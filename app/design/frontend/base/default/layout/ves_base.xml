@@ -36,7 +36,7 @@
 
 			<!-- Load Js Files -->
 
-			<action method="addJs" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_jquery"><script>ves_base/jquery/jquery-2.1.1.min.js</script></action>
+			<!--<action method="addJs" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_jquery"><script>ves_base/jquery/jquery-2.1.1.min.js</script></action>-->
 
 			<action method="addJs" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_jquery"><script>ves_base/jquery/noconflict.js</script></action>
 

@@ -1,92 +1,9 @@
-<?php
-/**
- * Magento
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Academic Free License (AFL 3.0)
- * that is bundled with this package in the file LICENSE_AFL.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/afl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magento.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magento.com for more information.
- *
- * @category    design
- * @package     base_default
- * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
- * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
- */
-?>
-<?php
-/**
- * Language switcher template
- *
- * @see Mage_Page_Block_Switch
- */
-?>
-<!-- <?php $stores = Mage::getModel('core/store')->getCollection()->addFieldToFilter('is_active', 1)->addFieldToFilter('store_id', array('neq'=>0));?>
-<?php if(count($stores)>1): ?>
-<div class="form-language">
-    <label for="select-language"><?php //echo $this->__('Your Language:') ?></label>
-    <select id="select-language" title="<?php echo $this->__('Your Language') ?>" onchange="window.location.href=this.value">
-    <?php foreach ($stores as $_lang): ?>
-        <?php $_selected = ($_lang->getId() == $this->getCurrentStoreId()) ? ' selected="selected"' : '' ?>
-        <option value="<?php echo $_lang->getCurrentUrl() ?>"<?php echo $_selected ?>><?php echo $this->htmlEscape($_lang->getName()) ?></option>
-    <?php endforeach; ?>
-    </select>
-</div>
-<?php endif; ?>  -->
-<!-- <?php if(count($this->getStores())>1): ?>
-    <ul id="language-switcher">
-        <a id = "language_name" href="#" ><?php echo $this->__('Language') ?>: <span id="current-language"></span></a>
-        <ol class="switcher-options" id="switcher" style="display:none;">
-            <?php foreach ($this->getStores() as $_lang): ?>
-            <?php $_selected = ($_lang->getId() == $this->getCurrentStoreId()) ? ' class="selected"' : '' ?>
-            <li<?php echo $_selected ?>>
-                <a  onclick="document.getElementById('switcher').style.display = 'none';" href="<?php echo $_lang->getCurrentUrl() ?>"><?php echo $this->escapeHtml($_lang->getName()) ?></a>
-            </li>
-            <?php endforeach; ?>
-        </ol>
-    </ul>
-<?php endif; ?> -->
-
 <?php if(count($this->getStores())>1): ?>
-<div class="form-language">
-    <label id = "language_name" class="language_name" for="select-language"><?php echo $this->__('Language') ?></label>
-    <div class="main_language_toggle"  id="switcher" style="display:none;">
-        <?php foreach ($this->getStores() as $_lang): ?>
-            <?php $_selected = ($_lang->getId() == $this->getCurrentStoreId()) ? ' selected="selected"' : '' ?>
-            <a href="<?php echo $_lang->getCurrentUrl() ?>">
-            <option value="<?php echo $_lang->getCurrentUrl() ?>"<?php echo $_selected ?>><?php echo $this->escapeHtml($_lang->getName()) ?></option>
-            </a>
-       <?php endforeach; ?>
+    <div class="form-language">
+        <div class="langs-wrapper">
+            <?php foreach ($this->getStores() as $_lang): ?>
+                <a class="lang-flag" href="<?php echo $this->getCurrentUrl() . '?___store=' . $_lang->getCode();?>"><img src="<?php echo $this->getSkinUrl('images/flags/' . $_lang->getCode() . '.png');?>" alt=""></a>
+            <?php endforeach;?>
+        </div>
     </div>
-   
-</div>
-<?php endif; ?> 
-<script>
-/*function calci() {
-    alert("fdsf");
-}*/
-/*$j(document).ready(function(){
-    $j("#language_name").click(function(){
-        $j(".switcher-options").fadeToggle();
-    });
-});*/
-document.getElementById('language_name').onclick = function() {
-   var x = document.getElementById('switcher');
-    if (x.style.display === 'none') {
-        x.style.display = 'block';
-    } else {
-        x.style.display = 'none';
-    }
-}
-
-</script> 
+<?php endif;?>

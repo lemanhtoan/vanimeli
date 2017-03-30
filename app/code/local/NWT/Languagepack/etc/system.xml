@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <vanimeli translate="label">
+            <label>Vanimeli Configuration</label>
+            <sort_order>50</sort_order>
+        </vanimeli>
+    </tabs>
+    <sections>
+        <vanimeli translate="label">
+            <label>Vanimeli Configuration</label>
+            <tab>vanimeli</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+
+            <groups>
+                <inchoo_group translate="label">
+                    <label>Social Link Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+                        <facebook_input translate="label">
+                            <label>Facebook link: </label>
+                            <comment>My Facebook link</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </facebook_input>
+                        <youtube_input translate="label">
+                            <label>Youtube link: </label>
+                            <comment>My Youtube link</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </youtube_input>
+                        <twitter_input translate="label">
+                            <label>Twitter link: </label>
+                            <comment>My Twitter link</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </twitter_input>
+                        <instagram_input translate="label">
+                            <label>Instagram link: </label>
+                            <comment>My Instagram link</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </instagram_input>
+                    </fields>
+                </inchoo_group>
+            </groups>
+        </vanimeli>
+    </sections>
+</config>

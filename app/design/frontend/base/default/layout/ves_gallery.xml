@@ -7,7 +7,7 @@
 
 			<action method="addItem" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_colorbox"><type>skin_css</type><name>ves_gallery/lib/colorbox/colorbox.css</name></action>
 
-			<action method="addJs" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_jquery"><script>ves_gallery/jquery/jquery-2.1.1.min.js</script></action>
+			<!--<action method="addJs" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_jquery"><script>ves_gallery/jquery/jquery-2.1.1.min.js</script></action>-->
 
 			<action method="addJs" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_jquery"><script>ves_gallery/jquery/noconflict.js</script></action>
 
