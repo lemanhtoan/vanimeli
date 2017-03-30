@@ -1,0 +1,61 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 8, 2014, 2:49:21 PM
+    Author     : Crystal
+*/
+/*
+*/
+.data-table#recent-transactions-history td .label-cell { display: none;}
+.data-table#recent-transactions-history td h2 {font-size: 13px; text-transform: none;}
+#rewardpoints-settings li.control label{background-color: #fff;}
+@media all {
+ .sp-methods dl.rewardpoints-sp-methods dt label {background-color: #fff; padding: 0px;}    
+.sp-methods dl.rewardpoints-sp-methods dt label:hover {background-color: #fff}
+}
+@media only screen and (max-width: 890px){
+
+	/* Force table to not be like tables anymore */
+	.data-table#recent-transactions-history thead{display: none;}
+        .data-table#recent-transactions-history tbody tr{margin: 0; border-bottom: 1px solid silver;border-top: 1px solid silver;}
+	.data-table#recent-transactions-history td.a-right.first{display: none;}
+        .data-table#recent-transactions-history td .label-cell {margin:0; text-transform:uppercase; display:block; text-align: left;float: left; font-family: "Helvetica Neue",Verdana,Arial,sans-serif;
+    font-size: 13px;}
+        .data-table#recent-transactions-history td {display: block; text-align: right; border: none;}
+        .data-table#recent-transactions-history td h2 {font-size: 13px; text-transform: none;text-align: left; margin-left: 280px;}
+        
+        .rewardpointsreferfriends-dashboard-right {float: left !important; width: 100% !important; display: block}
+}
+@media only screen and (max-width: 979px){    
+     .rewardpointsreferfriends-dashboard-right {float: left !important; width: 100% !important; display: block}
+     .rewardpointsreferfriends-dashboard-left {width: 100% !important; float: right; clear: both}     
+     .sp-methods dl.rewardpoints-sp-methods dt label {background-color: #fff; padding: 0px;}    
+     .sp-methods dl.rewardpoints-sp-methods dt label:hover {background-color: #fff} 
+}
+@media only screen and (max-width: 760px){
+    .data-table#recent-transactions-history td h2{margin-left: 335px;}
+}
+@media only screen and (max-width: 700px){
+    .data-table#recent-transactions-history td h2{margin-left: 300px;}
+    
+}
+@media only screen and (max-width: 650px){
+    .data-table#recent-transactions-history td h2{margin-left: 250px;}
+    
+}
+@media only screen and (max-width: 550px){
+    .data-table#recent-transactions-history td h2{margin-left: 230px;}
+    
+}
+@media only screen and (max-width: 450px){
+    .data-table#recent-transactions-history td h2{margin-left: 200px;}
+    
+}
+@media only screen and (max-width: 770px){
+    .rewardpointsreferfriends-dashboard-left {width: 100% !important;}
+}
+
+

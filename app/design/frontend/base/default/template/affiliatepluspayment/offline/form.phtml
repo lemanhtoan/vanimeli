@@ -1,0 +1,192 @@
+<?php
+/**
+ * Offline payment method form template
+ */
+?>
+<?php $require = Mage::helper('affiliateplus/payment')->isRequireAuthentication('offline');?>
+<?php $data = $this->getRequest()->getParams(); ?>
+<?php $back = (isset($data['invoice_address']) && $data['invoice_address']) ?>
+<?php
+$store_id = Mage::app()->getStore()->getStoreId();
+$check_responsvie = Mage::getStoreConfig('affiliateplus/style_config/responsive_enable', $store_id);
+ if($check_responsvie){
+     $class_name_col = 'col-lg-6 col-md-6 col-sm-12 col-xs-12';
+ }
+ else{
+      $class_name_col = 'col-lg-6 col-md-6 col-sm-6 col-xs-6';
+ }
+?>
+<ul>
+<?php if ($this->customerHasAddresses()): ?>
+	<li class="form-group">
+            <div class="<?php echo $class_name_col; ?>">
+		<label for="account-address-select"><?php echo $this->__('Select an address from your address book or enter a new address.') ?></label>
+		
+			<?php echo $this->getAddressesHtmlSelect('account') ?>
+            </div>
+	</li>
+<?php endif; ?>
+    <li id="account-new-address-form" <?php if ($this->customerHasAddresses() && !$this->isShowForm()): ?> style="display:none;"<?php endif; ?>>
+		<div>
+			<input type="hidden" name="account[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="account:address_id" />
+			<ul>
+				<li class="form-group address">
+                                    <div class="<?php echo $class_name_col; ?>">
+					<label for="account:street1" class="required"><?php echo $this->__('Address') ?><em>*</em></label>
+					
+						<input class = "input-text required-entry form-control" type="text" title="<?php echo $this->__('Street Address') ?>" name="account[street][]" id="account:street1" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet(1)) ?>"/>
+                                    </div>
+				</li>
+		<?php for ($_i=2, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++): ?>
+				<li class="form-group street-address">
+                                    <div class="<?php echo $class_name_col; ?>">
+                                    <label for="account:street1" class="required"><?php echo $this->__('Street Address') ?><em>*</em></label>
+					
+						<input type="text" class = "input-text form-control"  title="<?php echo $this->__('Street Address %s', $_i) ?>" name="account[street][]" id="account:street<?php echo $_i?>" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet($_i)) ?>" class="input-text" />
+                                    </div>
+				</li>
+		<?php endfor ?>
+				<li class="form-group">
+					<div class="<?php echo $class_name_col; ?>">
+						<label for="account:city" class="required"><?php echo $this->__('City') ?><em>*</em></label>
+						
+							<input type="text" class = "input-text required-entry form-control" title="<?php echo $this->__('City') ?>" name="account[city]" value="<?php echo $this->htmlEscape($this->getAddress()->getCity()) ?>" class="input-text required-entry" id="customer:city" />
+						
+					</div>
+					<div class="<?php echo $class_name_col; ?>">
+						<label for="account:region_id" class="required"><?php echo $this->__('State/Province') ?><em>*</em></label>
+						
+							<select id="account:region_id" name="account[region_id]" title="<?php echo $this->__('State/Province') ?>" class="validate-select form-control" style="display:none;">
+								<option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+							</select>
+							<script type="text/javascript">
+							//<![CDATA[
+								$('account:region_id').setAttribute('defaultValue',  "<?php echo $this->getAddress()->getRegionId() ?>");
+							//]]>
+							</script>
+							<input type="text" class = "input-text form-control" id="account:region" name="account[region]" value="<?php echo $this->htmlEscape($this->getAddress()->getRegion()) ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+						
+					</div>
+				</li>
+				<li class="form-group">
+					<div class="<?php echo $class_name_col; ?>">
+						<label for="account:postcode" class="required"><?php echo $this->__('Zip/Postal Code') ?><em>*</em></label>
+						
+							<input type="text" class = "input-text required-entry validate-zip-international form-control"  title="<?php echo $this->__('Zip/Postal Code') ?>" name="account[postcode]" id="account:postcode" value="<?php echo $this->htmlEscape($this->getAddress()->getPostcode()) ?>" class="input-text validate-zip-international required-entry" />
+						
+					</div>
+					<div class="<?php echo $class_name_col; ?>">
+						<label for="account:country_id" class="required"><?php echo $this->__('Country') ?><em>*</em></label>
+						
+							<?php echo $this->getCountryHtmlSelect('account') ?>
+						
+					</div>
+				</li>
+				<li class="form-group">
+					<div class="<?php echo $class_name_col; ?>">
+						<label for="account:telephone" class="required"><?php echo $this->__('Telephone') ?><em>*</em></label>
+						
+							<input type="text" class = "input-text required-entry form-control"  name="account[telephone]" value="<?php echo $this->htmlEscape($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" id="account:telephone" />
+						
+					</div>
+					<div class="<?php echo $class_name_col; ?>">
+						<label for="account:fax"><?php echo $this->__('Fax') ?></label>
+						
+							<input type="text"class = " input-text form-control"  name="account[fax]" value="<?php echo $this->htmlEscape($this->getAddress()->getFax()) ?>" title="<?php echo $this->__('Fax') ?>" class="input-text" id="account:fax" />
+						
+					</div>
+				</li>
+                <!--li lang="fields">
+					<div class="field">
+						<label for="account:invoice_address" class="required"><?php echo $this->__('Invoice Address') ?></label>
+						<div class="input-box">
+							<input type="file" name="invoice_address" value="" title="<?php echo $this->__('Invoice Address') ?>" class="" id="invoice_address" />
+						</div>
+					</div>
+				</li-->
+			</ul>
+		</div>
+	</li>
+    <?php if($require): ?>
+     <li class="form-group" id="verify-li" style="<?php if($this->addressIsVerified()):?>display:none<?php endif;?>">
+        <div class="<?php echo $class_name_col; ?>">
+            <label for="account:invoice_address" class="required"><em id="invoice_address_em" style="<?php if($back): ?>display:none;<?php endif;?>">*</em><?php echo $this->__('Invoice Address') ?></label>
+            
+				<?php if($back): ?>
+				<a href="<?php echo Mage::getBaseUrl('media').'/affiliateplus/payment/'.$data['invoice_address']; ?>" onclick="window.open(this.href, 'preview', 'resizable=1,scrollbars=1'); return false;"><img width="22" height="22" src="<?php echo Mage::getBaseUrl('media').'/affiliateplus/payment/'.$data['invoice_address']; ?>" /></a>
+				<?php endif;?>
+                <input type="file" name="invoice_address" value="" title="<?php echo $this->__('Invoice Address') ?>" <?php if(!$back): ?>class="required-entry"<?php endif;?> id="invoice_address" />
+         
+            <p class="authentication-comment note">
+                <?php echo $this->__('You need to upload an image of your house or your address in any reasonable documents to verify your address.');?>
+            </p>
+        </div>
+    </li>
+    <?php endif;?>
+</ul>
+<script type="text/javascript">
+//<![CDATA[
+	var regionUpdate = new RegionUpdater('account:country_id', 'account:region', 'account:region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'postcode');
+	
+    var currentAddressId = $('account-address-select') ? $('account-address-select').value : false;
+	function lsRequestTrialNewAddress(addressId) {
+		if(addressId == ""){
+			$('account-new-address-form').show();
+        <?php if($require):?>
+            $('verify-li').style.display = 'block';
+            <?php if($back): ?>
+                if (currentAddressId == addressId) {
+                    $$('#verify-li .input-box a').each(function(el){
+                        el.show();
+                    });
+                    $('invoice_address').removeClassName('required-entry');
+                    $('invoice_address_em').hide();
+                } else {
+                    $$('#verify-li .input-box a').each(function(el){
+                        el.hide();
+                    });
+                    $('invoice_address').addClassName('required-entry');
+                    $('invoice_address_em').show();
+                }
+            <?php endif ?>
+        <?php endif;?>
+		} else {
+			$('account-new-address-form').hide();
+            <?php if($require): ?>
+            var url = '<?php echo $this->getUrl('affiliateplus/index/checkVerify');?>?payment_method=offline&email='+addressId;
+            var request = new Ajax.Request(url,
+            {
+                onSuccess: function(response){
+                    if(response.responseText)
+                        $('verify-li').style.display = 'none';
+                    else {
+                        $('verify-li').style.display = 'block';
+                    <?php if($back): ?>
+                        if (currentAddressId == addressId) {
+                            $$('#verify-li .input-box a').each(function(el){
+                                el.show();
+                            });
+                            $('invoice_address').removeClassName('required-entry');
+                            $('invoice_address_em').hide();
+                        } else {
+                            $$('#verify-li .input-box a').each(function(el){
+                                el.hide();
+                            });
+                            $('invoice_address').addClassName('required-entry');
+                            $('invoice_address_em').show();
+                        }
+                    <?php endif ?>
+                    }
+                }
+            }
+            );
+            <?php endif; ?>
+		}
+	}
+        //By Crystal  
+        var hasSelect = document.getElementById('account:country_id');
+        if(hasSelect){
+            hasSelect.addClassName('form-control');
+        }
+//]]>
+</script>

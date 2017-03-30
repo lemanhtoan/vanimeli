@@ -1,0 +1,17 @@
+<?php $product_info_block = Mage::registry("product_info_block"); ?>
+<?php $_helper = $product_info_block->helper('catalog/output'); ?>
+<?php $_product = $product_info_block->getProduct(); ?>
+
+
+<div class="product-collateral panel panel-default">
+    <?php if ($detailedInfoGroup = $product_info_block->getChildGroup('detailed_info', 'getChildHtml')):?>
+        <?php $key = 0; foreach ($detailedInfoGroup as $alias => $html):?>
+          <div class="panel-heading">
+            <h3 class="panel-title"><?php echo $product_info_block->escapeHtml($product_info_block->getChildData($alias, 'title')) ?></h3>
+          </div>
+          <div class="panel-body">
+            <div class="tab-content"><?php echo $html ?></div>
+          </div>
+        <?php $key++; endforeach;?>
+    <?php endif; ?>
+</div>

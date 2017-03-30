@@ -1,0 +1,14 @@
+
+<?php if($this->hasOptions()) : ?>
+<div class="product-options" id="product-options-wrapper-<?php echo $this->getProduct()->getId(); ?>">
+    
+    <?php if($this->getProduct()->getTypeId() == "configurable") : ?>
+   	 	<?php echo $this->getChild('options_configurable')->setProduct($this->getProduct())->toHtml(); ?>		
+    <?php endif; ?>
+    <?php echo $this->getChild('options_js')->setProduct($this->getProduct())->toHtml(); ?>
+    <?php echo $this->getChild('product_options')->setProduct($this->getProduct())->toHtml(); ?>
+    <?php echo $this->getChild('html_calendar')->setProduct($this->getProduct())->toHtml(); ?>
+</div>
+
+<script type="text/javascript">decorateGeneric($$('#product-options-wrapper-<?php echo $this->getProduct()->getId(); ?> dl'), ['last']);</script>
+<?php endif; ?>

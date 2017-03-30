@@ -1,0 +1,419 @@
+/* 
+    Document   : referfriend
+    Created on : Aug 9, 2013, 9:19:32 AM
+    Author     : Hai
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.rewardpoints-referfriend-dialog-refer .top,
+.rewardpoints-referfriend-dialog-refer .bot{
+    display: none;
+}
+.rewardpoints-referfriend-dialog-refer .dialog_e,
+.rewardpoints-referfriend-dialog-refer .dialog_w {
+	width: 0;	
+}
+#rewardpoints-referfriends-popup{
+    background-color: #ffffff;
+}
+.rewardpoints-referfriend-dialog-refer .dialog_close{
+    display: none;
+}
+.referfriends-title{
+    background: url("images/bg-header2.gif") no-repeat scroll 0 0 transparent;	     
+    height: 81px;	
+    padding: 0 40px;
+}
+.referfriends-title h2{
+    color: #525252;
+    padding-top: 41px;
+    font-size: 25px;
+}
+.referfriends-title a{
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    font-size: 15px;
+    color: #e26703;
+    text-decoration: none;
+}
+.referfriends-title a:hover{
+    text-decoration: underline;
+}
+.referfriends-body-refer{
+    background: url("images/bg-referfriend.png") repeat scroll 0 0 transparent;
+	border: 1px solid #d5d5d5;
+    margin: 0;
+    padding: 26px 32px 22px;        
+    height: 392px;
+    font-size: 18px;
+    color: #373737;	
+}
+
+
+.referfriends-body-refer h3{
+	color: #df543d;
+}
+
+.referfriends-body-refer h3 .price{font-weight: bold;}
+.referfriends-body-refer .price{
+	color: #2f7eb5;
+	font-weight: normal;
+}
+.offer-contact p,
+.offer-question p{
+	font-size: 16px;
+}
+.referfriends-body{
+    background: url("images/bg-body-box.gif") repeat-y scroll 0 0 transparent;
+    margin: 0;
+    padding: 10px 40px;
+    padding-bottom: 0 !important;
+    height: 392px;
+    font-size: 13px;
+    color: #454545;
+}
+.referfriends-body-left{
+    float:left;
+    width: 350px;
+}
+.referfriends-body-left-description{
+    margin-bottom: 10px;
+}
+.referfriends-body-left-earn{
+    height: 80px;
+}
+.referfriends-body-left-product-title h3{
+    font-size: 18px;
+    font-weight: nomal;
+    color: #e26703;
+}
+.referfriends-body-right{
+    float: left;
+    width: 230px;
+    margin-left: 20px;
+}
+.referfriends-body-right-ul li.referfriends-sharelink{
+    padding: 4px 1px 4px 60px;
+    background: url('images/share.png') no-repeat left center;
+    height: 60px;
+    color: #454545;
+    font-size: 18px;
+    font-weight: normal;
+}
+.referfriends-body-right-ul li.referfriends-sharelink .share-link-url{
+    padding: 4px;
+}
+.referfriends-body-right-ul li.referfriends-sharefacebook{
+    height: 60px;
+}
+.referfriends-body-right-ul li.referfriends-sharefacebook a{
+    height: 43px;
+    padding: 13px 1px 4px 60px;
+    background: url('images/facebook.png') no-repeat left center;
+}
+.referfriends-body-right-ul li.referfriends-sharetwitter{
+    height: 60px;
+}
+.referfriends-body-right-ul li.referfriends-sharetwitter a{
+    height: 43px;
+    padding: 13px 1px 4px 60px;
+    background: url('images/twitter.png') no-repeat left center;
+}
+.referfriends-body-right-ul li.referfriends-sharegoogleplus{
+    height: 60px;
+}
+.referfriends-body-right-ul li.referfriends-sharegoogleplus a{
+    height: 43px;
+    padding: 13px 1px 4px 60px;
+    background: url('images/google.png') no-repeat left center;
+}
+.referfriends-body-right-ul li.referfriends-shareemail{
+    height: 60px;
+}
+.referfriends-body-right-ul li.referfriends-shareemail a{
+    height: 43px;
+    padding: 13px 1px 4px 60px;
+    background: url('images/sendmail.png') no-repeat left center;
+}
+.referfriends-body-right-ul li{
+    height: 52px;
+}
+.referfriends-body-right-ul li a{
+    color: #454545;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    text-decoration: none;
+}
+.referfriends-bottom{
+    background: url("images/bg-bottom.gif") no-repeat scroll 0 0 transparent;
+    height: 17px;
+}
+
+
+.rewardpointsreferfriends-dashboard-left{
+    float: left;
+    width: 58%; /*400px;*/
+}
+.rewardpointsreferfriends-dashboard-right{
+    float: right;
+    width: 39%; /*270px;*/
+}
+.rewardpointsreferfriends-block-content-share{
+    padding-left: 8px !important;
+}
+.box-referfriends-content .box-head h2 {
+    background: url("images/icon-links.png") no-repeat scroll left center transparent;
+	float: left;
+	width: 100%;
+	padding: 5px 0;
+	text-indent: 25px;
+        text-align: left;
+}
+.rewardpointsreferfriend-box-url .refer-content{
+    padding: 4px 1px 0px 60px;
+    background: url('images/share.png') no-repeat left center;
+    height: 60px;
+    color: #454545;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0 5px;
+}
+.rewardpointsreferfriend-box-url .refer-content input{
+    width: 100%;
+}
+.refer-sharing-box-content{
+    background: #ffffff !important;
+    padding: 8px !important;
+    margin: 0 !important;
+    text-align: justify !important;
+}
+.info-summary-special-offer p{
+    text-align: justify;
+}
+.info-summary-special-offer img{
+    max-width: 100%;
+}
+h2.email-logo{
+    background: url('images/email-color.png') no-repeat;
+}
+strong.special-title-offer{
+    background: url('images/i_ma-reviews.gif') no-repeat; 
+    padding-left: 20px
+}
+div.info-summary-special-offer{
+    padding-bottom: 15px;
+}
+div.info-summary-special-offer p{
+    padding-bottom: 0px;
+    margin-bottom: 5px;
+}
+
+#rewardpoints-referfriends-landing{    
+	text-align: center;
+}
+#rewardpoints-referfriends-landing p{
+    margin: 0;
+}
+.referfriends-body-offer-detail-description{
+    font-size: 16px;
+}
+.parent-body-offer{
+    height: auto;
+}
+.referfriends-body-offer-detail{
+    margin-bottom: 20px;
+	text-align: left;
+}
+.referfriends-body-offer{
+    min-height: 100px;
+}
+.offer-howto{
+	overflow: hidden;
+	margin: 20px 0 20px 0;
+	text-align: left;
+}
+
+.offer-howto h3{
+	font-size: 18px;
+}
+
+.offer-howto .offer-question{
+    float: left;
+    margin-right: 21px;
+    width: 48%;
+}
+
+
+.btn-start-shopping {
+
+}
+.offer-contact{
+    width: 280px;
+    float: left;
+}
+
+
+.offer-proceed{
+    font-size: 16px;
+    font-weight: bold;
+    height: 30px;
+    text-align: center;
+}
+
+
+
+/* Refer a Friend */
+.allow .step-title {
+        cursor: pointer;        
+}
+
+ .allow .step-title:hover{
+        background: #F9F3E3;
+}
+
+ .allow .step-title:hover .number{
+        background: #F18200;
+        border-color: #F19900;
+        color: #FFF;
+}
+
+ .allow .step-title:hover h2{
+        color: #F18200;
+}
+
+ .step,  p.box-content{
+        padding: 8px;
+}
+
+ .form-list textarea{
+        width: 100%;
+        height: 100px;
+}
+
+ .step-title span.logo{
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
+        border: none;
+}
+
+/* Personal */
+ #input-personal-url{
+        width: 219px;
+        float: right;
+}
+ #input-personal-url #personal_url{
+        width: 215px;
+}
+ #personal_referfriends_url{
+        width: 327px;
+        text-align: center;
+}
+
+/* Email */
+ .step-title h2.email-logo{
+        background: url("images/email-grayscale.png") no-repeat scroll 5px -2px / 20px 20px;
+}
+ .active .step-title h2.email-logo, #referfriends-opc-email .step-title:hover h2.logo{
+        background: url("images/email-color.png") no-repeat scroll 5px -2px / 20px 20px;
+}
+.rewardpointsreferfriends-dashboard-right .opc .section .step-title {border-top: 1px solid #ececec;}
+.rewardpointsreferfriends-dashboard-right .opc .section .step-title h2 {margin:0px; line-height: 1px;padding: 8px 0px 8px 90px;}
+.rewardpointsreferfriends-dashboard-right .opc .section .step-title .logo {max-width: 0px; min-height: 0px;margin-top: 5px;height: 5px !important;}
+.rewardpointsreferfriends-dashboard-right ol.opc.referfriends-opc {border-bottom: 1px solid #ececec;margin-bottom:20px;}
+.google-plus-share a img{float: left;margin-right: 33px}
+/* Google */
+ .step-title h2.google-logo{
+        background: url("images/gplus-grayscale.png") no-repeat scroll 5px 0 / 18px 18px;
+}
+ .active .step-title h2.google-logo, #referfriends-opc-google .step-title:hover h2.logo{
+        background: url("images/gplus-color.png") no-repeat scroll 5px 0/ 18px 18px;
+} 
+
+/* Facebook */
+ .step-title h2.facebook-logo{
+        background: url("images/facebook-grayscale.png") no-repeat scroll 5px -1px / 20px 20px;
+}
+ .active .step-title h2.facebook-logo, #referfriends-opc-facebook .step-title:hover h2.logo{
+        background: url("images/facebook-color.png") no-repeat scroll 5px -1px / 20px 20px;
+}
+
+/* Tweeter */
+ .step-title h2.twitter-logo{
+        background: url("images/tweet.png") no-repeat scroll -26px -27px / 53px 45px;
+}
+ .active .step-title h2.twitter-logo, #referfriends-opc-twitter .step-title:hover h2.logo{
+        background: url("images/tweet.png") no-repeat scroll -25px 1px / 53px 45px       
+}
+
+ .tweeter h2.h2{
+        -webkit-border-radius: 3px;
+        border: #CCC solid 1px;
+        padding: 2px;
+        -moz-border-radius: 3px; border-radius: 3px;
+        background-image: -moz-linear-gradient(top, white, #DEDEDE);
+        background-image: -webkit-gradient(linear, left top, left bottom, from(white), to(#DEDEDE));
+        background-image: -ms-linear-gradient(top, white, #DEDEDE);
+        background-image: linear-gradient(top, white, #DEDEDE);
+        background-image: -o-linear-gradient(top, white, #DEDEDE);
+}
+ button.tweeter h2.h2 h2{
+        background: url('images/tweet.png') no-repeat -26px 3px;
+        padding: 0px 3px 0px 24px;
+        color: #1E7EC8;
+        margin-left: 2px;
+}
+
+
+ .buttons-set{
+        padding-top: 7px;
+        border-top: 0px;
+        margin-top: 0px;
+}
+
+ .referfriends-opc li{
+        margin-bottom: 0px;
+        border-bottom: none;
+}
+.referfriends-opc .step{
+    padding: 5px;
+}
+.referfriends-opc .allow .step-title {
+    border-bottom: none;
+    padding: 4px 8px 6px;
+}
+
+
+/*Fix*/
+.action-shopping{
+	text-align:center;
+}
+a.btn-start-shopping { overflow:visible; width:auto; border:0; padding:0; margin:0; background:transparent; cursor:pointer; display:inline-block; }
+a.btn-start-shopping span {
+	background: url("images/btn_shopping.png") no-repeat scroll top left transparent;
+	float: left;
+	font-family: Arial;
+	font-size: 16px;
+	color:white;
+	font-weight: bold;
+	height: 34px;
+	line-height: 34px;
+	padding-left: 5px;
+	position: relative;
+	text-align: center;
+	white-space: nowrap;
+}
+a.btn-start-shopping span span {
+	background-position: 100% 0;
+	padding:0 40px 0 22px;
+}
+.referfriends-title a img{
+    position: absolute;
+    top: 20px;
+    right: 40px;
+}
+.box-rewardpointsreferfriends-history {
+    clear: both;
+}

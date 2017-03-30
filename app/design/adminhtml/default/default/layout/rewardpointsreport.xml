@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsReport
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">    
+    <!-- Report Dashboard -->
+    <adminhtml_reward_dashboard_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/rewardpointsreport.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="rewardpointsreport/adminhtml_dashboard" name="rewardpointsreport.dashboard">
+            	<block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher" template="store/switcher.phtml">
+            		<action method="setUseConfirm"><value>0</value></action>
+            	</block>
+            </block>
+        </reference>
+    </adminhtml_reward_dashboard_index>
+    
+    <!-- Report Grid / Customer Report -->
+    <adminhtml_reward_customerreport_index>
+        <reference name="content">
+            <block type="rewardpointsreport/adminhtml_grid_container" name="rewardpointsreport.customer" template="rewardpointsreport/grid/daterange.phtml">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher" template="store/switcher.phtml">
+                    <action method="setUseConfirm"><value>0</value></action>
+                </block>
+                <block type="rewardpointsreport/adminhtml_customer_grid" name="grid_content" as="grid_content" />
+            </block>
+        </reference>
+    </adminhtml_reward_customerreport_index>
+    <adminhtml_reward_customerreport_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="rewardpointsreport/adminhtml_customer_grid" name="grid_content" as="grid_content" />
+        </block>
+    </adminhtml_reward_customerreport_grid>
+    
+    <!-- Report Grid / Product Report -->
+    <adminhtml_reward_product_index>
+        <reference name="content">
+            <block type="rewardpointsreport/adminhtml_grid_container" name="rewardpointsreport.product" template="rewardpointsreport/grid/daterange.phtml">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher" template="store/switcher.phtml">
+                    <action method="setUseConfirm"><value>0</value></action>
+                </block>
+                <block type="rewardpointsreport/adminhtml_product_grid" name="grid_content" as="grid_content" />
+            </block>
+        </reference>
+    </adminhtml_reward_product_index>
+    <adminhtml_reward_product_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="rewardpointsreport/adminhtml_product_grid" name="grid_content" as="grid_content" />
+        </block>
+    </adminhtml_reward_product_grid>
+    
+    <!-- Report Grid / Order Report -->
+    <adminhtml_reward_order_index>
+        <reference name="content">
+            <block type="rewardpointsreport/adminhtml_grid_container" name="rewardpointsreport.order" template="rewardpointsreport/grid/datetype.phtml">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher" template="store/switcher.phtml">
+                    <action method="setUseConfirm"><value>0</value></action>
+                </block>
+                <block type="rewardpointsreport/adminhtml_order_grid" name="grid_content" as="grid_content" />
+            </block>
+        </reference>
+    </adminhtml_reward_order_index>
+    <adminhtml_reward_order_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="rewardpointsreport/adminhtml_order_grid" name="grid_content" as="grid_content" />
+        </block>
+    </adminhtml_reward_order_grid>
+    
+    <!-- Report Grid / Earned Points Report -->
+    <adminhtml_reward_earned_index>
+        <reference name="content">
+            <block type="rewardpointsreport/adminhtml_grid_container" name="rewardpointsreport.earned" template="rewardpointsreport/grid/datetype.phtml">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher" template="store/switcher.phtml">
+                    <action method="setUseConfirm"><value>0</value></action>
+                </block>
+                <block type="rewardpointsreport/adminhtml_earned_grid" name="grid_content" as="grid_content" />
+            </block>
+        </reference>
+    </adminhtml_reward_earned_index>
+    <adminhtml_reward_earned_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="rewardpointsreport/adminhtml_earned_grid" name="grid_content" as="grid_content" />
+        </block>
+    </adminhtml_reward_earned_grid>
+    
+    <!-- Report Grid / Spent Points Report -->
+    <adminhtml_reward_spent_index>
+        <reference name="content">
+            <block type="rewardpointsreport/adminhtml_grid_container" name="rewardpointsreport.spent" template="rewardpointsreport/grid/datetype.phtml">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher" template="store/switcher.phtml">
+                    <action method="setUseConfirm"><value>0</value></action>
+                </block>
+                <block type="rewardpointsreport/adminhtml_spent_grid" name="grid_content" as="grid_content" />
+            </block>
+        </reference>
+    </adminhtml_reward_spent_index>
+    <adminhtml_reward_spent_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="rewardpointsreport/adminhtml_spent_grid" name="grid_content" as="grid_content" />
+        </block>
+    </adminhtml_reward_spent_grid>
+</layout>

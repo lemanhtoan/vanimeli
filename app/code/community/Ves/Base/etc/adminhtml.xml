@@ -1,0 +1,59 @@
+<?xml version="1.0"?> 
+<config>
+	<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <vesextensions module="ves_base">
+                            <title>VenusTheme</title>
+                            <sort_order>53</sort_order>
+                            <children>
+                                 <base translate="title" module="ves_base">
+                                    <title>Ves Base</title>
+                                    <children>
+                                        <widgets translate="title">
+                                            <title>Manage Widgets</title>
+                                            <sort_order>0</sort_order>
+                                        </widgets>
+                                        <buildwidgets translate="title">
+                                            <title>Build Widges</title>
+                                            <sort_order>2</sort_order>
+                                        </buildwidgets>
+                                        <loadoptions translate="title">
+                                            <title>Load Options</title>
+                                            <sort_order>10</sort_order>
+                                        </loadoptions>
+                                        <media translate="title">
+                                            <title>Manage Images</title>
+                                            <sort_order>30</sort_order>
+                                        </media>
+                                        
+                                    </children>
+                                </base>
+                            </children>
+                         </vesextensions>
+                         <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ves_base>
+                                            <title>Ves Base</title>
+                                        </ves_base>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+			<modules>
+				<Ves_Base>
+					<files>
+						<default>Ves_Base.csv</default>
+					</files>
+				</Ves_Base>
+			</modules>
+		</translate>
+</config>

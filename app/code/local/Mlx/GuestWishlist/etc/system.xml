@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<config>	
+	<tabs>
+        <mlx translate="label">
+            <label>MLX</label>
+            <sort_order>0</sort_order>
+        </mlx>        
+    </tabs>	
+    <sections>    	
+    	<guestwishlist translate="label">
+    		<class>separator-top</class>
+    		<label>Guest Wishlist</label>
+    		<tab>mlx</tab>    		
+    		<sort_order>50</sort_order>
+    		<show_in_default>1</show_in_default>
+    		<show_in_website>1</show_in_website>
+    		<show_in_store>1</show_in_store>
+    		<groups>
+    			<general translate="label">
+    				<label>General Configuration</label>
+    				<frontend_type>text</frontend_type>
+    				<sort_order>1</sort_order>
+    				<show_in_default>1</show_in_default>
+    				<show_in_website>1</show_in_website>
+    				<show_in_store>1</show_in_store>
+    				<fields>
+    					<enable translate="label">
+							<label>Enable Guest WishList</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>							
+    					</enable>	
+    					<ajax translate="label">
+							<label>Enable Ajax</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>							
+    					</ajax>		
+    					<allow_move translate="label">
+							<label>Move to Wishlist</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Allow add button move all product to wishlist.</comment>							
+    					</allow_move>	
+    					<show_msg translate="label">
+							<label>Show Message</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>														
+    					</show_msg>
+    					<icon translate="label">
+							<label>Icon</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>														
+    					</icon>
+    					
+    					<sender translate="label">
+							<label>Sender are own store</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>	
+							<comment>If value is 'No', We will info on form. If value are 'Yes', We will use info from (GENERAL ~> Store Email Addresses ~> General Contact)</comment>													
+    					</sender>
+    					
+    					<bcc translate="label">
+							<label>BCC Email</label>							
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>					
+    					</bcc>
+    					
+    				</fields>
+    			</general>
+    		</groups>
+    	</guestwishlist>		
+	</sections>
+</config>

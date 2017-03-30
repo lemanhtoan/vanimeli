@@ -1,0 +1,60 @@
+<?php if ($this->showButton('googleplus')): ?>
+    <div id="behavior-google-plus" class="behavior-google-plus behavior-social" <?php if (!$this->showCount('googleplus')) echo "style='width: 33px !important;'" ?>>
+        <g:plusone href="<?php echo $this->getShareUrl() ?>" size="medium" annotation="<?php echo $this->showCount('googleplus') ? 'bubble' : 'none'; ?>" callback="ajaxgoogle"></g:plusone>
+
+        <script>
+            var messageGoogle = '<?php echo $this->getSocialInfo('googleplus') ?>';
+            var canRequestGoogle = (messageGoogle === '') ? false : true;
+            var countRequestGoogle = 0;
+            //google
+            (function () {
+                var po = document.createElement('script');
+                po.type = 'text/javascript';
+                po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(po, s);
+            })();
+            function ajaxgoogle(obj) {
+                countRequestGoogle++;
+                if (login && countRequestGoogle <= 2) {
+                    showAjaxLoader();
+                    new Ajax.Request('<?php echo $this->getUrl('rewardpointsbehavior/index/googleplus') ?>', {
+                        method: 'post',
+                        parameters: {
+                            remove: obj.state,
+                            link: obj.href
+                        },
+                        onException: function () {
+                            $('social-info-behavior').innerHTML = messageError;
+                            hideAjaxLoader();
+                        },
+                        onSuccess: function (message) {
+                            if (message.responseText && message.responseText != '') {
+                                $('social-info-behavior').innerHTML = message.responseText;
+                            } else {
+                                $('social-info-behavior').innerHTML = messageDefault;
+                            }
+                            hideAjaxLoader();
+                            canRequestGoogle = false;
+                        }
+                    });
+                }
+            }
+            if (messageGoogle !== '' && login) {
+                Event.observe('behavior-google-plus', 'mouseover', function () {
+                    if (canRequestGoogle) {
+                        $('behavior-ajax-loader').show();
+                        $('social-info-behavior').innerHTML = messageGoogle;
+                    } else {
+                        $('behavior-ajax-loader').hide();
+                    }
+                });
+                Event.observe('behavior-google-plus', 'mouseout', function () {
+                    $('behavior-ajax-loader').show();
+                    $('social-info-behavior').innerHTML = messageDefault;
+                });
+            }
+        </script>
+    </div>
+<?php endif; ?>

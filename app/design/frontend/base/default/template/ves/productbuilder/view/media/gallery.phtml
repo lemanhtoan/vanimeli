@@ -1,0 +1,112 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+
+/* @var $this Mage_Catalog_Block_Product_View_Media */
+?>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+    $config_data = $this->getConfigData();
+
+    $enable_popup = isset($config_data['enable_image_popup'])?$config_data['enable_image_popup']:'true';
+    $enable_popup = $enable_popup=='true'?true:false;
+    $enable_thumbs_carousel = isset($config_data['enable_thumbs_carousel'])?$config_data['enable_thumbs_carousel']:'true';
+    $enable_thumbs_carousel = $enable_thumbs_carousel=='true'?true:false;
+
+    $columns = isset($config_data['thumbs_perpage'])?(int)$config_data['thumbs_perpage']:4;
+    $thumb_width = isset($config_data['thumb_width'])?(int)$config_data['thumb_width']:200;
+    $thumb_height = isset($config_data['thumb_height'])?(int)$config_data['thumb_height']:300;
+
+    $popup_image_width = isset($config_data['popup_width'])?$config_data['popup_width']:"";
+    $popup_image_height = isset($config_data['popup_height'])?$config_data['popup_height']:"";
+
+    $id = rand().time();
+
+?>
+<script id="img-wrapper-tmpl" type="text/x-jquery-tmpl">    
+            <div class="rg-image-wrapper" style="display:none">
+                {{if itemsCount > 1}}
+                    <div class="rg-image-nav">
+                        <a href="#" class="rg-image-nav-prev"><?php echo $this->__("Previous Image");?></a>
+                        <a href="#" class="rg-image-nav-next"><?php echo $this->__("Next Image");?></a>
+                    </div>
+                {{/if}}
+                <div class="rg-image"></div>
+                <div class="rg-loading"></div>
+                <div class="rg-caption-wrapper" style="display:none;">
+                    <div class="rg-caption" style="display:none;">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+</script>
+<script id="gallery-preload-tmpl" type="text/x-jquery-tmpl">
+</script>
+<div id="rg-gallery" class="product-image product-image-zoom rg-gallery">
+    <div class="product-image-gallery rg-thumbs">
+        <div class="es-carousel-wrapper">
+            <div class="es-carousel images-gallery">
+                <ul class="gallery-grid gallery-grid--max-<?php echo $columns; ?>-col-widget">
+                <li class="item first">
+                    <a href="javascript:;" onclick="return false;" class="product-image" rel="gallery_colobox" style="width:<?php echo $thumb_width; ?>px;height:<?php echo $thumb_height; ?>px">
+                    <img id="image-main"
+                         src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize($thumb_width, $thumb_height); ?>"
+                         data-large="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" data-description="<?php echo $this->escapeHtml($this->getImageLabel()); ?>" 
+                         data-zoom-image="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>"
+                         alt="<?php echo $this->escapeHtml($this->getImageLabel()) ?>"
+                         title="<?php echo $this->escapeHtml($this->getImageLabel()); ?>"/>
+                    </a>
+                </li>
+        <?php $gallery = $this->getGalleryImages(); ?>
+        <?php if (count($gallery) > 0): ?> 
+            <?php $i=1; foreach ($gallery as $_image): ?>
+                <?php if ($this->isGalleryImageVisible($_image)): ?>
+                    <li class="item<?php if($i%$columns==0 || ($i == count($gallery))): ?> last<?php endif; ?>">
+                        <a href="javascript:;" id="image-<?php echo $i; ?>" class="product-image"  rel="gallery_colobox" style="width:<?php echo $thumb_width; ?>px;height:<?php echo $thumb_height; ?>px">
+                        <img id="image-<?php echo $i; ?>"
+                         src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($thumb_width, $thumb_height); ?>"
+                         data-large="<?php echo  $this->getGalleryImageUrl($_image); ?>"
+                         data-zoom-image="<?php echo  $this->getGalleryImageUrl($_image); ?>"/>
+                        </a>
+                    </li>
+                <?php endif; ?>
+            <?php $i++; endforeach; ?>
+        <?php endif; ?>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<?php echo $this->getChildHtml('after'); ?>

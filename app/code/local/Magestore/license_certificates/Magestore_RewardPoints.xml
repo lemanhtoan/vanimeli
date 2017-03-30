@@ -1,0 +1,44 @@
+<config>
+   <Magestore_RewardPoints>
+      <name>Reward Points Plus - Platinum</name>
+      <type>commercial</type>
+      <activation_date>Jan 11, 2017</activation_date>
+      <expiration_date/>
+      <order_number>100095320</order_number>
+   </Magestore_RewardPoints>
+   <Magestore_RewardPointsBehavior>
+      <name>Reward Points Behavior plugin</name>
+      <type>depend</type>
+      <depend>Magestore_RewardPoints</depend>
+   </Magestore_RewardPointsBehavior>
+   <Magestore_RewardPointsRule>
+      <name>Reward Points Rule plugin</name>
+      <type>depend</type>
+      <depend>Magestore_RewardPoints</depend>
+   </Magestore_RewardPointsRule>
+   <Magestore_RewardPointsReport>
+      <name>Reward Points Report plugin</name>
+      <type>depend</type>
+      <depend>Magestore_RewardPoints</depend>
+   </Magestore_RewardPointsReport>
+   <Magestore_RewardPointsApi>
+      <name>Reward Points API plugin </name>
+      <type>depend</type>
+      <depend>Magestore_RewardPoints</depend>
+   </Magestore_RewardPointsApi>
+   <Magestore_RewardPointsTransfer>
+      <name>Reward Points Transfer plugin</name>
+      <type>depend</type>
+      <depend>Magestore_RewardPoints</depend>
+   </Magestore_RewardPointsTransfer>
+   <Magestore_RewardPointsEvent>
+      <name>Reward Points Event plugin</name>
+      <type>depend</type>
+      <depend>Magestore_RewardPoints</depend>
+   </Magestore_RewardPointsEvent>
+   <Magestore_RewardPointsCoupon>
+      <name>Reward Points Coupon</name>
+      <type>depend</type>
+      <depend>Magestore_RewardPoints</depend>
+   </Magestore_RewardPointsCoupon>
+</config>

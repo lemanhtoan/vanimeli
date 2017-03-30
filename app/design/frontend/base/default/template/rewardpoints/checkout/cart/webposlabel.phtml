@@ -1,0 +1,87 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Rewardpoints show on Review Total
+ *
+ * @see Magestore_RewardPoints_Block_Checkout_Cart_Label
+ */
+?>
+<?php if ($this->isEnable()): ?>
+
+    <?php
+    /** @var $_pointHelper Magestore_RewardPoints_Helper_Point */
+    $_pointHelper = $this->getPointHelper();
+    $_spendingPoint = $this->getSpendingPoint();
+    $_earningPoints = $this->getEarningPoint();
+    $_earningPointsByCoupon = Mage::helper('rewardpoints/calculation_earning')->getEarningPointByCoupon();
+    ?>
+    <?php if ($_spendingPoint || $_earningPoints  || $_earningPointsByCoupon): ?>
+        <?php if ($this->getColspan() == 1): ?><thead><?php endif ?>
+        <?php if ($_spendingPoint): ?>
+            <div class="form-cart">
+                <div class="el1 col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <?php
+                    if (Mage::app()->getRequest()->getModuleName() == 'webpos')
+                        echo $this->__('Customer will spend');
+                    else {
+                        echo $this->__('You will spend');
+                    }
+                    ?>:
+                </div>
+                <div class="el2 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <?php echo $_pointHelper->format($_spendingPoint) ?>
+                </div>
+            </div>
+        <?php endif ?>
+        <?php if ($_earningPoints): ?>
+            <div class="form-cart <?php if (Mage::app()->getRequest()->getModuleName() == 'webpos') echo "online_totals";?>">
+                <div class="el1 col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <?php if (Mage::app()->getRequest()->getModuleName() == 'webpos')
+                        echo $this->__('Customer will earn');
+                    else {
+                        if(Mage::getSingleton('customer/session')->isLoggedIn() || $this->getQuote()->getCustomerGroupId() > 0){
+                            echo $this->__('You will earn');
+                        }else{
+                            echo "<a href='".Mage::getUrl('rewardpoints/index/redirectLogin',array('redirect'=>base64_encode(Mage::helper('core/url')->getCurrentUrl())))."'>".$this->__('Login')."</a> ". $this->__('to earn');
+                        }
+                    } ?>:
+                </div>
+                <div class="el2 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <?php echo $_pointHelper->format($_earningPoints) ?>
+                </div >
+            </div>
+        <?php endif ?>
+        <?php if ($_earningPointsByCoupon): ?>
+            <div class="form-cart">
+                <div  class="el1 col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <?php echo $this->__('Earn Points (%s)', Mage::helper('rewardpoints/calculation_earning')->getCouponEarnPoints()); ?>
+                </div>
+                <div class="el2 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <?php echo $_pointHelper->format($_earningPointsByCoupon) ?>
+                </div>
+            </div>
+        <?php endif ?>
+        <?php if ($this->getColspan() == 1): ?></thead><?php endif ?>
+    <?php endif ?>
+
+    <?php
+
+endif // End if ($this->isEnable()) ?>

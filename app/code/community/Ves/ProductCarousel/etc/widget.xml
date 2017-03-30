@@ -1,0 +1,701 @@
+<?xml version="1.0"?>
+<widgets>
+  <!-- Widget single image-->
+  <widget_product_carousel type="ves_productcarousel/widget_carousel">
+    <name>Ves Base : Products Carousel</name>
+    <description>Create Products Carousel Widget</description>
+    <parameters>
+      <spacer_1 translate="label">
+        <label>General Setting</label>
+        <type>ves_productcarousel/system_config_form_field_heading</type>
+        <sort_order>1</sort_order>
+        <visible>1</visible>
+        <description></description>
+      </spacer_1>
+
+      <show translate="label" module="core">
+        <visible>1</visible>
+        <label>Enabled</label>
+        <sort_order>10</sort_order>
+        <type>select</type>
+        <values>
+          <yes translate="label">
+            <label>Yes</label>
+            <value>true</value>
+          </yes>
+          <no translate="label">
+            <label>No</label>
+            <value>false</value>
+          </no>
+        </values>
+        <value>true</value>
+      </show>
+
+      <title translate="label">
+        <visible>1</visible>
+        <label>Module Title</label>
+        <type>text</type>
+        <sort_order>13</sort_order>
+        <description>Empty for hide</description>
+        <value></value>
+      </title>
+
+      <title_class translate="label">
+        <visible>1</visible>
+        <label>Title Class</label>
+        <type>text</type>
+        <sort_order>15</sort_order>
+        <description>Empty for hide</description>
+        <value></value>
+      </title_class> 
+
+      <title_icon translate="label" module="core">
+        <visible>1</visible>
+        <label>Title Icon</label>
+        <type>ves_base/adminhtml_widget_mediachooser</type>
+        <description><![CDATA[Enter image path or use holder image (ex: holder.js/300x200 ). Example: <strong>subfolder/image_name.jpg</strong>.The "subfolder" is child folder in <strong>your_webroot_folder/media/</strong>]]></description>
+        <sort_order>16</sort_order>
+      </title_icon>
+
+      <show_viewalllink>
+        <visible>1</visible>
+        <label>Show View All Button</label>
+        <type>select</type>
+        <values>
+          <yes translate="label">
+            <label>Yes</label>
+            <value>true</value>
+          </yes>
+          <no translate="label">
+            <label>No</label>
+            <value>false</value>
+          </no>
+        </values>
+        <sort_order>17</sort_order>
+        <value>true</value>
+      </show_viewalllink>
+
+      <viewall_link translate="label" module="core">
+        <visible>1</visible>
+        <label>View All Link</label>
+        <type>text</type>
+        <sort_order>18</sort_order>
+        <description><![CDATA['Input the link to view all products page as you want. For example: latest-products.html Empty to hide']]></description>
+        <value></value>
+        <depends><show_viewalllink><value>true</value></show_viewalllink></depends>
+      </viewall_link>
+
+      <viewall_text translate="label" module="core">
+        <visible>1</visible>
+        <label>View All Text</label>
+        <type>text</type>
+        <sort_order>19</sort_order>
+        <description><![CDATA['Input the link title text. For example: View All']]></description>
+        <depends><show_viewalllink><value>true</value></show_viewalllink></depends>
+      </viewall_text>
+
+      <cmsblock translate="label">
+        <visible>1</visible>
+        <label>Select Static Block</label>
+        <type>select</type>
+        <source_model>ves_productcarousel/system_config_source_listCms</source_model>
+        <sort_order>20</sort_order>
+        <description>Choose Template for your module</description>
+        <value>0</value>
+      </cmsblock>
+
+      <pretext translate="label">
+       <visible>1</visible>
+       <label>Pretext</label>
+       <type>ves_productcarousel/system_config_form_field_wysiwygEditor</type>
+       <sort_order>25</sort_order>
+       <description>Empty for hide. You put html code such A, H2,H3,H4...</description>
+       <depends><cmsblock><value>0</value></cmsblock></depends>
+     </pretext>
+
+     <prefix translate="label">
+       <visible>1</visible>
+       <label>Prefix Class</label>
+       <type>text</type>
+       <sort_order>30</sort_order>
+     </prefix>
+
+     <common_layout translate="label">
+      <visible>1</visible>
+      <label>Layout</label>
+      <description><![CDATA[Input custom layout file name.<br/><hr style="display:none"/>File default is <b>your_theme/template/common/list/defaut.phtml</b>, you should input <b>default.phtml</b>.<br/>Empty for default]]></description>
+      <type>text</type>
+      <sort_order>33</sort_order>
+    </common_layout>
+
+    <spacer_2 translate="label">
+      <label>Catalog - Products Source Setting</label>
+      <type>ves_productcarousel/system_config_form_field_heading</type>
+      <sort_order>35</sort_order>
+      <visible>1</visible>
+      <description></description>
+    </spacer_2>
+
+    <catsid translate="label">
+      <visible>1</visible>
+      <label>Categories ID:</label>
+      <type>multiselect</type>
+      <source_model>ves_productcarousel/system_config_source_ListCategories</source_model>
+      <description>Eg: 22,23. Empty for all categories.</description>
+      <sort_order>40</sort_order>
+    </catsid>
+
+    <source_products_mode translate="label">
+      <visible>1</visible>
+      <label>Show Products in</label>
+      <type>select</type>
+      <source_model>ves_productcarousel/system_config_source_listType</source_model>                         
+      <sort_order>45</sort_order>
+      <value>latest</value>
+    </source_products_mode>
+
+    <attribute_code translate="label">
+      <visible>1</visible>
+      <label>Select Product Attribute</label>
+      <type>select</type>
+      <source_model>ves_productcarousel/system_config_source_listAttributes</source_model>
+      <sort_order>48</sort_order>
+      <depends><source_products_mode><value>attribute</value></source_products_mode></depends>
+    </attribute_code>
+
+    <attribute_value translate="label">
+     <visible>1</visible>
+     <label>Attribute Value</label>
+     <sort_order>49</sort_order>
+     <type>text</type>
+     <description>Input attribute value which match when filter products</description>
+     <value>1</value>
+     <depends><source_products_mode><value>attribute</value></source_products_mode></depends>
+   </attribute_value>
+
+   <limit_item translate="label">
+     <visible>1</visible>
+     <label>Item number of categories</label>
+     <sort_order>50</sort_order>
+     <type>text</type>
+     <backend_model>ves_productcarousel/system_config_backend_productcarousel_checkQty</backend_model>
+     <description>0 for show all</description>
+     <value>8</value>
+   </limit_item>
+
+   <max_items>
+    <visible>1</visible>
+    <label>Max items on a page</label>
+    <description><![CDATA[Number products will show on a carousel page. If you enable <b>Use OWL Carousel</b>, and want use hozizontal owl carousel you should set <b>max items = 1</b>]]></description>
+    <type>text</type>
+    <sort_order>55</sort_order>
+    <value>4</value>
+  </max_items>
+
+  <limit_cols>
+    <visible>1</visible>
+    <label>Max Colums</label>
+    <type>text</type>
+    <sort_order>60</sort_order>
+    <value>4</value>
+  </limit_cols>
+
+  <spacer_3 translate="label">
+    <label>Item Settingss</label>
+    <type>ves_productcarousel/system_config_form_field_heading</type>
+    <sort_order>65</sort_order>
+    <visible>1</visible>
+    <description></description>
+  </spacer_3>
+
+  <image_width>
+   <visible>1</visible>
+   <label>Image Width</label>
+   <type>text</type>
+   <sort_order>70</sort_order>
+   <value>300</value>
+ </image_width>
+
+ <image_height>
+   <visible>1</visible>
+   <label>Image Height</label>
+   <type>text</type>
+   <sort_order>75</sort_order>
+   <value>300</value>
+ </image_height>
+
+
+ <title_maxchar>
+   <visible>1</visible>
+   <label>Title Max Chars</label>
+   <type>text</type>
+   <sort_order>76</sort_order>
+   <value>100</value>
+ </title_maxchar>
+
+ <desc_maxchar>
+  <visible>1</visible>
+  <label>Description Max Chars</label>
+  <type>text</type>
+  <sort_order>77</sort_order>
+  <value>100</value>
+</desc_maxchar>
+
+<show_navigator>
+  <visible>1</visible>
+  <label>Enable Button Navigation</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <sort_order>80</sort_order>
+  <value>true</value>
+</show_navigator>
+
+<show_title>
+  <visible>1</visible>
+  <label>Enable Main Title</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <sort_order>84</sort_order>
+  <value>true</value>
+</show_title>
+<show_desc>
+  <visible>1</visible>
+  <label>Enable Main Description</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <sort_order>85</sort_order>
+  <value>false</value>
+</show_desc>
+<show_price>
+  <visible>1</visible>
+  <label>Enable Price</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <sort_order>90</sort_order>
+  <value>true</value>
+</show_price>
+
+<show_wc>
+  <visible>1</visible>
+  <label>Enable Wishlist, Compare</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <sort_order>95</sort_order>
+  <value>true</value>
+</show_wc>
+<show_addcart>
+  <visible>1</visible>
+  <label>Enable Button addcart</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <sort_order>100</sort_order>
+  <value>true</value>
+</show_addcart>
+<show_review>
+  <visible>1</visible>
+  <label>Enable Rating</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <sort_order>105</sort_order>
+  <value>true</value>
+</show_review>
+
+<show_pzoom>
+ <visible>1</visible>
+ <label>Enable Product Image Zooming</label>
+ <type>select</type>
+ <values>
+  <yes translate="label">
+    <label>Yes</label>
+    <value>true</value>
+  </yes>
+  <no translate="label">
+    <label>No</label>
+    <value>false</value>
+  </no>
+</values>
+<sort_order>110</sort_order>
+<value>false</value>
+</show_pzoom>
+
+<enable_swap>
+ <visible>1</visible>
+ <label>Enable Swap Images</label>
+ <type>select</type>
+ <values>
+  <yes translate="label">
+    <label>Yes</label>
+    <value>true</value>
+  </yes>
+  <no translate="label">
+    <label>No</label>
+    <value>false</value>
+  </no>
+</values>
+<sort_order>115</sort_order>
+<value>true</value>
+</enable_swap>
+
+<swap_image_number>
+ <visible>1</visible>
+ <label>Swap Image Number</label>
+ <description>Input index number of product additional images to use for Swap image (index number start from 0), for example: you want get image 3 for swap image, you should input swap image number = 2 </description>
+ <type>text</type>
+ <sort_order>117</sort_order>
+ <value>0</value>
+ <depends><enable_swap><value>true</value></enable_swap></depends>
+</swap_image_number>
+
+<enable_sale_icon>
+  <visible>1</visible>
+  <label>Enable Sale Icon</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <sort_order>120</sort_order>
+  <value>true</value>
+</enable_sale_icon>
+
+<enable_new_icon>
+  <visible>1</visible>
+  <label>Enable New Icon</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <sort_order>130</sort_order>
+  <value>false</value>
+</enable_new_icon>
+
+<enable_quickview>
+  <visible>1</visible>
+  <label>Enable Quickview</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <sort_order>225</sort_order>
+  <value>true</value>
+</enable_quickview>
+
+<popup_quickview_width>
+ <visible>1</visible>
+ <label>Popup Quickview Width</label>
+ <type>text</type>
+ <sort_order>230</sort_order>
+ <value>60%</value>
+ <depends><enable_quickview><value>true</value></enable_quickview></depends>
+</popup_quickview_width>
+
+<popup_quickview_height>
+ <visible>1</visible>
+ <label>Popup Quickview Height</label>
+ <type>text</type>
+ <sort_order>240</sort_order>
+ <value>80%</value>
+ <depends><enable_quickview><value>true</value></enable_quickview></depends>
+</popup_quickview_height>
+
+<spacer_7 translate="label">
+  <label>OWL Carousel Setting</label>
+  <type>ves_productcarousel/system_config_form_field_heading</type>
+  <sort_order>250</sort_order>
+  <visible>1</visible>
+  <description></description>
+</spacer_7>
+<enable_owl_carousel>
+  <label>Use OWL Carousel</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <visible>1</visible>
+  <sort_order>255</sort_order>
+  <value>false</value>
+</enable_owl_carousel>
+<rtl>
+ <label>Enable Right To Left</label>
+ <type>select</type>
+ <values>
+  <yes translate="label">
+    <label>Yes</label>
+    <value>true</value>
+  </yes>
+  <no translate="label">
+    <label>No</label>
+    <value>false</value>
+  </no>
+</values>
+<visible>1</visible>
+<sort_order>260</sort_order>
+<value>false</value>
+</rtl>
+
+<loop>
+  <label>Enable Loop Carousel</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <visible>1</visible>
+  <sort_order>280</sort_order>
+  <value>true</value>
+</loop>
+<mouse_drag>
+  <label>Enable Mouse Drag</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <visible>1</visible>
+  <sort_order>280</sort_order>
+  <value>true</value>
+</mouse_drag>
+<touch_drag>
+  <label>Enable Touch Drag</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <visible>1</visible>
+  <sort_order>290</sort_order>
+  <value>true</value>
+</touch_drag>
+<slide_by>
+  <label>Slide By</label>
+  <type>text</type>
+  <description>Number Items will slide on a time. Default: 1</description>
+  <sort_order>300</sort_order>
+  <visible>1</visible>
+  <value>1</value>
+</slide_by>
+<margin_item>
+  <label>Margin Each Items</label>
+  <type>text</type>
+  <description>Default 0</description>
+  <sort_order>310</sort_order>
+  <visible>1</visible>
+  <value>0</value>
+</margin_item>
+
+<default_items>
+  <label>Number Columns On Page (Default)</label>
+  <description>Show number items when screen size between 1199px and 980px</description>
+  <type>text</type>
+  <sort_order>320</sort_order>
+  <visible>1</visible>
+  <value>4</value>
+</default_items>
+
+<mobile_items>
+  <label>Number Columns On Page (Phones)</label>
+  <description>Show number items when screen size bellow 480px</description>
+  <type>text</type>
+  <sort_order>330</sort_order>
+  <visible>1</visible>
+  <value>1</value>
+</mobile_items>
+
+<tablet_small_items>
+  <label>Number Columns On Page (Phones to Small tablets)</label>
+  <description>Show number items when screen size between 641px and 480px</description>
+  <type>text</type>
+  <sort_order>335</sort_order>
+  <visible>1</visible>
+  <value>2</value>
+</tablet_small_items>
+
+<tablet_items>
+  <label>Number Columns On Page (Phones to tablets)</label>
+  <description>Show number items when screen size between 768px and 641px</description>
+  <type>text</type>
+  <sort_order>340</sort_order>
+  <visible>1</visible>
+  <value>2</value>
+</tablet_items>
+
+<portrait_items>
+  <label>Number Columns On Page (Portrait tablets)</label>
+  <description>Show number items when screen size between 979px and 769px</description>
+  <type>text</type>
+  <sort_order>350</sort_order>
+  <visible>1</visible>
+  <value>3</value>
+</portrait_items>
+
+<large_items>
+  <label>Number Columns On Page (Large display)</label>
+  <description>Show number items when screen size 1200px and up</description>
+  <type>text</type>
+  <sort_order>360</sort_order>
+  <visible>1</visible>
+  <value>5</value>
+</large_items>
+
+<custom_items>
+  <label>Custom Number Items with any screen sizes</label>
+  <description>For example: [320, 1], [360, 1], [480, 1], [568, 2], [600, 2], [640, 2], [768, 2], [900, 3], [960, 3], [1024, 3] empty to disable</description>
+  <type>text</type>
+  <sort_order>370</sort_order>
+  <visible>1</visible>
+  <value></value>
+</custom_items>
+
+<auto_play>
+  <visible>1</visible>
+  <label>Auto Play</label>
+  <type>select</type>
+  <values>
+    <yes translate="label">
+      <label>Yes</label>
+      <value>true</value>
+    </yes>
+    <no translate="label">
+      <label>No</label>
+      <value>false</value>
+    </no>
+  </values>
+  <sort_order>400</sort_order>
+  <value>false</value>
+</auto_play>
+
+<interval>
+  <visible>1</visible>
+  <label>Speed</label>
+  <comment>Determines the duration of the transition in milliseconds.If less than 10, the number is interpreted as a speed (pixels/millisecond).This is probably desirable when scrolling items with variable sizes</comment>
+  <type>text</type>
+  <sort_order>500</sort_order>
+  <value>600</value>
+</interval>
+
+<spacer_8 translate="label">
+  <label>Template Setting</label>
+  <type>ves_productcarousel/system_config_form_field_heading</type>
+  <sort_order>600</sort_order>
+  <visible>1</visible>
+  <description></description>
+</spacer_8>
+
+<template translate="label">
+  <visible>1</visible>
+  <label>Module Template</label>
+  <description>Input custom module template file path. For example: ves/productcarousel/default.phtml Empty for default</description>
+  <type>text</type>
+  <sort_order>650</sort_order>
+</template>
+</parameters>
+</widget_product_carousel>
+</widgets>

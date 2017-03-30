@@ -1,0 +1,68 @@
+<?php
+$allproduct = Mage::getModel('catalog/product')->getCollection()->setOrder('entity_id','desc')->getData();
+$_helper = $this->helper('catalog/output');?>
+<section class="latest-offer">
+<div class="">
+<div class="row">
+<div class="col-sm-12">
+
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div class="offer-carousal">
+<div class="row">
+<div class="col-sm-12 owl-carousel-total">
+<h1 class="section-heading"><?php echo $this->__('Latest Offers'); ?></h1>
+<div id="latest_offers" class="owl-carousel owl-theme">
+<?php
+foreach($allproduct as $product){
+?>
+
+<?php
+$obj = Mage::getModel('catalog/product');
+$productid = $product['entity_id'];
+$_product = $obj->load($productid);$obj = Mage::getModel('catalog/product');
+$productid = $product['entity_id'];
+$_product = $obj->load($productid);
+ if($_product->getSpecialPrice()){
+
+$productName = $_product->getName();
+$productDescription = $_product->getDescription();
+$productImage = $_product->getImageUrl();
+$productUrl = $_product->getProductUrl();
+$productPrice = $_product->getPrice();
+$addToCartUrl = Mage::helper('checkout/cart')->getAddUrl($_product);
+?>
+<div class="item"><a href="<?php echo $productUrl;?>"><img class="img-responsive" alt="" src="<?php echo $productImage;?>" /></a>
+<?php if($_product->getSpecialPrice()){
+?>
+<p class="sale">Sale</p>
+<?php
+}
+?>
+<h1 class="products-name"><?php echo $productName;?></h1>
+<?php if($_product->getSpecialPrice()){
+?>
+<h2 class="product-price"><span class="past-price">was <?php echo Mage::helper('core')->currency($productPrice, true, false);?></span>&nbsp;&nbsp;&nbsp;<span class="present-price">now <?php echo Mage::helper('core')->currency($_product->getSpecialPrice(), true, false);?></span></h2>
+<?php
+}else{
+?>
+<h2 class="product-price"><?php echo Mage::helper('core')->currency($productPrice, true, false);?></h2>
+<?php 
+}
+?>
+<div class="view-buy"><a class="btn border-radius-0" href="<?php echo $productUrl;?>">View &amp; Buy</a></div>
+</div>
+<?php
+}
+}
+?>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>

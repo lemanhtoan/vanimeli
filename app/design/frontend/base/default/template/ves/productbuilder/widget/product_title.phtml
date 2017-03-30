@@ -1,0 +1,14 @@
+<?php $product_info_block = Mage::registry("product_info_block"); ?>
+<?php $_helper = $product_info_block->helper('catalog/output'); ?>
+<?php $_product = $product_info_block->getProduct(); ?>
+<?php 
+	$css_class = $this->getConfig("css_class","h1");
+	$max_chars = $this->getConfig("max_chars","");
+	$product_name = $_helper->productAttribute($_product, $_product->getName(), 'name');
+	if($max_chars && (int)$max_chars > 0) {
+		$product_name = Mage::helper("ves_blockbuilder")->subString($product_name, (int)$max_chars);
+	}
+ ?>
+<div class="product-name">
+    <span class="<?php echo $css_class; ?>"><?php echo $product_name; ?></span>
+</div>

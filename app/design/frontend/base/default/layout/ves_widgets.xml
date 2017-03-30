@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+
+			<action method="addJs" module="ves_widgets" ><script>ves_widgets/countdown.js</script></action>
+			<action method="addJs" module="ves_widgets" ifconfig="ves_widgets/general/enable_cookie_jquery" ><script>ves_widgets/jquery.cookie.js</script></action>
+			<action method="addCss"><stylesheet>ves_widgets/bannercountdown/style.css</stylesheet></action>
+
+			<!-- Enable Swiper Carousel -->
+			<action method="addJs" module="ves_widgets" ifconfig="ves_widgets/general/enable_swiper"><script>ves_widgets/swiper/swiper.min.js</script></action>
+			<action method="addCss" module="ves_widgets" ifconfig="ves_widgets/general/enable_swiper"><stylesheet>ves_widgets/swiper/swiper.min.css</stylesheet></action>
+			<action method="addCss" module="ves_widgets" ifconfig="ves_widgets/general/enable_swiper"><stylesheet>ves_widgets/swiper/styles.css</stylesheet></action>
+			<!-- Enable Swiper Carousel -->
+
+			<action method="addItem">
+                  <type>skin_js</type>
+                  <name>ves_widgets/js/common.js</name>
+                  <params/>
+            </action>
+		</reference>
+	</default>
+</layout>

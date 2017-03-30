@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<config>
+
+	<menu>
+		<nwdthemes translate="title" module="nwdrevslider">
+			<children>
+				<nwdrevslider>
+					<title>Revolution Slider</title>
+					<sort_order>10</sort_order>
+					<children>
+						<nwdrevslider translate="title" module="nwdrevslider">
+							<title>Slider Overview</title>
+							<sort_order>0</sort_order>
+							<action>adminhtml/nwdrevslider</action>
+						</nwdrevslider>
+						<nwdrevslider_navigation_editor translate="title" module="nwdrevslider">
+							<title>Navigation Editor</title>
+							<sort_order>10</sort_order>
+							<action>adminhtml/nwdrevslider/navigation</action>
+						</nwdrevslider_navigation_editor>
+						<nwdrevslider_add_ons translate="title" module="nwdrevslider">
+							<title>Add-Ons</title>
+							<sort_order>20</sort_order>
+							<action>adminhtml/nwdrevslider/addon</action>
+						</nwdrevslider_add_ons>
+						<configuration>
+							<title>Configuration</title>
+							<sort_order>30</sort_order>
+							<action>adminhtml/system_config/edit/section/nwdrevslider_config</action>
+						</configuration>
+					</children>
+				</nwdrevslider>
+			</children>
+		</nwdthemes>
+	</menu>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<nwdrevslider_config>
+										<title>Revolution Slider Configuration</title>
+									</nwdrevslider_config>
+								</children>
+							</config>
+						</children>
+					</system>
+					<nwdthemes>
+						<children>
+							<nwdrevslider>
+								<title>Revolution Slider</title>
+								<children>
+										<nwdrevslider translate="title" module="nwdrevslider">
+											<title>Slider Overview</title>
+										</nwdrevslider>
+										<nwdrevslider_navigation_editor translate="title" module="nwdrevslider">
+											<title>Navigation Editor</title>
+										</nwdrevslider_navigation_editor>
+										<nwdrevslider_add_ons translate="title" module="nwdrevslider">
+											<title>Add-Ons</title>
+										</nwdrevslider_add_ons>
+										<configuration>
+											<title>Configuration</title>
+										</configuration>
+								</children>
+							</nwdrevslider>
+						</children>
+					</nwdthemes>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+
+</config>

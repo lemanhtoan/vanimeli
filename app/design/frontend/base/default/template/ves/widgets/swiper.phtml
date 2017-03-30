@@ -1,0 +1,42 @@
+<?php
+    $id = "ves_widgets_swiper_".rand().time();
+    $title = $this->getConfig("title", "");
+    $freemode = $this->getConfig("freemode");
+    $loop = $this->getConfig("loop");
+    $stylecls = $this->getConfig("stylecls");
+    $slider_height = (int)$this->getConfig("slider_height",0);
+?>
+<?php if($items = $this->getDataItems() ): ?>
+<div id="<?php echo $id; ?>" class="widget-swiper block <?php echo $this->getConfig("addition_cls"); ?> <?php if (isset($stylecls)&&$stylecls) echo 'block-'.$stylecls;?>" data-interval="<?php echo (int)$this->getConfig("interval", 2500); ?>" data-autoplay="<?php echo $this->getConfig("auto_play", 0); ?>" data-speed="<?php echo (int)$this->getConfig("speed", 300); ?>" data-limitview="<?php echo $this->getConfig("slide_by", 'auto'); ?>" data-space="<?php echo (int)$this->getConfig("space", 0); ?>" data-direction="<?php echo $this->getConfig("direction", "horizontal") ?>" data-loop="<?php echo $loop; ?>" data-freemode="<?php echo $freemode; ?>" data-effect="<?php echo $this->getConfig("effect", "slide");?>" <?php if($this->getConfig("show_pagination")): ?> data-pagination=".swiper-pagination"<?php endif; ?> <?php if($this->getConfig("show_navigator")): ?>data-nextbutton=".swiper-button-next" data-prevbutton=".swiper-button-prev"<?php endif; ?> <?php if($this->getConfig("show_scrollbar")): ?>data-scrollbar=".swiper-scrollbar"<?php endif; ?> <?php echo $this->getConfig("rtl", 0)?' dir="rtl"':''; ?>>
+
+    <?php if( $title != '' && !$title){ ?>
+    <div class="block-title">
+        <?php echo $title; ?>
+    </div>
+    <?php } ?>
+    <div class="widget-inner block-content">
+<!-- Swiper -->
+    <div class="swiper-container slider banners masterslider" <?php echo $slider_height?' style="height:'.$slider_height.'px;"':'';?>>
+        <div class="swiper-wrapper">
+            <?php foreach($items as $item): ?>
+                <div class="swiper-slide <?php echo ($item->size)?'swiper-slide-'.$item->size:''; ?>" <?php echo $slider_height?' style="height:'.$slider_height.'px;"':'';?>><div class="slide-inner"><?php echo $item->content; ?></div></div>
+            <?php endforeach; ?>
+        </div>
+        <?php if($this->getConfig("show_pagination")): ?>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <?php endif; ?>
+        <?php if($this->getConfig("show_navigator")): ?>
+         <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <?php endif; ?>
+        <?php if($this->getConfig("show_scrollbar")): ?>
+        <!-- If we need scrollbar -->
+        <div class="swiper-scrollbar"></div>
+        <?php endif; ?>
+    </div>
+<!-- Initialize Swiper -->
+    </div>
+</div>
+<?php endif; ?>

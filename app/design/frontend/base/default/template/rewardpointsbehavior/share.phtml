@@ -1,0 +1,39 @@
+<?php if ($this->showSocial()) : ?>
+    <div class="share-button">
+        <script type="text/javascript">
+            var login = '<?php echo Mage::helper('customer')->isLoggedIn() ?>';
+            var messageDefault = '<?php echo $this->getSocialInfo() ?>';
+            var messageError = '<?php echo $this->getErrorMessage() ?>';
+            function showAjaxLoader(){
+                $('referfriends-ajax-loader').show();
+                $('behavior-ajax-loader').hide();
+            }
+            function hideAjaxLoader(){
+                $('referfriends-ajax-loader').hide();
+                $('behavior-ajax-loader').show();
+            }
+        </script>
+        <?php echo $this->getChildHtml(''); ?>
+        <div class="share-login behavior-social" id="behavior-ajax-loader-bound">
+            <?php if (Mage::getSingleton('customer/session')->isLoggedIn()) { ?>
+                <span><span id="referfriends-ajax-loader" style="display:none"><img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif'); ?>" /></span></span>
+                <span id="behavior-ajax-loader">
+                    <a href="<?php echo Mage::getUrl('rewardpoints/index/index') ?>" style="text-decoration: none"> <?php echo $this->_helper()->getIcon() ?></a>
+                    <span id="social-info-behavior"><?php echo $this->getSocialInfo() ?></span>
+                </span>
+            <?php } else { ?>
+                <span><span id="referfriends-ajax-loader" style="display:none"></span></span>
+                <span id="behavior-ajax-loader">
+                    <!--a href="<?php //echo Mage::getUrl('customer/account/login') ?>"><?php //echo $this->_helper()->__('Login or create an account') ?></a-->
+                    <span id="social-info-behavior">&nbsp;<?php echo $this->getLoginLink($this->_helper()->__('[login_link]Login or create an account[/login_link] to earn %s!', '<b>' . Mage::helper('rewardpoints/point')->getPluralName() . '</b>')) ?></span>
+                </span> 
+            <?php } ?>
+        </div>
+        <script type="text/javascript">
+            if(messageDefault === ''){
+                $('behavior-ajax-loader-bound').hide();
+            }
+        </script>
+    </div>
+<div style="clear:both"></div> <!-- Hiep -->
+<?php endif; ?>

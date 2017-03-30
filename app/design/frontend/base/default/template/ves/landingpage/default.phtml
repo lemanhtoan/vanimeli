@@ -1,0 +1,135 @@
+
+<?php 
+$banners = $sliders;
+$auto_play = 1;
+$auto_play_mode = "0";
+$height = $this->getConfig('height',0);
+$width = $this->getConfig('width',0);
+?>
+<!-- <script src="http://www.youtube.com/player_api" id="YTAPI"></script> -->
+<div class="ves-landingpage hidden-sm hidden-xs ">
+	<?php if($this->getConfig('title')) { ?>
+	<div class="block-title">
+		<h3><?php echo $this->getConfig('title') ?></h3>
+	</div>
+	<?php } ?>
+	<section class="intro-landingpage ">
+		<div class="bg-glare"></div>
+		<div class="line-loader">
+			<div class="loader"></div>
+		</div>
+
+		<div class="landingpage w-screen-size parallax anima3te-bg" id="fullscreen" data-bg="<?php echo $image ?>">
+			<div class="inner w-screen-size">
+				<div class="button-close"><span><?php echo $this->__("permanently remove intro page");?></span></div>
+				<div class="clearfix"></div>
+				<?php if( isset($videoid) && !empty($videoid) ) { ?>	
+				<!-- Video -->
+				<div id="P10" class="player video-container p-video-v" data-property="{videoURL:'<?php echo $videoid; ?>',containment:'#fullscreen',loop:<?php echo $loop?'true':'false'; ?>, autoPlay:<?php echo $autoPlay?'true':'false'; ?>, showControls:<?php echo $showControls?'true':'false'; ?>, mute:<?php echo $mute?'true':'false'; ?>, startAt:0, opacity:1}"></div>
+				<!-- End Video -->
+				<?php } ?>
+				<?php
+				if( isset($banners) &&  count($banners) ) {  ?>
+				<?php $id = rand(1,10);?>
+				<div id="veslandingpage<?php echo $id;?>" data-ride="carousel" class="carousel slide veslandingpage line-middle">
+					<div class="pav-caption slideUp ">
+						<a href="<?php echo (isset($link_logo) && $link_logo)?$link_logo:Mage::getBaseUrl(); ?>">
+							<img src="<?php echo (isset($logo) && $logo )?$logo:Mage::getBaseUrl('media')?>ves_landingpage/logo-intro.png"  alt="<?php echo $this->__("Logo Intro");?>" />
+						</a>
+
+					</div>
+					<div class="carousel-inner">
+						<?php $i=0; foreach ($banners as  $banner) {  ?>
+						<div class="item <?php if($i++==0) {?>active<?php } ?>">
+							<div class="pav-caption <?php echo $banner->getData('effect_1'). " ".$banner->getData('class1');?>" >
+								<?php  echo $banner->getData('caption_1');?>
+							</div>
+							<div class="pav-caption <?php echo $banner->getData('effect_2'). " ".$banner->getData('class_2');?>" >
+								<?php  echo $banner->getData('caption_2');?>
+							</div>
+							<div class="pav-caption <?php echo $banner->getData('effect_3'). " ".$banner->getData('class_3');?>" >
+								<?php  echo $banner->getData('caption_3');?>
+							</div>		 
+						</div>
+						<?php } ?>
+					</div>
+
+					<?php if( count($banners) > 1 ){ ?>	
+					<a class="carousel-control left " href="#veslandingpage<?php echo $id;?>" data-slide="prev"></a>
+					<a class="carousel-control right" href="#veslandingpage<?php echo $id;?>" data-slide="next"></a>
+					<?php } ?>
+				</div>
+				<?php if( count($banners) > 1 ){ ?>
+				<script type="text/javascript">
+					(function($) {
+						$('#veslandingpage<?php echo $id;?>').carousel({interval:<?php echo ( $auto_play_mode?$interval:'false') ;?>,auto:<?php echo $auto_play;?>,pause:'hover'});
+					})(jQuery);
+
+				</script>
+				<?php } ?>
+				<?php } ?>
+			</div>	
+			<div class="landingpage-scroll-down"></div>
+		</div>
+
+<script type="text/javascript">
+	(function($) {
+		if (jQuery.cookie('pavlandingpage')) {
+			$('.line-loader').remove();
+			$('.landingpage').css({
+				'display':'none',
+				'height':'0'
+			});
+		}else{
+			$(window).on('load', function() {
+				$('.line-loader').fadeOut(function() {
+					$('.line-loader').remove();
+				});
+			});
+			$('.landingpage').each(function(){
+				var bg      = $(this).data('bg');
+				$(this).css("background-image","url(" + bg + ")");
+			});
+			wheighter = $(window).height();
+			wwidth = $(window).width();
+			<?php if($height){ ?>
+				$(".w-screen-size").css("height",<?php echo $height ?>);
+			<?php }else{ ?>
+				$(".w-screen-size").css("height",wheighter);
+			<?php } ?>
+			//width
+			<?php if($width){ ?>
+				$(".w-screen-size").css("width",<?php echo $width ?>);
+			<?php }else{ ?>
+				$(".w-screen-size").css("width",wwidth);
+			<?php } ?>
+
+			$(window).resize(function(){
+				wheighter = $(window).height();
+				wwidth = $(window).width();
+				<?php if($height){ ?>
+					$(".w-screen-size").css("height",<?php echo $height ?>);
+				<?php }else{ ?>
+					$(".w-screen-size").css("height",wheighter);
+				<?php } ?>
+				//width
+				<?php if($width){ ?>
+					$(".w-screen-size").css("width",<?php echo $width ?>);
+				<?php }else{ ?>
+					$(".w-screen-size").css("width",wwidth);
+				<?php } ?>
+			});
+			$(".player").mb_YTPlayer();
+			$('.button-close').click( function(){
+				$.cookie( 'pavlandingpage', 1);
+				$('.landingpage').css({
+						'display':'none',
+						'height':'0'
+				});
+			});
+		}
+})(jQuery);
+</script>
+</section>
+</div>
+

@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadTinyMce"><flag>1</flag></action>
+        </reference>
+        <update handle="editor"/>
+        <reference name="js">
+            <block type="core/template" template="ves_blockbuilder/wysiwyg/js.phtml"/>
+        </reference>
+    </default>    
+    <!-- Block builder -->
+    <adminhtml_blockbuilder_index>
+        <reference name="content">
+            <block type="ves_blockbuilder/adminhtml_blockbuilder" name="blockbuilder.banner" template="ves_blockbuilder/block/grid.phtml"/>  
+        </reference>
+    </adminhtml_blockbuilder_index>
+    <adminhtml_blockbuilder_edit>
+        <reference name="head">
+           <action method="addItem"><type>skin_css</type><name>ves_base/style.css</name></action>
+           <action method="addItem"><type>skin_css</type><name>ves_base/animate.min.css</name></action>
+        </reference>
+        <reference name="content">
+            <block after="-" type="ves_blockbuilder/adminhtml_blockbuilder_edit_initform" name='blockbuilder.slider.adminhtml.editor' template="ves_blockbuilder/edit/initform.phtml"></block>
+        </reference>
+        <reference name="before_body_end">
+           <block before="-" type="ves_blockbuilder/adminhtml_blockbuilder_edit_afterform" name='blockbuilder.slider.adminhtml.afterform' template="ves_blockbuilder/edit/afterform.phtml"></block>
+        </reference>
+    </adminhtml_blockbuilder_edit>
+    <adminhtml_blockbuilder_new>
+        <update handle="adminhtml_blockbuilder_edit"/>
+    </adminhtml_blockbuilder_new>
+    
+    <!-- Page builder -->
+    <adminhtml_pagebuilder_index>
+        <reference name="content">
+            <block type="ves_blockbuilder/adminhtml_page" name="blockbuilder.page"  template="ves_blockbuilder/page/grid.phtml"/>
+        </reference>
+    </adminhtml_pagebuilder_index>
+    <adminhtml_pagebuilder_edit>
+        <reference name="head">
+           <action method="addItem"><type>skin_css</type><name>ves_base/style.css</name></action>
+           <action method="addItem"><type>skin_css</type><name>ves_base/animate.min.css</name></action>
+        </reference>
+        <reference name="content">
+            <block after="-" type="ves_blockbuilder/adminhtml_blockbuilder_edit_initform" name='blockbuilder.slider.adminhtml.editor' template="ves_blockbuilder/edit/initform.phtml"></block>
+        </reference>
+        <reference name="before_body_end">
+           <block before="-" type="ves_blockbuilder/adminhtml_blockbuilder_edit_afterform" name='blockbuilder.slider.adminhtml.afterform' template="ves_blockbuilder/edit/afterform.phtml"></block>
+        </reference>
+    </adminhtml_pagebuilder_edit>
+    <adminhtml_pagebuilder_new>
+        <update handle="adminhtml_pagebuilder_edit"/>
+    </adminhtml_pagebuilder_new>
+
+     <!-- Product Layou builder -->
+    <adminhtml_productbuilder_index>
+        <reference name="content">
+            <block type="ves_blockbuilder/adminhtml_product" name="blockbuilder.product"  template="ves_blockbuilder/product/grid.phtml"/>
+        </reference>
+    </adminhtml_productbuilder_index>
+    <adminhtml_productbuilder_edit>
+        <reference name="head">
+           <action method="addItem"><type>skin_css</type><name>ves_base/style.css</name></action>
+           <action method="addItem"><type>skin_css</type><name>ves_base/animate.min.css</name></action>
+        </reference>
+        <reference name="content">
+            <block after="-" type="ves_blockbuilder/adminhtml_blockbuilder_edit_initform" name='blockbuilder.slider.adminhtml.editor' template="ves_blockbuilder/edit/initform.phtml"></block>
+        </reference>
+        <reference name="before_body_end">
+           <block before="-" type="ves_blockbuilder/adminhtml_blockbuilder_edit_afterform" name='blockbuilder.slider.adminhtml.afterform' template="ves_blockbuilder/edit/afterform.phtml"></block>
+        </reference>
+    </adminhtml_productbuilder_edit>
+    <adminhtml_productbuilder_new>
+        <update handle="adminhtml_productbuilder_edit"/>
+    </adminhtml_productbuilder_new>
+    
+    <!-- Css Live Editor Selectors -->
+    <adminhtml_selector_index>
+        <reference name="head">
+           <action method="addItem"><type>js_css</type><name>ves_base/fancybox/jquery.fancybox.css?v=2.1.5</name></action>
+           <action method="addItem"><type>skin_css</type><name>ves_base/style.css</name></action>
+           <action method="addJs"><script>ves_base/jquery/jquery-2.1.1.min.js</script></action>
+           <action method="addJs"><script>ves_base/jquery/noconflict.js</script></action>
+           <action method="addJs"><script>ves_base/fancybox/jquery.fancybox.pack.js?v=2.1.5</script></action>
+        </reference>
+        <reference name="content">
+            <block type="ves_blockbuilder/adminhtml_selector" name="blockbuilder.selector"  template="ves_blockbuilder/selector/grid.phtml"/>
+        </reference>
+    </adminhtml_selector_index>
+    <adminhtml_selector_edit>
+        <reference name="head">
+           <action method="addItem"><type>skin_css</type><name>ves_base/style.css</name></action>
+           <action method="addItem"><type>skin_css</type><name>ves_base/animate.min.css</name></action>
+        </reference>
+    </adminhtml_selector_edit>
+    <adminhtml_selector_new>
+        <update handle="adminhtml_selector_edit"/>
+    </adminhtml_selector_new>
+
+    <adminhtml_catalog_product_edit>
+        <reference name="product_tabs">
+            <action method="addTab">
+                <name>ves_productbuilder_tab</name>
+                <block>ves_blockbuilder/adminhtml_catalog_product_edit_tab</block>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+</layout>

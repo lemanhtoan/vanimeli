@@ -1,0 +1,23 @@
+<?php if ($this->_helper()->isEnable()) { ?>
+    <script type="text/javascript">
+        //<![CDATA[
+    <?php if ($this->_helper()->getBirthdayConfig('customer_birthday') && $this->_helper()->getBirthdayConfig('show_cus_birthday')) { ?>
+            if($('form-validate') && $('form-validate').down('.customer-dob') && $('form-validate').down('.customer-dob').down('.validation-advice')){
+                var eladd=$('form-validate').down('.customer-dob').down('.validation-advice');
+                eladd.insert({
+                    after: '<div class="rewardpointsbehavior-checkout-action" style="width:inherit"><a href="<?php echo Mage::getUrl('rewardpoints/index/index') ?>"><?php echo $this->_helper()->getIcon() ?></a>&nbsp;&nbsp;'+'<?php echo $this->getBirthdayInFo() ?></div>'
+                });
+            }
+    <?php } ?>
+    <?php $actionName = Mage::app()->getRequest()->getActionName(); ?>
+    <?php if ($this->_helper()->getSignConfig('signing_up') && $this->_helper()->getSignConfig('show_signup') && $actionName=='create') { ?>
+            if($('form-validate') && $('form-validate').down('.form-list')){
+                var eladd1=$('form-validate').down('.form-list');
+                eladd1.insert({
+                    before: '<div class="rewardpointsbehavior-checkout-action1" style="width:inherit"><a href="<?php echo Mage::getUrl('rewardpoints/index/index') ?>"><?php echo $this->_helper()->getIcon() ?></a>&nbsp;&nbsp;'+'<?php echo $this->getSignupInFo() ?></div>'
+                });
+            }
+    <?php } ?>
+        //]]>
+    </script>
+<?php } ?>

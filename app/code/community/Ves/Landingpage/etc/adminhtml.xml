@@ -1,0 +1,77 @@
+<?xml version="1.0"?> 
+<config>
+    <menu>
+            <vesextensions module="ves_landingpage">
+                <title>VenusTheme</title>
+                <sort_order>53</sort_order>
+                <children>
+                    <landingpage translate="title" module="ves_landingpage">
+                        <title>Ves Landingpage</title>
+                        <children>
+                            <slideradd translate="title" module="ves_landingpage">
+                                <title>Add slider</title>
+                                <sort_order>3</sort_order>
+                                <action>adminhtml/adminhtml_slider/add</action>
+                            </slideradd>
+                            <slider translate="title" module="ves_landingpage">
+                                <title>Manage Slider</title>
+                                <sort_order>4</sort_order>
+                                <action>adminhtml/adminhtml_slider/index</action>
+                            </slider>
+                            <configuration translate="title" module="ves_landingpage">
+                                <title>Configuration</title>
+                                <sort_order>5</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_landingpage</action>
+                            </configuration>
+                        </children>
+                    </landingpage>
+                </children>
+            </vesextensions>
+    </menu>
+    <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <vesextensions module="ves_landingpage">
+                            <title>VenusTheme</title>
+                            <sort_order>53</sort_order>
+                            <children>
+                                <landingpage translate="title" module="ves_landingpage">
+                                    <title>Ves Landingpage</title>
+                                    <children>
+                                        <slideradd translate="title" module="ves_landingpage">
+                                            <title>Add slider</title>
+                                            <sort_order>3</sort_order>
+                                            <action>adminhtml/adminhtml_slider/add</action>
+                                        </slideradd>
+                                        <slider translate="title" module="ves_landingpage">
+                                            <title>Manage Slider</title>
+                                            <sort_order>4</sort_order>
+                                            <action>adminhtml/adminhtml_slider/index</action>
+                                        </slider>
+                                        <configuration translate="title" module="ves_landingpage">
+                                            <title>Configuration</title>
+                                            <sort_order>5</sort_order>
+                                            <action>adminhtml/system_config/edit/section/ves_landingpage</action>
+                                        </configuration>
+                                    </children>
+                                </landingpage>
+                            </children>
+                        </vesextensions>
+                         <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ves_landingpage>
+                                            <title>Ves Landingpage</title>
+                                        </ves_landingpage>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+</config>

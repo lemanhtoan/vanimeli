@@ -1,0 +1,304 @@
+<?xml version="1.0"?> 
+<config>
+    <menu>
+            <vesextensions module="ves_blockbuilder">
+                <title>VenusTheme</title>
+                <sort_order>53</sort_order>
+                <children>
+                    <blockbuilder translate="title" module="ves_blockbuilder">
+                        <title>Ves Block Builder</title>
+                        <children>
+                            <new translate="title" module="ves_blockbuilder">
+                                <title>Add Block Profile</title>
+                                <sort_order>2</sort_order>
+                                <action>adminhtml/blockbuilder/new</action>
+                            </new>
+                            <index translate="title" module="ves_blockbuilder">
+                                <title>Manage Block Profiles</title>
+                                <sort_order>4</sort_order>
+                                <action>adminhtml/blockbuilder/index</action>
+                            </index>
+                            <sample translate="title" module="ves_blockbuilder">
+                                <title>Install Sample Profile</title>
+                                <sort_order>5</sort_order>
+                                <action>adminhtml/blockbuilder/sample</action>
+                            </sample>
+                            <configuration translate="title" module="ves_blockbuilder">
+                                <title>Configuration</title>
+                                <sort_order>15</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_blockbuilder</action>
+                            </configuration>
+                        </children>
+                    </blockbuilder>
+                    <pagebuilder translate="title" module="ves_blockbuilder">
+                        <title>Ves Page Builder</title>
+                        <children>
+                            <new translate="title" module="ves_blockbuilder">
+                                <title>Add Page Profile</title>
+                                <sort_order>2</sort_order>
+                                <action>adminhtml/pagebuilder/new</action>
+                            </new>
+                            <index translate="title" module="ves_blockbuilder">
+                                <title>Manage Page Profiles</title>
+                                <sort_order>4</sort_order>
+                                <action>adminhtml/pagebuilder/index</action>
+                            </index>
+                            <sample translate="title" module="ves_blockbuilder">
+                                <title>Install Sample Profile</title>
+                                <sort_order>5</sort_order>
+                                <action>adminhtml/pagebuilder/sample</action>
+                            </sample>
+                            <configuration translate="title" module="ves_blockbuilder">
+                                <title>Configuration</title>
+                                <sort_order>15</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_blockbuilder</action>
+                            </configuration>
+                        </children>
+                    </pagebuilder>
+                    <productbuilder translate="title" module="ves_blockbuilder">
+                        <title>Ves Product Builder</title>
+                        <children>
+                            <new translate="title" module="ves_blockbuilder">
+                                <title>Add Product Layout Profile</title>
+                                <sort_order>2</sort_order>
+                                <action>adminhtml/productbuilder/new</action>
+                            </new>
+                            <index translate="title" module="ves_blockbuilder">
+                                <title>Manage Product Layout Profiles</title>
+                                <sort_order>4</sort_order>
+                                <action>adminhtml/productbuilder/index</action>
+                            </index>
+                            <sample translate="title" module="ves_blockbuilder">
+                                <title>Install Sample Profile</title>
+                                <sort_order>5</sort_order>
+                                <action>adminhtml/productbuilder/sample</action>
+                            </sample>
+                            <configuration translate="title" module="ves_blockbuilder">
+                                <title>Configuration</title>
+                                <sort_order>15</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_productbuilder</action>
+                            </configuration>
+                        </children>
+                    </productbuilder>
+                    <selector translate="title" module="ves_blockbuilder">
+                        <title>Ves Live CSS Editor</title>
+                        <children>
+                            <index translate="title" module="ves_blockbuilder">
+                                <title>Manage Css Selectors</title>
+                                <sort_order>2</sort_order>
+                                <action>adminhtml/selector/index</action>
+                            </index>
+                            <configuration translate="title" module="ves_blockbuilder">
+                                <title>Enable Live Css Tool</title>
+                                <sort_order>15</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_livecss</action>
+                            </configuration>
+                        </children>
+                    </selector>
+                    <installsample translate="title" module="ves_blockbuilder">
+                        <title>PageBuilder Setup</title>
+                        <children>
+                            <pagebuilder_import module="ves_blockbuilder">
+                                <title>Import</title>
+                                <sort_order>15</sort_order>
+                                <action>adminhtml/pagebuilderinstall/import</action>
+                            </pagebuilder_import>
+                            <pagebuilder_export module="ves_blockbuilder">
+                                <title>Export</title>
+                                <sort_order>20</sort_order>
+                                <action>adminhtml/pagebuilderinstall/export</action>
+                            </pagebuilder_export>
+                        </children>
+                    </installsample>
+                </children>
+            </vesextensions>
+    </menu>
+    <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <vesextensions module="ves_blockbuilder">
+                            <title>VenusTheme</title>
+                            <sort_order>53</sort_order>
+                            <children>
+                                 <blockbuilder translate="title" module="ves_blockbuilder">
+                                    <title>Ves Block Builder</title>
+                                    <children>
+                                        <index translate="title">
+                                            <title>Block Profiles</title>
+                                            <sort_order>0</sort_order>
+                                        </index>
+                                        <new translate="title">
+                                            <title>Add Profile</title>
+                                            <sort_order>2</sort_order>
+                                        </new>
+                                        <edit translate="title">
+                                            <title>Edit Profile</title>
+                                            <sort_order>2</sort_order>
+                                        </edit>
+                                        <save translate="title">
+                                            <title>Save Profile</title>
+                                            <sort_order>3</sort_order>
+                                        </save>
+                                        <sample translate="title">
+                                            <title>Install Sample Profile</title>
+                                            <sort_order>5</sort_order>
+                                        </sample>
+                                        <delete translate="title">
+                                            <title>Delete Profile</title>
+                                            <sort_order>10</sort_order>
+                                        </delete>
+                                        
+                                        <configuration translate="title">
+                                            <title>Configuration</title>
+                                            <sort_order>15</sort_order>
+                                            <action>adminhtml/system_config/edit/section/ves_blockbuilder</action>
+                                        </configuration>
+                                    </children>
+                                </blockbuilder>
+                                <pagebuilder translate="title" module="ves_blockbuilder">
+                                    <title>Ves Page Builder</title>
+                                    <children>
+                                        <index translate="title">
+                                            <title>Page Profiles</title>
+                                            <sort_order>0</sort_order>
+                                        </index>
+                                        <new translate="title">
+                                            <title>Add Profile</title>
+                                            <sort_order>1</sort_order>
+                                        </new>
+                                       
+                                        <edit translate="title">
+                                            <title>Edit Profile</title>
+                                            <sort_order>2</sort_order>
+                                        </edit>
+
+                                        <save translate="title">
+                                            <title>Save Profile</title>
+                                            <sort_order>4</sort_order>
+                                        </save>
+                                        <sample translate="title">
+                                            <title>Install Sample Profile</title>
+                                            <sort_order>5</sort_order>
+                                        </sample>
+                                        <delete translate="title">
+                                            <title>Delete Profile</title>
+                                            <sort_order>10</sort_order>
+                                        </delete>
+                                        <configuration translate="title">
+                                            <title>Configuration</title>
+                                            <sort_order>15</sort_order>
+                                            <action>adminhtml/system_config/edit/section/ves_blockbuilder</action>
+                                        </configuration>
+                                    </children>
+                                </pagebuilder>
+                                <productbuilder translate="title" module="ves_blockbuilder">
+                                    <title>Ves Product Builder</title>
+                                    <children>
+                                        <index translate="title">
+                                            <title>Product Profiles</title>
+                                            <sort_order>0</sort_order>
+                                        </index>
+                                        <new translate="title">
+                                            <title>Add Profile</title>
+                                            <sort_order>1</sort_order>
+                                        </new>
+                                        <edit translate="title">
+                                            <title>Edit Profile</title>
+                                            <sort_order>2</sort_order>
+                                        </edit>
+                                        <save translate="title">
+                                            <title>Save Profile</title>
+                                            <sort_order>4</sort_order>
+                                        </save>
+                                        <sample translate="title">
+                                            <title>Install Sample Profile</title>
+                                            <sort_order>5</sort_order>
+                                        </sample>
+                                        <delete translate="title">
+                                            <title>Delete Profile</title>
+                                            <sort_order>10</sort_order>
+                                        </delete>
+                                        <configuration translate="title" >
+                                            <title>Configuration</title>
+                                            <sort_order>15</sort_order>
+                                            <action>adminhtml/system_config/edit/section/ves_productbuilder</action>
+                                        </configuration>
+                                    </children>
+                                </productbuilder>
+                                <selector translate="title" module="ves_blockbuilder">
+                                    <title>Ves Live CSS Editor</title>
+                                    <children>
+                                        <index translate="title">
+                                            <title>Css Selector</title>
+                                            <sort_order>0</sort_order>
+                                        </index>
+                                        <new translate="title">
+                                            <title>Add Css Selector</title>
+                                            <sort_order>0</sort_order>
+                                        </new>
+                                        <edit translate="title">
+                                            <title>Edit Css Selector</title>
+                                            <sort_order>2</sort_order>
+                                        </edit>
+                                        <save translate="title">
+                                            <title>Save Css Selector</title>
+                                            <sort_order>5</sort_order>
+                                        </save>
+                                        <sample translate="title">
+                                            <title>Install Sample Profile</title>
+                                            <sort_order>6</sort_order>
+                                        </sample>
+                                        <delete translate="title">
+                                            <title>Delete Css Selector</title>
+                                            <sort_order>10</sort_order>
+                                        </delete>
+                                        
+                                        <configuration translate="title">
+                                            <title>Enable Live Css Tool</title>
+                                            <sort_order>40</sort_order>
+                                            <action>adminhtml/system_config/edit/section/ves_livecss</action>
+                                        </configuration>
+                                    </children>
+                                </selector>
+                                <installsample translate="title" module="ves_blockbuilder">
+                                    <title>PageBuilder Install Sample</title>
+                                    <children>
+                                        <import translate="title">
+                                            <title>Import Sample Data</title>
+                                            <sort_order>20</sort_order>
+                                        </import>
+                                        <export translate="title">
+                                            <title>Export Sample Data</title>
+                                            <sort_order>30</sort_order>
+                                        </export>
+                                    </children>
+                                </installsample>
+                            </children>
+                        </vesextensions>
+                         <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ves_blockbuilder>
+                                            <title>Ves Pages Builder</title>
+                                        </ves_blockbuilder>
+                                        <ves_productbuilder>
+                                            <title>Ves products Builder</title>
+                                        </ves_productbuilder>
+                                        <ves_livecss>
+                                            <title>Ves Live Css Editor</title>
+                                        </ves_livecss>
+                                        <ves_feed>
+                                            <title>Ves Pages Builder Plugin Market</title>
+                                        </ves_feed>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+</config>

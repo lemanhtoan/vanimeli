@@ -1,0 +1,33 @@
+<?php
+$currency = Mage::getModel('directory/currency')->load(Mage::app()->getStore()->getBaseCurrencyCode());
+?>
+<div id="messages">
+    <ul class="messages">
+        <li class="notice-msg">
+            <ul>
+                <li>
+                    <span><?php echo $this->__('Example for "Update prices using the following information":') ?></span>
+                    <br/>
+                    <span><?php echo $this->__('If you want to give a discount of $10 or 10% for X points (configured in tab Conditions), then you can configure as below:') ?></span>
+                </li>
+            </ul>
+            <div style="margin-left: 50px">
+                <?php echo $this->__('- Choose "Action": "Give a fixed discount amount for the whole cart" or "Give a percent discount amount for the whole cart"') ?>
+                </br>
+                <?php echo $this->__('- Fill in field "Discount Amount": 10') ?>
+                </br>
+                <?php echo $this->__('=> An order of %s can be discounted to %s with action "Fixed discount amount for the whole cart" or to %s with action "Percent discount amount for the whole cart".', $currency->format(200), $currency->format(190), $currency->format(180)) ?>
+                </br>
+            </div>
+            </br>
+            <ul>
+                <li><span><?php echo $this->__('Example for "Conditions":') ?></span>
+                </li>
+            </ul>
+            <?php echo $this->__('If you want to apply the rule to products that cost more than %s and have brand Apple,  the condition is:', $currency->format(200)) ?>
+            <div style="margin-left: 50px"> 
+                <img title="conditons" alt="conditons" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'rewardpointsrule/example/catalog_conditions.png'; ?>">
+            </div>
+        </li>
+    </ul>
+</div>

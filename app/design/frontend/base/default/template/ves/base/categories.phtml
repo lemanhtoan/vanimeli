@@ -1,0 +1,117 @@
+<?php
+/*
+* Ves Base Widget - Categories List
+*
+* @package   vesbase
+* @version   5.0
+* @author    http://www.venustheme.com
+* @copyright Copyright (C) October 2013 venustheme.com <@emai:venustheme@gmail.com>
+*               <info@venustheme.com>.All rights reserved.
+* @license   GNU General Public License version 2
+*/
+$_catalogCatgoryHelper = Mage::helper('catalog/category');
+$moduleId = rand().time();
+$catIds = explode(',', $catsid);
+$cols = (isset($cols) && $cols)?(int)$cols:4;
+$item_cols = round(12/$cols);
+$auto_play_mode = (int)$autoplay;
+$auto_play = $auto_play_mode?"true":"false";
+$cms = isset($cms)?$cms:"";
+?>
+<div class="widget-categories block <?php echo $addition_cls; ?> <?php echo isset($stylecls)&&$stylecls?'block-'.$stylecls:'';?>">
+	<?php if (isset($widget_heading)&&!empty($widget_heading)): ?>
+	<div class="block-title">
+		<?php echo $widget_heading; ?>
+		<!-- Show pretext -->
+		<?php if( ($pretext = $this->getConfig("pretext")) && !$cms ) { ?>
+		<div class="pretext"><?php echo $pretext;?></div>
+		<?php } elseif($cms) { ?>
+		<div class="pretext"><?php echo $cms;?></div>
+		<?php } ?>
+		<!-- End Show pretext -->
+	</div>
+	<?php endif; ?>
+	<div class="widget-inner block-content clearfix">
+		<?php if($enable_carousel) { //Check If enable carousel, call the carousel layout ?>
+			<div class="box-categories carousel slide" id="categoriescarousel<?php echo $moduleId;?>">
+			<?php if( count($catIds) > $itemsperpage && $show_navigator) { ?>
+			<div class="carousel-controls">
+				<a class="carousel-control left fa fa-angle-left" href="#categoriescarousel<?php echo $moduleId;?>"   data-slide="prev">&lt;</a>
+				<a class="carousel-control right fa fa-angle-right" href="#categoriescarousel<?php echo $moduleId;?>"  data-slide="next">&gt;</a>
+			</div>
+			<?php } ?>
+			<div class="carousel-inner">
+				<?php
+				$pages = array_chunk( $catIds, $itemsperpage);
+				?>
+				<?php foreach ($pages as  $k => $cate_items ) {  ?>
+
+					<div class="item <?php if($k==0) {?>first<?php } elseif($k == (count($pages) -1 )) {?>last<?php } ?> <?php if($k==0) {?>active<?php } ?> no-margin">
+
+						<?php foreach( $cate_items as $i => $_cate_id ) {  $i=$i+1;?>
+					        <?php if( $cols == 1 || $i%$cols == 1 ) { ?>
+					        <div class="row categories-row">
+					        <?php } ?>
+					        <?php
+					        	$category = Mage::getModel('catalog/category')->load($_cate_id);
+					        	
+					        ?>
+					        <div class="col-lg-<?php echo $item_cols; ?> col-md-<?php echo $item_cols; ?> col-sm-<?php echo $item_cols; ?> col-xs-12">
+					        	<ul>
+					        		<?php if($enable_image): 
+					        			  $category_image = $this->getCategoryImage( $category, $image_width, $image_height, $cate_image );
+					        		?>
+					        		<li><a href="<?php echo $_catalogCatgoryHelper->getCategoryUrl($category); ?>"><img src="<?php echo $category_image; ?>" alt="<?php echo $category->getName(); ?>"></a></li>
+					        		<?php endif; ?>
+					        		<li><a href="<?php echo $_catalogCatgoryHelper->getCategoryUrl($category)?>">
+				                            <?php echo $category->getName()?>
+				                            <?php if($enable_numbproduct): ?>
+				                                (<?php echo $category->getProductCount() ?>)
+				                            <?php endif; ?>
+				                    </a></li>
+					        	</ul>
+				            </div>
+					        <?php if( $cols==1 || $i%$cols == 0 || $i==count($cate_items) ) { ?>
+					            </div>
+					        <?php } ?>
+					                            
+					<?php } //endforeach; ?>
+						
+					</div>
+				<?php } ?>
+			</div>
+		</div>
+		<script type="text/javascript">
+			jQuery('#categoriescarousel<?php echo $moduleId;?>').carousel({interval:<?php echo ( $auto_play_mode?$interval:'false') ;?>,auto:<?php echo $auto_play;?>,pause:'hover', cycle: true});
+		</script>
+
+		<?php } else { //If not enable crousel ?>
+			<ul>
+				<?php foreach($catIds as $catId): 
+					$category = Mage::getModel('catalog/category')->load($catId);
+
+				?>
+				<li>
+					<div class="categories-row">
+						<?php if($enable_image): 
+					        $category_image = $this->getCategoryImage( $category, $image_width, $image_height, $cate_image );
+					    ?>
+						<div class="image pull-right">
+	                    	<a href="<?php echo $_catalogCatgoryHelper->getCategoryUrl($category); ?>"><img src="<?php echo $category_image; ?>" alt="<?php echo $category->getName(); ?>"></a>
+	                	</div>
+	                	<?php endif; ?>
+	                	<div class="pull-left"> 
+	                		<a href="<?php echo $_catalogCatgoryHelper->getCategoryUrl($category)?>">
+	                            <?php echo $category->getName()?>
+	                            <?php if($enable_numbproduct): ?>
+	                                (<?php echo $category->getProductCount() ?>)
+	                            <?php endif; ?>
+	                   		</a>
+	                	</div>
+					</div>
+				</li>
+			<?php endforeach; ?>
+			</ul>
+		<?php } ?>
+	</div>
+</div>

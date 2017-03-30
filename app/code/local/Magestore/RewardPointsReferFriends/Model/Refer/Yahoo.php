@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * RewardpointsReferfriends Refer Yahoo
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @author      Magestore Developer
+ */
+class Magestore_Rewardpointsreferfriends_Model_Refer_Yahoo
+{
+	public function __construct(){
+		try {
+			require Mage::getBaseDir('lib').DS.'Yahoo'.DS.'Yahoo.inc';
+		} catch (Exception $e) {
+		}
+		error_reporting(E_ALL | E_NOTICE);
+		ini_set('display_errors', true);
+		YahooLogger::setDebug(true);
+		YahooLogger::setDebugDestination('LOG');
+		
+		ini_set('session.save_handler', 'files');
+		session_save_path('/tmp/');
+		session_start();
+		
+		if(array_key_exists("logout", $_GET)){
+			YahooSession::clearSession();
+		}
+	}
+		
+	public function _getHelper(){
+		return Mage::helper('rewardpointsreferfriends');
+	}
+	
+	protected function _getAppId(){
+		return $this->_getHelper()->getReferConfig('yahoo_app_id');
+	}
+	
+	protected function _getConsumerKey(){
+		return $this->_getHelper()->getReferConfig('yahoo_consumer_key');
+	}
+	
+	protected function _getConsumerSecret(){
+		return $this->_getHelper()->getReferConfig('yahoo_consumer_secret');
+	}
+	
+	public function hasSession(){
+		return YahooSession::hasSession($this->_getConsumerKey(), $this->_getConsumerSecret(), $this->_getAppId());
+	}
+	
+	public function getAuthUrl(){
+		return YahooSession::createAuthorizationUrl($this->_getConsumerKey(), $this->_getConsumerSecret());
+	}
+	
+	public function getSession(){
+		return YahooSession::requireSession($this->_getConsumerKey(), $this->_getConsumerSecret(), $this->_getAppId());
+	}
+}

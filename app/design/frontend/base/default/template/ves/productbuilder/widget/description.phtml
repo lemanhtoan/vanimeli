@@ -1,0 +1,11 @@
+<?php $product_info_block = Mage::registry("product_info_block"); ?>
+<?php if($description = $product_info_block->getChildHtml("description")): ?>
+<div class="panel panel-default product-description-block">
+	<div class="panel-heading">
+        <h3 class="panel-title"><?php echo $this->__("Description") ?></h3>
+    </div>
+    <div class="panel-body">
+        <div class="tab-content"><?php echo $description; ?></div>
+    </div>
+</div>
+<?php endif; ?>

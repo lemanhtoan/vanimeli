@@ -1,0 +1,105 @@
+<?xml version="1.0"?> 
+<config>
+    <menu>
+            <vesextensions module="ves_testimonial">
+                <title>VenusTheme</title>
+                <sort_order>50</sort_order>
+                <children>
+                    <testimonial translate="title" module="ves_testimonial">
+                        <title>Ves Testimonial</title>
+                        <children>
+                            <addgroup module="ves_testimonial">
+                                <title>Add Group</title>
+                                <sort_order>0</sort_order>
+                                <action>adminhtml/testimonialgroup/add</action>
+                            </addgroup>
+                            <testimonialgroup translate="title" module="ves_testimonial">
+                                <title>Manage Group Testimonial</title>
+                                <sort_order>1</sort_order>
+                                <action>adminhtml/testimonialgroup/index</action>
+                            </testimonialgroup>
+
+                            <add module="ves_testimonial">
+                                <title>Add Testimonial</title>
+                                <sort_order>2</sort_order>
+                                <action>adminhtml/testimonial/add</action>
+                            </add>
+                            <testimonials module="ves_testimonial">
+                                <title>Manage Testimonials</title>
+                                <sort_order>3</sort_order>
+                                <action>adminhtml/testimonial/index</action>
+                            </testimonials>
+                            
+                         
+                            <configuration translate="title" module="ves_testimonial">
+                                <title>Configuration</title>
+                                <sort_order>5</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_testimonial</action>
+                            </configuration>
+                        </children>
+                    </testimonial>
+                </children>
+            </vesextensions>
+    </menu>
+    <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <vesextensions module="ves_testimonial">
+                            <title>VenusTheme</title>
+                            <sort_order>50</sort_order>
+                            <children>
+                                <testimonial translate="title" module="ves_testimonial">
+                                    <title>Ves Testimonial</title>
+                                    <children>
+                                        <addgroup module="ves_testimonial">
+                                            <title>Add Group</title>
+                                            <sort_order>0</sort_order>
+                                        </addgroup>
+                                        <testimonialgroup translate="title" module="ves_testimonial">
+                                            <title>Manage Group Testimonial</title>
+                                            <sort_order>1</sort_order>
+                                        </testimonialgroup>
+                                        <add module="ves_testimonial">
+                                            <title>Add Testimonial</title>
+                                            <sort_order>2</sort_order>
+                                        </add>
+                                        <testimonials module="ves_testimonial">
+                                            <title>Manage Testimonials</title>
+                                            <sort_order>3</sort_order>
+                                        </testimonials>
+                                        
+                                     
+                                        <configuration translate="title" module="ves_testimonial">
+                                            <title>Configuration</title>
+                                            <sort_order>5</sort_order>
+                                        </configuration>
+                                    </children>
+                                </testimonial>
+                            </children>
+                        </vesextensions>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ves_testimonial>
+                                            <title>Ves Testimonial</title>
+                                        </ves_testimonial>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+			<modules>
+				<Ves_Testimonial>
+					<files>
+						<default>Ves_Testimonial.csv</default>
+					</files>
+				</Ves_Testimonial>
+			</modules>
+		</translate>
+</config>

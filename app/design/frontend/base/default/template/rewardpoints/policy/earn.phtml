@@ -1,0 +1,32 @@
+<?php 
+$names = Mage::helper('rewardpoints/point')->getPluralName();
+?>
+<div class="rewardpoints-dashboard-list">
+    <strong class="rewardpoints-title"><?php echo $this->__('EARN %s',$names) ?></strong>
+    <br>
+    <span class="rewardpoints-title-content"><?php echo $this->__('Rewards can currently be earned for the following actions:')?></span>
+    <ul class="rewardpoints-dashboard-ul">
+        <li><?php echo $this->__('Making purchases — every time you make a purchase you earn points based on the price of products purchased and these points are added to your %s balance.',$names); ?></li>
+        <!--BeHavior-->
+        <?php if ($this->isPluginEnable('Magestore_RewardPointsBehavior')): ?>
+            <?php if (Mage::getStoreConfig('rewardpoints/group_signandnews/show_signup') && Mage::getStoreConfig('rewardpoints/group_signandnews/signing_up')): ?>
+                <li><?php echo $this->__('Registering on the site.') ?></li>
+            <?php endif; ?>
+            <?php if (Mage::getStoreConfig('rewardpoints/group_signandnews/show_newsletter') && Mage::getStoreConfig('rewardpoints/group_signandnews/newsletter')): ?>
+                <li><?php echo $this->__('Subscribing to a newsletter for the first time.') ?></li>
+            <?php endif; ?>
+            <?php if (Mage::getStoreConfig('rewardpoints/group_review_product/show_reviewing') && Mage::getStoreConfig('rewardpoints/group_review_product/review')): ?>
+                <li><?php echo $this->__('Review Submission — Earn %s for submitting product reviews.',$names) ?></li>
+            <?php endif; ?>
+            <?php if (Mage::getStoreConfig('rewardpoints/group_tagging_product/show_tagging') && Mage::getStoreConfig('rewardpoints/group_tagging_product/tag')): ?>
+                <li><?php echo $this->__('New Tag Submission — Earn %s for adding tags to products.',$names) ?></li>
+            <?php endif; ?>
+        <?php endif; ?>
+        <!-- ReferFriends -->
+        <?php if ($this->isPluginEnable('Magestore_RewardPointsReferFriends')): ?>
+            <li><?php echo $this->__('Sending Invitations — Earn %s by inviting your friends to join the site.',$names) ?></li>
+            <li><?php echo $this->__('Converting Invitations to Customer — Earn %s for every invitation you send out which leads to your friends registering on the site.',$names) ?></li>
+            <li><?php echo $this->__('Converting Invitations to Order — Earn %s for every invitation you send out which leads to a sale.',$names) ?></li>
+        <?php endif; ?>
+    </ul>
+</div>

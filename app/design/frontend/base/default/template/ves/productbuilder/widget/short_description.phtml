@@ -1,0 +1,14 @@
+<?php $product_info_block = Mage::registry("product_info_block"); ?>
+<?php $_helper = $product_info_block->helper('catalog/output'); ?>
+<?php $_product = $product_info_block->getProduct(); ?>
+<?php 
+	$title = $this->getConfig("title", "");
+?>
+<?php if ($_product->getShortDescription()):?>
+	    <div class="short-description">
+	     	<?php if($title): ?>
+	     		<div class="shortdesc-title"><span class="short-title"><?php echo $title; ?></span></div>
+	     	<?php endif; ?>
+	        <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+	    </div>
+<?php endif;?>

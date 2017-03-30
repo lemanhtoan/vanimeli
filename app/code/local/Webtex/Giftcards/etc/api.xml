@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <giftcards_import>
+                <model>giftcards/api</model>
+                <title>Webtex Gift Cards API</title>
+                <acl>giftcards_import</acl>
+                <methods>
+                    <cardlist translate="title">
+                        <title>Get Gift Cards List</title>
+                    </cardlist>
+                    <getcard>
+                        <title>Retrieve Gift Card</title>
+                    </getcard>
+                    <create translate="title">
+                        <title>Create Gift Card</title>
+                    </create>
+                    <delete translate="title">
+                        <title>Delete Gift Card</title>
+                    </delete>
+                    <update translate="title">
+                        <title>Update Gift Card</title>
+                    </update>
+                </methods>
+            </giftcards_import>
+            <faults module="catalog">
+                <giftcard_not_exists>
+                    <code>1000</code>
+                    <message>Requested Gift Card not found.</message>
+                </giftcard_not_exists>
+                <error_update_giftcard>
+                    <code>1001</code>
+                    <message>Error update data.</message>
+                </error_update_giftcard>
+            </faults>
+        </resources>
+        <v2>
+            <resources_function_prefix>
+                <giftcards_import>giftCards</giftcards_import>
+            </resources_function_prefix>
+        </v2>
+        <acl>
+            <resources>
+                <giftcards_import translate="title">
+                    <title>Gift Cards API</title>
+                    <sort_order>3</sort_order>
+                </giftcards_import>
+            </resources>
+        </acl>
+    </api>
+</config>

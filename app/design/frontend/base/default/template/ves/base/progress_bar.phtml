@@ -1,0 +1,113 @@
+<?php if ($prog_type): ?>
+	<div class="widget-progress-bar block <?php echo $addition_cls; ?> <?php if (isset($stylecls)&&$stylecls) echo 'block-'.$stylecls;?>">
+		<?php if (isset($widget_heading)&&!empty($widget_heading)): ?>
+			<div class="block-title">
+				<?php echo $widget_heading; ?>
+			</div>
+		<?php endif; ?>
+		<div class="widget-inner block-content">
+
+			<?php if($prog_type == 'progress' || $prog_type == 'progress progress-striped' || $prog_type == 'progress progress-striped active'){ ?>	
+			<?php if($success){ ?>
+			<div class="<?php echo $prog_type ; ?>">
+				<?php $success = explode('|',$success) ?>
+				<div class="progress-bar progress-bar-<?php echo $success[0] ?>" role="progressbar" aria-valuenow="<?php echo $success[1] ?>" aria-valuemin="<?php echo $success[2] ?>" aria-valuemax="<?php echo $success[3] ?>" style="width: <?php echo $success[1].'%' ?>">
+					<?php if($prog_label){ 
+						echo $success[1].'%';
+					}else{ ?>
+					<span class="sr-only"><?php echo $success[1].'% '. $this->__('Complete (success)'); ?></span>
+					<?php } ?>
+				</div>
+			</div>
+			<?php } ?>
+
+			<?php if($info){ ?>
+			<div class="<?php echo $prog_type ; ?>">
+				<?php $info = explode('|',$info) ?>
+				<div class="progress-bar progress-bar-<?php echo $info[0] ?>" role="progressbar" aria-valuenow="<?php echo $info[1] ?>" aria-valuemin="<?php echo $info[2] ?>" aria-valuemax="<?php echo $info[3] ?>" style="width: <?php echo $info[1].'%' ?>">
+					<?php if($prog_label){ 
+						echo $info[1].'%';
+					}else{ ?>
+					<span class="sr-only"><?php echo $info[1].'% '. $this->__('Complete'); ?></span>
+					<?php } ?>
+				</div>
+			</div>
+			<?php } ?>
+
+			<?php if($warning){ ?>
+			<div class="<?php echo $prog_type ; ?>">
+				<?php $warning = explode('|',$warning) ?>
+				<div class="progress-bar progress-bar-<?php echo $warning[0] ?>" role="progressbar" aria-valuenow="<?php echo $warning[1] ?>" aria-valuemin="<?php echo $warning[2] ?>" aria-valuemax="<?php echo $warning[3] ?>" style="width: <?php echo $warning[1].'%' ?>">
+					<?php if($prog_label){ 
+						echo $warning[1].'%';
+					}else{ ?>
+					<span class="sr-only"><?php echo $warning[1].'% '. $this->__('Complete'); ?></span>
+					<?php } ?>
+				</div>
+			</div>
+			<?php } ?>
+
+			<?php if($danger){ ?>
+			<div class="<?php echo $prog_type ; ?>">
+				<?php $danger = explode('|',$danger) ?>
+				<div class="progress-bar progress-bar-<?php echo $danger[0] ?>" role="progressbar" aria-valuenow="<?php echo $danger[1] ?>" aria-valuemin="<?php echo $danger[2] ?>" aria-valuemax="<?php echo $danger[3] ?>" style="width: <?php echo $danger[1].'%' ?>">
+					<?php if($prog_label){ 
+						echo $danger[1].'%';
+					}else{ ?>
+					<span class="sr-only"><?php echo $danger[1].'% '. $this->__('Complete (danger)'); ?></span>
+					<?php } ?>
+				</div>
+			</div>
+			<?php } ?>
+			<?php }elseif($prog_type == 'stacked'){ ?>
+			<div class="progress progress-striped active">
+
+				<?php if($success){ ?>
+				<?php $success = explode('|',$success) ?>
+				<div class="progress-bar progress-bar-<?php echo $success[0] ?>" role="progressbar" aria-valuenow="<?php echo $success[1] ?>" aria-valuemin="<?php echo $success[2] ?>" aria-valuemax="<?php echo $success[3] ?>" style="width: <?php echo $success[1].'%' ?>">
+					<?php if($prog_label){ 
+						echo $success[1].'%';
+					}else{ ?>
+					<span class="sr-only"><?php echo $success[1].'% '. $this->__('Complete (success)'); ?></span>
+					<?php } ?>
+				</div>
+				<?php } ?>
+
+				<?php if($info){ ?>
+				<?php $info = explode('|',$info) ?>
+				<div class="progress-bar progress-bar-<?php echo $info[0] ?>" role="progressbar" aria-valuenow="<?php echo $info[1] ?>" aria-valuemin="<?php echo $info[2] ?>" aria-valuemax="<?php echo $info[3] ?>" style="width: <?php echo $info[1].'%' ?>">
+					<?php if($prog_label){ 
+						echo $info[1].'%';
+					}else{ ?>
+					<span class="sr-only"><?php echo $info[1].'% '. $this->__('Complete'); ?></span>
+					<?php } ?>
+				</div>
+				<?php } ?>
+
+				<?php if($warning){ ?>
+				<?php $warning = explode('|',$warning) ?>
+				<div class="progress-bar progress-bar-<?php echo $warning[0] ?>" role="progressbar" aria-valuenow="<?php echo $warning[1] ?>" aria-valuemin="<?php echo $warning[2] ?>" aria-valuemax="<?php echo $warning[3] ?>" style="width: <?php echo $warning[1].'%' ?>">
+					<?php if($prog_label){ 
+						echo $warning[1].'%';
+					}else{ ?>
+					<span class="sr-only"><?php echo $warning[1].'% '. $this->__('Complete'); ?></span>
+					<?php } ?>
+				</div>
+				<?php } ?>
+
+				<?php if($danger){ ?>
+				<?php $danger = explode('|',$danger) ?>
+				<div class="progress-bar progress-bar-<?php echo $danger[0] ?>" role="progressbar" aria-valuenow="<?php echo $danger[1] ?>" aria-valuemin="<?php echo $danger[2] ?>" aria-valuemax="<?php echo $danger[3] ?>" style="width: <?php echo $danger[1].'%' ?>">
+					<?php if($prog_label){ 
+						echo $danger[1].'%';
+					}else{ ?>
+					<span class="sr-only"><?php echo $danger[1].'% '. $this->__('Complete (danger)'); ?></span>
+					<?php } ?>
+				</div>
+				<?php } ?>
+
+			</div>
+			<?php } ?>
+		</div>
+	</div>
+<?php endif; ?>

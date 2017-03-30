@@ -1,0 +1,132 @@
+<?php
+/**
+* This file is released under a custom license by Avenla Oy.
+* All rights reserved
+*
+* License and more information can be found at http://productdownloads.avenla.com/magento-modules/klarna-checkout/
+* For questions and support - klarna-support@avenla.com
+*
+* @category   Avenla
+* @package    Avenla_KlarnaCheckout
+* @copyright  Copyright (c) Avenla Oy
+* @link       http://www.avenla.fi
+*/
+
+/**
+ * Avenla KlarnaCheckout
+ *
+ * @category   Avenla
+ * @package    Avenla_KlarnaCheckout
+ */
+?>
+<?php if ($this->getRequest()->getActionName() == "view"): ?>
+
+	<?php if($klarnaInfo): ?>
+
+		<?php // Logo and GUI link ?>
+		<img src="<?php echo $klarnaInfo->getLogoSrc(); ?>" alt="Klarna Checkout" />
+		<?php if($klarnaInfo->getGuiUrl()): ?>
+			<a href="<?php echo $klarnaInfo->getGuiUrl(); ?>" target="_blank" style="float:right"><?php echo $this->__('Klarna online GUI'); ?></a>
+		<?php endif; ?>
+
+		<?php // Klarna reservation ?>
+		<?php if($klarnaInfo->getReservation() && $orderState != Mage_Sales_Model_Order::STATE_COMPLETE): ?>
+			<p><b><?php echo $this->__('Klarna reservation : %s', $klarnaInfo->getReservation());?></b><p>
+		<?php endif; ?>
+
+		<?php // Klarna reference ?>
+		<?php if($klarnaInfo->getKlarnaReference()): ?>
+			<p><b><?php echo $this->__('Klarna reference number: %s', $klarnaInfo->getKlarnaReference());?></b><p>
+		<?php endif; ?>
+
+		<?php // Order status ?>
+		<?php if($klarnaInfo->getStatusMessage()): ?>
+			<p><?php echo $this->__($klarnaInfo->getStatusMessage());?><p>
+		<?php endif; ?>
+
+		<?php // Remaining amount on reservation ?>
+		<?php if($klarnaInfo->getRemainingAmount()): ?>
+			<p><?php echo $this->__('Remaining amount: %s', Mage::helper('klarnaCheckout')->formatKlarnaPriceForMagento($klarnaInfo->getRemainingAmount(), $orderStore));?><p>
+		<?php endif; ?>
+
+		<?php // Reservation expiration ?>
+		<?php if($klarnaInfo->getExpiration() && $orderState != Mage_Sales_Model_Order::STATE_COMPLETE): ?>
+			<p><?php echo $this->__('Klarna reservation expires: %s', Mage::helper('core')->formatDate($klarnaInfo->getExpiration(), 'medium', false)); ?></p>
+			<?php $now = new Zend_Date();?>
+			<?php if(strtotime($klarnaInfo->getExpiration()) < $now->get()): ?>
+				<p class="klarnaAlert" style="font-weight:bold; color:red;"><?php echo $this->__('Klarna reservation has expired.'); ?></p>
+			<?php endif; ?>
+		<?php endif; ?>
+
+		<?php // Organization reference ?>
+		<?php if($klarnaInfo->getOrganizationReference()): ?>
+			<p><?php echo $this->__('Organization reference: %s', $klarnaInfo->getOrganizationReference());?><p>
+		<?php endif; ?>
+
+		<?php // Invoices ?>
+		<?php if($klarnaInfo->getCaptures()):?>
+			<div style="border:1px solid #CCC;padding:5px;">
+				<p><?php echo $this->__('Captures:'); ?></p>
+				<table class="actions">
+					<tr>
+						<th><?php echo $this->__('Reference'); ?></th>
+						<th><?php echo $this->__('Captured amount'); ?></th>
+						<th><?php echo $this->__('Captured at'); ?></th>
+						<th><?php echo $this->__('Refunded amount'); ?></th>
+					</tr>
+
+					<?php foreach($klarnaInfo->getCaptures() as $capture): ?>
+						<tr>
+							<td><?php echo $capture['klarna_reference']; ?></td>
+							<td><?php echo Mage::helper('klarnaCheckout')->formatKlarnaPriceForMagento($capture['captured_amount'], $orderStore); ?></td>
+							<td><?php echo Mage::helper('core')->formatDate($capture['captured_at'], 'medium', false); ?></td>
+							<td><?php echo Mage::helper('klarnaCheckout')->formatKlarnaPriceForMagento($capture['refunded_amount'], $orderStore); ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</table>
+			</div>
+		<?php endif; ?>
+
+		<?php // Refunds ?>
+		<?php if($klarnaInfo->getRefunds()):?>
+			<div style="border:1px solid #CCC;padding:5px;">
+				<p><?php echo $this->__('Refunds:'); ?></p>
+				<table class="actions">
+					<tr>
+						<th><?php echo $this->__('Refunded amount'); ?></th>
+						<th><?php echo $this->__('Refunded at'); ?></th>
+						<th><?php echo $this->__('Description'); ?></th>
+					</tr>
+
+					<?php foreach($klarnaInfo->getRefunds() as $refund): ?>
+						<tr>
+							<td><?php echo Mage::helper('klarnaCheckout')->formatKlarnaPriceForMagento($refund['refunded_amount'], $orderStore); ?></td>
+							<td><?php echo Mage::helper('core')->formatDate($refund['refunded_at'], 'medium', false); ?></td>
+							<td><?php echo $refund['description']; ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</table>
+			</div>
+		<?php endif; ?>
+
+		<?php // Klarna invoices ?>
+		<?php if ($klarnaInfo->getOrderInvoices()): ?>
+			<?php foreach($klarnaInfo->getOrderInvoices() as $inv): ?>
+				<p>
+					<b><?php echo $this->__('Klarna Invoice number: %s', $inv["invoice"]); ?></b>
+					<?php if($klarnaInfo->getPdfUrl()): ?>
+						<a href="<?php echo $klarnaInfo->getPdfUrl() . $inv['invoice'] . ".pdf" ?>" target="_blank"><?php echo $this->__('Packing slip'); ?></a>
+					<?php endif; ?>
+				</p>
+			<?php endforeach; ?>
+		<?php endif; ?>
+
+		<?php if($klarnaInfo->getMessage()): ?>
+			<p><b><?php echo $klarnaInfo->getMessage(); ?></b></p>
+		<?php endif; ?>
+	<?php else: ?>
+		<p><?php echo $this->__('Klarna Checkout'); ?></p>
+	<?php endif; ?>
+<?php else: ?>
+	<p>Klarna Checkout</p>
+<?php endif; ?>

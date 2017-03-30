@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<nextbits_extensions translate="label" module="logincatalog">
+            <label>NextBits - Extensions</label>
+            <sort_order>100</sort_order>
+        </nextbits_extensions>
+	</tabs>
+	<sections>
+        <catalog_login>
+			<label>Login Only Catalog</label>
+			<tab>nextbits_extensions</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>900</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store> 
+            <groups>
+                <logincatalog translate="label" module="logincatalog">
+                    <label>Login Only Catalog</label>
+                    <sort_order>765</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <disable_ext translate="label" module="logincatalog">
+                            <label>Disable Extension</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </disable_ext>
+                        <hide_categories translate="label" module="logincatalog">
+                            <label>Hide Category Navigation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <disable_ext>0</disable_ext>
+                            </depends>
+                        </hide_categories>
+                        <redirect_on_all_pages translate="label" module="logincatalog">
+                            <label>Redirect to login from any page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>23</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <disable_ext>0</disable_ext>
+                            </depends>
+                        </redirect_on_all_pages>
+                        <redirect_for_categories translate="label" module="logincatalog">
+                            <label>Do redirect on Category Pages</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <disable_ext>0</disable_ext>
+                                <redirect_on_all_pages>0</redirect_on_all_pages>
+                            </depends>
+                        </redirect_for_categories>
+						<message translate="label comment" module="logincatalog">
+                            <label>Message when a customer is redirected</label>
+                            <comment>Empty to disable</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <disable_ext>0</disable_ext>
+                            </depends>
+                        </message>
+                        <redirect_to_page translate="label comment" module="logincatalog">
+                            <label>Redirect to</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>logincatalog/system_config_source_redirectType</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <disable_ext>0</disable_ext>
+                            </depends>
+                        </redirect_to_page>
+                        <cms_page translate="label comment" module="logincatalog">
+                            <label>Target CMS Page</label>
+                            <comment><![CDATA[The module will be deactivated on the target page.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_cms_page</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <disable_ext>0</disable_ext>
+                                <redirect_to_page>1</redirect_to_page>
+                            </depends>
+                        </cms_page>
+						<disable_on_routes translate="label comment" module="logincatalog">
+							<label>Disable on routes</label>
+							<comment><![CDATA[Add route/controller/action routes (one per line) where no redirect should happen.]]></comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+						    <show_in_website>1</show_in_website>
+						    <show_in_store>1</show_in_store>
+                            <depends>
+                                <disable_ext>0</disable_ext>
+                            </depends>
+						</disable_on_routes>
+                    </fields>
+                </logincatalog>				
+            </groups>
+        </catalog_login>
+    </sections>
+</config>

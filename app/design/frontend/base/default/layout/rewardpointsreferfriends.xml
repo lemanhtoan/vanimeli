@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsReferFriends
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <!-- update layout for all frontend page -->
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/rewardpointsreferfriends/referfriends.css</stylesheet>
+            </action>
+            <!--action method="addJs"><script>prototype/window.js</script></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action-->
+        </reference>
+    </default>
+    <rewardpoints_default>       
+        <reference name="rewardpoints.navigation">
+                <action method="addLink" translate="label" module="rewardpointsreferfriends" ifconfig="rewardpoints/referfriendplugin/enable">
+                    <name>rewardpoints_referfriends</name>
+                    <path>rewardpointsreferfriends</path>
+                    <label>Refer Friends</label>
+                    <enable>true</enable>
+                    <order>40</order>
+                </action>
+        </reference>
+    </rewardpoints_default>
+    <rewardpointsreferfriends_index_index>
+        <update handle="rewardpoints_default" />  
+        <reference name="content">
+            <block type="rewardpointsreferfriends/rewardpointsreferfriends" name="rewardpointsreferfriends" template="rewardpointsreferfriends/rewardpointsreferfriends.phtml" >
+                <block type="rewardpointsreferfriends/transactions" name="rewardpointsreferfriends.transactions" as="rewardpointsreferfriends.transactions" template="rewardpointsreferfriends/transactions.phtml" />
+            </block>
+        </reference>
+    </rewardpointsreferfriends_index_index>
+    
+    <!-- Product view page -->
+    <catalog_product_view>
+		<reference name="head">
+            <action method="addJs"><script>prototype/window.js</script></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="rewardpointsreferfriends/product_productrefer" template="rewardpointsreferfriends/product/productrefer.phtml"/>
+        </reference>
+    </catalog_product_view>
+    <!-- End Product view page -->
+    <checkout_onepage_success>
+		<reference name="head">
+            <action method="addJs"><script>prototype/window.js</script></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+        </reference>
+        <reference name="content">
+            <block type="rewardpointsreferfriends/product_productrefer" name="referfriends.checkout.onepage.success" after="-" template="rewardpointsreferfriends/product/productreferonepage.phtml" />
+        </reference>
+    </checkout_onepage_success>
+    
+    <rewardpointsreferfriends_refer_index>
+        <update handle="page_two_columns_right"/>
+        <reference name="content">
+            <block type="rewardpointsreferfriends/defaultpage_refer" template="rewardpointsreferfriends/defaultpage/refer.phtml"/>
+        </reference>
+    </rewardpointsreferfriends_refer_index>
+    <rewardpointsreferfriends_refer_sendmail>
+        <label>Catalog Product Email to a Friend</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addJs"><script>varien/product.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="rewardpointsreferfriends/product_send" template="sendfriend/send.phtml" />
+        </reference>
+    </rewardpointsreferfriends_refer_sendmail>
+    <rewardpointsreferfriends_index_gmail>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/popup.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="rewardpointsreferfriends/refer_gmail" name="rewardpointsreferfriends_refer_gmail" template="rewardpointsreferfriends/refer/contacts.phtml" />
+        </reference>
+    </rewardpointsreferfriends_index_gmail>
+    <rewardpointsreferfriends_index_yahoo>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/popup.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="rewardpointsreferfriends/refer_yahoo" name="rewardpointsreferfriends_yahoo" template="rewardpointsreferfriends/refer/contacts.phtml" />
+        </reference>
+    </rewardpointsreferfriends_index_yahoo>
+    
+    
+    <!-- sales order view -->
+    <sales_order_view>
+        <reference name="order_totals">
+            <block type="rewardpointsreferfriends/totals_order_orderviewpage"/>
+        </reference>
+    </sales_order_view>
+    <sales_order_print>
+        <reference name="order_totals">
+            <block type="rewardpointsreferfriends/totals_order_orderviewpage"/>
+        </reference>
+    </sales_order_print>
+    <sales_email_order_items>
+        <reference name="order_totals">
+            <block type="rewardpointsreferfriends/totals_order_orderviewpage"/>
+        </reference>
+    </sales_email_order_items>
+     <!-- end sales order view -->
+    
+     <!-- sales order invoice view -->
+    <sales_order_invoice>
+        <reference name="invoice_totals">
+            <block type="rewardpointsreferfriends/totals_invoice_orderviewpage"/>
+        </reference>
+    </sales_order_invoice>
+    <sales_order_printinvoice>
+        <reference name="invoice_totals">
+            <block type="rewardpointsreferfriends/totals_invoice_orderviewpage"/>
+        </reference>
+    </sales_order_printinvoice>
+    <sales_email_order_invoice_items>
+        <reference name="invoice_totals">
+            <block type="rewardpointsreferfriends/totals_invoice_orderviewpage"/>
+        </reference>
+    </sales_email_order_invoice_items>
+     <!-- end sales order invoice view -->
+    
+     <!-- sales order crediememo view -->
+    <sales_order_creditmemo>
+        <reference name="creditmemo_totals">
+            <block type="rewardpointsreferfriends/totals_creditmemo_orderviewpage"/>
+        </reference>
+    </sales_order_creditmemo>   
+    <sales_order_printcreditmemo>
+        <reference name="creditmemo_totals">
+            <block type="rewardpointsreferfriends/totals_creditmemo_orderviewpage"/>
+        </reference>
+    </sales_order_printcreditmemo>    
+    <sales_email_order_creditmemo_items>
+        <reference name="creditmemo_totals">
+            <block type="rewardpointsreferfriends/totals_creditmemo_orderviewpage"/>
+        </reference>
+    </sales_email_order_creditmemo_items>
+</layout>

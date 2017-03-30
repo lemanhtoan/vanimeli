@@ -1,0 +1,328 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <styleSheet>css/magestore/affiliateplus.css</styleSheet>
+            </action>
+             <action method="addJs"><script>magestore/affiliateplus/jscolor/jscolor.js</script></action> 
+        </reference>
+    </default>
+    
+    <!--        Changed By Adam 29/10/2015: Fix issue of SUPEE 6788 - in Magento 1.9.2.2-->
+    <adminhtml_affiliateplus_account_index>
+        <reference name="content">
+            <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                <action method="setUseConfirm">
+                    <params>0</params>
+                </action>
+            </block>
+            <block type="affiliateplus/adminhtml_account" name="account" />
+        </reference>
+    </adminhtml_affiliateplus_account_index>
+    <adminhtml_affiliateplus_account_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="affiliateplus/adminhtml_account_grid" name="account" />
+        </block>
+    </adminhtml_affiliateplus_account_grid>
+    <adminhtml_affiliateplus_banner_index>
+        <reference name="content">
+            <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                <action method="setUseConfirm">
+                    <params>0</params>
+                </action>
+            </block>
+            <block type="affiliateplus/adminhtml_banner" name="banner" />
+        </reference>
+    </adminhtml_affiliateplus_banner_index>
+    <adminhtml_affiliateplus_banner_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="affiliateplus/adminhtml_banner_grid" name="banner" />
+        </block>
+    </adminhtml_affiliateplus_banner_grid>
+    <adminhtml_affiliateplus_transaction_index>
+        <reference name="content">
+            <block type="affiliateplus/adminhtml_transaction" name="transaction" />
+        </reference>
+    </adminhtml_affiliateplus_transaction_index>
+    
+    <adminhtml_affiliateplus_transaction_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="affiliateplus/adminhtml_transaction_grid" name="transaction" />
+        </block>
+    </adminhtml_affiliateplus_transaction_grid>
+    
+    <adminhtml_affiliateplus_payment_index>
+        <reference name="content">
+            <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                <action method="setUseConfirm">
+                    <params>0</params>
+                </action>
+            </block>
+            <block type="affiliateplus/adminhtml_payment" name="payment" />
+        </reference>
+    </adminhtml_affiliateplus_payment_index>
+    <adminhtml_affiliateplus_payment_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="affiliateplus/adminhtml_payment_grid" name="payment" />
+        </block>
+    </adminhtml_affiliateplus_payment_grid>
+    
+    <adminhtml_affiliateplus_payment_selectaccount>
+        <reference name="content">
+            <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                <action method="setUseConfirm">
+                    <params>0</params>
+                </action>
+            </block>
+            <block type="affiliateplus/adminhtml_selectaccount" name="payment_selectaccount" />
+        </reference>
+    </adminhtml_affiliateplus_payment_selectaccount>
+    
+    <adminhtml_affiliateplus_payment_selectaccountgrid>
+        <reference  name="content">
+            <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                <action method="setUseConfirm">
+                    <params>0</params>
+                </action>
+            </block>
+            <block type="affiliateplus/adminhtml_selectaccount" name="payment_selectaccount_grid" />
+        </reference>	
+    </adminhtml_affiliateplus_payment_selectaccountgrid>
+    
+	
+    <adminhtml_affiliateplus_transaction_view>
+		
+    </adminhtml_affiliateplus_transaction_view>
+	
+    <adminhtml_affiliateplus_account_edit>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/affiliateplus.js</script>
+            </action>
+        </reference>
+        <reference name="left">
+            <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                <action method="setUseConfirm">
+                    <params>0</params>
+                </action>
+            </block>
+        </reference>
+        <!-- <reference name="content">
+             			<block type="affiliate/affiliate" name="standard_info" after="-" template="affiliate/test.phtml" />
+      		</reference> -->
+    </adminhtml_affiliateplus_account_edit>
+	
+    <adminhtml_affiliateplus_banner_edit>	
+        <reference name="left">
+            <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                <action method="setUseConfirm">
+                    <params>0</params>
+                </action>
+            </block>
+        </reference>
+    </adminhtml_affiliateplus_banner_edit>
+	
+    <adminhtml_affiliateplus_account_customer>
+        <block type="core/text_list" name="root">
+            <block type="affiliateplus/adminhtml_account_edit_tab_customer" name="account.edit.tab.customer"/>
+            <block type="affiliateplus/adminhtml_account_serializer" name="related_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>account.edit.tab.customer</grid_block_name>
+                    <hidden_input_name>map_customer_id</hidden_input_name>
+                </action>
+            </block>
+        </block>	
+    </adminhtml_affiliateplus_account_customer>
+	
+    <adminhtml_affiliateplus_account_customergrid>
+        <block type="core/text_list" name="root">
+            <block type="affiliateplus/adminhtml_account_edit_tab_customer" name="account.edit.tab.customer"/>
+        </block>
+    </adminhtml_affiliateplus_account_customergrid>	
+	
+
+    <adminhtml_affiliateplus_account_transaction>
+        <block type="core/text_list" name="root">
+            <block type="affiliateplus/adminhtml_account_edit_tab_transaction" name="account.edit.tab.transaction"/>
+        </block>
+    </adminhtml_affiliateplus_account_transaction>
+	
+    <adminhtml_affiliateplus_account_transactiongrid>
+        <block type="core/text_list" name="root">
+            <block type="affiliateplus/adminhtml_account_edit_tab_transaction" name="account.edit.tab.transaction"/>
+        </block>
+    </adminhtml_affiliateplus_account_transactiongrid>
+	
+    <adminhtml_affiliateplus_account_payment>
+        <block type="core/text_list" name="root">
+            <block type="affiliateplus/adminhtml_account_edit_tab_payment" name="account.edit.tab.payment"/>
+        </block>
+    </adminhtml_affiliateplus_account_payment>
+	
+    <adminhtml_affiliateplus_account_paymentgrid>
+        <block type="core/text_list" name="root">
+            <block type="affiliateplus/adminhtml_account_edit_tab_payment" name="account.edit.tab.payment"/>
+        </block>
+    </adminhtml_affiliateplus_account_paymentgrid>
+	
+	
+	
+    <adminhtml_sales_order_view>
+        <reference name="order_totals">
+            <block type="affiliateplus/sales_ordertotalaffiliate" />
+            <block type="affiliateplus/sales_credit_order" />
+        </reference>
+    </adminhtml_sales_order_view>	
+	
+    <adminhtml_sales_order_invoice_new>
+        <reference name="invoice_totals">
+            <block type="affiliateplus/sales_ordertotalaffiliate" />
+            <block type="affiliateplus/sales_credit_invoice" />
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+
+    <adminhtml_sales_order_invoice_view>
+        <reference name="invoice_totals">
+            <block type="affiliateplus/sales_ordertotalaffiliate" />
+            <block type="affiliateplus/sales_credit_invoice" />
+        </reference>
+    </adminhtml_sales_order_invoice_view>	
+	
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="invoice_totals">
+            <block type="affiliateplus/sales_ordertotalaffiliate" />
+            <block type="affiliateplus/sales_credit_invoice" />
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+	
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="creditmemo_totals">
+            <block type="affiliateplus/sales_ordertotalaffiliate" />
+            <block type="affiliateplus/sales_credit_creditmemo" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>	
+	
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="creditmemo_totals">
+            <block type="affiliateplus/sales_ordertotalaffiliate" />
+            <block type="affiliateplus/sales_credit_creditmemo" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+	
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="creditmemo_totals">
+            <block type="affiliateplus/sales_ordertotalaffiliate" />
+            <block type="affiliateplus/sales_credit_creditmemo" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_updateqty>
+
+    <!-- Add by Richard-->
+    <adminhtml_affiliateplus_account_product>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="affiliateplus/adminhtml_account_edit_tab_products" name="affiliateplus.block.adminhtml.account.edit.tab.products"/>
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                <reference name="related_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>affiliateplus.block.adminhtml.account.edit.tab.products</grid_block_name>
+                        <data_callback>getSelectedProducts</data_callback>
+                        <hidden_input_name>sproducts</hidden_input_name>
+                        <reload_param_name>account_products</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_affiliateplus_account_product>
+    <adminhtml_affiliateplus_account_productgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="affiliateplus/adminhtml_account_edit_tab_products" name="affiliateplus.block.adminhtml.account.edit.tab.products"/>
+        </block>
+    </adminhtml_affiliateplus_account_productgrid>
+    <!-- End by Richard-->
+
+    <!-- Changed By Adam (29/04/2016): create transaction from existed order manually -->
+    <affiliateplusadmin_adminhtml_transaction_new>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/affiliateplus.js</script>
+            </action>
+        </reference>
+    </affiliateplusadmin_adminhtml_transaction_new>
+
+    <affiliateplusadmin_adminhtml_transaction_listorder>
+        <block type="core/text_list" name="root">
+            <block type="affiliateplus/adminhtml_transaction_edit_tab_listorder" name="transaction.edit.tab.listorder"/>
+            <block type="affiliateplus/adminhtml_transaction_edit_tab_serializer" name="related_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>transaction.edit.tab.listorder</grid_block_name>
+                    <hidden_input_name>candidate_order_id</hidden_input_name>
+                </action>
+            </block>
+        </block>
+    </affiliateplusadmin_adminhtml_transaction_listorder>
+
+    <affiliateplusadmin_adminhtml_transaction_listordergrid>
+        <block type="core/text_list" name="root">
+            <block type="affiliateplus/adminhtml_transaction_edit_tab_listorder" name="transaction.edit.tab.listorder"/>
+        </block>
+    </affiliateplusadmin_adminhtml_transaction_listordergrid>
+
+
+    <adminhtml_affiliateplus_transaction_new>
+        <reference name="head">
+            <action method="addJs">
+                <script>magestore/affiliateplus.js</script>
+            </action>
+        </reference>
+    </adminhtml_affiliateplus_transaction_new>
+
+    <adminhtml_affiliateplus_transaction_listorder>
+        <block type="core/text_list" name="root">
+            <block type="affiliateplus/adminhtml_transaction_edit_tab_listorder" name="transaction.edit.tab.listorder"/>
+            <block type="affiliateplus/adminhtml_transaction_edit_tab_serializer" name="related_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>transaction.edit.tab.listorder</grid_block_name>
+                    <hidden_input_name>candidate_order_id</hidden_input_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_affiliateplus_transaction_listorder>
+
+    <adminhtml_affiliateplus_transaction_listordergrid>
+        <block type="core/text_list" name="root">
+            <block type="affiliateplus/adminhtml_transaction_edit_tab_listorder" name="transaction.edit.tab.listorder"/>
+        </block>
+    </adminhtml_affiliateplus_transaction_listordergrid>
+    <!-- End code -->
+
+    <!-- Customize by Adam (29/04/2016): add customer to affiliate lifetime manually -->
+    <affiliateplusadmin_adminhtml_account_lifetimecustomer>
+        <block type="core/text_list" name="root">
+            <!-- <block type="affiliateplus/adminhtml_account_edit_tab_lifetimecustomerform" name="account.edit.tab.lifetimecustomer.Form"/> -->
+            <block type="affiliateplus/adminhtml_account_edit_tab_lifetimecustomer" name="account.edit.tab.lifetimecustomer"/>
+        </block>
+    </affiliateplusadmin_adminhtml_account_lifetimecustomer>
+
+    <affiliateplusadmin_adminhtml_account_lifetimecustomergrid>
+        <block type="core/text_list" name="root">
+            <block type="affiliateplus/adminhtml_account_edit_tab_lifetimecustomer" name="account.edit.tab.lifetimecustomer"/>
+        </block>
+    </affiliateplusadmin_adminhtml_account_lifetimecustomergrid>
+    <adminhtml_affiliateplus_account_lifetimecustomer>
+        <block type="core/text_list" name="root">
+            <block type="affiliateplus/adminhtml_account_edit_tab_lifetimecustomerform" name="account.edit.tab.lifetimecustomer.Form"/>
+            <block type="affiliateplus/adminhtml_account_edit_tab_lifetimecustomer" name="account.edit.tab.lifetimecustomer"/>
+        </block>
+    </adminhtml_affiliateplus_account_lifetimecustomer>
+
+    <adminhtml_affiliateplus_account_lifetimecustomergrid>
+        <block type="core/text_list" name="root">
+            <block type="affiliateplus/adminhtml_account_edit_tab_lifetimecustomer" name="account.edit.tab.lifetimecustomer"/>
+        </block>
+    </adminhtml_affiliateplus_account_lifetimecustomergrid>
+    <!-- End code -->
+	
+</layout>

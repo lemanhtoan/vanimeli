@@ -1,0 +1,184 @@
+.banner-countdowns .timeleft h3{
+    color: #FFFFFF!important;
+    padding:0; 
+    margin:0; 
+    line-height:40px;
+    font-family: verdana,arial;
+    font-size: 19px;
+    font-weight: normal;
+}
+.banner-countdowns .item-countdown{
+    padding: 10px 0;
+    direction: ltr;
+}
+.banner-countdowns .item-countdown ul{
+    /*text-align: center;*/
+}
+.banner-countdowns .item-countdown ul li{
+    display: inline-block; 
+    margin: 0px 8px 0 0;
+    line-height: normal;
+    border: 0;
+}
+.banner-countdowns .item-countdown ul li.first{}
+.banner-countdowns .item-countdown ul li.last{ 
+    margin: 0px;
+}
+.banner-countdowns .item-countdown ul li div{
+    text-transform: lowercase; 
+    clear: both;
+    text-align:center;
+    width:100%;
+    font-size:12px;
+}
+.banner-countdowns .item-countdown ul li div.countdown_num{}
+.banner-countdowns .item-countdown ul li div.countdown_num span.mw_dld_detail_num{}
+.banner-countdowns .timeleft{
+    background-color: #6B9E1B; 
+    background-image: linear-gradient(to bottom, #7aa832, #4b6f13);
+}
+.banner-countdowns .item-countdown ul li div.countdown_num span{
+    display: inline-block; 
+    font-size: 14px; 
+    font-weight: bold; 
+    color: #000;
+    border: 1px solid #ebebeb;
+    padding: 4px 6px;
+
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #ffffff 50%, #f8f8f8 51%, #f8f8f8 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#ffffff), color-stop(51%,#f8f8f8), color-stop(100%,#f8f8f8)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#ffffff 50%,#f8f8f8 51%,#f8f8f8 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#ffffff 50%,#f8f8f8 51%,#f8f8f8 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#ffffff 50%,#f8f8f8 51%,#f8f8f8 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#ffffff 50%,#f8f8f8 51%,#f8f8f8 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f8f8f8',GradientType=0 ); /* IE6-9 */
+
+}
+.banner-countdowns .item-countdown ul li div.countdown_num span + span{
+    border-left: 0;
+}
+
+/*Carousel css*/
+
+.banner-countdowns .product-block .group-item {
+    display: inline-block;
+}
+
+.banner-countdowns .group-action .cart {
+    float: none;
+}
+.banner-countdowns .group-action .cart input {
+    background-color: #7eac22;
+    display: inline-block;
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+    text-indent: 0;
+    width: auto;
+}
+.banner-countdowns .group-action .group-action-inner {
+    background-color: #7eac22;
+    bottom: 30px;
+    height: 33px;
+    margin: 0 ;
+    position: absolute;
+    width: 100%;
+    right: -100%;
+    opacity:0;
+    transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+}
+.banner-countdowns .product-block:hover .group-action .group-action-inner {
+    right: 0;
+    opacity:1;
+    transition: all 1s ease 0s;
+    -o-transition: all 1s ease 0s;
+    -ms-transition: all 1s ease 0s;
+    -webkit-transition: all 1s ease 0s;
+    -moz-transition: all 1s ease 0s;
+}
+.banner-countdowns .group-action .wishlist, 
+.banner-countdowns .group-action .compare {
+    float: left;
+    width: 19.5%;
+    border-left: 1px solid #8cbc2b;
+    border-right: 1px solid #6d951d;
+}
+.banner-countdowns .group-action .cart {
+    float: left;
+    border-left: 1px solid #8cbc2b;
+    width: 56%;
+}
+.banner-countdowns .group-action .wishlist:hover, 
+.banner-countdowns .group-action .compare:hover, 
+.banner-countdowns .group-action .cart:hover {
+}
+.banner-countdowns .group-action .wishlist a,
+.banner-countdowns .group-action .compare a, 
+.banner-countdowns .group-action .cart .button {
+    background-image: url("../image/default/icon-action.png");
+    background-repeat: no-repeat;
+    height: 32px;
+    width: 100%;
+}
+.banner-countdowns .group-action .wishlist a, 
+.banner-countdowns .group-action .compare a {
+    overflow: hidden;
+    text-indent: -9999em;
+    padding: 0;
+}
+.banner-countdowns .group-action .wishlist a {
+    background-position: 55% 12px;
+}
+.banner-countdowns .group-action .compare a {
+    background-position: 58% -52px;
+}
+.banner-countdowns .group-action .cart .button {
+    background-position: 14% -125px;
+    color: #FFFFFF;
+    font-weight: 400;
+    padding-left: 30px;
+}
+.banner-countdowns .group-action .icon-plus {
+    background-color: #F2711F;
+    bottom: 0;
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    width: 30px;
+}
+
+.banner-countdowns .product-block:hover .group-action .icon-plus {
+    background-color: #7eac22;
+}
+
+.banner-countdowns .product-block .rating {
+     display: none;
+}
+
+.banner-countdowns .carousel-controls {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    width: 80px;
+}
+.banner-countdowns .carousel-control {
+    border-radius: 15px;
+    font-size: 24px;
+    height: 20px;
+    line-height: 15px;
+    margin-top: 0;
+    width: 20px;
+    opacity: 0.5;
+}
+

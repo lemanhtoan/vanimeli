@@ -1,0 +1,79 @@
+<?php
+/******************************************************
+ * @package Ves Megamenu module for Magento 1.4.x.x and Magento 1.7.x.x
+ * @version 1.0.0.1
+ * @author http://landofcoder.com
+ * @copyright	Copyright (C) December 2010 LandOfCoder.com <@emai:landofcoder@gmail.com>.All rights reserved.
+ * @license		GNU General Public License version 2
+*******************************************************/
+?>
+<div class="ves-megamenu">
+	<div class="navbar navbar-inverse">
+		<div id="mainmenutop" class="megamenu" role="navigation" data-offcanvas="true">
+			<div class="navbar">
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<div class="close-mobile-nav close-block hidden-lg hidden-md">
+						<?php echo $this->getChildHtml("top.menu.top"); ?>
+					</div>
+					<?php echo $menuHtml; ?>
+					<div class="menu-footer hidden-lg hidden-md">
+						<?php echo $this->getChildHtml("top.menu.footer"); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+function initMobileMenu() {
+    var $mcontent = jQuery('#mainmenutop .navbar .navbar-nav');
+    var $mcontent_parent = $mcontent.parent();
+    var eventtype = mobilecheck() ? 'touchstart' : 'click';
+    /*  Fix First Click Menu */
+    jQuery(document.body).on(eventtype, '#mainmenutop .navbar .navbar-nav [data-toggle="dropdown"]' ,function(){
+        if(!jQuery(this).parent().hasClass('open') && this.href && this.href != '#' && this.href != 'javascript:;' && this.href != 'javascript:void(0);'){
+            window.location.href = this.href;
+        }
+
+    });
+
+    jQuery(document.body).on(eventtype, '#mainmenutop .navbar .navbar-nav .open-child' ,function(){
+        var find_sub_class = ".dropdown-menu";
+        if (jQuery(this).parent().hasClass('over')) {
+            jQuery(this).parent().removeClass('over').find('>'+find_sub_class).removeClass("in");
+            jQuery(this).parent().removeClass('over').find('>'+find_sub_class).slideUp(200);
+        }else{
+            jQuery(this).parent().removeClass('over').find('>'+find_sub_class).addClass("in");
+            jQuery(this).parent().parent().find('>li.over').removeClass('over').find('>'+find_sub_class).slideUp(200);
+            jQuery(this).parent().addClass('over').find('>'+find_sub_class).slideDown(200);
+        }
+    });
+  
+}
+
+jQuery(window).ready( function(){
+
+	/*  Fix First Click Menu */
+	jQuery(document.body).on('click', '#mainmenutop [data-toggle="dropdown"]' ,function(event){
+		event.stopImmediatePropagation();
+		jQuery(this).parent().show();
+		if(!jQuery(this).parent().hasClass('open') && this.href && this.href != '#'){
+			window.location.href = this.href;
+		}
+
+	});
+	jQuery(document.body).on('dblclick', '#mainmenutop [data-toggle="dropdown"]' ,function(event){
+		event.stopImmediatePropagation();
+		jQuery(this).parent().show();
+		if(!jQuery(this).parent().hasClass('open') && this.href && this.href != '#'){
+			window.location.href = this.href;
+		}
+
+	});
+
+	initMobileMenu();
+});
+
+
+</script>

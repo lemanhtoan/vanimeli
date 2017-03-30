@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Magestore_RewardPoints>
+            <active>true</active>
+            <codePool>local</codePool>
+            <aliasName>Reward Points</aliasName>
+            <erp>
+                <isERPmodule>true</isERPmodule>
+                <alias_name>Reward Points</alias_name>
+                <icon>rewardpoints</icon>
+                <default_page>adminhtml/reward_dashboard</default_page>
+            </erp>            
+        </Magestore_RewardPoints>
+        <!-- Disable Old Reward Points System -->
+        <Magestore_Customerreward>
+            <active>false</active>
+        </Magestore_Customerreward>
+    </modules>
+</config>

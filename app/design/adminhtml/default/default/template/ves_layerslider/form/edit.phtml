@@ -1,0 +1,2136 @@
+<?php
+/**
+ * @see Mage_Adminhtml_Block_Widget_Form_Container
+ */
+ ?>
+ <?php
+
+ 	$element = Mage::helper("ves_layerslider/element");
+    //Private Key use to access file manager
+    //You should config same $username, $salt, $privateKey in the file "js/ves_layerslider/filemanager/config/config.php"
+    //Find the line  code
+    // define('USE_ACCESS_KEYS', TRUE);
+    // $username = 'Venustheme';/*public key*/
+    // $salt = 'your private salt';
+    // $akey = md5($username.$salt);
+    // $access_keys = array($akey);
+    $username = 'Venustheme';/*Public Key*/
+    $privateKey = md5($username);
+
+ 	$banner = $this->getBannerData();
+
+ 	$params = $this->getParamsJSON();
+
+ 	$options = $this->getSliderOptions();
+
+    if(isset($options['transition']) && !is_array($options['transition'])) {
+        $options['transition'] = isset($options['transition'])?explode(",", $options['transition']): array();
+    }
+
+ 	$yesno_options= array(1 => Mage::helper('ves_layerslider')->__('Yes'),
+ 				  0 => Mage::helper('ves_layerslider')->__('No'));
+
+ 	$disable_options= array(1 => Mage::helper('ves_layerslider')->__('Enabled'),
+ 				  0 => Mage::helper('ves_layerslider')->__('Disabled'));
+
+ 	$stores = $banner->getStoreId();
+ 	
+ 	$stores = $element->getElementStores("store_id", "stores[]", $stores);
+
+ 	$effects = array('slideUp','slideDown','slideLeft',
+					'slideRight','slideExpandUp','expandUp','fadeIn',
+					'expandOpen','bigEntrance','hatch','bounce',
+					'pulse','floating','tossing','pullUp','pullDown','stretchLeft','stretchRight'
+					);
+
+    $fullwidth = array('' => Mage::helper("ves_layerslider")->__("Boxed"),
+                        'fullwidth' => Mage::helper("ves_layerslider")->__("Fullwidth"),
+                        'fullscreen' => Mage::helper("ves_layerslider")->__("Fullscreen"));
+
+    $screen_sizes = array('' => Mage::helper("ves_layerslider")->__("Selcted a screen size"),
+                          'hidden-xs' => Mage::helper("ves_layerslider")->__("Extra small (less than 768px)"),
+                          'hidden-sm' => Mage::helper("ves_layerslider")->__("Small (up to 768 px)"),
+                          'hidden-md' => Mage::helper("ves_layerslider")->__("Medium (768 px to 991 px)")
+                          );
+
+    $shadow_types = array('0' => Mage::helper("ves_layerslider")->__("No Shadow"),
+                        '1' => Mage::helper("ves_layerslider")->__("Shadow 1"),
+                        '2' => Mage::helper("ves_layerslider")->__("Shadow 2"),
+                        '3' => Mage::helper("ves_layerslider")->__("Shadow 3"));
+
+    $timer_positions = array('top-left' => Mage::helper("ves_layerslider")->__("Top Left"),
+                        'top-right' => Mage::helper("ves_layerslider")->__("Top Right"),
+                        'top-center' => Mage::helper("ves_layerslider")->__("Top Center"),
+                        'middle' => Mage::helper("ves_layerslider")->__("Middle"),
+                        'bottom-left' => Mage::helper("ves_layerslider")->__("Bottom Left"),
+                        'bottom-right' => Mage::helper("ves_layerslider")->__("Bottom Right"),
+                        'bottom-center' => Mage::helper("ves_layerslider")->__("Bottom Center")
+                        );
+
+    $timer_styles = array('Bar' => Mage::helper("ves_layerslider")->__("Bar"),
+                        'Pie' => Mage::helper("ves_layerslider")->__("Pie"),
+                        '360Bar' => Mage::helper("ves_layerslider")->__("360Bar"));
+
+    $stroke_styles = array(
+                        'solid' => Mage::helper("ves_layerslider")->__("Solid"),
+                        'none' => Mage::helper("ves_layerslider")->__("None"),
+                        'hidden' => Mage::helper("ves_layerslider")->__("Hidden"),
+                        'dotted' => Mage::helper("ves_layerslider")->__("Dotted"),
+                        'dashed' => Mage::helper("ves_layerslider")->__("Dashed"),
+                        'double' => Mage::helper("ves_layerslider")->__("Double"),
+                        'groove' => Mage::helper("ves_layerslider")->__("Groove"),
+                        'ridge' => Mage::helper("ves_layerslider")->__("Ridge"),
+                        'inset' => Mage::helper("ves_layerslider")->__("Inset"),
+                        'outset' => Mage::helper("ves_layerslider")->__("Outset"),
+                        'initial' => Mage::helper("ves_layerslider")->__("Initial")
+                        );
+
+    $time_liner_positions = array('bottom' => Mage::helper("ves_layerslider")->__("Bottom"),
+                        'top' => Mage::helper("ves_layerslider")->__("Top"));
+
+    $navigator_types = array('none' => Mage::helper("ves_layerslider")->__(" --- None --- "),
+                        'bullet' => Mage::helper("ves_layerslider")->__("Bullet"),
+                        'thumb' => Mage::helper("ves_layerslider")->__("Thumbnail"),
+                        'name' => Mage::helper("ves_layerslider")->__("Slide Name"),
+                        'name-thumb' => Mage::helper("ves_layerslider")->__("Slide Name & Thumbnail"),
+                        'bullet-name' => Mage::helper("ves_layerslider")->__("Bullet & Slide Name"));
+
+
+    $navigation_arrows = array('verticalcentered' => Mage::helper("ves_layerslider")->__("Vertical Centered"),
+                                'nexttobullets' => Mage::helper("ves_layerslider")->__("Next To Bullets")
+                        );
+
+    $navigation_style = array('round' => Mage::helper("ves_layerslider")->__("Round"),
+                        'navbar' => Mage::helper("ves_layerslider")->__("NavBar"),
+                        'round-old' => Mage::helper("ves_layerslider")->__("Round Old"),
+                        'square-old' => Mage::helper("ves_layerslider")->__("Square Old"),
+                        'navbar-old' => Mage::helper("ves_layerslider")->__("Navbar Old"));
+
+    $easing_lists = array("linear","swing","easeInQuad","easeOutQuad","easeInOutQuad","easeInCubic","easeOutCubic","easeInOutCubic","easeInQuart","easeOutQuart","easeInOutQuart","easeInQuint","easeOutQuint","easeInOutQuint","easeInExpo","easeOutExpo","easeInOutExpo","easeInSine","easeOutSine","easeInOutSine","easeInCirc","easeOutCirc","easeInOutCirc","easeInElastic","easeOutElastic","easeInOutElastic","easeInBack","easeOutBack","easeInOutBack","easeInBounce","easeOutBounce","easeInOutBounce");
+    $transtions = array(
+            'random' => 'Random',
+            'strip-down-right'=> 'strip-down-right',
+            'strip-down-left' => 'strip-down-left',
+            'strip-up-right' => 'strip-up-right',
+            'strip-up-left' => 'strip-up-left',
+            'strip-up-down'=> 'strip-up-down',
+            'strip-up-down-left'=> 'strip-up-down-left',
+            'strip-left-right'=> 'strip-left-right',
+            'strip-left-right-down'=> 'strip-left-right-down',
+            'slide-in-right'=> 'slide-in-right',
+            'slide-in-left'=> 'slide-in-left',
+            'slide-in-up' => 'slide-in-up',
+            'slide-in-down' => 'slide-in-down',
+            'right-curtain' => 'right-curtain',
+            'left-curtain' => 'left-curtain',
+            'top-curtain' => 'top-curtain',
+            'bottom-curtain' => 'bottom-curtain',
+            'fade' => 'fade',
+            'block-random' => 'block-random',
+            'block-fade'=> 'block-fade',
+            'block-fade-reverse'=> 'block-fade-reverse',
+            'block-expand'=> 'block-expand',
+            'block-expand-reverse' => 'block-expand-reverse',
+            'block-expand-random' => 'block-expand-random',
+            'block-drop-random' => 'block-drop-random',
+            'zigzag-top' => 'zigzag-top',
+            'igzag-bottom' => 'igzag-bottom',
+            'zigzag-grow-top' => 'zigzag-grow-top',
+            'zigzag-grow-bottom' => 'zigzag-grow-bottom',
+            'zigzag-drop-top' => 'zigzag-drop-top',
+            'zigzag-drop-bottom' => 'zigzag-drop-bottom',
+            'strip-left-fade' => 'strip-left-fade',
+            'strip-right-fade' => 'strip-right-fade',
+            'strip-top-fade' => 'strip-top-fade',
+            'strip-bottom-fade' => 'strip-bottom-fade'
+        );
+    
+    $usevideo = array( '0'=> Mage::helper("ves_layerslider")->__('No'),
+                        'youtube'=>Mage::helper("ves_layerslider")->__('Youtube'),
+                        'vimeo'=>Mage::helper("ves_layerslider")->__('Vimeo')
+                    );
+ 	$skins = array(
+ 					"" => Mage::helper('ves_layerslider')->__('default'),
+ 					"lush-skin-dark" => Mage::helper('ves_layerslider')->__('dark'),
+ 					"lush-skin-silver" => Mage::helper('ves_layerslider')->__('silver'),
+ 					"lush-skin-flat" => Mage::helper('ves_layerslider')->__('flat'),
+ 					"lush-skin-default-mini" => Mage::helper('ves_layerslider')->__('default-mini'),
+ 					"lush-skin-dark-mini" => Mage::helper('ves_layerslider')->__('dark-mini'),
+ 					"lush-skin-silver-mini" => Mage::helper('ves_layerslider')->__('silver-mini'),
+ 					"lush-skin-borderless" => Mage::helper('ves_layerslider')->__('no border'));
+
+ 	$shadows = array(
+ 					"shadow-a" => Mage::helper('ves_layerslider')->__('shadow-a'),
+ 					"shadow-b" => Mage::helper('ves_layerslider')->__('shadow-b'),
+ 					"shadow-c" => Mage::helper('ves_layerslider')->__('shadow-c'),
+ 					"shadow-d" => Mage::helper('ves_layerslider')->__('shadow-d'),
+ 					"" => Mage::helper('ves_layerslider')->__('no-shadow'));
+
+ 	$base_url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+ 	$id = $banner->getData("banner_id");
+ 	$title = $banner->getData("title");
+    $alias = $banner->getData("alias");
+ 	$is_active = $banner->getData("is_active");
+ 	$is_flexslider = $banner->getData("is_flexslider");
+ 	$position = $banner->getData("position");
+
+
+
+ 	$banner_params = $this->getBannerParams();
+ 	if(isset($banner_params['fs']) && $flexslider = $banner_params['fs'] ) {
+ 		if(isset($flexslider['is_flexslider'])) {
+ 			$is_flexslider = $flexslider['is_flexslider'];
+ 		}
+ 	}
+ ?>
+
+<?php echo $this->getFormInitScripts() ?>
+<!-- Bootstrap -->
+<link type="text/css" rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/css/bootstrap.min.css">
+
+<link type="text/css" rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/css/bootstrap-theme.min.css">
+
+<!-- Interface styles -->
+<link type="text/css" rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/css/jquery-ui-1.10.3.custom.min.css" />
+<link type="text/css" rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/css/venus.builder.css" />
+<!-- Google prettify -->
+<link type="text/css" rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/js/google-code-prettify/prettify.css" />
+
+<!-- Revolution slider styles -->
+
+<!-- Items styles -->
+<link type="text/css" rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/css/venus.items.css" id='lush-items-css'/>
+
+<!-- Settings styles -->
+<link type="text/css" rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/css/settings.css" id='lush-items-css'/>
+
+<link type="text/css" rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/fancybox/jquery.fancybox-1.3.4.css" media="screen"/>
+
+<link type="text/css" rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/css/animate.min.css" media="screen"/>
+
+
+<style type="text/css">
+ 	button, .form-button {
+ 		background:transparent;
+ 	}
+	#page-content{
+		min-height: 1200px;
+		width: 100%;
+		padding-bottom: 100px
+	}
+	.layerslider-adminhtml-banner-edit .header, .layerslider-adminhtml-banner-edit .notification-global, .layerslider-adminhtml-banner-edit .footer{
+		/*display: none;*/
+	}
+</style>
+<?php echo $element->initTextEditor(); ?>
+<div class="ajax_loading" id="ajax_loading">
+    <div id="noTrespassingOuterBarG">
+    <div id="noTrespassingFrontBarG" class="noTrespassingAnimationG">
+    <div class="noTrespassingBarLineG">
+    </div>
+    <div class="noTrespassingBarLineG">
+    </div>
+    <div class="noTrespassingBarLineG">
+    </div>
+    <div class="noTrespassingBarLineG">
+    </div>
+    <div class="noTrespassingBarLineG">
+    </div>
+    <div class="noTrespassingBarLineG">
+    </div>
+    </div>
+    </div>
+</div>
+<div id="themepanel" class="">
+<form id="edit_form" action="<?php echo $this->getFormActionUrl() ?>" method="post" id="product_edit_form">
+    <input type="hidden" name="banner_id" value="<?php echo $id; ?>"/>
+    <input type="hidden" name="action" value="" id="action"/>
+    <div class="heading">
+      <h1><b style="font-size:18	px;color:#E8481B"><?php echo $this->getHeaderText(); ?></b></h1>
+	  
+      <div class="buttons">
+      	<a href="javascript:;" class="btn btn-success save-slider" id="save-slide"><?php echo Mage::helper('ves_layerslider')->__('Save Slider');?></a> &nbsp;
+
+      	<a href="javascript:;" class="btn btn-info save-stay-slider" id="save-stay-slide"><?php echo Mage::helper('ves_layerslider')->__('Save & Stay');?></a> &nbsp;
+
+      	<?php if($id) { ?>
+		    <a id="button_duplicate" href="javascript:;" class="btn btn-success duplicate-slider" onclick="jQuery('#action').val('duplicate');editForm.submit();" rel="duplicate"><?php echo Mage::helper('ves_layerslider')->__('Duplicate');?></a> &nbsp;
+		<?php } ?>
+
+	  	<a href="<?php echo $this->getCancelLink(); ?>" class="btn btn-primary"><?php echo Mage::helper('ves_layerslider')->__('Cancel');?></a>
+	  </div>
+    </div>
+    <br/>
+    <ul class="nav nav-tabs" id="myTab">
+		 <li class="active"><a class="selected" href="#tab-general" data-toggle="tab"><?php echo Mage::helper('ves_layerslider')->__('General');?></a></li>
+		 <li><a href="#tab-slider" data-toggle="tab"><?php echo Mage::helper('ves_layerslider')->__('Slider Options');?></a></li>
+		  <li><a href="#tab-banner-images" data-toggle="tab"><?php echo Mage::helper('ves_layerslider')->__('Manage Sliders');?></a></li>
+	</ul>
+<div class="general mytab" id="tab-general">
+	<div class="container bar">
+		<h4><?php echo Mage::helper('ves_layerslider')->__('Slider Group Form');?></h4>
+			<table class="form">
+				<tr>
+					<td>ID: #<?php echo $id?$id:"0";?></td>
+				<tr>
+				<tr>
+					<td><?php echo Mage::helper('ves_layerslider')->__('Slider Group Title: ');?><font color="#FF0000" style="font-weight:bold">*</font></td>
+					 <td><input type="text" name="slider[title]" id="input_title" size="" value="<?php echo $title;?>"/></td>
+				</tr>
+                <tr>
+                    <td><?php echo Mage::helper('ves_layerslider')->__('Slider Group Alias: ');?><font color="#FF0000" style="font-weight:bold">*</font></td>
+                    <td><input type="text" name="slider[alias]" size="" id="input_alias" value="<?php echo $alias;?>"/></td>
+                </tr>
+                <tr>
+                    <td><?php echo Mage::helper('ves_layerslider')->__('Slider Shortcode: ');?></td>
+                    <td><span class="normaltext uneditable-input" style="width:500px" id="slider_shortcode"><?php echo Mage::helper("ves_layerslider")->getShortcode($alias, '{{widget type="ves_layerslider/widget_slider" alias="" show="1"}}');?></span> <br/><span class="help"><?php echo Mage::helper('ves_layerslider')->__('You can use the shortcode in CMS page or CMS Static Block or anywhere have texteditor. On frontend at there will show the layer slider.');?></span></td>
+                </tr>
+				<tr style="display:none;">
+					<td><?php echo Mage::helper('ves_layerslider')->__('Is Flexslider?');?></td>
+					<td>
+				 		<select name="slider[is_flexslider]">
+							<?php foreach( $yesno_options as $key => $value ) { ?>
+							<option value="<?php echo $key;?>" <?php if( $is_flexslider == $key){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+							 <?php } ?>
+							
+						</select>	
+					</td>
+				</tr>
+				<tr>
+					<td><?php echo Mage::helper('ves_layerslider')->__('Is Active?');?></td>
+					<td>
+				 		<select name="slider[is_active]">
+							<?php foreach( $yesno_options as $key => $value ) { ?>
+							<option value="<?php echo $key;?>" <?php if( $is_active == $key){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+							 <?php } ?>
+							
+						</select>	
+					</td>
+				</tr>
+				<tr>
+					<td><?php echo Mage::helper('ves_layerslider')->__('Position');?></td>
+					<td>
+						<input type="text" name="slider[position]" value="<?php echo $position;?>"/>
+					</td>
+				</tr>
+				<tr>
+					<td><b><?php echo Mage::helper('ves_layerslider')->__('Store views');?></b></td>
+					<td class="value">
+						<?php echo $stores; ?>
+					</td>
+				</tr>
+			</table>
+	</div>
+</div>
+<div class="general mytab" id="tab-slider" style="display:none">
+	<div class="container bar">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSliderOptions"><?php echo Mage::helper('ves_layerslider')->__('1. Slider Options');?></a>
+                    </h4>
+                </div>
+                <div id="collapseSliderOptions" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="form">
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Transitions');?></td>
+                                <td>
+                                    <select id="slider_options_transition" name="slider_options[transition][]" multiple="multiple" size="10">
+                                        <?php foreach( $transtions as $key => $value ) { ?>
+                                        <option value="<?php echo $key;?>" <?php if( (isset($options['transition']) && (in_array($key, $options['transition']) )) || (!isset($options['transition']) && $key == "random") ) { ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                         <?php } ?>
+                                        
+                                    </select>   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Easing');?></td>
+                                <td>
+                                    <select id="slider_options_easing" name="slider_options[easing]">
+                                        <?php foreach( $easing_lists as $key => $value ) { 
+                                            $key = $value;
+                                        ?>
+                                        <option value="<?php echo $key;?>" <?php if( isset($options['easing']) && ($key == $options['easing']) ){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                         <?php } ?>
+                                        
+                                    </select>   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Pause Time');?></td>
+                                <td><input type="text" id="slider_options_delay" name="slider_options[delay]" value="<?php echo isset($options['delay'])?$options['delay']:15000;?>"/> &nbsp;<span class="help"><?php echo Mage::helper('ves_layerslider')->__('How long each slide will show. Recommend value: <strong>9000 - 29000</strong>. Default value = <strong>15000</strong>');?></span> </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Animation Speed');?></td>
+                                <td><input type="text" id="slider_options_speed" name="slider_options[speed]" value="<?php echo isset($options['speed'])?$options['speed']:500;?>"/></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Number Strips');?></td>
+                                <td><input type="text" id="slider_options_delay" name="slider_options[strips]" value="<?php echo isset($options['strips'])?$options['strips']:20;?>"/>&nbsp;<span class="help"><?php echo Mage::helper('ves_layerslider')->__('Number of strips for strip animations');?></span></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Number of block columns');?></td>
+                                <td><input type="text" id="slider_options_delay" name="slider_options[block_cols]" value="<?php echo isset($options['block_cols'])?$options['block_cols']:10;?>"/>&nbsp;<span class="help"><?php echo Mage::helper('ves_layerslider')->__('Number of block columns for block animations');?></span></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Number of block rows');?></td>
+                                <td><input type="text" id="slider_options_delay" name="slider_options[block_rows]" value="<?php echo isset($options['block_rows'])?$options['block_rows']:5;?>"/>&nbsp;<span class="help"><?php echo Mage::helper('ves_layerslider')->__('Number of block rows for block animations');?></span></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('FullWidth Mode');?></td>
+                                <td>
+                                    <select id="slider_options_fullwidth" name="slider_options[fullwidth]">
+                                        <?php foreach( $fullwidth as $key => $value ) { ?>
+                                        <option value="<?php echo $key;?>" <?php if( isset($options['fullwidth']) && ($key == $options['fullwidth']) ){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                         <?php } ?>
+                                        
+                                    </select>   
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Touch Mobile');?></td>
+                                <td>    
+                                    <select id="slider_options_touch_mobile" name="slider_options[touch_mobile]">
+                                        <?php foreach( $yesno_options as $key => $value ) { ?>
+                                            <option value="<?php echo $key;?>" <?php if( isset($options['touch_mobile']) && ($key == $options['touch_mobile']) ){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                             <?php } ?>
+                                    </select>   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Stop On Hover');?></td>
+                                <td>
+                                    <select id="slider_options_stop_on_hover" name="slider_options[stop_on_hover]">
+                                       <?php foreach( $yesno_options as $key => $value ) { ?>
+                                            <option value="<?php echo $key;?>" <?php if( isset($options['stop_on_hover']) && ($key == $options['stop_on_hover'])){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                             <?php } ?>
+                                    </select>   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Auto Play');?></td>
+                                <td>
+                                    <select id="slider_options_auto_play" name="slider_options[auto_play]">
+                                        <?php foreach( $yesno_options as $key => $value ) { ?>
+                                            <option value="<?php echo $key;?>" <?php if( isset($options['auto_play']) && ($key == $options['auto_play'])){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                             <?php } ?>
+                                    </select>   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Resize Main Image');?></td>
+                                <td>
+                                    <?php
+                                        $options['image_cropping'] = isset($options['image_cropping'])?$options['image_cropping']:0;
+                                    ?>
+                                    <select id="slider_options_image_cropping" name="slider_options[image_cropping]">
+                                       <?php foreach( $yesno_options as $key => $value ) { ?>
+                                            <option value="<?php echo $key;?>" <?php if( isset($options['image_cropping']) && ($key == $options['image_cropping'])){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                             <?php } ?>
+                                    </select>   
+                                </td>
+                            </tr>
+                            <tr style="display:none">
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Lazy Load Main Image');?></td>
+                                <td>
+                                    <select id="slider_options_lazy_load" name="slider_options[lazy_load]">
+                                       <?php foreach( $yesno_options as $key => $value ) { ?>
+                                            <option value="<?php echo $key;?>" <?php if( isset($options['lazy_load']) && ($key == $options['lazy_load'])){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                             <?php } ?>
+                                    </select>   
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+		    </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseCaptionOptions"><?php echo Mage::helper('ves_layerslider')->__('2. Caption Options');?></a>
+                    </h4>
+                </div>
+                <div id="collapseCaptionOptions" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="form">
+                             <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Caption Animation Speed');?></td>
+                                <td><input type="text" id="slider_options_caption_speed" name="slider_options[caption_speed]" value="<?php echo isset($options['caption_speed'])?$options['caption_speed']:500;?>"/></td>
+                            </tr>
+                             <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Caption Easing');?></td>
+                                <td>
+                                    <select id="slider_options_caption_easing" name="slider_options[caption_easing]">
+                                        <?php foreach( $easing_lists as $key => $value ) { 
+                                            $key = $value;
+                                        ?>
+                                        <option value="<?php echo $key;?>" <?php if( isset($options['caption_easing']) && ($key == $options['caption_easing']) ){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                         <?php } ?>
+                                        
+                                    </select>   
+                                </td>
+                            </tr>
+                           
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseStyleOptions"><?php echo Mage::helper('ves_layerslider')->__('3. Style Options');?></a>
+                    </h4>
+                </div>
+                <div id="collapseStyleOptions" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="form">
+                             <tr>
+                                    <td><?php echo Mage::helper('ves_layerslider')->__('Shadow Type');?></th>
+                                     <td>
+                                        <select id="slider_options_shadow_type" name="slider_options[shadow_type]">
+                                            <?php foreach( $shadow_types as $key => $value ) { ?>
+                                            <option value="<?php echo $key;?>" <?php if( isset($options['shadow_type']) && $key == $options['shadow_type'] ){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                             <?php } ?> 
+                                        </select>   
+                                     </td>
+                            </tr>
+                             <tr>
+                                    <td><?php echo Mage::helper('ves_layerslider')->__('Background Color');?></td>
+                                    <td>
+                                        <input type="text" id="slider_options_background_color" name="slider_options[background_color]" value="<?php echo isset($options['background_color'])?$options['background_color']:'#d9d9d9';?>"/>      
+                                         
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo Mage::helper('ves_layerslider')->__('Margin');?></td>
+                                    <td>
+                                        <input type="text" name="slider_options[margin]" value="<?php echo isset($options['margin'])?$options['margin']:0;?>"/> Example: 5px 0; or 5px 10px 20px
+                                     
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo Mage::helper('ves_layerslider')->__('Padding(border)');?></td>
+                                    <td>
+                                        <input type="text" name="slider_options[padding]" value="<?php echo isset($options['padding'])?$options['padding']:0;?>"/> Example: 5px 0; or 5px 10px 20px
+                                     
+                                    </td>
+                                </tr>
+                                <tr style="display:none">
+                                    <td><?php echo Mage::helper('ves_layerslider')->__('Show Background Image');?></td>
+                                    <td>
+                                        <select id="slider_options_background_image" name="slider_options[background_image]">
+                                            <?php foreach( $yesno_options as $key => $value ) { ?>
+                                            <option value="<?php echo $key;?>" <?php if(isset($options['background_image']) && $key == $options['background_image']){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                             <?php } ?> 
+                                        </select>   
+                                    </td>
+                                </tr>
+                                <tr style="display:none">
+                                    <td><?php echo Mage::helper('ves_layerslider')->__('Background URL');?></td>
+                                    <td>
+                                        <input type="text" id="slider_options_background_url" value="<?php echo isset($options['background_url'])?$options['background_url']:'';?>" name="slider_options[background_url]"/>
+                                             
+                                    </td>
+                                </tr>
+                                
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTimer"><?php echo Mage::helper('ves_layerslider')->__('4. Timer Options');?></a>
+                    </h4>
+                </div>
+                <div id="collapseTimer" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="form">
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Show Timer');?></td>
+                                <td>
+                                    <select id="slider_options_show_time_line"  name="slider_options[show_time_line]">
+                                        <?php foreach( $yesno_options as $key => $value ) { ?>
+                                        <option value="<?php echo $key;?>" <?php if( isset($options['show_time_line']) && ($key == $options['show_time_line'])){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                         <?php } ?>
+                                    </select>   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Timer Style');?></td>
+                                <td>
+                                    <select id="slider_options_time_style" name="slider_options[timer_style]">
+                                        <?php foreach( $timer_styles as $key => $value ) { ?>
+                                        <option value="<?php echo $key;?>" <?php if( isset($options['timer_style']) && $key == $options['timer_style'] ){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                         <?php } ?> 
+                                    </select>   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Timer Position');?></td>
+                                <td>
+                                    <select id="slider_options_timer_position" name="slider_options[timer_position]">
+                                        <?php foreach( $timer_positions as $key => $value ) { ?>
+                                        <option value="<?php echo $key;?>" <?php if( isset($options['timer_position']) && $key == $options['timer_position'] ){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                         <?php } ?> 
+                                    </select>   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Timer X position threshold');?></td>
+                                <td>
+                                    <input type="text" id="slider_options_timer_x" name="slider_options[timer_x]" value="<?php echo isset($options['timer_x'])?$options['timer_x']:'10';?>"/>      
+                                     
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Timer Y position threshold');?></td>
+                                <td>
+                                    <input type="text" id="slider_options_timer_y" name="slider_options[timer_y]" value="<?php echo isset($options['timer_y'])?$options['timer_y']:'10';?>"/>      
+                                     
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Timer Opacity');?></td>
+                                <td>
+                                    <input type="text" id="slider_options_timer_opacity" name="slider_options[timer_opacity]" value="<?php echo isset($options['timer_opacity'])?$options['timer_opacity']:'0.5';?>"/>      
+                                     
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Timer Background');?></td>
+                                <td>
+                                    <input type="text" id="slider_options_timer_background" name="slider_options[timer_background]" value="<?php echo isset($options['timer_background'])?$options['timer_background']:'#000000';?>"/>      
+                                     
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Timer Color');?></td>
+                                <td>
+                                    <input type="text" id="slider_options_timer_color" name="slider_options[timer_color]" value="<?php echo isset($options['timer_color'])?$options['timer_color']:'#FFFFFF';?>"/>      
+                                     
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Timer Diameter');?></td>
+                                <td>
+                                    <input type="text" id="slider_options_timer_diameter" name="slider_options[timer_diameter]" value="<?php echo isset($options['timer_diameter'])?$options['timer_diameter']:'30';?>"/>      
+                                     
+                                </td>
+                            </tr>
+                             <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Timer Padding');?></td>
+                                <td>
+                                    <input type="text" id="slider_options_timer_padding" name="slider_options[timer_padding]" value="<?php echo isset($options['timer_padding'])?$options['timer_padding']:'0';?>"/>      
+                                     
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Timer Stroke');?></td>
+                                <td>
+                                    <input type="text" id="slider_options_timer_stroke" name="slider_options[timer_stroke]" value="<?php echo isset($options['timer_stroke'])?$options['timer_stroke']:'7';?>"/>      
+                                     
+                                </td>
+                            </tr>
+                             <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Timer Bar Stroke');?></td>
+                                <td>
+                                    <input type="text" id="slider_options_timer_bar_stroke" name="slider_options[timer_bar_stroke]" value="<?php echo isset($options['timer_bar_stroke'])?$options['timer_bar_stroke']:'0';?>"/>      
+                                     
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Timer Bar Stroke Color');?></td>
+                                <td>
+                                    <input type="text" id="slider_options_timer_bar_stroke_color" name="slider_options[timer_bar_stroke_color]" value="<?php echo isset($options['timer_bar_stroke_color'])?$options['timer_bar_stroke_color']:'#EEEEEE';?>"/>      
+                                     
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Timer Bar Stroke Style');?></td>
+                                <td>
+                                    <select id="slider_options_timer_bar_stroke_style" name="slider_options[timer_bar_stroke_style]">
+                                        <?php foreach( $stroke_styles as $key => $value ) { ?>
+                                        <option value="<?php echo $key;?>" <?php if( isset($options['timer_bar_stroke_style']) && $key == $options['timer_bar_stroke_style'] ){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                         <?php } ?> 
+                                    </select>   
+                                </td>
+                            </tr>
+                            
+                           
+                        </table> 
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseNavigator"><?php echo Mage::helper('ves_layerslider')->__('5. Navigator');?></a>
+                    </h4>
+                </div>
+                <div id="collapseNavigator" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="form">
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Navigator Type');?></th>
+                                 <td>
+                                    <select id="slider_options_navigator_type" name="slider_options[navigator_type]">
+                                        <?php foreach( $navigator_types as $key => $value ) { ?>
+                                        <option value="<?php echo $key;?>" <?php if( $key == $options['navigator_type'] ){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                         <?php } ?> 
+                                    </select>   
+                                 </td>
+                            </tr>
+
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Show Navigator When Hover On Slide');?></th>
+                                 <td>
+                                    <select id="slider_options_navigator_hidden" name="slider_options[navigator_hidden]">
+                                         <?php foreach( $yesno_options as $key => $value ) { ?>
+                                        <option value="<?php echo $key;?>" <?php if( isset($options['navigator_hidden']) && $key == $options['navigator_hidden']){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                         <?php } ?> 
+                                    </select>   
+                                 </td>
+                            </tr>
+                            
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Offset Horizontal');?></td>
+                                <td><input type="text" id="slider_options_offset_horizontal" value="<?php echo isset($options['offset_horizontal'])?$options['offset_horizontal']:"50%";?>" name="slider_options[offset_horizontal]"/><span class="help"> For example: 50%</span></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Offset Vertical');?></td>
+                                <td><input type="text" id="slider_options_offset_vertical" value="<?php echo isset($options['offset_vertical'])?$options['offset_vertical']:'20px';?>" name="slider_options[offset_vertical]"/><span class="help"> For example: 20px</span></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Show Direction Navigator');?></td>
+                                <td>
+                                    <select id="slider_options_show_direction_nav" name="slider_options[show_direction_nav]">
+                                        <?php foreach( $yesno_options as $key => $value ) { ?>
+                                        <option value="<?php echo $key;?>" <?php if( isset($options['show_direction_nav']) && $key == $options['show_direction_nav']){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                         <?php } ?> 
+                                    </select>   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Show Thumbnail In Next and Prev Button');?></td>
+                                <td>
+                                    <select id="slider_options_show_control_thumb" name="slider_options[show_control_thumb]">
+                                        <?php foreach( $yesno_options as $key => $value ) { ?>
+                                        <option value="<?php echo $key;?>" <?php if( isset($options['show_control_thumb']) && $key == $options['show_control_thumb']){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                         <?php } ?> 
+                                    </select>   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Direction Navigator Position');?></td>
+                                <td>
+                                    <select id="slider_options_navigator_arrows" name="slider_options[navigator_arrows]">
+                                        <?php foreach( $navigation_arrows as $key => $value ) { ?>
+                                        <option value="<?php echo $key;?>" <?php if( $key == $options['navigator_arrows'] ){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                         <?php } ?> 
+                                    </select>   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Previous Button Margin Top');?></td>
+                                <td><input type="text" id="slider_options_prev_top" value="<?php echo isset($options['prev_top'])?$options['prev_top']:"-20px";?>" name="slider_options[prev_top]"/></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Previous Button Margin Left');?></td>
+                                <td><input type="text" id="slider_options_prev_left" value="<?php echo isset($options['prev_left'])?$options['prev_left']:"20px";?>" name="slider_options[prev_left]"/></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Next Button Margin Top');?></td>
+                                <td><input type="text" id="slider_options_next_top" value="<?php echo isset($options['next_top'])?$options['next_top']:"-20px";?>" name="slider_options[next_top]"/></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Next Button Margin Right');?></td>
+                                <td><input type="text" id="slider_options_next_right" value="<?php echo isset($options['next_right'])?$options['next_right']:"20px";?>" name="slider_options[next_right]"/></td>
+                            </tr> 
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThumbnails"><?php echo Mage::helper('ves_layerslider')->__('6. Thumbnails');?></a>
+                    </h4>
+                </div>
+                <div id="collapseThumbnails" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="form">
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Resize Thumbnail Image');?></td>
+                                <td>
+                                    <?php
+                                    $options['thumbnail_cropping'] = isset($options['thumbnail_cropping'])?$options['thumbnail_cropping']:0;
+                                    ?>
+                                    <select id="slider_options_thumbnail_cropping" name="slider_options[thumbnail_cropping]">
+                                       <?php foreach( $yesno_options as $key => $value ) { ?>
+                                            <option value="<?php echo $key;?>" <?php if( isset($options['thumbnail_cropping']) && ($key == $options['thumbnail_cropping'])){ ?> selected="selected" <?php } ?> ><?php echo $value; ?></option>
+                                             <?php } ?>
+                                    </select>   
+                                </td>
+                            </tr>     
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Thumbnail Width');?></td>
+                                <td>
+                                    <input type="text" id="slider_options_thumbnail_width" value="<?php echo isset($options['thumbnail_width'])?$options['thumbnail_width']:100;?>" name="slider_options[thumbnail_width]"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Thumbnail Height');?> </td>
+                                <td>
+                                    <input type="text" id="slider_options_thumbnail_height" value="<?php echo isset($options['thumbnail_height'])?$options['thumbnail_height']:50;?>" name="slider_options[thumbnail_height]"/>
+                                </td>
+                            </tr>
+                           
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseMobile"><?php echo Mage::helper('ves_layerslider')->__('7. Mobile Visiblity');?></a>
+                    </h4>
+                </div>
+                <div id="collapseMobile" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                       <table class="form">
+                            <tr>
+                                <td><?php echo Mage::helper('ves_layerslider')->__('Hide Under Width');?></td>
+                                <td>
+                                    <select id="slider_options_hide_screen_width" name="slider_options[hide_screen_width]">
+                                        <?php
+                                            foreach($screen_sizes as $key=>$val) {
+                                                ?>
+                                            <option value="<?php echo $key; ?>" <?php echo isset($options['hide_screen_width']) && $options['hide_screen_width'] == $key?'selected="selected"':''; ?> ><?php echo $val; ?></option>  
+                                                <?php
+                                            }
+                                        ?>
+                                    </select>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+<div class="slider_preview mytab" id="tab-banner-images" style="display:none">
+	<div class="container bar">
+		<div class="minimize" ><em class="icon icon-angle-up"></em> </div>
+			<!-- start controls bar -->
+
+		<div class="row" style="padding-top: 20px">
+				<div class="span1">
+					<label>Element</label>
+					<div class="btn-group">
+						<button data-toggle="dropdown" class="btn btn-info dropdown-toggle">
+							Add <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="javascript:;" id="add-image">Image</a>
+							</li>
+							<li>
+								<a href="javascript:;" id="add-text">Text</a>
+							</li>
+							<li>
+								<a href="javascript:;" id="add-link">Link</a>
+							</li>
+							<li>
+								<a href="javascript:;" id="add-imglink">Image Link</a>
+							</li>
+                            <li>
+                                <a href="javascript:;" id="add-productsku">Product Spot</a>
+                            </li>
+							<li>
+								<a href="javascript:;" id="add-block">Block</a>
+							</li>
+							<li>
+								<a href="javascript:;" id="add-video">Video</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="span2">
+					<label>Slider size</label>
+					<input type="text" class="span1" placeholder="Width" id="slider-width" value="1140"/>
+					x
+					<input type="text" class="span1" placeholder="Height" id="slider-height" value="450"/>
+				</div>
+				<div class="span1">
+					<label>Grid size</label>
+					<div class="input-append">
+						<input type="text" id="grid-size" style="width: 40px;" value="30">
+						<div class="btn-group">
+							<button data-toggle="dropdown" class="btn dropdown-toggle">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<div class="dd-item no-bubble">
+										<span class="checkbox">
+											<input type="checkbox" id="snap-grid" />Snap to grid </span> 
+									</div>
+								</li>
+								<li>
+									<div class="dd-item no-bubble">
+										<span class="checkbox">
+										<input type="checkbox" id="snap-item" />Snap to elements </span> 
+									</div>
+								</li>
+								<li>
+									<div class="dd-item no-bubble"> <span class="checkbox">
+										<input type="checkbox" id="show-grid" />
+										Show grid </span> </div>
+								</li>
+								<li>
+									<div class="dd-item no-bubble"> <span class="checkbox">
+										<input type="checkbox" id="drag-x" />
+										Drag X</span> </div>
+								</li>									
+								<li>
+									<div class="dd-item no-bubble"> <span class="checkbox">
+										<input type="checkbox" id="drag-y" />
+										Drag Y</span> </div>
+								</li>									
+							</ul>
+						</div><!-- /btn-group -->
+					</div>
+				</div>
+				<div class="span1"></div>
+				<div class="span2">
+						<label>Preview Slider</label>
+						<a href="#" class="btn btn-warning preview"><?php echo Mage::helper("ves_layerslider")->__("Preview");?></a>
+				</div>
+				<div class="span4 ">
+					<label>Actions</label>
+					<a href="#" class="btn btn-info" id="add-slide">New Slide</a> &nbsp; <a href="#" class="btn btn-danger" id="remove-slide">Remove Slide</a>
+				</div>
+			</div>
+			<!-- end controls bar -->
+
+            <input type="hidden" class="image-path" value="" id="image-path"/>
+            <input type="hidden" class="image-path" value="" id="bg-image-path"/>
+
+			<div class="row subbar">
+				<div class="span2" style="">
+					<label>Path to image folder</label>
+					<input type="text" placeholder="images/location" value="<?php echo Mage::helper("ves_layerslider")->getImageBaseDir(); ?>" class="span2" id="image-location">
+				</div>
+				<div class="span2" style="display:none">
+					<label>Skin</label>
+					<select class="span2" id="skin-class">
+						<?php 
+							foreach($skins as $key=>$val){
+								echo '<option value="'.$key.'">'.$val.'</option>';
+							}
+						?>
+					</select>						
+				</div>
+				<div class="span2" style="display:none">
+					<label>Shadow</label>
+					<select class="span2" id="shadow-class">
+						<?php 
+							foreach($shadows as $key=>$val){
+								echo '<option value="'.$key.'">'.$val.'</option>';
+							}
+						?>
+					</select>						
+				</div>
+				
+				<div class="span1">
+					<label>Fullwidth</label>
+					<button class="btn btn-block"  data-toggle="button" id="do-fw" >Toggle</button>
+				</div>
+				
+				<div class="span2">
+					<label>Slider background</label>
+					<div class="fileupload fileupload-new" data-provides="fileupload" style="margin-bottom: 0">
+						<span class="fileupload-preview thumbnail " style="display: none;"></span>
+						<div>
+							<div class="btn btn-file pull-left">
+								<span class="fileupload-new">Select Image</span>
+								<span class="fileupload-exists">Select Image</span>
+                                <input type="file" class="fileup" id="bg-image" data-id="bg-image-path" style="cursor: pointer;"/>
+							</div>
+						</div>
+					</div>
+					<a title=""
+					data-id="#pover-bgimage"
+					data-placement="bottom"
+					data-toggle="popover"
+					class="btn"
+					href="#"
+					data-original-title="Settings"><em class="icon-cog"></em></a>	
+				</div>
+				<div class="span2" style="display:none">
+                    <label>Flexslider Mode</label>
+                    	<input type="checkbox" value="1" id="is_flexslider" data-bind="is_flexslider"/>&nbsp;
+						<a title="Flexslider Settings"
+						data-id="#pover-flexslider"
+						data-placement="bottom"
+						data-toggle="popover"
+						class="btn"
+						href="#"
+						data-original-title="Settings">Settings</a>	
+				</div>					
+				<div class="span2" style="display:none">
+					<label> Slide data</label>
+					<button class="btn" id="ieport">Import / Export</button>
+				</div>
+			</div>
+
+		</div>
+		<div class="container tabs">
+
+			<ul class="nav nav-tabs sortable" id="slide-tabs">
+				<!-- Slide tabs will be created here -->
+			</ul>
+		</div>
+        
+		<div class="container slider">
+			<!-- The slider -->
+            
+			<div class="tab-content" id="slide-content">
+				<!-- Slide content with elements will be created here -->
+			</div>
+
+			<!-- Image popover content -->
+			<div id="pover-image" class="hidden">
+				<a class="remove-item-quick" href="#">Remove</a>
+				<div class="fileupload fileupload-new" data-provides="fileupload">
+					<span class="fileupload-preview thumbnail " style="display: none;"></span>
+					<div>
+						<div class="btn btn-file">
+							<span class="fileupload-new">Select Image</span>
+							<span class="fileupload-exists">Select Image</span>
+							<input type="file" class="fileup" data-id="image-path"/>
+						</div>
+					</div>
+				</div>
+                <label>Or Image Url</label>
+                <input type="text" placeholder="Image Url" value=""  class="span2 filepath" data-bind='image-url'/>
+				<label>Width x Height</label>
+				<input type="text" placeholder="Width" value=""  class="span1" data-bind='width'/>
+				<input type="text" placeholder="Height" value="" class="span1" data-bind='height'/>
+				<label class="checkbox">
+					<input type="checkbox" data-bind="ignore" />
+					Main Slider Image </label>
+				<label class="checkbox">
+					<input type="checkbox" data-bind="clip" id="image-clip"/>
+					Clip Image </label>
+				<label>Extras</label>
+
+				<a
+				data-id="#pover-style"
+				data-placement="bottom"
+				data-toggle="popover"
+				class="btn"
+				href="#"
+				title="Custom CSS"
+				data-original-title="Custom CSS"><em class="icon-tint"></em> </a>
+
+				<a title=""
+				data-id="#tools"
+				data-placement="bottom"
+				data-toggle="popover"
+				class="btn "
+				href="#"
+				data-original-title="Tools"><em class="icon icon-cog"></em> </a>
+			</div>
+
+			<!-- Text popover content -->
+
+			<div id="pover-text" class="hidden">
+				<a class="remove-item-quick" href="#">Remove</a>
+				<label>Content</label>
+				<textarea class="span2" data-bind='content' data-trigger="focusout"></textarea>
+
+				<label class="control-label">Class</label>
+				<div class="controls">
+					<select data-bind='clase' class="span2 text-classes">
+						<option value="">Select</option>
+					</select>
+				</div>
+
+				<label class="control-label">Custom Class</label>
+				<div class="controls">
+					<input data-bind='customclase' id="customclase" class="span2 text-customclasses">
+				</div>
+
+				<label>Extras</label>
+
+				<a
+				data-id="#pover-style"
+				data-placement="bottom"
+				data-toggle="popover"
+				class="btn"
+				href="#"
+				title="Custom CSS"
+				data-original-title="Custom CSS"><em class="icon-tint"></em> </a>
+
+				<a title=""
+				data-id="#tools"
+				data-placement="bottom"
+				data-toggle="popover"
+				class="btn "
+				href="#"
+				data-original-title="Tools"><em class="icon icon-cog"></em> </a>
+			</div>
+
+            <!-- Text popover product spot -->
+
+            <div id="pover-productsku" class="hidden">
+                <a class="remove-item-quick" href="#">Remove</a>
+                <label>Product Sku</label>
+                <input type="text" placeholder="" class="span2" data-bind="sku"/>
+
+                <label class="control-label">Show Image</label>
+                <div class="controls">
+                    <select data-bind='showimage' class="span2">
+                        <option value="1">yes</option>
+                        <option value="0">no</option>
+                    </select>
+                </div>
+                <label class="control-label">Show Price</label>
+                <div class="controls">
+                    <select data-bind='showprice' class="span2">
+                        <option value="1">yes</option>
+                        <option value="0">no</option>
+                    </select>
+                </div>
+                <label class="control-label">Show Rating</label>
+                <div class="controls">
+                    <select data-bind='showrating' class="span2">
+                        <option value="1">yes</option>
+                        <option value="0">no</option>
+                    </select>
+                </div>
+
+                <label>Extras</label>
+
+                <a
+                data-id="#pover-style"
+                data-placement="bottom"
+                data-toggle="popover"
+                class="btn"
+                href="#"
+                title="Custom CSS"
+                data-original-title="Custom CSS"><em class="icon-tint"></em> </a>
+
+                <a title=""
+                data-id="#tools"
+                data-placement="bottom"
+                data-toggle="popover"
+                class="btn "
+                href="#"
+                data-original-title="Tools"><em class="icon icon-cog"></em> </a>
+            </div>
+
+			<!-- Anchor popover content -->
+			<div id="pover-link" class="hidden">
+				<a class="remove-item-quick" href="#">Remove</a>
+				<label>Content</label>
+				<textarea class="span2" data-bind='content' data-trigger="focusout"></textarea>
+				<label>URL</label>
+				<input type="text" placeholder="" class="span2" data-bind="href"/>
+				<label class="control-label">Class</label>
+				<div class="controls">
+					<select data-bind='clase' class="span2 link-classes">
+						<option value="">Select</option>
+					</select>
+				</div>
+                <label class="control-label">Custom Class</label>
+                <div class="controls">
+                    <input data-bind='customclase' id="customclase" class="span2 text-customclasses">
+                </div>
+				<label class="control-label">Taget</label>
+				<div class="controls">
+					<select data-bind='target' class="span2">
+						<option>_top</option>
+						<option>_blank</option>
+						<option>_self</option>
+						<option>_parent</option>
+					</select>
+				</div>
+				<label>Extras</label>
+
+				<a
+				data-id="#pover-style"
+				data-placement="bottom"
+				data-toggle="popover"
+				class="btn"
+				href="#"
+				title="Custom CSS"
+				data-original-title="Custom CSS"><em class="icon-tint"></em> </a>
+
+				<a title=""
+				data-id="#tools"
+				data-placement="bottom"
+				data-toggle="popover"
+				class="btn "
+				href="#"
+				data-original-title="Tools"><em class="icon icon-cog"></em> </a>
+			</div>
+
+			<!-- Anchor Image popover content -->
+			<div id="pover-imglink" class="hidden">
+				<a class="remove-item-quick" href="#">Remove</a>
+				<div class="fileupload fileupload-new" data-provides="fileupload">
+					<span class="fileupload-preview thumbnail " style="display: none;"></span>
+					<div>
+						<div class="btn btn-file">
+							<span class="fileupload-new">Select Image</span>
+							<span class="fileupload-exists">Select Image</span>
+							<input type="file" class="fileup"  data-id="image-path"/>
+						</div>
+					</div>
+				</div>
+                <label>Or Image Url</label>
+                <input type="text" placeholder="Image Url" value=""  class="span2 filepath" data-bind='image-url'/>
+				<label>Width x Height</label>
+				<input type="text" placeholder="Width" value=""  class="span1" data-bind='width'/>
+				<input type="text" placeholder="Height" value="" class="span1" data-bind='height'/>
+
+				<label>URL</label>
+				<input type="text" placeholder="" class="span2" data-bind="href"/>
+				<label class="control-label">Taget</label>
+				<div class="controls">
+					<select data-bind='target' class="span2">
+						<option>_top</option>
+						<option>_blank</option>
+						<option>_self</option>
+						<option>_parent</option>
+					</select>
+				</div>
+				<label>Extras</label>
+
+				<a
+				data-id="#pover-style"
+				data-placement="bottom"
+				data-toggle="popover"
+				class="btn"
+				href="#"
+				title="Custom CSS"
+				data-original-title="Custom CSS"><em class="icon-tint"></em> </a>
+
+				<a title=""
+				data-id="#tools"
+				data-placement="bottom"
+				data-toggle="popover"
+				class="btn "
+				href="#"
+				data-original-title="Tools"><em class="icon icon-cog"></em> </a>
+			</div>
+
+			<!-- Solid Block popover content -->
+
+			<div id="pover-block" class="hidden">
+				<a class="remove-item-quick" href="#">Remove</a>
+				<label class="control-label">Class</label>
+				<div class="controls">
+					<select class="span2 block-classes" data-bind='clase' >
+						<option value="">Select</option>
+					</select>
+				</div>
+                <label class="control-label">Custom Class</label>
+                <div class="controls">
+                    <input data-bind='customclase' id="customclase" class="span2 text-customclasses">
+                </div>
+				<label>Opacity</label>
+				<!--<input type="range" min="0" max="1" step="0.1" data-bind="opacity" class="span2" />-->
+				<div class="ui-slider"></div>
+				
+				<label>Width x Height</label>
+				<input type="text" placeholder="Width" value=""  class="span1" data-bind='width'/>
+				<input type="text" placeholder="Height" value="" class="span1" data-bind='height'/>
+
+				<!--<label>Style</label>
+				<input type="text" placeholder="Class1 Class2..." class="" id="pref-text-style"/> -->
+				<label>Extras</label>
+
+
+				<a
+				data-id="#pover-style"
+				data-placement="bottom"
+				data-toggle="popover"
+				class="btn"
+				href="#"
+				title="Custom CSS"
+				data-original-title="Custom CSS"><em class="icon-tint"></em> </a>
+
+				<a title=""
+				data-id="#tools"
+				data-placement="bottom"
+				data-toggle="popover"
+				class="btn "
+				href="#"
+				data-original-title="Tools"><em class="icon icon-cog"></em> </a>
+			</div>
+
+			<!-- Image popover content -->
+			<div id="pover-video" class="hidden">
+				<a class="remove-item-quick" href="#">Remove</a>
+				<label>Video Id</label>
+				<input type="text" placeholder="Video Id" value=""  class="span2" data-bind='videoid' data-trigger="focusout" />
+				<label>Video Source</label>
+				<label class="radio" for="videotype1">
+				  <input type="radio" name="videotype" id="videotype1" value="youtube" data-bind='videotype' checked="checked">
+				  Youtube
+				</label>
+				<label class="radio" for="videotype2">
+				  <input type="radio" name="videotype" id="videotype2" value="vimeo" data-bind='videotype'>
+				  Vimeo
+				</label>
+				<label>Width x Height</label>
+				<input type="text" placeholder="Width" value=""  class="span1" data-bind='width'/>
+				<input type="text" placeholder="Height" value="" class="span1" data-bind='height'/>
+
+				<label>Extras</label>
+				<a
+				data-id="#pover-style"
+				data-placement="bottom"
+				data-toggle="popover"
+				class="btn"
+				href="#"
+				title="Custom CSS"
+				data-original-title="Custom CSS"><em class="icon-tint"></em> </a>
+
+				<a title=""
+				data-id="#tools"
+				data-placement="bottom"
+				data-toggle="popover"
+				class="btn "
+				href="#"
+				data-original-title="Tools"><em class="icon icon-cog"></em> </a>
+			</div>
+
+			<!-- Animation in popover -->
+			<div id="animation-in" class="hidden">
+				<div class="form-horizontal">
+					<div class="control-group">
+						<label class="control-label inline" >at</label>
+						<div class="controls">
+							<input type="text" placeholder="(ms)" class="input-mini" data-bind='at'>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label inline">plus</label>
+						<div class="controls">
+							<input type="text" placeholder="(ms)" class="input-mini" data-bind='plus'>
+						</div>
+					</div>
+					<div class="control-group">
+
+						<!-- Select Basic -->
+						<label class="control-label">from</label>
+						<div class="controls">
+							<select class="input-small effect-list" data-bind='from'>
+							</select>
+						</div>
+
+					</div>
+
+					<div class="control-group">
+
+						<!-- Select Basic -->
+						<label class="control-label">use</label>
+						<div class="controls">
+							<select class="input-small easing-list" data-bind='use'>
+							</select>
+						</div>
+
+					</div>
+					<div class="control-group">
+
+						<label class="control-label" >during</label>
+						<div class="controls">
+							<input type="text" placeholder="(ms)" class="input-mini" data-bind='during'>
+						</div>
+					</div>
+					<div class="control-group only-element">
+						<label class="control-label" >override global </label>
+						<div class="controls">
+							<input type="checkbox" data-bind="override" />
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- Animation out popover -->
+			<div id="animation-out" class="hidden">
+				<div class="form-horizontal">
+					<div class="control-group">
+						<label class="control-label inline" >at</label>
+						<div class="controls">
+							<input type="text" placeholder="(ms)" class="input-mini" data-bind='at'>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label inline" >plus</label>
+						<div class="controls">
+							<input type="text" placeholder="(ms)" class="input-mini" data-bind='plus'>
+						</div>
+					</div>
+					<div class="control-group">
+
+						<!-- Select Basic -->
+						<label class="control-label">to</label>
+						<div class="controls">
+							<select class="input-small effect-list" data-bind='to'>
+							</select>
+						</div>
+
+					</div>
+
+					<div class="control-group">
+
+						<!-- Select Basic -->
+						<label class="control-label">use</label>
+						<div class="controls">
+							<select class="input-small easing-list" data-bind='use'>
+							</select>
+						</div>
+
+					</div>
+					<div class="control-group">
+
+
+						<label class="control-label" >during</label>
+						<div class="controls">
+							<input type="text" placeholder="(ms)" class="input-mini" data-bind='during'>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" >force </label>
+						<div class="controls">
+							<input type="checkbox" data-bind="force" />
+						</div>
+					</div>					
+					<div class="control-group only-element">
+						<label class="control-label" >override global </label>
+						<div class="controls">
+							<input type="checkbox" data-bind="override" />
+						</div>
+					</div>
+										
+				</div>
+			</div>
+
+			<!-- Current Slide setting popover  -->
+			<div id="pover-slide" class="hidden" >
+				<a class="clone-slide" href="#">Clone</a>
+				<div class="form-horizontal" style="margin-bottom: 9px;">
+					<div class="control-group" style="display:none">
+						<label class="control-label">Delay</label>
+						<div class="controls">
+							<input type="text" placeholder="(ms)" class="input-large" data-bind='deadtime'>
+						</div>
+
+					</div>
+					
+					<div class="control-group slider-params">
+                    <table class="form">
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Slider Title:");?></td>
+                        <td><input type="text" name="slider_title" id="slider_title" data-bind="slider_title" placeholder=""></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Status")?> </td>
+                        <td>
+                            <select name="slider_status" id="slider_status" data-bind="slider_status">
+                                <?php foreach( $yesno_options as $key => $value ) { ?>
+                                <option value="<?php echo $key;?>"><?php echo $value; ?></option>
+                                 <?php } ?>
+                                
+                            </select>   
+                            </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Transition")?></td>
+                        <td>
+                            <select name="slider_transition[]" id="slider_transition" multiple="multiple" size="10"  data-bind="slider_transition">
+                                <?php foreach( $transtions as $key => $value ) { ?>
+                                <option value="<?php echo $key;?>"><?php echo $value; ?></option>
+                                 <?php } ?>
+                            </select>   
+                            </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Easing")?></td>
+                        <td>
+                            <select name="slider_easing" id="slider_easing" data-bind="slider_easing">
+                                <option value="auto">Auto</option>
+                                <?php foreach( $easing_lists as $key => $value ) { 
+                                    $key = $value;
+                                ?>
+                                <option value="<?php echo $key;?>"><?php echo $value; ?></option>
+                                 <?php } ?>
+                            </select>   
+                            </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Pause Time")?>  </td>
+                        <td><input type="text" name="slider_delay" id="slider_delay" data-bind="slider_delay" placeholder="0"></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Enable Link")?>  </td>
+                        <td> 
+                            <select value="slider_enable_link" id="slider_enable_link" data-bind="slider_enable_link">
+                                <?php foreach( $yesno_options as $key => $value ) { ?>
+                                <option value="<?php echo $key;?>"<?php echo empty($key)?' selected="selected"':'';?>><?php echo $value; ?></option>
+                                 <?php } ?>
+                                
+                            </select>   
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Link")?></td>
+                        <td><input type="text" name="slider_link" id="slider_link" data-bind="slider_link" value=""></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Product SKU")?></td>
+                        <td><input type="text" name="slider_productsku" id="slider_productsku" title="<?php echo $this->__('Input product SKU to show on slider navigation pagging.'); ?>" data-bind="slider_productsku" value=""></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Full Width Video");?></td>
+                        <td>
+                            <div>
+                            <select name="slider_usevideo" id="slider_usevideo" data-bind="slider_usevideo">
+                                <?php foreach( $usevideo as $key => $value ) { ?>
+                                <option value="<?php echo $key;?>"><?php echo $value; ?></option>
+                                 <?php } ?>
+                                
+                            </select>
+                            </div>
+                            <div style="margin-top:5px">
+                                <?php echo Mage::helper("ves_layerslider")->__("Video ID");?>
+                                <input type="text" name="slider_videoid" id="slider_videoid" data-bind="slider_videoid" value="">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Auto Play");?></td>
+                        <td>
+                            <select name="slider_videoplay" id="slider_videoplay" data-bind="slider_videoplay">
+                                <?php foreach( $yesno_options as $key => $value ) { ?>
+                                <option value="<?php echo $key;?>"><?php echo $value; ?></option>
+                                 <?php } ?>
+                                
+                            </select>   
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Background Color");?></td>
+                        <td>
+                            <input type="text" class="input-color" name="slider_bgcolor" title="Add background color for the slider item. Input color code, for example: #FFFFFF" id="slider_bgcolor" data-bind="slider_bgcolor" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Class");?></td>
+                        <td>
+                            <input type="text" name="slider_class" title="Adds a unique class to the li of the Slide like class='ves_special_class' (add only the classnames, seperated by space)" id="slider_class" data-bind="slider_class" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Attribute");?></td>
+                        <td>
+                            <input type="text" name="slider_attribute" title="Adds a unique Attribute to the li of the Slide like attr=''ves_speical_attr'' (add only the attribute)" id="slider_attribute" data-bind="slider_attribute" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?php echo Mage::helper("ves_layerslider")->__("Custom Fields");?></td>
+                        <td>
+                            <textarea name="slider_customfields" title="Add as many attributes as you wish here. (i.e: data-layer=''firstlayer'' data-custom=''somevalue'')" id="slider_customfields" data-bind="slider_customfields" cols="10" rows="5"></textarea>
+                        </td>
+                    </tr>
+                </table>
+        </div>
+					
+				</div>
+			</div>
+
+
+			<!-- Background image setting popover  -->
+			<div id="pover-bgimage" class="hidden">
+				<a id="remove-bg"  href="#">Remove</a>
+				<label>Position</label>
+				<input type="text" placeholder="0 0" value=""  class="span2" data-bind='position'/>
+				<label>Repeat</label>
+				<input type="text" placeholder="no-repeat" value=""  class="span2" data-bind='repeat'/>
+				<label>Size</label>
+				<input type="text" placeholder="100% auto" value=""  class="span2" data-bind='size'/>
+                <label>Background Color</label>
+                <input type="text" placeholder="" value=""  class="span2 input-color" data-bind='bgcolor' title="Input background color, for example: #FFFFFF"/>
+			</div>
+
+
+			<!-- Flexslider setting popover  -->
+			<div id="pover-flexslider" class="hidden">
+
+				<div class="form-horizontal">
+					
+					<div class="control-group">
+						<label class="control-label">Animation</label>
+						<div class="controls">
+							<select data-bind="animation" class="input-small ">
+								<option>slide</option>
+								<option>fade</option>
+							</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" >Direction</label>
+						<div class="controls">
+							<select data-bind="direction" class="input-small">
+								<option>horizontal</option>
+								<option>vertical</option>
+							</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label  class="control-label">Speed</label>
+						<div class="controls">
+							<input type="text" data-bind="speed" class="input-mini" placeholder="(ms)" value="600">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Easing</label>
+						<div class="controls">
+							<select class="input-small easing-list" data-bind='easing'>
+							</select>
+						</div>
+
+					</div>					
+					<div class="control-group">
+						<label  class="control-label">pausable</label>
+						<div class="controls">
+							<input type="checkbox" data-bind="pauseonhover">
+						</div>
+					</div>					
+										
+				</div>				
+			</div>
+			<!-- Custom CSS popover  -->
+			<div id="pover-style" class="hidden">
+				<textarea class="span2 custom-css" rows="6" data-bind='style' placeholder="Write your custom rules..."></textarea>
+			</div>
+
+			<!-- Tools popover -->
+			<div id="tools" class="hidden">
+
+				<label>Resize</label>
+				<div class="text-center">
+					<a class="btn" id="tool-resize-h" title="Full Width" ><em class="icon icon-resize-horizontal"></em> </a>
+					<a class="btn" id="tool-resize-v" title="Full Height" ><em class="icon icon-resize-vertical"></em> </a>
+					<a class="btn" id="tool-resize-f" title="Full Size" ><em class="icon icon-fullscreen"></em> </a>
+					<a class="btn" id="tool-resize-r" title="Restore" ><em class="icon icon-undo"></em> </a>
+				</div>
+				<label>Position</label>
+				<div class="tool-position text-center">
+					<a class="btn btn-mini" id="tool-align-tl" title="Top Left corner" ><em class="icon-2x icon-caret-left icon-rotate-45"></em></a>
+					<a class="btn btn-mini" id="tool-align-tt" title="Top border" ><em class="icon-2x icon-caret-up"></em></a>
+					<a class="btn btn-mini" id="tool-align-tr" title="Top Right corner" ><em class="icon-2x icon-caret-up icon-rotate-45"></em></a>
+					<br>
+					<a class="btn btn-mini" id="tool-align-ll" title="Left border" ><em class="icon-2x icon-caret-left"></em></a>
+					<a class="btn btn-mini" id="tool-align-cc" title="Slider center" ><em class="icon-circle"></em></a>
+					<a class="btn btn-mini" id="tool-align-rr" title="Right border" ><em class="icon-2x icon-caret-right"></em></a>
+					<br>
+					<a class="btn btn-mini" id="tool-align-bl" title="Bottom Left corner" ><em class="icon-2x icon-caret-down icon-rotate-45"></em></a>
+					<a class="btn btn-mini" id="tool-align-bb" title="Bottom border" ><em class="icon-2x icon-caret-down"></em></a>
+					<a class="btn btn-mini" id="tool-align-br" title="Bottom Right corner" ><em class="icon-2x icon-caret-right icon-rotate-45"></em></a>
+				</div>
+				<br>
+				<div class="text-center">
+					<a class="btn btn-mini" id="tool-align-vc" title="Vertical center" >V-Center</a>
+					<a class="btn btn-mini" id="tool-align-hc" title="Horizontal center " >H-Center</a>
+				</div>
+				<br />
+				<!--
+				<label>Arrangement</label>
+				<a class="btn btn-mini" id="tool-order-up" title="Bring forward" >Forward</a>
+				<a class="btn btn-mini" id="tool-order-down" title="Send backward" >Backward</a>
+				-->
+			</div>
+			
+			<!-- Generated Code Modal -->
+			<div id="modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mod-label" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h3 id="mod-label"><?php echo Mage::helper("ves_layerslider")->__("Layer Slider Markup");?></h3>
+				</div>
+				<div class="modal-body">
+					<p>
+						Paste this markup into your page
+					</p>
+					<pre class="prettyprint" id="generated-markup"></pre>
+					<p>
+						Minimun JavaScript required
+					</p>
+					<pre class="prettyprint" id="generated-js"></pre>
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal">
+						Close
+					</button>
+					<button class="btn btn-info" id="format-markup">
+						Format
+					</button>
+				</div>
+			</div>
+			
+			
+			<!-- Preview Modal -->
+
+			<div id="prev-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="prev-mod-label" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h3 id="prev-mod-label"><?php echo Mage::helper("ves_layerslider")->__("Layer Slider Preview");?></h3>
+				</div>
+				<div class="modal-body" id="prev-container">
+				</div>
+			</div>
+
+
+            <div id="filemanager-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="filemanager-mod-label" aria-hidden="true" style="width:880px; height: 570px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h3 id="filemanager-mod-label"><?php echo Mage::helper("ves_layerslider")->__("Image Manager");?></h3>
+                </div>
+                <div class="modal-body" id="filemanager-container">
+                    <?php 
+                    Mage::getSingleton('core/session', array('name'=>'adminhtml'));
+                    /*Check if admin logged in*/
+                    if( Mage::getSingleton('admin/session')->isLoggedIn() ) {
+                        $sesId = isset($_COOKIE['adminhtml']) ? $_COOKIE['adminhtml'] : false ;
+
+                    ?>
+                    <iframe width="860" height="550" data-src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>slider_filemanager/dialog.php?field_id=__FIELD_ID__&amp;lang=en_EN&amp;akey=<?php echo $privateKey; ?>&amp;key=<?php echo $sesId; ?>" frameborder="0" allowfullscreen=""></iframe>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php 
+                Mage::getSingleton('core/session', array('name'=>'adminhtml'));
+                /*Check if admin logged in*/
+                if( Mage::getSingleton('admin/session')->isLoggedIn() ) {
+                    $sesId = isset($_COOKIE['adminhtml']) ? $_COOKIE['adminhtml'] : false ;
+
+                ?>
+                <a href="" data-src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>slider_filemanager/dialog.php?type=1&amp;field_id=__FIELD_ID__&amp;lang=en_EN&amp;akey=<?php echo $privateKey; ?>&amp;key=<?php echo $sesId; ?>" id="filemanager-fancybox" class="modal hide fade" data-width="880" data-height="570">Select</a>
+             <?php } ?>
+            <!-- Import / Export Modal -->
+
+			<!-- Import / Export Modal -->
+
+			<div id="ieport-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="ieport-mod-label" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h3 id="ieport-mod-label">Import / Export</h3>
+				</div>
+				<div class="modal-body clearfix" id="ieport-container">
+					<!-- IMPORT AREA -->
+					<p>Paste here the exported string</p>
+					<textarea id="import-target" style="width: 90%;"></textarea>
+					<br />
+					<button class="btn btn-primary" id="do-import">Import</button> 
+					<span id="import-status"></span> 
+					<br />
+					<br />
+					<!-- EXPORT AREA -->
+					<p>Save this in a plain text file.</p>
+					<textarea id="export-target" class="uneditable-textarea" style="width: 90%;"></textarea>
+					<br />
+					<button class="btn btn-primary" id="do-export">Export</button>
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal">
+						Close
+					</button>
+				</div>
+			</div>
+			
+		</div>
+
+		<!-- Table of elements -->
+		<div id="toe">
+
+			<div class="toe-data form-inline">
+
+				<fieldset class="preview-slider" data-title="Slider Preview">
+					<a href="#" class="btn btn-warning preview"><?php echo Mage::helper("ves_layerslider")->__("Preview");?></a>
+				</fieldset>
+				
+				<fieldset class="toe-data-in" data-title="animation-in">
+					<label for="in-at"> at <br>
+						<input id="in-at" type="number" placeholder="(ms)" class="input-mini" data-bind='at' data-trigger="focusout">
+					</label>
+
+					<label for="in-from"> from <br>
+						<select id="in-from" class="input-small effect-list" data-bind='from'></select>
+					</label>
+
+					<label for="in-use"> use <br>
+						<select id="in-use" class="input-small easing-list" data-bind='use'></select>
+					</label>
+
+					<label for="in-during"> during <br>
+						<input id="in-during" type="number" placeholder="(ms)" class="input-mini" data-bind='during' data-trigger="focusout">
+					</label>
+                    <div style="display:none">
+                    <br/>
+                    <label for="in-split"> Split <br>
+                        <select id="in-split" class="input-small split-list" data-bind='split'></select>
+                    </label>
+                    <label for="in-speed"> Speed <br>
+                        <input id="in-speed" type="number" placeholder="(ms)" class="input-mini" data-bind='speed' data-trigger="focusout">
+                    </label>
+                     <br/>
+                    <strong style="color:#3498db">Custom In Effect</strong>
+                     <br/>
+                    <div class="span1" style="margin-left:0px">
+                     <a href="javascript:void(0);"  class="btn btn-block" id="toggle_custom_in">Toggle</a>
+                    </div>
+                     <br/>
+                    <div id="customin_effect" style="display:none">
+                        
+                        <span style="float:right"><a href="javascript:void(0);" id="set-random-animation" class="btn btn-info">Random In/Out</a></span>
+                        <br/>
+                        <span>Transition</span>
+                        <br/>
+                        <label for="in-transitionx"> X <br>
+                            <input id="in-transitionx" type="number" placeholder="0" class="input-mini" data-bind='transitionx' data-trigger="focusout"> px
+                        </label>
+                        <label for="in-transitiony"> Y <br>
+                            <input id="in-transitiony" type="number" placeholder="0" class="input-mini" data-bind='transitiony' data-trigger="focusout"> px
+                        </label>
+                        <label for="in-transitionz"> Z <br>
+                            <input id="in-transitionz" type="number" placeholder="0" class="input-mini" data-bind='transitionz' data-trigger="focusout"> px
+                        </label>
+                        <br/>
+                        <span>Rotation</span>
+                        <br/>
+                        <label for="in-rotationx"> X <br>
+                            <input id="in-rotationx" type="number" placeholder="0" class="input-mini" data-bind='rotationx' data-trigger="focusout"> °
+                        </label>
+                        <label for="in-rotationy"> Y <br>
+                            <input id="in-rotationy" type="number" placeholder="0" class="input-mini" data-bind='rotationy' data-trigger="focusout"> °
+                        </label>
+                        <label for="in-rotationz"> Z <br>
+                            <input id="in-rotationz" type="number" placeholder="0" class="input-mini" data-bind='rotationz' data-trigger="focusout"> °
+                        </label>
+                        <br/>
+                        <span>Scale</span>
+                        <br/>
+                        <label for="in-scalex"> X <br>
+                            <input id="in-scalex" type="number" placeholder="100" class="input-mini" data-bind='scalex' data-trigger="focusout"> %
+                        </label>
+                        <label for="in-scaley"> Y <br>
+                            <input id="in-scaley" type="number" placeholder="100" class="input-mini" data-bind='scaley' data-trigger="focusout"> %
+                        </label>
+                        <br/>
+                        <span>Skew</span>
+                        <br/>
+                        <label for="in-skewx"> X <br>
+                            <input id="in-skewx" type="number" placeholder="0" class="input-mini" data-bind='skewx' data-trigger="focusout"> %
+                        </label>
+                        <label for="in-skewy"> Y <br>
+                            <input id="in-skewy" type="number" placeholder="0" class="input-mini" data-bind='skewy' data-trigger="focusout"> %
+                        </label>
+                        <br/>
+                        <label for="in-opacity"> Opacity <br>
+                            <input id="in-opacity" type="number" placeholder="0" class="input-mini" data-bind='opacity' data-trigger="focusout"> % (0-100)
+                        </label>
+                        <label for="in-perspective"> Perspective <br>
+                            <input id="in-perspective" type="number" placeholder="600" class="input-mini" data-bind='perspective' data-trigger="focusout"> px (300-1600)
+                        </label>
+                        <br/>
+                        <span> Origin </span><br>
+                        <label for="in-originx"> X <br>
+                           <input id="in-originx" type="number" placeholder="50" class="input-mini" data-bind='originx' data-trigger="focusout"> %
+                        </label>
+                        <label for="in-originy"> Y <br>
+                           <input id="in-originy" type="number" placeholder="50" class="input-mini" data-bind='originy' data-trigger="focusout"> %
+                        </label>
+                    </div>
+                </div>
+				</fieldset>
+				<fieldset class="toe-data-out" data-title="animation-out">
+					<label for="out-at"> at <br>
+						<input id="out-at" type="number" placeholder="(ms)" class="input-mini" data-bind='at' data-trigger="focusout">
+					</label>
+
+					<label for="out-to"> to <br>
+						<select id="out-to" class="input-small effect-list" data-bind='to'></select>
+					</label>
+
+					<label for="out-use"> use <br>
+						<select id="out-use" class="input-small easing-list" data-bind='use'></select>
+					</label>
+
+					<label for="out-during"> during <br>
+						<input id="out-during" type="number" placeholder="(ms)" class="input-mini" data-bind='during' data-trigger="focusout">
+					</label>
+					<label for="out-force" style="display:none"> force<br>
+						<input id="out-force" type="checkbox" data-bind="force" />
+					</label>
+                     <br/>
+                    <div style="display:none">
+                        <label for="out-split"> Split <br>
+                            <select id="out-split" class="input-small split-list" data-bind='split'></select>
+                        </label>
+                    <label for="out-speed"> Speed <br>
+                        <input id="out-speed" type="number" placeholder="(ms)" class="input-mini" data-bind='speed' data-trigger="focusout">
+                    </label>
+                     <br/>
+                     
+                     <strong style="color:#3498db">Custom Out Effect</strong>
+                     <br/>
+                     <div class="span1" style="margin-left:0px">
+                         <a href="javascript:void(0);" class="btn btn-block" id="toggle_custom_out">Toggle</a>
+                     </div>
+                     <br/>
+                    <div id="customout_effect" style="display:none">
+                        <span style="float:right"><a href="javascript:void(0);" id="set-random-out-animation" class="btn btn-info">Random In/Out</a></span>
+                        <br/>
+                        <span>Transition</span>
+                        <br/>
+                        <label for="out-transitionx"> X <br>
+                            <input id="out-transitionx" type="number" placeholder="(ms)" class="input-mini" data-bind='transitionx' data-trigger="focusout">
+                        </label>
+                        <label for="out-transitiony"> Y <br>
+                            <input id="out-transitiony" type="number" placeholder="(ms)" class="input-mini" data-bind='transitiony' data-trigger="focusout">
+                        </label>
+                        <label for="out-transitionz"> Z <br>
+                            <input id="out-transitionz" type="number" placeholder="(ms)" class="input-mini" data-bind='transitionz' data-trigger="focusout"> px
+                        </label>
+                        <br/>
+                        <span>Rotation</span>
+                        <br/>
+                        <label for="out-rotationx"> X <br>
+                            <input id="out-rotationx" type="number" placeholder="0" class="input-mini" data-bind='rotationx' data-trigger="focusout"> °
+                        </label>
+                        <label for="out-rotationy"> Y <br>
+                            <input id="out-rotationy" type="number" placeholder="0" class="input-mini" data-bind='rotationy' data-trigger="focusout"> °
+                        </label>
+                        <label for="out-rotationz"> Z <br>
+                            <input id="out-rotationz" type="number" placeholder="0" class="input-mini" data-bind='rotationz' data-trigger="focusout"> °
+                        </label>
+                        <br/>
+                        <span>Scale</span>
+                        <br/>
+                        <label for="out-scalex"> X <br>
+                            <input id="out-scalex" type="number" placeholder="100" class="input-mini" data-bind='scalex' data-trigger="focusout"> %
+                        </label>
+                        <label for="out-scaley"> Y <br>
+                            <input id="out-scaley" type="number" placeholder="100" class="input-mini" data-bind='scaley' data-trigger="focusout"> %
+                        </label>
+                        <br/>
+                        <span>Skew</span>
+                        <br/>
+                        <label for="out-skewx"> X <br>
+                            <input id="out-skewx" type="number" placeholder="0" class="input-mini" data-bind='skewx' data-trigger="focusout"> %
+                        </label>
+                        <label for="out-skewy"> Y <br>
+                            <input id="out-skewy" type="number" placeholder="0" class="input-mini" data-bind='skewy' data-trigger="focusout"> %
+                        </label>
+                        <br/>
+                        <label for="out-opacity"> Opacity <br>
+                            <input id="out-opacity" type="number" placeholder="0" class="input-mini" data-bind='opacity' data-trigger="focusout"> % (0-100)
+                        </label>
+                        <label for="out-perspective"> Perspective <br>
+                            <input id="out-perspective" type="number" placeholder="600" class="input-mini" data-bind='perspective' data-trigger="focusout"> px (300-1600)
+                        </label>
+                        <br/>
+                        <span> Origin </span><br>
+                        <label for="out-originx"> X <br>
+                           <input id="out-originx" type="number" placeholder="50" class="input-mini" data-bind='originx' data-trigger="focusout"> %
+                        </label>
+                        <label for="out-originy"> Y <br>
+                           <input id="out-originy" type="number" placeholder="50" class="input-mini" data-bind='originy' data-trigger="focusout"> %
+                        </label>
+                    </div>
+                </div>
+				</fieldset>
+			</div>
+
+			<div class="toe-item">
+			<!--
+				<div class="toe-item-timeline">
+				
+						<a href="#" class="toe-item-action action-visibility"><em class="icon-eye-open"></em></a>
+						<a href="#" class="toe-item-action action-clone"><em class="icon-copy"></em></a>
+						<a href="#" class="toe-item-action action-remove"><em class="icon-remove"></em></a>
+						<div class="toe-item-type">
+							Image
+						</div>
+					    <div class="timeline-wrapper">
+					      <div class="timeline-slider"></div>
+					    </div>
+				
+				</div>
+			-->
+			</div>
+			
+	</div>
+</div>
+	<textarea name="slider_data" style="display:none" id="slider_json_data"><?php echo $params; ?></textarea>
+	<?php echo $this->getBlockHtml('formkey')?>
+	<div style="display:none"></div>
+</form>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+        openEditorPopup = function(url, name, specs, parent) {
+            if ((typeof popups == "undefined") || popups[name] == undefined || popups[name].closed) {
+                if (typeof popups == "undefined") {
+                    popups = new Array();
+                }
+                var opener = (parent != undefined ? parent : window);
+                popups[name] = opener.open(url, name, specs);
+            } else {
+                popups[name].focus();
+            }
+            return popups[name];
+        }
+
+        closeEditorPopup = function(name) {
+            if ((typeof popups != "undefined") && popups[name] != undefined && !popups[name].closed) {
+                popups[name].close();
+            }
+        }
+    //]]>
+</script>
+
+
+<?php echo $this->getChildHtml('form_after');?>
+
+<?php if ($this->hasFooterButtons()): ?>
+    <div class="content-footer">
+        <p class="form-buttons"><?php echo $this->getButtonsHtml('footer') ?></p>
+    </div>
+<?php endif; ?>
+<script type="text/javascript">
+    editForm = new varienForm('edit_form', '<?php echo $this->getValidationUrl() ?>');
+</script>
+<?php echo $this->getFormScripts() ?>
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/js/jquery.js"></script>
+<script type="text/javascript">
+	jQuery.noConflict();
+
+    var base_media_url = "<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>";
+
+	if (Prototype.BrowserFeatures.ElementExtensions) {
+    var disablePrototypeJS = function (method, pluginsToDisable) {
+            var handler = function (event) {
+                event.target[method] = undefined;
+                setTimeout(function () {
+                    delete event.target[method];
+                }, 0);
+            };
+            pluginsToDisable.each(function (plugin) { 
+                jQuery(window).on(method + '.bs.' + plugin, handler);
+            });
+        },
+        pluginsToDisable = ['collapse', 'dropdown', 'modal', 'tooltip'];
+    disablePrototypeJS('show', pluginsToDisable);
+    disablePrototypeJS('hide', pluginsToDisable);
+}
+</script>
+
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/js/bootstrap.min.js"></script>
+<!-- Extra plugins -->
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/js/dragslider.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/js/google-code-prettify/prettify.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/js/style-html.min.js"></script>
+
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/raphael-min.js"></script>
+
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/jquery.easing.js"></script>
+
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/venusslider.pack.js"></script>
+
+<!-- Layer Slider Scripts -->
+<script type="text/javascript">
+    var ajaxUploadImageUrl = "<?php echo $this->getAjaxUploadUrl();?>";
+</script>
+<!-- Layer Builder Scripts -->
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/venusslider/builder/js/venus.builder.min.js"></script>
+
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_layerslider/jscolor/jscolor.js"></script>
+
+
+<script type="text/javascript">
+jQuery('#myTab a').click(function (e) {
+  e.preventDefault()
+  var tabid = jQuery(this).attr("href");
+  if(jQuery(tabid).length > 0){
+  	jQuery(".mytab").hide();
+  	jQuery(tabid).show();
+  }
+})
+
+function responsive_filemanager_callback(field_id){
+        console.log(field_id);
+        var url = jQuery('#'+field_id).val();
+        jQuery('#'+field_id).trigger("change");
+        //your code
+}
+
+if(jQuery('#input_alias').val() == "") {
+    var slider_alias = jQuery("#input_title").val().toLowerCase().replace(/ +/g,'-').replace(/[^a-z0-9-_]/g,'').trim();
+    jQuery('#input_alias').val(slider_alias);
+}
+
+
+jQuery("#input_title").keyup(function(){
+    if(jQuery('#input_alias').val() == "") {
+        var slider_alias = jQuery(this).val().toLowerCase().replace(/ +/g,'-').replace(/[^a-z0-9-_]/g,'').trim();
+        jQuery("#input_alias").val(slider_alias);
+    }
+})
+/*
+jQuery('.preview').click(function (e) {
+	e.preventDefault();
+	jQuery('#dialog').remove();
+	jQuery('#anchor-content').prepend('<div id="dialog" style="padding: 3px 0px 0px 0px;"><iframe src="<?php echo $this->getPreviewUrl($id);?>" style="padding:0; margin: 0; display: block; width: 100%; height: 100%;" frameborder="no" scrolling="auto"></iframe></div>');
+		 
+	jQuery('#dialog').dialog({
+			title: '<?php echo Mage::helper("ves_layerslider")->__("Slider Preview");?>',
+			close: function (event, ui) {
+
+			},	
+			bgiframe: false,
+			width: 1145,
+			height: 500,
+			resizable: false,
+			modal: false
+	});  
+	return false; 
+})
+*/
+</script>

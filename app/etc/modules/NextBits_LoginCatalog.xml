@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+        <NextBits_LoginCatalog>
+            <active>false</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Core/>
+                <Mage_Customer/>
+                <Mage_Page/>
+                <Mage_Adminhtml/>
+            </depends>
+        </NextBits_LoginCatalog>
+	</modules>
+</config>

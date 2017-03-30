@@ -1,0 +1,85 @@
+<?php
+$testimonials = isset($testimonials)?$testimonials:null;
+$auto_play_mode = $this->getConfig("autoplay");
+$interval = $this->getConfig("interval");
+$auto_play = $auto_play_mode?"true":"false";
+$cols = (int)$this->getListConfig("list_columns", 4);
+$cols = !empty($cols)?$cols:1;
+$span = 12/$cols;
+$itemsperpage = (int)$this->getConfig("list_limit", 4);
+$itemsperpage = !empty($itemsperpage)?$itemsperpage:4;
+$id = rand(1,10)+rand();
+?>
+<?php if( count($testimonials) ) { ?>
+<div class="block  vestestimonialcarousel">
+	<div class="block-content">
+		<div id="vestestimonial<?php echo $id;?>" class="carousel slide box-vestestimonial">
+				<?php
+				$pages = array_chunk( $testimonials, $itemsperpage);
+				?>
+				<?php foreach ($pages as $k=>$tmptestimonials) {  ?>
+				<div class="item <?php if($k==0) {?>active<?php } ?>">
+					<?php foreach( $tmptestimonials as $i => $testimonial ) {  $i=$i+1;?>
+					<?php if( $cols == 1 || $i%$cols == 1 ) { ?>
+					<div class="row">
+						<?php } ?>
+
+						<div class="col-lg-<?php echo $span;?> col-sm-<?php echo $span;?> col-xs-12">
+							<div class="testimonial-item">
+								<div class="post-image">
+									<img src="<?php echo $testimonial['thumb']; ?>" class="post-image" alt="<?php echo strip_tags($testimonial['profile']); ?>"/>
+								</div>
+								<?php if(  $testimonial['profile'] ) { ?>
+								<h4><a><?php echo $testimonial['profile']; ?></a></h4>
+								<?php } ?>
+								<?php if(  $testimonial['description'] ) { ?>
+								<div class="latest-description"><?php echo $testimonial['description']; ?></div>
+								<?php } ?>
+								<div class="testimonial-social pull-left text-right">
+									<?php if ($testimonial['facebook']) { ?>
+									<a href="https://www.facebook.com/<?php echo $testimonial['facebook']; ?>" class="carousel-control"><i class="fa fa-facebook">&nbsp;</i></a>
+									<?php } ?>
+									<?php if ($testimonial['twiter']) { ?>
+									<a href="https://www.twiter.com/<?php echo $testimonial['twiter']; ?>" class="carousel-control"><i class="fa fa-twitter">&nbsp;</i></a>
+									<?php } ?>
+									<?php if ($testimonial['google']) { ?>
+									<a href="https://plus.google.com/<?php echo $testimonial['google']; ?>" class="carousel-control"><i class="fa fa-google-plus">&nbsp;</i></a>
+									<?php } ?>
+									<?php if ($testimonial['youtube']) { ?>
+									<a href="https://youtube.com/user/<?php echo $testimonial['youtube']; ?>" class="carousel-control"><i class="fa fa-youtube">&nbsp;</i></a>
+									<?php } ?>
+									<?php if ($testimonial['pinterest']) { ?>
+									<a href="https://pinterest.com/<?php echo $testimonial['pinterest']; ?>" class="carousel-control"><i class="fa fa-pinterest">&nbsp;</i></a>
+									<?php } ?>
+									<?php if ($testimonial['vimeo']) { ?>
+									<a href="https://vimeo.com/<?php echo $testimonial['vimeo']; ?>" class="carousel-control"><i class="fa fa-vimeo-square">&nbsp;</i></a>
+									<?php } ?>
+									<?php if ($testimonial['instagram']) { ?>
+									<a href="https://instagram.com/<?php echo $testimonial['instagram']; ?>" class="carousel-control"><i class="fa fa-instagram">&nbsp;</i></a>
+									<?php } ?>
+									<?php if ($testimonial['linkedin']) { ?>
+									<a href="https://linkedin.com/in/<?php echo $testimonial['linkedin']; ?>" class="carousel-control"><i class="fa fa-linkedin">&nbsp;</i></a>
+									<?php } ?>
+								</div>
+								<?php if( $testimonial['video_link']) { ?>
+								<p class="blog-readmore">
+									<br>
+									<a class="colorbox-t" href="http://www.youtube.com/embed/<?php echo $testimonial['video_link'];?>"><?php echo Mage::helper("ves_testimonial")->__("Watch Video");?></a>
+								</p>
+								<?php } ?>
+							</div>
+						</div>
+
+						<?php } ?>
+					</div>
+					<?php } ?>
+				</div>
+		</div>
+	</div>
+	<?php echo $this->getChildHtml('list.toolbar'); ?>
+	<script type="text/javascript"><!--
+		jQuery(document).ready(function() {
+			jQuery('.colorbox-t').colorbox({iframe:true, innerWidth:640, innerHeight:390});
+		});
+		//--></script>
+		<?php } ?>

@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!--
+ This file is released under a custom license by Avenla Oy.
+ All rights reserved
+ 
+ License and more information can be found at http://productdownloads.avenla.com/magento-modules/klarna-checkout/ 
+ For questions and support - klarna-support@avenla.com
+ 
+ @category   Avenla
+ @package    Avenla_KlarnaCheckout
+ @copyright  Copyright (c) Avenla Oy
+ @link       http://www.avenla.fi 
+
+
+ Avenla KlarnaCheckout
+
+ @category   Avenla
+ @package    Avenla_KlarnaCheckout
+-->
+
+<layout version="0.1.0">
+
+	<kco_only>
+	  	<reference name="top.links">
+			<remove name="checkout_cart_link"/>
+	       	<block type="checkout/links" name="checkout_cart_link_kco">
+	       		<action method="addCartLink"></action>
+	       	</block>
+   		</reference>
+	</kco_only>
+
+	<klarnacheckout_kco_confirmation>
+		<reference name="head">
+			<action method="addCss" ifconfig="payment/klarnaCheckout_payment/active"><stylesheet>KCO/kco.css</stylesheet></action>
+		</reference>
+		<reference name="root">
+			<action method="setTemplate">
+				<template>page/1column.phtml</template>
+			</action>
+		</reference>
+		<reference name="content">
+			<block type="klarnaCheckout/KCO_confirmation" name="klarnaCheckout.confirmation" as="confirmation" />
+		</reference>
+	</klarnacheckout_kco_confirmation>
+	
+	<checkout_cart_index>
+		<reference name="head">
+			<action method="addCss" ifconfig="payment/klarnaCheckout_payment/active"><stylesheet>KCO/kco.css</stylesheet></action>
+		</reference>
+		<reference name="checkout.cart.top_methods">
+			<action method="unsetChild" ifconfig="payment/klarnaCheckout_payment/active"><name>checkout.cart.methods.onepage.top</name></action>
+			<action method="unsetChild" ifconfig="payment/klarnaCheckout_payment/active">"<name>checkout.cart.methods.onepage</name></action>
+		</reference>
+
+		<reference name="checkout.cart">
+			<action method="setCartTemplate" ifconfig="payment/klarnaCheckout_payment/active"><value>KCO/cart.phtml</value></action>
+			<action method="chooseTemplate"/>
+			<action method="addItemRender" ifconfig="payment/klarnaCheckout_payment/active">
+				<type>simple</type><block>checkout/cart_item_renderer</block><template>KCO/cart/item/default.phtml</template>
+			</action>
+            <action method="addItemRender" ifconfig="payment/klarnaCheckout_payment/active">
+            	<type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>KCO/cart/item/default.phtml</template>
+        	</action>
+            <action method="addItemRender" ifconfig="payment/klarnaCheckout_payment/active">
+        		<type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>KCO/cart/item/default.phtml</template>
+        	</action>
+        	<action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>KCO/cart/item/default.phtml</template></action>
+            <block type="klarnaCheckout/KCO" name="checkout.cart.klarnacheckout" as="klarnacheckout" template="KCO/KCO.phtml" />
+            <block type="core/template" name="cart.giftmessage" as="cart.giftmessage" template="KCO/cart/giftmessage.phtml"/>
+		</reference>
+
+		<reference name="checkout.cart.crosssell">
+	  		<action method="setTemplate" ifconfig="payment/klarnaCheckout_payment/active"><template>KCO/cart/crosssell.phtml</template></action>	
+		</reference>
+		<reference name="checkout.cart.shipping">
+			<action method="setTemplate" ifconfig="payment/klarnaCheckout_payment/active"><template>KCO/cart/shipping.phtml</template></action>	
+		</reference>
+		<reference name="checkout.cart.methods.onepage">
+			<action method="setTemplate" ifconfig="payment/klarnaCheckout_payment/active"><template>KCO/onepage/link.phtml</template></action>
+		</reference>
+	</checkout_cart_index>
+
+	<checkout_onepage_index>
+		<reference name="head">
+			<action method="addCss" ifconfig="payment/klarnaCheckout_payment/active"><stylesheet>KCO/kco.css</stylesheet></action>
+		</reference>
+	</checkout_onepage_index>
+	
+	<catalog_product_view>
+		<reference name="head">
+            <block type="core/text" name="klarna_widget_js">
+                <action method="setText" ifconfig="payment/klarnaCheckout_payment/pp_widget">
+                	<text><![CDATA[<script async src="https://cdn.klarna.com/1.0/code/client/all.js"></script>]]></text>
+            	</action>
+            </block>
+			<action method="addCss" ifconfig="payment/klarnaCheckout_payment/active"><stylesheet>KCO/kco.css</stylesheet></action>
+        </reference>
+    </catalog_product_view>
+
+    <catalog_category_default>
+		<reference name="head">
+			<action method="addCss" ifconfig="payment/klarnaCheckout_payment/active"><stylesheet>KCO/kco.css</stylesheet></action>		
+        </reference>
+    </catalog_category_default>
+
+    <catalog_category_layered>
+		<reference name="head">
+			<action method="addCss" ifconfig="payment/klarnaCheckout_payment/active"><stylesheet>KCO/kco.css</stylesheet></action>		
+        </reference>
+    </catalog_category_layered>
+
+    <kco_twocolumns>
+		<reference name="checkout.cart">
+			<action method="setCartTemplate" ifconfig="payment/klarnaCheckout_payment/active">
+				<value>KCO/cart_twocolumns.phtml</value>
+			</action>
+			<action method="chooseTemplate"/>
+		</reference>
+	</kco_twocolumns>
+	
+</layout>
+
+

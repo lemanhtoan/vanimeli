@@ -1,0 +1,27 @@
+.vesclear:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.vesclear {
+	display: inline-block;
+}
+ 
+html[xmlns] .vesclear {
+	display: block;
+}
+ 
+* html .vesclear {
+	height: 1%;
+}
+
+.youtube-wrapper{ position:relative; clear:both }
+.youtube-wrapper li,.youtube-wrapper li div{ float:left;}
+.youtube-wrapper li div{width:60px; height:60px;overflow:hidden; border:#CCC solid 3px; margin:5px 3px;}
+.youtube-wrapper li:hover div{border-color:#f2f2f2}
+
+.gallery-wrapper li{ float:left;}

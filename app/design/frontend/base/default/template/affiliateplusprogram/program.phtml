@@ -1,0 +1,29 @@
+<?php
+/**
+ * Sales transaction history template
+ */
+?>
+<?php
+$store_id = Mage::app()->getStore()->getStoreId();
+$check_responsvie = Mage::getStoreConfig('affiliateplus/style_config/responsive_enable', $store_id);
+ if($check_responsvie)
+     $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+ else
+     $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+?>
+
+    <div class="aff-main-content <?php echo $class_name; ?>">
+        <div class="aff-title">
+            <h2><?php echo $this->__('My Programs') ?></h2>
+        </div>
+      <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+        <?php echo $this->getGridHtml() ?>
+
+        <div class="buttons-set">
+            <button class="button button-config" type="button" onclick='setLocation("<?php echo $this->getAllProgramUrl() ?>")'>
+                <span>
+                    <span><?php echo $this->__('Other Programs') ?></span>
+                </span>
+            </button>
+        </div>
+    </div>

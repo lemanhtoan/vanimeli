@@ -1,0 +1,73 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Rewardpoints Account Dashboard
+ * 
+ * @see Magestore_RewardPoints_Block_Account_Dashboard
+ */
+?>
+<?php if($this->getMaxPointBalance() || $this->getRedeemablePoints() || $this->getMaxPerOrder() || !Mage::getStoreConfigFlag('rewardpoints/earning/earn_when_spend',Mage::app()->getStore()->getId()) || $this->getTransactionExpireDays() || $this->getHoldingDays()): ?>
+<strong class="rewardpoints-title"><?php echo $this->__('How your points can be managed') ?></strong><br />
+<ul class="rewardpoints-dashboard-ul">
+    <?php if ($_maxBalance = $this->getMaxPointBalance()): ?>
+    <li>
+        <?php echo $this->__('Maximum of your balance') ?>:
+        <strong class="rewardpoints-money"><?php echo Mage::helper('rewardpoints/point')->format($_maxBalance) ?></strong>
+    </li>
+    <?php endif; ?>
+    <?php if ($_redeemablePoints = $this->getRedeemablePoints()): ?>
+    <li>
+        <?php echo $this->__('Reach %s to start using your balance for your purchase.',
+            '<strong class="rewardpoints-money">' . Mage::helper('rewardpoints/point')->format($_redeemablePoints) . '</strong>'
+        ) ?>
+    </li>
+    <?php endif; ?>
+    <?php if ($_maxPerOrder = $this->getMaxPerOrder()): ?>
+    <li>
+        <?php echo $this->__('Maximum %s are allowed to spend for an order.',
+            '<strong class="rewardpoints-money">' . Mage::helper('rewardpoints/point')->format($_maxPerOrder) . '</strong>'
+        ) ?>
+    </li>
+    <?php endif; ?>
+    <?php if (!Mage::getStoreConfigFlag('rewardpoints/earning/earn_when_spend',Mage::app()->getStore()->getId())): ?>
+    <li>
+        <?php echo $this->__('You cannot earn any points when you use points to spend for your order!'); ?>
+    </li>
+    <?php endif; ?>
+    <?php if ($_expireDays = $this->getTransactionExpireDays()): ?>
+    <li>
+        <?php echo $this->__('A transaction will expire after %s since its creating date..',
+            ($_expireDays == 1) ? $_expireDays . ' ' . $this->__('day') : $_expireDays . ' ' . $this->__('days')
+        ) ?>
+    <br/>
+        <?php echo $this->__('View transaction history to follow when the transaction expires.') ?>
+    </li>
+    <?php endif ?>
+    <?php if ($_holdingDays = $this->getHoldingDays()): ?>
+    <li>
+        <?php echo $this->__('A transaction will be withheld for %s since creation.',
+            ($_holdingDays == 1) ? $_holdingDays . ' ' . $this->__('day') : $_holdingDays . ' ' . $this->__('days')
+        ) ?>
+    </li>
+    <?php endif ?>
+</ul>
+<?php endif; ?>

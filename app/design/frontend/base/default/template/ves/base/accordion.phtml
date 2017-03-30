@@ -1,0 +1,43 @@
+<?php
+$id = rand().time();
+$expand_index = $this->getConfig('expand_index', 1);
+$expand_index = isset($expand_index)?$expand_index:'false';
+if($expand_index == 'false' || $expand_index == -1 || $expand_index == false || !$expand_index) {
+	$expand_index = -1;
+} else {
+	$expand_index = (int)$expand_index-1;
+}
+
+if (isset($accordions)): ?>
+<div class="widget-accordion block <?php echo $addition_cls; ?> <?php if (isset($stylecls)&&$stylecls) echo 'block-'.$stylecls;?>">
+	<?php if (isset($widget_heading)&&!empty($widget_heading)): ?>
+	<div class="block-title">
+		<?php echo $widget_heading; ?>
+	</div>
+	<?php endif; ?>
+	<div class="widget-inner block-content">	
+		<div id="accordion<?php echo $id; ?>" class="panel-group">
+	 	<?php foreach ($accordions as $key => $ac): ?>
+		
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h4 class="panel-title">
+				      <a href="#collapseAc<?php echo $id.$key;?>" data-parent="#accordion<?php echo $id; ?>" data-toggle="collapse" class="accordion-toggle collapsed">
+				       	<?php echo $ac['header']; ?> 
+				      </a>
+				    </h4>
+				  </div>
+				  <div class="panel-collapse collapse <?php if ($key==$expand_index) echo 'in'; else echo 'out';?>" id="collapseAc<?php echo $id.$key;?>"  >
+				    <div class="panel-body">
+				     <?php echo $ac['content']; ?>
+				    </div>
+				  </div>
+				</div>
+			
+	 	<?php endforeach; ?>
+		</div>	
+	</div>
+</div>
+<?php endif; ?>
+
+

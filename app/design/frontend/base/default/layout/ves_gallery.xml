@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+
+			<action method="addItem" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_owl"><type>skin_css</type><name>ves_gallery/lib/owlcarousel/owl.carousel.css</name></action>
+
+			<action method="addItem" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_colorbox"><type>skin_css</type><name>ves_gallery/lib/colorbox/colorbox.css</name></action>
+
+			<action method="addJs" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_jquery"><script>ves_gallery/jquery/jquery-2.1.1.min.js</script></action>
+
+			<action method="addJs" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_jquery"><script>ves_gallery/jquery/noconflict.js</script></action>
+
+			<action method="addJs" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_transition"><script>ves_gallery/jquery/jquery.transition.js</script></action>
+
+			<action method="addItem" ifconfig="ves_gallery/ves_gallery/enable_colorbox"><type>skin_js</type><name>ves_gallery/lib/colorbox/jquery.colorbox-min.js</name><params/></action>
+
+			<action method="addItem" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_owl"><type>skin_js</type><name>ves_gallery/lib/owlcarousel/owl.carousel.min.js</name><params/></action>
+
+			<!-- Enable Masonary JS -->
+
+			<action method="addItem" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_masonary"><type>skin_js</type><name>ves_gallery/lib/masonry/modernizr.custom.js</name><params/></action>
+			<action method="addItem" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_masonary"><type>skin_js</type><name>ves_gallery/lib/masonry/masonry.pkgd.min.js</name><params/></action>
+			<action method="addItem" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_masonary"><type>skin_js</type><name>ves_gallery/lib/masonry/imagesloaded.js</name><params/></action>
+			<action method="addItem" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_masonary"><type>skin_js</type><name>ves_gallery/lib/masonry/classie.js</name><params/></action>
+			<action method="addItem" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_masonary"><type>skin_js</type><name>ves_gallery/lib/masonry/AnimOnScroll.js</name><params/></action>
+
+			<action method="addItem" module="ves_gallery" ifconfig="ves_gallery/ves_gallery/enable_masonary"><type>skin_css</type><name>ves_gallery/lib/masonry/component.css</name></action>
+			<!-- End Enable Masonary JS -->
+
+		</reference>
+	</default>
+	<!--
+	<default>
+		<reference name="content">
+			<block type="core/text_list" name="gallery" as="gallery" translate="label">
+				<block type="ves_gallery/file" name="ves.gallery" before="-" />
+			</block>			
+		</reference>
+	</default>-->
+</layout>

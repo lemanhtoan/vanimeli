@@ -1,0 +1,48 @@
+<?php
+/**
+ * Payments miniform request template
+ */
+?>
+<form id="affiliateplus_payment_request_miniform" action="<?php echo $this->getFormActionUrl() ?>" method="post">
+    <div class="affiliateplus_form_request">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 my-blance">
+            <strong><?php echo $this->__('My Balance: ') ?></strong>
+            <?php echo $this->getFormatedBalance() ?>
+        </div>
+        <?php if ($this->canRequest()): ?>
+
+            <div class="input_fields_form form-inline request-amount-money col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+
+                
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 input-blance">
+                <input id="request_amount"  name="amount" value="<?php echo $this->__('Request Amount') ?>" class="input-text required-entry form-control input-text required-entry validate-greater-than-zero" type="text" onchange="checkAmountBalance(this);" onfocus="if (this.value == this.defaultValue)
+                                    this.value = '';" onblur="if (this.value == '')
+                                                this.value = this.defaultValue;" />
+                <input type="hidden" id="from_request_page" name="from_request_page" value="1" />
+                </div>
+                <div class="request-withrawal col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <button class="button button-config request-amount" title="<?php echo $this->__('Request Withdrawal') ?>" type="submit">
+                    <span><span><?php echo $this->__('Request Withdrawal') ?></span></span>
+                </button>
+                </div>
+            </div>
+        <?php endif ?>
+    </div>
+</form>
+<?php if ($this->canRequest()): ?>
+    <script type="text/javascript">
+    //<![CDATA[
+        var affiliateplusPaymentRequestMiniform = new VarienForm('affiliateplus_payment_request_miniform', true);
+        var request_amount_max = <?php echo $this->getMaxAmount() ?>;
+        function checkAmountBalance(el) {
+            el.value = parseFloat(el.value);
+            if (el.value < 0)
+                el.value = 0;
+            else if (el.value > request_amount_max || el.value == 'NaN')
+                el.value = request_amount_max;
+        }
+    //]]>
+    </script>
+    <div class="clear"></div>
+    <?php
+ endif ?>

@@ -1,0 +1,510 @@
+<?xml version="1.0"?>
+<widgets>
+<!-- Widget single image-->
+	<widget_gallery type="ves_gallery/widget_gallery">
+		<name>Ves Base : Gallery Images</name>
+		<description>Create Images Gallery Widget</description>
+		<parameters>
+            <show translate="label" module="core">
+                <label>Enabled</label>
+                <sort_order>10</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <value>true</value>
+                
+            </show>
+                                   
+            <title translate="label">
+                <label>Module Title </label>
+                <type>text</type>
+                <sort_order>15</sort_order>
+                <description>Empty for hide</description>
+                <visible>1</visible>
+                <value></value>
+                
+            </title>
+            <layout_mode translate="label">
+                <label>Layout Mode</label>
+                <type>select</type>
+                <values>
+                    <default translate="label">
+                        <value>default</value>
+                        <label>Gallery Show As Carousel</label>
+                    </default>
+                    <masonary translate="label">
+                        <value>masonry</value>
+                        <label>Gallery Show As Massonry</label>
+                    </masonary>
+                    <grid translate="label">
+                        <value>grid</value>
+                        <label>Gallery Show As Grid/List</label>
+                    </grid>
+                </values>
+                <sort_order>18</sort_order>
+                <description>Choose Layout Mode for your gallery</description>
+                <visible>1</visible>
+                <value>default</value>
+            </layout_mode>
+            <theme translate="label">
+                <label>Select Template</label>
+                <type>select</type>
+                <source_model>ves_gallery/system_config_source_listTheme</source_model>
+                <sort_order>20</sort_order>
+                <description>Choose Template for your module</description>
+                <visible>1</visible>
+                <value>default</value>
+                
+            </theme>
+            <module_height translate="label">
+                <label>Module Height</label>
+                <type>text</type>
+                <sort_order>25</sort_order>
+                <visible>1</visible>
+                <value>auto</value>
+                
+            </module_height>
+            <module_width translate="label">
+                <label>Module Width</label>
+                <type>text</type>
+                <sort_order>26</sort_order>
+                <visible>1</visible>
+                <value>auto</value>
+                
+            </module_width>
+            <thumbnail_mode translate="label">
+                <label>Render Thumbnail</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>27</sort_order>
+                <description>Whether to render thumbnail with cropping-resizing function</description>
+                <visible>1</visible>
+                <value>yes</value>
+                
+            </thumbnail_mode>
+            <crop_image translate="label">
+                <label>Is Cropped Thumbnail?</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <sort_order>30</sort_order>
+                <visible>1</visible>
+                <value>no</value>
+            </crop_image>
+
+            <thumb_height translate="label">
+                <label>Thumbnail Height</label>
+                <type>text</type>
+                <sort_order>33</sort_order>
+                <visible>1</visible>
+                <value>200</value>
+                
+            </thumb_height>
+            <thumb_width translate="label">
+                <label>Thumbnail Width</label>
+                <type>text</type>
+                <sort_order>34</sort_order>
+                <visible>1</visible>
+                <value>200</value>
+            </thumb_width>
+
+            <limit_item translate="label">
+                <label>Limit</label>
+                <type>text</type>
+                <sort_order>35</sort_order>
+                <visible>1</visible>
+                <value>10</value>
+            </limit_item>
+
+            <max_items translate="label">
+                <label>Max Items on a Page (Or a Column if layout = grid/list)</label>
+                <type>text</type>
+                <sort_order>35</sort_order>
+                <visible>1</visible>
+                <value>1</value>
+            </max_items>
+            
+            <source translate="label">
+                <label>From Source</label>
+                <type>select</type>
+                <source_model>ves_gallery/system_config_source_listSource</source_model>
+                <sort_order>210</sort_order>
+                <description>Choose Source to render image and content in the slideshow</description>
+                <visible>1</visible>
+                <value>file</value>
+                
+            </source>
+
+            <imagecategory translate="label">
+                <label>Images group </label>
+                <type>multiselect</type>
+                <source_model>ves_gallery/system_config_source_listImagegroup</source_model>
+                <sort_order>220</sort_order>
+                <description>Group of images</description>
+                <visible>1</visible>
+                <depends><source><value>file</value></source></depends>
+            </imagecategory>
+
+            <image_folder translate="label">
+                <label>Image Folder Path</label>
+                <type>text</type>
+                <sort_order>230</sort_order>
+                <description><![CDATA[Image Folder Path Setting(this folder put in media/)]]></description>
+                <visible>1</visible>
+                <depends><source><value>image</value></source></depends>
+            </image_folder>
+
+            <template translate="label">
+				        <visible>1</visible>
+                <label>Module Template</label>
+                <description>Input custom module template file path. For example: ves/treemenu/scroll.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>235</sort_order>
+            </template>
+
+            <spacer_8 translate="label">
+                <label>Gallery Settings</label>
+                <type>ves_gallery/system_config_form_field_heading</type>
+                <sort_order>236</sort_order>
+                <visible>1</visible>
+                <description></description>
+            </spacer_8>
+            <show_title translate="label" module="core">
+                <label>Show Title</label>
+                <sort_order>237</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <value>true</value>
+                
+            </show_title>
+            <show_link translate="label" module="core">
+                <label>Show Link</label>
+                <sort_order>238</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <value>true</value>
+                
+            </show_link>
+            <show_description translate="label" module="core">
+                <label>Show Description</label>
+                <sort_order>239</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <value>true</value>
+                
+            </show_description>
+
+            <crop_desc translate="label" module="core">
+                <label>Crop Description</label>
+                <sort_order>240</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <value>true</value>
+                
+            </crop_desc>
+
+            <enable_popup translate="label" module="core">
+                <label>Enabled Image Popup</label>
+                <sort_order>241</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <value>true</value>
+                
+            </enable_popup>
+
+            <spacer_7 translate="label">
+                <label>OWL Carousel Setting</label>
+                <type>ves_gallery/system_config_form_field_heading</type>
+                <sort_order>254</sort_order>
+                <visible>1</visible>
+                <description></description>
+            </spacer_7>
+
+            <enable_owl_carousel>
+                  <label>Use OWL Carousel</label>
+                  <type>select</type>
+                   <values>
+                    <yes translate="label">
+                      <label>Yes</label>
+                      <value>true</value>
+                    </yes>
+                    <no translate="label">
+                      <label>No</label>
+                      <value>false</value>
+                    </no>
+                  </values>
+                  <visible>1</visible>
+                  <sort_order>255</sort_order>
+                  <value>false</value>
+              </enable_owl_carousel>
+              <rtl>
+                   <label>Enable Right To Left</label>
+                   <type>select</type>
+                   <values>
+                    <yes translate="label">
+                      <label>Yes</label>
+                      <value>true</value>
+                    </yes>
+                    <no translate="label">
+                      <label>No</label>
+                      <value>false</value>
+                    </no>
+                  </values>
+                  <visible>1</visible>
+                  <sort_order>260</sort_order>
+                  <value>false</value>
+              </rtl>
+              <carousel_responsive translate="label" module="core">
+                <label>Enable Responsive</label>
+                <sort_order>265</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <value>true</value>
+                
+            </carousel_responsive>
+              <loop>
+                  <label>Enable Loop Carousel</label>
+                   <type>select</type>
+                   <values>
+                    <yes translate="label">
+                      <label>Yes</label>
+                      <value>true</value>
+                    </yes>
+                    <no translate="label">
+                      <label>No</label>
+                      <value>false</value>
+                    </no>
+                  </values>
+                  <visible>1</visible>
+                  <sort_order>280</sort_order>
+                  <value>true</value>
+              </loop>
+              <mouse_drag>
+                  <label>Enable Mouse Drag</label>
+                   <type>select</type>
+                   <values>
+                    <yes translate="label">
+                      <label>Yes</label>
+                      <value>true</value>
+                    </yes>
+                    <no translate="label">
+                      <label>No</label>
+                      <value>false</value>
+                    </no>
+                  </values>
+                  <visible>1</visible>
+                  <sort_order>280</sort_order>
+                  <value>true</value>
+              </mouse_drag>
+              <touch_drag>
+                  <label>Enable Touch Drag</label>
+                   <type>select</type>
+                   <values>
+                    <yes translate="label">
+                      <label>Yes</label>
+                      <value>true</value>
+                    </yes>
+                    <no translate="label">
+                      <label>No</label>
+                      <value>false</value>
+                    </no>
+                  </values>
+                  <visible>1</visible>
+                  <sort_order>290</sort_order>
+                  <value>true</value>
+              </touch_drag>
+              <slide_by>
+                  <label>Slide By</label>
+                  <type>text</type>
+                  <description>Number Items will slide on a time. Default: 1</description>
+                  <sort_order>300</sort_order>
+                  <visible>1</visible>
+                  <value>1</value>
+              </slide_by>
+              <margin_item>
+                  <label>Margin Each Items</label>
+                  <type>text</type>
+                  <description>Default 0</description>
+                  <sort_order>310</sort_order>
+                  <visible>1</visible>
+                  <value>0</value>
+              </margin_item>
+
+              <default_items>
+                  <label>Number Columns On Page (Default)</label>
+                  <description>Show number items when screen size between 1199px and 980px</description>
+                  <type>text</type>
+                  <sort_order>320</sort_order>
+                  <visible>1</visible>
+                  <value>4</value>
+              </default_items>
+
+              <mobile_items>
+                  <label>Number Columns On Page (Phones)</label>
+                  <description>Show number items when screen size bellow 480px</description>
+                  <type>text</type>
+                  <sort_order>330</sort_order>
+                  <visible>1</visible>
+                  <value>1</value>
+              </mobile_items>
+
+               <tablet_small_items>
+                  <label>Number Columns On Page (Phones to Small tablets)</label>
+                  <description>Show number items when screen size between 641px and 480px</description>
+                  <type>text</type>
+                  <sort_order>335</sort_order>
+                  <visible>1</visible>
+                  <value>2</value>
+              </tablet_small_items>
+
+              <tablet_items>
+                  <label>Number Columns On Page (Phones to tablets)</label>
+                  <description>Show number items when screen size between 768px and 641px</description>
+                  <type>text</type>
+                  <sort_order>340</sort_order>
+                  <visible>1</visible>
+                  <value>2</value>
+              </tablet_items>
+
+              <portrait_items>
+                  <label>Number Columns On Page (Portrait tablets)</label>
+                  <description>Show number items when screen size between 979px and 769px</description>
+                  <type>text</type>
+                  <sort_order>350</sort_order>
+                  <visible>1</visible>
+                  <value>3</value>
+              </portrait_items>
+
+              <large_items>
+                  <label>Number Columns On Page (Large display)</label>
+                  <description>Show number items when screen size 1200px and up</description>
+                  <type>text</type>
+                  <sort_order>360</sort_order>
+                  <visible>1</visible>
+                  <value>5</value>
+              </large_items>
+
+               <custom_items>
+                  <label>Custom Number Items with any screen sizes</label>
+                  <description>For example: [320, 1], [360, 1], [480, 1], [568, 2], [600, 2], [640, 2], [768, 2], [900, 3], [960, 3], [1024, 3] empty to disable</description>
+                  <type>text</type>
+                  <sort_order>370</sort_order>
+                  <visible>1</visible>
+                  <value></value>
+               </custom_items>
+
+              <auto_play>
+                <visible>1</visible>
+                <label>Auto Play</label>
+                <type>select</type>
+                <values>
+                  <yes translate="label">
+                    <label>Yes</label>
+                    <value>true</value>
+                  </yes>
+                  <no translate="label">
+                    <label>No</label>
+                    <value>false</value>
+                  </no>
+                </values>
+                <sort_order>400</sort_order>
+                <value>false</value>
+            </auto_play>
+
+            <interval>
+              <visible>1</visible>
+              <label>Speed</label>
+              <comment>Determines the duration of the transition in milliseconds.If less than 10, the number is interpreted as a speed (pixels/millisecond).This is probably desirable when scrolling items with variable sizes</comment>
+              <type>text</type>
+              <sort_order>500</sort_order>
+              <value>300</value>
+            </interval> 
+		</parameters>
+	</widget_gallery>
+</widgets>

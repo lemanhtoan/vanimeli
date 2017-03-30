@@ -1,0 +1,11 @@
+<?php /* @var $this Neklo_Instagram_Block_Adminhtml_System_Config_Frontend_Oauth_Disconnect */ ?>
+<?php echo $this->getButtonHtml(); ?>
+<script type="text/javascript">
+    var button = $('<?php echo $this->getButton()->getId(); ?>');
+    if (button) {
+        Event.observe(button, 'click', function(e) {
+            Event.stop(e);
+            confirmSetLocation('<?php echo $this->__('Are you sure?') ?>', '<?php echo $this->getDisconnectUrl(); ?>');
+        });
+    }
+</script>

@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <!-- System -->
+    <default>
+        <!-- Add CSS and Javascript -->
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/rewardpoints.css</stylesheet>
+            </action>
+            <!--add by Sally-->
+            <action method="addCss">
+                <stylesheet>css/magestore/rewardpoints_new.css</stylesheet>
+            </action>
+			<action method="addCss">
+                <stylesheet>css/magestore/transactionpoint.css</stylesheet>
+            </action>			
+            <!--end by Sally-->
+            <action method="addJs">
+                <script>magestore/rewardpoints.js</script>
+            </action>
+        </reference>
+        
+        <!-- Change My Account Text -->
+        <reference name="top.links">
+            <block type="rewardpoints/toplink" name="rewardpoints.toplink" />
+        </reference>
+        <reference name="footer_links">
+            <action method="addLink" translate="label title" module="rewardpoints" ifconfig="rewardpoints/general/show_welcome_page"><label>Reward Points</label><url helper="rewardpoints/policy/getWelcomeUrl" /><title>Reward Points</title></action>
+        </reference>
+        
+        <!-- Show on MiniCart -->
+        <reference name="cart_sidebar.extra_actions">
+            <block type="rewardpoints/checkout_sidebar_action" name="rewardpoints.cart_sidebar.earning" template="rewardpoints/checkout/sidebar/action.phtml" />
+        </reference>
+    </default>
+    
+    <!-- Catalog Product View -->
+    <catalog_product_view>
+        <!-- fix for Magento 1.4.0.x -->
+        <block type="rewardpoints/product_view" name="rewardpoints.rewrite" />
+        <reference name="product.info.extrahint">
+            <block type="rewardpoints/product_view_earning" name="rewardpoints.extrahint.earning" template="rewardpoints/product/view/earning.phtml" />
+        </reference>
+    </catalog_product_view>
+    
+    <!-- Checkout using Reward Points -->
+    <checkout_cart_index>
+        <reference name="checkout.cart.coupon">
+            <block type="rewardpoints/checkout_cart_point" name="checkout.cart.rewardpoints" template="rewardpoints/checkout/cart/point.phtml" />
+        </reference>
+    </checkout_cart_index>
+    
+    <!-- Order View -->
+    <sales_order_view>
+        <reference name="order_totals">
+            <block type="rewardpoints/totals_order_point" name="rewardpoints.total.point" />
+            <block type="rewardpoints/totals_order_label" name="rewardpoints.total.label" />
+        </reference>
+    </sales_order_view>
+    <sales_order_print>
+        <reference name="order_totals">
+            <block type="rewardpoints/totals_order_point" name="rewardpoints.total.point" />
+            <block type="rewardpoints/totals_order_label" name="rewardpoints.total.label" />
+        </reference>
+    </sales_order_print>
+    <sales_email_order_items>
+        <reference name="order_totals">
+            <block type="rewardpoints/totals_order_point" name="rewardpoints.total.point" />
+            <block type="rewardpoints/totals_order_label" name="rewardpoints.total.label" />
+        </reference>
+    </sales_email_order_items>
+    
+    <sales_order_invoice>
+        <reference name="invoice_totals">
+            <block type="rewardpoints/totals_invoice_point" name="rewardpoints.total.point" />
+        </reference>
+    </sales_order_invoice>
+    <sales_order_printinvoice>
+        <reference name="invoice_totals">
+            <block type="rewardpoints/totals_invoice_point" name="rewardpoints.total.point" />
+        </reference>
+    </sales_order_printinvoice>
+    <sales_email_order_invoice_items>
+        <reference name="invoice_totals">
+            <block type="rewardpoints/totals_invoice_point" name="rewardpoints.total.point" />
+        </reference>
+    </sales_email_order_invoice_items>
+    
+    <sales_order_creditmemo>
+        <reference name="creditmemo_totals">
+            <block type="rewardpoints/totals_creditmemo_point" name="rewardpoints.total.point" />
+        </reference>
+    </sales_order_creditmemo>
+    <sales_order_printcreditmemo>
+        <reference name="creditmemo_totals">
+            <block type="rewardpoints/totals_creditmemo_point" name="rewardpoints.total.point" />
+        </reference>
+    </sales_order_printcreditmemo>
+    <sales_email_order_creditmemo_items>
+        <reference name="creditmemo_totals">
+            <block type="rewardpoints/totals_creditmemo_point" name="rewardpoints.total.point" />
+        </reference>
+    </sales_email_order_creditmemo_items>
+    
+    <!-- Customer account -->
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="rewardpoints" ifconfig="rewardpoints/general/enable">
+                <name>rewardpoints</name>
+                <path>rewardpoints</path>
+                <label helper="rewardpoints/getMyRewardsLabel" />
+            </action>
+        </reference>
+        <reference name="cart_sidebar">
+            <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions">
+                <block type="rewardpoints/checkout_sidebar_action" name="rewardpoints.cart_sidebar.earning" template="rewardpoints/checkout/sidebar/action.phtml" />
+            </block>
+        </reference>
+    </customer_account>
+    <customer_account_index>
+        <reference name="customer_account_dashboard">
+            <block type="core/text_list" name="customer_account_dashboard_top" as="top">
+                <block type="rewardpoints/account" name="rewardpoints.account_dashboard" template="rewardpoints/account.phtml" />
+                <block type="sales/order_recent" name="sales.order_recent" template="sales/order/recent.phtml"/>
+            </block>
+        </reference>
+    </customer_account_index>
+    
+    <!-- Reward Points -->
+    <rewardpoints_default>
+        <update handle="page_two_columns_left" />
+        <reference name="left_first">
+            <block type="rewardpoints/account_navigation" before="-" name="rewardpoints.navigation" template="rewardpoints/account/navigation.phtml">
+                <action method="addLink" translate="label" module="rewardpoints">
+                    <name>account_dashboard</name>
+                    <path>customer/account</path>
+                    <label>Account Dashboard</label>
+                    <enable>true</enable>
+                </action>
+                <action method="addLink" translate="label" module="rewardpoints">
+                    <name>rewardpoints_dashboard</name>
+                    <path>rewardpoints</path>
+                    <label helper="rewardpoints/getMyRewardsLabel" />
+                    <enable>true</enable>
+                    <order>10</order>
+                </action>
+                <action method="addLink" translate="label" module="rewardpoints">
+                    <name>rewardpoints_transactions</name>
+                    <path>rewardpoints/index/transactions</path>
+                    <label>Point Transactions</label>
+                    <enable>true</enable>
+                    <order>20</order>
+                </action>
+                <action method="addLink" translate="label" module="rewardpoints">
+                    <name>rewardpoints_policy</name>
+                    <path>rewardpoints/index/policy</path>
+                    <label>Reward Policy</label>
+                    <enable helper="rewardpoints/policy/showPolicyMenu" />
+                    <order>30</order>
+                </action>
+                <action method="addLink" translate="label" module="rewardpoints">
+                    <name>rewardpoints_settings</name>
+                    <path>rewardpoints/index/settings</path>
+                    <label>Settings</label>
+                    <enable>true</enable>
+                    <order>100</order>
+                </action>
+            </block>
+        </reference>
+    </rewardpoints_default>
+    
+    <rewardpoints_index_index>
+        <update handle="rewardpoints_default" />
+        <reference name="content">
+            <block type="rewardpoints/account_dashboard" name="rewardpoints.dashboard" template="rewardpoints/account/dashboard.phtml">
+                <block type="rewardpoints/template" name="rewardpoints.dashboard.earn" as="dashboard_earn" template="rewardpoints/account/dashboard/list.phtml">
+                    <block type="rewardpoints/account_dashboard_earn" name="dashboard.earn" template="rewardpoints/account/dashboard/earn.phtml" />
+                </block>
+                <block type="rewardpoints/template" name="rewardpoints.dashboard.spend" as="dashboard_spend" template="rewardpoints/account/dashboard/list.phtml">
+                    <block type="rewardpoints/account_dashboard_spend" name="dashboard.spend" template="rewardpoints/account/dashboard/spend.phtml" />
+                </block>
+                <block type="core/text_list" name="rewardpoints.dashboard.policy" as="dashboard_policy">
+                    <block type="rewardpoints/account_dashboard_policy" name="dashboard.policy" template="rewardpoints/account/dashboard/policy.phtml" />
+                </block>
+                <block type="core/text_list" name="rewardpoints.dashboard.other" as="other">
+                    <block type="rewardpoints/account_dashboard_transactions" name="dashboard.transactions" template="rewardpoints/account/dashboard/transactions.phtml" />
+                </block>
+            </block>
+        </reference>
+    </rewardpoints_index_index>
+    
+    <rewardpoints_index_transactions>
+        <update handle="rewardpoints_default" />
+        <reference name="content">
+            <block type="rewardpoints/account_transactions" name="rewardpoints.transactions" template="rewardpoints/account/transactions.phtml" />
+        </reference>
+    </rewardpoints_index_transactions>
+    
+    <rewardpoints_index_policy>
+        <update handle="rewardpoints_default" />
+        <reference name="content">
+<!--            <block type="rewardpoints/account_dashboard_policy" name="rewardpoints.policy" template="rewardpoints/account/dashboard/policy.phtml" />-->
+            <block type="rewardpoints/account_policy" name="rewardpoints.policy">
+                <block type="core/template" name="page_content_heading" template="cms/content_heading.phtml" />
+            </block>
+        </reference>
+    </rewardpoints_index_policy>
+    
+    <rewardpoints_index_settings>
+        <update handle="rewardpoints_default" />
+        <reference name="content">
+            <block type="rewardpoints/account_settings" name="rewardpoints.settings" template="rewardpoints/account/settings.phtml" />
+        </reference>
+    </rewardpoints_index_settings>
+</layout>

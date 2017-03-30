@@ -1,0 +1,332 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Rewardpoints spending on shopping cart template
+ * 
+ * @see Magestore_RewardPoints_Block_Checkout_Cart_Point
+ */
+?>
+
+<?php if ($this->enableReward()): ?>
+    <?php
+    $_sliderRules = $this->getSliderRules();
+    $_checkboxRules = $this->getCheckboxRules();
+    /** @var $_pointHelper Magestore_RewardPoints_Helper_Point */
+    $_pointHelper = $this->getPointHelper();
+    $_spendingHelper = Mage::helper('rewardpoints/calculation_spending');
+    $_pointName = $_pointHelper->getPluralName();
+    ?>
+
+    <?php if (count($_sliderRules) || (count($_checkboxRules))): ?>
+        <div class="discount">
+            <h2><?php echo $this->__('Spend Your Points') ?></h2>
+            <div class="discount-form" id="cart-rewards-form">
+                <dl class="rewards-sales-rules">
+                    <?php if (count($_sliderRules)): ?>
+                        <?php $_sliderData = $this->getSliderData() ?>
+                        <dt>
+                        <label><?php echo $this->__('Choose how many points to spend') ?>:</label>
+                        </dt>
+                        <dd>
+                            <?php if (count($_sliderRules) == 1): ?>
+                                <?php $_rule = current($_sliderRules) ?>
+                                <input id="reward_sales_rule" name="reward_sales_rule" type="hidden" value="<?php echo $_rule->getId() ?>" />
+                                <span>
+                                    <?php if ($_rule->getId() == 'rate'): ?>
+                                        <?php echo $this->__('Each of %s gets %s discount', $_pointHelper->format($_rule->getPointsSpended()), $this->formatDiscount($_rule)) ?>
+                                    <?php else: ?>
+                                        <?php echo $this->escapeHtml($_rule->getName()) ?>
+                                        (<?php echo $this->__('With %s', $_pointHelper->format($_rule->getPointsSpended())) ?>)
+                                    <?php endif ?>
+                                </span>
+                            <?php else: ?>
+                                <div class="reward-rules">
+                                    <span><?php echo $this->__('Use Your Points') ?>:</span>
+                                    <select id="reward_sales_rule" name="reward_sales_rule" class="input-select" onchange="changeRewardSalesRule(this)">
+                                        <?php foreach ($_sliderRules as $_rule): ?>
+                                            <option value="<?php echo $_rule->getId() ?>"<?php if ($_rule->getId() == $_sliderData->getRuleId()): ?> selected="selected"<?php endif ?>>
+                                                <?php if ($_rule->getId() == 'rate'): ?>
+                                                    <?php echo $this->__('Each of %s gets %s discount', $_pointHelper->format($_rule->getPointsSpended()), $this->formatDiscount($_rule)) ?>
+                                                <?php else: ?>
+                                                    <?php echo $this->escapeHtml($_rule->getName()) ?>
+                                                    (<?php echo $this->__('With %s', $_pointHelper->format($_rule->getPointsSpended())) ?>)
+                                                <?php endif ?>
+                                            </option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                            <?php endif ?>
+                            <div id="rewardpoints-needmore-msg" style="display: none;">
+                                <?php echo $this->__('You need to earn more') ?>
+                                <span id="rewardpoints-needmore-points">100</span>
+                                <?php echo $this->__('point(s) to use this rule.') ?>
+                                <?php echo $this->__('Please click') ?>
+                                <a href="<?php echo Mage::helper('rewardpoints/policy')->getPolicyUrl() ?>"><?php echo $this->__('here') ?></a>
+                                <?php echo $this->__('to learn about it.') ?>
+                            </div>
+                            <div id="rewardpoints-slider-container" style="display: none;">
+                                <div id="rewardpoints-slider">
+                                    <div id="rewardpoints-slider-zoom-out"><img src="<?php echo $this->getSkinUrl('css/magestore/images/slider_btn_zoom_out.gif') ?>" alt="<?php echo $this->__('Zoom Out') ?>" title="<?php echo $this->__('Zoom Out') ?>" /></div>
+                                    <div id="rewardpoints-track">
+                                        <div id="rewardpoints-handle"></div>
+                                    </div>
+                                    <div id="rewardpoints-slider-zoom-in"><img src="<?php echo $this->getSkinUrl('css/magestore/images/slider_btn_zoom_in.gif') ?>" alt="<?php echo $this->__('Zoom In') ?>" title="<?php echo $this->__('Zoom In') ?>" /></div>
+                                </div>
+                                <div class="rewardpoints-slider-input">
+                                    <div class="input-point">
+                                        <span>
+                                            <?php echo $this->__('You will spend') ?>
+                                            <input type="text" class="input-text" id="reward_sales_point" name="reward_sales_point" value="0" onchange="manualChangePoint(this)" />
+                                            <?php echo $_pointName ?>
+                                        </span>
+                                    </div>
+                                    <div class="input-max">
+                                        <input type="checkbox" id="reward_max_points_used" onchange="changeUseMaxpoint(this)" />
+                                        <label for="reward_max_points_used">
+                                            <?php echo $this->__('Maximize my discount with points') ?>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="reward_ajax_total" style="display: none;">
+                                <div id="reward_ajax_loading">
+                                    <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" class="v-middle" alt="" /> &nbsp; <?php echo $this->__('Loading total') ?>...
+                                </div>
+                                <div id="reward_ajax_container"></div>
+                            </div>
+                        </dd>
+                        <script type="text/javascript">
+                            var rewardSliderRules = <?php echo $this->getRulesJson($_sliderRules) ?>;
+                            var currentRuleOptions = {};
+                            function changeRewardSalesRule(el) {
+                                var ruleId = el.value;
+                                if (ruleId) {
+                                    currentRuleOptions = rewardSliderRules[ruleId];
+                                    switch (currentRuleOptions.optionType) {
+                                        case 'needPoint':
+                                            showRewardInfo('rewardpoints-needmore-msg');
+                                            $('rewardpoints-needmore-points').innerHTML = currentRuleOptions.needPoint;
+                                            break;
+                                        case 'slider':
+                                            showRewardInfo('rewardpoints-slider-container');
+                                            rewardSlider.applyOptions(currentRuleOptions.sliderOption);
+                                            break;
+                                    }
+                                    if(currentRuleOptions.sliderOption.maxPoints == 0){
+                                        $("cart-rewards-form").up().hide();
+                                    }
+                                } else {
+                                    showRewardInfo('');
+                                }
+                            }
+                            function manualChangePoint(el) {
+                                rewardSlider.manualChange(el.value);
+                            }
+                            function changeUseMaxpoint(el) {
+                                if (el.checked) {
+                                    rewardSlider.manualChange(rewardSlider.maxPoints);
+                                } else {
+                                    rewardSlider.manualChange(0);
+                                }
+                            }
+                            var currentPointUsed = <?php echo $_sliderData->getUsePoint() ? $_sliderData->getUsePoint() : '0' ?>;
+                            var currentRuleUsed = $('reward_sales_rule').value;
+                            var disableRewardAjax = true;
+                            function changePointCallback(points) {
+                                if (points == rewardSlider.maxPoints) {
+                                    $('reward_max_points_used').checked = true;
+                                } else {
+                                    $('reward_max_points_used').checked = false;
+                                }
+                                if (currentPointUsed == rewardSlider.slider.value
+                                        && currentRuleUsed == $('reward_sales_rule').value
+                                        ) {
+                                    return false;
+                                }
+                                currentPointUsed = rewardSlider.slider.value;
+                                currentRuleUsed = $('reward_sales_rule').value;
+                                if (disableRewardAjax) {
+                                    return false;
+                                }
+
+                                var params = Form.serializeElements($('cart-rewards-form').select('input, select, textarea'));
+                                uniqueAjax.NewRequest({
+                                    method: 'post',
+                                    postBody: params,
+                                    parameters: params,
+                                    beforeRequest: function() {
+                                        var total = $('shopping-cart-totals-table');
+                                        var container = Element.extend(total.parentNode);
+                                        if (container.down('#reward_ajax_loading')) {
+                                            container.down('#reward_ajax_loading').show();
+                                        } else {
+                                            container.insertBefore($('reward_ajax_loading'), total);
+                                        }
+                                        total.hide();
+										if(container.down('.checkout-types'))
+                                        container.down('.checkout-types').hide();
+                                    },
+                                    onException: function() {
+                                        window.location.reload();
+                                    },
+                                    onComplete: function(xhr) {
+                                        if (xhr.responseText.isJSON()) {
+                                            var response = xhr.responseText.evalJSON();
+                                            if (response.total) {
+                                                var total = $('shopping-cart-totals-table');
+                                                var container = Element.extend(total.parentNode);
+                                                total.remove();
+                                                $('reward_ajax_container').innerHTML = response.total;
+                                                container.down('#reward_ajax_loading').hide();
+                                                container.insertBefore($('shopping-cart-totals-table'), container.firstChild);
+										if(container.down('.checkout-types'))
+                                                container.down('.checkout-types').show();
+                                                <?php if(!Mage::getStoreConfigFlag('rewardpoints/earning/earn_when_spend',Mage::app()->getStore()->getId())){ ?>
+                                                if($('check-spend-point')){
+                                                        $$('.reward-points-earning').each(function(el) {
+                                                                el.style.display="none";
+                                                    });
+                                                }else{
+                                                        $$('.reward-points-earning').each(function(el) {
+                                                                el.style.display="";
+                                                    });
+                                                }
+                                                <?php } ?>
+                                            }
+                                            if (response.refresh) {
+                                                window.location.reload();
+                                            }
+                                        } else {
+                                            window.location.reload();
+                                        }
+                                    }
+                                });
+                            }
+                            function showRewardInfo(elId) {
+                                var elIds = ['rewardpoints-needmore-msg', 'rewardpoints-slider-container'];
+                                for (var i = 0; i < 2; i++) {
+                                    if (elIds[i] == elId) {
+                                        $(elId).show();
+                                    } else {
+                                        $(elIds[i]).hide();
+                                    }
+                                }
+                            }
+                            // Initial Variables
+                            $('rewardpoints-slider-container').show();
+                            var rewardSlider = new RewardPointsSlider(
+                                    'reward_sales_point',
+                                    'rewardpoints-track',
+                                    'rewardpoints-handle',
+                                    'rewardpoints-slider-zoom-out',
+                                    'rewardpoints-slider-zoom-in',
+                                    ''
+                                    );
+                            rewardSlider.changePointCallback = changePointCallback;
+                            $('rewardpoints-slider-container').hide();
+                            changeRewardSalesRule($('reward_sales_rule'));
+                            // rewardSlider.manualChange(<?php echo $_sliderData->getUsePoint() ? $_sliderData->getUsePoint() : '0' ?>);
+
+                            var uniqueAjax = new RewardPointsAjax('<?php echo $this->getUrl('rewardpoints/checkout/updateTotal') ?>');
+                            Event.observe(window, 'load', function() {
+                                disableRewardAjax = false;
+                                rewardSlider.manualChange(<?php echo $_sliderData->getUsePoint() ? $_sliderData->getUsePoint() : '0' ?>);
+                            });
+                        </script>
+                    <?php endif ?>
+                    <?php if (count($_checkboxRules)): ?>
+                        <?php $_checkedData = $this->getCheckedData() ?>
+                        <dt>
+                        <?php if (count($_sliderRules)): ?>
+                            <label><?php echo $this->__('More ways to spend points') ?>:</label>
+                        <?php else: ?>
+                            <label><?php echo $this->__('Choose ways to spend points') ?></label>
+                        <?php endif ?>
+                        </dt>
+                        <dd>
+                            <ul>
+                                <?php foreach ($_checkboxRules as $_rule): ?>
+                                    <li>
+                                        <input type="checkbox" value="<?php echo $_rule->getId() ?>" name="sales_checkbox_rule[]" id="sales_checkbox_rule_<?php echo $_rule->getId() ?>" onchange="checkUseSalesRule(this)"<?php if (in_array($_rule->getId(), $_checkedData)): ?> checked="checked"<?php endif ?> />
+                                        <label for="sales_checkbox_rule_<?php echo $_rule->getId() ?>" id="reward_rule_label_<?php echo $_rule->getId() ?>">
+                                            <?php echo $this->__('Spend %s', $_pointHelper->format($_rule->getPointsSpended())) ?>
+                                            <?php echo $this->__('and get %s off', $this->formatDiscount($_rule)) ?>
+                                        </label>
+                                    </li>
+                                <?php endforeach ?>
+                            </ul>
+                            <div id="rule_refreshing_label" style="display: none;">
+                                <span class="rule_refreshing_label"><?php echo $this->__('Refreshing cart, please wait') ?>...</span>
+                            </div>
+                        </dd>
+                        <script type="text/javascript">
+                            function checkUseSalesRule(el) {
+                                var ruleId = el.value;
+                                var params = 'rule_id=' + ruleId + '&is_used=';
+                                if (el.checked) {
+                                    params += '1';
+                                } else {
+                                    params += '0';
+                                }
+                                el.disabled = true;
+                                var label = $('reward_rule_label_' + ruleId);
+                                label.innerHTML = $('rule_refreshing_label').innerHTML;
+                                var url = '<?php echo $this->getUrl('rewardpoints/checkout/checkboxRule') ?>';
+                                if (window.location.href.match('https://') && !url.match('https://')) {
+                                    url = url.replace('http://', 'https://');
+                                }
+                                if (!window.location.href.match('https://') && url.match('https://')) {
+                                    url = url.replace('https://', 'http://');
+                                }
+                                new Ajax.Request(url, {
+                                    method: 'post',
+                                    postBody: params,
+                                    parameters: params,
+                                    onException: function() {
+                                        window.location.reload();
+                                    },
+                                    onComplete: function() {
+                                        window.location.reload();
+                                    }
+                                });
+                            }
+                        </script>
+
+                    <?php endif ?>
+                </dl>
+            </div>
+            <?php 
+        if (!Mage::getStoreConfigFlag('rewardpoints/earning/earn_when_spend',Mage::app()->getStore()->getId())){ ?>
+        <div class="cant-earn-points-spend" style="padding: 10px 0; clear: both"><?php echo $this->__('P/s: You will not earn any points when using points to spend!'); ?></div>
+        <?php } ?>
+        </div>
+            <?php if(Mage::helper('rewardpoints/customer')->getBalance() && $_spendingHelper->isUseMaxPointsDefault() && (!$_spendingHelper->isUsePoint() || Mage::getSingleton('checkout/session')->getData('use_max'))): ?>
+                <script type="text/javascript">
+                   Event.observe(window, 'load', function() {
+                       rewardSlider.manualChange(rewardSlider.maxPoints);
+                   });
+                </script> 
+            <?php endif; ?>
+    <?php endif ?>
+
+    <?php
+ endif #end $this->enableReward() condition ?>

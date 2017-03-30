@@ -1,0 +1,57 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+$addition_cls = $this->getData("addition_cls");
+$button_text = $this->getData("button_text");
+$signup_text = $this->getData("signup_text");
+$widget_heading = $this->getData("widget_heading");
+$modid = rand().time();
+$enable_collapse = $this->getData("enable_collapse");
+$enable_collapse = $enable_collapse?(int)$enable_collapse:0;
+?>
+<div class="widget-newsletter block custom-subscribe <?php echo $addition_cls; ?>">
+    <div class="block-title <?php echo $this->getData("title_class"); ?>">
+        <?php if($enable_collapse): ?><span class="opener hidden-lg hidden-md" data-toggle="collapse" data-target="#widget-newsletter<?php echo $modid; ?>"><i class="fa fa-angle-down"></i></span><?php endif; ?>
+        <span><?php echo (isset($widget_heading) && $widget_heading)?$this->__($widget_heading): $this->__('Newsletter') ?></span>
+    </div>
+    <div id="widget-newsletter<?php echo $modid; ?>" class="widget-inner block-content <?php if($enable_collapse): ?> widget-enanle-collapse collapse in <?php endif; ?>">
+        <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+          <div class="form-subscribe-header">
+             <label for="newsletter"><?php echo (isset($signup_text) && $signup_text)?$this->__($signup_text): $this->__('Sign Up for Our Newsletter:') ?></label>
+         </div>
+         <div class="input-box">
+           <input type="text" name="email" id="newsletter" title="<?php echo (isset($signup_text) && $signup_text)?$this->__($signup_text): $this->__('Sign up for our newsletter') ?>" class="input-text required-entry validate-email form-control <?php echo $this->getData("input_class"); ?>" />
+       </div>
+       <div class="actions">
+         <button type="submit" title="<?php echo (isset($button_text) && $button_text)?$this->__($button_text): $this->__('Subscribe') ?>" class="button <?php echo $this->getData("button_class"); ?>"><span><span><?php echo (isset($button_text) && $button_text)?$this->__($button_text): $this->__('Subscribe') ?></span></span></button>
+     </div>
+ </form>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+    //]]>
+</script>
+</div>

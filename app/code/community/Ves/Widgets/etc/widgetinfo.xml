@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<widgets>
+	<widget_singledeals type="ves_widgets/widget_singledeals">
+      <title>Single Deal Block</title>
+      <description>Single Deal Block</description>
+      <code>deal</code>
+      <icon>deal</icon>
+      <group>other</group>
+   </widget_singledeals>
+   <widget_bannercountdown type="ves_widgets/widget_bannercountdown">
+      <title>Banner Countdown</title>
+      <description>Display coupon code with countdown timer block</description>
+      <code>counting_number</code>
+      <icon>counting_number</icon>
+      <group>others</group>
+   </widget_bannercountdown>
+   <widget_countdown_timer type="ves_widgets/widget_countdowntimer">
+      <title>Banner Countdown Timer</title>
+      <description>Show a banner with countdown timer</description>
+      <code>counting_number</code>
+      <icon>counting_number</icon>
+      <group>others</group>
+   </widget_countdown_timer>
+   <widget_swiper type="ves_widgets/widget_swiper">
+      <title>Swiper Carousel</title>
+      <description>Display content carousel use swiper slider js</description>
+      <code>carousel</code>
+      <icon>carousel</icon>
+      <group>others</group>
+   </widget_swiper>
+   <widget_popup type="ves_widgets/widget_popup">
+      <title>Ves Widgets: All Popup</title>
+      <description>Show Promotion, Newsletter, Signup Popup</description>
+      <code>popup</code>
+      <icon>popup</icon>
+      <group>others</group>
+   </widget_popup>
+   <widget_singleproduct type="ves_widgets/widget_singleproduct">
+      <title>Ves Widgets: Single Product Block</title>
+      <description>Show Single Product Information Block</description>
+      <code>single-product</code>
+      <icon>product</icon>
+      <group>others</group>
+   </widget_singleproduct>
+</widgets>

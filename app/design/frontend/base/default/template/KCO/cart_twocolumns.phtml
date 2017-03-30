@@ -1,0 +1,241 @@
+<?php
+/**
+ * This file is released under a custom license by Avenla Oy.
+ * All rights reserved
+ * 
+ * License and more information can be found at http://productdownloads.avenla.com/magento-modules/klarna-checkout/ 
+ * For questions and support - klarna-support@avenla.com
+ * 
+ * @category   Avenla
+ * @package    Avenla_KlarnaCheckout
+ * @copyright  Copyright (c) Avenla Oy
+ * @link       http://www.avenla.fi 
+ */
+
+/**
+ * Avenla KlarnaCheckout
+ *
+ * @category   Avenla
+ * @package    Avenla_KlarnaCheckout
+ */
+?>
+<div class="cart twocolumncart">
+	<div class="page-title title-buttons">
+        <h1><?php echo $this->__('Shopping Cart') ?></h1>
+        <?php if(!$this->hasError()): ?>
+        <ul class="checkout-types">
+        <?php foreach ($this->getMethods('top_methods') as $method): ?>
+            <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+            <li><?php echo $methodHtml; ?></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('form_before') ?>
+	
+	<!-- To left side -->
+	<div class="col2-set">
+		<div class="col-1 cart-col">
+	
+			<form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+				<?php echo $this->getBlockHtml('formkey'); ?>
+				<fieldset>
+					<table id="shopping-cart-table" class="data-table cart-table">
+
+						<?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+						<thead>
+			                <tr>
+			                    <th rowspan="<?php echo $mergedCells; ?>" ><span class="nobr"><?php echo $this->__('Product') ?></span></th>
+
+			                    <th rowspan="<?php echo $mergedCells; ?>" class="hideToFit">&nbsp;</th>
+
+			                    <th class="a-center cart-price-head" colspan="<?php echo $mergedCells; ?>">
+			                            <span class="nobr"><?php echo $this->__('Price') ?></span>
+			                    </th>
+			                    <th rowspan="<?php echo $mergedCells; ?>" class="a-center">
+			                        <?php echo $this->__('Qty') ?>
+			                    </th>
+			                    <th class="a-center cart-total-head" colspan="<?php echo $mergedCells; ?>">
+			                            <?php echo $this->__('Subtotal') ?>
+			                    </th>
+			                    <th class="a-center" rowspan="<?php echo $mergedCells; ?>">&nbsp;</th>
+			                </tr>
+			                <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+			                <tr>
+			                    <th class="a-center cart-price-head"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+			                    <th class="a-center cart-price-head"><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+			                    <th class="a-center cart-total-head"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+			                    <th class="a-center cart-total-head"><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+			                </tr>
+			                <?php endif; ?>
+			            </thead>
+						 
+						<tfoot>
+							<tr>
+								<td colspan="50" class="a-right">
+									<?php if($this->getContinueShoppingUrl()): ?>
+										<button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+									<?php endif; ?>
+									<button type="submit" name="update_cart_action" value="empty_cart" title="<?php echo $this->__('Clear Shopping Cart'); ?>" class="button btn-empty" id="empty_cart_button"><span><span><?php echo $this->__('Clear Shopping Cart'); ?></span></span></button>
+
+									<button type="submit" name="update_cart_action" value="update_qty" title="<?php echo $this->__('Update Shopping Cart'); ?>" class="button btn-update"><span><span><?php echo $this->__('Update Shopping Cart'); ?></span></span></button>
+									
+									<!--[if lt IE 8]>
+									<input type="hidden" id="update_cart_action_container" />
+									<script type="text/javascript">
+									//<![CDATA[
+										Event.observe(window, 'load', function()
+										{
+											// Internet Explorer (lt 8) does not support value attribute in button elements
+											$emptyCartButton = $('empty_cart_button');
+											$cartActionContainer = $('update_cart_action_container');
+											if ($emptyCartButton && $cartActionContainer) {
+												Event.observe($emptyCartButton, 'click', function()
+												{
+													$emptyCartButton.setAttribute('name', 'update_cart_action_temp');
+													$cartActionContainer.setAttribute('name', 'update_cart_action');
+													$cartActionContainer.setValue('empty_cart');
+												});
+											}
+
+										});
+									//]]>
+									</script>
+									<![endif]-->
+								</td>
+							</tr>
+						</tfoot>
+						<tbody>
+							<?php foreach($this->getItems() as $_item): ?>
+								<?php echo $this->getItemHtml($_item) ?>
+							<?php endforeach ?>
+						</tbody>
+
+					</table>
+					<script type="text/javascript">decorateTable('shopping-cart-table')</script>
+					
+				</fieldset>				
+			</form>
+
+			<div class="cart-collaterals cart-forms">
+				<?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
+				
+				<div class="full-column">
+					<?php echo $this->getChildHtml('coupon') ?>
+				</div>
+				
+				<div class="full-column cart-totals-wrapper">
+					<div class="totals cart-totals">
+						<?php echo $this->getChildHtml('totals'); ?>
+					</div>
+				</div>
+				
+				<div class="full-column">
+					<?php if(Mage::getModel('klarnaCheckout/config')->showGiftMessage()):?>
+						<?php echo $this->getChildHtml('cart.giftmessage') ?>
+					<?php endif; ?>
+					<?php echo $this->getChildHtml('checkout.cart.extra') ?>
+					<?php
+						if(Mage::getModel('klarnaCheckout/config')->showNewsletter())
+							echo $this->getLayout()->createBlock('klarnaCheckout/KCO_newsletter')->toHtml();
+					?>
+				</div>
+		
+			</div>
+		</div>
+		<!-- end left side -->
+		<div class="col-2">
+			<div class="col1-set">
+				<div class="full-column">
+					<div class="payments">
+						<?php if(!$this->hasError()): ?>
+							<?php if(!Mage::getModel('klarnaCheckout/config')->hideDefaultCheckout()): ?>
+								<div class="paymentMenuContainer">
+									<ul>
+										<li class="active">
+											<a href="#">
+												<img src="<?php echo $this->getSkinUrl('KCO/klarna_simplifying.png') ?>" alt="<?php echo Mage::getSingleton('klarnaCheckout/config')->getTitle(); ?>" />
+											</a>
+										</li>
+										<?php foreach ($this->getMethods('methods') as $method): ?>
+											<?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+											<?php if(strlen(preg_replace( "/\r|\n/", "", $methodHtml)) > 0): ?>	
+												<li><?php echo $methodHtml; ?></li>
+												<?php endif; ?>
+											<?php endif; ?>
+										<?php endforeach; ?>
+									</ul>
+								</div>
+							<?php endif; ?>
+						<div class="paymentContainer">
+							<?php echo $this->getChildHtml('klarnacheckout'); ?>
+						</div>
+						<script>
+							Event.observe(window, 'load', function() {
+								fitCartTable();
+								var width = 0;
+								$$('div.payments ul li').each(function(e){
+									width += e.getWidth();
+								});
+
+								if(width > $$('div.paymentMenuContainer')[0].getWidth()){
+									$$('div.payments')[0].removeClassName('payments').addClassName('responsive-payments');
+									$$('div.responsive-payments ul')[0].insert({before: '<span class="paymentnavi-toggle"></span>'});
+								}
+
+								if($$('.paymentnavi-toggle')[0] !== undefined){
+									$$('.paymentnavi-toggle')[0].observe('click', function(event){
+										$$('div.responsive-payments ul li').each(function(e, index){
+											if(index > 0){
+												var display = window.getComputedStyle(e).display;    											
+												if(display == "none"){
+													e.style.display = 'block';
+												}
+												else{
+													e.style.display = 'none';
+												}
+											}
+										});
+									});
+								}
+
+							});
+
+							function fitCartTable()
+							{
+								if($('shopping-cart-table').getWidth() > $$('div.cart-col')[0].getWidth()){
+									$$('.hideToFit').each(function(element) {
+										tableFit = true;
+						    			element.hide();
+									});
+								}
+
+								if($('shopping-cart-table').getWidth() > $$('div.cart-col')[0].getWidth()){
+									tableFit = false;
+									$$('.col-1').each(function(element) {
+						    			element.addClassName('full-column');
+									});
+
+									$$('.col-2').each(function(element) {
+						    			element.addClassName('full-column');
+									});
+									
+									$$('.hideToFit').each(function(element){
+						    			element.show();
+									});
+								}
+							}
+							  							
+						</script>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="crosssell-container">
+			<?php echo $this->getChildHtml('crosssell') ?>
+		</div>
+</div>

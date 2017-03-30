@@ -1,0 +1,209 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Rewardpoints spending on Backend template
+ * 
+ * @see Magestore_RewardPoints_Block_Adminhtml_Order_Create_Form
+ */
+?>
+<?php if ($this->enableReward()): ?>
+<?php $_sliderRules = $this->getSliderRules() ?>
+<?php $_checkboxRules = $this->getCheckboxRules() ?>
+<?php
+    /** @var $_pointHelper Magestore_RewardPoints_Helper_Point */
+    $_pointHelper   = $this->getPointHelper();
+    $_pointName     = $_pointHelper->getPluralName();
+?>
+
+<?php if (count($_sliderRules) || (count($_checkboxRules))): ?>
+<div class="entry-edit box-right" id="admin_rewardpoints_rules">
+    <div class="entry-edit-head">
+        <h4 class="icon-head">
+            <?php echo $this->__('Use Customer Reward Points') ?>
+            (<?php echo Mage::helper('rewardpoints/customer')->getBalanceFormated() ?>)
+        </h4>
+    </div>
+    <fieldset class="np">
+        <div class="content">
+    <div id="cart-rewards-form">
+        <dl class="form-list rewards-sales-rules">
+            <?php if (count($_sliderRules)): ?>
+                <?php $_sliderData = $this->getSliderData() ?>
+            <dt>
+                <label><?php echo $this->__('Choose how many points to spend') ?>:</label>
+            </dt>
+            <dd>
+                <?php if (count($_sliderRules) == 1): ?>
+                <?php $_rule = current($_sliderRules) ?>
+                    <input id="reward_sales_rule" name="reward_sales_rule" type="hidden" value="<?php echo $_rule->getId() ?>" />
+                    <span>
+                        <?php if ($_rule->getId() == 'rate'): ?>
+                            <?php echo $this->__('Each %s get %s discount', $_pointHelper->format($_rule->getPointsSpended(), $this->getStore()), $this->formatDiscount($_rule)) ?>
+                        <?php else: ?>
+                            <?php echo $this->escapeHtml($_rule->getName()) ?>
+                            (<?php echo $this->__('With %s', $_pointHelper->format($_rule->getPointsSpended(), $this->getStore())) ?>)
+                        <?php endif ?>
+                    </span>
+                <?php else: ?>
+                <div class="reward-rules">
+                    <span><?php echo $this->__('Use Reward Points') ?>:</span>
+                    <select id="reward_sales_rule" name="reward_sales_rule" class="input-select">
+                    <?php foreach ($_sliderRules as $_rule): ?>
+                        <option value="<?php echo $_rule->getId() ?>"<?php if ($_rule->getId() == $_sliderData->getRuleId()): ?> selected="selected"<?php endif ?>>
+                            <?php if ($_rule->getId() == 'rate'): ?>
+                                <?php echo $this->__('Each %s get %s discount', $_pointHelper->format($_rule->getPointsSpended(), $this->getStore()), $this->formatDiscount($_rule)) ?>
+                            <?php else: ?>
+                                <?php echo $this->escapeHtml($_rule->getName()) ?>
+                                (<?php echo $this->__('With %s', $_pointHelper->format($_rule->getPointsSpended(), $this->getStore())) ?>)
+                            <?php endif ?>
+                        </option>
+                    <?php endforeach ?>
+                    </select>
+                </div>
+                <?php endif ?>
+                <div id="rewardpoints-needmore-msg" style="display: none;">
+                    <?php echo $this->__('Customer not enough points to spend') ?>
+                </div>
+                <div id="rewardpoints-slider-container">
+                    <div id="rewardpoints-slider">
+                        <div id="rewardpoints-slider-zoom-out"><img src="<?php echo $this->getSkinUrl('images/slider_btn_zoom_out.gif') ?>" alt="<?php echo $this->__('Zoom Out') ?>" title="<?php echo $this->__('Zoom Out') ?>" /></div>
+                        <div id="rewardpoints-track" style="background-image: url('<?php echo $this->getSkinUrl('images/rewardpoints/reward_rule.gif') ?>')">
+                            <div id="rewardpoints-handle" style="background-image: url('<?php echo $this->getSkinUrl('images/magnifier_handle.gif') ?>')"></div>
+                        </div>
+                        <div id="rewardpoints-slider-zoom-in"><img src="<?php echo $this->getSkinUrl('images/slider_btn_zoom_in.gif') ?>" alt="<?php echo $this->__('Zoom In') ?>" title="<?php echo $this->__('Zoom In') ?>" /></div>
+                    </div>
+                    <div class="rewardpoints-slider-input">
+                        <div class="input-point">
+                            <span>
+                                <?php echo $this->__('You will spend') ?>
+                                <input type="text" class="input-text" id="reward_sales_point" name="reward_sales_point" value="0" />
+                                <?php echo $_pointName ?>
+                            </span>
+                        </div>
+                        <div class="input-max">
+                            <input type="checkbox" id="reward_max_points_used" />
+                            <label for="reward_max_points_used">
+                                <?php echo $this->__('Maximize discount with points') ?>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </dd>
+<script type="text/javascript">
+    rewardSliderRules = <?php echo $this->getRulesJson($_sliderRules) ?>;
+    currentPointUsed = <?php echo $_sliderData->getUsePoint() ? $_sliderData->getUsePoint() : '0' ?>;
+    currentRuleUsed = $('reward_sales_rule').value;
+    // Initial Variables
+    // $('rewardpoints-slider-container').show();
+    rewardSlider = new RewardPointsSlider(
+        'reward_sales_point',
+        'rewardpoints-track',
+        'rewardpoints-handle',
+        'rewardpoints-slider-zoom-out',
+        'rewardpoints-slider-zoom-in',
+        ''
+    );
+    rewardSlider.changePointCallback = changePointCallback;
+    rewardSlider.changeUseMaxpointEvent('reward_max_points_used');
+    rewardSlider.manualChangePointEvent('reward_sales_point');
+    rewardSlider.changeRule = function(event) {
+        var ruleId = event.element().value;
+        if (ruleId) {
+            currentRuleOptions = rewardSliderRules[ruleId];
+            switch (currentRuleOptions.optionType) {
+                case 'needPoint':
+                    showRewardInfo('rewardpoints-needmore-msg');
+                    break;
+                case 'slider':
+                    showRewardInfo('rewardpoints-slider-container');
+                    this.applyOptions(currentRuleOptions.sliderOption);
+                    break;
+            }
+        } else {
+            showRewardInfo('');
+        }
+    };
+    rewardSlider.changeRuleEvent = function(el) {
+        Event.observe($(el), 'change', this.changeRule.bind(this));
+    };
+    rewardSlider.changeRuleEvent('reward_sales_rule');
+    // $('rewardpoints-slider-container').hide();
+    uniqueAjax = new RewardPointsAjax('<?php echo $this->getUrl("adminhtml/reward_checkout/changePoint") ?>');
+    
+    disableRewardAjax = true;
+    changeRewardSalesRule($('reward_sales_rule'));
+    disableRewardAjax = true;
+    rewardSlider.manualChange(<?php echo $_sliderData->getUsePoint() ? $_sliderData->getUsePoint() : '0' ?>);
+    disableRewardAjax = false;
+</script>
+            <?php endif ?>
+            <?php if (count($_checkboxRules)): ?>
+                <?php $_checkedData = $this->getCheckedData() ?>
+            <dt>
+                <?php if (count($_sliderRules)): ?>
+                <label><?php echo $this->__('More ways to spend points') ?>:</label>
+                <?php else: ?>
+                <label><?php echo $this->__('Choose ways to spend points') ?></label>
+                <?php endif ?>
+            </dt>
+            <dd>
+                <ul>
+                <?php foreach ($_checkboxRules as $_rule): ?>
+                    <li>
+                        <input type="checkbox" value="<?php echo $_rule->getId() ?>" name="sales_checkbox_rule[]" id="sales_checkbox_rule_<?php echo $_rule->getId() ?>" onclick="checkUseSalesRule(this, '<?php echo $this->getUrl('adminhtml/reward_checkout/checkboxRule') ?>')"<?php if (in_array($_rule->getId(), $_checkedData)): ?> checked="checked"<?php endif ?> />
+                        <label for="sales_checkbox_rule_<?php echo $_rule->getId() ?>" id="reward_rule_label_<?php echo $_rule->getId() ?>">
+                            <?php echo $this->__('Spend %s', $_pointHelper->format($_rule->getPointsSpended(), $this->getStore())) ?>
+                            <?php echo $this->__('and get %s off', $this->formatDiscount($_rule)) ?>
+                        </label>
+                    </li>
+                <?php endforeach ?>
+                </ul>
+            </dd>
+            <?php endif ?>
+        </dl>
+    </div>
+        </div>
+    </fieldset>
+</div>
+<script type="text/javascript">
+    Event.observe(window, 'load', function(){
+        if (order) {
+            order.loadArea(['totals'], true, {});
+        }
+    });
+    // Reload reward points slider when change shipping method
+    if (order) {
+        order.setShippingMethod = function(method){
+            var data = {};
+            data['order[shipping_method]'] = method;
+            order.loadArea(['items', 'shipping_method', 'totals', 'billing_method'], true, data);
+        }
+    }
+    // Change class reward points slider when gift card, store credit exist
+    if ($('admin_giftcard_coupon')) {
+        $('admin_rewardpoints_rules').removeClassName('box-right');
+        $('admin_rewardpoints_rules').addClassName('box-left');
+    }
+</script>
+<?php endif ?>
+
+<?php endif // end $this->enableReward() condition ?>

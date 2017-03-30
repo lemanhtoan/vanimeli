@@ -1,0 +1,36 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Rewardpoints earning on product view page template
+ * 
+ * @see Magestore_RewardPointsRule_Block_Product_View_Earning
+ */
+?>
+<?php if ($this->enableDisplay()): ?>
+<?php if ($this->getEarningPoints() > 0): ?>
+<div class="divider"></div>
+<div class="rewardpoints-product-view-earning">
+    <?php echo $this->getImageHtml(true) ?>
+    <?php echo $this->__('You will earn %s for purchasing this product.', Mage::helper('rewardpoints/point')->format($this->getEarningPoints())) ?>
+</div>
+<?php endif ?>
+<?php endif ?>

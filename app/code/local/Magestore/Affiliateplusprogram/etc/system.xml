@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <affiliateplus translate="label" module="affiliateplus">
+            <groups>
+                <!--Changed By Adam 13/09/2014: Add User Guide to Configuration page-->
+                <document_help translate="label" module="affiliateplusdirectlink">
+                    <fields>
+                        <affiliateplusprogram_user_guide translate="label">
+                            <label>Affiliate Plus Program User Guide</label>
+                            <frontend_type>label</frontend_type>  
+                            <frontend_model>affiliateplusprogram/adminhtml_field_affiliateplusprogram</frontend_model>
+                            <sort_order>47</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment></comment>
+                        </affiliateplusprogram_user_guide>
+                    </fields>
+                </document_help>
+                <!--hainh edit 28-04-2014-->
+                <program translate="label" module="affiliateplusprogram">
+                    <label>Multi-program Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                     <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable Module Multi Program</label>
+                            <frontend_type>select</frontend_type>  
+                            <source_model>adminhtml/system_config_source_yesno</source_model>                 
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </enable>
+                        <show_default translate="label">
+                            <label>Show default affiliate program in frontend</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>                 
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </show_default>
+                    </fields>
+                </program>
+            </groups>
+        </affiliateplus>  
+    </sections>
+</config>

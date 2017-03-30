@@ -1,0 +1,66 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Dashboard Spending Points By Rule
+ * 
+ * @see Magestore_RewardPointsRule_Block_Account_Dashboard_Spend
+ */
+?>
+
+<?php $_catalogSpending  = $this->getCatalogRules() ?>
+<?php $_salesSpending    = $this->getShoppingCartRules() ?>
+
+<?php if (count($_catalogSpending) || count($_salesSpending)): ?>
+<?php $processor = Mage::helper('cms')->getBlockTemplateProcessor();?>
+<!--strong class="rewardpoints-money rewardpoints-title-rate"><?php //echo $this->__('How to spend points:') ?></strong><br /-->
+<ul class="rewardpoints-dashboard-ul">
+    <?php foreach ($_catalogSpending as $_rule){ ?>
+    <li>
+        <span class="rewardpointsrule-rule-name-policy"><?php echo $_rule->getName() ?></span>
+        <?php if($_rule->getDescription()): ?>
+        <span class="rewardpointsrule-rule-description-policy"><?php echo ': '.$processor->filter($_rule->getDescription()) ?></span>
+        <?php endif; ?>
+        <?php if ($_rule->getToDate()): ?>
+        <br/>
+        <span class="rewardpointsrule-rule-date-policy">
+            <?php echo $this->__('It is valid until %s', $this->formatDate($_rule->getToDate(), Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM)) ?>
+        </span>
+        <?php endif ?>
+    </li>
+    <?php } ?>
+        
+    <?php foreach ($_salesSpending as $_rule): ?>
+    <li>
+        <span class="rewardpointsrule-rule-name-policy"><?php echo $_rule->getName() ?></span>:
+        <?php if($_rule->getDescription()): ?>
+        <span class="rewardpointsrule-rule-description-policy"><?php echo ': '.$processor->filter($_rule->getDescription()) ?></span>
+        <?php endif; ?>
+        <?php if ($_rule->getToDate()): ?>
+        <br/>
+        <span class="rewardpointsrule-rule-date-policy">
+            <?php echo $this->__('It is valid until %s', $this->formatDate($_rule->getToDate(), Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM)) ?>
+        </span>
+        <?php endif ?>
+    </li>
+    <?php endforeach ?>
+</ul>
+<?php endif ?>

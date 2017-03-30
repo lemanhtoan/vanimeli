@@ -1,0 +1,472 @@
+<?php
+/**
+ * Register form
+ */
+?>
+<?php
+$store_id = Mage::app()->getStore()->getStoreId();
+$check_responsvie = Mage::getStoreConfig('affiliateplus/style_config/responsive_enable', $store_id);
+ if($check_responsvie) {
+    $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+    $class_name_col = 'col-lg-6 col-md-6 col-sm-12 col-xs-12';
+} else {
+    $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+    $class_name_col = 'col-lg-6 col-md-6 col-sm-6 col-xs-6';
+}
+ $class_name_full = 'col-lg-16 col-md-12 col-sm-12 col-xs-12';
+?>
+
+<div class="aff-main-content  <?php echo $class_name; ?>">
+    <div class="aff-title">
+        <h2><?php echo $this->__('Affiliate Registration'); ?></h2>
+    </div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <div class="my-account">
+        <form id="signup_affiliate_account_form" role="form"  method="post" action="<?php echo $this->getUrl('affiliateplus/account/createPost') ?>">
+<?php //if (!$this->customerLoggedIn()):  ?>
+            <?php if (!$this->customerLoggedIn()): ?>
+                <div class="form-group">
+                    <div class="<?php echo $class_name_col; ?>">
+                        <label class="required" for="firstname"><?php echo $this->__('First Name') ?><em>*</em></label> 
+                        <input type="text" placeholder="<?php echo $this->__('First Name') ?>" class="form-control input-text required-entry" title="First Name" name="firstname" id="firstname" value="<?php echo $this->getFormData('firstname') ?>">
+                    </div>
+                    <div class="<?php echo $class_name_col; ?>">
+                        <label class="required" for="lastname"><?php echo $this->__('Last Name') ?><em>*</em></label>
+                        <input type="text" placeholder="<?php echo $this->__('Last Name') ?>"  class="form-control input-text required-entry" title="Last Name"  name="lastname" id="lastname" value="<?php echo $this->getFormData('lastname') ?>">             
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="<?php echo $class_name_col; ?>">
+                        <label for="email_address" class="required"><?php echo $this->__('Email Address') ?><em>*</em></label>
+
+                        <input type="text" placeholder="<?php echo $this->__('Email Address') ?>" name="email" id="email_address" onchange="checkEmailRegister('<?php echo $this->getCheckCustomerEmailUrl(); ?>', 'signup_account_account_form');" title="<?php echo $this->__('Email Address') ?>" class="form-control input-text validate-email required-entry" value="<?php echo $this->getFormData('email') ?>" />
+                        <span id="affiliate-please-wait-email" style="display:none;" class="opc-please-wait">
+                            <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" class="v-middle" alt="" /> &nbsp; <?php echo $this->__('Checking email address') ?>...
+                        </span>
+                        <div id="affiliate_message_hidden_email" class="affiliate_message"></div>
+                        <div class="affiliate_message" id="affiliate_message_email" style="display:none">
+    <?php echo $this->__('This username is already existed.  Please use a different one.'); ?>
+                        </div>
+                    </div>
+                    <!--Added Adam (27/08/2016): add key shop to affiliate-->
+                    <div class="<?php echo $class_name_col; ?>">
+                        <label for="key_shop" class="required"><?php echo $this->__('Key Shop') ?><em>*</em></label>
+
+                        <input type="text" placeholder="<?php echo $this->__('Key Shop') ?>" name="key_shop" id="key_shop" onchange="checkKeyShop('<?php echo $this->getCheckKeyShopUrl(); ?>', 'signup_account_account_form');" title="<?php echo $this->__('Key Shop') ?>" class="form-control input-text required-entry" value="<?php echo $this->getFormData('key_shop') ?>" />
+                        <span id="affiliate-please-wait-key-shop" style="display:none;" class="opc-please-wait">
+                            <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" class="v-middle" alt="" /> &nbsp; <?php echo $this->__('Checking key shop') ?>...
+                        </span>
+                        <div id="affiliate_message_hidden_key_shop" class="affiliate_message"></div>
+                        <div class="affiliate_message" id="affiliate_message_key_shop" style="display:none">
+                            <?php echo $this->__('This key shop is already existed. Please use a different one.'); ?>
+                        </div>
+                    </div>
+                </div>
+    <?php if (0 && Mage::helper('core')->isModuleOutputEnabled('Mage_Newsletter')): ?>
+                    <div class="checkbox form-group">
+                        <div class="<?php echo $class_name_full; ?>">
+                            <label>
+                                <input type="checkbox" name="is_subscribed" title="<?php echo $this->__('Sign up for our Newsletters') ?>" value="1" id="is_subscribed"<?php if ($this->getFormData('is_subscribed')): ?> checked="checked"<?php endif; ?> class="checkbox" /> <?php echo $this->__('Sign up for our Newsletters') ?>
+                            </label>
+                        </div>
+                    </div>
+    <?php endif ?>
+            <!--Changed By Adam 02/05/2015: fix loi CSS cho dob, tax, gender -->
+                <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
+                <?php if ($_dob->isEnabled()): ?>
+                    <div class="form-group">
+                        <div class="<?php echo $class_name_col; ?>">
+                            <?php echo $_dob->setDate($this->getFormData('dob'))->toHtml() ?>
+                        </div>
+                    </div>
+                <?php endif ?>
+                <?php $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat') ?>
+                <?php if ($_taxvat->isEnabled()): ?>
+                    <div class="form-group">
+                        <div class="<?php echo $class_name_col; ?>">
+                            <?php echo $_taxvat->setTaxvat($this->getFormData('taxvat'))->toHtml() ?>
+                        </div>
+                    </div>
+                <?php endif ?>
+                <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
+                <?php if ($_gender->isEnabled()): ?>
+                    <div class="form-group">
+                        <div class="<?php echo $class_name_col; ?>">
+                            <?php echo $_gender->setGender($this->getFormData('gender'))->toHtml() ?>
+                        </div>
+                    </div>
+                <?php endif ?>
+                <div class="form-group">
+                    <div class="<?php echo $class_name_col; ?>">
+                        <label for="password" class="required"><?php echo $this->__('Password') ?><em>*</em></label>
+
+                        <input type="password" placeholder="<?php echo $this->__('Password') ?>" name="password" id="password" title="<?php echo $this->__('Password') ?>" class="form-control input-text required-entry validate-password" />
+                    </div>  
+
+                    <div class="<?php echo $class_name_col; ?>">
+                        <label for="confirmation" class="required"><?php echo $this->__('Confirm Password') ?><em>*</em></label>
+
+                        <input type="password" placeholder="<?php echo $this->__('Confirm Password') ?>"  name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="form-control input-text required-entry validate-cpassword" />
+
+                    </div> 
+                </div>
+<?php endif ?>
+            <!--/ul>
+    </div>
+<?php //endif  ?>
+    
+            <?php if ($this->requiredAddress()): ?>
+                            <div class="fieldset">
+                                    <h2 class="legend"><?php echo $this->__('Address Information') ?></h2>
+                                    <ul class="form-list"-->
+    <?php if ($this->customerHasAddresses()): ?>
+                    <div class="form-group">
+                        <div class="<?php echo $class_name_full; ?>">
+                            <label for="customer-address-select"><?php echo $this->__('Select an address from your address book or enter a new address.') ?></label>
+
+        <?php echo $this->getAddressesHtmlSelect('account') ?>
+                        </div>
+                    </div>
+    <?php endif; ?>
+                <div class="form-group" id="account-new-address-form" <?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
+                    <fieldset>
+                        <input  type="hidden"  name="account[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="account:address_id" />
+
+                        <div class="form-group">
+                            <div class="<?php echo $class_name_full; ?>">
+                                <label for="account:street1" class="required"><?php echo $this->__('Address') ?><em>*</em></label>
+
+                                <input type="text" placeholder="<?php echo $this->__('Address') ?>" title="<?php echo $this->__('Street Address') ?>" name="account[street][]" id="account:street1" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet(1)) ?>" class="form-control input-text required-entry" />
+                            </div>
+                        </div>
+    <?php
+    for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++):
+        ?>
+                            <div class="form-group">
+                                <div class="<?php echo $class_name_full; ?>">
+                                    <input type="text" placeholder="<?php echo $this->__('Street Address') ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" name="account[street][]" id="account:street<?php echo $_i ?>" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet($_i)) ?>" class="input-text form-control" />
+                                </div>
+                            </div>
+    <?php endfor ?>
+
+                        <div class="form-group">
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="account:city" class="required"><?php echo $this->__('City') ?><em>*</em></label>
+
+                                <input type="text" placeholder="<?php echo $this->__('City') ?>" title="<?php echo $this->__('City') ?>" name="account[city]" value="<?php echo $this->htmlEscape($this->getAddress()->getCity()) ?>" class="input-text required-entry form-control" id="customer:city" />
+                            </div>
+                        
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="account:region_id" class="required"><?php echo $this->__('State/Province') ?><em>*</em></label>
+
+                                <select id="account:region_id" name="account[region_id]" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
+                                    <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                                </select>
+                                <script type="text/javascript">
+                                    //<![CDATA[
+                                    $('account:region_id').setAttribute('defaultValue', "<?php echo $this->getAddress()->getRegionId() ?>");
+                                    //]]>
+                                </script>
+                                <input type="text" placeholder="<?php echo $this->__('Region') ?>" id="account:region" name="account[region]" value="<?php echo $this->htmlEscape($this->getAddress()->getRegion()) ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text form-control" style="display:none;" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="account:postcode" class="required"><?php echo $this->__('Zip/Postal Code') ?><em>*</em></label>
+
+                                <input type="text" placeholder="<?php echo $this->__('Zip/Postal Code') ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" name="account[postcode]" id="account:postcode" value="<?php echo $this->htmlEscape($this->getAddress()->getPostcode()) ?>" class="input-text validate-zip-international required-entry form-control" />
+
+                            </div>
+                        
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="account:country_id" class="required"><?php echo $this->__('Country') ?><em>*</em></label>
+
+    <?php echo $this->getCountryHtmlSelect('account') ?>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="account:telephone" class="required"><?php echo $this->__('Telephone') ?><em>*</em></label>
+
+                                <input type="text" placeholder="<?php echo $this->__('Telephone') ?>" name="account[telephone]" value="<?php echo $this->htmlEscape($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry form-control" id="account:telephone" />
+                            </div>
+                      
+                            <div class="<?php echo $class_name_col; ?>">
+                                <label for="account:fax"><?php echo $this->__('Fax') ?></label>
+
+                                <input type="text" placeholder="<?php echo $this->__('Fax') ?>"  name="account[fax]" value="<?php echo $this->htmlEscape($this->getAddress()->getFax()) ?>" title="<?php echo $this->__('Fax') ?>" class="input-text form-control" id="account:fax" />
+                            </div>
+                        </div>
+
+
+                    </fieldset>
+                </div>
+                <!--/ul>
+        </div>
+<?php endif ?>
+
+<div class="fieldset">
+<h2 class="legend"><?php echo $this->__('Affiliate Account Information'); ?></h2>
+<ul class="form-list"-->
+<?php if ($this->getFormData('account_name')): ?>
+                <div class="form-group">
+                    <div class="<?php echo $class_name_full; ?>">
+                        <label for="account_name"><?php echo $this->__('Name: '); ?></label>
+
+                        <strong>
+                            <span><?php echo $this->getFormData('account_name') ?></span>
+                        </strong>
+                        <input id="account_name" type="hidden" title="<?php echo $this->__('Name'); ?>" name="account_name"  value="<?php echo $this->getFormData('account_name') ?>"/>
+
+                        <div id="affiliate_message_hidden" class="affiliate_message"></div>
+                    </div>
+                </div>
+<?php endif ?>
+            <div class="form-group">
+                <div class="<?php echo $class_name_col; ?>">
+<?php if ($this->requiredPaypal()): ?>
+                        <label class="required" for="paypal_email"><?php echo $this->__('Paypal Email'); ?><em>*</em></label>
+
+                        <input id="paypal_email" placeholder="<?php echo $this->__('Paypal Email') ?>"  class="input-text required-entry validate-email form-control" type="text" title="<?php echo $this->__('Paypal Email'); ?>" name="paypal_email" value="<?php echo $this->getFormData('paypal_email') ?>"/>
+
+<?php else: ?>
+                        <label for="paypal_email"><?php echo $this->__('Paypal Email'); ?></label>
+                        <div class="input-box">
+                            <input id="paypal_email" placeholder="<?php echo $this->__('Paypal Email') ?>" class="input-text validate-email" type="text" title="<?php echo $this->__('Paypal Email'); ?>" name="paypal_email" value="<?php echo $this->getFormData('paypal_email') ?>"/>
+                        </div>
+<?php endif ?>
+                </div>
+           
+                <div class="<?php echo $class_name_col; ?>">
+                    <label for="notification"><?php echo $this->__('Receive notification emails') ?></label>
+
+                    <select name="notification" id="notification" class="input-select form-control">
+                        <option value="0"><?php echo $this->__('No') ?></option>
+                        <option value="1" selected="selected"><?php echo $this->__('Yes') ?></option>
+                    </select>
+                </div>
+            </div>
+
+<?php
+//hainh update for adding Referring WebSite field
+//22-04-2014
+?>
+            <!-- hainh 21-07-2014 -->               
+            <div class="form-group">
+                <div class="<?php echo $class_name_col; ?>">
+                    <label for="referring_website"><?php echo $this->__('Referring Website'); ?></label>
+
+                    <input id="referring_website" placeholder="<?php echo $this->__('Referring Website') ?>" class="input-text form-control" type="text" title="<?php echo $this->__('Referring Website'); ?>" name="referring_website" value=""/>
+
+                </div>
+           
+                <div class="<?php echo $class_name_col; ?>">
+                    <label for="referred_by"><?php echo $this->__('Referred By'); ?></label>&nbsp; (<?php echo $this->__('Email Address') ?>)
+
+<!--                            <input id="referred_by" class="input-text" type="text" title="<?php echo $this->__('Referred By'); ?>" name="referred_by" value=""/><br>-->
+                    <input id="referred_by" placeholder="<?php echo $this->__('Referred By') ?>" onchange="checkReferredEmail('<?php echo $this->getCheckReferredEmailUrl(); ?>', 'signup_account_account_form');" class="input-text form-control" type="text" title="<?php echo $this->__('Referred By'); ?>" name="referred_by" value=""/>
+                    <span id="affiliateplus-please-wait-referredemail" style="display:none;" class="opc-please-wait">
+                        <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" class="v-middle" alt="" /> &nbsp; <?php echo $this->__('Checking email address') ?>...
+                    </span>
+                    <div id="affiliateplus_message_hidden_referredemail" class="affiliate_message"></div>
+                    <div class="affiliate_message" id="affiliate_message_referredemail" style="display:none">
+<?php echo $this->__('There is no affiliate account with this email address. Please enter a different one.'); ?>
+                    </div>
+                </div>
+            </div>
+
+
+
+<?php $termsandconditions = Mage::getStoreConfig('affiliateplus/account/terms_and_conditions'); ?>
+            <?php if (($termsandconditions) && ($termsandconditions != '')): ?>
+                <div class="form-group">
+                    <div class="<?php echo $class_name_full; ?>">
+                        <label class="required" for="accept_terms"><?php echo $this->__('Terms and Conditions'); ?><em>*</em></label>
+                        <div>
+                            <textarea disabled class="form-control"  style="height:200px"><?php echo Mage::getStoreConfig('affiliateplus/account/terms_and_conditions'); ?></textarea>                        
+                        </div>
+                        <div class="checkbox <?php echo $class_name_full; ?>">
+                            <input  class ="required required-entry" placeholder="<?php echo $this->__('Terms and Conditions') ?>" type="checkbox" name="accept-terms" id="accept-terms">  <?php echo $this->__('I agree to the terms & conditions') ?></div>
+                    </div>    </div>
+<?php endif ?>
+            <!-- end editing -->
+
+            <div class="form-group">
+                <div class="<?php echo $class_name_col; ?>">
+                    <label class="required" for="account_captcha"><?php echo $this->__('Verification'); ?><em>*</em></label>
+                    <div class="input-box">
+                        <img src="<?php echo $this->getUrl('affiliateplus/account/imagecaptcha'); ?>" id="account_captcha_image" />
+                        <span id="affiliate-please-wait-captcha" style="display:none;" class="opc-please-wait">
+                            <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" class="v-middle" alt="" /> &nbsp; <?php echo $this->__('Getting new captcha') ?>...
+                        </span>
+                        <a href="javascript:void(0);" onclick="refreshCaptchaImage();
+                                return false;" id="affiliate-captcha-link"><?php echo $this->__("Refresh"); ?></a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="<?php echo $class_name_col; ?>">
+                    <input id="account_captcha" placeholder="<?php echo $this->__('Verification') ?>" class="input-text required-entry form-control" type="text" title="<?php echo $this->__('Captcha code') ?>" name="account_captcha" />
+                </div>
+            </div>
+			<p style="float:right" class="required"><?php echo $this->__('* Required Fields') ?></p>
+            <div class="buttons-set">
+                <button type="submit" title="<?php echo $this->__('Save'); ?>" class="button button-config">
+                    <span>
+                        <span><?php echo $this->__('Save') ?></span>
+                    </span>
+                </button>                 
+                <p class="back-link">
+                    <a href="javascript:history.go(-1)">
+                        <button type="button" title="<?php echo $this->__('Save'); ?>" class="button button-config" onclick="javascript:history.go(-1)">
+                            <span>
+                                <span><?php echo $this->__('Back') ?></span>
+                            </span>
+                        </button>                        
+                    </a>
+                </p>
+            </div>
+
+        </form>	
+    </div>
+    <script type="text/javascript">
+        //<![CDATA[
+        if ($('account-address-select')) {
+            $('account-address-select').value = "<?php echo $this->getFormData('account_address_id') ?>";
+            lsRequestTrialNewAddress($('account-address-select').value);
+        }
+        var signupAffiliateAccountForm = new VarienForm('signup_affiliate_account_form', true);
+
+<?php if ($this->requiredAddress()): ?>
+            var regionUpdate = new RegionUpdater('account:country_id', 'account:region', 'account:region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'postcode');
+<?php endif ?>
+
+        function lsRequestTrialNewAddress(addressId) {
+            if (addressId == "") {
+                $('account-new-address-form').show();
+            } else {
+                $('account-new-address-form').hide();
+            }
+        }
+
+        function refreshCaptchaImage() {
+            var url = '<?php echo $this->getUrl('affiliateplus/account/refreshcaptcha') ?>';
+            $('account_captcha_image').hide();
+            $('affiliate-captcha-link').hide();
+            $('affiliate-please-wait-captcha').show();
+            new Ajax.Request(url, {
+                method: 'get',
+                onSuccess: function(transport) {
+                    var imageCapcha = new Image();
+                    imageCapcha.src = transport.responseText;
+                    $('account_captcha_image').src = imageCapcha.src;
+                    $('affiliate-please-wait-captcha').hide();
+                    $('account_captcha_image').show();
+                    $('affiliate-captcha-link').show();
+                },
+                onException: function(xhr, e) {
+                    $('affiliate-please-wait-captcha').hide();
+                    $('account_captcha_image').show();
+                    $('affiliate-captcha-link').show();
+                    alert('Exception: ' + e);
+                }
+            });
+        }
+
+        function checkEmailRegister(requestUrl, form) {
+            var email_address = $('email_address').value;
+            var params = {email_address: email_address};
+            $('affiliate-please-wait-email').show();
+            $('affiliate_message_hidden_email').hide();
+            new Ajax.Updater(
+                    'affiliate_message_hidden_email',
+                    requestUrl,
+                    {
+                        method: 'get',
+                        onComplete: function() {
+                            endCheckEmailRegister();
+                        },
+                        onSuccess: '',
+                        onFailure: '',
+                        parameters: params,
+                        postBody: params
+                    }
+            );
+        }
+
+        /*Changed By Adam 12/09/2014: check referred by email before register*/
+        function endCheckEmailRegister() {
+            $('affiliate-please-wait-email').hide();
+            $('affiliate_message_hidden_email').show();
+            if ($('is_valid_email').value == '0')
+                $('email_address').value = '';
+        }
+
+
+        function checkReferredEmail(requestUrl, form) {
+            var email_address = $('referred_by').value;
+            var params = {email_address: email_address};
+            $('affiliateplus-please-wait-referredemail').show();
+            $('affiliateplus_message_hidden_referredemail').hide();
+            new Ajax.Updater(
+                    'affiliateplus_message_hidden_referredemail',
+                    requestUrl,
+                    {
+                        method: 'get',
+                        onComplete: function() {
+                            endCheckReferredEmail();
+                        },
+                        onSuccess: '',
+                        onFailure: '',
+                        parameters: params,
+                        postBody: params
+                    }
+            );
+        }
+
+        function endCheckReferredEmail() {
+            $('affiliateplus-please-wait-referredemail').hide();
+            $('affiliateplus_message_hidden_referredemail').show();
+            //        if ($('is_valid_email').value == '0')
+            //            $('email_address').value = '';
+        }
+
+        /**
+         * Changed By Adam (27/08/2016): check key shop before register
+         */
+        function checkKeyShop(requestUrl, form) {
+            var key_shop = $('key_shop').value;
+            var params = {key_shop: key_shop};
+            $('affiliate-please-wait-key-shop').show();
+            $('affiliate_message_hidden_key_shop').hide();
+            new Ajax.Updater(
+                'affiliate_message_hidden_key_shop',
+                requestUrl,
+                {
+                    method: 'get',
+                    onComplete: function() {
+                        endCheckKeyShop();
+                    },
+                    onSuccess: '',
+                    onFailure: '',
+                    parameters: params,
+                    postBody: params
+                }
+            );
+        }
+
+        /**
+         * Changed By Adam (27/08/2016): end check key shop before register
+         */
+        function endCheckKeyShop() {
+            $('affiliate-please-wait-key-shop').hide();
+            $('affiliate_message_hidden_key_shop').show();
+            if ($('is_valid_key_shop').value == '0')
+                $('key_shop').value = '';
+        }
+        //]]>
+    </script>
+</div>

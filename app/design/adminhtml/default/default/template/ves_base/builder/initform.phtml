@@ -1,0 +1,938 @@
+<?php
+  $animations = $this->getCSSAnimations();
+  $row_class = $this->getRowClass();
+  $row_repeats = $this->getRowRepeats();
+  $row_attachments = $this->getRowAttachments();
+  $row_positions = $this->getRowPositions();
+  $widget_class = $this->getWidgetClasses();
+  $offcanvas_types = $this->getOffCanvasTypes();
+  $offcol_types = $this->getOffColTypes();
+?>
+<div style="display:none" id="backup_layout_profiles">
+	<?php
+		if($backup_params) {
+			foreach($backup_params as $key=>$val) {
+				?>
+				<textarea name="<?php echo $key; ?>_params" id="<?php echo $key; ?>_params" class="textarea hide backup_params" style="width: 400px; height: 200px"><?php echo $val; ?></textarea>
+				<?php
+			}
+		}
+	?>
+	<textarea name="default_params" id="default_params" class="textarea hide backup_params" style="width: 400px; height: 200px"><?php echo $params; ?></textarea>
+	<textarea name="block_widgets" id="block_widgets" class="textarea hide block_widgets" style="width: 400px; height: 200px"><?php echo $block_widgets_json; ?></textarea>
+</div>
+<?php
+	$_storeBaseUrl = str_replace('index.php', '', Mage::getBaseUrl());
+?>
+<script type="text/javascript">
+	/*function get all widgets information*/
+	function getWidgetsInfo(widget_type) {
+		var $widgets = jQuery.parseJSON('<?php echo isset($widgets_json)?$widgets_json:''; ?>');
+		var $widget = null;
+		if(widget_type != "" && $widgets) {
+			widget_type = widget_type.replace(/\\/g, '/');
+			$widgets.each(function(el){
+				if(el.type == widget_type) {
+					$widget = el;
+					return;
+				}
+			})
+		}
+
+		return $widget;
+	}
+	function getWidgetShortcode(widget_id) {
+ 		var $shortcode = "";
+ 		var block_widgets = "";
+ 		if(jQuery("#block_widgets").length > 0) {
+ 			block_widgets = jQuery("#block_widgets").val();
+ 		}
+ 		if(block_widgets && block_widgets != "") {
+ 			var $block_widgets = jQuery.parseJSON(block_widgets);
+			if(widget_id != "" && $block_widgets) {
+				$block_widgets.each(function(el){
+					if(el.wkey == widget_id) {
+						$shortcode = el.shortcode;
+						return;
+					}
+				})
+			}
+		}
+
+		return $shortcode;
+
+ 	}
+</script>
+<!--
+<script language="javascript" type="text/javascript" src="<?php echo $_storeBaseUrl; ?>/js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+//< ![CDATA[
+	Event.observe(window, "load", function() {
+		tinyMCE.init({
+		mode : "exact",
+		theme : "simple",
+		elements : "layout_html",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_path_location : "bottom",
+		extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
+		theme_advanced_resize_horizontal : false,
+		theme_advanced_resizing : false,
+		apply_source_formatting : true,
+		convert_urls : false,
+		force_br_newlines : true,
+		forced_root_block : "",
+   	 	force_p_newlines : false,
+		doctype : '< !DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'
+		});
+	});
+	 
+	//]]>
+</script>-->
+<!-- Widgets -->
+
+<div class="modal fade" id="mdwidgetbuttons" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title"><?php echo Mage::helper("ves_base")->__("Add element");?></h4>
+    </div>
+    <div class="modal-body">
+
+	<div id="wpo-widgetslist" class="wpo-widgetslist clearfix" style="display:none">
+		<div class="wpo-widgets clearfix">
+			<div class="widget-info"></div>
+			<div class="group-buttons showinform pull-right" id="showinform">
+				<button class="btn btn-info backtolist" type="button"><?php echo Mage::helper("ves_base")->__("Toggle List");?></button>
+			</div>
+			<div class="widgets-filter" style="display:none">
+				<div class="form-group has-success clearfix">
+					<label for="searchwidgets" class="col-lg-2 control-label"><?php echo Mage::helper("ves_base")->__("Filter By Name");?></label>
+					<div class="col-lg-10">
+						<input type="text" name="searchwidgets" id="searchwidgets">
+					</div>
+				</div>
+
+				<div class="form-group clearfix">
+					<label for="searchwidgets" class="col-lg-2 control-label"><?php echo Mage::helper("ves_base")->__("Filter By Group");?></label>
+					<div id="filterbygroups" class="col-lg-10">
+						<ul class="nav nav-pills">
+						 	<li data-option="all" class="filter-option">
+								<a href="#"><?php echo Mage::helper("ves_base")->__("All");?><span class="badge"></span></a>
+							</li>
+						 	<li data-option="typo" class="filter-option">
+								<a href="#"><?php echo Mage::helper("ves_base")->__("Typo");?><span class="badge"></span></a>
+							</li>
+					 		<li data-option="blog" class="filter-option">
+								<a href="#"><?php echo Mage::helper("ves_base")->__("Blog");?><span class="badge"></span></a>
+							</li>
+					 		<li data-option="magento" class="filter-option">
+								<a href="#"><?php echo Mage::helper("ves_base")->__("Magento");?><span class="badge"></span></a>
+							</li>
+					 		<li data-option="social" class="filter-option">
+								<a href="#"><?php echo Mage::helper("ves_base")->__("Social");?><span class="badge"></span></a>
+							</li>
+					 		<li data-option="image" class="filter-option">
+								<a href="#"><?php echo Mage::helper("ves_base")->__("Image");?><span class="badge"></span></a>
+							</li>
+					 		<li data-option="others" class="filter-option">
+								<a href="#"><?php echo Mage::helper("ves_base")->__("Others");?><span class="badge"></span></a>
+							</li>
+					 		<li data-option="content" class="filter-option">
+								<a href="#"><?php echo Mage::helper("ves_base")->__("Content");?><span class="badge"></span></a>
+							</li>
+							<li data-option="product" class="filter-option">
+								<a href="#"><?php echo Mage::helper("ves_base")->__("Product");?><span class="badge"></span></a>
+							</li>
+					 	</ul>
+			      </div>  
+				</div>
+		 	</div>
+		 	<div class="clearfix"></div>
+			<ul class="widgets_list" style="display:none">
+				<?php
+					if(isset($widgets) && $widgets) {
+						foreach($widgets as $widget) {
+				?>
+					<li class="wpo-wg-button" data-group="<?php echo $widget['group'];?>"> 
+						<div data-widget="<?php echo $widget['code'];?>" data-widgettype="<?php echo $widget['type']; ?>" id="wpo_<?php echo $widget['code'];?>">
+							<div class="wpo-wicon wpo-icon-<?php echo $widget['icon'];?>"></div>
+							<div class="widget-title" style="text-transform: capitalize"><?php echo strtolower( $widget['title'] );?></div>
+							 <i class="widget-desc"><?php echo $widget['description'];?></i>
+						</div>
+					</li>
+				<?php
+						}
+					}
+				?>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<div class="wpo-widgetform wpo-widgets clearfix" style="display:none">
+	</div>
+	<div class="widget_code" id="widget_code" style="display:none"></div>
+   </div>
+        <div class="modal-footer">
+          	<button type="button" class="btn btn-submit btn-danger"  data-type="save"><?php echo Mage::helper("ves_base")->__('Save'); ?></button>
+          	<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Mage::helper("ves_base")->__('Close'); ?></button>
+        </div>
+      </div> 
+    </div> 
+</div>
+
+<div id="widget-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="widget-mod-label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 id="widget-shortcode-label" class="modal-label" style="display:block"><?php echo Mage::helper("ves_base")->__("Widget - Edit Short Code");?></h4>
+            </div>
+            <div class="modal-body">
+            	<!-- add popup content at here-->
+            	<div class="widget_editshortcode" id="widget_editshortcode">
+            		<div class="inpt-setting fly-buttons">
+	                  <label><?php echo $this->__('Shortcode');?>:   </label>
+	                  <textarea cols="15" rows="10" type="text" name="shortcode" class="form-control input-text"></textarea>
+	                </div>  
+            	</div>
+            </div>
+
+            <div class="modal-footer">
+	          	<button type="button" class="btn btn-submit btn-submit-shortcode btn-danger"  data-type="save"><?php echo Mage::helper("ves_base")->__('Update Shortcode'); ?></button>
+	          	<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Mage::helper("ves_base")->__('Close'); ?></button>
+	        </div>
+        </div>
+    </div>
+</div>
+<div id="row-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="row-mod-label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 id="row-shortcode-label" class="modal-label" style="display:block"><?php echo Mage::helper("ves_base")->__("Row - Edit Short Code");?></h4>
+            </div>
+            <div class="modal-body">
+            	<!-- add popup content at here-->
+            	<div class="row_editshortcode" id="row_editshortcode">
+            		<div class="inpt-setting fly-buttons">
+	                  <label><?php echo $this->__('Shortcode');?>:   </label>
+	                  <textarea cols="15" rows="10" type="text" name="shortcode" class="form-control input-text"></textarea>
+	                </div>  
+            	</div>
+            </div>
+
+            <div class="modal-footer">
+	          	<button type="button" class="btn btn-submit btn-submit-shortcode btn-danger"  data-type="save"><?php echo Mage::helper("ves_base")->__('Update Shortcode'); ?></button>
+	          	<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Mage::helper("ves_base")->__('Close'); ?></button>
+	        </div>
+        </div>
+    </div>
+</div>  
+<!-- File manager -->
+
+<div id="filemanager-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="filemanager-mod-label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 id="filemanager-mod-label" class="modal-label"><?php echo Mage::helper("ves_base")->__("Image Manager");?></h4>
+                <h4 id="row-mod-label" class="modal-label" style="display:none"><?php echo Mage::helper("ves_base")->__("Row Settings");?></h4>
+                <h4 id="col-mod-label" class="modal-label" style="display:none"><?php echo Mage::helper("ves_base")->__("Column Settings");?></h4>
+                <h4 id="widget-mod-label" class="modal-label" style="display:none"><?php echo Mage::helper("ves_base")->__("Widget Settings");?></h4>
+            </div>
+            <div class="modal-body">
+            	<div id="filemanager-container" style="display:none">
+	               
+            	</div>
+                <div class="row_settings" id="row_settings" style="display:none">
+                	<div class="row-form">
+                		<ul class="nav nav-tabs" id="row_tabs">
+                			<li role="presentation" class="active"><a data-toggle="tab" href="#tab-row-layout"><?php echo $this->__("Layout");?></a></li>
+                			<li role="presentation"><a data-toggle="tab" href="#tab-row-background"><?php echo $this->__("Background");?></a></li>
+                			<li role="presentation"><a data-toggle="tab" href="#tab-row-innerbackground"><?php echo $this->__("Inner Background");?></a></li>
+                			<li role="presentation"><a data-toggle="tab" href="#tab-row-style"><?php echo $this->__("Style");?></a></li>
+                		</ul>
+                		<div class="tab-content">
+
+                			<div id="tab-row-layout" class="tab-pane fade in active"> 
+                				<div class="row">
+                					<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+	                				<div class="panel panel-primary">
+									  <div class="panel-heading"><?php echo $this->__('Layout Settings'); ?></div>
+									  <div class="panel-body">
+										    <div class="inpt-setting">
+						                      <label>
+						                          <?php echo $this->__('Enable offcanvas Sidebar');?>:
+						                           <select name="offcanvas" class="form-control select">
+						                               <?php foreach($offcanvas_types as $key=>$row): ?>
+						                                  <option value="<?php echo $key; ?>"><?php echo $row; ?></option>
+						                                <?php endforeach; ?>
+						                           </select>
+						                       </label>
+							                </div>
+			                				 <div class="inpt-setting">
+							                  <label><?php echo $this->__('Fullwidth');?>: </label>
+							                   <select name="fullwidth" class="form-control">
+							                      <option value="1"><?php echo $this->__('Yes');?></option>
+							                      <option value="0"><?php echo $this->__('No');?></option>
+							                   </select>
+							                  </div>
+
+							                  <div class="inpt-setting">
+							                  <label><?php echo $this->__('No Gutters');?>: </label>
+							                   <select name="nogutters" class="form-control">
+							                   		<option value="0"><?php echo $this->__('No');?></option>
+							                      	<option value="1"><?php echo $this->__('Yes');?></option>
+							                   </select>
+							                  </div>
+									  </div>
+									</div>
+									</div>
+									<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+										<div class="panel panel-primary">
+		                					<div class="panel-heading"><?php echo $this->__('Margin & Padding');?></div>
+										  	<div class="panel-body">
+
+								                  <div class="inpt-setting">
+								                  <label><?php echo $this->__('Padding');?>: </label>
+								                  <input type="text" name="padding" placeholder="0px 0px 0px 0px" class="form-control input-text" />
+								                  </div>
+								                  <div class="inpt-setting">
+								                  <label><?php echo $this->__('Margin');?>: </label>
+								                  <input type="text" name="margin" placeholder="0px 0px 0px 0px" class="form-control input-text" />
+								                  </div>
+						                  	</div>
+										</div>
+									</div>
+								</div>
+                			</div>
+
+                			<div id="tab-row-background" class="tab-pane fade in">
+                				<div class="row">
+                					<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+                						<div class="panel panel-primary">
+										  <div class="panel-heading"><?php echo $this->__('Background'); ?></div>
+										  <div class="panel-body">
+										  			<div class="inpt-setting fly-buttons">
+									                  <label><?php echo $this->__('Background Color');?>:   </label>
+									                  <input type="text" name="bgcolor" class="input-color form-control input-text"  data-hex="true"/>
+								                    </div>  
+								                  <div class="inpt-setting fly-buttons">
+								                  <label><?php echo $this->__('Image');?>: </label>
+								                    <input type="text" name="bgimage" class="imageuploaded form-control input-text"/>
+								                    <input type="hidden" name="hidden_row_image" class="image-path" id="row_bgimage" value=""/>
+								                    <span id="row_rmbutton" class="rmbutton btn btn-danger" onclick="return removeBackground(this);">x</span>
+								                    <div id="row_imagecontent" class="images-content row"></div>
+								                    <hr>
+
+								                    <div id="button" data-filefield="row_bgimage" class="btn btn-warning fileupload"><?php echo Mage::helper("ves_base")->__("Select Image");?></div>
+								                  </div>
+								                  <div class="inpt-setting">
+								                     <label>
+								                      <?php echo $this->__('Background Repeat');?>:
+								                       <select name="bgrepeat" class="form-control select">
+								                          <?php foreach($row_repeats as $key=>$val): ?>
+								                            <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+								                          <?php endforeach; ?>
+								                       </select>
+								                       </label>
+								                   </div> 
+								                  <div class="inpt-setting">
+								                    <label>
+								                      <?php echo $this->__('Background Position');?>:
+								                        <select name="bgposition" class="form-control select">
+								                          <?php foreach($row_positions as $key=>$val): ?>
+								                            <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+								                          <?php endforeach; ?>
+								                        </select>
+								                    </label>
+								                  </div>
+								                  <div class="inpt-setting">
+								                     <label>
+								                      <?php echo $this->__('Background Attachment');?>:
+								                       <select name="bgattachment" class="form-control select">
+								                          <?php foreach($row_attachments as $key=>$val): ?>
+								                            <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+								                          <?php endforeach; ?>
+								                       </select>
+								                       </label>
+								                   </div>
+										  </div>
+										</div>
+
+                					</div>
+                					<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+                						<div class="panel panel-primary">
+										    <div class="panel-heading"><?php echo $this->__('Parallax'); ?></div>
+										    <div class="panel-body">
+										  		<div class="inpt-setting">
+								                  <label><?php echo $this->__('Parallax Style');?>: </label>
+								                   <select name="parallax" class="form-control select">
+								                      <option value="1"><?php echo $this->__('Yes');?></option>
+								                      <option value="0"><?php echo $this->__('No');?></option>
+								                   </select>
+								                  </div>
+								                   <div class="inpt-setting">
+								                  <label><?php echo $this->__('Parallax Percent');?>: </label>
+								                  <input type="text" name="p_percent" class="form-control input-text" placeholder="50%"/>
+								                  </div>
+								                  <div class="inpt-setting">
+								                  <label><?php echo $this->__('Parallax Scroll');?>: </label>
+								                  <input type="text" name="p_scroll" class="form-control input-text" placeholder="0.4"/>
+								                  </div>
+										    </div>
+										</div>
+                					</div>
+                				</div>
+  
+                			</div>
+                			<div id="tab-row-innerbackground" class="tab-pane fade in">
+                				<div class="row">
+                					<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+                						<div class="panel panel-primary">
+										    <div class="panel-heading"><?php echo $this->__('Background'); ?></div>
+										    <div class="panel-body">
+										    	<div class="inpt-setting fly-buttons">
+								                  <label><?php echo $this->__('Inner Background Color');?>:   </label>
+								                  <input type="text" name="inbgcolor" class="input-color form-control input-text"  data-hex="true"/>
+								                    </div>  
+								                  <div class="inpt-setting fly-buttons">
+								                  <label><?php echo $this->__('Inner Background Image');?>: </label>
+								                    <input type="text" name="inbgimage" class="imageuploaded form-control input-text"/>
+								                    <input type="hidden" name="hidden_row_image" class="image-path" id="row_inbgimage" value=""/>
+								                    <span id="row_rmbutton" class="rmbutton btn btn-danger" onclick="return removeBackground(this);">x</span>
+								                    <div id="row_imagecontent" class="images-content row"></div>
+								                    <hr>
+								                    <div id="button" data-filefield="row_inbgimage" class="btn btn-warning fileupload"><?php echo Mage::helper("ves_base")->__("Select Image");?></div>
+								                  </div>
+								                  <div class="inpt-setting">
+								                     <label>
+								                      <?php echo $this->__('Background Repeat');?>:
+								                       <select name="inbgrepeat" class="form-control select">
+								                          <?php foreach($row_repeats as $key=>$val): ?>
+								                            <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+								                          <?php endforeach; ?>
+								                       </select>
+								                       </label>
+								                   </div> 
+								                  <div class="inpt-setting">
+								                    <label>
+								                      <?php echo $this->__('Background Position');?>:
+								                        <select name="inbgposition" class="form-control select">
+								                          <?php foreach($row_positions as $key=>$val): ?>
+								                            <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+								                          <?php endforeach; ?>
+								                        </select>
+								                    </label>
+								                  </div>
+								                  <div class="inpt-setting">
+								                     <label>
+								                      <?php echo $this->__('Background Attachment');?>:
+								                       <select name="inbgattachment" class="form-control select">
+								                          <?php foreach($row_attachments as $key=>$val): ?>
+								                            <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+								                          <?php endforeach; ?>
+								                       </select>
+								                       </label>
+								                   </div>
+										    </div>
+										</div>
+                					</div>
+                					<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+                						<div class="panel panel-primary">
+										    <div class="panel-heading"><?php echo $this->__('Parallax'); ?></div>
+										    <div class="panel-body">
+										    		<div class="inpt-setting">
+									                  <label><?php echo $this->__('Parallax Style');?>: </label>
+									                   <select name="inparallax" class="form-control select">
+									                      <option value="1"><?php echo $this->__('Yes');?></option>
+									                      <option value="0"><?php echo $this->__('No');?></option>
+									                   </select>
+									                  </div>
+									                   <div class="inpt-setting">
+									                  <label><?php echo $this->__('Parallax Percent');?>: </label>
+									                  <input type="text" name="inp_percent" class="form-control input-text" placeholder="50%"/>
+									                  </div>
+									                  <div class="inpt-setting">
+									                  <label><?php echo $this->__('Parallax Scroll');?>: </label>
+									                  <input type="text" name="inp_scroll" class="form-control input-text" placeholder="0.4"/>
+									                  </div>
+										    </div>
+										</div>
+                					</div>
+                				</div>
+
+                			</div>
+                			<div id="tab-row-style" class="tab-pane fade in">
+                				<div class="row">
+                					<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+                						<div class="panel panel-primary">
+										    <div class="panel-heading"><?php echo $this->__('Css Classes'); ?></div>
+										    <div class="panel-body">
+										    	<div class="inpt-setting">
+								                  <label><?php echo $this->__('Row Wrapper Class');?>: </label>
+								                  <input type="text" name="wcls" class="form-control input-text" />
+								                </div>
+
+								                <div class="inpt-setting">
+								                  <label><?php echo $this->__('Wrapper Inner Class');?>: </label>
+								                  <input type="text" name="cls" class="form-control input-text" />
+								                </div>
+								                <div class="inpt-setting">
+							                      <label>
+							                          <?php echo $this->__('Row Style');?>:
+							                           <select name="sfxcls" class="form-control select">
+							                               <?php foreach($row_class as $row): ?>
+							                                  <option value="<?php echo $row; ?>"><?php echo $row; ?></option>
+							                                <?php endforeach; ?>
+							                           </select>
+							                       </label>
+							                    </div>
+								                <div class="inpt-setting">
+								                  <label><?php echo $this->__('Row Inner Class');?>: </label>
+								                  <input type="text" name="incls" class="form-control input-text" />
+								                </div>
+										    </div>
+										</div>
+									</div>
+									<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+                						<div class="panel panel-primary">
+										    <div class="panel-heading"><?php echo $this->__('Custom Style'); ?></div>
+										    <div class="panel-body">
+										    	<div class="inpt-setting">
+								                  <label><?php echo $this->__('Inline Css');?>: </label>
+								                  <textarea cols="5" rows="5" name="css" class="form-control input-text"></textarea>
+								                  <span class="help"><?php echo $this->__('Input css code at here. It will show in property <strong>style</strong> of the element.<br/> For example: &lt;div  <strong>style</strong>="<i>Inline Css</i>"&gt;...&lt;/div&gt;');?></span>
+								                </div>
+										    </div>
+										</div>
+									</div>
+								</div>
+                				
+                				
+                			</div>
+                		</div>
+		                   <br class="inpt-setting"/>
+		                    <div class="inpt-setting" style="display:none">
+		                    <button type="submit" class="btn btn-sm btn-primary"><?php echo $this->__('Save');?></button>     
+		                  </div>  
+		              </div>
+                </div>
+				<div class="column_settings" id="column_settings" style="display:none">
+					<div class="row-form row">
+							<ul class="nav nav-tabs" id="column_tabs">
+	                			<li role="presentation" class="active"><a data-toggle="tab" href="#tab-column-layout"><?php echo $this->__("Layout");?></a></li>
+	                			<li role="presentation"><a data-toggle="tab" href="#tab-column-background"><?php echo $this->__("Background");?></a></li>
+	                			<li role="presentation"><a data-toggle="tab" href="#tab-column-style"><?php echo $this->__("Style");?></a></li>
+	                		</ul>
+	                		<div class="tab-content">
+	                			<div id="tab-column-layout" class="tab-pane fade in active">
+	                				<div class="row">
+										<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+											<div class="panel panel-primary">
+											    <div class="panel-heading"><?php echo $this->__('Layout Settings'); ?></div>
+											    <div class="panel-body">
+											    	<div class="inpt-setting">
+								                      <label>
+								                          <?php echo $this->__('Set Column As');?>:
+								                           <select name="offcol" class="form-control select">
+								                               <?php foreach($offcol_types as $key=>$row): ?>
+								                                  <option value="<?php echo $key; ?>"><?php echo $row; ?></option>
+								                                <?php endforeach; ?>
+								                           </select>
+								                       </label>
+								                    </div>
+											    </div>
+											</div>
+										</div>
+										<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+											<div class="panel panel-primary">
+											    <div class="panel-heading"><?php echo $this->__('Margin & Padding'); ?></div>
+											    <div class="panel-body">
+											    	<div class="inpt-setting">
+						                            <label><?php echo $this->__('Padding');?>: </label>
+						                            <input type="text" name="padding" placeholder="0px 0px 0px 0px" class="form-control input-text" />
+						                            </div>
+						                            <div class="inpt-setting">
+						                            <label><?php echo $this->__('Margin');?>: </label>
+						                            <input type="text" name="margin" placeholder="0px 0px 0px 0px" class="form-control input-text" />
+						                            </div>
+											    </div>
+											</div>
+										</div>
+									</div>
+	                				 
+	                				
+	                			</div>
+	                			
+	                			<div id="tab-column-background" class="tab-pane fade in">
+	                				<div class="panel panel-primary">
+									    <div class="panel-heading"><?php echo $this->__('Background'); ?></div>
+									    <div class="panel-body">
+									    	<div class="inpt-setting">
+                              					<label>
+				                              <?php echo $this->__('Background Color');?>:
+				                               <input type="text" name="bgcolor" class="form-control input-text input-color"  data-hex="true" />
+				                               </label>
+				                            </div>
+				                            <div class="inpt-setting fly-buttons">
+				                            <label><?php echo $this->__('Image');?>: </label>
+				                              <input type="text" name="bgimage" class="form-control input-text imageuploaded"/>
+				                              <input type="hidden" name="hidden_col_image" class="image-path" id="col_bgimage" value=""/>
+				                              <span id="col_rmbutton" class="rmbutton btn btn-danger" onclick="return removeBackground(this);">x</span>
+				                              <div id="col_imagecontent" class="images-content row"></div>
+				                              <hr>
+				                              <div id="button" data-filefield="col_bgimage" class="btn btn-warning fileupload"><?php echo Mage::helper("ves_base")->__("Select Image");?></div>
+				                            </div> 
+				                            <div class="inpt-setting">
+				                               <label>
+				                                <?php echo $this->__('Background Repeat');?>:
+				                                 <select name="bgrepeat" class="form-control select">
+				                                    <?php foreach($row_repeats as $key=>$val): ?>
+				                                      <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+				                                    <?php endforeach; ?>
+				                                 </select>
+				                                 </label>
+				                             </div> 
+				                            <div class="inpt-setting">
+				                              <label>
+				                                <?php echo $this->__('Background Position');?>:
+				                                 <select name="bgposition" class="form-control select">
+				                                  <?php foreach($row_positions as $key=>$val): ?>
+				                                    <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+				                                  <?php endforeach; ?>
+				                                </select>
+				                              </label>
+				                            </div>
+				                            <div class="inpt-setting">
+				                               <label>
+				                                <?php echo $this->__('Background Attachment');?>:
+				                                 <select name="bgattachment" class="form-control select">
+				                                    <?php foreach($row_attachments as $key=>$val): ?>
+				                                      <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+				                                    <?php endforeach; ?>
+				                                 </select>
+				                                 </label>
+				                             </div>
+									    </div>
+									</div>
+	                				
+	                			</div>
+	                			
+	                			<div id="tab-column-style" class="tab-pane fade in">
+	                				<div class="row">
+										<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+											<div class="panel panel-primary">
+											    <div class="panel-heading"><?php echo $this->__('Css Classes'); ?></div>
+											    <div class="panel-body">
+											    	<div class="inpt-setting">
+						                               <label>
+						                                <?php echo $this->__('Column Style');?>:
+						                                 <select name="sfxcls" class="form-control select">
+						                                    <?php foreach($row_class as $row): ?>
+						                                      <option value="<?php echo $row; ?>"><?php echo $row; ?></option>
+						                                    <?php endforeach; ?>
+						                                 </select>
+						                                 </label>
+						                            </div>
+					                				<div class="inpt-setting">
+						                              <label>
+						                                <?php echo $this->__('Addition Class');?>:
+						                                 <input type="text" name="cls" class="form-control input-text"/>
+						                              </label>
+						                            </div> 
+						                            <div class="inpt-setting">
+						                              <label><?php echo $this->__('Inner Class');?>: </label>
+						                              <input type="text" name="incls" class="form-control input-text" />
+						                            </div>
+											    </div>
+											</div>
+										</div>
+										<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+											<div class="panel panel-primary">
+											    <div class="panel-heading"><?php echo $this->__('Custom Style'); ?></div>
+											    <div class="panel-body">
+											    	<div class="inpt-setting">
+									                  <label><?php echo $this->__('Inline Css');?>: </label>
+									                  <textarea cols="5" rows="5" name="css" class="form-control input-text"></textarea>
+									                  <span class="help"><?php echo $this->__('Input css code at here. It will show in property <strong>style</strong> of the element.<br/> For example: &lt;div  <strong>style</strong>="<i>Inline Css</i>"&gt;...&lt;/div&gt;');?></span>
+									                </div>
+											    </div>
+											</div>
+										</div>
+									</div>
+	                				
+	                			</div>
+
+	                		</div>
+                             <br class="inpt-setting"/>
+                             <div class="inpt-setting" style="display:none">
+                             <button type="submit" class="btn btn-primary"><?php echo $this->__('Save');?></button>  
+                             </div>
+                        </div>
+				</div>
+				<div class="widget_settings" id="widget_settings" style="display:none">
+					<div class="row-form row">
+							<ul class="nav nav-tabs" id="widget_tabs">
+								<li role="presentation" class="active"><a data-toggle="tab" href="#tab-widget-display"><?php echo $this->__("Display On");?></a></li>
+	                			<li role="presentation"><a data-toggle="tab" href="#tab-widget-layout"><?php echo $this->__("Layout");?></a></li>
+	                			<li role="presentation"><a data-toggle="tab" href="#tab-widget-animation"><?php echo $this->__("Animation");?></a></li>
+	                			
+	                			<li role="presentation"><a data-toggle="tab" href="#tab-widget-background"><?php echo $this->__("Background");?></a></li>
+	                			
+	                			<li role="presentation"><a data-toggle="tab" href="#tab-widget-style"><?php echo $this->__("Style");?></a></li>
+	                		</ul>
+	                		<div class="tab-content">
+	                			<!-- Start content tab widget display-->
+	                			<div id="tab-widget-display" class="tab-pane fade in active">
+	                				<div class="row">
+										<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+											<div class="panel panel-primary">
+											    <div class="panel-heading"><?php echo $this->__('Display On'); ?></div>
+											    <div class="panel-body">
+											     	<div><span class="help"><?php echo $this->__('Detect mobile/tablet devices to show or not show the widget.');?></span></div>	
+						                            <div class="inpt-setting">
+						                               <label>
+						                                <?php echo $this->__('Desktop');?>:
+						                                 <select name="desktop" class="form-control select">
+						                                  <option value="1" selected="selected"><?php echo $this->__('Yes'); ?></option>
+						                                   <option value="0"><?php echo $this->__('No'); ?></option>
+						                                 </select>
+						                                 </label>
+
+						                             </div>
+						                             <div class="inpt-setting">
+						                               <label>
+						                                <?php echo $this->__('Tablet');?>:
+						                                 <select name="tablet" class="form-control select">
+						                                   <option value="1" selected="selected"><?php echo $this->__('Yes'); ?></option>
+						                                   <option value="0"><?php echo $this->__('No'); ?></option>
+						                                 </select>
+						                                 </label>
+
+						                             </div>
+						                             <div class="inpt-setting">
+						                               <label>
+						                                <?php echo $this->__('Mobile');?>:
+						                                 <select name="mobile" class="form-control select">
+						                                   <option value="1" selected="selected"><?php echo $this->__('Yes'); ?></option>
+						                                   <option value="0"><?php echo $this->__('No'); ?></option>
+						                                 </select>
+						                                 </label>
+
+						                             </div>
+											    </div>
+											</div>
+										</div>
+
+										<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+											<div class="panel panel-primary">
+											    <div class="panel-heading"><?php echo $this->__('Ajax Mode'); ?></div>
+											    <div class="panel-body">
+						                            <div class="inpt-setting">
+						                               <label>
+						                                <?php echo $this->__('Enable Ajax To Generate The Widget');?>:
+						                                 <select name="isajax" class="form-control select">
+						                                 	<option value="0" selected="selected"><?php echo $this->__('Disabled'); ?></option>
+						                                    <option value="1"><?php echo $this->__('Enable'); ?></option>
+						                                   
+						                                 </select>
+						                                 </label>
+						                                <span class="help"><?php echo $this->__('Allow generate widget shortcode via ajax. Enable to speed up the site.');?></span>
+						                             </div>
+											    </div>
+											</div>
+										</div>
+										
+									</div>
+	                				
+	                			</div>
+	                			<!-- End content tab widget display-->
+	                			<div id="tab-widget-layout" class="tab-pane fade in">
+	                				<div class="panel panel-primary">
+									    <div class="panel-heading"><?php echo $this->__('Margin & Padding'); ?></div>
+									    <div class="panel-body">
+									    	<div class="inpt-setting">
+							                  <label><?php echo $this->__('Padding');?>: </label>
+							                  <input type="text" name="padding" placeholder="0px 0px 0px 0px" class="form-control input-text" />
+							                  </div>
+							                  <div class="inpt-setting">
+							                  <label><?php echo $this->__('Margin');?>: </label>
+							                  <input type="text" name="margin" placeholder="0px 0px 0px 0px" class="form-control input-text" />
+							                  </div>
+									    </div>
+									</div>
+	                			</div>
+	                			<div id="tab-widget-animation" class="tab-pane fade in">
+	                				<div class="panel panel-primary">
+									    <div class="panel-heading"><?php echo $this->__('Animation Settings'); ?></div>
+									    <div class="panel-body">
+									    	<div class="inpt-setting">
+				                               <label>
+				                                <?php echo $this->__('CSS3 Animation');?>:
+				                                 <select name="sfxa" class="form-control select effect-list">
+				                                    <?php foreach($animations as $row): ?>
+				                                      <option value="<?php echo $row['value']; ?>"><?php echo $row['label']; ?></option>
+				                                    <?php endforeach; ?>
+				                                 </select>
+				                                 </label>
+				                            </div>
+				                            <div class="inpt-setting">
+				                              <label>
+				                                <?php echo $this->__('Animation Duration');?>:
+				                                 <input type="text" name="sfxaduration" class="form-control input-text" data-toggle="tooltip" data-placement="top" title="Change the animation duration. For example: 2s"/>
+				                              </label>
+				                            </div>
+				                            <div class="inpt-setting">
+				                              <label>
+				                                <?php echo $this->__('Animation Delay');?>:
+				                                 <input type="text" name="sfxadelay" class="form-control input-text" data-toggle="tooltip" data-placement="top" title="Delay before the animation starts. For example: 5s"/>
+				                              </label>
+				                            </div>
+				                            <div class="inpt-setting">
+				                              <label>
+				                                <?php echo $this->__('Animation Offset');?>:
+				                                 <input type="text" name="sfxaoffset" class="form-control input-text" data-toggle="tooltip" data-placement="top" title="Distance to start the animation (related to the browser bottom). For example: 10"/>
+				                              </label>
+				                            </div>
+				                            <div class="inpt-setting">
+				                              <label>
+				                                <?php echo $this->__('Animation Iteration');?>:
+				                                 <input type="text" name="sfxaiteration" class="form-control input-text" data-toggle="tooltip" data-placement="top" title="Number of times the animation is repeated. For example: 10"/>
+				                              </label>
+				                            </div>
+									    </div>
+									</div>
+	                				
+	                			</div>
+	                			
+	                			<div id="tab-widget-background" class="tab-pane fade in">
+	                				<div class="panel panel-primary">
+									    <div class="panel-heading"><?php echo $this->__('Background'); ?></div>
+									    <div class="panel-body">
+									    	<div class="inpt-setting">
+				                              <label>
+				                              <?php echo $this->__('Background Color');?>:
+				                               <input type="text" name="bgcolor" class="form-control input-text input-color"  data-hex="true" />
+				                               </label>
+				                            </div>
+				                            <div class="inpt-setting fly-buttons">
+				                            <label><?php echo $this->__('Image');?>: </label>
+				                              <input type="text" name="bgimage" class="form-control input-text imageuploaded"/>
+				                              <input type="hidden" name="hidden_widget_image" class="image-path" id="widget_bgimage" value=""/>
+				                              <span id="widget_rmbutton" class="rmbutton btn btn-danger" onclick="return removeBackground(this);">x</span>
+				                              <div id="widget_imagecontent" class="images-content row"></div>
+				                              <hr>
+				                              <div id="button" data-filefield="widget_bgimage" class="btn btn-warning fileupload"><?php echo Mage::helper("ves_base")->__("Select Image");?></div>
+				                            </div> 
+				                            <div class="inpt-setting">
+				                               <label>
+				                                <?php echo $this->__('Background Repeat');?>:
+				                                 <select name="bgrepeat" class="form-control select">
+				                                    <?php foreach($row_repeats as $key=>$val): ?>
+				                                      <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+				                                    <?php endforeach; ?>
+				                                 </select>
+				                                 </label>
+				                             </div> 
+				                            <div class="inpt-setting">
+				                              <label>
+				                                <?php echo $this->__('Background Position');?>:
+				                                 <select name="bgposition" class="form-control select">
+				                                  <?php foreach($row_positions as $key=>$val): ?>
+				                                    <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+				                                  <?php endforeach; ?>
+				                                </select>
+				                              </label>
+				                            </div>
+				                            <div class="inpt-setting">
+				                               <label>
+				                                <?php echo $this->__('Background Attachment');?>:
+				                                 <select name="bgattachment" class="form-control select">
+				                                    <?php foreach($row_attachments as $key=>$val): ?>
+				                                      <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+				                                    <?php endforeach; ?>
+				                                 </select>
+				                                 </label>
+				                             </div>	
+									    </div>
+									</div>
+	                				
+	                			</div>
+	                			
+	                			<div id="tab-widget-style" class="tab-pane fade in">
+	                				<div class="row">
+										<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+											<div class="panel panel-primary">
+											    <div class="panel-heading"><?php echo $this->__('Css Classes'); ?></div>
+											    <div class="panel-body">
+											    	<div class="inpt-setting">
+						                              <label>
+						                                <?php echo $this->__('Addition Class');?>:
+						                                 <input type="text" name="cls" class="form-control input-text"/>
+						                              </label>
+						                            </div>
+						                            <div class="inpt-setting">
+						                               <label>
+						                                <?php echo $this->__('Widget Box Style');?>:
+						                                 <select name="sfxcls" class="form-control select">
+						                                    <?php foreach($widget_class as $key=>$val): ?>
+						                                      <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+						                                    <?php endforeach; ?>
+						                                 </select>
+						                                 </label>
+
+						                             </div>
+											    </div>
+											</div>
+										</div>
+										<div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
+											<div class="panel panel-primary">
+											    <div class="panel-heading"><?php echo $this->__('Custom Style'); ?></div>
+											    <div class="panel-body">
+											    	<div class="inpt-setting">
+									                  <label><?php echo $this->__('Inline Css');?>: </label>
+									                  <textarea cols="5" rows="5" name="css" class="form-control input-text"></textarea>
+									                  <span class="help"><?php echo $this->__('Input css code at here. It will show in property <strong>style</strong> of the element.<br/> For example: &lt;div  <strong>style</strong>="<i>Inline Css</i>"&gt;...&lt;/div&gt;');?></span>
+									                </div>
+											    </div>
+											</div>
+										</div>
+									</div>
+	                				
+	                			</div>
+	                		</div>
+                           
+                            
+                            <br class="inpt-setting"/>
+                             <div class="inpt-setting" style="display:none">
+                             <button type="submit" class="btn btn-primary"><?php echo $this->__('Save');?></button>
+                             </div>  
+                        </div>
+				</div>
+            </div>
+            <div class="modal-footer">
+	          	<button type="button" class="btn btn-submit btn-danger"  data-type="save" style="display:none"><?php echo Mage::helper("ves_base")->__('Save'); ?></button>
+	          	<button type="button" class="btn btn-submit btn-submit-column_settings btn-danger"  data-type="save" style="display:none"><?php echo Mage::helper("ves_base")->__('Save'); ?></button>
+	          	<button type="button" class="btn btn-submit btn-submit-row_settings btn-danger"  data-type="save" style="display:none"><?php echo Mage::helper("ves_base")->__('Save'); ?></button>
+	          	<button type="button" class="btn btn-submit btn-submit-widget_settings btn-danger"  data-type="save" style="display:none"><?php echo Mage::helper("ves_base")->__('Save'); ?></button>
+	          	<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo Mage::helper("ves_base")->__('Close'); ?></button>
+	        </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+  function removeBackground(obj) {
+  	jQuery(obj).parent().find(".imageuploaded").val('');
+  }
+
+</script>

@@ -1,0 +1,47 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Rewardpoints Account Dashboard
+ * 
+ * @see Magestore_RewardPoints_Block_Account_Dashboard
+ */
+?>
+
+<?php if ($this->getCanShow()): ?>
+    <strong class="rewardpoints-title"><?php echo $this->__('How to spend points') ?></strong><br />
+    <span class="rewardpoints-title-content"><?php 
+        echo $this->__('You can use points in your reward balance as discount for your future purchases at our store. Please note that redeeming to cash is not allowed. ').'&nbsp;';
+        if(Mage::helper('rewardpoints')->isEnablePolicy()) echo $this->__('For more information, please see our %s.', $this->getRewardPolicyLink());
+    ?></span><br />
+    <?php $rate = $this->getSpendingRate() ?>
+    <?php if ($rate && $rate->getId()): ?>
+        <!--strong class="rewardpoints-money rewardpoints-title-rate"><?php //echo $this->__('Spending Rate:') ?></strong><br /-->
+        <ul class="rewardpoints-dashboard-ul">
+            <li>
+                <span><?php echo $this->__('Each %s can be redeemed for %s.',
+            '<strong class="rewardpoints-money">' . Mage::helper('rewardpoints/point')->format($rate->getPoints()) . '</strong>',
+            '<strong class="rewardpoints-money">' . $this->getCurrentMoney($rate) . '</strong>'
+        ) ?></span>
+            </li>
+        </ul>
+    <?php endif ?>
+<?php endif ?>

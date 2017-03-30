@@ -1,0 +1,22 @@
+<?php 
+$product_info_block = Mage::registry("product_info_block"); 
+$_helper = $product_info_block->helper('catalog/output'); 
+$_product = $product_info_block->getProduct(); 
+$layout = $this->getConfig("layout", "default");
+$config_data = $this->getData();
+
+if($layout != "default" && $layout != "") {
+	$custom_template = "ves/productbuilder/view/media/{$layout}.phtml";
+	if($meda_block = $product_info_block->getChild('media')) {
+		$meda_block->setConfigData($config_data)->setTemplate($custom_template);
+	}
+	
+}
+?>
+<div class="product-img-box row">
+    <div class="product-name">
+        <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+    </div>
+    <?php echo $product_info_block->getChildHtml('media') ?>
+</div>
+<div style="clear:both;"></div>

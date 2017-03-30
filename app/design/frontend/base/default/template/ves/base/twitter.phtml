@@ -1,0 +1,17 @@
+<?php
+$widgetid = rand().time();
+$enable_collapse = $this->getConfig("enable_collapse", 0);
+$custom_id = $this->getConfig("custom_id", "");
+?>
+<div <?php echo $custom_id?'id="'.$custom_id.'"':''; ?> class="block block-list block-twitter-widget">
+	<?php if(isset($title) && trim($title)!=''): ?>
+		<div class="block-title">
+			<?php if($enable_collapse): ?><span class="opener hidden-lg hidden-md" data-toggle="collapse" data-target="#widget-twitter<?php echo $widgetid; ?>"><i class="fa fa-angle-down"></i></span><?php endif; ?>
+			<strong><span><?php echo $title; ?></span></strong>
+		</div>
+	<?php endif; ?>
+	<div id="widget-twitter<?php echo $widgetid; ?>" class="widget-inner block-content <?php if($enable_collapse): ?> widget-enanle-collapse collapse in <?php endif; ?>">
+		<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/<?php echo $username ?>" data-widget-id="<?php echo $id ?>" width="<?php echo $width ?>" data-border-color="<?php echo $borderColor ?>" data-theme="<?php echo $theme ?>" data-link-color="<?php echo $linkColor ?>" height="<?php echo $height ?>"  data-show-replies="true" data-tweet-limit="<?php echo $limit; ?>" data-chrome="<?php echo $scrollbar.' '.$header.' '.$footer.' '.$border; ?>">Tweets by @<?php echo $username ?></a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</div>
+</div>

@@ -1,0 +1,336 @@
+
+
+<?php
+/**
+ * Edit Affiliate template
+ */
+?>
+
+<?php $accountData = $this->getFormData('account') ?>
+<?php
+$store_id = Mage::app()->getStore()->getStoreId();
+$check_responsvie = Mage::getStoreConfig('affiliateplus/style_config/responsive_enable', $store_id);
+ if($check_responsvie)
+     $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+ else
+     $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+?>
+
+<div class="aff-main-content <?php echo $class_name; ?>">
+    <div class="aff-title">
+        <h2><?php echo $this->__('Account Settings'); ?></h2>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <form id="signup_affiliate_account_form" method="post" action="<?php echo $this->getUrl('affiliateplus/account/editPost') ?>">
+        <div class="lable-title">
+            <h2 class="legend"><?php echo $this->__('Account Information') ?></h2>
+        </div>
+            <ul>
+                <li class="form-group">
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <label class="required" for="firstname"><?php echo $this->__('First Name') ?><em>*</em></label>
+
+                        <input type="text" class="form-control input-text required-entry" title="First Name" name="firstname" id="firstname" value="<?php echo $this->getFormData('firstname') ?>">
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <label class="required" for="lastname"><?php echo $this->__('Last Name') ?><em>*</em></label>
+
+                        <input type="text" class="form-control input-text required-entry" title="Last Name"  name="lastname" id="lastname" value="<?php echo $this->getFormData('lastname') ?>">
+                       
+                    </div>
+
+                </li>
+                <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
+                <?php if ($_dob->isEnabled()): ?>
+                    <li class="form-group"><div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><?php echo $_dob->setDate($this->getFormData('dob'))->toHtml() ?></div></li>
+                <?php endif ?>
+                <?php $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat') ?>
+                <?php if ($_taxvat->isEnabled()): ?>
+                    <li class="form-group"><div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><?php echo $_taxvat->setTaxvat($this->getFormData('taxvat'))->toHtml() ?></div></li>
+                <?php endif ?>
+                <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
+                <?php if ($_gender->isEnabled()): ?>
+                    <li class="form-group"><div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><?php echo $_gender->setGender($this->getFormData('gender'))->toHtml() ?></div></li>
+                <?php endif ?>
+                <?php if ($this->customerHasAddresses()): ?>
+                    <li class="form-group">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <label for="customer-address-select"><?php echo $this->__('Select an address from your address book or enter a new address.') ?></label>
+
+                            <?php echo $this->getAddressesHtmlSelect('account') ?>
+                        </div>
+                    </li>
+                <?php endif; ?>
+                <li class="form-group" id="account-new-address-form" <?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
+                    <fieldset>
+                        <input type="hidden" name="account[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="account:address_id" />
+                        <ul>
+                            <li class=" form-group">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label for="account:street1" class="required"><?php echo $this->__('Address') ?><em>*</em></label>
+
+                                    <input type="text" title="<?php echo $this->__('Street Address') ?>" name="account[street][]" id="account:street1" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet(1)) ?>" class="input-text required-entry form-control" />
+                                </div>
+                            </li>
+                            <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
+                                <li class="form-group">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text" title="<?php echo $this->__('Street Address %s', $_i) ?>" name="account[street][]" id="account:street<?php echo $_i ?>" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet($_i)) ?>" class="input-text form-control" />
+                                    </div>
+                                </li>
+                            <?php endfor ?>
+                            <li class="form-group">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <label for="account:city" class="required"><?php echo $this->__('City') ?><em>*</em></label>
+
+                                    <input type="text" title="<?php echo $this->__('City') ?>" name="account[city]" value="<?php echo $this->htmlEscape($this->getAddress()->getCity()) ?>" class="input-text required-entry form-control" id="customer:city" />
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <label for="account:region_id" class="required"><?php echo $this->__('State/Province') ?><em>*</em></label>
+
+                                    <select id="account:region_id" name="account[region_id]" title="<?php echo $this->__('State/Province') ?>" class="validate-select form-control" style="display:none;">
+                                        <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                                    </select>
+                                    <script type="text/javascript">
+                                        //<![CDATA[
+                                        $('account:region_id').setAttribute('defaultValue', "<?php echo $this->getAddress()->getRegionId() ?>");
+                                        //]]>
+                                    </script>
+                                    <input type="text" id="account:region" name="account[region]" value="<?php echo $this->htmlEscape($this->getAddress()->getRegion()) ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text form-control" style="display:none;" />
+
+                                </div>
+                            </li>
+                            <li class="fields">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <label for="account:postcode" class="required"><?php echo $this->__('Zip/Postal Code') ?><em>*</em></label>
+
+                                    <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="account[postcode]" id="account:postcode" value="<?php echo $this->htmlEscape($this->getAddress()->getPostcode()) ?>" class="input-text validate-zip-international required-entry form-control" />
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <label for="account:country_id" class="required"><?php echo $this->__('Country') ?><em>*</em></label>
+
+                                    <?php echo $this->getCountryHtmlSelect('account') ?>
+
+                                </div>
+                            </li>
+                            <li class='form-group' lang="fields">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <label for="account:telephone" class="required"><?php echo $this->__('Telephone') ?><em>*</em></label>
+
+                                    <input type="text" name="account[telephone]" value="<?php echo $this->htmlEscape($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry form-control" id="account:telephone" />
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <label for="account:fax"><?php echo $this->__('Fax') ?></label>
+
+                                    <input type="text" name="account[fax]" value="<?php echo $this->htmlEscape($this->getAddress()->getFax()) ?>" title="<?php echo $this->__('Fax') ?>" class="input-text form-control" id="account:fax" />
+
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                </li>
+
+                <li class="form-group">
+                    <?php if ($this->getFormData('account_name')): ?>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label for="account_name"><?php echo $this->__('Name'); ?></label>
+
+                            <strong>
+                                <span><?php echo $this->getFormData('account_name') ?></span>
+                            </strong>
+                            <input id="account_name" type="hidden" title="<?php echo $this->__('Name'); ?>" name="account_name"  value="<?php echo $this->getFormData('account_name') ?>"/>
+
+                            <div id="affiliate_message_hidden" class="affiliate_message"></div>
+                        </div>
+                    <?php endif ?>
+                </li>
+                <li class=" form-group">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="checkbox" name="change_password" id="change_password" value="1" onclick="setPasswordForm(this.checked)" title="<?php echo $this->__('Change Password') ?>"<?php if ($this->getFormData('change_password')): ?> checked="checked"<?php endif; ?> class="checkbox" /><label for="change_password"><?php echo $this->__('Change Password') ?></label>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="checkbox" name="notification" id="notification" value="1" <?php if ($this->getFormData('notification')): ?>checked="checked"<?php endif ?> />
+                        <label for="notification"><?php echo $this->__('Receive notification emails') ?></label>
+                    </div>
+
+                </li>
+            </ul>
+
+        <div class="fieldset" style="display:none;">
+            <div class="lable-title">
+                <h2 class="legend"><?php echo $this->__('Change Password') ?></h2>
+            </div>
+            <ul>
+                <li class="form-group">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label for="current_password" class="required"><?php echo $this->__('Current Password') ?><em>*</em></label>
+
+                        <input type="password" title="<?php echo $this->__('Current Password') ?>" class="input-text form-control" name="current_password" id="current_password" />
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <label for="password" class="required"><?php echo $this->__('New Password') ?><em>*</em></label>
+
+                        <input type="password" title="<?php echo $this->__('New Password') ?>" class="input-text validate-password form-control" name="password" id="password" />
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <label for="confirmation" class="required"><?php echo $this->__('Confirm New Password') ?><em>*</em></label>
+
+                        <input type="password" title="<?php echo $this->__('Confirm New Password') ?>" class="input-text validate-cpassword" name="confirmation" id="confirmation" />
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="lable-title" style="margin-top:20px;">
+                <h2 class="legend"><?php echo $this->__('Recurring Payment ') ?></h2>
+            </div>
+            <ul>
+                <li class="form-group">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <input type="checkbox" name="recurring_payment" id="recurring_payment"  onclick="recurringPaymentCheck(this.checked)" value="1" <?php if ($this->getRecurringPayment()): ?>checked="checked"<?php endif ?> />
+                        <label for="recurring_payment"><?php echo $this->__('Receive money by Recurring Payment') ?></label>
+                    </div>
+                </li>
+                <li class="form-group">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <label for="recurring_method" id="label_recurring_method" class="required"><em>*</em><?php echo $this->__('Select the payment method') ?></label>
+
+                        <select id="recurring_method" class="input-text required-entry form-control" onchange="changeMethodPayment()" name="recurring_method">
+                            <?php
+                            foreach ($this->getMethodArr() as $key => $value) {
+                                ?>
+                                <option <?php if ($this->getRecurringMethod() == $key) echo 'selected="selected"'; ?> value="<?php echo $key ?>"><?php echo $this->__($value) ?></option>
+                            <?php } ?>
+                        </select>
+
+                    </div>
+                    <div id="div_moneybooker_email"  class="col-lg-6 col-md-6 col-sm-12 col-xs-12 field moneybooker_email" <?php if (!$this->moneybookerDisplay()) { ?>style="display:none;" <?php } ?>>
+                        <label class="required" id="label_moneybooker_email"   for="moneybooker_email"><em>*</em><?php echo $this->__('Moneybooker Email'); ?></label>
+
+                        <input id="moneybooker_email" class="input-text required-entry validate-email form-control" type="text" title="<?php echo $this->__('Moneybooker Email'); ?>" name="moneybooker_email" value="<?php echo $this->getMoneybookerEmail() ?>"/>
+
+                    </div>
+
+                    <div id="div_paypal_email"  class="col-lg-6 col-md-6 col-sm-12 col-xs-12 field paypal-email" <?php if ($this->moneybookerDisplay()) { ?>style="display:none;" <?php } ?> >
+                        <label class="required" id="label_paypal_email" for="paypal_email"><em>*</em><?php echo $this->__('Paypal Email'); ?></label>
+
+                        <input id="paypal_email" class="input-text required-entry validate-email form-control" type="text" title="<?php echo $this->__('Paypal Email'); ?>" name="paypal_email" value="<?php echo $this->getFormData('paypal_email') ?>"/>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="buttons-set">
+            <p class="required">* <?php echo $this->__('Required Fields'); ?></p>
+            <button class="button button-config" title="Save" type="submit">
+                <span>
+                    <span>
+                        <?php echo $this->__('Save'); ?>
+                    </span>
+                </span>
+            </button>
+            <?php if (0): ?>
+                <p class="back-link">
+                    <a href="javascript:history.go(-1)">
+                        <button type="button" class="button button-config" onclick="javascript:history.go(-1)">
+                            <span><span><?php echo $this->__('Back') ?></span></span>
+                        </button>
+                    </a>
+                </p>
+            <?php endif ?>
+        </div>
+
+    </form>
+</div>
+<div class="clear"></div>	
+<script type="text/javascript">
+    //<![CDATA[
+    if ($('account-address-select')) {
+        $('account-address-select').value = "<?php echo $accountData['address_id'] ?>";
+        lsRequestTrialNewAddress($('account-address-select').value);
+    }
+    var signupAffiliateAccountForm = new VarienForm('signup_affiliate_account_form', true);
+
+    var regionUpdate = new RegionUpdater('account:country_id', 'account:region', 'account:region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'postcode');
+
+    function lsRequestTrialNewAddress(addressId) {
+        if (addressId == "") {
+            $('account-new-address-form').show();
+        } else {
+            $('account-new-address-form').hide();
+        }
+    }
+
+    function setPasswordForm(arg) {
+        if (arg) {
+            $('current_password').up(3).show();
+            $('current_password').addClassName('required-entry');
+            $('password').addClassName('required-entry');
+            $('confirmation').addClassName('required-entry');
+
+        } else {
+            $('current_password').up(3).hide();
+            $('current_password').removeClassName('required-entry');
+            $('password').removeClassName('required-entry');
+            $('confirmation').removeClassName('required-entry');
+        }
+    }
+<?php if ($this->getFormData('change_password')): ?>
+        setPasswordForm(true);
+<?php endif; ?>
+    //]]>
+</script>
+
+<script type="text/javascript">
+    //<![CDATA[
+    function changeMethodPayment() {
+        var method = $('recurring_method').options[$('recurring_method').selectedIndex].value;
+        if (method == 'paypal') {
+            $('div_moneybooker_email').style.display = 'none';
+            $('div_paypal_email').style.display = 'block';
+        } else {
+            $('div_moneybooker_email').style.display = 'block';
+            $('div_paypal_email').style.display = 'none';
+        }
+    }
+    function recurringPaymentCheck(arg) {
+        if (arg) {
+            //    $('recurring_method').disabled="";
+            //    $('moneybooker_email').disabled="";
+            //    $('paypal_email').disabled="";
+
+            $('label_paypal_email').innerHTML = '<em>*</em><?php echo $this->__('Paypal Email'); ?>';
+            $('label_moneybooker_email').innerHTML = '<em>*</em><?php echo $this->__('Moneybooker Email'); ?>';
+            $('label_recurring_method').innerHTML = '<em>*</em><?php echo $this->__('Select the payment method') ?>';
+
+            $('paypal_email').addClassName('required-entry');
+            $('moneybooker_email').addClassName('required-entry');
+        } else {
+            $('label_paypal_email').innerHTML = '<?php echo $this->__('Paypal Email'); ?>';
+            $('label_moneybooker_email').innerHTML = '<?php echo $this->__('Moneybooker Email'); ?>';
+            $('label_recurring_method').innerHTML = '<?php echo $this->__('Select the payment method') ?>';
+
+            //      $('recurring_method').disabled="disabled";
+            //     $('paypal_email').disabled="disabled";
+            //     $('moneybooker_email').disabled="disabled";
+
+            $('paypal_email').removeClassName('required-entry');
+            $('moneybooker_email').removeClassName('required-entry');
+
+
+
+        }
+    }
+    //]]>
+</script>
+

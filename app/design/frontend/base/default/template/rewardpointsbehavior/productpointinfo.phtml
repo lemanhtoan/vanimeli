@@ -1,0 +1,20 @@
+<?php
+if ($this->isEnabled() && $this->isRateReview()) {
+    //$_product = $this->getProduct(); 
+    //if ($_product->getId()){
+       // $ratingSummary = $_product->getRatingSummary();
+       // if ($ratingSummary && $ratingSummary->getPrimaryId()){
+            ?>
+            <div class="rewardpointsbehavior-product-view">
+                <div class="rewardpointsbehavior-checkout-action">
+                    <a href="<?php echo Mage::getUrl('rewardpoints/index/index') ?>" style='text-decoration: none'>
+                        <?php echo $this->_helper()->getIcon(); ?>
+                    </a>
+                    <?php echo $this->getRewardViewProductInFo(); ?>
+                </div>
+            </div>
+            <?php
+    //    }
+  //  }
+}
+?>

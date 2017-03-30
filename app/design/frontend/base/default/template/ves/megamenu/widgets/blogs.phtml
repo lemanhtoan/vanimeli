@@ -1,0 +1,33 @@
+<?php 
+  $widget = $this->getWidget(); 
+  $show_name = isset($widget['show_name'])?$widget['show_name']: 1;
+  $blogs = isset($widget['blogs'])?$widget['blogs']: array();
+  if($blogs) {
+?>
+<?php if( isset($widget['widget_name']) & $show_name){
+?>
+<div class="menu-title"><?php echo $widget['widget_name'];?></div>
+<?php
+}?>
+<div class="widget-blog-list">
+  <div class="widget-inner">
+    
+      <?php foreach ($blogs as $post) { ?>
+      <div class="post-item itemcol">
+        <div class="post-image"><a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>">
+          <img src="<?php echo $post->getImageURL( "s" );?>" class="post-image" alt="<?php echo $post->getTitle();?>"/>
+        </a>
+        </div>
+        <h4><a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>"><?php echo $post->getTitle(); ?></a></h4>
+        <div class="latest-description"><?php echo $post->getDescription(); ?></div>
+        <p class="blog-readmore">
+          <a href="<?php echo $post->getURL();?>" title="<?php echo $post->getTitle();?>">
+            <?php echo $this->__("Read more...");?>
+          </a>
+        </p>    
+      </div>
+      <?php } ?>
+      
+  </div>
+</div>
+<?php } ?>

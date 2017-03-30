@@ -1,0 +1,42 @@
+<?php
+$currency = Mage::getModel('directory/currency')->load(Mage::app()->getStore()->getBaseCurrencyCode());
+?>
+<div id="messages">
+    <ul class="messages">
+        <li class="notice-msg">
+            <ul>
+                <li>
+                    <span><?php echo $this->__('Example for "Apply the rule to shopping carts only if the following conditions are met (leave blank for all carts)":') ?></span>
+                </li>
+            </ul>
+            <?php echo $this->__('If you want to apply the rule to orders that have over %s in Subtotal and Shipping to France, the condition is:', $currency->format(1000)) ?>
+            <div style="margin-left: 50px"> 
+                <img title="conditons" alt="conditons" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'rewardpointsrule/example/shoppingcart.png'; ?>">
+            </div>
+            </br>
+            <ul>
+                <li><span><?php echo $this->__('Example for "Spending Point Action":') ?></span>
+                </li>
+            </ul>
+            <?php echo $this->__('1. If you want to allow Customers to spend 5 points only on a shopping cart to get the discount, then you can configure as below:') ?>
+            <div style="margin-left: 50px">              
+                <?php echo $this->__('- Choose "Action": "Give discount for fixed X points"') ?>
+                </br>
+                <?php echo $this->__('- Fill in field "Points (X)": 5') ?>
+                </br>
+                <?php echo $this->__('=> If Customers place an order of %s or %s, they can spend only 5 points in both cases.', $currency->format(500), $currency->format(800)) ?>
+            </div>
+            <?php echo $this->__('2. If you want to give discount for every 5 points Customers spend on the order and limit the number of points that can be used to 15, then:') ?>
+            <div style="margin-left: 50px">              
+                <?php echo $this->__('- Choose "Action": "Give discount for every X points"') ?>
+                </br>
+                <?php echo $this->__('- Fill in field "Points (X)": 5') ?>
+                </br>
+                <?php echo $this->__('- Fill in field " Max points allowed to spend": 15 ') ?>
+                </br>
+                <?php echo $this->__('=> With every 5 points customers spend, they can receive a corresponding discount. For example, 5 points can be spent to get %s, 10 points can get %s and so on. But they can not use more than 15 points as that is the max points that can be spent by this rule.',
+                    $currency->format(1), $currency->format(2)) ?>
+            </div>
+        </li>
+    </ul>
+</div>

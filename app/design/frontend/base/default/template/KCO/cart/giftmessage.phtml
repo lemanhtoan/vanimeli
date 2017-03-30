@@ -1,0 +1,127 @@
+<?php
+/**
+ * This file is released under a custom license by Avenla Oy.
+ * All rights reserved
+ * 
+ * License and more information can be found at http://productdownloads.avenla.com/magento-modules/klarna-checkout/ 
+ * For questions and support - klarna-support@avenla.com
+ * 
+ * @category   Avenla
+ * @package    Avenla_KlarnaCheckout
+ * @copyright  Copyright (c) Avenla Oy
+ * @link       http://www.avenla.fi 
+ */
+
+/**
+ * Avenla KlarnaCheckout
+ *
+ * @category   Avenla
+ * @package    Avenla_KlarnaCheckout
+ */
+?>
+<script type="text/javascript">
+	//<![CDATA[
+	if(!window.toogleVisibilityOnObjects) {
+	    var toogleVisibilityOnObjects = function(source, objects) {
+	        if($(source) && $(source).checked) {
+	            objects.each(function(item){
+	                $(item).show();
+	                $$('#' + item + ' .input-text').each(function(item) {
+	                    item.removeClassName('validation-passed');
+	                });
+	            });
+	        } else {
+	            objects.each(function(item){
+	                if ($(item)) {
+	                    $(item).hide();
+	                    $$('#' + item + ' .input-text').each(function(sitem) {
+	                        sitem.addClassName('validation-passed');
+	                    });
+	                    $$('#' + item + ' .giftmessage-area').each(function(sitem) {
+	                        sitem.value = '';
+	                    });
+	                    $$('#' + item + ' .checkbox').each(function(sitem) {
+	                        sitem.checked = false;
+	                    });
+	                    $$('#' + item + ' .select').each(function(sitem) {
+	                        sitem.value = '';
+	                    });
+	                    $$('#' + item + ' .price-box').each(function(sitem) {
+	                        sitem.addClassName('no-display');
+	                    });
+	                }
+	            });
+	        }
+	    }
+	}
+
+	if(!window.toogleRequired) {
+	    var toogleRequired = function (source, objects)
+	    {
+	        if(!$(source).value.blank()) {
+	            objects.each(function(item) {
+	               $(item).addClassName('required-entry');
+	            });
+	        } else {
+	            objects.each(function(item) {
+	                if (typeof shippingMethod != 'undefined' && shippingMethod.validator) {
+	                   shippingMethod.validator.reset(item);
+	                }
+	                $(item).removeClassName('required-entry');
+	            });
+
+	        }
+	    }
+	}
+</script>
+<div class="KCOgiftFormContainer">
+	<form id="KCOgiftForm">
+		<?php echo $this->helper('giftmessage/message')->getInline('onepage_checkout', Mage::getSingleton('checkout/session')->getQuote(), true) ?>
+	</form>
+</div>
+
+<script>
+	Event.observe(window, 'load', function(){
+		appendGiftButton();
+	});
+
+	function appendGiftButton(){
+    	$('allow-gift-message-container')
+    		.insert('<button id="addGiftMessage" class="button"><span><?php echo $this->__("Save gift message") ?></span></button>');
+    	$('allow-gift-message-container').insert('<p id="giftStatus"></p>');
+
+    	$("addGiftMessage").observe('click', function(e){
+			Event.stop(e);
+			saveGiftForm(true);		
+		});
+
+    	$$('#KCOgiftForm input[type="checkbox"]').invoke('observe','click',function(field) {
+    		if(!this.checked){
+				saveGiftForm(false);
+    		}	
+		});
+    		
+    }
+
+    function saveGiftForm(showmessage){
+    	new Ajax.Request('<?php echo $this->getUrl("klarnaCheckout/KCO/saveGiftMessage") ?>', {
+            method:'POST',
+            parameters: $('KCOgiftForm').serialize(true),
+            onSuccess: function(k) {
+            	var response = eval("(" + k.responseText + ")");
+            	if(response.msg){
+            		if(showmessage){
+            			$('giftStatus').update(response.msg);
+            		}
+            		else{
+            			$('giftStatus').update('');
+            		}
+            		return true;
+            	}
+            	else{
+	            	return false;
+            	}
+            }
+        });
+    }
+</script>

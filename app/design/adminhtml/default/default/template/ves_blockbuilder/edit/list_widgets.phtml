@@ -1,0 +1,34 @@
+<div class="widgets-filter">
+		<div class="form-group has-success clearfix">
+			<label class="col-lg-2 control-label" for="searchwidgets"><?php echo Mage::helper("ves_blockbuilder")->__('Filter By Name');?></label>
+			<div class="col-lg-10">
+				<input class="form-control" type="text" id="searchwidgets"  name="searchwidgets">
+			</div>
+		</div>
+
+		<div class="form-group clearfix">
+			<label class="col-lg-2 control-label" for="searchwidgets"><?php echo Mage::helper("ves_blockbuilder")->__('Filter By Group');?></label>
+			<div class="col-lg-10" id="filterbygroups">
+				 <ul class="nav nav-pills">
+				 	<li class="filter-option" data-option="all">
+						<a href="#"><?php echo Mage::helper("ves_blockbuilder")->__('All');?><span class="badge"></span></a>
+					</li>
+
+				 	<?php  foreach( $groups  as $group) { ?>
+					<li class="filter-option" data-option="<?php echo $group['key'];?>">
+						<a href="#"><?php echo $group['group'];?><span class="badge"></span></a>
+					</li>
+			 		<?php } ?>
+				</ul>
+	      </div>  
+		</div>
+ 	</div>
+
+	<ul>
+		<?php foreach ( $widgets as $widget ){ ?>
+		<li class="wpo-wg-button" data-group="<?php echo $widget['group'];?>"> 
+			 <?php echo $widget['button'];?>
+		</li>
+		<?php } ?>
+ 	</ul>
+ 	<div class="clearfix"></div>

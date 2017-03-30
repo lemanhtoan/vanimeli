@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <!-- Earning -->
+    <adminhtml_reward_earning_index>
+        <reference name="content">
+            <block type="rewardpoints/adminhtml_earning" name="rewardpoints_earning" />
+        </reference>
+    </adminhtml_reward_earning_index>
+    <adminhtml_reward_earning_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="rewardpoints/adminhtml_earning_grid" name="rewardpoints_earning" />
+        </block>
+    </adminhtml_reward_earning_grid>
+    
+    <!-- Spending -->
+    <adminhtml_reward_spending_index>
+        <reference name="content">
+            <block type="rewardpoints/adminhtml_spending" name="rewardpoints_spending" />
+        </reference>
+    </adminhtml_reward_spending_index>
+    <adminhtml_reward_spending_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="rewardpoints/adminhtml_spending_grid" name="rewardpoints_spending" />
+        </block>
+    </adminhtml_reward_spending_grid>
+    
+    <!-- Transaction -->
+    <adminhtml_reward_transaction_index>
+        <reference name="content">
+            <block type="rewardpoints/adminhtml_transaction" name="rewardpoints_transaction" />
+        </reference>
+    </adminhtml_reward_transaction_index>
+    <adminhtml_reward_transaction_edit>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/rewardpoints.css</stylesheet>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/tinybox/style.css</stylesheet>
+            </action>
+            <action method="addJs">
+                <script>tinybox/tinybox.js</script>
+            </action>
+        </reference>
+    </adminhtml_reward_transaction_edit>
+    <adminhtml_reward_transaction_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="rewardpoints/adminhtml_transaction_grid" name="rewardpoints_transaction" />
+        </block>
+    </adminhtml_reward_transaction_grid>
+    
+    <adminhtml_reward_transaction_customer>
+        <block type="core/text_list" name="root">
+            <block type="adminhtml/template" template="rewardpoints/transaction/customer/header.phtml" name="transaction.popup.header" />
+            <block type="rewardpoints/adminhtml_transaction_edit_tab_customer" name="transaction.popup.customer" />
+            <block type="rewardpoints/adminhtml_transaction_edit_tab_customer_serializer" name="transaction.popup.serializer">
+                <action method="initSerializerBlock">
+                    <grid_name>transaction.popup.customer</grid_name>
+                    <hidden_input_name>selected_customer_id</hidden_input_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_reward_transaction_customer>
+    <adminhtml_reward_transaction_customergrid>
+        <block type="core/text_list" name="root">
+            <block type="rewardpoints/adminhtml_transaction_edit_tab_customer" name="transaction.popup.customer" />
+        </block>
+    </adminhtml_reward_transaction_customergrid>
+    
+    <!-- Edit customer form -->
+    <adminhtml_customer_edit>
+        <reference name="customer_edit_tabs">
+            <action method="addTab">
+                <name>rewardpoints_tab</name>
+                <block>rewardpoints/adminhtml_customer_edit_tab_rewardpoints</block>
+            </action>
+        </reference>
+    </adminhtml_customer_edit>
+    <adminhtml_reward_customer_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="rewardpoints/adminhtml_customer_edit_tab_history" name="rewardpoints_transaction" />
+        </block>
+    </adminhtml_reward_customer_grid>
+    
+    <!-- Create Order on Backend -->
+    <adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/rewardpoints.css</stylesheet>
+            </action>
+            <action method="addJs">
+                <script>magestore/rewardpoints.js</script>
+            </action>
+            <!-- Custom JS for Backend -->
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magestore/rewardpoints.js</name>
+                <params/>
+            </action>
+        </reference>
+        <reference name="items_grid">
+            <block type="rewardpoints/adminhtml_order_create_form" template="rewardpoints/order/create/form.phtml" name="rewardpoints.spending.form" />
+        </reference>
+    </adminhtml_sales_order_create_index>
+    <adminhtml_sales_order_create_load_block_data>
+        <reference name="items_grid">
+            <block type="rewardpoints/adminhtml_order_create_form" template="rewardpoints/order/create/form.phtml" name="rewardpoints.spending.form" />
+        </reference>
+    </adminhtml_sales_order_create_load_block_data>
+    <adminhtml_sales_order_create_load_block_items>
+        <reference name="items_grid">
+            <block type="rewardpoints/adminhtml_order_create_form" template="rewardpoints/order/create/form.phtml" name="rewardpoints.spending.form" />
+        </reference>
+    </adminhtml_sales_order_create_load_block_items>
+    
+    <!-- Order Totals -->
+    <adminhtml_sales_order_view>
+        <reference name="order_totals">
+            <block type="rewardpoints/adminhtml_totals_order_point" name="rewardpoints.total.point" />
+            <block type="rewardpoints/adminhtml_totals_order_label" name="rewardpoints.total.label" />
+        </reference>
+    </adminhtml_sales_order_view>
+    
+    <adminhtml_sales_order_invoice_new>
+        <reference name="invoice_totals">
+            <block type="rewardpoints/adminhtml_totals_invoice_point" name="rewardpoints.total.point" />
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="invoice_totals">
+            <block type="rewardpoints/adminhtml_totals_invoice_point" name="rewardpoints.total.point" />
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+    
+    <adminhtml_sales_order_invoice_view>
+        <reference name="invoice_totals">
+            <block type="rewardpoints/adminhtml_totals_invoice_point" name="rewardpoints.total.point" />
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+    
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="creditmemo_totals">
+            <block type="rewardpoints/adminhtml_totals_creditmemo_point" name="rewardpoints.total.point" />
+        </reference>
+        <reference name="submit_before">
+            <block type="rewardpoints/adminhtml_totals_creditmemo_rewards" name="rewardpoints.total.earned" template="rewardpoints/totals/creditmemo/rewards.phtml" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="creditmemo_totals">
+            <block type="rewardpoints/adminhtml_totals_creditmemo_point" name="rewardpoints.total.point" />
+        </reference>
+        <reference name="submit_before">
+            <block type="rewardpoints/adminhtml_totals_creditmemo_rewards" name="rewardpoints.total.earned" template="rewardpoints/totals/creditmemo/rewards.phtml" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_updateqty>
+    
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="creditmemo_totals">
+            <block type="rewardpoints/adminhtml_totals_creditmemo_point" name="rewardpoints.total.point" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+    
+</layout>

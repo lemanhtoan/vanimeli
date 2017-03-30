@@ -1,0 +1,222 @@
+<?php
+    $product_info_block = Mage::registry("product_info_block");
+    $_helper = $product_info_block->helper('catalog/output');
+    $_product = $product_info_block->getProduct();
+
+    $show_product_type_data = $this->getConfig("show_product_type_data", 1);
+    $show_extrahint = $this->getConfig("show_extrahint", 1);
+    $show_availability = $this->getConfig("show_availability", 1);
+    $show_alert_urls = $this->getConfig("show_alert_urls", 1);
+    $enable_snipet = $this->getConfig("enable_snipet", 0);
+    $show_product_name = $this->getConfig("show_product_name", 1);
+    $show_price = $this->getConfig("show_price", 1);
+    $show_extra_info = $this->getConfig("show_extra_info", 1);
+    $show_short_description = $this->getConfig("show_short_description", 1);
+    $show_other_block = $this->getConfig("show_other_block", 1);
+    $show_addtocart_block = $this->getConfig("show_addtocart_block", 1);
+    $show_socialshare_block = $this->getConfig("show_share_block", 0);
+    $show_addto_block = $this->getConfig("show_addto_block", 0);
+    $sharing_template = $this->getConfig("sharing_template", "");//Enable to load sharing block layout at ves/productbuilder/view/sharing.phtml
+    if($sharing_template) {
+        $product_info_block->getChild("sharing")->setTemplate($sharing_template);
+    }
+    if(!$show_socialshare_block) {
+        $product_info_block->getChild("container1")->unsetChild("sharing");
+    }
+    if(!$show_addto_block) {
+        $product_info_block->getChild("container1")->unsetChild("addto");
+    }
+
+    $magento_version = Mage::getVersion();
+    $magento_version = str_replace(".","", $magento_version);
+    if($magento_version < 1920){
+        $form_action = $product_info_block->getSubmitUrl($_product);
+    } else {
+        $form_action = $product_info_block->getSubmitUrl($_product, array('_secure' => $product_info_block->_isSecure()));
+    }
+?>
+
+<div class="product-essential row">
+    <form action="<?php echo $form_action; ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+            <?php echo $product_info_block->getBlockHtml('formkey') ?>
+            <div class="no-display">
+                <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+                <input type="hidden" name="related_product" id="related-products-field" value="" />
+            </div>
+            
+            <?php if($show_product_name || $show_price || $show_extra_info || $show_short_description || $show_other_block): ?>
+            <div class="product-shop">
+
+                <?php //Product Name ?>
+                <?php if($show_product_name): ?>
+                <div class="product-name">
+                    <span class="h1" itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></span>
+                </div>
+                <?php endif; ?>
+
+                <?php //Product Price ?>
+                <?php if($show_price): ?>
+                <div <?php if($enable_snipet): ?>itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer"<?php endif; ?> class="price-info price">
+                    <?php echo $product_info_block->getPriceHtml($_product); ?>
+                    <?php echo $product_info_block->getChildHtml('bundle_prices') ?>
+                    <?php echo $product_info_block->getTierPriceHtml() ?>
+                </div>
+                <?php endif; ?>
+
+                <?php //Product Extra Info ?>
+                <?php if($show_extra_info): ?>
+                <div class="extra-info">
+                    <?php //Product Reviews ?>    
+                    <?php if($enable_snipet): ?>
+                    <div class="review" itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate"> <?php echo $this->getReviewsSummaryHtml($_product, 'aggregate', true)?> </div>
+                    <?php else: ?>
+                    <?php echo $product_info_block->getReviewsSummaryHtml($_product, 'default', false)?>
+                    <?php endif; ?>
+
+                    <?php //Product Availability ?>
+                    <?php if($show_availability): ?>
+                    <?php echo $product_info_block->getChildHtml('product_type_availability'); ?>
+                    <?php endif; ?>
+                </div> 
+                <?php endif; ?>
+
+                <?php //Product Alert Urls ?>
+                <?php if($show_alert_urls): ?>
+                <?php echo $product_info_block->getChildHtml('alert_urls') ?>
+                <?php endif; ?>
+
+                <?php //Product Short Description ?>
+                <?php if ($show_short_description && $_product->getShortDescription()):?>
+                    <div class="short-description">
+                        <div class="std" <?php if($enable_snipet): ?>itemprop="description"<?php endif; ?>><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+                    </div>
+                <?php endif;?>
+
+                <?php //Product Other block ?>
+                <?php if($show_other_block): ?>
+                <?php echo $product_info_block->getChildHtml('other');?>
+                <?php endif; ?>
+
+                <?php //Product container1 ?>
+                <?php if ($show_addtocart_block && $_product->isSaleable() && $product_info_block->hasOptions()):?>
+                    <div <?php if($enable_snipet): ?>itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer"<?php endif; ?>>
+                    <?php echo $product_info_block->getChildChildHtml('container1', '', true, true) ?>
+                    </div>
+                <?php endif;?>
+
+            </div>
+            <?php endif; ?>
+
+            <?php //Product addtocart block ?>
+            <?php if($show_addtocart_block): ?>
+            <div class="add-to-cart-wrapper">
+                <?php if($show_product_type_data): ?>
+                <?php echo $product_info_block->getChildHtml('product_type_data') ?>
+                <?php endif; ?>
+                <?php if($show_extrahint): ?>
+                <?php echo $product_info_block->getChildHtml('extrahint') ?>
+                <?php endif; ?>
+
+                <?php //Product extra ?>
+                <div class="product-extra">
+                <?php if (!$product_info_block->hasOptions()):?>
+                    <div class="add-to-box">
+                        <?php if($_product->isSaleable()): ?>
+                            <?php echo $product_info_block->getChildHtml('addtocart') ?>
+                            <?php if( $product_info_block->helper('wishlist')->isAllow() || $_compareUrl=$product_info_block->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+                                <span class="or hidden"><?php echo $product_info_block->__('OR') ?></span>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
+                        <?php //Product addto block ?>
+                        <?php if($show_addto_block): ?>
+                        <?php echo $product_info_block->getChildHtml('addto') ?>
+                        <?php endif; ?>
+
+                        <?php //Product sharing ?>
+                        <?php if($show_socialshare_block): ?>
+                        <?php echo $product_info_block->getChildHtml('sharing') ?>
+                        <?php endif; ?>
+                    </div>
+
+                    <?php //Product extrabuttons ?>
+                    <?php echo $product_info_block->getChildHtml('extra_buttons') ?>
+                <?php elseif (!$_product->isSaleable()): ?>
+                    <div class="add-to-box">
+
+                        <?php //Product addto ?>
+                        <?php if($show_addto_block): ?>
+                        <?php echo $product_info_block->getChildHtml('addto') ?>
+                        <?php endif; ?>
+
+                        <?php //Product sharing ?>
+                        <?php if($show_socialshare_block): ?>
+                        <?php echo $product_info_block->getChildHtml('sharing') ?>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+                </div>
+            </div>
+            <?php endif; ?>
+
+            <div class="clearer"></div>
+
+            <?php //Product container2 ?>
+            <?php if ($_product->isSaleable() && $product_info_block->hasOptions()):?>
+                <div <?php if($enable_snipet): ?>itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer"<?php endif; ?>>
+                <?php echo $product_info_block->getChildChildHtml('container2', '', true, true) ?>
+                </div>
+            <?php endif;?>
+        </form>
+        <script type="text/javascript">
+        //<![CDATA[
+            var productAddToCartForm = new VarienForm('product_addtocart_form');
+            productAddToCartForm.submit = function(button, url) {
+                if (this.validator.validate()) {
+                    var form = this.form;
+                    var oldUrl = form.action;
+
+                    if (url) {
+                       form.action = url;
+                    }
+                    var e = null;
+                    try {
+                        this.form.submit();
+                    } catch (e) {
+                    }
+                    this.form.action = oldUrl;
+                    if (e) {
+                        throw e;
+                    }
+
+                    if (button && button != 'undefined') {
+                        button.disabled = true;
+                    }
+                }
+            }.bind(productAddToCartForm);
+
+            productAddToCartForm.submitLight = function(button, url){
+                if(this.validator) {
+                    var nv = Validation.methods;
+                    delete Validation.methods['required-entry'];
+                    delete Validation.methods['validate-one-required'];
+                    delete Validation.methods['validate-one-required-by-name'];
+                    // Remove custom datetime validators
+                    for (var methodName in Validation.methods) {
+                        if (methodName.match(/^validate-datetime-.*/i)) {
+                            delete Validation.methods[methodName];
+                        }
+                    }
+
+                    if (this.validator.validate()) {
+                        if (url) {
+                            this.form.action = url;
+                        }
+                        this.form.submit();
+                    }
+                    Object.extend(Validation.methods, nv);
+                }
+            }.bind(productAddToCartForm);
+        //]]>
+ </script>
+</div>

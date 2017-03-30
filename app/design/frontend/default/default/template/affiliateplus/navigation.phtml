@@ -1,0 +1,47 @@
+<?php
+$store_id = Mage::app()->getStore()->getStoreId();
+$check_responsvie = Mage::getStoreConfig('affiliateplus/style_config/responsive_enable', $store_id);
+?>
+
+<div class="navbar-default affiliate-navigation col-lg-3 col-md-3 <?php if ($check_responsvie): ?>hidden-sm hidden-xs<?php else: ?>col-sm-3 col-xs-3<?php endif; ?> " role="navigation">
+    <div class="container-fluid">
+
+        <div class="collapse1 navbar-collapse-aff" id="nav-aff" >
+            <div class="block-title-aff">
+                <h2><?php echo $this->getNavigationTitle(); ?></h2>
+            </div>
+            <div class="navigation-content">
+                <ul class="nav"  id="affiliateplus-navigation-<?php echo $this->getNameInLayout() ?>">
+                    <?php $_links = $this->getLinks(); ?>
+                    <?php foreach ($_links as $_link): ?>
+                        <?php if ($_link->getDisabled()) continue; ?>
+                        <?php if ($this->isActive($_link)): ?>
+                            <li class="active"><a><?php echo $_link->getLabel() ?></a></li>
+                        <?php else: ?>
+                            <li><a href="<?php echo $_link->getUrl() ?>"><?php echo $_link->getLabel() ?></a></li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ul>
+                <script type="text/javascript">
+                    decorateGeneric($('affiliateplus-navigation-<?php echo $this->getNameInLayout() ?>').childElements(), ['last']);
+                </script>
+            </div>
+        </div>
+    </div>
+    <a class="navbar-hidden" style="cursor:pointer">&nbsp;</a>
+</div>
+<script type="text/javascript">
+    var $nav = jQuery.noConflict();
+    $nav(document).ready(function () {
+        $nav('.navbar-hidden').bind('click', function () {
+            if ($nav('.aff-mobile').hasClass('active')) {
+                $nav('.aff-mobile').removeClass('active');
+                $nav('#navi-bg').hide();
+            } else {
+                $nav('.aff-mobile').addClass('active');
+                $nav('#navi-bg').show();
+            }
+        });
+
+    });
+</script>

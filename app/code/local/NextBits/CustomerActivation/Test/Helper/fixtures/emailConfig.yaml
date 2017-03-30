@@ -1,0 +1,12 @@
+
+
+config:
+  default/customeractive/customeractivation_group/disable_ext: 0
+  default/customeractive/customeractivation_group/alert_admin: 1
+  default/customeractive/customeractivation_group/alert_customer: 1
+  default/customeractive/customeractivation_group/activation_status_default: 0
+  default/customeractive/customeractivation_group/always_send_admin_email: 0
+  default/customeractive/customeractivation_group/require_activation_for_specific_groups: 0
+  default/customeractive/customeractivation_group/registration_admin_template: customer_customeractivation_registration_admin_template
+  default/customeractive/customeractivation_group/activation_template: customer_customeractivation_activation_template
+  default/customeractive/customeractivation_group/admin_email: admin@example.com

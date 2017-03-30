@@ -1,0 +1,60 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please 
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_Coming_Soon
+ * @copyright   Copyright (c) 2015 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+$config = Mage::helper('comingsoon/config');
+$fields = $config->getComingsoonSignupFields(true);
+?>
+
+<div class="plcs-account-create <?php $countFields = count($fields);
+				if($countFields == 1) {
+					echo 'one-row';
+				}elseif($countFields <= 3) {
+					echo 'one-column';
+				}elseif($countFields > 3) {
+					echo 'two-column';
+				}
+				?>">
+	<?php //echo $this->getMessagesBlock()->getGroupedHtml() ?>
+	<form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="plcs-register-form">
+		<div id="messages"></div>
+		<div class="plcs-formholder plcs-clear">
+			<div>
+				<ul>
+					<?php echo $this->getChildHtml()?>
+				</ul>
+			</div>
+		</div>
+
+		<div class="plcs-buttons-set plcs-cf">
+			<button type="submit" title="<?php echo $this->__('Submit Now') ?>" class="plcs-button plcs-btn-proceed-checkout">
+				<span><?php echo $this->__($config->getComingsoonSignupMethod() == 'signup'? 'Get notified' : 'Register and get notified');  ?></span>
+				<img class="plcs-ajax-loader" src="<?php echo $this->getSkinUrl('images/plumrocket/comingsoon/ajax-loader.gif'); ?>" alt="loader" />
+			</button>
+				
+			</div>
+		</div>
+		
+	</form>
+
+	<?php if (!empty($fields['region'])) { ?>
+		<script type="text/javascript">
+			//<![CDATA[
+			spsps = new RegionUpdater('plcs-country', 'plcs-region', 'plcs-region_id', <?php echo $this->helper('directory')->getRegionJson(); ?>, undefined, 'zip');
+			//]]>
+		</script>
+	<?php } ?>
+</div>

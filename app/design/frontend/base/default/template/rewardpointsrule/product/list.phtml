@@ -1,0 +1,71 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Rewardpoints earning on product list page template
+ * 
+ * @see Magestore_RewardPoints_Block_Product_List
+ */
+?>
+<?php
+$mycore = Mage::helper('rewardpoints/point');
+$earningPoints = $this->getEarningPoints();
+
+?>
+<?php if (Mage::helper('rewardpointsrule')->isEnabled() && Mage::helper('rewardpointsrule')->getCanShow()) { ?>
+        <script type="text/javascript">
+            var display = new Array();
+            <?php
+            $index = 0;
+            foreach ($earningPoints as $point){
+                if($point != 0){
+                    echo 'display['.$index.'] = "'.$this->__('Purchase and earn %s', Mage::helper('rewardpoints/point')->format($point)).'";';
+                }else{
+                    echo 'display['.$index.'] = "";';
+                }
+                $index++;
+            } ?>
+        </script>
+    
+        <script type="text/javascript">
+            var index = 0;
+            <?php if($this->getMode() == 'list'): ?>
+            $$('.col-main .category-products li.item .price-box').each(function(el) {
+                if(display[index] != ''){
+                    el.insert({
+                        before: '<div class="earning-product-list"><?php echo $mycore->getImageHtml(true) ?>'+' '+display[index]+'</div>'
+                    });
+                }
+                index++;
+            });
+            <?php else: ?>
+                $$('.col-main .category-products li.item .price-box').each(function(el) {
+                if(display[index] != ''){
+                    el.insert({
+                        after: '<div class="earning-product-list"><?php echo $mycore->getImageHtml(true) ?>'+' '+display[index]+'</div>'
+                    });
+                }
+                index++;
+            });
+            <?php endif ?>
+        </script>
+<?php } ?>
+

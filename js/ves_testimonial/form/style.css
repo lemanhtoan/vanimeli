@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+#config_edit_form .entry-edit-head{border-left:12px solid #849BA3!important;}
+#config_edit_form .entry-edit-head a{padding:8px!important;}
+.box, .entry-edit fieldset, .entry-edit .fieldset{	border-color:#849BA3}
+.system-fieldset-sub-head h4{	font-size:10px;	font-weight:bold;	color:#666;	border-left:#CCC solid 5px;	padding:2px 12px;}
+.note{ color:#666}
+tr:hover .note, tr:hover label{color:#F30;}
+tr:hover label{font-weight:bold;}
+.lof-description li{
+	margin:9px 67px!important;
+	list-style-type:disc
+}

@@ -1,0 +1,738 @@
+NWDthemes.com - Slider Revolution Responsive Magento Extension
+
+
+27 July 2016
+-----------------
+Version 5.2.6
+
+
+New Features:
+
+ * Added translation locales
+ * Added option to modify z-index for layers, can be set in the hover styles
+
+Changes:
+
+ * Moved revslider thumbs folder to revslider folder
+ * Removed option to disable leave confirmation
+ * Trimmed purchase tokens
+ * Removed unused templates
+ * Added initial upload folder creation
+ * Deactivating a purchase code will now remove it from the purchase code field
+ * Changed activation message if purchase code is already registered
+ * Instagram API Changes (only username search allowed by Instagram, no hashtag search)
+ * Moved SVG's into the uploads folder
+ * Improved user experience with activation and templates messages
+
+Bugfixes:
+
+ * Fix notice with user agent
+ * Fix for product slider with flat products/categories enabled
+ * Fix for relative url for html5 videos
+ * Fix for image features with Media symlink
+ * Fix for slide background images url on import for multidomain installation
+ * Fix for selecting some navigation styles
+ * Removed the SVG copy failure notice
+
+
+
+13 May 2016
+-----------------
+Version 5.2.5.1
+
+
+New Features:
+
+ * Added IgnoreHeightChange for Android Phones as Fall Back which will avoid the small Jump on Mobile Phones if Location Bar is removed/resized on scroll
+ * Added Dark/Light BG for Layer Style Selector, which helps to pick the right Style on demand
+
+Changes:
+
+ * Changed data that are stored in the options table to reduce pageload
+ * Changed Vimeo Frogaloop Script Loading Origin from HTTP:// to HTTPS://
+ * Add-On Installation Problem Handling optimized
+
+Bugfixes:
+
+ * Fixed Action Delay Issues
+ * Eliminated Loading issues, where Static Layer Load time was over 5s or Slider was simple not starting due high loading times
+
+
+
+12 May 2016
+-----------------
+Version 5.2.5
+
+New Features:
+
+ * Added option to set the ID for the Slider which will also set dynamical added container ID's based on the preseted ID
+ * Delay option added to the Jump To Slide Layer Action
+ * Template Slider Packs now available
+
+Changes:
+
+ * Toggle Content on Click event has been extended. Toggle Content without Actions and also on all actions can be added.
+ * Added further improvements for the Slider Template Library download routine.
+
+Bugfixes:
+
+ * Fixed minHeight settings where entered suffix broke the Slider output.
+ * Fixed duplication of ID on layers in frontend, caused by duplicating layers in Slide Editor
+
+
+
+28 April 2016
+-----------------
+Version 5.2.4.1
+
+New Features:
+
+ * Added replace url in all sliders feature
+
+Changes:
+
+ * Changed HTML5 example URLs as the old ones are no longer available
+ * Reminder on LayerAction added as solid warning in case Vimeo Video Controls are set to hidden
+ * Calculation of Wave Loop Effect changed to respect the real X/Y Offsets
+ * Removed absolute admin url from images when saving
+ * Force ssl on links and svg source.
+
+Bugfixes:
+
+ * Vimeo Arguments no longer reset on a Vimeo Layer
+ * Fixed a Bug where 2nd Time Focused Slider with previously played Video started again even if it was not visible currently
+ * Fixed an issue with Hungarian Translation.  Hungarian Translation is at 50% currently
+ * Issue with HTML5 Video Next Slide at End on Mobile was skipping a slide after 2nd loop has been fixed.
+ * Force Rewind available now for YouTube and Vimeo also on Mobile again
+ * Shortocde Management on pages was not closing the Modal window in some cases. Added a Workaround which checks the last state of the Window in case the default GUI would not be able to close the window
+ * Fixed the Start Angle Calculation of Wave Loop Effect
+ * Keyboard Navigation could not be disabled if all other Navigation was disabled
+ * Added missing store view selector
+ * Fix for missing add video button
+ * Fix for captions.css not found
+ * Fix for slider import
+ * Fix for notice when post based slider imported
+ * Replace urls in text layers too
+ * Fix for video poster url
+ * Fix for Pclzip fallback
+
+
+
+20 April 2016
+-----------------
+Version 5.2.4
+
+Bugfixes:
+
+ * Static Layer Container was written even if no Static Layers were exist. This blocked 3D Parallax Slides from Hovering/Clicking on Elements
+ * Fixed an issue where layers were disappearing in Google Chrome and other browsers after revisiting the slide
+ * Fixed an issue with IE11 not beeing able to handle audio layer in Slide Editor
+ * Fixed a bug where duplicated layers could loose their hover settings
+ * Fixed a bug with SVG Objects, where styling was only attached if the SVG Object was loading from cache
+
+
+
+18 March 2016
+-----------------
+Version 5.2.3.5
+
+Bugfixes:
+
+ * Fixed output of 1 before the slider in rare cases
+ * Fixed issue where layers would only show on hover
+
+
+
+17 March 2016
+-----------------
+Version 5.2.3
+
+Changes:
+
+ * Improved google font loading by removing not needed multiple fonts
+
+Bugfixes:
+
+ * Fixed conflicts that could occur in combinations with different third party plugins
+ * Fixed a Viusal Composer conflict
+ * Fixed Next Slide At End Bug, Loop, and Loop but Keep Slide Progress Bug for Video Backgrounds
+
+
+
+11 March 2016
+-----------------
+Version 5.2.2
+
+Bugfixes:
+
+ * Fixed an issue in Slide Editor where Options were not any more selectable. This is also a Fix for all iussues with "Can not read lenght of Null" Faliure
+ * Fixed Layer Timing issue where Layer could not start any more at 0ms
+ * Fixed Start Value issues in Slide Editor where some Value changed from "0" to a predefined Default value
+ * Fixed an Issue where Layers disappearing after a long time period.
+ * Fixed Slider / Layer Grid Based Align options for Navigation Elements
+ * Fixed calculation errors of navigation elements
+ * Fixed an issue where slidelinks on carousel slides was not working properly
+ * Fixed Static Layer container perspective on 3D Parallax Animations. Static Layers and Layers will have now the same View Perspective. To achieve this, Static Layers will always overlay simple Layers in 3D Parallax Mode
+ * Scrolling by Scroll Bar will also trigger Parallax and Start Slider functions now
+ * Fixed issues that could occur with older Visual Composer versions
+ * Fixed a few template store issues where notices and warning occured
+
+
+
+4 March 2016
+-----------------
+Version 5.2.1
+
+Bugfixes:
+
+ * Fixed an Issue for PHP 5.2 or older where the Plugin was not loading on Backend any more
+
+
+
+3 March 2016
+-----------------
+Version 5.2.0
+
+New Features:
+
+ * Added Navigation Position Aligned By option to allow Navigation element positioned within the Layer Grid also
+ * Added individual RTL Option to Arrows, Bullets, Tabs and Tumbnails to change the Slider direction and the order of elements
+ * Added New Layer Type: Object with SVG Icon Library included (over 500+ SVG Icons)
+ * Added New Layer Type: Audio Layer
+ * Added Text-Transform Style Option (Uppercase, LowerCase, Capitalize)
+ * Added Force Inherit Style Changes on Font Size, Font Weight, Font Color and Line Height in Break Point Based Sliders, to inherit changes for other Device Sizes during changes
+ * Added PlaceHolders and Presets for Navigation Elements to allow Easy Styling on Navigation elements per Slider
+ * Added Options to change Navigation Element Styling per Slide (i.e. use Light Navigation on Dark Slides and Dark navigation on Light Slides)
+ * Live Preview of Custom Changes on Navigation Elements
+ * Added title Attribute to the background images for Slides
+ * Added option to redownload Slider Templates.
+ * Added Bulk TimeLine Functions to arrange Layer timings based on predefined batches
+ * Added Undo & Redo Steps to the Slide Editor
+ * Version 5.2. is Introducing the Possibilities of using Addons.
+ * Added Vimeo "No Controls" option to hide the Control Panel of Vime Videos on request
+ * Added "Pause on Slide" option to stop the Auto Play Progress on certain slides
+ * Added an option to Wait for revapi.revstart() Method to start the Slider. This allows to start the Slider on request
+ * Added an global option to trigger database creation
+ * Added Static Layers Overflow hidden/visible option
+ * Added option for Post and Stream Sliders to strip fetched content by words/chars
+ * Added Cache timing option for Social Streams
+ * Added Global Mute for All Media Action to mute the whole Slider
+ * Added Invisible Slide option to make Slides only Availblae due Actions and API Functions
+
+Changes:
+
+ * Calculation of HTML5 Videos on IE Edge has been changed to respoect the Cover mode in all responsive mode also
+ * HTML5 Video leaves automaticaly FullScreen Mode when it reach the end of the Video and Next Slide at End selected
+ * HTML5 Video does not show Cover image if Pause Mode is selected and Video is on FullScreen Mode
+ * Improvement of the GUI in Slide Editor
+ * Removed .htaccess file
+ * Updated Vimeo API
+ * Images, Videos and Audios will get Line height 0px to avoid position distortions on small elements
+
+Bugfixes:
+
+ * Fixed Parallax Effect if slider is higher than screen height to avoid an odd jump effect
+ * Fix for limiting the excerpt length in WooCommerce
+ * Fix for border-radius not working on hover state in certain cases
+ * Fix for Sharp Right option not saving properly on layers
+ * Fix for Cover Mode not beeing applied to all devices for image layers in certain cases
+ * Fixed a minor jQuery bug in Slider Settings on Hover over different options
+ * Fix for Mouse Scroll Option. The values on/off were interchanged
+ * Fixed a bug which would not allow to go to next slide If Show Only Poster on Mobile was selected on HTML5 Videos
+ * Slotholder and BG Video got own z-index to fix some layer / video covering issues in Carousel mode
+ * Fixed an issue where SlideLink on RTL environment was not available
+ * Fixed an issue where export did not work if a newver version of WPML is active
+ * Fixed Replace URL's in Slider Settings, to check also for actions, videos and more
+ * Removed loading of jQuery UI libraries if not needed while Visual Composer is installed
+ * Fixed Scroll Bugs in Layer Timeline Window
+ * Fixed Timeline Calculation Issues on Backend
+ * Fixed Warning Issue by leaving the Slider
+ * Fixed KenBurns issues on RTL Environment
+ * Fixed Bug with Static Layers if Static Layer was set to only show on Slider Hover
+ * Fixed Video Background Loop And Keep Slider Progress Function
+ * Fixed Shape Resize Issue, where Shape Height lost its last valuse
+ * Fixed Sorting Order WP Gallery Images when using revslider shortcode wrap
+ * Fixed YouTube API Issues, (Mute, Loop, Auto Start, Next Slide Bugs due the latest YT Api)
+
+
+
+7 March 2016
+-----------------
+version 5.1.6.3
+
+New Features:
+
+ * Added Wunderadmin (http://nwdthemes.com/extensions/wunderadmin-magento-admin-skin/) Admin theme compatibility
+ * Added new global setting to disable editing leave confirmation prompt
+
+Changes:
+
+ * Changed error message for template download permissions
+ * Updated localization CSV file
+
+Bugfixes:
+
+ * Fix for display memory limit when there is no limit
+ * Fix for YouTube video insert
+ * Fix for YouTube cover image upload
+ * Fix for mouse scroll navigation option labels
+ * Fix for YouTube next slide on end feature
+ * Fix for base image original size in product based slider
+ * Fix for showing layers from slides for static layer editing
+ * Fix for conversion of 1.2.x version styles when upgrade
+
+
+
+8 February 2016
+-----------------
+version 5.1.6.2
+
+Changes:
+
+ * Moved filter modules function to public static
+ 
+Bugfixes:
+
+ * Fix for horizontal scroll in admin interface
+ * Fix for slides list displayed over navigation menu
+ * Fix for missing immage layers in admin after upgrade
+
+
+
+4 February 2016
+-----------------
+version 5.1.6.1
+
+New Features:
+
+ * Store View visibility option for slides
+ 
+Bugfixes:
+
+ * Fixed caption styles translation
+ * Fixed select values setting in Slider Settings
+
+
+
+1 February 2016
+-----------------
+Version 5.1.6
+
+New Features:
+
+ * Fully Responsive & Mobile Specific Features
+ * jQuery 1.7 - jQuery 2.x Supported
+ * Lightning Fast Greensock Animation Engine
+ * Powerful API functions
+ * Smart Font Loading
+ * All Sizes Possible (Full Responsive + Revolutionary 4 Level Advanced Sizes)
+ * Hero, Carousel and Classic Slider Features
+ * Fullwidth, Fullscreen, Auto Responsive Slider sizes
+ * Unlimited Slider per page
+ * Image BG Cover, Contain, Tiling, Alignment, etc.
+ * WYSIWYG Drag & Drop Editor
+ * Published / Unpublished Slides
+ * Published slides based on predefined Dates
+ * Simple and Advanced Lazy Loading for Quicker and SEO Optimized Slider Start
+ * Link and Actions on Slides
+ * Parallax Effects, full customizeable, combined with Ken Burns and other effects (Mouse / Scroll controlled)
+ * Improved Light weight Ken Burns Effects (easier & faster)
+ * Word Premiere for Advacned Action Building
+ * Build your Social Stream supported Bulk Slider
+ * Easy and quick building based on Slider, Slide and Layer Templates
+ * Performance Monitor and better Performance Suggestions
+ * Viewport based Slide Loading and Progress
+ * Create Slider Defaults, Reset, overwrite single Settings due all slides
+ * Save Slide, Slider, Layer, Animation as Template
+ * Animation Builder
+ * Huge Number of Possible Transitions
+ * Create your custom animations
+ * Set Start / End Time, Speed, Ease and Effects of any Layers
+ * Show/hide layers on Slider Effects, Events, Actions
+ * Add Unlimited Number of Layers
+ * YouTube, Vimeo, Self-Hosted HTML5 Videos, Shapes, Buttons, Predefined Buttons as Layer
+ * Set actions and links per Layers
+ * Combine Actions due different Layers and slides
+ * Option to Link to a Specific Slide via Layer
+ * Toggle Animation, Classes, video functions via Layers
+ * Variable Layer Image Sizes, full responsive and/or Device Size based
+ * Design your Layers for different Device sizes after your needs
+ * Option to Hide Layers on Any Devices
+ * Bullet, Button, Tabs and Thumbnail Navigation, single or mixed mode. Any position like outter,inner, aligned etc.
+ * Left/Right, Top/Bottom Mouse Scroll events.
+ * Vertical/Horizontal Keyboard actions
+ * Mobile Touch Enabled (Optional)
+ * Drag and Pull Carousel Feature
+ * "Stop Slide Timer on Hover" Function
+ * Auto-Hiding of Navigation with Delay Option
+ * Optional Countdown Timer Line
+ * Set Position, color, size of Time Line
+ * Set Size, visibility, amount and behaviour of Thumbs, Tabs, Bullets, Arrows
+ * Hide / Enable Navigation on Mobile Devices
+ * Keyboard Navigation
+ * Fancy Navigation Skins with Slider Preview
+ * AutoPlay - Always, only first time, skip first time, wait for action
+ * Stop video on Blur, Play Video only in ViewPort
+ * Rewind, or keep current progress time
+ * Set Star and End time
+ * Loop, Loop and Progress Slide
+ * Fullscreen, fullwidth, boxed
+ * Navigation features
+ * Action based controll (due other layers)
+ * New Video API, Events and Methods to controll media outside of the Slider
+ * Custom-Build Content
+ * Magento
+ * Facebook
+ * Twitter
+ * YouTube
+ * Vimeo
+ * Flickr
+ * Instagram
+ * Added jQuery 2.1.4 and 1.11.3 Support
+ * Added new Slide Transition - Slide "remove" which is the opposite transition of Slide "over"
+ * Added start volume for Videos.
+ * Added Input fields to edit start and end time/speed alternate to the drag and pull functions
+ * Added option to choose for original image for thumbnails and the specific dimensions set in the Slider Settings -> Navigation -> Thumbs tab
+ * Added "Disable Browser Blur/Focus behavior" option to not stop the Slider in case the broswer tab has been blurred
+ * Added a Info Field under Main Background / Source Settings to show the current selected Image URL
+ * Double Click is now allowed for Editing content of Layers for quicker Content Editor Mode
+ * Added a Quick Menu to edit Slider, Go back to Sliders Overview or edit Slides directly
+ * Added revaddcallback() Method to add Call Back to i.e. the Parallax Module. See Documentation for further instructions
+ * Added revgetparallaxproc() Method to get the current scroll percentage
+ * Added Maximum Width option to Slider that are set to Slide Layout - Auto
+ * Added new Premium and Free Template Store
+ * Added dropdown into the admin bar in frontend, to be able to quick edit all existing Slider on the current page (Only visible for adminstrative users)
+ * Added New Layer Scale mode "Cover" and "Stretch" to be able to scale Layer images proportional also over the Layer grid or over the slide
+ * Now First Slide can be always the same (Alternative First Slide) even if the rest order of slides are Randomzied
+ * Added Requirements & Recommendations Informations to the Slider Overview page to highlight recommended server configurations
+ * FaceBook API 2.4 support
+ * Added Disable Force FullWidth for FullScreen Slider, to be able to set FullScreen Slider floated horizontal
+ * Added Enable/Disable FullScreen Video Button for YouTube and HTML5 Videos. Option is available due the Video Settings Panel only in Layer Video Mode.
+ * Added % based Border Radius Fields to Element Styling also
+ * Set thumbnail now also as admin Slide Preview image for easier selection in the Slider List / Slides List
+ * Added Fullscreen Toggle, Go Fullscreen and Exit Fullscreen actions, to allow Slider Revolution to open in Fullscreen from any layout mode
+ * Added visibility levels to allow hide/show layers via the Visibility Tab also if no Custom Grid Sizes has been set
+ * Added new Tooltip for z-index Sorting of Elements
+ * Added new Tooltip for Layer End Animation Toggler
+ * Added new Google Font Handling - Using any Google Font on layers will auto manage loading of the font
+ * Added filter revslider_meta_generator to remove the Meta Generator
+ * Added Tabs to the Metis Navigation
+ * Added 3D Parallax Feature
+ * Added new Transitions
+ * Added own Slider Module for Visual Composer called Slider Revolution 5
+ * Added Quick Slider builder
+ * Post Based Sliders can now choose between Categories & Tags, Related, Popular, Recent and Next / Previous
+ * Specific Post Based Sliders can now add Popular and Recent Posts
+ * Custom build navigations will now be added to the exports and will be also imported at the import process
+ * New Cursors for Layers: zoom-in & zoom-out
+ * Added a key listener which will allow to close Fullscreen mode with ESC once it has been triggered by FullScreen Action
+ * Added Keyboard listener to Slide Editor to save the Slider on CTRL+S / CMD+S
+ * Added Keyboard listener to Slide Editor to delte Layers on Backspace / Delete Key
+ * Added two new Premium Sliders
+ * Facebook Album now available at the Facebook Source Type
+ * Instagram Stream can now also be fetched through hashtags
+ * Added option to import layers from any existing Slide into the current Slide at the "Add Layer" selector
+ * Added Video Toggle Action
+ * Added Mute, UnMute, Toggle Mute Action
+ * Added Toggle Functions for HTML Layers. Toggled Layers can have two states if any Toggle Action is activated
+ * Added "Layer Selectable" option as Default and Layer based, to enable Layer selection on Frontend for visitors (to copy paste text content from Layers)
+ * Added a new Method "revremoveslide(slideindex)" to remove a slide from the Slider on demand
+ * Added a new option to each Slide "Hide after Loop" which will remove / Hide 1 Slide from the Slider after x amount of loop of that certain slide
+ * Added MouseWheel Scroll option "carousel" to allow infinite MouseWheel scroll on Sliders in both direction. PIf enabled, slider will not allow page to scroll during wheel functions on Slider Container
+
+Changes:
+
+ * Upgraded FontAwesome Library to latest version 4.5.0
+ * Leaving Slide Editor will now ask to confirm leaving, to prevent data loss if Slide was not saved
+ * The video type can now be switched on an existing Video Layer
+ * Strengthened Security Posture
+ * Removed some inline css written on videos/images
+ * Restricted access to certain features if the user does not have administrator privileges. Can be enabled again by adding: add_filter('revslider_restrict_role', '__return_false');
+ * Specific Posts buttons "Add Popular Posts" and "Add Recent Posts" now append the IDs instead of replacing the current list
+ * Video will play muted/unmuted based on the last state of the Mute Button at Slide Load
+ * Changed YouTube default argument ref=0 to rel=0
+ * Removed the need of Username / API key to activate the plugin
+ * Made some changes to the GUI
+ * Changed Success Messages to disappear faster now
+ * Changed Error Messages to disappear now automatically
+ * Available options for current selected Layer Types are highlighted better in Slide Editor
+ * New visualisation of Custom Layer Grid Sizes and Presets to make the function more transparent
+ * Added some CSS changes to avoid Theme overwrites
+ * Using Toggle/Play/Stop Slider will restart Progress of Slider, even if it is stopped due Stop At Slide options
+ * Creating a new Slider will now redirect to the Slide Editor
+ * Removed the requirement of the ZipArchive extension for import/export
+ * Renamed action to Play/Pause/Stop Slider for more transparencity
+ * Added confirmation box for layer deletion
+ * Changing Slide Main image change the Thumbnails straight to make the identification of Slides in Small view easier.
+ * Added a new 5 sec Rule which will skip Lazy Loading and Overall Loading processes in case no Answers comes from Server, and process the Slider further
+ * Added a new Warning in case SSL Certificate is old or not any more active
+ * Small adjustments to the Template Store
+ * Allow to change Title of Slides due simple Enter / Tab also for quick editing Slide Titles
+ * Adding content to a text box (for the first time) is automatically mirrored in the layer’s ‘caption text’
+ * Click on the Small Thumbnail in Slider Overview will open the Slide Editor
+ * Changed missleading "Video Not Found" to make it more clear for YouTube videos if no thumbnail is set on the video
+ * Removed option Hide Controls for Vimeo Video Layer as this is not supported by Vimeo
+ * Minor Layout changes in Slider lists and in Slide Editor
+ * All Styles are now printed in one single style tag
+ * Reduced markup size of the Sliders (inline styles reduced)
+ * Added the usage of attachment_url_to_postid() if WordPress 4.0.0+ is installed
+
+Bugfixes:
+
+ * Out of ViewPort Preloading and Prestarting was calculating the values wrongly. Issue is fixed in this release
+ * Min amount of Used Fingers for Touch/Scroll/Link was set to 50 as default, which broke any kind of Touch function on Mobiles in version 5.1.5. Issue is fixed now
+ * Fixed a bug where the background image would be exported (if there was one selected at a time) even if transparent or solid color was selected
+ * Fixed PanZoom/KenBurns Disabling on Mobile function
+ * Fixed z-index position for From/Till Calendar in Slide Editor
+ * Fixed Swipe Treshold and Fingers Options which were ignored in earlier version
+ * Fixed and issue with Static Layer Parallax handling
+ * Fixed Specific Posts not sorting properly
+ * Improved Custom Animation save speed in backend
+ * Fixed Delete / Backspace issues in CSS Editor textarea
+ * Fixed animation opacity divided by 100
+ * Fixed Fullcover / FullWidth sizing issues of Videos in Backend on differnet Layer Grid sizes
+ * Fixed Video issues, where Play/Stop video button was not triggering HTML5, YouTube and Vimeo videos correctly
+ * Fixed HTML5 Video Actions
+ * Fixed video actions where video Start at was set
+ * Fixed video "start at" and "end at" not resetting in Slide Editor after adding multiple videos
+ * Fixed Google Fonts not beeing loaded in frontend from Static Layers in some cases
+ * Fixed a bug where navigation does not replace meta placeholders if the meta data is empty
+ * Fixed a bug where Layers of one Slider was animated in the wrong timeline if other Slider changed the slide. Some crosscall issue between independent sliders
+ * Fixed an issue where Videos after Next Slide At End was not rewinded withouth the Force Rewind feature
+ * Fixed Parallax Flickering in Safari and Google Chrome
+ * Fixed type:text; that was added in CSS
+ * Fixed a JavaScript loading issue in backend
+ * Fixed a typo failure in slide-main-options.php file which caused some jQuery issue in Slider Settings
+ * Message "cover image needs to be set for videos" now appearing only if there is really no cover image set
+ * Fixed HTML5 Start/End Time issues, and HTML5 Seekbar, Play Button issues
+ * Fixed a strange bug in Safari, where end of the Video the Slider skipped one following slide
+ * Fixed an issue if focus changed from one layer to an other, the wrong Aniamtion Speed was "shown" in the Animation speed Fields
+ * Fixed an issue where the slider could not be loaded on localhosts
+ * Fixed an issue where duplicated elements in Editor got the wrong zIndex position
+ * Fixed an issue where Deleted layers still have been selected and some fields still keep their values
+ * Fixed a very rare bug where a slide may change it's selected background image
+ * Fixed "number of comments" option not working properly for Post Based Slider
+ * Fixed hover color not working
+ * Fixed multiple bugs for certain servers that could not import Sliders
+ * Fixed a bug where the toolbar was missing after adding a video layer
+ * Fixed some CSS Issues
+ * Fixed Box Slots where Amount of Slots could not be changed
+ * Fixed a bug where Resize Function was not working after Editing Video Layer
+ * Fixed layer Source Type bug, not fetching the desired Source Type
+ * Fixed a bug where an image was printed as array()
+ * Fixed HTML5 Crop Issues for IE11 and Edge Browsers
+ * Fixed a bug where Swipe was not available on elements with links
+ * Fixed a bug where Parallax elements jumped on half scrolled position
+ * Fixed a bug with Focus Listener where the Option had no real effect on the Blur/Focus events.
+ * Fixed PHP Warnings in case no static-layers.css existing on some Update processes
+ * Fixed Google Fonts / Fonts Drop Down issues
+ * Fixed Arguments not saving for Main Background Videos
+ * Fixed bug where font-style italic was not written properly for some layers
+ * Fixed Fullwidth/Fullscreen Visual Bug in Slide Editor
+ * Fixed Shape Loop Animation issue
+ * Fixed Text Layer Size issue when layer is added after a Shape element
+ * Fixed Facebook likes count not working properly in certain cases
+ * Fixed notice issue in update.class.php
+ * Fixed revscroll() API Method
+ * Fixed revkill() Method where Removing Slider from the Stage was broken in some situation (i.e. if Looping Elements or navigation elements were present)
+ * Fixed a bug where importing a Slider may not change the custom JavaScript revapi to the new Slider ID
+ * Fixed Poster View only on Mobile and Disable Video on Mobile features
+ * Fixed Stop on Hover function. It will keep the Slider paused also if Next slide has been called
+ * Fixed Full Slider Link Issues where next,previous,slide index and Scroll Under Links were not working well
+ * Importing Templates with bigger file size will request a bigger TimeOut to avoid Import failures or will give a clear feedback for further Debugging
+ * Fixed Static Layers Position calculation issues.
+ * Fixed Typo Failure in the Navigation Styling
+ * Added a Workaround for YouTube Video API's with broken Origin attributes. (i.e. http://www.domain.com vs. http://domain.com)
+ * Fixed YouTube Cover Video Loop issue
+ * Fixed an issue where Disable Force FullWidth reseted to "off" after reloading the Slider Settings
+ * Fixed Next Slide on Focus in FireFox where Slider skipped 1 Slide after Focusing Browser Tab again
+ * Fixed Update Slider and Install Template from Server issues in some cases
+ * Fixed a bug where Static Images with Links in lazy Load mode was not showing up correctly
+ * Fixed a bug where Layers were flashing or not visible at all in "Show Layer on Slider Hover" mode
+ * Fixed an OutPut bug within css parser where in some situation an error was reported in Console log with Undefined Index
+ * Fixed a Bug where Layers text coud not be edited any more if Splitted Layer animation was selected
+ * Fixed Rounded Background issues on layers in FireFox and IE in some situation
+ * Put the Auto Complete Window of Font Selection in the Front to Overlay the Button Font Selector
+ * Fixed Some Visual issue in Static Layer Slide Selector
+ * Fixed FaceBook Stream Issues due Api Changes.
+ * Fixed a bug where Video Poster Images from HTTPS Pages could not be loaded well
+ * Fixed a missing closing Tag in HTML5 Video elements which broke IE11
+ * Fixed an issue where Mobile Sliders stucked when Video "autoplay" was enabled
+ * Fixed Static Layer Position problems if Outer Left Navigation was enabled
+ * Lazy Loading Fixes. Due an internal failure, none of the Lazy Loading option was working. Single, Smart and Full Lazy Loading are available again.
+ * Fixed a bug where HTML5 Cover Videos in IE did not really cover the slider.
+ * Fixed default override not working with all available options
+ * Fixed record not found issue
+ * Fixed Uncaught TypeError: Cannot read property 'innerHTML' of null
+ * Fixed actions bug for Post Based Slider where meta like {{link}} did not work properly
+ * Fixed issue with 2d rotation resulting in styles not written properly on layer
+ * Fixed issue where YouTube videos could not be loaded on https origins.
+ * Fixed an issue where Next/Previous Slide Links from Full Slide Link was not processing well
+ * Fixed text-align always beeing left
+ * Problem with Layer Name Editing fixed
+ * Fixed Next Slide on Focus bug
+ * Fixed a bug that broke the Slider Output when using Spinner "4"
+ * Fixed RTL Layer Aligns on Frontend. Elements now showing up in the Correct position on RTL Direction also
+ * Fixed a bug where files relative with special chars under subdomain could not be loaded
+ * Fixes the 1px Gap on the left side at some fullscreen and fullwidth Sliders
+ * Fixed an Editor Bug where Imported Layers could not be edited on some browser
+ * Fixed import inside of Slider Settings
+ * Fixed a bug where Responsive Videos on alternative Layer Grids had only a dimension of 100x100px
+ * Fixed a bug where Videos not act Responsiv in some situation
+ * Fixed a bug where Parallax Start Position jumps if Site is scrolled at load
+ * Fixed a missing Static to a function which could cause a notice.
+ * Fixed a bug where putRevSlider() could result into a fatal error
+ * Fixed a bug in import process where the revapi text in custom JS was replaced wrong
+ * Fixed JetPack related bugs for compatibility
+ * Fixed an issue where media files with Parameter attached in file name were not loaded in the Slider
+ * Fixed an issue related with ShowBiz where in certain circumstances ShowBiz Slider Settings could no longer be opened
+ * Fixed an issue with TinyMCE not beeing able to add Slider in the Post/Page Editor
+ * Fixed Visual Composer FrontEnd editor issue
+ * Fixed issues if Slider is loaded through ajax
+ * Fixed issues where the Slider did not show up under certain circumstances
+ * Added Change Image button at Background Videos for Slides in Post Based Slider
+ * Shuffle Mode fixed
+ * Fixed a bug where files could not be loaded from Relative Path in HTTPS enviroment
+ * Fixed a bug where muted YouTube video still made a sound for 0.1ms
+ * Fixed a bug where Slider with Slide Link were not loaded well if no layers were added to the slide
+ * Fixed a bug where layer would not fade out of the stage.
+ * Fixed a bug where if Min Height was set, the Slider was broken.
+ * Fixed a bug where Slide Links did not work without existing layers.
+ * Fixed some Backend CSS Issues for RTL / LTR View
+ * Fallback to transparent background image if no correct background image was set
+ * Missing Template Previews added
+ * Fixed a Bug where Images with special Char Names were not loaded.
+ * Fixed a bug where PunchFont Fallbacks are printed in the content not source
+ * Fixed a bug where PunchFonts could not be edited in Essential Grid if version 5.0+ of Slider Revolution is installed
+ * Full Slide Link was not available after update on 5.0.0. Sizing issue is fixed now.
+
+
+
+2 November 2015
+-----------------
+version 1.2.8
+
+* fixed: 1.9.2.2 Security Patch
+* fixed: disable slider on mobile feature issue
+* fixed: disable_on_mobile cache issue
+* fixed: slide attribute feature
+* fixed: import routine for specified local file
+* fixed: missing Alt attribute in single slide mode
+* fixed: slider background in full width force mode
+
+
+
+24 July 2015
+-----------------
+version 1.2.7
+
+* fixed: Fix for Youtube video search.
+* fixed: Show custom css styles in admin slide editor.
+* fixed: Add gradient images to frontend.
+
+* updated: Updated install script.
+
+
+
+09 June 2015
+-----------------
+version 1.2.6
+
+* updated: example code
+
+* fixed: swipe touch issue
+* fixed: youtube api issue
+* fixed: remove product count from categories list
+
+
+
+15 April 2015
+-----------------
+version 1.2.5
+
+* fixed: Fix for line ending character convert issue in preview.
+* fixed: Fix for warning on create new template slider.
+* fixed: Fix for pagination bug on sliders page.
+* fixed: Fix for override font size in p tag of text layers.
+
+
+
+
+11 March 2015
+-----------------
+version 1.2.4
+
+* fixed: Fix for import dynamic styles from some export versions.
+
+
+
+
+21 January 2015
+-----------------
+version 1.2.3
+
+* fixed: Fix for duplicated store view controls on slider preview.
+
+
+
+
+19 January 2015
+-----------------
+version 1.2.2
+
+* added: Added selection of store view on slider preview.
+
+
+
+
+15 January 2015
+-----------------
+version 1.2.1
+
+* fixed: Fix for store specific slides bug on front end.
+
+
+
+
+13 January 2015
+-----------------
+version 1.2.0
+
+* fixed: missing background images for buttons
+* fixed: ssl bug with image popup
+* fixed: issue with navigation thumbnails on front end
+
+
+
+
+27 November 2014
+-----------------
+version 1.1.0
+
+* added: check for DB tables existance
+
+* updated: change extension namespace to nwdresliver to avoid collisions with other magento revolution slider extensions
+* updated: slider description on main view
+
+* fixed: header and footer styles override
+* fixed: fonts dropdown on slide edit page
+* fixed: slider custom css bug
+* fixed: permission check routine
+* fixed: duplicated alias bug in slider import
+
+
+
+
+3 November 2014
+-----------------
+version 1.0.1
+
+* fixed: incorrect acl in adminhtml.xml
+
+
+
+31 October 2014
+-----------------
+version 1.0.0
+
+initial release

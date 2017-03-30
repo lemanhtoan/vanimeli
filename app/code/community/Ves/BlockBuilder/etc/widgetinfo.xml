@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<widgets>
+   <pbuilder_information type="ves_blockbuilder/widget_product_information">
+      <title>Ves Product Builder : Information Block</title>
+      <description>Generate product description, additional, reviews, tags, custom block in accordion, tabs, list panel layout</description>
+      <code>accordion</code>
+      <icon>product-builder</icon>
+      <group>product</group>
+   </pbuilder_information>
+
+   <pbuilder_form type="ves_blockbuilder/widget_product_form">
+      <title>Ves Product Builder : Product Main Form Block</title>
+      <description>Generate product form: options, price, addtocart button,...</description>
+      <code>form</code>
+      <icon>product-builder form</icon>
+      <group>product</group>
+   </pbuilder_form>
+
+   <pbuilder_description type="ves_blockbuilder/widget_product_description">
+      <title>Ves Product Builder : Product Description Block</title>
+      <description>Generate product description block</description>
+      <code>description</code>
+      <icon>product-builder product-description</icon>
+      <group>product</group>
+   </pbuilder_description>
+
+   <pbuilder_price type="ves_blockbuilder/widget_product_price">
+      <title>Ves Product Builder : Product Price</title>
+      <description>Generate product price block</description>
+      <code>price</code>
+      <icon>product-builder product-price</icon>
+      <group>product</group>
+   </pbuilder_price>
+
+   <pbuilder_shortdesc type="ves_blockbuilder/widget_product_shortdesc">
+      <title>Ves Product Builder : Product Product Short Description Block</title>
+      <description>Generate product short description block</description>
+      <code>price</code>
+      <icon>product-builder product-shortdesc</icon>
+      <group>product</group>
+   </pbuilder_shortdesc>
+
+   <pbuilder_additional type="ves_blockbuilder/widget_product_additional">
+      <title>Ves Product Builder : Product Additional Block</title>
+      <description>Generate product additional block</description>
+      <code>additional</code>
+      <icon>product-builder product-additional</icon>
+      <group>product</group>
+   </pbuilder_additional>
+
+   <pbuilder_media type="ves_blockbuilder/widget_product_media">
+      <title>Ves Product Builder : Product Media Block</title>
+      <description>Generate product media block</description>
+      <code>media</code>
+      <icon>product-builder media</icon>
+      <group>product</group>
+   </pbuilder_media>
+   <pbuilder_title type="ves_blockbuilder/widget_product_title">
+      <title>Ves Product Builder : Product Title</title>
+      <description>Generate product title</description>
+      <code>title</code>
+      <icon>product-builder product-title</icon>
+      <group>product</group>
+   </pbuilder_title>
+   <pbuilder_reviews type="ves_blockbuilder/widget_product_reviews">
+      <title>Ves Product Builder : Product Reviews Block</title>
+      <description>Generate product reviews</description>
+      <code>reviews</code>
+      <icon>product-builder reviews</icon>
+      <group>product</group>
+   </pbuilder_reviews>
+   <pbuilder_rating type="ves_blockbuilder/widget_product_rating">
+      <title>Ves Product Builder : Product Rating Block</title>
+      <description>Generate product rating</description>
+      <code>rating</code>
+      <icon>product-builder rating</icon>
+      <group>product</group>
+   </pbuilder_rating>
+   <pbuilder_tags type="ves_blockbuilder/widget_product_tags">
+      <title>Ves Product Builder : Product Tags Block</title>
+      <description>Generate product tags</description>
+      <code>tags</code>
+      <icon>product-builder tags</icon>
+      <group>product</group>
+   </pbuilder_tags>
+   <pbuilder_attribute type="ves_blockbuilder/widget_product_attribute">
+      <title>Ves Product Builder : Product Attribute Block</title>
+      <description>Display Product Attribute Content</description>
+      <code>attributes</code>
+      <icon>product-builder attributes</icon>
+      <group>product</group>
+   </pbuilder_attribute>
+
+   <pbuilder_otherblock type="ves_blockbuilder/widget_product_otherblock">
+         <title>Ves Product Builder : Product All Other Block</title>
+         <description>Generate product all other blocks which show in main container of product view page</description>
+         <code>otherblocks</code>
+         <icon>product-builder other-blocks</icon>
+         <group>product</group>
+   </pbuilder_otherblock>     
+</widgets>

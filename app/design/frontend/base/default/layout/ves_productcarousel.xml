@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+	<reference name="head">
+		<action method="addItem"><type>skin_css</type><name>ves_productcarousel/style.css</name></action>
+	</reference>
+	<cms_index_index translate="label">
+		<reference name="content">
+			<!-- example to add more product carousel 
+			<block type="ves_productcarousel/list" before="-" name="productcarousel.list2" template="ves/productcarousel/scroll.phtml">
+				<action method="setConfig">
+					<key>title</key>
+					<value>New Ves Product Carousel </value>
+				</action>
+				<action method="setConfig">
+					<key>catsid</key>
+					<value>4,16</value>
+				</action>
+				<action method="setConfig">
+					<key>sourceProductsMode</key>
+					<value>most_viewed</value>
+				</action>
+				<action method="setConfig">
+					<key>show_desc</key>
+					<value>0</value>
+				</action>
+				<action method="setConfig">
+					<key>auto_play</key>
+					<value>0</value>
+				</action>
+			</block>
+			-->
+			<block type="ves_productcarousel/list" before="-" name="productcarousel.list"/>		
+		</reference>
+	</cms_index_index>
+</layout>

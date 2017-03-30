@@ -1,0 +1,16 @@
+<?php
+	$is_container = isset($is_container)?$is_container:0;
+	//$is_container = 0;
+	$rows = $layouts; 
+	$level = 1;
+	$block_id = isset($block_id)?$block_id:"";
+?>
+<div class="block vesbuilder-block <?php echo $block_id." ".$class; ?>">
+	<?php if( trim($heading) && $show_title ){ ?>
+	<div class="block-title"><span><?php echo $heading; ?></span></div>
+	<?php } ?>
+	<div class="block-content"><div id="ves-blockbuilder<?php echo rand().time();?>" class="<?php echo $class; ?>">
+ 		<?php require "row.phtml"; ?>
+ 	  </div>
+	</div>
+</div>

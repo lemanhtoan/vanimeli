@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<tabs>
+         <nextbits_extensions translate="label" module="hideprice">
+            <label>NextBits - Extensions</label>
+            <sort_order>100</sort_order>
+        </nextbits_extensions>
+    </tabs> 
+    <sections>
+        <wholesale translate="label" module="wholesale">
+			<label>Wholesale - B2B</label>
+            <tab>nextbits_extensions</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+			<show_in_website>0</show_in_website>
+			<show_in_store>0</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>Activate Script</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>             
+					<fields>
+						<wholesale_type translate="title" module="wholesale">
+                            <label>Wholesale Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>wholesale/system_config_source_wholesaleType</source_model>
+                            <sort_order>26</sort_order>
+                            <show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment>
+								<![CDATA[
+									<b>Wholesale Store</b> - same website,seprate extended registration link,wholesale price by group price.
+									<br/>
+									<b>Wholesale Website</b> - seprate website,extended registration,can change main price.
+								]]>
+							</comment>
+                        </wholesale_type>						
+						<wholesale_type_store translate="title" module="wholesale">
+							<label>Wholesale Store</label>
+							<frontend_type>multiselect</frontend_type>
+							<source_model>wholesale/store</source_model>
+							<sort_order>27</sort_order> 
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<depends>
+                                <wholesale_type>w-store</wholesale_type>
+                            </depends>
+							<comment>
+								<![CDATA[
+									Select multiple wholesale store from list.
+								]]>
+							</comment>
+						</wholesale_type_store>
+						
+						<wholesale_select_type translate="title" module="wholesale">
+                            <label>Select Wholesale Website</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>wholesale/system_config_source_WholesaleselectType</source_model>
+                            <sort_order>28</sort_order>
+                            <show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<depends>
+                                <wholesale_type>w-webs</wholesale_type>
+                            </depends>
+							
+							<comment>
+								<![CDATA[
+									<b>Select Existing Website</b> - Select multiple website from existing websites.
+									<br/>
+									<b>Create New Website</b> - Create new website for wholesale.
+								]]>
+							</comment>
+                        </wholesale_select_type>
+						
+						<wholesale_type_webs translate="title" module="wholesale">
+							<label>Wholesale Website</label>
+							<frontend_type>multiselect</frontend_type>
+							<source_model>wholesale/website</source_model>
+							<sort_order>29</sort_order> 
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<depends>
+								<wholesale_type>w-webs</wholesale_type>
+                                <wholesale_select_type>1</wholesale_select_type>
+                            </depends>
+							<comment>
+								<![CDATA[
+									Select wholesale multiple website from list.
+								]]>
+							</comment>
+						</wholesale_type_webs>
+						<run_website translate="label" module="wholesale">
+							<label>Create Now</label>
+							<frontend_type>button</frontend_type>
+							<frontend_model>wholesale/button</frontend_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<depends>
+								<wholesale_type>w-webs</wholesale_type>
+                                <wholesale_select_type>2</wholesale_select_type>
+                            </depends>
+							<comment>
+							<![CDATA[
+								Create a new website.
+								<script type="text/javascript">
+									Event.observe('wholesale_general_wholesale_select_type', 'change', function() {
+										if(this.value==0)
+										{
+											$('row_wholesale_general_run_website').hide();
+										}else if(this.value==2)
+										{
+											$('row_wholesale_general_run_website').show();
+										}else
+										{
+											$('row_wholesale_general_run_website').hide();
+										}
+									})
+									
+									Event.observe('wholesale_general_wholesale_type', 'change', function() {
+										if(this.value=='none')
+										{
+											$('row_wholesale_general_run_website').hide();
+										}
+									})
+									
+									
+									Event.observe(window, 'load', function(event) {
+									
+										
+										value=$('wholesale_general_wholesale_select_type').value;
+										if(value==1)
+										{
+											$('row_wholesale_general_run_website').hide();
+										}else if(value==2)
+										{
+											$('row_wholesale_general_run_website').show();
+										}else
+										{
+											$('row_wholesale_general_run_website').hide();
+										}
+									});
+								</script>
+							]]>
+							</comment>
+						</run_website>
+						<wholesale_hide_pricecatalog translate="title" module="wholesale">
+							<label>Hide Price/Catalog</label>
+							<frontend_type>select</frontend_type>
+							<source_model>wholesale/system_config_source_HidecatalogPrice</source_model>
+							<sort_order>31</sort_order> 
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment>
+							<![CDATA[
+								<b>Hide Price</b> - Select Hide Price to enable require login to see the product price.
+								<br/>
+								<b>Hide Catalog</b> - Select Hide catalog to enable redirect to login page to see the catalog.
+								<script type="text/javascript">
+								
+									Event.observe('wholesale_general_wholesale_type', 'change', function() {
+										if(this.value=='none')
+										{
+											$('row_wholesale_general_wholesale_hide_pricecatalog').hide();
+										}
+										else{
+											$('row_wholesale_general_wholesale_hide_pricecatalog').show();
+										}
+									});
+									Event.observe('wholesale_general_wholesale_select_type', 'change', function() {
+										if(this.value==0)
+										{
+											$('row_wholesale_general_wholesale_hide_pricecatalog').hide();
+										}else{
+											$('row_wholesale_general_wholesale_hide_pricecatalog').show();
+										}
+									})
+									Event.observe(window, 'load', function(event) {
+									
+										
+										value1 = $('wholesale_general_wholesale_type').value;
+										value2 = $('wholesale_general_wholesale_select_type').value;
+										if(value1=='none' && value2==0)
+										{
+											$('row_wholesale_general_wholesale_hide_pricecatalog').hide();
+										}else{
+											$('row_wholesale_general_wholesale_hide_pricecatalog').show();
+										}
+									});
+								</script>
+							]]>
+							</comment>
+						</wholesale_hide_pricecatalog>
+						
+						
+						<wholesale_customer_activation translate="title" module="wholesale">
+							<label>Customer Activation</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>33</sort_order> 
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment>
+							<![CDATA[
+								Customer who registered from the wholesale registration form require activation by admin.
+								<script type="text/javascript">
+									
+									Event.observe('wholesale_general_wholesale_type', 'change', function() {
+										if(this.value=='none')
+										{
+											$('row_wholesale_general_wholesale_customer_activation').hide();
+										}
+										else{
+											$('row_wholesale_general_wholesale_customer_activation').show();
+										}
+									});
+									Event.observe('wholesale_general_wholesale_select_type', 'change', function() {
+										if(this.value==0)
+										{
+											$('row_wholesale_general_wholesale_customer_activation').hide();
+										}else{
+											$('row_wholesale_general_wholesale_customer_activation').show();
+										}
+									})
+									Event.observe(window, 'load', function(event) {
+									
+										
+										value1 = $('wholesale_general_wholesale_type').value;
+										value2 = $('wholesale_general_wholesale_select_type').value;
+										if(value1=='none' && value2==0)
+										{
+											$('row_wholesale_general_wholesale_customer_activation').hide();
+										}else{
+											$('row_wholesale_general_wholesale_customer_activation').show();
+										}
+									});
+								</script>
+							]]>
+							</comment>
+						</wholesale_customer_activation>
+						<show_address translate="label" >
+							<label>Show Address Fields In Registration Form?</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>220</sort_order>
+                            <show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment>
+								<![CDATA[
+									Select Yes/No to enable or disable address field in wholesale registration form.
+								]]>
+							</comment>
+							<depends>
+								<wholesale_type separator="|"><value>w-webs|w-store</value></wholesale_type>								                            
+                            </depends>
+                        </show_address>
+						<taxvat_show translate="label">
+                            <label>Show Tax/VAT Number In Registration Form?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_nooptreq</source_model>
+                            <backend_model>adminhtml/system_config_backend_customer_show_customer</backend_model>
+                            <sort_order>240</sort_order>
+                            <show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment>
+								<![CDATA[
+									Select value for Show Tax/VAT Number field in wholesale registration form.
+								]]>
+							</comment>
+							<depends>
+								<wholesale_type separator="|"><value>w-webs|w-store</value></wholesale_type>								                            
+                            </depends>
+                        </taxvat_show>
+						<wholesale_customer_group translate="title" module="wholesale">
+							<label>Wholesale Customer Group</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_customer_group</source_model>
+							<sort_order>250</sort_order> 
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment>
+								<![CDATA[
+									Assign customer group for wholesale customers from the list.
+								]]>
+							</comment>
+							<depends>
+								<wholesale_type separator="|"><value>w-webs|w-store</value></wholesale_type>								                            
+                            </depends>
+						</wholesale_customer_group>
+						
+					</fields>
+                </general>
+            </groups>
+        </wholesale>
+    </sections>     
+</config>

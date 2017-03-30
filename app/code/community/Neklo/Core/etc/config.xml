@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+NOTICE OF LICENSE
+
+This source file is subject to the NekloEULA that is bundled with this package in the file ICENSE.txt.
+
+It is also available through the world-wide-web at this URL: http://store.neklo.com/LICENSE.txt
+
+Copyright (c)  Neklo (http://store.neklo.com/)
+-->
+<config>
+    <modules>
+        <Neklo_Core>
+            <version>1.1.1</version>
+        </Neklo_Core>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <neklo before="Mage_Adminhtml">Neklo_Core_Adminhtml</neklo>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <global>
+        <blocks>
+            <neklo_core>
+                <class>Neklo_Core_Block</class>
+            </neklo_core>
+        </blocks>
+        <helpers>
+            <neklo_core>
+                <class>Neklo_Core_Helper</class>
+            </neklo_core>
+        </helpers>
+        <models>
+            <neklo_core>
+                <class>Neklo_Core_Model</class>
+            </neklo_core>
+        </models>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <awall module="Neklo_Core">
+                    <file>neklo/core.xml</file>
+                </awall>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Neklo_Core>
+                    <files>
+                        <default>Neklo_Core.csv</default>
+                    </files>
+                </Neklo_Core>
+            </modules>
+        </translate>
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <neklo_core_admin_notification>
+                        <class>neklo_core/observer</class>
+                        <method>checkUpdate</method>
+                    </neklo_core_admin_notification>
+                </observers>
+            </controller_action_predispatch>
+            <adminhtml_block_html_before>
+                <observers>
+                    <sort_module_tab_list>
+                        <class>neklo_core/observer</class>
+                        <method>sortModuleTabList</method>
+                    </sort_module_tab_list>
+                </observers>
+            </adminhtml_block_html_before>
+        </events>
+    </adminhtml>
+    <default>
+        <neklo_core>
+            <notification>
+                <feed_url>store.neklo.com/magento-update/magento-notifications.rss</feed_url>
+                <use_https>0</use_https>
+                <frequency>24</frequency>
+                <last_update>0</last_update>
+                <type>UPDATE,RELEASE,UPDATE_ALL,PROMO,INFO</type>
+            </notification>
+        </neklo_core>
+    </default>
+</config>

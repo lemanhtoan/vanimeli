@@ -1,0 +1,14 @@
+<?php if ($this->_helper()->isEnable()) { ?>
+    <script type="text/javascript">
+        //<![CDATA[    
+    <?php if ($this->_helper()->getSignConfig('signing_up') && $this->_helper()->getSignConfig('show_signup')) { ?>
+         if($('login-form')){
+            var eladd1=$('login-form').down('.buttons-set');
+                eladd1.insert(
+                    '<div class="rewardpointsbehavior-checkout-action1" style="width:inherit"><a href="<?php echo Mage::getUrl('rewardpoints/index/index') ?>"><?php echo $this->_helper()->getIcon() ?></a>&nbsp;'+'<?php echo $this->getSignupInfoNew() ?></div>'
+                );
+            }
+    <?php } ?>
+        //]]>
+    </script>
+<?php } ?>

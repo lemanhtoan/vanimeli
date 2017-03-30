@@ -1,0 +1,46 @@
+<?php if($this->getItems()->getSize()): ?>
+
+<section class="latest-offer related-product-carousal">
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<h1 class="section-heading"><?php echo $this->__('YOU MAY ALSO LIKE:') ?></h1>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="latest_offers">
+<?php foreach($this->getItems() as $_item): ?>
+<div class="item"><a href="<?php echo $_item->getProductUrl() ?>"><img class="img-responsive" alt="" src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(400) ?>" alt="<?php echo $this->escapeHtml($_item->getName()) ?>" /></a>
+<?php if($_item->getSpecialPrice()){
+?>
+<p class="sale">Sale</p>
+<?php
+}else{
+?>
+<?php 
+}
+?>
+<h1 class="products-name"><?php echo $_item->getName() ?></h1>
+<div class="prod-short-des"><?php echo $_item->getShortDescription();?></div>
+<?php if($_item->getSpecialPrice()){
+?>
+<h2 class="product-price"><span class="past-price">was <?php echo Mage::helper('core')->currency($_item->getPrice(), true, false);?></span>&nbsp;&nbsp;&nbsp;<span class="present-price">now <?php echo Mage::helper('core')->currency($_item->getSpecialPrice(), true, false);?></span></h2>
+<?php
+}else{
+?>
+<h2 class="product-price"><?php echo Mage::helper('core')->currency($_item->getPrice(), true, false);?></h2>
+<?php 
+}
+?>
+
+<div class="related-pro-buy"><!-- <a class="" href="<?php //echo $_item->getProductUrl() ?>">View &amp; Buy</a>--></div>
+</div>
+<?php endforeach ?>
+</div>
+</div>
+
+
+</div>
+</div>
+</section><?php endif ?>

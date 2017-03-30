@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsBehavior
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <!-- update layout for all frontend page -->
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/rewardpointsbehavior.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="footer">
+            <block type="rewardpointsbehavior/showrewardpoint" name="rewardpointinfo" template="rewardpointsbehavior/showrewardpoint.phtml" />
+        </reference>
+    </default>
+	<!-- product detail show -->
+    <catalog_product_view>
+        <reference name="alert.urls">
+            <block type="rewardpointsbehavior/showrewardpoint" name="rewardpointsbehavior.product.view" before="-" template="rewardpointsbehavior/productpointinfo.phtml" />
+        </reference>
+        <reference name="content">
+            <block type="rewardpointsbehavior/showrewardpoint" before="-" name="behavior.social.share" template="rewardpointsbehavior/share.phtml" >
+                <block type="rewardpointsbehavior/showrewardpoint" name="facebook.like" template="rewardpointsbehavior/share/facebook-like.phtml" />
+                <block type="rewardpointsbehavior/showrewardpoint" name="facebook.share" template="rewardpointsbehavior/share/facebook-share.phtml" />
+                <block type="rewardpointsbehavior/showrewardpoint" name="twitter.tweet" as="twitter.tweet" template="rewardpointsbehavior/share/twitter.phtml" />
+                <block type="rewardpointsbehavior/showrewardpoint" name="google.plus" as="google.plus" template="rewardpointsbehavior/share/google-plus.phtml" />
+                <block type="rewardpointsbehavior/showrewardpoint" name="pinterest.pin" template="rewardpointsbehavior/share/pinterest.phtml" /><!--xuanbinh-->
+                <!--<block type="rewardpointsbehavior/showrewardpoint" name="linkedin.share" as="linkedin.share" template="rewardpointsbehavior/share/linkedin.phtml" />-->
+            </block>
+        </reference>
+    </catalog_product_view>
+	<!-- review points show -->
+    <review_product_list>
+        <reference name="product.review.form.fields.before">
+            <block type="rewardpointsbehavior/showrewardpoint" name="rewards_review_points" 
+                    as="rewards_review_points" template="rewardpointsbehavior/productpointinfo.phtml" />
+        </reference>
+    </review_product_list>
+    <customer_account_create>
+        <reference name="before_body_end">
+            <block type="rewardpointsbehavior/showrewardpoint" name="behavior_register" template="rewardpointsbehavior/birthday/signup.phtml"/>
+        </reference>
+    </customer_account_create>
+    <customer_account_edit>
+        <reference name="before_body_end">
+            <block type="rewardpointsbehavior/showrewardpoint" name="behavior_register_dashboard" template="rewardpointsbehavior/birthday/signup.phtml"/>
+        </reference>
+    </customer_account_edit>
+    <customer_account_login>
+        <reference name="before_body_end">
+            <block type="rewardpointsbehavior/showrewardpoint" name="behavior_register_login" template="rewardpointsbehavior/birthday/signupnew.phtml"/>
+            <block type="rewardpointsbehavior/showrewardpoint" name="behavior_login" template="rewardpointsbehavior/customer/login.phtml"/>
+        </reference>
+    </customer_account_login>
+    <catalog_category_view>
+        <reference name="content">
+            <block type="rewardpointsbehavior/showrewardpoint" before="-" name="behavior.social.share" template="rewardpointsbehavior/share.phtml" >
+                <block type="rewardpointsbehavior/showrewardpoint" name="facebook.like" template="rewardpointsbehavior/share/facebook-like.phtml" />
+                <block type="rewardpointsbehavior/showrewardpoint" name="facebook.share" template="rewardpointsbehavior/share/facebook-share.phtml" />
+                <block type="rewardpointsbehavior/showrewardpoint" name="twitter.tweet" as="twitter.tweet" template="rewardpointsbehavior/share/twitter.phtml" />
+                <block type="rewardpointsbehavior/showrewardpoint" name="google.plus" as="google.plus" template="rewardpointsbehavior/share/google-plus.phtml" />
+                <block type="rewardpointsbehavior/showrewardpoint" name="pinterest.pin" template="rewardpointsbehavior/share/pinterest.phtml" /><!--xuanbinh-->
+                <!--<block type="rewardpointsbehavior/showrewardpoint" name="linkedin.share" as="linkedin.share" template="rewardpointsbehavior/share/linkedin.phtml" />-->
+            </block>
+        </reference>
+    </catalog_category_view>
+    <cms_index_index>
+        <reference name="content">
+            <block type="rewardpointsbehavior/showrewardpoint" before="-" name="behavior.social.share" template="rewardpointsbehavior/share.phtml" >
+                <block type="rewardpointsbehavior/showrewardpoint" name="facebook.like" as="facebook.like" template="rewardpointsbehavior/share/facebook-like.phtml" />
+                <block type="rewardpointsbehavior/showrewardpoint" name="facebook.share" template="rewardpointsbehavior/share/facebook-share.phtml" />
+                <block type="rewardpointsbehavior/showrewardpoint" name="twitter.tweet" as="twitter.tweet" template="rewardpointsbehavior/share/twitter.phtml" />
+                <block type="rewardpointsbehavior/showrewardpoint" name="google.plus" as="google.plus" template="rewardpointsbehavior/share/google-plus.phtml" />
+                <block type="rewardpointsbehavior/showrewardpoint" name="pinterest.pin" template="rewardpointsbehavior/share/pinterest.phtml" /><!--xuanbinh-->
+                <!--<block type="rewardpointsbehavior/showrewardpoint" name="linkedin.share" as="linkedin.share" template="rewardpointsbehavior/share/linkedin.phtml" />-->
+            </block>
+        </reference>
+    </cms_index_index>
+</layout>

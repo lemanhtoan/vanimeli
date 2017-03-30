@@ -1,0 +1,33 @@
+<?php
+$currency = Mage::getModel('directory/currency')->load(Mage::app()->getStore()->getBaseCurrencyCode());
+?>
+<div id="messages">
+    <ul class="messages">
+        <li class="notice-msg">
+            <ul>
+                <li><span><?php echo $this->__('Example:') ?></span>
+                </li>
+            </ul>
+            <?php echo $this->__('1. Example 1: To give a discount of $10 or to $10 for every X points and limit the discount per product to 5 times of minimum spending points by the rule, you can configure as below:'); ?>
+            <div style="margin-left: 50px">
+                <?php echo $this->__('- Choose “Discount type”: "By a fixed amount" or "To a fixed amount" ') ?>
+                </br>
+                <?php echo $this->__('- Fill in field "Discount Amount": 10') ?>
+                </br>
+                <?php echo $this->__('- Fill in field "Uses Allowed Per Product": 5') ?>
+                </br>
+                <?php echo $this->__('=> With the discount "By a fixed amount" of %s and "Uses Allowed Per Product" equal to 5, a %s product will have its price down to %s for the first time of spending points, to %s for the second time and so on until reaching %s for the last time (5th time).', $currency->format(10), $currency->format(200), $currency->format(90), $currency->format(180), $currency->format(150)); ?>
+            </div>
+            <?php echo $this->__('2. Example 2: To give a discount of 10% or to 10%  for every X points (configured in tab Conditions) and apply the discount 5 times maximum per product, you can configure as below:'); ?>
+            <div style="margin-left: 50px">
+                <?php echo $this->__('- Choose "Discount Type": "By a percentage of the original price" or "To a percentage of the original price"') ?>
+                </br>
+                <?php echo $this->__('- Fill in field: "Discount Amount": 10') ?>
+                </br>
+                <?php echo $this->__('- Fill in field: "Uses Allowed Per Product": 5') ?>
+                </br>
+                <?php echo $this->__('=> With the discount "By a fixed percentage" of %s and "Uses Allowed Per Product" equal to 5, a %s product will have its price down to %s for the first time of spending points, to %s for the second time and so on until reaching %s for the last time (5th time)', '10%', $currency->format(200), $currency->format(180), $currency->format(160), $currency->format(100)) ?>
+            </div>
+        </li>
+    </ul>
+</div>

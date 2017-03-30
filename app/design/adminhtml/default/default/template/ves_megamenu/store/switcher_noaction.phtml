@@ -1,0 +1,35 @@
+<?php $_websiteCollection = $this->getWebsiteCollection() ?>
+<?php 
+    $store_id = Mage::getSingleton('admin/session')->getLastViewedStore() ? Mage::getSingleton('admin/session')->getLastViewedStore() : Mage::helper("ves_megamenu")->getStoreId(); 
+    $clone_link = $this->getCloneLink();
+?>
+<?php if ($_websiteCollection->getSize()): ?>
+<div id="store_switcher_noaction_container">
+<p class="switcher"><label for="store_switcher_noaction"><?php echo $this->__('Import From Store View') ?>:</label>
+<select name="store_switcher_noaction" id="store_switcher_noaction" class="left-col-block">
+    <option value=""><?php echo $this->getDefaultStoreName() ?></option>
+    <?php foreach ($_websiteCollection as $_website): ?>
+        <?php $showWebsite=false; ?>
+        <?php foreach ($this->getGroupCollection($_website) as $_group): ?>
+            <?php $showGroup=false; ?>
+            <?php foreach ($this->getStoreCollection($_group) as $_store): ?>
+                <?php if ($showWebsite == false): ?>
+                    <?php $showWebsite = true; ?>
+                    <optgroup label="<?php echo $_website->getName() ?>"></optgroup>
+                <?php endif; ?>
+                <?php if ($showGroup == false): ?>
+                    <?php $showGroup = true; ?>
+                    <optgroup label="&nbsp;&nbsp;&nbsp;<?php echo $_group->getName() ?>">
+                <?php endif; ?>
+                <option group="<?php echo $_group->getId() ?>" value="<?php echo $_store->getId() ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $_store->getName() ?></option>
+            <?php endforeach; ?>
+            <?php if ($showGroup): ?>
+                </optgroup>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+</select>
+</p>
+</div>
+
+<?php endif; ?>

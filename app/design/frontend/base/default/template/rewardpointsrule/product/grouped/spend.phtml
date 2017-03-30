@@ -1,0 +1,185 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * spend points for product
+ * 
+ * @see Magestore_RewardPointsRule_Block_Product_Spend
+ */
+?>
+<?php if($this->isShowRedeemRulesGrouped()): ?>
+<script type="text/javascript">
+    var customerPoint = '<?php echo $this->getCustomerPoint();//Mage::helper('rewardpoints/customer')->getBalance() ?>';
+    var rewardProductRulesGrouped = <?php echo $this->getProductRulesJsonGrouped() ?>;
+    var arrayReward = new Array();
+    for(var key in rewardProductRulesGrouped){
+        arrayReward[key] = key;
+        $('product-price-'+key).up('.price-box').insert({after : "<button type='button' class='button btn-cart' onclick='onclickButton(" + key + ", this);' id='rewardpoints-rule-grouped-button-" + key + "'><span><span>Spend Points</span></span></button><div id='rewardpoints-rule-grouped-showprice-"+key+"' style='display:none'></div>"});
+    }
+    $$('#super-product-table input').each(function(element) {
+        Event.observe(element, 'change', changeButtonStatus);
+    });
+    function changeButtonStatus(){
+        var form = $('product_addtocart_form').serialize(true);
+        for(var key1 in arrayReward){
+            if(typeof arrayReward[key1] == "function") continue;
+            if(form["super_group["+ key1 + "]"] == 0) {
+                $('rewardpoints-rule-grouped-button-' + key1).addClassName('disabled');
+            }else {
+                $('rewardpoints-rule-grouped-button-' + key1).removeClassName('disabled');
+            }            
+        }
+    }
+    changeButtonStatus();
+    function onclickButton(key, element){
+        if(!element.hasClassName('disabled'))
+            getSpendBox(key); 
+        return false;
+    }
+    //Rule
+    var spendPointItems = new Array();
+    function getSpendBox(id){
+        content = 'webpos-spend-points'+id;
+        spendPointItems[id].getSpendBox(content);
+        $('overlay_modal').observe('click', function(event){
+            spendPointItems[id].spendPopup.hide(); 
+            event.stop();
+        });
+    }
+    function changeRewardProductRule(el, id) {
+//        $('reward_product_rule_hi' + id).value = el.value;
+        spendPointItems[id].changeRewardProductRule(el);    
+    }
+    function changePointCallback(points, id) {
+        spendPointItems[id].changePointCallback(points);
+    }
+    function applyRule(id, rule){
+        var sumPoint = 0;
+        for(var key in arrayReward){
+            if(typeof arrayReward[key] == "function") continue;
+            if($('reward_product_point'+key).value > 0) sumPoint = sumPoint + parseInt($('reward_product_point'+key).value); 
+        }
+        if(sumPoint > customerPoint){
+            alert('<?php echo $this->__('Your balance is not enought to spend.'); ?>');
+            return;
+        }
+        $('reward_product_rule_hi' + id).value = rule;
+        if(rule == ''){
+            $('rewardpoints-rule-grouped-button-' + id).show();
+            $('product-price-'+id).show();
+            $('rewardpoints-rule-grouped-showprice-' + id).hide();
+        }else{
+            $('rewardpoints-rule-grouped-button-' + id).hide();
+            $('rewardpoints-rule-grouped-showprice-' + id).innerHTML = "<a href='javascript:void()' onclick='getSpendBox("+id+")' style='text-decoration:none'><img src='<?php echo $this->getSkinUrl('images/btn_edit.gif') ?>' title='<?php echo $this->__('Edit Rule') ?>' style='margin: 2px 0px 0px 2px;' /></a>" + $('webpos-price-box' + id).innerHTML;
+            $('product-price-'+id).hide();
+            $('rewardpoints-rule-grouped-showprice-' + id).show();
+        }
+        spendPointItems[id].spendPopup.hide();
+    }
+</script>
+<?php 
+$product = $this->getProduct();
+$groupedProduct = $product->getTypeInstance(true)->getAssociatedProducts($product);
+foreach($groupedProduct as $productItem):
+?>
+<?php 
+$productId = $productItem->getId();
+$_catalogRules = $this->getCalculation()->getProductSpendingRules($productItem);
+$_formData = $this->getRewardFormData();
+$_pointHelper   = $this->getPointHelper()
+?>
+<input type="hidden" id="reward_product_point<?php echo $productId ?>" name="reward_product_point<?php echo $productId ?>" value="" />
+<input type="hidden" id="reward_product_rule_hi<?php echo $productId ?>" name="reward_product_rule_hi<?php echo $productId ?>" value="" />
+<div id="webpos-spend-points<?php echo $productId ?>" class="webpos-spend-points" style="display:none; width:400px; height: 225px">
+    <div class="webpos-rule-title">
+        <?php echo $this->__("Spend Points for '%s'", $productItem->getName()) ?>
+    </div>
+    <div class="webpos-rule-body">
+        <div class="webpos-rule-select">
+            <span><?php echo $this->__('Use Your Points') ?>:</span>
+            <select id="reward_product_rule<?php echo $productId ?>" name="reward_product_rule<?php echo $productId ?>" class="input-select" onchange="changeRewardProductRule(this,'<?php echo $productId ?>');" style="width:300px">
+                <option value=""><?php echo $this->__('-- Please Select Rule --') ?></option>
+                <?php foreach ($_catalogRules as $_rule): ?>
+                <option value="<?php echo $_rule->getId() ?>">
+                    <?php echo $this->escapeHtml($_rule->getName()) ?>
+                    (<?php echo $this->__('With %s', $_pointHelper->format($this->getMinRulePoint($_rule))) ?>)
+                </option>
+                <?php endforeach; ?>
+            </select>
+            
+        </div>
+        <div id="rewardpoints-login-msg<?php echo $productId ?>" class="webpos-rewardpoints-login-msg" style="display: none;">
+            <?php echo $this->__('You need') ?>
+            <a href="<?php echo $this->getUrl('customer/account/login') ?>"><?php echo $this->__('login') ?></a>
+            <?php echo $this->__('to redeem your points on this product') ?>
+        </div>
+        <div id="rewardpoints-needmore-msg<?php echo $productId ?>" class="webpos-rewardpoints-needmore-msg" style="display: none;">
+            <?php echo $this->__('You need to earn ') ?>
+            <span id="rewardpoints-needmore-points">100</span>
+            <?php echo $this->__('more point(s) to use this rule.') ?>
+            <?php echo $this->__('Please click') ?>
+            <a href="<?php echo Mage::helper('rewardpoints/policy')->getPolicyUrl() ?>"><?php echo $this->__('here') ?></a>
+            <?php echo $this->__('to learn about it.') ?>
+        </div>
+        <div id="rewardpoints-slider-container<?php echo $productId ?>" class="webpos-rewardpoints-slider-container" style="display: none; margin: 20px">
+            <div id="rewardpoints-slider<?php echo $productId ?>" class="webpos-rewardpoints-slider">
+                <div id="rewardpoints-slider-zoom-out<?php echo $productId ?>"  class="webpos-rewardpoints-slider-zoom-out"><img src="<?php echo $this->getSkinUrl('css/magestore/images/slider_btn_zoom_out.gif') ?>" alt="<?php echo $this->__('Zoom Out') ?>" title="<?php echo $this->__('Zoom Out') ?>" /></div>
+                <div id="rewardpoints-track<?php echo $productId ?>" class="webpos-rewardpoints-track" style="">
+                    <div id="rewardpoints-handle<?php echo $productId ?>" class="webpos-rewardpoints-handle"></div>
+                </div>
+                <div id="rewardpoints-slider-zoom-in<?php echo $productId ?>" class="webpos-rewardpoints-slider-zoom-in"><img src="<?php echo $this->getSkinUrl('css/magestore/images/slider_btn_zoom_in.gif') ?>" alt="<?php echo $this->__('Zoom In') ?>" title="<?php echo $this->__('Zoom In') ?>" /></div>
+            </div>
+            <div class="rewardpoints-slider-label">
+                <span><span id="rewardpoints-slider-label<?php echo $productId ?>" class="webpos-rewardpoints-slider-label"></span> <?php echo $this->__('Points') ?></span>
+            </div>
+        </div>
+         <div id="rewardpoints-price-template<?php echo $productId ?>" style="display: none;">
+            <span class="price">
+                <span class="price"></span>
+                <?php echo $this->__('with') ?>
+                <span class="points"></span>
+                <?php echo $this->__('Point(s)') ?>
+            </span>
+        </div>
+        <div id="webpos-price-box<?php echo $productId ?>" class="webpos-price-box<?php echo $productId ?>" style="position: absolute; left: 10px; bottom: 88px; width: 385px; overflow: hidden">
+<!--            <span style="font-weight: bold;font-size: 13px;color: #c76200;"><?php //echo $this->__('Price: ') ?></span>-->
+            <span class="regular-price">                
+                <span class="price"><?php echo $productItem->getFormatedPrice() ?></span>
+            </span>
+        </div>
+    </div>
+    <div class="webpos-rule-foot">
+        <button type="button" name="apply_spend_points" value="apply_spend_points" title="<?php echo $this->__('Close'); ?>" class="button btn-update btn-apply-spend" style="float:right" onclick="spendPointItems['<?php echo $productId ?>'].spendPopup.hide(); return false;"><span><span><?php echo $this->__('Close'); ?></span></span></button>
+        <button type="button" name="apply_spend_points" value="apply_spend_points" title="<?php echo $this->__('Apply'); ?>" class="button btn-update btn-apply-spend" style="float:right; margin-right: 10px" onclick="applyRule('<?php echo $productId ?>', $('reward_product_rule<?php echo $productId ?>').value); return false;"><span><span><?php echo $this->__('Apply Rule'); ?></span></span></button>
+    </div>
+</div>
+<script>
+    spendPointItems['<?php echo $productId ?>'] = new WebposRewardPointsItem(
+                <?php echo $productId ?>, 
+                rewardProductRulesGrouped['<?php echo $productId ?>'],
+                <?php echo Mage::app()->getStore()->convertPrice($productItem->getFinalPrice()) ?>, 
+                <?php echo Mage::helper('core')->jsonEncode(Mage::app()->getLocale()->getJsPriceFormat()) ?> 
+            );
+</script>
+<?php
+endforeach;
+?>
+<?php endif; ?>

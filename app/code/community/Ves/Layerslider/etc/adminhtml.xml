@@ -1,0 +1,95 @@
+<?xml version="1.0"?> 
+<config>
+    <menu>
+            <vesextensions module="ves_layerslider">
+                <title>VenusTheme</title>
+                <sort_order>50</sort_order>
+                <children>
+                    <ves_layerslider translate="title" module="ves_layerslider">
+                        <title>Ves Layerslider</title>
+                        <children>
+                            <add module="ves_layerslider">
+                                <title>Add Banner</title>
+                                <sort_order>0</sort_order>
+                                <action>adminhtml/veslayersliderbanner/add</action>
+                            </add>
+                            <banners module="ves_layerslider">
+                                <title>Manage Banners</title>
+                                <sort_order>1</sort_order>
+                                <action>adminhtml/veslayersliderbanner/index</action>
+                            </banners>
+                            
+                         
+                            <configuration translate="title" module="ves_layerslider">
+                                <title>Configuration</title>
+                                <sort_order>5</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_layerslider</action>
+                            </configuration>
+                        </children>
+                    </ves_layerslider>
+                </children>
+            </vesextensions>
+    </menu>
+    <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <vesextensions module="ves_layerslider">
+                            <title>VenusTheme</title>
+                            <sort_order>50</sort_order>
+                            <children>
+                                <ves_layerslider translate="title" module="ves_layerslider">
+                                    <title>Ves Layerslider</title>
+                                    <children>
+                                        <add module="ves_layerslider">
+                                            <title>Add Banner</title>
+                                            <sort_order>0</sort_order>
+                                        </add>
+
+                                        <save module="ves_layerslider">
+                                            <title>Save Banner</title>
+                                            <sort_order>0</sort_order>
+                                        </save>
+
+                                        <delete module="ves_layerslider">
+                                            <title>Delete Banner</title>
+                                            <sort_order>0</sort_order>
+                                        </delete>
+                                        <banners module="ves_layerslider">
+                                            <title>Manage Brands</title>
+                                            <sort_order>1</sort_order>
+                                        </banners>
+
+                                        <configuration translate="title" module="ves_layerslider">
+                                            <title>Configuration</title>
+                                            <sort_order>5</sort_order>
+                                        </configuration>
+                                    </children>
+                                </ves_layerslider>
+                            </children>
+                        </vesextensions>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ves_layerslider>
+                                            <title>Ves Layerslider</title>
+                                        </ves_layerslider>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+			<modules>
+				<Ves_layerslider>
+					<files>
+						<default>Ves_Layerslider.csv</default>
+					</files>
+				</Ves_layerslider>
+			</modules>
+		</translate>
+</config>

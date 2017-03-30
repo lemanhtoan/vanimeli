@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsReport
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Magestore_RewardPointsReport>
+            <version>0.2.5</version>
+        </Magestore_RewardPointsReport>
+    </modules>
+    <admin>
+        <routers>
+            <!-- <rewardpointsreportadmin>
+                <use>admin</use>
+                <args>
+                    <module>Magestore_RewardPointsReport</module>
+                    <frontName>rewardpointsreportadmin</frontName>
+                </args>
+            </rewardpointsreportadmin> -->
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Magestore_RewardPointsReport before="Mage_Adminhtml">Magestore_RewardPointsReport_Adminhtml</Magestore_RewardPointsReport>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <rewardpointsreport>
+                    <file>rewardpointsreport.xml</file>
+                </rewardpointsreport>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_RewardPointsReport>
+                    <files>
+                        <default>Magestore_RewardPointsReport.csv</default>
+                    </files>
+                </Magestore_RewardPointsReport>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <rewardpointsreport>
+                <class>Magestore_RewardPointsReport_Model</class>
+                <resourceModel>rewardpointsreport_mysql4</resourceModel>
+            </rewardpointsreport>
+            <rewardpointsreport_mysql4>
+                <class>Magestore_RewardPointsReport_Model_Mysql4</class>
+            </rewardpointsreport_mysql4>
+        </models>
+        <resources>
+            <rewardpointsreport_setup>
+                <setup>
+                    <module>Magestore_RewardPointsReport</module>
+                    <class>Magestore_RewardPoints_Model_Mysql4_Setup</class>
+                </setup>
+            </rewardpointsreport_setup>
+        </resources>
+        <blocks>
+            <rewardpointsreport>
+                <class>Magestore_RewardPointsReport_Block</class>
+            </rewardpointsreport>
+        </blocks>
+        <helpers>
+            <rewardpointsreport>
+                <class>Magestore_RewardPointsReport_Helper</class>
+            </rewardpointsreport>
+        </helpers>
+    </global>
+    <default>
+        <rewardpoints>
+            <report>
+                <ytd_start>1,1</ytd_start>
+                <mtd_start>1</mtd_start>
+            </report>
+        </rewardpoints>
+    </default>
+</config>

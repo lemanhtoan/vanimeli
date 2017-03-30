@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<widgets>
+	<nwdrevslider type="nwdrevslider/widget_revslider" translate="name description" module="nwdrevslider">
+		<name>NWDthemes Revolution Slider</name>
+		<description>Add Revolution slider</description>
+		<parameters>
+			<alias translate="label description">
+				<required>1</required>
+				<visible>1</visible>
+				<label>Select slider</label>
+				<type>select</type>
+				<source_model>nwdrevslider/system_config_source_revslider</source_model>
+				<value></value>
+				<sort_order>10</sort_order>
+			</alias>
+		</parameters>
+	</nwdrevslider>
+</widgets>

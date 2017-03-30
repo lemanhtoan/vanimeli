@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+			<!-- Load Css Files -->
+			<action method="addItem" ifconfig="ves_livecss/general/show"><type>skin_css</type><name>ves_base/paneltool.css</name></action>
+
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_animation"><type>skin_css</type><name>ves_base/animate.css</name></action>
+			
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_bootstrap"><type>js_css</type><name>ves_base/bootstrap/css/bootstrap.min.css</name></action>
+
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_tinybootstrap"><type>js_css</type><name>ves_base/bootstrap/css/bootstrap-tiny.css</name></action>
+
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_bootstrap24"><type>js_css</type><name>ves_base/bootstrap/css/bootstrap24.min.css</name></action>
+
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_tinybootstrap24"><type>js_css</type><name>ves_base/bootstrap/css/bootstrap24-tiny.css</name></action>
+
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_jquery_ui"><type>js_css</type><name>ves_base/jquery/ui/jquery-ui.min.css</name></action>
+
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_owl"><type>skin_css</type><name>ves_base/owlcarousel/owl.carousel.css</name></action>
+
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_colorbox"><type>skin_css</type><name>ves_base/colorbox/colorbox.css</name></action>
+
+			<action method="addLinkRel" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_fontawesome">
+	            <rel>stylesheet</rel>
+	            <href>//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css</href>
+	        </action>
+	        
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/show"><type>skin_css</type><name>ves_base/style.css</name></action>
+
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/use_sample_elements"><type>skin_css</type><name>ves_base/elements.css</name></action>
+
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_livecss/general/show"><type>js_css</type><name>ves_base/jquery/colorpicker/css/colorpicker.css</name></action>
+
+			<action method="addCss" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/show"><stylesheet helper="ves_blockbuilder/cssgen/getProfileFile" /><params>id="loaded_custom_css_profile"</params></action>
+
+			<!-- Load Js Files -->
+
+			<action method="addJs" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_jquery"><script>ves_base/jquery/jquery-2.1.1.min.js</script></action>
+
+			<action method="addJs" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_jquery"><script>ves_base/jquery/noconflict.js</script></action>
+
+			<action method="addJs" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_transition"><script>ves_base/jquery/jquery.transition.js</script></action>
+
+			<action method="addJs" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_bootstrap_js"><script>ves_base/bootstrap/js/bootstrap.min.js</script></action>
+
+			<action method="addJs" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_jquery_ui"><script>ves_base/jquery/ui/jquery-ui.min.js</script></action>
+
+			<action method="addItem" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_colorbox"><type>skin_js</type><name>ves_base/colorbox/jquery.colorbox-min.js</name><params/></action>
+
+			<!-- Add mousewheel plugin (this is optional) -->
+            <action method="addJs" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_fancybox"><script>ves_base/fancybox/jquery.mousewheel-3.0.6.pack.js</script></action>
+            <!-- Add fancyBox -->
+            <action method="addItem" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_fancybox"><type>js_css</type><name>ves_base/fancybox/jquery.fancybox.css?v=2.1.5</name><params/></action>
+        	<action method="addJs" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_fancybox"><script>ves_base/fancybox/jquery.fancybox.pack.js?v=2.1.5</script></action>
+        	<!-- Optionally add helpers - button, thumbnail and/or media -->
+        	<action method="addItem" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_fancybox_buttons"><type>js_css</type><name>ves_base/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5</name><params/></action>
+        	<action method="addJs" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_fancybox_buttons"><script>ves_base/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5</script></action>
+        	<action method="addJs" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_fancybox_media"><script>ves_base/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6</script></action>
+
+        	<action method="addItem" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_fancybox_thumbs"><type>js_css</type><name>ves_base/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7</name><params/></action>
+        	<action method="addJs" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_fancybox_thumbs"><script>ves_base/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7</script></action>
+
+            
+			<action method="addJs" module="ves_blockbuilder" ifconfig="ves_livecss/general/show"><script>ves_base/jquery/colorpicker/js/colorpicker.js</script></action>
+
+			<action method="addJs" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_owl"><script>ves_base/jquery/owl.carousel.min.js</script></action>
+
+			<action method="addJs" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_holder_js"><script>ves_base/jquery/holder.min.js</script></action>
+
+			<action method="addJs" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_animation"><script>ves_base/animate/animate.min.js</script></action>
+
+			<action method="addJs" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_parallax"><script>ves_base/jquery/jquery.parallax-1.1.3.js</script></action>
+
+			<!-- Enable Masonary JS -->
+
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_masonary"><type>skin_js</type><name>ves_base/js/libs/masonry/modernizr.custom.js</name><params/></action>
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_masonary"><type>skin_js</type><name>ves_base/js/libs/masonry/masonry.pkgd.min.js</name><params/></action>
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_masonary"><type>skin_js</type><name>ves_base/js/libs/masonry/imagesloaded.js</name><params/></action>
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_masonary"><type>skin_js</type><name>ves_base/js/libs/masonry/classie.js</name><params/></action>
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_masonary"><type>skin_js</type><name>ves_base/js/libs/masonry/AnimOnScroll.js</name><params/></action>
+
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/enable_masonary"><type>skin_css</type><name>ves_base/js/libs/masonry/component.css</name></action>
+			<!-- End Enable Masonary JS -->
+
+			<!-- <action method="addJs"><script>ves_base/front.common.js</script></action> -->
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_blockbuilder/ves_blockbuilder/show">
+                  <type>skin_js</type>
+                  <name>ves_base/js/common.js</name>
+                  <params/>
+            </action>
+			
+	  	</reference>
+	</default>
+
+	<catalog_product_view translate="label">
+        <label>Catalog Product View (Any)</label>
+        <reference name="head">
+        	<!-- Loading product media gallery images -->
+        	<action method="addJs" module="ves_blockbuilder" ifconfig="ves_productbuilder/general/enable_media_gallery"><script>ves_base/jquery/jquery.tmpl.min.js</script></action>
+        	<action method="addJs" module="ves_blockbuilder" ifconfig="ves_productbuilder/general/enable_jcarousel"><script>ves_base/jquery/jquery.jcarousellite-1.1.min.js</script></action>
+			<action method="addJs" module="ves_blockbuilder" ifconfig="ves_productbuilder/general/enable_media_gallery"><script>ves_base/jquery/jquery.elastislide.js</script></action>
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_productbuilder/general/enable_media_gallery"><type>skin_js</type><name>ves_base/js/libs/gallery.js</name></action>
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_productbuilder/general/enable_media_gallery"><type>skin_css</type><name>ves_base/elastislide.css</name></action>
+			<action method="addItem" module="ves_blockbuilder" ifconfig="ves_productbuilder/general/enable_media_gallery"><type>skin_css</type><name>ves_base/gallery.css</name></action>
+        </reference>
+    </catalog_product_view>
+</layout>

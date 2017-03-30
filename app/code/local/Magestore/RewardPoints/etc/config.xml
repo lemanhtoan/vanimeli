@@ -1,0 +1,508 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_RewardPoints
+  ~ @module     RewardPoints
+  ~ @author      Magestore Developer
+  ~
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+<config>
+    <modules>
+        <Magestore_RewardPoints>
+            <version>0.2.5</version>
+        </Magestore_RewardPoints>
+    </modules>
+    <frontend>
+        <secure_url>
+            <rewardpoints_checkout>/rewardpoints/checkout</rewardpoints_checkout>
+        </secure_url>
+        <routers>
+            <rewardpoints>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_RewardPoints</module>
+                    <frontName>rewardpoints</frontName>
+                </args>
+            </rewardpoints>
+        </routers>
+        <layout>
+            <updates>
+                <rewardpoints module="Magestore_RewardPoints">
+                    <file>rewardpoints.xml</file>
+                </rewardpoints>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_RewardPoints>
+                    <files>
+                        <default>Magestore_RewardPoints.csv</default>
+                    </files>
+                </Magestore_RewardPoints>
+            </modules>
+        </translate>
+        <events>
+            <paypal_prepare_line_items>
+                <observers>
+                    <rewardpoints_frontend_observers>
+                        <type>singleton</type>
+                        <class>rewardpoints/frontend_observer</class>
+                        <method>paypalPrepareLineItems</method>
+                    </rewardpoints_frontend_observers>
+                </observers>
+            </paypal_prepare_line_items>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <rewardpoints_block_to_html>
+                        <type>singleton</type>
+                        <class>rewardpoints/frontend_observer</class>
+                        <method>rewardpointsPaymentMethod</method>
+                    </rewardpoints_block_to_html>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+    </frontend>
+    <admin>
+        <routers>
+            <!-- <rewardpointsadmin>
+                <use>admin</use>
+                <args>
+                    <module>Magestore_RewardPoints</module>
+                    <frontName>rewardpointsadmin</frontName>
+                </args>
+            </rewardpointsadmin> -->
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Magestore_RewardPoints before="Mage_Adminhtml">Magestore_RewardPoints_Adminhtml</Magestore_RewardPoints>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <rewardpoints>
+                    <file>rewardpoints.xml</file>
+                </rewardpoints>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_RewardPoints>
+                    <files>
+                        <default>Magestore_RewardPoints.csv</default>
+                    </files>
+                </Magestore_RewardPoints>
+            </modules>
+        </translate>
+        <events>
+            <paypal_prepare_line_items>
+                <observers>
+                    <rewardpoints_adminhtml_observers>
+                        <type>singleton</type>
+                        <class>rewardpoints/adminhtml_observer</class>
+                        <method>paypalPrepareLineItems</method>
+                    </rewardpoints_adminhtml_observers>
+                </observers>
+            </paypal_prepare_line_items>
+            <customer_save_after>
+                <observers>
+                    <rewardpoints_adminhtml_observers>
+                        <type>singleton</type>
+                        <class>rewardpoints/adminhtml_observer</class>
+                        <method>customerSaveAfter</method>
+                    </rewardpoints_adminhtml_observers>
+                </observers>
+            </customer_save_after>
+            <sales_order_load_after>
+                <observers>
+                    <rewardpoints_adminhtml_observers>
+                        <type>singleton</type>
+                        <class>rewardpoints/adminhtml_observer</class>
+                        <method>salesOrderLoadAfter</method>
+                    </rewardpoints_adminhtml_observers>
+                </observers>
+            </sales_order_load_after>
+            <sales_order_creditmemo_refund>
+                <observers>
+                    <rewardpoints_adminhtml_observers>
+                        <type>singleton</type>
+                        <class>rewardpoints/adminhtml_observer</class>
+                        <method>salesOrderCreditmemoRefund</method>
+                    </rewardpoints_adminhtml_observers>
+                </observers>
+            </sales_order_creditmemo_refund>
+        </events>
+    </adminhtml>   
+    <global>
+        <models>
+            <rewardpoints>
+                <class>Magestore_RewardPoints_Model</class>
+                <resourceModel>rewardpoints_mysql4</resourceModel>
+            </rewardpoints>
+            <rewardpoints_mysql4>
+                <class>Magestore_RewardPoints_Model_Mysql4</class>
+                <entities>
+                    <customer>
+                        <table>rewardpoints_customer</table>
+                    </customer>
+                    <rate>
+                        <table>rewardpoints_rate</table>
+                    </rate>
+                    <transaction>
+                        <table>rewardpoints_transaction</table>
+                    </transaction>
+                </entities>
+            </rewardpoints_mysql4>
+            <!--            <tax>
+                <rewrite>
+                    <sales_total_quote_tax>Magestore_RewardPoints_Model_Total_Quote_Tax</sales_total_quote_tax>
+                </rewrite>
+            </tax>-->
+			
+            <!--paygate>
+                <rewrite>
+                    <authorizenet>Magestore_RewardPoints_Model_Paygate_Rewrite_Authorizenet</authorizenet>
+                </rewrite>
+            </paygate-->
+			
+        </models>
+        <resources>
+            <rewardpoints_setup>
+                <setup>
+                    <module>Magestore_RewardPoints</module>
+                    <class>Magestore_RewardPoints_Model_Mysql4_Setup</class>
+                </setup>
+            </rewardpoints_setup>
+        </resources>
+        <blocks>
+            <rewardpoints>
+                <class>Magestore_RewardPoints_Block</class>
+            </rewardpoints>
+            <checkout>
+                <rewrite>
+                    <cart_coupon>Magestore_RewardPoints_Block_Checkout_Cart_Rewrite_Coupon</cart_coupon>
+                    <!--                    <onepage_payment_methods>Magestore_RewardPoints_Block_Checkout_Onepage_Payment_Rewrite_Methods</onepage_payment_methods>-->
+                </rewrite>
+            </checkout>
+        </blocks>
+        <helpers>
+            <rewardpoints>
+                <class>Magestore_RewardPoints_Helper</class>
+            </rewardpoints>
+        </helpers>
+        <events>
+            <!-- Rewardpoints Earning Total -->
+            <sales_quote_collect_totals_after>
+                <observers>
+                    <rewardpoints_observers>
+                        <type>singleton</type>
+                        <class>rewardpoints/total_quote_earning</class>
+                        <method>salesQuoteCollectTotalsAfter</method>
+                    </rewardpoints_observers>
+                </observers>
+            </sales_quote_collect_totals_after>
+            <!-- Rewardpoints Before and after place order -->
+            <sales_model_service_quote_submit_before>
+                <observers>
+                    <rewardpoints_observers>
+                        <type>singleton</type>
+                        <class>rewardpoints/observer</class>
+                        <method>salesOrderPlaceBefore</method>
+                    </rewardpoints_observers>
+                </observers>
+            </sales_model_service_quote_submit_before>
+            <sales_model_service_quote_submit_after>
+                <observers>
+                    <rewardpoints_observers>
+                        <type>singleton</type>
+                        <class>rewardpoints/observer</class>
+                        <method>salesOrderPlaceAfter</method>
+                    </rewardpoints_observers>
+                </observers>
+            </sales_model_service_quote_submit_after>
+            
+            <!-- Rewardpoints process order -->
+            <sales_order_save_after>
+                <observers>
+                    <rewardpoints_observers>
+                        <type>singleton</type>
+                        <class>rewardpoints/observer</class>
+                        <method>salesOrderSaveAfter</method>
+                    </rewardpoints_observers>
+                </observers>
+            </sales_order_save_after>
+            <sales_order_save_before>
+                <observers>
+                    <rewardpoints_observers>
+                        <type>singleton</type>
+                        <class>rewardpoints/observer</class>
+                        <method>salesOrderSaveBefore</method>
+                    </rewardpoints_observers>
+                </observers>
+            </sales_order_save_before>
+            <sales_order_invoice_save_after>
+                <observers>
+                    <rewardpoints_observers>
+                        <type>singleton</type>
+                        <class>rewardpoints/observer</class>
+                        <method>salesOrderInvoiceSaveAfter</method>
+                    </rewardpoints_observers>
+                </observers>
+            </sales_order_invoice_save_after>
+            
+            <adminhtml_sales_order_creditmemo_register_before>
+                <observers>
+                    <rewardpoints_observers>
+                        <type>singleton</type>
+                        <class>rewardpoints/observer</class>
+                        <method>salesOrderCreditmemoRegisterBefore</method>
+                    </rewardpoints_observers>
+                </observers>
+            </adminhtml_sales_order_creditmemo_register_before>
+            <sales_order_creditmemo_save_after>
+                <observers>
+                    <rewardpoints_observers>
+                        <type>singleton</type>
+                        <class>rewardpoints/observer</class>
+                        <method>salesOrderCreditmemoSaveAfter</method>
+                    </rewardpoints_observers>
+                </observers>
+            </sales_order_creditmemo_save_after>
+        </events>
+        
+        <!-- Reward Points Total Config -->
+        <sales>
+            <quote>
+                <totals>
+                    <rewardpoints_label>
+                        <class>rewardpoints/total_quote_label</class>
+                        <before>nominal,subtotal</before>
+                        <renderer>rewardpoints/checkout_cart_label</renderer>
+                        <admin_renderer>rewardpoints/adminhtml_cart_label</admin_renderer>
+                    </rewardpoints_label>
+                    <rewardpoints>
+                        <class>rewardpoints/total_quote_point</class>
+                        <after>wee,discount</after>
+                        <before>tax</before>
+                    </rewardpoints>
+                    <rewardpoints_after_tax>
+                        <class>rewardpoints/total_quote_pointaftertax</class>
+                        <after>tax</after>
+                        <before>grand_total</before>
+                    </rewardpoints_after_tax>
+                    <!-- Refine shipping order
+					<freeshipping>
+                        <before>tax_subtotal,rewardpoints_freeshipping,shipping</before>
+                    </freeshipping>
+                    <rewardpoints_freeshipping>
+                        <class>rewardpoints/total_quote_freeshipping</class>
+                        <after>subtotal,freeshipping,tax_subtotal</after>
+                        <before>shipping,grand_total</before>
+                    </rewardpoints_freeshipping>
+                    <shipping>
+                        <after>subtotal,freeshipping,rewardpoints_freeshipping,tax_subtotal</after>
+                    </shipping> -->
+                </totals>
+            </quote>
+            <order_invoice>
+                <totals>
+                    <rewardpoints>
+                        <class>rewardpoints/total_invoice_point</class>
+                        <after>grand_total</after>
+                    </rewardpoints>
+                </totals>
+            </order_invoice>
+            <order_creditmemo>
+                <totals>
+                    <rewardpoints>
+                        <class>rewardpoints/total_creditmemo_point</class>
+                        <after>grand_total</after>
+                    </rewardpoints>
+                </totals>
+            </order_creditmemo>
+        </sales>
+        <pdf>
+            <totals>
+                <rewardpoints translate="title">
+                    <title>Use points on spend</title>
+                    <source_field>rewardpoints_discount</source_field>
+                    <model>rewardpoints/total_pdf_point</model>
+                    <font_size>7</font_size>
+                    <display_zero>0</display_zero>
+                    <sort_order>251</sort_order>
+                </rewardpoints>
+                <rewardpoints_earn translate="title">
+                    <title>Earn points </title>
+                    <source_field>rewardpoints_earn</source_field>
+                    <model>rewardpoints/total_pdf_pointearn</model>
+                    <font_size>7</font_size>
+                    <display_zero>0</display_zero>
+                    <sort_order>100</sort_order>
+                </rewardpoints_earn>
+            </totals>
+        </pdf>
+        <fieldsets>
+            <sales_convert_quote_address>
+                <rewardpoints_earn>
+                    <to_order>*</to_order>
+                </rewardpoints_earn>
+                <rewardpoints_spent>
+                    <to_order>*</to_order>
+                </rewardpoints_spent>
+                <rewardpoints_base_discount>
+                    <to_order>*</to_order>
+                </rewardpoints_base_discount>
+                <rewardpoints_discount>
+                    <to_order>*</to_order>
+                </rewardpoints_discount>
+                <rewardpoints_base_amount>
+                    <to_order>*</to_order>
+                </rewardpoints_base_amount>
+                <rewardpoints_amount>
+                    <to_order>*</to_order>
+                </rewardpoints_amount>
+                <!--rewardpoints_base_hidden_tax_amount>
+                    <to_order>*</to_order>
+                </rewardpoints_base_hidden_tax_amount>
+                <rewardpoints_hidden_tax_amount>
+                    <to_order>*</to_order>
+                </rewardpoints_hidden_tax_amount>
+                <rewardpoints_base_shipping_hidden_tax_amount>
+                    <to_order>*</to_order>
+                </rewardpoints_base_shipping_hidden_tax_amount>
+                <rewardpoints_shipping_hidden_tax_amount>
+                    <to_order>*</to_order>
+                </rewardpoints_shipping_hidden_tax_amount-->
+            </sales_convert_quote_address>
+            <sales_convert_quote_item>
+                <rewardpoints_earn>
+                    <to_order_item>*</to_order_item>
+                </rewardpoints_earn>
+                <rewardpoints_spent>
+                    <to_order_item>*</to_order_item>
+                </rewardpoints_spent>
+                <rewardpoints_base_discount>
+                    <to_order_item>*</to_order_item>
+                </rewardpoints_base_discount>
+                <rewardpoints_discount>
+                    <to_order_item>*</to_order_item>
+                </rewardpoints_discount>
+                <!--rewardpoints_base_hidden_tax_amount>
+                    <to_order>*</to_order>
+                </rewardpoints_base_hidden_tax_amount>
+                <rewardpoints_hidden_tax_amount>
+                    <to_order>*</to_order>
+                </rewardpoints_hidden_tax_amount-->
+            </sales_convert_quote_item>
+        </fieldsets>
+        
+        <!-- Reward Points Action Config -->
+        <rewardpoints>
+            <actions>
+                <!-- Sales - Earning Actions -->
+                <earning_invoice>rewardpoints/action_earning_invoice</earning_invoice>
+                <earning_creditmemo>rewardpoints/action_earning_creditmemo</earning_creditmemo>
+                <earning_cancel>rewardpoints/action_earning_cancel</earning_cancel>
+                
+                <!-- Sales - Spending Actions -->
+                <spending_order>rewardpoints/action_spending_order</spending_order>
+                <spending_creditmemo>rewardpoints/action_spending_creditmemo</spending_creditmemo>
+                <spending_cancel>rewardpoints/action_spending_cancel</spending_cancel>
+                
+                <!-- Admin - Change by Custom -->
+                <admin>rewardpoints/action_admin</admin>
+
+                <!-- Customize - Earning Actions replace money Affiliate - Jacob 09/03/2017 -->
+                <earning_affiliate>rewardpoints/action_earning_affiliate</earning_affiliate>
+            </actions>
+        </rewardpoints>
+        <template>
+            <email>
+                <rewardpoints_email_update_balance translate="label" module="rewardpoints">
+                    <label>Email template sent to customer when updating point balance</label>
+                    <file>rewardpoints/update_balance.html</file>
+                    <type>html</type>
+                </rewardpoints_email_update_balance>
+                <rewardpoints_email_before_expire_transaction translate="label" module="rewardpoints">
+                    <label>Email template sent to customer before a transaction expires</label>
+                    <file>rewardpoints/before_expire_transaction.html</file>
+                    <type>html</type>
+                </rewardpoints_email_before_expire_transaction>
+            </email>
+        </template>
+    </global>
+    <default>
+        <sales>
+            <totals_sort>
+                <rewardpoints>34</rewardpoints>
+                <rewardpoints_after_tax>44</rewardpoints_after_tax>
+            </totals_sort>
+        </sales>
+        <rewardpoints>
+            <general>
+                <enable>1</enable>
+                <show_policy_menu>0</show_policy_menu>
+                <policy_page>rewardpoints-policy</policy_page>
+                <show_welcome_page>0</show_welcome_page>
+                <welcome_page>rewardpoints-welcome</welcome_page>
+            </general>
+            <earning>
+                <by_tax>0</by_tax>
+                <by_shipping>0</by_shipping>
+                <rounding_method>round</rounding_method>
+                <order_invoice>1</order_invoice>
+                <earn_when_spend>1</earn_when_spend>
+                <order_cancel_state>closed,canceled</order_cancel_state>
+            </earning>
+            <spending>
+                <!--discount_before_tax>0</discount_before_tax-->
+                <spend_for_tax>1</spend_for_tax>
+                <spend_for_shipping>1</spend_for_shipping>
+                <spend_for_shipping_tax>1</spend_for_shipping_tax>
+                <order_refund_state>closed,canceled</order_refund_state>
+            </spending>
+            <display>
+                <toplink>1</toplink>
+                <product>1</product>
+                <minicart>1</minicart>
+            </display>
+            <email>
+                <enable>1</enable>
+                <sender>general</sender>
+                <update_balance>rewardpoints_email_update_balance</update_balance>
+                <before_expire_transaction>rewardpoints_email_before_expire_transaction</before_expire_transaction>
+            </email>
+        </rewardpoints>
+    </default>
+    <crontab>
+        <jobs>
+            <rewardpoints>
+                <schedule>
+                    <cron_expr>10 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>rewardpoints/cron::processTransactions</model>
+                </run>
+            </rewardpoints>
+        </jobs>
+    </crontab>
+</config>

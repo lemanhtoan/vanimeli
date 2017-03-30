@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_RewardPoints
+  ~ @module     RewardPoints
+  ~ @author      Magestore Developer
+  ~
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+<config>
+    <menu>
+        <rewardpoints module="rewardpoints" translate="title">
+            <title>Reward Points</title>
+            <sort_order>71</sort_order>
+            <children>
+                <earning module="rewardpoints" translate="title">
+                    <title>Earning Rates</title>
+                    <sort_order>10</sort_order>
+                    <action>adminhtml/reward_earning</action>
+                    <icon>fa-gift</icon>
+                </earning>
+                <spending module="rewardpoints" translate="title">
+                    <title>Spending Rates</title>
+                    <sort_order>60</sort_order>
+                    <action>adminhtml/reward_spending</action>
+                    <icon>fa-shopping-cart</icon>
+                </spending>
+                <transaction module="rewardpoints" translate="title">
+                    <title>Transactions</title>
+                    <sort_order>110</sort_order>
+                    <action>adminhtml/reward_transaction</action>
+                    <icon>fa-exchange</icon>
+                </transaction>
+                <simicart module="rewardpoints" translate="title">
+                    <title>Use in mobile app</title>
+                    <sort_order>2000</sort_order>
+                    <action>adminhtml/reward_simi</action>
+                    <icon>fa-tablet</icon>
+                </simicart>
+                <settings module="rewardpoints" translate="title">
+                    <title>Settings</title>
+                    <sort_order>200</sort_order>
+                    <action>adminhtml/system_config/edit/section/rewardpoints</action>
+                    <icon>fa-cog</icon>
+                </settings>
+            </children>
+        </rewardpoints>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <rewardpoints module="rewardpoints" translate="title">
+                                        <title>Reward Points</title>
+                                        <sort_order>71</sort_order>
+                                    </rewardpoints>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <rewardpoints module="rewardpoints" translate="title">
+                        <title>Reward Points</title>
+                        <sort_order>71</sort_order>
+                        <children>
+                            <earning module="rewardpoints" translate="title">
+                                <title>Earning Rates</title>
+                                <sort_order>10</sort_order>
+                            </earning>
+                            <spending module="rewardpoints" translate="title">
+                                <title>Spending Rates</title>
+                                <sort_order>60</sort_order>
+                            </spending>
+                            <transaction module="rewardpoints" translate="title">
+                                <title>Transactions</title>
+                                <sort_order>110</sort_order>
+                            </transaction>
+                            <simicart module="rewardpoints" translate="title">
+                                <title>Use in mobile app</title>
+                                <sort_order>2000</sort_order>
+                            </simicart>
+                            <settings module="rewardpoints" translate="title">
+                                <title>Settings</title>
+                                <sort_order>200</sort_order>
+                            </settings>
+                        </children>
+                    </rewardpoints>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

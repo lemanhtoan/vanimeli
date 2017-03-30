@@ -1,0 +1,142 @@
+<?php
+	$urlwidgets = Mage::helper("ves_blockbuilder")->getListWidgetsUrl("layout_html");
+	$urlwidget = Mage::helper("ves_blockbuilder")->getWidgetFormUrl();
+	$urlwidgetdata = Mage::helper("ves_blockbuilder")->getWidgetDataUrl();
+	$max_columns = 12;
+	$gutter = 30;
+	$coldwith = 54;
+	$enable_bootstrap_24cols = Mage::getStoreConfig("ves_blockbuilder/ves_blockbuilder/enable_bootstrap_24cols");
+	if($enable_bootstrap_24cols) {
+		$max_columns = 24;
+		$gutter = 10;
+		$coldwith = 34;
+	}
+	$block_data = $this->getBlockData();
+	$placeholder = "";
+?>
+
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/jquery/jquery-migrate-1.2.1.js"></script>
+<script type="text/javascript">
+    jQuery.noConflict();
+</script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/bootstrap/js/bootstrap.min.js"></script>
+
+<?php if($enable_bootstrap_24cols) { ?>
+<link href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/bootstrap/css/bootstrap24.min.css" type="text/css" rel="stylesheet"/>
+<?php } else { ?>
+<link href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+<?php }?>
+<!--
+<link href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/bootstrap/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet"/>-->
+
+<!--
+<link href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/bootstrap/less/bootstrap.less" rel="stylesheet/less" />
+<script src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/bootstrap/less-1.7.4.min.js"></script>
+-->
+
+<link href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+
+<link type="text/css" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/jquery/ui/jquery-ui.min.css" rel="stylesheet" media="screen" />
+
+<link type="text/css" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/jquery/ui/themes/smoothness/jquery-ui.css" rel="stylesheet" media="screen" />
+
+
+
+<!-- Elfinder -->
+<link type="text/css" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/elfinder/css/elfinder.min.css" rel="stylesheet" media="screen" />
+<link type="text/css" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/elfinder/css/theme.css" rel="stylesheet" media="screen" />
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/elfinder/js/elfinder.min.js"></script>
+<script type="text/javascript">
+	var elfinder_connector = "<?php echo Mage::helper("ves_base")->getConnectorUrl();?>";
+</script>
+<!-- Elfinder -->
+
+<!--
+<link type="text/css" rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/fancybox/jquery.fancybox.css?v=2.1.5" media="screen"/> -->
+
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/common.js"></script>
+
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/jquery/jquerycookie.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/jquery/ui/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/jquery/jquery.colorpicker.js"></script>
+<script type="text/javascript">
+	jQuery.fn.mColorPicker.init.replace = false
+</script>
+
+<!--
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>-->
+
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/builder/script.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/builder/image_gallery.js"></script>
+
+
+<style type="text/css">
+	button:hover{ background: transparent;}
+</style>
+
+<script type="text/javascript">
+	var base_media_url = "<?php echo Mage::helper("ves_blockbuilder")->getImageUrl();?>";
+	var base_secure_media_url = "<?php echo Mage::helper("ves_blockbuilder")->getImageUrl(true);?>";
+
+    function toggleEditor() {
+        jQuery("#wpo-widgetform").parent().toggleClass("hidden");
+    }
+
+    if(jQuery('#alias').val() == "") {
+	    var slider_alias = jQuery("#title").val().toLowerCase().replace(/ +/g,'-').replace(/[^a-z0-9-_]/g,'').trim();
+	    jQuery('#alias').val(slider_alias);
+	}
+
+	<?php if(!$block_data->getBlockId()): ?>
+	jQuery("#title").keyup(function(){
+
+	   var slider_alias = jQuery(this).val().toLowerCase().replace(/ +/g,'-').replace(/[^a-z0-9-_]/g,'').trim();
+	   jQuery("#alias").val(slider_alias);
+		
+	})
+	<?php endif; ?>
+	jQuery(document).ready(function($) {
+		var config = { 
+		      	  urlwidgets:'<?php echo str_replace("&amp;","&", $urlwidgets);?>',
+		          urlwidget:'<?php echo str_replace("&amp;","&", $urlwidget);?>',
+		          urlwidgetdata:'<?php echo str_replace("&amp;","&", $urlwidgetdata);?>',
+		          gutter	   :   '<?php echo (int)$gutter; ?>',
+				  coldwith   :   '<?php echo (int)$coldwith; ?>',
+		          col: '<?php echo (int)$max_columns; ?>',
+		          imageurl : '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>',
+		          placeholder:'<?php echo $placeholder; ?>'
+		      };
+
+		jQuery("#wpo-widgetform").parent().toggleClass("hidden");
+		jQuery(".layout-builder-wrapper").each( function(){
+			
+		    jQuery( jQuery(".layout-builder", this) ).WPO_Layout( config, $(".hidden-content-layout",this).val() );
+
+		} );
+		/*Choose backup layout then refresh layout builder*/
+		if(jQuery("#load_sample_layout").length > 0) {
+			jQuery("#load_sample_layout").change(function(){
+				var current_option = jQuery(this).val();
+				if(current_option && jQuery("#"+current_option+"_params").length > 0) {
+					jQuery(".layout-builder-wrapper").each( function(){
+						jQuery(".layout-builder", this).html("");
+					    jQuery( jQuery(".layout-builder", this) ).WPO_Layout( config, jQuery("#"+current_option+"_params").val() );
+
+					} );
+				}
+			})
+		}
+	})
+
+
+	function changeFieldImage(obj, id) {
+	    var a = obj.value.replace(base_media_url, "");
+	    a = a.replace(base_secure_media_url, "");
+	    document.getElementById(id).value=a;
+	    document.getElementById(id+'_image').src=obj.value;
+	    if(jQuery('#filemanager-modal').length > 0)
+	    	jQuery('#filemanager-modal').modal('toggle');
+	}
+</script>

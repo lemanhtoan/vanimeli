@@ -1,0 +1,70 @@
+<?php
+$id = rand().time();
+
+$custom_items = trim($custom_items);
+$modid = rand().time();
+$enable_collapse = $this->getConfig("enable_collapse", 0);
+
+$single_item = $this->getConfig("single_item", 0);
+$autoSpeed = $this->getConfig("autospeed", 1000);
+$fx = $this->getConfig("fx","");
+
+if (isset($carousels) && $carousels): ?>
+<div class="widget-carousel owlcarousel block <?php echo $addition_cls; ?> <?php if (isset($stylecls)&&$stylecls) echo 'block-'.$stylecls;?>">
+	<?php if (isset($widget_heading)&&!empty($widget_heading)): ?>
+	<div class="block-title">
+            <?php if($enable_collapse): ?><span class="opener hidden-lg hidden-md" data-toggle="collapse" data-target="#widget-carousel<?php echo $modid; ?>"><i class="fa fa-angle-down"></i></span><?php endif; ?>
+		<?php echo $widget_heading; ?>
+	</div>
+	<?php endif; ?>
+	<div id="widget-carousel<?php echo $modid; ?>" class="widget-inner block-content <?php if($enable_collapse): ?> widget-enanle-collapse collapse in <?php endif; ?>">
+		<div id="owlwidgetcarousel<?php echo $id;?>" class="owl-carousel">
+	 	<?php foreach ($carousels as $key => $ac): ?>
+				<div class="item <?php if($key==0) {?>first<?php } elseif($key == (count($carousels) -1 )) {?>last<?php } ?>">
+					<h4 class="item-title"><?php echo $ac['header']; ?> </h4>
+					<div class="item-content">
+						<?php echo $ac['content']; ?>
+					</div>
+				</div>
+	 	<?php endforeach; ?>
+		</div>	
+	</div>
+</div>
+<script type="text/javascript">
+jQuery(window).load(function() {
+	var widgetowlcarousel = jQuery('#owlwidgetcarousel<?php echo $id;?>');
+        widgetowlcarousel.owlCarousel({
+            singleItem: <?php echo $single_item?'true':'false';?>,
+            autoPlay: <?php echo $auto_play_mode?'true':'false';?>,
+            <?php if ($autoSpeed): ?>
+            paginationSpeed: <?php echo $autoSpeed; ?>,
+            <?php endif; ?>
+            <?php if($interval): ?>
+            slideSpeed: <?php echo $interval?(int)$interval:'1000';?>,
+            <?php endif; ?>
+            <?php if ($fx): ?>
+            transitionStyle: '<?php echo $fx; ?>',
+            <?php endif; ?>
+            autoplayHoverPause: true,
+            navigationText: ["<span class='fa fa-angle-left'></span>","<span class='fa fa-angle-right'></span>"],
+            slideBy: <?php echo (isset($slide_by) && $slide_by)?(int)$slide_by:1; ?>,
+            loop: <?php echo $loop == 1?'true':'false'; ?>,
+            margin: <?php echo $margin_item?(int)$margin_item:'0'; ?>,
+            navigation: <?php echo $show_nav == 1?'true':'false'; ?>,
+            mouseDrag: <?php echo $mouse_drag == 1?'true':'false'; ?>,
+            touchDrag: <?php echo $touch_drag == 1?'true':'false'; ?>,
+            autoWidth: false,
+            responsive: true,
+            items: <?php echo $default_items?(int)$default_items:4; ?>,
+            itemsDesktop : [1199,<?php echo $default_items?(int)$default_items:4; ?>], //4 items between 1199px and 980px
+            itemsDesktopSmall : [979,<?php echo $portrait_items?(int)$portrait_items:3; ?>], //3 items betweem 979px and 769px
+            itemsTablet: [768, <?php echo $tablet_items?(int)$tablet_items:2; ?>], //2 items between 768px and 641px
+            itemsTabletSmall : [640, <?php echo $tablet_small_items?(int)$tablet_small_items:2; ?>], //2 items between 641px and 480px
+            itemsMobile : [479, <?php echo $mobile_items?(int)$mobile_items:1; ?>], // itemsMobile disabled - inherit from itemsTablet option
+            itemsCustom: <?php echo (isset($custom_items) && $custom_items)?'['.$custom_items.']':'false';?> // custom numbers item view on screen
+        });
+});
+</script>
+<?php endif; ?>
+
+

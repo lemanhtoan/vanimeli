@@ -1,0 +1,227 @@
+" not found!<br>"," non trovato!<br>"
+"-- Next Slide --","-- Prossima Slide --"
+"-- Not Chosen --","-- Nessuna scelta --"
+"-- Previous Slide --","-- Precedente Slide --"
+"-- Scroll Below Slider --","-- Scorrere sotto Slider --"
+"2 x 2 Black","2 x 2 Nero"
+"2 x 2 White","2 x 2 Bianco"
+"3 x 3 Black","3 x 3 Nero"
+"3 x 3 White","3 x 3 Bianco"
+"API Functions","Funzioni API"
+Actions,Azioni
+"Add New Font","Agg. nuovi Font"
+"Add Slide","Agg. Slide"
+"Add This Video","Agg. questo Video"
+"Add Video Layout","Agg. Layout Video"
+"Adds a unique ID to the li of the Slide like id=""rev_special_id"" (add only the id)","Aggiunge un ID univoco alla Slide come un ID a piacere=""rev_special_id "" (aggiungere solo l'id)"
+"Adds a unique class to the li of the Slide like class=""rev_special_class"" (add only the classnames, seperated by space)","Aggiunge una classe unica alla Slide come una classe a piacere=""rev_special_class"" (aggiungere solo i nomi della classe, separati da uno spazio)"
+All,Tutti
+Angle,Angolazione
+Animation,Animazione
+Appearance,Aspetto
+Arguments:,Argomenti:
+"Aspect Ratio:","Aspetto Ratio:"
+Background,Sfondo
+"Background Fit:","Sfondo Fit:"
+"Background Image Url","Url Immagine di Sfondo"
+"Background Position:","Posizione Sfondo:"
+"Background Repeat:","Ripeti Sfondo:"
+"Background color","Colore Sfondo"
+Bottom,Basso
+"By Compressing Output","Per compressione di Output"
+"By Echo Output","Per Echo di Output"
+Center,Centro
+"Change Image","Cambia Immagine"
+"Choose Operation","Scegli Operazione"
+"Choose Slider","Scegli Slider"
+"Choose the import file","Scegli il file da importare"
+"Choose video type","Scegli tipo di Video"
+Class,Classe
+Classes,Classi
+Close,Chiudi
+Copy,Copia
+"Copy / Move",Copia/Sposta
+"Copy / move slide","Copia / Sposta Slide"
+"Copy the Google Font Family from <a href=""http://www.google.com/fonts"" target=""_blank"">http://www.google.com/fonts</a> like: <strong>Open+Sans:400,700,600</strong>","Copia le Google Font Family da <a href=""http://www.google.com/fonts"" target=""_blank"">http://www.google.com/fonts</a> like: <strong>Open+Sans:400,700,600</strong>"
+"Could not remove Validation!","Impossibile rimuovere convalida!"
+Custom,Personalizzato
+"Custom Animations:","Animazioni Personalizzate:"
+"Custom CSS","CSS Personalizzato"
+"Custom JavaScript","JavaScript Personalizzato"
+"Date created","Data di creazione"
+Delay,Durata
+Delete,Elimina
+"Delete All Layers","Cancella tutti i Layers"
+"Delete Slide","Elimina Slide"
+"Delete Slider","Elimina Slider"
+"Delete this slide?","Elimina questa Slide?"
+Disable,Disabilita
+Disabled,Disabilita
+"Do It!",Fatto!
+"Dotted Overlay:","Copertura tratteggiata:"
+Duplicate,Duplica
+"Duration (in ms):","Durata (in ms):"
+"Dynamic Styles (Not Editable):","Stili Dinamici (Non modificabile)"
+Easing:,Effetto:
+Edit,Modifica
+"Edit Slider","Modifica Slider"
+"Edit Slides","Modifica Slides"
+Enable,Abilita
+"Enable Logs:","Abilita Logs:"
+"Enable Markup Export option:","Abilita l'opzione per esportare note di revisione:"
+"Enable Swipe Function on touch devices","Abilita Funzione Swipe  sui dispositivi touch"
+"Enable console logs for debugging.","Abilita consolle Logs per il debugging."
+End,Fine
+"End on Slide","Fine della Slide"
+"Export Slider","Esporta Slider"
+"Export with Dummy Images","Esporta con Immagini fittizie"
+"External Scroll","Scroll Esterno"
+"External URL","URL Esterno"
+"First Transition Active","Attiva prima transizione"
+"First slide transition type","Tipo Prima transizione Slide"
+"From the",Dal
+Gallery,Galleria
+"General Settings","Impostazioni Generali"
+"General settings updated","Impostazioni Generali aggiornate"
+"Get External","Ottieni Esterno"
+"Global Settings","Impostazioni Globali"
+"Global Style Editor","Editore di Stile globale"
+"Go Back","Torna indietro"
+"Go To Slide","Vai alla Slide"
+Height,Alt.:
+Help,Aiuto
+"Help Lines","Linea di aiuto"
+"Helper Grid:","Griglia di Aiuto:"
+"Hide Controls:","Nascondi controlli:"
+"Import Slider","Importa Slider"
+"Installed Version","Versione Installata"
+"JQuery No Conflict Mode","JQuery Non in modalità Conflitto"
+"Latest Available Version","Ultima Versione Disponibile"
+"Lazy Load","Caricamento lento"
+Left,Sinistra
+"Link Type","Tipo di Link"
+"Loop Video:","Cicli Video:"
+"Loop, Slide does not stop","Ciclo, non fermare la Slide"
+"Margin Bottom","Margine Basso"
+"Margin Left","Margine Sinistro"
+"Margin Right","Margine Destro"
+"Margin Top","Margine Alto"
+"Min. Height","Alt. Minima"
+Move,Sposta
+Mute:,Muto:
+Navigation,Navigazione
+"New Slider","Nuova Slider"
+"New Window","Nuova Finestra"
+"Next Slide","Slide successiva"
+"Next Slide On End:","Nuova Slide alla Fine"
+"No Corner","Nessun Angolo"
+"No Shadow",Nessuna
+"No Sliders Found","Non sono state trovate Sliders"
+"No slides found, please add some slides","Non sono state trovate Slides, per favore aggiungi alcune Slides"
+None,Nessuna
+Opacity,Opacità
+Origin,Origine
+"Output Filters Protection","Filtri di protezione Output"
+"Overwrite current static styles?","Sovrascrivi Stili Statici correnti ?"
+"Pause Slider","Pausa Slider"
+Pendulum,Pendolo
+Perspective,prospettiva
+"Please Wait...",Attendere...
+Position,Posizione
+"Position on the page","Posizione sulla pagina"
+"Post Title","Titolo del Post"
+"Post content","Contenuto del Post"
+"Poster Image Url","Url Immagine Poster"
+Preview,Anteprima
+"Preview Slider","Anteprima Slider"
+"Previous Slide","Slide precedente"
+Published,Pubblicato
+"Purchase Code Successfully Activated","Codice di acquisto attivato con Successo"
+"Purchase Code already registered!","Codice di acquisto già registrato!"
+"Purchase Code is invalid","Codice di acquisto non valido"
+"Put JS Includes To Body","Mettere JS Incluso nel corpo"
+"Redraw Slider","Ridisegna Slider"
+Regular,Regolare
+Remove,Rimuovi
+Replacing...,"Sostituzione ..."
+"Resume Slider","Riprendi Slider"
+"Revolution Slider Error","Revolution Slider ERRORE"
+Right,Destra
+Rotation,Rotazione
+"Same Window","Altra Finestra"
+"Save As","Salva come"
+"Save Settings","Salva Slider"
+"Save Static Styles","Salva Stili Statici"
+Scale,Scala
+"Select Slide Image","Seleziona Immagine Slide"
+Set,Imposta
+Settings,Impostazioni
+"Settings in all Slides changed","Le impostazioni in tutte le Slides sono state cambiate"
+"Shadow Type","Tipo di Ombra"
+Sharp,Angolo
+"Sharp Reversed","Angolo invertito"
+"Show Background Image","Mostra Immagine di Sfondo"
+"Show Layers from Slide:","Mostra Layers della Slide:"
+Skew,Inclinato
+"Slide Created","Slide Creata"
+"Slide Created, redirecting...","Slide Create, sto reindirizzando..."
+"Slide Thumbnail. If not set - it will be taken from the slide image.","Miniatura della Slide. Se non è impostato - sarà presa dall'immagine della Slide."
+"Slide Title","Titolo Slide"
+"Slide updated","Slide aggiornata"
+Slideloop,"Cicli Slide"
+"Slider Import Success, redirecting...","Slider Importate con Successo, sto reindirizzando ..."
+"Slider Settings","impostazioni Slider"
+"Slider updated","Slider Aggiornata"
+"Slides Created","Slides Create"
+"Snap to:","Applica a:"
+"Solid Colored","Colore Tinta Unita"
+"Sortby updated","Ordinamento Aggiornato"
+Source,Fonte
+"Source Type","Tipo di Fonte"
+Start,Inizio
+"Start on Slide","Inizio della Slide"
+"Static Layers","Layer Statici"
+"Static Layers will be shown on every slide in template sliders","I Layer statici verranno visualizzati in ogni Slide del template Sliders"
+"Static Styles:","Stili Statici"
+Style,Stile
+"Successfully removed validation","Convalida rimossa con Successo"
+"The bottom margin of the slider wrapper div","Padding del margine inferiore della slider"
+"The left margin of the slider wrapper div","Padding del margine sinistro della slider"
+"The link to the post","Link al Post"
+"The right margin of the slider wrapper div","Padding del margine destro della slider"
+"The state of the slide. The unpublished slide will be excluded from the slider.","Stato della Slide. La Slide non pubblicata sarà esclusa dalla Slider."
+"The title of the slide, will be shown in the slides list.","Il titolo della Slide, verrà visualizzato nell'elenco delle Slides."
+"The top margin of the slider wrapper div","Padding del margine superiore della slider"
+"This will enable the option to export the Slider Markups to copy/paste it directly into websites.","Abilita l'opzione per esportare le note di revisione della Slider è a copiare / incollare direttamente nei siti web."
+Thumbnail,Miniatura
+Thumbnails,Miniature
+Title,Titolo
+Title:,Titolo:
+"To Slide","A Slide"
+Top,Alto
+"Touch Enabled","Abilita Touch"
+"Transition Duration","Durata Transazione"
+Transitions,Transizioni
+Transparent,Trasparente
+Troubleshooting,"Risoluzione dei problemi"
+Unpublished,"Non Pubblicato"
+Update,Aggiorna
+"Update History","Storico Aggiornamenti"
+"Update Static Layers","Aggiorna Layer Statici"
+"Update Video","Aggiorna Video"
+"Video Preload:","Video Precaricato:"
+"Video Settings","Impostazioni Video"
+"Video Speed:","Velocità Video"
+"White Space","Spazio Bianco"
+Width,Largh.:
+Width:,Altezza:
+Yes,Si
+"animations imported!","Animazioni Importate!"
+append,aggiungi
+"dynamic styles imported!","Stili dinamici Importati!"
+example,esempio
+none,Nessuna
+overwrite,Sovrascrivi
+updating,Aggiornamento
+updating...,"Sto Aggiornando..."
+use,usa

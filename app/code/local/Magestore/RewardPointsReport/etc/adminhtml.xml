@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsReport
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <menu>
+        <rewardpoints>
+            <children>
+                <reports>
+                    <title>Reports</title>
+                    <sort_order>180</sort_order>
+                    <children>
+                        <dashboard module="rewardpointsreport" translate="title">
+                            <title>Dashboard</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/reward_dashboard</action>
+                        </dashboard>
+                        <order module="rewardpointsreport" translate="title">
+                            <title>Orders</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/reward_order</action>
+                        </order>
+                        <customer module="rewardpointsreport" translate="title">
+                            <title>Customers</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/reward_customerreport</action>
+                        </customer>
+                        <product module="rewardpointsreport" translate="title">
+                            <title>Products</title>
+                            <sort_order>40</sort_order>
+                            <action>adminhtml/reward_product</action>
+                        </product>
+                        <earned module="rewardpointsreport" translate="title">
+                            <title>Earned Points</title>
+                            <sort_order>50</sort_order>
+                            <action>adminhtml/reward_earned</action>
+                        </earned>
+                        <spent module="rewardpointsreport" translate="title">
+                            <title>Spent Points</title>
+                            <sort_order>60</sort_order>
+                            <action>adminhtml/reward_spent</action>
+                        </spent>
+                    </children>
+                </reports>
+            </children>
+        </rewardpoints>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <rewardpoints>
+                        <children>
+                            <reports>
+                                <title>Reports</title>
+                                <sort_order>180</sort_order>
+                                <children>
+                                    <dashboard module="rewardpointsreport" translate="title">
+                                        <title>Dashboard</title>
+                                        <sort_order>10</sort_order>
+                                    </dashboard>
+                                    <order module="rewardpointsreport" translate="title">
+                                        <title>Orders</title>
+                                        <sort_order>20</sort_order>
+                                    </order>
+                                    <customer module="rewardpointsreport" translate="title">
+                                        <title>Customers</title>
+                                        <sort_order>30</sort_order>
+                                    </customer>
+                                    <product module="rewardpointsreport" translate="title">
+                                        <title>Products</title>
+                                        <sort_order>40</sort_order>
+                                    </product>
+                                    <earned module="rewardpointsreport" translate="title">
+                                        <title>Earned Points</title>
+                                        <sort_order>50</sort_order>
+                                    </earned>
+                                    <spent module="rewardpointsreport" translate="title">
+                                        <title>Spent Points</title>
+                                        <sort_order>60</sort_order>
+                                    </spent>
+                                </children>
+                            </reports>
+                        </children>
+                    </rewardpoints>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

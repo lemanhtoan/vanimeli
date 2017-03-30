@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsRule
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <!-- Custom block view earning points in product detail page -->
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/rewardpointsrule.css</stylesheet>
+            </action>
+            <action method="addJs">
+                <script>prototype/window.js</script>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>	
+        </reference>
+        <!-- Catalog Point Spend and Earn -->
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magestore/rewardpointsrule.js</name>
+                <params/>
+            </action>
+        </reference>
+        <reference name="product.info.extrahint">
+            <block type="rewardpointsrule/product_spend" name="rewardpoints.product.spendpoint" template="rewardpointsrule/product/spend.phtml" before="-" />
+            <block type="rewardpointsrule/product_view_earning" name="rewardpoints.product.earning" template="rewardpointsrule/product/view/earning.phtml" />
+            <block type="rewardpointsrule/product_spend" name="rewardpoints.product.spendpoint.grouped" template="rewardpointsrule/product/grouped/spend.phtml" />
+        </reference>
+        <!--        Hai.Tran 12/11/2013 - Fix earning points theo option-->
+        <reference name="before_body_end">
+            <block type="rewardpointsrule/product_view_earning" name="rewardpoints.product.earning.option" template="rewardpointsrule/product/view/option.phtml" />
+            <!--            <block type="rewardpointsrule/product_spend" name="rewardpoints.product.spendpoint.grouped" template="rewardpointsrule/product/grouped/spend.phtml" />-->
+        </reference>
+    </catalog_product_view>
+    
+    <!-- Cart Item Render -->
+    <checkout_cart_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/rewardpointsrule.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="checkout.cart">
+            <block type="rewardpointsrule/cart_item_renderer" name="additional.product.info" template="rewardpointsrule/cart/item/default.phtml" />
+        </reference>
+    </checkout_cart_index>
+    
+    <rewardpoints_index_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/rewardpointsrule.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="rewardpoints.dashboard.earn">
+            <block type="rewardpointsrule/account_dashboard_earn" name="earning.rules" template="rewardpointsrule/account/dashboard/earn.phtml" />
+        </reference>
+        <reference name="rewardpoints.dashboard.spend">
+            <block type="rewardpointsrule/account_dashboard_spend" name="spending.rules" template="rewardpointsrule/account/dashboard/spend.phtml" />
+        </reference>
+    </rewardpoints_index_index>
+    
+    <!--start Thin 14/8-->
+    <!--Custom view product list-->
+    <catalog_category_view>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/rewardpointsrule.css</stylesheet>
+            </action>
+        </reference>
+<!--        <reference name="before_body_end">
+            <block type="rewardpointsrule/product_list" name="rewardpointsrule.product.list" after="-" template="rewardpointsrule/product/list.phtml" />
+        </reference>-->
+    </catalog_category_view>
+    <catalogsearch_result_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/magestore/rewardpointsrule.css</stylesheet>
+            </action>
+        </reference>
+<!--        <reference name="before_body_end">
+            <block type="rewardpointsrule/product_list" name="rewardpointsrule.catalogsearch" after="-" template="rewardpointsrule/product/list.phtml" />
+        </reference>-->
+    </catalogsearch_result_index>
+    <!--end Thin 14/8-->
+
+    <checkout_cart_index>
+    	<reference name="checkout.cart.form.before">
+    		<block type="rewardpointsrule/cart_info" name="rewardpoint.rules.info" after="-" template="rewardpointsrule/cart/default.phtml" />
+    	</reference>
+    </checkout_cart_index>
+</layout>

@@ -1,0 +1,62 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Rewardpoints customer grid select
+ * 
+ * @see Mage_Adminhtml_Block_Template
+ */
+?>
+
+<?php if ($this->isEnable()): ?>
+
+<?php
+    /** @var $_pointHelper Magestore_RewardPoints_Helper_Point */
+    $_pointHelper   = $this->getPointHelper();
+    $_spendingPoint = $this->getSpendingPoint();
+    $_earningPoints = $this->getEarningPoint();
+?>
+<?php if ($_spendingPoint || $_earningPoints): ?>
+<?php if ($this->getColspan() == 1): ?><thead><?php endif ?>
+    <?php if ($_spendingPoint): ?>
+    <tr>
+        <td class="a-right" colspan="<?php echo $this->getColspan() ?>" style="<?php echo $this->getTotal()->getStyle() ?>">
+            <strong style="font-size: 13px;"><?php echo $this->__('Customer will spend') ?>:</strong>
+        </td>
+        <td class="a-right" style="min-width: 70px;<?php echo $this->getTotal()->getStyle() ?>">
+            <?php echo $_pointHelper->format($_spendingPoint, $this->getStore()) ?>
+        </td>
+    </tr>
+    <?php endif ?>
+    <?php if ($_earningPoints): ?>
+    <tr>
+        <td class="a-right" colspan="<?php echo $this->getColspan() ?>" style="<?php echo $this->getTotal()->getStyle() ?>">
+            <strong style="font-size: 13px;"><?php echo $this->__('Customer will earn') ?>:</strong>
+        </td>
+        <td class="a-right" style="min-width: 70px;<?php echo $this->getTotal()->getStyle() ?>">
+            <?php echo $_pointHelper->format($_earningPoints, $this->getStore()) ?>
+        </td>
+    </tr>
+    <?php endif ?>
+<?php if ($this->getColspan() == 1): ?></thead><?php endif ?>
+<?php endif ?>
+
+<?php endif // End if ($this->isEnable()) ?>

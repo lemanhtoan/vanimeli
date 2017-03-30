@@ -1,0 +1,10 @@
+<li class="plcs-fields">
+	<div class="plcs-field plcs-gerden-field">
+		<span>Gender</span>
+		<input type="radio" name="gender" title="male" id="prop-male" class="prop-radiobutton" value="1" style="vertical-align:middle;" />
+		<label for="prop-male"><?php echo $this->__('Male');?></label>
+		<input type="radio" name="gender" title="female" id="prop-female" class="prop-radiobutton" value="2" style="vertical-align:middle;" />
+		<label for="prop-female"><?php echo $this->__('Female');?></label>
+		<input type="hidden" id="plcs-gender_fix" <?php if ($this->isRequired()) { ?>class="required-entry"<?php } ?> />
+ 	</div>
+</li>

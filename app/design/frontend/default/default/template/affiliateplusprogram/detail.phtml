@@ -1,0 +1,61 @@
+<?php
+/**
+ * Sales transaction history template
+ */
+?>
+<?php
+$store_id = Mage::app()->getStore()->getStoreId();
+$check_responsvie = Mage::getStoreConfig('affiliateplus/style_config/responsive_enable', $store_id);
+ if($check_responsvie)
+     $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+ else
+     $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+?>
+
+<div class="aff-main-content <?php echo $class_name; ?>">
+<div class="aff-title" style="border-bottom: none;">
+	<h2 style="border-bottom: 1px solid #CCC;"><?php echo $this->__('Program: "%s"',$this->getProgram()->getName()) ?></h2>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="fieldset">
+    <p>
+        <?php echo $this->getProgram()->getDescription() ?>
+    </p>
+<?php if ($this->getProgram()->getValidFrom() || $this->getProgram()->getValidTo()): ?>
+    <p>
+        <span><?php echo $this->__('Notice') ?>:</span>
+        <?php echo $this->__('This program only available') ?>
+        <?php if ($this->getProgram()->getValidFrom()): ?>
+            <?php echo $this->__('from %s',$this->formatDate($this->getProgram()->getValidFrom(),'medium',false)) ?>
+        <?php endif ?>
+        <?php if ($this->getProgram()->getValidTo()): ?>
+            <?php echo $this->__('to %s',$this->formatDate($this->getProgram()->getValidTo(),'medium',false)) ?>
+        <?php endif ?>
+    </p>
+<?php endif ?>
+</div>
+<?php // echo $this->getGridHtml() ?>
+
+<div class="buttons-set">
+	<p class="back-link">
+		<a href="<?php echo $this->getUrl('affiliateplusprogram/index/index') ?>">
+			<button type="button" class="form-button button button-config">
+                            <span><span><?php echo $this->__('Back')?></span></span>
+			</button>
+		</a>
+	</p>
+<?php if ($this->isJoined()): ?>
+	<button class="button button-config" type="button" onclick='setLocation("<?php echo $this->getUrl('affiliateplusprogram/index/out',array('id' => $this->getProgram()->getId())) ?>")'>
+		<span>
+			<span><?php echo $this->__('Opt Out') ?></span>
+		</span>
+	</button>
+<?php else: ?>
+	<button class="button button-config" type="button" onclick='setLocation("<?php echo $this->getUrl('affiliateplusprogram/index/join',array('id' => $this->getProgram()->getId())) ?>")'>
+		<span>
+                    <span><?php echo $this->__('Join Program') ?></span>
+		</span>
+	</button>
+<?php endif ?>
+</div>
+</div>

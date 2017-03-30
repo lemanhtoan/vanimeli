@@ -1,0 +1,118 @@
+<?php if($this->getCanShowDescription()):?>
+	<?php $processor = Mage::helper('cms')->getBlockTemplateProcessor();?>
+	<?php $collectCatalogRules = $this->getCatalogRules()?>
+	<?php $collectCartRules = $this->getShoppingCartRules()?>
+	<?php if(count($collectCatalogRules) || count($collectCartRules)):?>
+		<div class="rule-info">
+			<div class="rule-title">
+				<span>
+				<img src="<?php echo Mage::helper('rewardpoints/point')->getImage() ?>" alt="<?php echo $this->__('Reward Points') ?>"/></span>
+				<h2><?php echo $this->__('Earning Rules')?></h2>
+			</div>
+			
+			<?php if(count($collectCatalogRules)):?>
+			<div class ="catalog-rule-info">
+				<ul class="rule-description">
+					<?php foreach ($collectCatalogRules as $rule):?>
+						<?php $ruleId = $rule->getRuleId()?>
+						<li <?php if($rule->getUsed()):?>class="rule-used"<?php else: ?>class="rule-notused"<?php endif;?>>
+							<ul>
+								<li>
+									<a class="rule-link-title" onclick="showDescriptionRule('<?php echo $ruleId?>'); activeClass(this, '<?php echo $ruleId?>'); return false;" href="javascript:void(0)">
+										<span class="rule-name"><?php echo $rule->getName();?></span>
+									</a>
+	
+									<div id="catalog-rule-<?php echo $ruleId ?>" style="display:none; margin-top: 10px">
+										<?php if($rule->getFromDate()):?>
+											<span><?php echo $this->__('<b>From Date</b>: <i>%s</i>', Mage::helper('core')->formatDate($rule->getFromDate(), 'medium', false))?></span>
+											<br/>
+										<?php endif;?>
+										<?php if($rule->getToDate()):?>
+											<span><?php echo $this->__('<b>To Date</b>: <i>%s</i>', Mage::helper('core')->formatDate($rule->getToDate(), 'medium', false))?></span>
+											<br/>
+											<br/>
+										<?php endif;?>
+										<span><?php echo $this->__('<i>%s</i>', $processor->filter($rule->getDescription()))?></span>  	
+									</div>
+								</li>
+							</ul>
+						</li>
+					<?php endforeach;?>
+				</ul>
+			</div>
+			<script type="text/javascript">
+	                function showDescriptionRule(id) {
+	                    var showDivId = 'catalog-rule-' + id;
+	                    if ($(showDivId).style.display == 'none') {
+	                        $(showDivId).style.display = 'block';
+	                    } else {
+	                        $(showDivId).style.display = 'none';
+	                    }
+	                }
+	                function activeClass(el, number) {
+	                    showDivId = 'catalog-rule-' + number;
+	                    if ($(showDivId).style.display == 'none') {
+	                        el.removeClassName('active');
+	                    } else {
+	                        el.addClassName('active')
+	
+	                    }
+	                }
+		    </script>
+			<?php endif;?>	
+			
+		
+		<?php if(count($collectCartRules)):?>
+			<div class="shopping-cart-info">
+				<ul class="rule-description">
+					<?php foreach ($collectCartRules as $rule):?>
+						<?php $ruleId = $rule->getRuleId()?>
+						<li <?php if($rule->getUsed()):?>class="rule-used"<?php else: ?>class="rule-notused"<?php endif;?>>
+							<ul>
+								<li>
+									<a class="rule-link-title" onclick="showDescriptionCartRule('<?php echo $ruleId?>'); activeCartClass(this, '<?php echo $ruleId?>'); return false;" href="javascript:void(0)">
+										<span class="rule-name"><?php echo $rule->getName();?></span>
+									</a>
+	
+									<div id="cart-rule-<?php echo $ruleId ?>" style="display:none; margin-top: 10px">
+										<?php if($rule->getFromDate()):?>
+											<span><?php echo $this->__('<b>From Date</b>: <i>%s</i>', Mage::helper('core')->formatDate($rule->getFromDate(), 'medium', false))?></span>
+											<br/>
+										<?php endif;?>
+										<?php if($rule->getToDate()):?>
+											<span><?php echo $this->__('<b>To Date</b>: <i>%s</i>', Mage::helper('core')->formatDate($rule->getToDate(), 'medium', false))?></span>
+											<br/>
+											<br/>
+										<?php endif;?>
+										<span><?php echo $this->__('<i>%s</i>', $processor->filter($rule->getDescription()))?></span>
+									</div>
+								</li>
+							</ul>
+						</li>
+					<?php endforeach;?>
+				</ul>
+			</div>	
+			<script type="text/javascript">
+		                function showDescriptionCartRule(id) {
+		                    var showDivId = 'cart-rule-' + id;
+		                    if ($(showDivId).style.display == 'none') {
+		                        $(showDivId).style.display = 'block';
+		                    } else {
+		                        $(showDivId).style.display = 'none';
+		                    }
+		                }
+		                function activeCartClass(el, number) {
+		                    showDivId = 'cart-rule-' + number;
+		                    if ($(showDivId).style.display == 'none') {
+		                        el.removeClassName('active');
+		                    } else {
+		                        el.addClassName('active')
+		
+		                    }
+		                }
+		    </script>
+	    <?php endif;?>
+	    </div>
+	<?php endif;?>
+<?php endif;?>
+

@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<widgets>
+    <!-- Widget single image-->
+    <widget_testimonial type="ves_testimonial/widget_list">
+      <name>Ves Base : Testimonial</name>
+      <description>Create Testimonial Widget</description>
+      <parameters>
+        <show translate="label" module="core">
+            <label>Enabled</label>
+            <sort_order>10</sort_order>
+            <type>select</type>
+            <values>
+                <yes translate="label">
+                    <label>Yes</label>
+                    <value>true</value>
+                </yes>
+                <no translate="label">
+                    <label>No</label>
+                    <value>false</value>
+                </no>
+            </values>
+            <visible>1</visible>
+            <value>true</value>
+
+        </show>
+
+        <title translate="label">
+            <label>Module Title</label>
+            <type>text</type>
+            <sort_order>20</sort_order>
+            <description>Empty for hide</description>
+            <visible>1</visible>
+            <value></value>
+
+        </title>
+
+        <cmsblock translate="label">
+            <visible>1</visible>
+            <label>Select Static Block</label>
+            <type>select</type>
+            <source_model>ves_testimonial/system_config_source_listCms</source_model>
+            <sort_order>21</sort_order>
+            <description>Choose Template for your module</description>
+            <value>0</value>
+        </cmsblock>
+
+        <pretext translate="label">
+         <visible>1</visible>
+         <label>Pretext</label>
+         <type>ves_testimonial/widget_wysiwyg</type>
+         <sort_order>22</sort_order>
+         <description>Empty for hide. You put html code such A, H2,H3,H4...</description>
+         <depends><cmsblock><value>0</value></cmsblock></depends>
+     </pretext>
+
+     <autoplay translate="label" module="core">
+        <label>Auto Play</label>
+        <sort_order>30</sort_order>
+        <description>Enable/Disable Autoplay mode</description>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <visible>1</visible>
+        <value>no</value>
+
+    </autoplay>
+
+    <interval translate="label" module="core">
+        <label>Interval</label>
+        <sort_order>40</sort_order>
+        <description></description>
+        <type>text</type>             
+        <visible>1</visible>
+        <value>1000</value>
+
+    </interval>
+
+    <width translate="label" module="core">
+        <label>Testimonial Width</label>
+        <sort_order>50</sort_order>
+        <description></description>
+        <type>text</type>
+        <visible>1</visible>
+        <value>120</value>
+
+    </width>
+    <height translate="label" module="core">
+        <label>Testimonial Height</label>
+        <sort_order>60</sort_order>
+        <description></description>
+        <type>text</type>
+        <visible>1</visible>
+        <value>120</value>
+
+    </height>
+
+    <columns translate="label" module="core">
+        <label>Columns</label>
+        <sort_order>70</sort_order>
+        <description>Number columns on carousel mode</description>
+        <type>text</type>
+        <visible>1</visible>
+        <value>1</value> 
+    </columns>
+
+    <show_navigator>
+        <label>Enable Button Navigation</label>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>75</sort_order>
+        <visible>1</visible>
+        <value>yes</value>
+    </show_navigator>
+
+    <show_more_link translate="label" module="core">
+        <label>Show More Link</label>
+        <sort_order>78</sort_order>
+        <type>select</type>
+        <values>
+            <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <visible>1</visible>
+        <value>false</value>
+    </show_more_link>
+
+    <max_items_page translate="label" module="core">
+        <label>Max Items In Each Page</label>
+        <sort_order>80</sort_order>
+        <description></description>
+        <type>text</type>
+        <visible>1</visible>
+        <value>2</value> 
+    </max_items_page>
+
+    <filter_group translate="label" module="core">
+        <label>Testimonial Group</label>
+        <sort_order>100</sort_order>
+        <type>select</type>
+        <source_model>ves_testimonial/system_config_source_listTestimonial</source_model>
+        <description>Choose Testimonial Group to get testimonials to show on frontend.</description>
+        <visible>1</visible>
+    </filter_group>
+
+    <template translate="label">
+        <visible>1</visible>
+        <label>Module Template</label>
+        <description>Input custom module template file path. For example: ves/testimonial/scroll.phtml Empty for default</description>
+        <type>text</type>
+        <sort_order>250</sort_order>
+    </template> 
+</parameters>
+</widget_testimonial>
+</widgets>

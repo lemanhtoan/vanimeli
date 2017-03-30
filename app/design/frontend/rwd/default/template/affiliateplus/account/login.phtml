@@ -1,0 +1,55 @@
+<?php
+$store_id = Mage::app()->getStore()->getStoreId();
+$check_responsvie = Mage::getStoreConfig('affiliateplus/style_config/responsive_enable', $store_id);
+ if($check_responsvie)
+     $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+ else
+     $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+?>
+
+
+<div class="aff-main-content <?php echo $class_name; ?>">
+<div class="account-login">
+    <div class="aff-title">
+        <h1><?php echo $this->__('Login or Create an Account') ?></h1>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="lable-title">
+         <h2 class="legend"><?php echo $this->__('New Account') ?></h2>
+        </div>
+        <p><?php echo $this->getRegisterDescription() ?></p>
+       <button type="button" class="button button-config" title="<?php echo $this->__('Signup') ?>" onclick="setLocation('<?php echo $this->getRegisterUrl() ?>')">
+            <span><span><?php echo $this->__('Signup') ?></span></span>
+        </button>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="lable-title">
+         <h2 class="legend"><?php echo $this->__('Registered Customers') ?></h2>
+        </div>
+        <form action="<?php echo $this->getUrl('affiliateplus/account/loginPost') ?>" method="post" id="login-form" role="form">
+                <div class="form-group">
+                    <label for="email" class="required"><?php echo $this->__('Email Address') ?><em>*</em></label>
+                    <input type="text" placeholder="<?php echo $this->__('Email Address') ?>"  name="login[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="email" class="form-control input-text required-entry validate-email" title="<?php echo $this->__('Email Address') ?>" />
+                </div>
+                <div class="form-group">
+                    <label for="pass" class="required"><?php echo $this->__('Password') ?><em>*</em></label>
+                    <input type="password" placeholder="<?php echo $this->__('Password') ?>" name="login[password]" class="form-control input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
+                </div>
+                <p class="required" ><?php echo $this->__('* Required Fields') ?></p>
+                <a href="<?php echo $this->getUrl('customer/account/forgotpassword/'); ?>" class="f-right"><?php echo $this->__('Forgot Your Password?') ?></a>
+                <button type="submit" title="<?php echo $this->__('Login') ?>" class="button button-config"  name="send" id="send2">
+                    <span>
+                        <span><?php echo $this->__('Login') ?></span>
+                    </span>
+                </button>                 
+         </form>
+    </div>
+</div>
+</div>
+</div>
+<!--Changed By Adam 26/06/2015 fix issue: Doesn't verify require field before submit-->
+<script type="text/javascript">
+    var loginAffiliateAccountForm = new VarienForm('login-form', true);
+</script>

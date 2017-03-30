@@ -1,0 +1,28 @@
+<?php if ($this->showButton('linkedin')): ?>
+    <div class="behavior-linkedin behavior-social" id="behavior-linkedin" <?php if (!$this->showCount('linkedin')) echo "style='width: 62px !important;'" ?>>
+        <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+        <script type="IN/Share" data-url="<?php echo $this->getShareUrl() ?>" <?php echo $this->showCount('linkedin') ? 'data-counter="right"' : ''; ?> data-onSuccess="haitv" data-success="haitv" data-onError="haitv"></script>
+        <script>
+            var messageLinkedin = '<?php echo $this->getSocialInfo('linkedin') ?>';
+            var canRequestLinkedin = (messageLinkedin === '') ? false : true;
+
+            function haitv(response) {
+                alert(response);
+            }
+            if (messageLinkedin !== '' && login) {
+                Event.observe('behavior-linkedin', 'mouseover', function () {
+                    if (canRequestLinkedin) {
+                        $('behavior-ajax-loader').show();
+                        $('social-info-behavior').innerHTML = messageLinkedin;
+                    }else {
+                        $('behavior-ajax-loader').hide();
+                    }
+                });
+                Event.observe('behavior-linkedin', 'mouseout', function () {
+                    $('behavior-ajax-loader').show();
+                    $('social-info-behavior').innerHTML = messageDefault;
+                });
+            }
+        </script>
+    </div>
+<?php endif; ?>

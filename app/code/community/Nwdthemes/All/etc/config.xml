@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<config>
+
+	<modules>
+		<Nwdthemes_All>
+			<version>1.0.0</version>
+		</Nwdthemes_All>
+	</modules> 
+
+	<global>
+		<blocks>
+			<nwdall>
+				<class>Nwdthemes_All_Block</class>
+			</nwdall>
+		</blocks>
+		<resources>
+			<nwdall_setup>
+				<setup>
+					<module>Nwdthemes_All</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</nwdall_setup>
+			<nwdall_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</nwdall_write>
+			<nwdall_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</nwdall_read>
+		</resources>
+		<models>
+			<nwdall>
+				<class>Nwdthemes_All_Model</class>
+			</nwdall>
+		</models>
+		<helpers>
+			<nwdall>
+				<class>Nwdthemes_All_Helper</class>
+			</nwdall>
+		</helpers>
+	</global>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <nwdall after="Mage_Adminhtml">Nwdthemes_All_Adminhtml</nwdall>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+	<adminhtml>
+		<layout>
+			<updates>
+				<nwdall>
+					<file>nwdthemes/all.xml</file>
+				</nwdall>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<Nwdthemes_All>
+					<files>
+						<default>Nwdthemes_All.csv</default>
+					</files>
+				</Nwdthemes_All>
+			</modules>
+		</translate>
+	</adminhtml>
+
+	<default>
+		<nwdall>
+		</nwdall>
+	</default>
+
+</config>

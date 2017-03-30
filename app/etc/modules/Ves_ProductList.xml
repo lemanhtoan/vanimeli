@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Ves_ProductList>
+			<active>true</active>
+			<codePool>community</codePool>
+		</Ves_ProductList>
+	</modules>
+</config>

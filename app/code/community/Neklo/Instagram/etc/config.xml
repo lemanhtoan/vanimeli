@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+NOTICE OF LICENSE
+
+This source file is subject to the NekloEULA that is bundled with this package in the file ICENSE.txt.
+
+It is also available through the world-wide-web at this URL: http://store.neklo.com/LICENSE.txt
+
+Copyright (c)  Neklo (http://store.neklo.com/)
+-->
+<config>
+    <modules>
+        <Neklo_Instagram>
+            <version>1.1.0</version>
+        </Neklo_Instagram>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Neklo_Instagram before="Mage_Adminhtml">Neklo_Instagram_Adminhtml</Neklo_Instagram>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <layout>
+            <updates>
+                <neklo_instagram>
+                    <file>neklo_instagram.xml</file>
+                </neklo_instagram>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <neklo_instagram>
+                    <file>neklo/instagram.xml</file>
+                </neklo_instagram>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Neklo_Instagram>
+                    <files>
+                        <default>Neklo_Instagram.csv</default>
+                    </files>
+                </Neklo_Instagram>
+            </modules>
+        </translate>
+    </adminhtml>
+    <global>
+        <blocks>
+            <neklo_instagram>
+                <class>Neklo_Instagram_Block</class>
+            </neklo_instagram>
+            <neklo_instagram_adminhtml>
+                <class>Neklo_Instagram_Block_Adminhtml</class>
+            </neklo_instagram_adminhtml>
+        </blocks>
+        <helpers>
+            <neklo_instagram>
+                <class>Neklo_Instagram_Helper</class>
+            </neklo_instagram>
+        </helpers>
+        <models>
+            <neklo_instagram>
+                <class>Neklo_Instagram_Model</class>
+            </neklo_instagram>
+        </models>
+        <resources>
+            <neklo_instagram_setup>
+                <setup>
+                    <module>Neklo_Instagram</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </neklo_instagram_setup>
+        </resources>
+    </global>
+    <default>
+        <neklo_instagram>
+            <general>
+                <cache_lifetime>3600</cache_lifetime>
+            </general>
+        </neklo_instagram>
+    </default>
+</config> 

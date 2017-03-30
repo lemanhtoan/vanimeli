@@ -1,0 +1,41 @@
+<?php
+/**
+* This file is released under a custom license by Avenla Oy.
+* All rights reserved
+*
+* License and more information can be found at http://productdownloads.avenla.com/magento-modules/klarna-checkout/
+* For questions and support - klarna-support@avenla.com
+*
+* @category   Avenla
+* @package    Avenla_KlarnaCheckout
+* @copyright  Copyright (c) Avenla Oy
+* @link       http://www.avenla.fi
+*/
+
+/**
+ * Avenla KlarnaCheckout
+ *
+ * @category   Avenla
+ * @package    Avenla_KlarnaCheckout
+ */
+?>
+<script type="text/javascript">
+   	//<![CDATA[
+    function updatePClasses() {
+    	new Ajax.Request('<?php echo $this->getAjaxUpdateUrl() ?>', {
+ 			onSuccess: function(response){
+	            if (response.responseText){
+					$('pclassResponse').update(response.responseText);
+	            }
+            }
+        });
+    }
+    //]]>
+</script>
+
+<div class="pp-buttons-container">
+    <button onclick="javascript:updatePClasses(); return false;" class="scalable" type="button" id="<?php echo $this->getHtmlId() ?>">
+        <span><span><span><?php echo $this->escapeHtml($this->getButtonLabel()); ?></span></span></span>
+    </button>
+</div>
+<p id="pclassResponse" style="clear:both;"></p>

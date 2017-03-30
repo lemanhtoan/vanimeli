@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_RewardPoints
+  ~ @module     RewardPoints
+  ~ @author      Magestore Developer
+  ~
+  ~ @copyright   Copyright (c) 2016 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+<config>
+    <modules>
+        <Magestore_RewardPointsCsv>
+            <version>0.2.5</version>
+        </Magestore_RewardPointsCsv>
+    </modules>
+    <frontend>
+        <routers>
+            <rewardpointscsv>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_RewardPointsCsv</module>
+                    <frontName>rewardpointscsv</frontName>
+                </args>
+            </rewardpointscsv>
+        </routers>
+        <layout>
+            <updates>
+                <rewardpointscsv>
+                    <file>rewardpointscsv.xml</file>
+                </rewardpointscsv>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_RewardPointsCsv>
+                    <files>
+                        <default>Magestore_RewardPointsCsv.csv</default>
+                    </files>
+                </Magestore_RewardPointsCsv>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <!-- <rewardpointscsvadmin>
+                <use>admin</use>
+                <args>
+                    <module>Magestore_RewardPointsCsv</module>
+                    <frontName>rewardpointscsvadmin</frontName>
+                </args>
+            </rewardpointscsvadmin> -->
+        <adminhtml>
+            <args>
+                <modules>
+                    <Magestore_RewardPointsCsv before="Mage_Adminhtml">Magestore_RewardPointsCsv_Adminhtml</Magestore_RewardPointsCsv>
+                </modules>
+            </args>
+        </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <rewardpointscsv>
+                    <file>rewardpointscsv.xml</file>
+                </rewardpointscsv>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_RewardPointsCsv>
+                    <files>
+                        <default>Magestore_RewardPointsCsv.csv</default>
+                    </files>
+                </Magestore_RewardPointsCsv>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <rewardpointscsv>
+                <class>Magestore_RewardPointsCsv_Model</class>
+                <resourceModel>rewardpointscsv_mysql4</resourceModel>
+            </rewardpointscsv>
+            <rewardpointscsv_mysql4>
+                <class>Magestore_RewardPointsCsv_Model_Mysql4</class>
+                <entities>
+                    <rewardpointscsv>
+<!--                        <table>rewardpointscsv</table>-->
+                    </rewardpointscsv>
+                </entities>
+            </rewardpointscsv_mysql4>
+        </models>
+        <resources>
+            <rewardpointscsv_setup>
+                <setup>
+                    <module>Magestore_RewardPointsCsv</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </rewardpointscsv_setup>
+            <rewardpointscsv_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </rewardpointscsv_write>
+            <rewardpointscsv_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </rewardpointscsv_read>
+        </resources>
+        <blocks>
+            <rewardpointscsv>
+                <class>Magestore_RewardPointsCsv_Block</class>
+            </rewardpointscsv>
+        </blocks>
+        <helpers>
+            <rewardpointscsv>
+                <class>Magestore_RewardPointsCsv_Helper</class>
+            </rewardpointscsv>
+        </helpers>
+        <!-- <events>
+            <controller_action_predispatch>
+                <observers>
+                    <rewardpointscsv_observers>
+                        <class>rewardpointscsv/observer</class>
+                        <method>controllerActionPredispatch</method>
+                    </rewardpointscsv_observers>
+                </observers>
+            </controller_action_predispatch>
+        </events> -->
+    </global>
+</config>

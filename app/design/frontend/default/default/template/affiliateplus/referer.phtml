@@ -1,0 +1,22 @@
+<?php
+/**
+ * Referers history template
+ */
+?>
+
+
+<div class="aff-title">
+	<h2><?php echo $this->__('Referrer') ?></h2>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php if ($this->getCollection()->getSize()): ?>
+	<?php echo $this->getPagerHtml() ?>
+	<?php echo $this->getGridHtml() ?>
+	<?php echo $this->getPagerHtml() ?>
+<?php else: ?>
+<div>
+	<p class="note-msg">
+		<?php echo $this->__('There are no referrer matching this selection.') ?>
+	</p>
+</div>
+<?php endif ?>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Magento Product List extension
+ *
+ * @category   Ves
+ * @package    Ves_ProductList
+ * @author     venustheme.com
+ */
+-->
+<config>
+	<menu>
+		<vesextensions module="productlist">
+			<title>VenusTheme</title>
+			<sort_order>51</sort_order>
+			<children>
+				<productlist module="productlist">
+					<title>Ves Product List</title>
+					<children>
+						<add module="productlist">
+							<title>Add Rule</title>
+							<sort_order>0</sort_order>
+							<action>adminhtml/productlist/new</action>
+						</add>
+						<items module="productlist">
+							<title>Manage Rules</title>
+							<sort_order>10</sort_order>
+							<action>adminhtml/productlist/index</action>
+						</items>
+						<config translate="title">
+							<title>Configuration</title>
+							<sort_order>30</sort_order>
+							<action>adminhtml/system_config/edit/section/productlist</action>
+						</config>
+					</children>
+				</productlist>
+			</children>
+		</vesextensions>
+	</menu>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<vesextensions module="productlist">
+						<title>VenusTheme</title>
+						<sort_order>51</sort_order>
+						<children>
+							<productlist module="productlist">
+								<title>Ves Product List</title>
+								<sort_order>2</sort_order>s
+								<children>
+									<add module="productlist">
+										<title>Add Rule</title>
+										<sort_order>0</sort_order>
+									</add>
+									<items module="productlist">
+										<title>Manage Rules</title>
+										<sort_order>10</sort_order>
+									</items>
+									<save module="productlist">
+										<title>Save Rules</title>
+										<sort_order>10</sort_order>
+									</save>
+									<delete module="productlist">
+										<title>Delete Rules</title>
+										<sort_order>10</sort_order>
+									</delete>
+
+									<ruleproducts module="productlist">
+										<title>Manage Rule Products</title>
+										<sort_order>20</sort_order>
+									</ruleproducts>
+
+									<config translate="title">
+										<title>Configuration</title>
+										<sort_order>30</sort_order>
+									</config>
+								</children>
+							</productlist>
+						</children>
+					</vesextensions>
+					<system>
+						<children>
+							<config>
+								<children>
+									<productlist>
+										<title>Ves Product List</title>
+									</productlist>
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

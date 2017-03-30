@@ -1,0 +1,12 @@
+<config>
+  <global>
+    <page>
+      <layouts>
+        <homepage_layout translate="label">
+          <label>Homepage Layout</label>
+          <template>page/home-page.phtml</template>
+        </homepage_layout>
+      </layouts>
+    </page>
+  </global>
+</config>

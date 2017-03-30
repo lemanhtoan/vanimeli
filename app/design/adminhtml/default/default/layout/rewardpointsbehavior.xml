@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsBehavior
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    
+    <adminhtml_reward_earning_behavior_index>
+        <reference name="left">
+            <block type="rewardpointsbehavior/adminhtml_system_configuration_switcher" name="adminhtml.system.config.switcher" before="-" />
+        </reference>
+    </adminhtml_reward_earning_behavior_index>
+</layout>

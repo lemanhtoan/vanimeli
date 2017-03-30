@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ves_Layerslider>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Widget />
+            </depends>
+        </Ves_Layerslider>
+    </modules>
+</config>

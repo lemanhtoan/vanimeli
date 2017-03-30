@@ -1,0 +1,825 @@
+<?xml version="1.0"?>
+<widgets>
+    <blockbuilder type="ves_blockbuilder/widget_builder"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Block Builder : Generate Block Builder Profile</name>
+        <description type="desc">Generate Block Builder Profile</description>
+        <parameters>
+        	<block_id translate="label" module="core">
+				<label>Block Id</label>
+				<sort_order>20</sort_order>
+				<type>select</type>
+                <source_model>ves_blockbuilder/system_config_source_listBlock</source_model>
+				<description>Choose Block Builder Item</description>
+                <visible>1</visible>
+				<required>1</required>
+				<value></value>
+			</block_id>
+            <code translate="label" module="core">
+				<label>Block Builder Code</label>
+				<sort_order>10</sort_order>
+				<description>The code of block builder</description>
+				<type>text</type>
+				<visible>1</visible>
+				<required>0</required>
+				<value></value>
+			</code>
+			<show_title translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Title</label>
+                <sort_order>20</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_title>
+            <template translate="label">
+                <visible>1</visible>
+                <label>Block Template</label>
+                <description>Input custom module template file path. For example: ves/blockbuilder/default.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template>
+        </parameters>
+    </blockbuilder>
+    <pagebuilder type="ves_blockbuilder/widget_page"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Block Builder : Generate Page Builder Profile</name>
+        <description type="desc">Generate a page builder profile</description>
+        <parameters>
+            <block_id translate="label" module="core">
+                <label>Page Profile Id</label>
+                <sort_order>20</sort_order>
+                <type>select</type>
+                <source_model>ves_blockbuilder/system_config_source_listPage</source_model>
+                <description>Choose A Profile Of Page Builder</description>
+                <visible>1</visible>
+                <required>1</required>
+                <value></value>
+            </block_id>
+            <code translate="label" module="core">
+                <label>Page Builder Code</label>
+                <sort_order>10</sort_order>
+                <description>The code of page builder</description>
+                <type>text</type>
+                <visible>1</visible>
+                <required>0</required>
+                <value></value>
+            </code>
+            <show_title translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Title</label>
+                <sort_order>20</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_title>
+            <template translate="label">
+                <visible>1</visible>
+                <label>Page Builder Template</label>
+                <description>Input custom module template file path. For example: ves/blockbuilder/row.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template>
+        </parameters>
+    </pagebuilder>
+
+    <productbuilder type="ves_blockbuilder/widget_product"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Block Builder : Product Layout Builder Profile</name>
+        <description type="desc">Generate a product layout builder profile</description>
+        <parameters>
+            <block_id translate="label" module="core">
+                <label>Product Profile Id</label>
+                <sort_order>20</sort_order>
+                <type>select</type>
+                <source_model>ves_blockbuilder/system_config_source_listProduct</source_model>
+                <description>Choose A Profile Of Page Builder</description>
+                <visible>1</visible>
+                <required>1</required>
+                <value></value>
+            </block_id>
+            <code translate="label" module="core">
+                <label>Product Builder Code</label>
+                <sort_order>10</sort_order>
+                <description>The code of product builder</description>
+                <type>text</type>
+                <visible>1</visible>
+                <required>0</required>
+                <value></value>
+            </code>
+            <show_title translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Title</label>
+                <sort_order>20</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_title>
+            <template translate="label">
+                <visible>1</visible>
+                <label>Product Builder Template</label>
+                <description>Input custom module template file path. For example: ves/productbuilder/row.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template>
+        </parameters>
+    </productbuilder>
+
+    <pbuilder_information type="ves_blockbuilder/widget_product_information"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Product Builder : Information Block</name>
+        <description type="desc">Generate product description, additional, reviews, tags, custom block in accordion, tabs, list panel layout</description>
+        <parameters>
+            <layout translate="label" module="core">
+                <visible>1</visible>
+                <label>Layout Mode</label>
+                <type>select</type>
+                <values>
+                    <tabs translate="label">
+                        <label>Tabs</label>
+                        <value>tabs</value>
+                    </tabs>
+                    <accordion translate="label">
+                        <label>Accordion</label>
+                        <value>accordion</value>
+                    </accordion>
+                    <list translate="label">
+                        <label>List Panels</label>
+                        <value>list</value>
+                    </list>
+                </values>
+                <value>tabs</value>
+            </layout>
+            <bootstrap_tab translate="label" module="core">
+                <visible>1</visible>
+                <label>Is Bootstrap Tab?</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+                <depends><layout><value>tabs</value></layout></depends>
+            </bootstrap_tab>
+            <template translate="label">
+                <visible>1</visible>
+                <label>Product Information Template</label>
+                <description>Input custom module template file path. For example: ves/productbuilder/widget/accordion.phtml Empty for default</description>
+                <type>text</type>
+            </template>
+        </parameters>
+    </pbuilder_information>
+   
+    <pbuilder_form type="ves_blockbuilder/widget_product_form"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Product Builder : Product Main Form Block</name>
+        <description type="desc">Generate product form: options, price, addtocart button,...</description>
+        <parameters>
+            <show_product_name translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Product Name</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_product_name>
+            <show_price translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Product Price</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_price>
+            <show_extra_info translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Product Extra Info</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_extra_info>
+            <show_short_description translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Product Short Description</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_short_description>
+            <show_availability translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Product Availability</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_availability>
+            <show_alert_urls translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Alert Urls</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_alert_urls>
+            <show_other_block translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Product Other Block</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_other_block>
+            <show_addtocart_block translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Add To Cart Block</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_addtocart_block>
+            <show_product_type_data translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Product Type Data</label>
+                <description>Product Type Data</description>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+                <depends><show_addtocart_block><value>true</value></show_addtocart_block></depends>
+            </show_product_type_data>
+            <show_extrahint translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Extrahint Block</label>
+                <description>Extrahint block</description>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+                <depends><show_addtocart_block><value>true</value></show_addtocart_block></depends>
+            </show_extrahint>
+            <show_addto_block translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Add To Block</label>
+                <description>Add To Block: Wishlist, Compare Links</description>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_addto_block>
+            <show_share_block translate="label" module="core">
+                <visible>1</visible>
+                <label>Show Social Sharing Block</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </show_share_block>
+            <sharing_template translate="label">
+                <visible>1</visible>
+                <label>Custom Sharing Block Template</label>
+                <description>Input custom module template file path. For example: ves/productbuilder/view/sharing.phtml Empty for default</description>
+                <type>text</type>
+            </sharing_template>
+            <template translate="label">
+                <visible>1</visible>
+                <label>Custom Product Form Template</label>
+                <description>Input custom module template file path. For example: ves/productbuilder/widget/form.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template>
+        </parameters>
+    </pbuilder_form>
+    <pbuilder_description type="ves_blockbuilder/widget_product_description"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Product Builder : Product Description Block</name>
+        <description type="desc">Generate product description block</description>
+        <parameters>
+            <template translate="label">
+                <visible>1</visible>
+                <label>Product Description Template</label>
+                <description>Input custom module template file path. For example: ves/productbuilder/widget/description.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template>
+        </parameters>
+    </pbuilder_description>
+     <pbuilder_shortdesc type="ves_blockbuilder/widget_product_shortdesc"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Product Builder : Product Short Description Block</name>
+        <description type="desc">Generate product short description block</description>
+        <parameters>
+            <title translate="label">
+                <visible>1</visible>
+                <label>Short description title</label>
+                <type>text</type>
+                <sort_order>0</sort_order>
+            </title>
+            <template translate="label">
+                <visible>1</visible>
+                <label>Product Description Template</label>
+                <description>Input custom module template file path. For example: ves/productbuilder/widget/short_description.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template>
+        </parameters>
+    </pbuilder_shortdesc>
+    <pbuilder_additional type="ves_blockbuilder/widget_product_additional"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Product Builder : Product Additional Block</name>
+        <description type="desc">Generate product additional block</description>
+        <parameters>
+            <template translate="label">
+                <visible>1</visible>
+                <label>Product Additional Template</label>
+                <description>Input custom module template file path. For example: ves/productbuilder/widget/additional.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template>
+        </parameters>
+    </pbuilder_additional>
+    <pbuilder_media type="ves_blockbuilder/widget_product_media"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Product Builder : Product Media Block</name>
+        <description type="desc">Generate product media block</description>
+        <parameters>
+            <layout translate="label" module="core">
+                <visible>1</visible>
+                <label>Media Block Layout</label>
+                <type>select</type>
+                <values>
+                    <default translate="label">
+                        <label>Default layout of current template</label>
+                        <value>default</value>
+                    </default>
+                    <horizontal_bottom translate="label">
+                        <label>Horizontal Bottom Thumbs</label>
+                        <value>horizontal_bottom</value>
+                    </horizontal_bottom>
+                    <horizontal_top translate="label">
+                        <label>Horizontal Top Thumbs</label>
+                        <value>horizontal_top</value>
+                    </horizontal_top>
+                    <vertical_left translate="label">
+                        <label>Vertical with Left Thumbs</label>
+                        <value>vertical_left</value>
+                    </vertical_left>
+                    <vertical_right translate="label">
+                        <label>Vertical with Right Thumbs</label>
+                        <value>vertical_right</value>
+                    </vertical_right>
+                    <gallery translate="label">
+                        <label>Gallery Images</label>
+                        <value>gallery</value>
+                    </gallery>
+                </values>
+                <value>true</value>
+            </layout>
+
+            <enable_new_label translate="label" module="core">
+                <visible>1</visible>
+                <label>Enable New Label</label>
+                <type>select</type>
+                <values>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    
+                </values>
+                <value>false</value>
+            </enable_new_label>
+
+            <enable_sale_label translate="label" module="core">
+                <visible>1</visible>
+                <label>Enable Sale Label</label>
+                <type>select</type>
+                <values>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    
+                </values>
+                <value>false</value>
+            </enable_sale_label>
+
+            <enable_discount_label translate="label" module="core">
+                <visible>1</visible>
+                <label>Enable Percent Discount Label</label>
+                <type>select</type>
+                <values>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    
+                </values>
+                <value>false</value>
+            </enable_discount_label>
+
+            <thumb_width translate="label">
+                <visible>1</visible>
+                <label>Thumbnail Image Width</label>
+                <description>default: 80 (px)</description>
+                <type>text</type>
+                <value>80</value>
+            </thumb_width>
+            <thumb_height translate="label">
+                <visible>1</visible>
+                <label>Thumbnail Image Height</label>
+                <description>default: 80 (px)</description>
+                <type>text</type>
+                <value>80</value>
+            </thumb_height>
+
+            <enable_thumbs_carousel translate="label" module="core">
+                <visible>1</visible>
+                <label>Enable Carousel For Thumbnails</label>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <value>true</value>
+            </enable_thumbs_carousel>
+            <thumbs_perpage translate="label">
+                <visible>1</visible>
+                <label>Thumbnail Items Per Page</label>
+                <description>default: 4</description>
+                <type>text</type>
+                <value>4</value>
+            </thumbs_perpage>
+
+            <enable_image_popup translate="label" module="core">
+                <visible>1</visible>
+                <label>Enable Image Popup</label>
+                <type>select</type>
+                <values>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    
+                </values>
+                <value>true</value>
+            </enable_image_popup>
+            <popup_width translate="label">
+                <visible>1</visible>
+                <label>Popup Width</label>
+                <description>for example: 800 (px)</description>
+                <type>text</type>
+                <value></value>
+            </popup_width>
+            <popup_height translate="label">
+                <visible>1</visible>
+                <label>Popup Height</label>
+                <description>for example: 600 (px)</description>
+                <type>text</type>
+                <value></value>
+            </popup_height>
+            
+            <template translate="label">
+                <visible>1</visible>
+                <label>Product Media Template</label>
+                <description>Input custom module template file path. For example: ves/productbuilder/widget/media.phtml Empty for default</description>
+                <type>text</type>
+            </template>
+        </parameters>
+    </pbuilder_media>
+
+    <pbuilder_attribute type="ves_blockbuilder/widget_product_attribute"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Product Builder : Product Attribute Block</name>
+        <description type="desc">Display Product Attribute Content</description>
+        <parameters>
+            <title translate="label" module="core">
+                <visible>1</visible>
+                <label>Block Title</label>
+                <type>text</type>
+            </title>
+
+            <attribute translate="label">
+                <visible>1</visible>
+                <label>Product Attribute Code</label>
+                <description>Select a attribute of product which you want to show on frontend</description>
+                <type>select</type>
+                <source_model>ves_blockbuilder/system_config_source_listAttributes</source_model>
+                <required>1</required>
+                <value></value>
+            </attribute>
+        </parameters>
+    </pbuilder_attribute>
+
+    <pbuilder_title type="ves_blockbuilder/widget_product_title"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Product Builder : Product Name</name>
+        <description type="desc">Generate product Name</description>
+        <parameters>
+
+            <max_chars translate="label" module="core">
+                <visible>1</visible>
+                <label>Max charectors</label>
+                <type>text</type>
+                <description>Sub string product name by max chars. Empty to get full name</description>
+            </max_chars>
+            <css_class translate="label">
+                <visible>1</visible>
+                <label>Css Class</label>
+                <type>text</type>
+                <value>h1</value>
+            </css_class>
+        </parameters>
+    </pbuilder_title>
+    <pbuilder_price type="ves_blockbuilder/widget_product_price"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Product Builder : Product Price</name>
+        <description type="desc">Generate product price</description>
+        <parameters>
+            <show_bundle_prices translate="label" module="core">
+                <visible>1</visible>
+                <label>Enable Bundle Prices</label>
+                <type>select</type>
+                <values>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    
+                </values>
+                <value>true</value>
+            </show_bundle_prices>
+            <show_tier_price translate="label" module="core">
+                <visible>1</visible>
+                <label>Enable Tier Price</label>
+                <type>select</type>
+                <values>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    
+                </values>
+                <value>true</value>
+            </show_tier_price>
+            <enable_snipet translate="label" module="core">
+                <visible>1</visible>
+                <label>Enable Google Snipet For Price</label>
+                <type>select</type>
+                <values>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    
+                </values>
+                <value>false</value>
+            </enable_snipet>
+        </parameters>
+    </pbuilder_price>
+
+    <pbuilder_otherblock type="ves_blockbuilder/widget_product_otherblock"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Product Builder : Product All Other Block</name>
+        <description type="desc">Generate product all other blocks which show in main container of product view page</description>
+        <parameters>
+            <container_class translate="label" module="core">
+                <visible>1</visible>
+                <label>Block Container Class</label>
+                <type>text</type>
+                <description>Input css class</description>
+            </container_class>
+            <block_type translate="label" module="core">
+                <visible>1</visible>
+                <label>Choose children block name</label>
+                <type>select</type>
+                <values>
+                    <alert_urls translate="label">
+                        <label>Alert Urls</label>
+                        <value>alert_urls</value>
+                    </alert_urls>
+                    <product_type_availability translate="label">
+                        <label>Product Type Availability</label>
+                        <value>product_type_availability</value>
+                    </product_type_availability>
+                    <extrahint translate="label">
+                        <label>Extrahint</label>
+                        <value>extrahint</value>
+                    </extrahint>
+                    <container1 translate="label">
+                        <label>Container1</label>
+                        <value>container1</value>
+                    </container1>
+                    <product_type_data translate="label">
+                        <label>Product Type Data</label>
+                        <value>product_type_data</value>
+                    </product_type_data>
+                    <addtocart translate="label">
+                        <label>Addtocart</label>
+                        <value>addtocart</value>
+                    </addtocart>
+                    <addto translate="label">
+                        <label>Addto</label>
+                        <value>addto</value>
+                    </addto>
+                    <sharing translate="label">
+                        <label>Sharing</label>
+                        <value>sharing</value>
+                    </sharing>
+                    <extra_buttons translate="label">
+                        <label>Extra Buttons</label>
+                        <value>extra_buttons</value>
+                    </extra_buttons>
+                    <container2 translate="label">
+                        <label>Container2</label>
+                        <value>container2</value>
+                    </container2>
+                    <other translate="label">
+                        <label>Other</label>
+                        <value>other</value>
+                    </other>
+                </values>
+                <value></value>
+            </block_type>
+        </parameters>
+    </pbuilder_otherblock>
+
+    <pbuilder_reviews type="ves_blockbuilder/widget_product_reviews"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Product Builder : Product Reviews Block</name>
+        <description type="desc">Generate product reviews</description>
+        <parameters>
+            
+        </parameters>
+    </pbuilder_reviews>
+    <pbuilder_rating type="ves_blockbuilder/widget_product_rating"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Product Builder : Product Rating Block</name>
+        <description type="desc">Generate product rating</description>
+        <parameters>
+            <template translate="label">
+                <visible>1</visible>
+                <label>Product Description Template</label>
+                <description>Input custom module template file path. For example: ves/productbuilder/widget/reviews.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template>
+        </parameters>
+    </pbuilder_rating>
+    <pbuilder_tags type="ves_blockbuilder/widget_product_tags"  translate="label description" module="ves_blockbuilder" >
+        <name>Ves Product Builder : Product Tags Block</name>
+        <description type="desc">Generate product tags</description>
+        <parameters>
+            
+        </parameters>
+    </pbuilder_tags>
+</widgets>

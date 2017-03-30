@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+		<mlx translate="title">
+			<title>MLX</title>
+			<sort_order>9999</sort_order>			
+			<children>
+				<license translate="title">
+					<title>Manage License Keys</title>
+					<sort_order>9999</sort_order>
+					<action>adminhtml/mlx_license/index/</action>
+				</license>					
+			</children>
+		</mlx>
+	</menu>
+	<acl>
+		<resources>
+			<all>
+				<title>Allow Everything</title>
+			</all>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>																	
+									<mlx translate="title">
+										<title>Manage License Keys</title>
+										<sort_order>9999</sort_order>
+									</mlx>															
+								</children>
+							</config>													
+						</children>											
+					</system>
+					<mlx translate="title">
+						<title>MLX</title>
+						<sort_order>999</sort_order>
+						<children>
+							<license translate="title">
+								<title>Manage License Keys</title>
+								<sort_order>9999</sort_order>								
+							</license>												
+						</children>
+					</mlx>
+				</children>
+			</admin>
+		</resources>
+	</acl>		
+</config>

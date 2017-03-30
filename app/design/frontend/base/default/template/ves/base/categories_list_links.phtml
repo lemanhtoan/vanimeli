@@ -1,0 +1,59 @@
+<?php 
+$_catalogCatgoryHelper = Mage::helper('catalog/category');
+$moduleId = rand().time();
+$catIds = explode(',', $catsid);
+$cols = (isset($cols) && $cols)?(int)$cols:4;
+$item_cols = round(12/$cols);
+$auto_play_mode = (int)$autoplay;
+$auto_play = $auto_play_mode?"true":"false";
+$cms = isset($cms)?$cms:"";
+?>
+<div class="widget-categories-info block <?php echo $addition_cls; ?> <?php if (isset($stylecls)&&$stylecls) echo 'block-'.$stylecls;?>">
+		<ul>
+			<?php 
+
+				if($catIds ){
+
+					$_catalogCatgoryHelper = Mage::helper('catalog/category');
+					$number_check_limit = 1;
+					?>
+					<?php foreach($catIds as $catId): 
+						$category = Mage::getModel('catalog/category')->load($catId); 
+					?>
+						<li>
+							<?php if( $show_title ){ ?>
+							<a href="<?php echo $_catalogCatgoryHelper->getCategoryUrl($category)?>" title="<?php echo $category->getName()?>">
+								<?php echo $category->getName()?>
+								<?php if($show_number_product): ?>
+									(<?php echo $category->getProductCount() ?>)
+								<?php endif; ?>
+							</a>
+							<?php } ?>
+							<?php if( $show_image && $category->getThumbnail()){ ?>
+							<div class="image">
+								<a href="<?php echo $_catalogCatgoryHelper->getCategoryUrl($category)?>" title="<?php echo $category->getName()?>">
+									<?php 
+										$category_image = Mage::getBaseUrl('media').'catalog/category/'.$category->getThumbnail();
+										if($resize_image) {
+											$category_image = $this->getCategoryImage( $category, $image_width, $image_height, "thumbnail" );
+										}
+									?>
+									<img src="<?php echo $category_image; ?>" width="<?php echo (int)$image_width;?>" height="<?php echo (int)$image_height;?>" alt="<?php echo $category->getName()?>">
+								</a>
+							</div>
+							<?php } ?>
+						</li>
+					
+				<?php $number_check_limit ++ ?>
+			<?php endforeach; ?>
+			<?php } ?>
+			<!-- Show pretext -->
+			<?php if( ($pretext = $this->getConfig("pretext")) && !$cms ) { ?>
+			<li class="pretext"><?php echo $pretext;?></li>
+			<?php } elseif($cms) { ?>
+			<li class="pretext"><?php echo $cms;?></li>
+			<?php } ?>
+			<!-- End Show pretext -->
+		</ul>
+
+</div>

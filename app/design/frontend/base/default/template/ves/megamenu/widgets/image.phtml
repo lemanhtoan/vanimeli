@@ -1,0 +1,17 @@
+<?php 
+	$widget = $this->getWidget(); 
+	$show_name = isset($widget['show_name'])?$widget['show_name']: 1;
+	$image = isset($widget['image'])?$widget['image']: "";
+	if($image){
+?>
+<?php if( isset($widget['widget_name']) & $show_name){
+?>
+<div class="menu-title"><?php echo $widget['widget_name'];?></div>
+<?php
+}?>
+<div class="widget-image">
+	<div class="widget-inner clearfix">
+		<div><img src="<?php echo $image; ?>" alt="<?php echo $widget['widget_name'];?>" /></div>
+	</div>
+</div>
+<?php } ?>

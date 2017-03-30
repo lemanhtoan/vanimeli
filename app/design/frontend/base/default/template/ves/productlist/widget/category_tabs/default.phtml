@@ -1,0 +1,433 @@
+<?php
+//Load Theme Settings
+$class = '';
+$enable_ajax_cart = false;
+if(Mage::helper("productlist")->checkModuleInstalled("Ves_Themesettings"))
+{
+    $ves = $this->helper('themesettings');
+    $ajax = $this->helper('ajax');
+    $helpImg = $this->helper('themesettings/image');
+    
+    $alt_image_column = $ves->getConfig('category_product/alt_image_column');
+    $alt_image_column_value = $ves->getConfig('category_product/alt_image_column_value');
+
+    // Product Settings
+    $display_name_single_line = $ves->getConfig('category_product/display_name_single_line');
+    if($display_name_single_line){
+        $class .= ' single-line-name';
+    }
+    // Product Grid
+    $equal_height = $ves->getConfig('category_grid/equal_height');
+    if($equal_height){
+        $class .= ' equal-height';
+    }
+    $hover_effect = $ves->getConfig('category_grid/hover_effect');
+    if($equal_height){
+        $class .= ' hover-effect';
+    }
+    $disable_hover_effect = $ves->getConfig('category_grid/disable_hover_effect');
+
+    // Ajax Cart, Quick View
+    $ajaxcart = $ajax->getConfig('general_setting/enable_ajaxcart');
+    $enable_ajax_cart = $ajaxcart;
+    $show_addtocart = $ajax->getConfig('general_setting/show_addtocart');
+    $show_quickview = $ajax->getConfig('general_setting/show_quickview');
+    $popup_quickview_width = $ajax->getConfig('general_setting/popup_quickview_width');
+    $popup_quickview_height = $ajax->getConfig('general_setting/popup_quickview_height');
+
+    // Product Label
+    $enable_new_icon = $ves->getConfig('product_labels/new');
+    $enable_sale_icon = $ves->getConfig('product_labels/sale');
+
+    // Product Settings
+    $_helper = $this->helper('catalog/output');
+    $show_name = $ves->getConfig('product_slider/show_name');
+
+    $show_short_description = $ves->getConfig('product_slider/show_short_description');
+    $short_max_char = $ves->getConfig('product_slider/short_max_char');
+    $show_price = $ves->getConfig('product_slider/show_price');
+    $show_rating = $ves->getConfig('product_slider/show_rating');
+    $show_learnmore = $ves->getConfig('product_slider/show_learnmore');
+    $show_countdowntimer = $ves->getConfig('product_slider/show_countdowntimer');
+    $show_addtolinks = $ves->getConfig('product_slider/show_addtolinks');
+
+    $alt_image = $ves->getConfig('product_slider/alt_image');
+    $alt_image_column = $ves->getConfig('product_slider/alt_image_column');
+    $alt_image_column_value = $ves->getConfig('product_slider/alt_image_column_value');
+
+    $aspect_ratio = $ves->getConfig('product_slider/aspect_ratio');
+    $imgWidth = (int)$ves->getConfig('product_slider/image_width');
+    $imgHeight = $imgWidth;
+    //If image width is not specified, use default values
+    if ($imgWidth <= 0)
+    {
+        $imgWidth = 295;
+        $imgHeight = 295;
+    }
+
+    if($aspect_ratio){
+        $imgHeight = 0;
+        $catViewKeepFrame = FALSE;
+    }else{
+        $catViewKeepFrame = TRUE;
+    }
+
+    if (Mage::registry('catViewKeepFrame') === NULL){
+        Mage::register('catViewKeepFrame', $catViewKeepFrame);
+    }
+
+    // Quickview Design
+    $quickview_format = $ves->getCfgDesign('icons/quickview_format');
+    $quickview_text = $ves->getCfgDesign('icons/quickview_text');
+    $quickview_class = $ves->getCfgDesign('icons/quickview_class');
+
+    // Addtocart Design
+    $addtocart_format = $ves->getCfgDesign('icons/addtocart_format');
+    $addtocart_text = $ves->getCfgDesign('icons/addtocart_text');
+    $addtocart_class = $ves->getCfgDesign('icons/addtocart_class');
+
+    // Compare Design
+    $compare_format = $ves->getCfgDesign('icons/compare_format');
+    $compare_text = $ves->getCfgDesign('icons/compare_text');
+    $compare_class = $ves->getCfgDesign('icons/compare_class');
+
+    // Wishlist Design
+    $wishlist_format = $ves->getCfgDesign('icons/wishlist_format');
+    $wishlist_text = $ves->getCfgDesign('icons/wishlist_text');
+    $wishlist_class = $ves->getCfgDesign('icons/wishlist_class');
+
+}
+if($show_countdowntimer){
+    $widget_show_countdowntimer = $this->getData('show_countdowntimer');
+    if($widget_show_countdowntimer == "false"){
+        $show_countdowntimer = false;
+    }
+}
+//End Load Theme Settings
+// Override Theme Settings
+$show_quickview = $this->getConfig('show_quickview');
+$popup_quickview_width = $this->getConfig('popup_quickview_width');
+$popup_quickview_height = $this->getConfig('popup_quickview_height');
+
+$display_name_single_line = $this->getConfig('display_name_single_line');
+if($display_name_single_line){
+    $class .= ' single-line-name';
+}
+
+// End Override Theme Settings
+$randid = rand().time();
+$moduleId = "ves_productlist_tab_".rand().time();
+$title = $this->getConfig("title", "");
+$addtionClass = $this->getConfig("addition_cls");
+$tabs = $this->getTabs();
+
+$processor = Mage::helper('cms')->getPageTemplateProcessor();
+
+/** General Settings **/
+$pretext = '';
+$static_blockId = $this->getConfig("cmsblock");
+if(!$static_blockId){
+    $pretext =  $processor->filter($this->getConfig('productlist_pretext'));
+}else{
+    $pretext = $cms = Mage::getSingleton('core/layout')->createBlock('cms/block')->setBlockId($static_blockId)->toHtml();
+}
+$price_prefix = 'carousel_'.$moduleId;
+$_helper = $this->helper('catalog/output');
+
+/** Tab Settings **/
+$product_number = $this->getConfig('product_number');
+$enable_tab_title = $this->getConfig('enable_tab_title');
+$enable_tab_icon = $this->getConfig('enable_tab_icon');
+$tab_icon_size = $this->getConfig('tab_icon_size');
+$enable_tab_short_description = $this->getConfig('enable_tab_short_description');
+$show_all_button = $this->getConfig("show_all_button", 1);
+
+/** Item Settings **/
+$show_image = (int)$this->getConfig("show_image", 1);
+$imgWidth = (int)$this->getConfig("image_width", 300);
+$imgHeight = (int)$this->getConfig("image_height", 300);
+$show_name = $this->getConfig('show_name');
+$show_short_description = $this->getConfig('show_short_description');
+$show_price = $this->getConfig('show_price');
+$show_rating = $this->getConfig('show_rating');
+$show_addtocart = $this->getConfig('show_addtocart');
+$show_addtolinks = $this->getConfig('show_addtolinks');
+$alt_image = $this->getConfig('enable_swap');
+$swap_image_number = $this->getConfig('swap_image_number', 1);
+$enable_sale_icon = $this->getConfig('show_sale_icon');
+$enable_new_icon = $this->getConfig('show_new_icon');
+$enable_discount_icon = $this->getConfig('enable_discount_icon');
+$short_max_char = (int)$this->getConfig("desc_maxchar", 100);
+$show_learnmore = (int)$this->getConfig("show_learnmore", 1);
+
+/** OWL Settings **/
+//Carousel setting
+$lazyload = $this->getConfig("lazyload", 0);
+$rtl = $this->getConfig('rtl');
+$loop = $this->getConfig('loop');
+$mouse_drag = $this->getConfig('mouse_drag');
+$touch_drag = $this->getConfig('touch_drag');
+$slide_by = $this->getConfig('slide_by');
+$margin_item = $this->getConfig('margin_item');
+$mobile_items = $this->getConfig('mobile_items',1);
+$tablet_small_items = $this->getConfig('tablet_small_items',2);
+$tablet_items = (int)$this->getConfig('tablet_items',2);
+$portrait_items = (int)$this->getConfig('portrait_items',3);
+$large_items = (int)$this->getConfig('large_items',5);
+$custom_items = $this->getConfig('custom_items','');
+$default_items = (int)$this->getConfig("default_items", 4);
+$default_items = !empty($default_items)?(int)$default_items:4;
+$auto_play_mode = $this->getConfig('auto_play',0);
+$enable_navigator = $this->getConfig('show_navigator',1);
+$enable_pagination = $this->getConfig('show_pagination',0);
+$slider_height = (int)$this->getConfig('slider_height',0);
+$custom_navigation = $this->getConfig("custom_navigation", 0);
+$enable_animate = $this->getConfig("animate_tab", 1);
+$animate_speed = $this->getConfig("animate_speed", 'normal');
+
+/*Deals Setting*/
+$enable_deals = $this->getConfig("enable_deals", 0);
+$enable_deals_block = Mage::getStoreConfig("productlist/general_setting/enable_countdown_js");
+if(!$enable_deals_block && $enable_deals) {
+    $enable_deals = 0;
+}
+$show_discount = $this->getConfig("show_discount", 1, "deals_setting");
+$show_save_price = $this->getConfig("show_save_price", 1, "deals_setting");
+$show_number_bought = $this->getConfig("show_number_bought", 1, "deals_setting");
+$show_countdown_timer = $this->getConfig("show_countdown_timer", 1, "deals_setting");
+
+$itemsperpage = $this->getConfig("items_per_page", $default_items);
+$itemsperpage = $itemsperpage?(int)$itemsperpage: $default_items;
+$cols = $default_items;
+
+if($itemsperpage > $default_items) {
+    $default_items = 1;
+    $large_items = 1;
+    $mobile_items = 1;
+    $tablet_items = 1;
+    $portrait_items = 1;
+    $tablet_small_items = 1;
+    $custom_items = "";
+    $lazyload = 0;
+
+}
+
+if($slider_height) {
+    $slider_height = "height: ".$slider_height."px;";
+} else {
+    $slider_height = "";
+}
+$speed = (int)$this->getConfig('speed',0);
+$show_nav = $this->getConfig("show_navigator", 1);
+
+
+//Load product item layout
+$common_template = $default_path = "item.phtml";
+if(!Mage::helper("productlist")->checkModuleInstalled("Ves_Themesettings")) {
+    $common_template = $default_path = "vesproductlist_item.phtml";
+}
+if($custom_common = $this->getConfig("common_template", "")) {
+    $common_template = $custom_common;
+}
+$current_catalog_product_path = Mage::getSingleton('core/design_package')->getBaseDir(array('_area' => 'frontend', '_type'=>'template'));
+$current_catalog_product_path .= "/common/list/";
+
+$base_catalog_product_path = Mage::getBaseDir('design')."/frontend/base/default/template/common/list/";
+
+$load_file_path = false;
+
+if(file_exists($current_catalog_product_path.$common_template)) { //Load in default template
+    $load_file_path = $current_catalog_product_path.$common_template;
+} elseif(file_exists($current_catalog_product_path.$default_path)) {
+    $load_file_path = $current_catalog_product_path.$default_path;
+} elseif(file_exists($base_catalog_product_path.$common_template)) { //Load in base template
+    $load_file_path = $base_catalog_product_path.$common_template;
+} elseif(file_exists($base_catalog_product_path.$default_path)) {
+    $load_file_path = $base_catalog_product_path.$default_path;
+}
+
+?>
+
+<?php if(count($tabs)>0){ ?>
+<div id="productlist_tab<?php echo $moduleId; ?>" class="widget-productlist-tab easytab-play block <?php echo $addtionClass ?> <?php if (isset($stylecls)&&$stylecls) echo 'block-'.$stylecls;?>" style="width:100%">
+    <?php if( $title != '' && $title || $pretext != ''){ ?>
+    <div class="block-title">
+        <?php if($title != '' && $title){ ?><h3><?php echo $title;?></h3><?php } ?>
+        <?php if($pretext!=''){ ?>
+        <div class="pretext"><?php echo $pretext; ?></div>
+        <?php } ?>
+    </div>
+    <?php } ?>
+
+    <div class="widget-inner block-content tab-side-container easytab"
+    data-animate="<?php echo ($enable_animate == 1)?'true':'false'; ?>"
+    data-speed="<?php echo $animate_speed; ?>"
+    data-tab-active-class="active"
+    data-panel-active-class="selected"
+    data-collapsible="true"
+    data-in-transition="fadeIn"
+    data-out-transition="fadeOut"
+    data-in-easing="linear"
+    data-out-easing="linear">
+
+    <ul class="nav nav-tabs" id="productlisttab<?php echo $moduleId; ?>">
+        <?php foreach ($tabs as $k => $_tab) { ?>
+        <?php
+        $category = isset($_tab['category'])?$_tab['category']:false;
+        $tmpclass = '';
+        $_tab['class'] = isset($_tab['class'])?($_tab['class']." category-tab-".$_tab['category_id']):(" category-tab-".$_tab['category_id']);
+        if(isset($_tab['class'])){
+            $tmpclass = 'class="'.$_tab['class'].'"';
+        }
+        ?>
+        <li class="tab">
+            <a href="#productlist_tab<?php echo $k.$randid; ?>" <?php echo $tmpclass; ?> title="<?php echo $this->escapeHtml($_tab['title']); ?>" 
+                <?php if(!$enable_tab_title){ ?>style="display: none;"<?php } ?>>
+                    <?php if($_tab['title']!='' && $enable_tab_title){ ?><?php echo $_tab['title']; ?><?php } ?>
+
+                    <?php if($category && $enable_tab_icon){ ?>
+                    <?php
+                    $icon_size = $this->getConfig('tab_icon_size','50x50');
+                    $icon_file = $category->getThumbnail();
+                    ?>
+                    <?php if($icon_file!=''){ ?>
+                    <?php
+                    $array_size = explode("x", $icon_size);
+                    $icon_image_width = isset($array_size[0])?(int)$array_size[0]:0;
+                    $icon_image_width = $icon_image_width?$icon_image_width: 0;
+                    $icon_image_height = isset($array_size[1])?(int)$array_size[1]:0;
+                    $icon_image_height = $icon_image_height?$icon_image_height: 0;
+                    $rule_thumbnailurl = '';
+                    if ($icon_file && !preg_match("/^http\:\/\/|https\:\/\//", $icon_file) && $icon_image_width >0 && $icon_image_height > 0) {
+                        $rule_thumbnailurl = Mage::helper("productlist")->resizeImage($icon_file, (int)$icon_image_width, (int)$icon_image_height);
+                    } else {
+                        $rule_thumbnailurl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$icon_file;
+                    }
+                    ?>
+                    <?php if($rule_thumbnailurl!=''){ ?>
+                    <img src="<?php echo $rule_thumbnailurl ?>" alt="<?php echo $this->stripTags($category->getTitle()); ?>">
+                    <?php } ?>
+                    <?php } ?>
+                    <?php } ?>
+
+                </a>
+
+            </li>
+            <?php } ?>
+        </ul>
+
+        <div class="panel-container">
+            <?php foreach ($tabs as $k => $_tab) { ?>
+            <?php if(isset($_tab['products']) && $_tab['products']){ 
+                $moduleId2 = "_".rand(1,9)+rand().time(); 
+                $items = $_tab['products'];
+                $category = isset($_tab['category'])?$_tab['category']:false;
+                ?>
+                <div id="productlist_tab<?php echo $k.$randid ?>" class="tab-owlproductcarousel-content">
+                    <?php
+                    $tab_shortDes = '';
+                    $tab_shortDes = $processor->filter($category->getShortDescription());
+                    ?>
+                    <?php if($enable_tab_short_description && $tab_shortDes != ''){ ?>
+                    <div class="tab-shortdescription">
+                        <?php echo $tab_shortDes; ?>
+                    </div>
+                    <?php } ?>
+
+                    <?php if($show_all_button){ ?>
+                    <div class="viewmore"><a href="<?php echo $category->getUrl(); ?>" title="<?php echo $this->stripTags($_tab['title']); ?>" ><?php echo $this->__('Show All'); ?></a></div>
+                    <?php } ?>
+
+                    <div class="box-products carousel slide owl-carousel-play" data-ride="owlcarousel">
+                        <div id="owltabsproductcarousel<?php echo $moduleId2;?>"
+                            class="owl-carousel"
+                            data-slide-default="<?php echo $default_items?(int)$default_items:4; ?>"
+                            data-slide-desktop="1199,<?php echo $default_items?(int)$default_items:4; ?>"
+                            data-slide-desktop-small="979,<?php echo $portrait_items?(int)$portrait_items:3; ?>"
+                            data-slide-tablet="768, <?php echo $tablet_items?(int)$tablet_items:2; ?>"
+                            data-slide-tablet-small="640, <?php echo $tablet_small_items?(int)$tablet_small_items:2; ?>"
+                            data-slide-mobile="479, <?php echo $mobile_items?(int)$mobile_items:1; ?>"
+                            data-slide-custom="<?php echo (isset($custom_items) && $custom_items)?$custom_items:'false';?>"
+                            data-slide-speed="<?php echo (int)$this->getConfig("speed", 300); ?>"
+                            data-auto="<?php echo $auto_play_mode?'true':'false';?>"
+                            data-lazyload="<?php echo $lazyload?'true':'false';?>"
+                            data-navigation="<?php echo ($show_nav == 1 && !$custom_navigation)?'true':'false'; ?>"
+                            data-pagination="<?php echo $enable_pagination == 1?'true':'false'; ?>">
+
+                            <?php $i = 0; ?>
+                            <?php foreach($items as $_product): ?>
+                                <?php if($itemsperpage > $cols) {
+                                    if(++$i == 1 || ($i%$itemsperpage == 1)):
+                                        ?>
+                                    <div class="item no-margin" <?php echo $slider_height?' style="'.$slider_height.'"':'';?>>
+                                        <?php if($cols == 1): ?>
+                                            <ul class="mini-products-list">
+                                            <?php else: ?>
+                                                <ul class="products-grid products-grid--max-<?php echo $cols; ?>-col-widget">
+                                                <?php endif; ?>
+                                                <li class="product-item first">
+                                                    <?php
+                                                    else:
+                                                        ?>
+                                                    <li class="product-item<?php if($i%$itemsperpage==0): ?> last<?php endif; ?>">
+                                                        <?php
+                                                        endif;
+                                                    } else {
+                                                        ?>
+                                                        <div class="item product-item products-grid no-margin <?php echo $class; ?>" <?php echo $slider_height?' style="'.$slider_height.'"':'';?>>
+
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                        <!-- Product Item -->
+                                                        <?php 
+                                                        if($load_file_path) {
+                                                require ($load_file_path); //Require file app/design/frontend/template package/template layout/template/common/list/item.phtml
+                                            }
+                                            ?>
+                                            <!-- End Product Item -->
+                                            <?php if($itemsperpage > $default_items) {
+                                                ?>
+                                            </li>
+
+                                            <?php 
+                                            if($i % $itemsperpage == 0 || $i == count($items)) {
+
+                                                ?>
+                                            </ul>
+                                        </div>
+                                        <?php
+                                    }
+                                } else {
+
+                                    ?>
+
+                                </div>
+
+                                <?php
+                            } 
+                            ?>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <?php if($show_nav == 1 && count($items) > $default_items && $custom_navigation): ?>
+                        <div class="carousel-controls">
+                            <a class="owl-left left carousel-control" href="#owltabsproductcarousel<?php echo $moduleId2;?>" data-slide="prev">
+                                <span class="fa fa-angle-left"></span>
+                            </a>
+                            <a class="owl-right right carousel-control" href="#owltabsproductcarousel<?php echo $moduleId2;?>" data-slide="next">
+                                <span class="fa fa-angle-right"></span>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php } else { ?>
+            <div id="productlist_tab<?php echo $k.$randid ?>" class="tab-owlproductcarousel-content">
+            </div>
+            <?php } ?>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+<?php } ?>

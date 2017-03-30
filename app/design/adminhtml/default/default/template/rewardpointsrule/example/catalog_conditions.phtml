@@ -1,0 +1,40 @@
+<?php
+$currency = Mage::getModel('directory/currency')->load(Mage::app()->getStore()->getBaseCurrencyCode());
+?>
+<div id="messages">
+    <ul class="messages">
+        <li class="notice-msg">
+            <ul>
+                <li><span><?php echo $this->__('Example:') ?></span>
+                </li>
+            </ul>
+            <?php echo $this->__('1. If you want to apply the rule to products that cost more than %s and have brand Apple, the condition is:', $currency->format(200)) ?>
+            <div style="margin-left: 50px"> 
+                <img title="conditons" alt="conditons" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'rewardpointsrule/example/catalog_conditions.png'; ?>">
+            </div>
+
+            <?php if (Mage::app()->getRequest()->getControllerName() == 'adminhtml_spending_catalog') { ?>
+                <?php echo $this->__('2. If you want to configure that Customers need to spend at least 5 points on products:') ?>
+                <div style="margin-left: 50px">              
+                    <?php echo $this->__('- Choose "Action": "Discount for every X points"') ?>
+                    </br>
+                    <?php echo $this->__('- Fill in field "Points (X)": 5') ?>
+                    </br>
+                    <?php echo $this->__('=> With every 5 points customers spend, they can receive a corresponding discount. For example, 5 points can be spent to get $1, 10 points can get $2 and so on.') ?>
+                </div>
+                <?php echo $this->__('3.If you want to configure that Customers need to spend 5 points on every %s of product price and limit the required number of points to 15, then:', $currency->format(200)) ?>
+                <div style="margin-left: 50px">              
+                    <?php echo $this->__('- Choose "Action": "Spend X Points for every Y amount of price" ') ?>
+                    </br>
+                    <?php echo $this->__('- Fill in field "Points (X)": 5 ') ?>
+                    </br>
+                    <?php echo $this->__('- Fill in field "Money Step (Y)": 100 ') ?>
+                    </br>
+                    <?php echo $this->__('- Fill in field "Spending-point step": 15 ') ?>
+                    </br>
+                    <?php echo $this->__('=> If the price of the product is %s, Customers need to adjust spending points as the multiples of 15 (for example: 15, 30 or 45 points) to get discount. ', $currency->format(800)) ?>
+                </div>
+            <?php } ?>
+        </li>
+    </ul>
+</div>

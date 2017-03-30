@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+
+	
+	<default>
+		<reference name="head">
+				
+			<action method="addCss"><stylesheet>Mlx/GuestWishlist/css/nprogress.css</stylesheet></action>
+			<action method="addCss"><stylesheet>Mlx/GuestWishlist/fancybox/jquery.fancybox-1.3.4.css</stylesheet></action>
+			<action method="addCss"><stylesheet>Mlx/GuestWishlist/css/styles.css</stylesheet></action>
+			<action method="addCss" ifconfig="guestwishlist/general/icon"><stylesheet>Mlx/GuestWishlist/css/icon.css</stylesheet></action> 		
+			
+			<action method="addJs"><script>Mlx/Mlx/jquery.js</script></action>
+			<action method="addJs"><script>Mlx/GuestWishlist/jquery-ui.js</script></action>
+			<action method="addJs"><script>Mlx/GuestWishlist/nprogress.js</script></action>			
+			<action method="addJs"><script>Mlx/GuestWishlist/jquery.fancybox-1.3.4.pack.js</script></action>
+			<action method="addJs"><script>Mlx/GuestWishlist/guestwishlist.js</script></action>	
+			<action method="addJs"><script>varien/product.js</script></action>
+            <action method="addJs"><script>varien/configurable.js</script></action>
+            <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+            
+            <action method="addJs"><script>scriptaculous/scriptaculous.js</script></action>
+            
+            	
+            	
+		</reference>
+		<reference name="after_body_start">
+			<block template="Mlx/GuestWishlist/ajax.phtml" name="ajax_guestlist" type="core/template" />
+		</reference>
+   	</default>
+   	
+   	<customer_logged_out>
+   		<remove name="customer_account_navigation"/>
+   	</customer_logged_out>
+   	
+   	<wishlist_index_share>
+   		<reference name="wishlist.sharing">
+   			<action method="setTemplate"><template>Mlx/GuestWishlist/wishlist/sharing.phtml</template></action>
+   		</reference>
+   	</wishlist_index_share>
+   	
+   	<checkout_cart_index>
+   		<reference name="checkout.cart">   			
+   			<action method="setCartTemplate" ifconfig="guestwishlist/general/allow_move"><template>Mlx/GuestWishlist/checkout/cart.phtml</template></action>   			
+   			<action method="setEmptyTemplate" ifconfig="guestwishlist/general/allow_move"><value>checkout/cart/noItems.phtml</value></action>
+   			<action method="chooseTemplate" ifconfig="guestwishlist/general/allow_move"/>			
+   		</reference>
+   	</checkout_cart_index>
+   	
+   	<wishlist_index_index>
+   		<reference name="customer.wishlist">
+   			<action method="setTemplate"><template>Mlx/GuestWishlist/wishlist/view.phtml</template></action>
+   			<remove name="customer.wishlist.items"/>
+   			<block type="wishlist/customer_wishlist_item_options" name="customer.wishlist.item.options" />
+   			
+   			<!-- 
+   			<block type="guestwishlist/product_view" name="product.info.options.wrapper" as="product_options_wrapper" template="Mlx/GuestWishlist/catalog/product/view/options/wrapper.phtml" translate="label">
+   					<block type="catalog/product_view_type_configurable" name="product.info.options.configurable" as="options_configurable" before="-" template="catalog/product/view/type/options/configurable.phtml"/>
+					<block type="core/template" name="options_js" template="catalog/product/view/options/js.phtml"/>
+	                <block type="catalog/product_view_options" name="product.info.options" as="product_options" template="catalog/product/view/options.phtml">
+	                      <action method="addOptionRenderer"><type>text</type><block>catalog/product_view_options_type_text</block><template>catalog/product/view/options/type/text.phtml</template></action>
+	                      <action method="addOptionRenderer"><type>file</type><block>catalog/product_view_options_type_file</block><template>catalog/product/view/options/type/file.phtml</template></action>
+	                      <action method="addOptionRenderer"><type>select</type><block>catalog/product_view_options_type_select</block><template>catalog/product/view/options/type/select.phtml</template></action>
+	                      <action method="addOptionRenderer"><type>date</type><block>catalog/product_view_options_type_date</block><template>catalog/product/view/options/type/date.phtml</template></action>
+	              	</block>
+					<block type="core/html_calendar" name="html_calendar" as="html_calendar" template="page/js/calendar.phtml"/>
+					
+			</block> -->
+			
+			<block type="core/text_list" name="customer.wishlist.buttons" as="control_buttons">
+                    <block type="wishlist/customer_wishlist_button" name="customer.wishlist.button.share" template="wishlist/button/share.phtml" />                    
+			</block>			
+   		</reference>
+   	</wishlist_index_index>
+   	<wishlist_index_configure>   		
+   		<reference name="root">
+   			<action method="setTemplate"><template>Mlx/GuestWishlist/page/empty.phtml</template></action>   			
+   			<remove name="footer" />
+   			<remove name="left" />
+   			<remove name="right" />
+   			<remove name="header" />
+   			<remove name="breadcrumbs" />   			   			
+   		</reference>
+   		<reference name="product.info">
+   			<action method="setTemplate"><template>Mlx/GuestWishlist/catalog/product/view.phtml</template></action>
+   		</reference>
+   		<reference name="product.info.options.wrapper.bottom">
+   			<remove name="product.info.addto" />
+   		</reference>
+   	</wishlist_index_configure>
+</layout>

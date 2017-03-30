@@ -1,0 +1,436 @@
+<?php
+
+/**
+
+ * affiliatepluscoupon template
+
+ * @see Magestore_Affiliatepluscoupon_Block_Affiliatepluscoupon
+
+ */
+
+?>
+
+<?php $account = $this->getAccount() ?>
+
+<?php $listPrograms = $this->getListProgram() ?>
+
+<?php
+
+$store_id = Mage::app()->getStore()->getStoreId();
+
+$check_responsvie = Mage::getStoreConfig('affiliateplus/style_config/responsive_enable', $store_id);
+
+ if($check_responsvie)
+
+     $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+
+ else
+
+     $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+
+?>
+
+
+
+<div class="aff-main-content <?php echo $class_name; ?>">
+
+    <?php if (count($listPrograms)): ?>
+
+        <div class="aff-title">
+
+            <h1><?php echo $this->__('Coupon Code') ?></h1>
+
+        </div>
+
+        <ul class="message">
+
+            <li class="success-msg">
+
+                <?php echo $this->__('Share with your friends the coupon code below.') ?>
+
+                <?php echo $this->__('You will receive commission when your friends purchase using this coupon.') ?>
+
+            </li>
+
+        </ul>
+
+        <ul id="affiliate-coupon-codes">
+
+            <?php foreach ($listPrograms as $program): ?>
+
+                <li>
+
+                    <div class = "coupon-code lable-title" style="border-bottom: 1px dotted #CCC; min-height: 20px;">
+
+                        <div class = "div-coupon-code">
+
+                            <?php $discount = $program->getDiscount() ? $program->getDiscount() : 0 ?>
+
+                            <?php if ($program->getDiscountType() != 'percentage'): ?>
+
+                                <?php $discountText = Mage::helper('core')->currency($discount, true, false) ?>
+
+                            <?php else: ?>
+
+                                <?php $discountText = rtrim(rtrim(sprintf("%.2f", $discount), '0'), '.') . '%' ?>
+
+                            <?php endif ?>
+
+                            <strong>
+
+                                <?php echo $discountText ?>
+
+                            </strong>
+
+                            <strong style="text-transform: uppercase;">
+
+                                <?php echo $this->__('discount') ?>
+
+                                <?php if ($program->getId() && $program->getValidFrom()): ?>
+
+                                    <?php echo $this->__('from') ?>
+
+                                    <?php echo $this->formatDate($program->getValidFrom(), 'short', false) ?>
+
+                                <?php endif ?>
+
+                                <?php if ($program->getId() && $program->getValidTo()): ?>
+
+                                    <?php echo $this->__('to') ?>
+
+                                    <?php echo $this->formatDate($program->getValidTo(), 'short', false) ?>
+
+                                <?php endif ?>
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class = "infor-coupon">
+
+                        <div class="coupon-table">
+
+                            <table style="width: 100%;">
+
+                                <tr>
+
+                                    <td class = "td-left"><?php echo $this->__('Coupon Code') ?>:&nbsp;</td>
+
+<!--                                    <td class = "td-right"><strong>--><?php //echo $program->getCouponCode() ?><!--</strong></td>-->
+                                    <!-- Customize By Adam 11/03/2015 -->
+                                    <td class = "td-right"><input readonly="readonly" type="text" id="coupon_code_<?php echo $program->getId(); ?>" name="coupon_code_<?php echo $program->getId(); ?>" value="<?php echo $program->getCouponCode() ?>" /></td>
+                                    <td>
+
+										<span id="affiliatecoupon_please_wait_<?php echo $program->getId(); ?>" style="display:none;" class="opc-please-wait">
+											<img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" class="v-middle" alt="" /> &nbsp; <?php echo $this->__('Updating Coupon Code') ?>...
+										</span>
+                                        <button id="edit_<?php echo $program->getId(); ?>" type="button" class="button" title="" onclick='editCoupon("<?php echo $program->getId()?>");'><span><span><?php echo $this->__('Edit'); ?></span></span></button>
+                                        <button style="display:none;" id="submit_<?php echo $program->getId(); ?>" type="button" class="button" title="" onclick='submitCoupon("<?php echo $program->getId()?>", "<?php echo $this->getUrl('affiliatepluscoupon/index/editCouponPost'); ?>");'><span><span><?php echo $this->__('Submit'); ?></span></span></button>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td class = "td-left"><?php echo $this->__('Program') ?>:&nbsp;</td>
+
+                                    <td class = "td-right">
+
+                                        <strong>
+
+                                            <?php if ($program->getId()): ?>
+
+                                                <a href="<?php echo $this->getUrl('affiliateplusprogram/index/detail', array('id' => $program->getId())) ?>" title="<?php echo $this->__('View Program Detail') ?>"><?php echo $program->getName() ?></a>
+
+                                            <?php else: ?>
+
+                                                <?php echo $program->getName() ?>
+
+                                            <?php endif ?>
+
+                                        </strong>
+
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td class = "td-left"><?php echo $this->__('Commission Type') ?>:&nbsp;</td>
+
+                                    <td class = "td-right">
+
+                                        <?php
+
+                                        $commission = $program->getCommission();
+
+                                        $secCommission = $program->getSecondaryCommission();
+
+
+
+                                        if ($program->getCommissionType() == 'fixed') {
+
+                                            $commissionText = Mage::helper('core')->currency($commission);
+
+                                        } elseif ($program->getCommissionType() == 'cart_fixed') {
+
+                                            $commissionText = Mage::helper('core')->currency($commission) . ' ' . $this->__('');
+
+                                        } else {
+
+                                            $commissionText = rtrim(rtrim(sprintf("%.2f", $commission), '0'), '.') . '%';
+
+                                        }
+
+                                        if ($program->getSecCommissionType() == 'fixed') {
+
+                                            $secText = Mage::helper('core')->currency($secCommission);
+
+                                        } elseif ($program->getSecCommissionType() == 'cart_fixed') {  // Changed By Adam 22/07/2014
+
+                                            $secText = Mage::helper('core')->currency($secCommission) . ' ' . $this->__('');
+
+                                        } else {
+
+                                            $secText = rtrim(rtrim(sprintf("%.2f", $secCommission), '0'), '.') . '%';
+
+                                        }
+
+
+
+                                        $typeIsProfit = Mage::helper('affiliateplus')->affiliateTypeIsProfit();
+
+                                        if ($program->getAffiliateType()) {
+
+                                            $typeIsProfit = (bool) ($program->getAffiliateType() == 'profit');
+
+                                        }
+
+                                        ?>
+
+                                        <?php if ($typeIsProfit): ?>
+
+                                            <?php $profitText = $this->__('Pay-per-Profit') ?>
+
+                                        <?php else: ?>
+
+                                            <?php $profitText = $this->__('Pay-per-Sale') ?>
+
+                                        <?php endif ?>
+
+
+
+                                        <?php if (!$this->hasSecondaryCommission($program)): ?>
+
+                                            <?php if ($program->getCommissionType() == 'cart_fixed'): // Changed By Adam 22/07/2014?>
+
+                                                <?php echo $this->__('%s %s for whole cart you deliver', $commissionText, $profitText) ?>
+
+                                            <?php else: ?>
+
+                                                <?php echo $this->__('%s %s for each sale you deliver', $commissionText, $profitText) ?>
+
+                                            <?php endif; ?>
+
+                                        <?php else: ?>
+
+                                            <?php echo $this->__('%s %s for the first order of a customer, %s for next orders', $commissionText, $profitText, $secText) ?>
+
+                                        <?php endif ?>
+
+                                    </td>
+
+                                </tr>
+
+                                <?php if ($this->hasSecondaryDiscount($program)): ?>
+
+                                    <tr>
+
+                                        <td class = "td-left"><?php echo $this->__('Discount Type') ?>:&nbsp;</td>
+
+                                        <td class = "td-right">
+
+                                            <?php
+
+                                            $discount = $program->getDiscount();
+
+                                            $secDiscount = $program->getSecondaryDiscount();
+
+                                            if ($program->getDiscountType() == 'fixed') {
+
+                                                $discountText = Mage::helper('core')->currency($discount);
+
+                                                $discountText .= ' ' . $this->__('discount on each purchased item');
+
+                                            } else if ($program->getDiscountType() == 'percentage') {
+
+                                                $discountText = rtrim(rtrim(sprintf("%.2f", $discount), '0'), '.') . '%';
+
+                                                $discountText .= ' ' . $this->__('discount on each purchased item');
+
+                                            } else if ($this->hasSecondaryDiscount($program)) {
+
+                                                $discountText = Mage::helper('core')->currency($discount);
+
+                                                $discountText .= ' ' . $this->__('discount');
+
+                                            } else {
+
+                                                $discountText = Mage::helper('core')->currency($discount);
+
+                                                $discountText .= ' ' . $this->__('discount on each order');
+
+                                            }
+
+
+
+                                            if ($program->getSecDiscountType() == 'fixed') {
+
+                                                $secText = Mage::helper('core')->currency($secDiscount);
+
+                                                $secText .= ' ' . $this->__('on each purchased item');
+
+                                            } else if ($program->getSecDiscountType() == 'percentage') {
+
+                                                $secText = rtrim(rtrim(sprintf("%.2f", $secDiscount), '0'), '.') . '%';
+
+                                                $secText .= ' ' . $this->__('on each purchased item');
+
+                                            } else {
+
+                                                $secText = Mage::helper('core')->currency($secDiscount);
+
+                                                $secText .= ' ';
+
+                                            }
+
+                                            ?>
+
+                                            <?php if (!$this->hasSecondaryDiscount($program)): ?>
+
+                                                <?php echo $discountText ?>
+
+                                            <?php else: ?>
+
+                                                <?php echo $this->__('%s on the first order, %s of next orders', $discountText, $secText) ?>
+
+                                            <?php endif ?>
+
+                                        </td>
+
+                                    <link href="../../../../../../../skin/frontend/base/default/css/magestore/affiliatepluscoupon.css" rel="stylesheet" type="text/css"/>
+
+                                    </tr>
+
+                                <?php endif ?>
+
+                            </table>
+
+                        </div>
+
+                    <div class="tweeter">
+
+                        <div class="share-tweeter" onclick="popWin('https://twitter.com/share?original_referer=<?php echo urlencode($this->getBaseUrl()) ?>&source=tweetbutton&text=<?php echo urlencode($this->__('Get %s discount by Coupon Code: ', $discountText) . $program->getCouponCode() . chr(10) . $this->__('at')) ?>', 'tweeter', 'top:100,left:100,width=640,height=480,resizable=yes,scrollbars=yes');
+
+                                            return false;" style="text-decoration: none;">
+
+                                <span class = "coupon-tweeter">
+
+                                    <?php echo $this->__('Tweet') ?>
+
+                                </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                </li>
+
+            <?php endforeach ?>
+
+        </ul>
+
+        <script type="text/javascript">decorateList('affiliate-coupon-codes');</script>
+
+    <?php else: ?>
+
+        <div class="aff-title">
+
+            <h1><?php echo $this->__('Coupon Code') ?></h1>
+
+        </div>
+
+        <ul class="message">
+
+            <li class="notice-msg">
+
+                <?php echo $this->__('You have no affiliate coupon code.') ?>
+
+                <?php if ($this->isMultiProgram()): ?>
+
+                    <?php echo $this->__('Please join to a program to get coupon code.') ?>
+
+                <?php endif ?>
+
+            </li>
+
+        </ul>
+
+    <?php endif ?>
+
+</div>
+
+<script type="text/javascript">
+
+    /*Changed By Adam to allow affiliate edit his own coupon in frontend*/
+    //<![CDATA[
+    function editCoupon(programid) {
+        $("coupon_code_"+programid).removeAttribute('readonly');
+        $("coupon_code_"+programid).focus();
+        $("coupon_code_"+programid).select();
+        $("edit_"+programid).style.display="none";
+        $("submit_"+programid).style.display="block";
+    }
+
+    function submitCoupon(programid, requestUrl) {
+
+        var coupon_code = $('coupon_code_'+programid).value;
+
+        var params = {coupon_code: coupon_code, program_id: programid};
+        $('affiliatecoupon_please_wait_'+programid).show();
+        $('coupon_code_'+programid).hide();
+        $("submit_"+programid).style.display="none";
+        new Ajax.Request(
+            requestUrl,
+            {
+                method:'get',
+                onComplete: function(response) {
+                    if (response.responseText.isJSON()) {
+                        var res = response.responseText.evalJSON();
+                        $('affiliatecoupon_message_'+programid).innerHTML = res.html;
+                        $('coupon_code_'+programid).value = res.coupon_code;
+                    }
+                    endCheckCouponCode(programid);
+                },
+                onSuccess:  '',
+                onFailure: '',
+                parameters: params,
+                postBody: params
+            }
+        );
+    }
+
+    function endCheckCouponCode(programid){
+        var id = "coupon_code_"+programid;
+        $('affiliatecoupon_please_wait_'+programid).hide();
+        $('coupon_code_'+programid).show();
+        $('coupon_code_'+programid).setAttribute('readonly','readonly');
+        $("edit_"+programid).style.display="block";
+        $("submit_"+programid).style.display="none";
+    }
+    //]]>
+</script>

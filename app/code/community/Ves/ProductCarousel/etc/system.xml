@@ -1,0 +1,592 @@
+<?xml version="1.0"?>
+<config>
+  <tabs>
+    <ves translate="label" module="ves_productcarousel">
+      <label>Venus Theme</label>
+      <sort_order>211</sort_order>
+    </ves>
+  </tabs>
+  <sections>
+    <ves_productcarousel>
+      <label>Ves Product Carousel</label>
+      <tab>ves</tab>
+      <frontend_type>text</frontend_type>
+      <sort_order>10</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+      <groups>
+        <ves_productcarousel translate="label">
+          <label>General Setting</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>1000</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <fields>
+            <last_update translate="label">
+             <label>Current Update Time</label>
+             <frontend_type>label</frontend_type>
+             <frontend_model>ves_productcarousel/system_config_form_field_notification</frontend_model>
+             <sort_order>3</sort_order>
+             <show_in_default>1</show_in_default>
+             <show_in_website>1</show_in_website>
+             <show_in_store>1</show_in_store>
+           </last_update>
+
+           <show translate="label" module="core">
+             <label>Enabled</label>
+             <sort_order>10</sort_order>
+             <frontend_type>select</frontend_type>
+             <source_model>adminhtml/system_config_source_yesno</source_model>
+             <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+             <show_in_default>1</show_in_default>
+             <show_in_website>1</show_in_website>
+             <show_in_store>1</show_in_store>
+           </show>
+
+           <title translate="label">
+            <label>Module Title </label>
+            <frontend_type>text</frontend_type>
+            <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+            <sort_order>15</sort_order>
+            <comment>Empty for hide</comment>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+          </title>
+          <cmsblock translate="label">
+            <label>Select Static Block</label>
+            <frontend_type>select</frontend_type>
+            <source_model>ves_productcarousel/system_config_source_listCms</source_model>
+            <sort_order>20</sort_order>
+            <comment>Choose Template for your module</comment>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+          </cmsblock>
+          <pretext translate="label">
+            <label>Pretext</label>
+            <frontend_type>textarea</frontend_type>
+            <sort_order>25</sort_order>
+            <comment>Empty for hide. You put html code such A, H2,H3,H4...</comment>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <depends><cmsblock><value>0</value></cmsblock></depends>
+          </pretext>
+
+          <prefix translate="label">
+            <label>Prefix Class</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>30</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+          </prefix>
+
+          <enable_cache translate="label" module="core">
+            <label>Enable Caching</label>
+            <sort_order>150</sort_order>
+            <frontend_type>select</frontend_type>
+            <source_model>adminhtml/system_config_source_yesno</source_model>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+          </enable_cache>
+
+          <cache_lifetime translate="label">
+            <label>Cache Life Time </label>
+            <frontend_type>text</frontend_type>
+            <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+            <sort_order>160</sort_order>
+            <comment>Default 86400 seconds</comment>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+          </cache_lifetime>
+
+          <common_layout translate="label">
+            <label>Layout</label>
+            <comment><![CDATA[Input custom layout file path.<br/><hr style="display:none"/>File default is <b>your_theme/template/common/list/defaut.phtml</b>.<br/>Empty for default]]></comment>
+            <frontend_type>text</frontend_type>
+            <sort_order>165</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+          </common_layout>
+
+        </fields>
+      </ves_productcarousel>
+      <!-- Catagory -->
+      <catalog_source_setting>
+       <label>Catalog - Products Source Setting</label>
+       <frontend_type>text</frontend_type>
+       <sort_order>1999</sort_order>
+       <show_in_default>1</show_in_default>
+       <show_in_website>1</show_in_website>
+       <show_in_store>1</show_in_store>
+       <fields>
+        <catsid translate="label">
+          <label>Categories ID: </label>
+          <frontend_type>multiselect</frontend_type>
+          <source_model>ves_productcarousel/system_config_source_ListCategories</source_model>
+          <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+          <comment>Eg: 22,23. Empty for all categories.</comment>
+          <sort_order>5</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+        </catsid>
+
+        <source_products_mode translate="label">
+          <label>Show Products From: </label>
+          <frontend_type>select</frontend_type>
+          <source_model>ves_productcarousel/system_config_source_listType</source_model>
+          <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+          <sort_order>10</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+        </source_products_mode>
+
+        <attribute_code translate="label">
+          <label>Select Product Attribute: </label>
+          <frontend_type>select</frontend_type>
+          <source_model>ves_productcarousel/system_config_source_listAttributes</source_model>
+          <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+          <sort_order>13</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <depends><source_products_mode><value>attribute</value></source_products_mode></depends>
+        </attribute_code>
+
+        <attribute_value translate="label">
+          <label>Attribute Value</label>
+          <sort_order>14</sort_order>
+          <frontend_type>text</frontend_type>
+          <comment>Input attribute value which match when filter products</comment>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <depends><source_products_mode><value>attribute</value></source_products_mode></depends>
+        </attribute_value>
+
+        <limit_item translate="label">
+          <label>Limit items of Categories</label>
+          <sort_order>15</sort_order>
+          <frontend_type>text</frontend_type>
+          <backend_model>ves_productcarousel/system_config_backend_productcarousel_checkQty</backend_model>
+          <comment>0 for show all</comment>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+        </limit_item>
+
+        <max_items>
+          <label>Max items on a page</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>20</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+        </max_items>
+
+        <limit_cols>
+          <label>Max Colums</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>25</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+        </limit_cols>
+      </fields>
+    </catalog_source_setting>
+    <carousel_setting>
+     <label>Owl Carousel Settings</label>
+     <frontend_type>text</frontend_type>
+     <sort_order>5555</sort_order>
+     <show_in_default>1</show_in_default>
+     <show_in_website>1</show_in_website>
+     <show_in_store>1</show_in_store>
+     <fields>
+      <enable_owl_carousel>
+        <label>Use OWL Carousel</label>
+        <frontend_type>select</frontend_type>
+        <source_model>adminhtml/system_config_source_yesno</source_model>
+        <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+        <sort_order>0</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>1</show_in_store>
+      </enable_owl_carousel>
+      <rtl>
+       <label>Enable Right To Left</label>
+       <frontend_type>select</frontend_type>
+       <source_model>adminhtml/system_config_source_yesno</source_model>
+       <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+       <sort_order>10</sort_order>
+       <show_in_default>1</show_in_default>
+       <show_in_website>1</show_in_website>
+       <show_in_store>1</show_in_store>
+     </rtl>
+     <loop>
+      <label>Enable Loop Carousel</label>
+      <frontend_type>select</frontend_type>
+      <source_model>adminhtml/system_config_source_yesno</source_model>
+      <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+      <sort_order>30</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </loop>
+    <mouse_drag>
+      <label>Enable Mouse Drag</label>
+      <frontend_type>select</frontend_type>
+      <source_model>adminhtml/system_config_source_yesno</source_model>
+      <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+      <sort_order>40</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </mouse_drag>
+    <touch_drag>
+      <label>Enable Touch Drag</label>
+      <frontend_type>select</frontend_type>
+      <source_model>adminhtml/system_config_source_yesno</source_model>
+      <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+      <sort_order>50</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </touch_drag>
+    <slide_by>
+      <label>Slide By</label>
+      <frontend_type>text</frontend_type>
+      <comment>Number Items will slide on a time. Default: 1</comment>
+      <sort_order>60</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </slide_by>
+    <margin_item>
+      <label>Margin Each Items</label>
+      <frontend_type>text</frontend_type>
+      <comment>Default 0</comment>
+      <sort_order>70</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </margin_item>
+
+    <default_items>
+      <label>Number Columns On Page (Default)</label>
+      <comment>Show number items when screen size between 1199px and 980px</comment>
+      <frontend_type>text</frontend_type>
+      <sort_order>90</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </default_items>
+
+    <mobile_items>
+      <label>Number Columns On Page (Phones)</label>
+      <comment>Show number items when screen size bellow 480px</comment>
+      <frontend_type>text</frontend_type>
+      <sort_order>100</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </mobile_items>
+
+    <tablet_small_items>
+      <label>Number Columns On Page (Phones to Small tablets)</label>
+      <comment>Show number items when screen size between 641px and 480px</comment>
+      <frontend_type>text</frontend_type>
+      <sort_order>105</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </tablet_small_items>
+
+    <tablet_items>
+      <label>Number Columns On Page (Phones to tablets)</label>
+      <comment>Show number items when screen size between 768px and 641px</comment>
+      <frontend_type>text</frontend_type>
+      <sort_order>110</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </tablet_items>
+
+    <portrait_items>
+      <label>Number Columns On Page (Portrait tablets)</label>
+      <comment>Show number items when screen size between 979px and 769px</comment>
+      <frontend_type>text</frontend_type>
+      <sort_order>120</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </portrait_items>
+
+    <large_items>
+      <label>Number Columns On Page (Large display)</label>
+      <comment>Show number items when screen size 1200px and up</comment>
+      <frontend_type>text</frontend_type>
+      <sort_order>130</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </large_items>
+
+    <custom_items>
+      <label>Custom Number Items with screen size</label>
+      <comment>For example: [320, 1], [360, 1], [480, 1], [568, 2], [600, 2], [640, 2], [768, 2], [900, 3], [960, 3], [1024, 3] empty to disable</comment>
+      <frontend_type>text</frontend_type>
+      <sort_order>135</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+    </custom_items>
+
+  </fields>
+</carousel_setting>
+<effect_setting>
+ <label>Slider Settings</label>
+ <frontend_type>text</frontend_type>
+ <sort_order>5999</sort_order>
+ <show_in_default>1</show_in_default>
+ <show_in_website>1</show_in_website>
+ <show_in_store>1</show_in_store>
+ <fields>
+
+   <image_width>
+    <label>Image Width</label>
+    <frontend_type>text</frontend_type>
+    <sort_order>1</sort_order>
+    <show_in_default>1</show_in_default>
+    <show_in_website>1</show_in_website>
+    <show_in_store>1</show_in_store>
+  </image_width>
+
+  <image_height>
+    <label>Image Height</label>
+    <frontend_type>text</frontend_type>
+    <sort_order>5</sort_order>
+    <show_in_default>1</show_in_default>
+    <show_in_website>1</show_in_website>
+    <show_in_store>1</show_in_store>
+  </image_height>
+
+  <titleMaxchar>
+   <label>Title Max Chars</label>
+   <frontend_type>text</frontend_type>
+   <sort_order>10</sort_order>
+   <show_in_default>1</show_in_default>
+   <show_in_website>1</show_in_website>
+   <show_in_store>1</show_in_store>
+ </titleMaxchar>
+
+ <descMaxchar>
+   <label>Description Max Chars</label>
+   <frontend_type>text</frontend_type>
+   <sort_order>15</sort_order>
+   <show_in_default>1</show_in_default>
+   <show_in_website>1</show_in_website>
+   <show_in_store>1</show_in_store>
+ </descMaxchar>
+
+ <auto_play>
+   <label>Auto Play</label>
+   <frontend_type>select</frontend_type>
+   <source_model>adminhtml/system_config_source_yesno</source_model>
+   <sort_order>20</sort_order>
+   <show_in_default>1</show_in_default>
+   <show_in_website>1</show_in_website>
+   <show_in_store>1</show_in_store>
+ </auto_play>
+
+ <interval>
+   <label>Speed</label>
+   <frontend_type>text</frontend_type>
+   <sort_order>25</sort_order>
+   <show_in_default>1</show_in_default>
+   <show_in_website>1</show_in_website>
+   <show_in_store>1</show_in_store>
+   <comment>Determines the duration of the transition in milliseconds.If less than 10, the number is interpreted as a speed (pixels/millisecond).This is probably desirable when scrolling items with variable sizes</comment>
+ </interval>
+
+ <show_navigator>
+  <label>Show Button Navigation</label>
+  <frontend_type>select</frontend_type>
+  <source_model>adminhtml/system_config_source_yesno</source_model>
+  <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+  <sort_order>30</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+</show_navigator>
+
+<show_title>
+  <label>Enable Main Title</label>
+  <frontend_type>select</frontend_type>
+  <source_model>adminhtml/system_config_source_yesno</source_model>
+  <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+  <sort_order>35</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+</show_title>
+<show_desc>
+  <label>Enable Main Description</label>
+  <frontend_type>select</frontend_type>
+  <source_model>adminhtml/system_config_source_yesno</source_model>
+  <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+  <sort_order>40</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+</show_desc>
+<show_price>
+  <label>Enable Price</label>
+  <frontend_type>select</frontend_type>
+  <source_model>adminhtml/system_config_source_yesno</source_model>
+  <backend_model>ves_productcarousel/system_config_backend_productcarousel_carousel</backend_model>
+  <sort_order>45</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+</show_price>
+
+<show_wc>
+  <label>Enable Wishlist, Compare</label>
+  <frontend_type>select</frontend_type>
+  <source_model>adminhtml/system_config_source_yesno</source_model>
+  <sort_order>50</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+</show_wc>
+<show_addcart>
+  <label>Enable Button addcart</label>
+  <frontend_type>select</frontend_type>
+  <source_model>adminhtml/system_config_source_yesno</source_model>
+  <sort_order>55</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+</show_addcart>
+<show_review>
+  <label>Enable Rating</label>
+  <frontend_type>select</frontend_type>
+  <source_model>adminhtml/system_config_source_yesno</source_model>
+  <sort_order>60</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+</show_review>
+
+<show_pzoom>
+  <label>Enable Product Image Zooming</label>
+  <frontend_type>select</frontend_type>
+  <source_model>adminhtml/system_config_source_yesno</source_model>
+  <sort_order>65</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+</show_pzoom>
+
+<enable_quickview>
+  <label>Enable Quickview</label>
+  <frontend_type>select</frontend_type>
+  <source_model>adminhtml/system_config_source_yesno</source_model>
+  <sort_order>70</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+</enable_quickview>
+
+<popup_quickview_width>
+  <label>Popup Quickview Width</label>
+  <frontend_type>text</frontend_type>
+  <sort_order>75</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+  <depends><enable_quickview><value>1</value></enable_quickview></depends>
+</popup_quickview_width>
+
+<popup_quickview_height>
+  <label>Popup Quickview Height</label>
+  <frontend_type>text</frontend_type>
+  <sort_order>80</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+  <depends><enable_quickview><value>1</value></enable_quickview></depends>
+</popup_quickview_height>
+
+<enable_swap>
+  <label>Enable Swap Images</label>
+  <frontend_type>select</frontend_type>
+  <source_model>adminhtml/system_config_source_yesno</source_model>
+  <sort_order>85</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+</enable_swap>
+<enable_sale_icon>
+  <label>Enable Sale Icon</label>
+  <frontend_type>select</frontend_type>
+  <source_model>adminhtml/system_config_source_yesno</source_model>
+  <sort_order>90</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+</enable_sale_icon>
+<enable_new_icon>
+  <label>Enable New Icon</label>
+  <frontend_type>select</frontend_type>
+  <source_model>adminhtml/system_config_source_yesno</source_model>
+  <sort_order>95</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+</enable_new_icon>
+<swap_image_number>
+  <label>Swap Image Number</label>
+  <comment>Input index number of product additional images to use for Swap image (index number start from 0), for example: you want get image 3 for swap image, you should input swap image number = 2 </comment>
+  <frontend_type>text</frontend_type>
+  <sort_order>100</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+  <depends><enable_swap><value>1</value></enable_swap></depends>
+</swap_image_number>
+</fields>
+</effect_setting>
+<!-- Information -->
+<advanded_parameter>
+ <label>Information - Support</label>
+ <frontend_type>text</frontend_type>
+ <sort_order>6001</sort_order>
+ <show_in_default>1</show_in_default>
+ <show_in_website>1</show_in_website>
+ <show_in_store>1</show_in_store>
+ <fields>
+  <module_information translate="label">
+   <label>Set Module Visable On Pages, Position</label>
+   <frontend_type>label</frontend_type>
+   <frontend_model>ves_productcarousel/system_config_form_field_information</frontend_model>
+   <sort_order>40</sort_order>
+   <show_in_default>1</show_in_default>
+   <show_in_website>0</show_in_website>
+   <show_in_store>0</show_in_store>
+ </module_information>
+</fields>
+</advanded_parameter>
+</groups>
+</ves_productcarousel>
+</sections>
+</config>

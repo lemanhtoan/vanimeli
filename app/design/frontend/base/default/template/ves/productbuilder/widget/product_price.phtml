@@ -1,0 +1,18 @@
+<?php $product_info_block = Mage::registry("product_info_block"); ?>
+<?php $_helper = $product_info_block->helper('catalog/output'); ?>
+<?php $_product = $product_info_block->getProduct(); ?>
+<?php 
+
+	$show_bundle_prices = $this->getConfig("show_bundle_prices",1);
+	$show_tier_price = $this->getConfig("show_tier_price",1);
+	$enable_snipet = $this->getConfig("enable_snipet", 0);
+ ?>
+<div <?php if($enable_snipet): ?>itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer"<?php endif; ?> class="price-info price">
+    <?php echo $product_info_block->getPriceHtml($_product); ?>
+    <?php if($show_bundle_prices): ?>
+    <?php echo $product_info_block->getChildHtml('bundle_prices') ?>
+	<?php endif; ?>
+	<?php if($show_tier_price): ?>
+    <?php echo $product_info_block->getTierPriceHtml() ?>
+	<?php endif; ?>
+</div>

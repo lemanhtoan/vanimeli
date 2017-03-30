@@ -1,0 +1,32 @@
+<?php 
+$product_info = Mage::helper("ves_layerslider")->getSliderProduct( $product_sku );
+if($product_info):
+$showimage = isset($showimage)?$showimage:1;
+$showprice = isset($showprice)?$showprice:1;
+$showrating = isset($showrating)?$showrating:1;
+?>
+<div class="product-info">
+  <span class="hotspot-url nodisplay" style="display:none" data-url="<?php echo $product_info['url']; ?>"></span>
+ <?php if($showimage): ?>
+  <div class="product-img img"><a href="<?php echo $product_info['url']; ?>" title="<?php echo Mage::helper("ves_layerslider")->__("View Product"); ?>"><img class="img img-responsive" src="<?php echo $product_info['thumbnail']  ?>" alt="<?php echo $product_info['name']  ?>"/></a></div>
+<?php endif; ?>
+  <div class="product-name"><a href="<?php echo $product_info['url']; ?>" title="<?php echo Mage::helper("ves_layerslider")->__("View Product"); ?>"><?php echo $product_info['name']  ?></a></div>
+ <?php if($showprice): ?>
+  <div class="price-box">
+  	<?php if($product_info['special_price']): ?>
+  		<div class="old-price">
+  			<span class="price"><?php echo Mage::helper('core')->currency($product_info['price'], true, false);  ?></span>
+  		</div>
+  		<div class="special-price">
+  			<span class="price"><?php echo Mage::helper('core')->currency($product_info['special_price'], true, false);  ?></span>
+  		</div>
+  	<?php else: ?>
+  		<span class="regular-price"><?php echo Mage::helper('core')->currency($product_info['price'], true, false);  ?></span>
+  	<?php endif; ?>
+  </div>
+ <?php endif; ?>
+ <?php if($showprice): ?>
+  <?php echo $this->getReviewsSummaryHtml($product_info['object'], true, true); ?>
+ <?php endif; ?>
+</div>
+<?php endif; ?>

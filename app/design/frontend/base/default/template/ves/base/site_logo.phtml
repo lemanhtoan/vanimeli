@@ -1,0 +1,8 @@
+<?php
+	$header_block = Mage::app()->getLayout()->getBlock('header');
+?>
+<?php if ($header_block->getIsHomePage()):?>
+<h1 class="logo"><strong><?php echo $header_block->getLogoAlt() ?></strong><a href="<?php echo $header_block->getUrl('') ?>" title="<?php echo $header_block->getLogoAlt() ?>" class="logo"><img src="<?php echo $header_block->getLogoSrc() ?>" alt="<?php echo $header_block->getLogoAlt() ?>" /></a></h1>
+<?php else:?>
+<a href="<?php echo $header_block->getUrl('') ?>" title="<?php echo $header_block->getLogoAlt() ?>" class="logo"><strong><?php echo $header_block->getLogoAlt() ?></strong><img src="<?php echo $header_block->getLogoSrc() ?>" alt="<?php echo $header_block->getLogoAlt() ?>" /></a>
+<?php endif?>

@@ -1,0 +1,183 @@
+<div class="content-header">
+<table cellspacing="0">
+    <tr>
+        <td style="width:50%;"><h3 class="icon-head head-products"><?php echo Mage::helper('catalog')->__('Manage Css Selector Elements') ?></h3></td>
+        <td class="a-right">
+            <?php echo $this->getButtonsHtml() ?>
+            <!-- Start of Displaying of your custom import form -->
+            <?php echo $this->getImportButtonHtml() ?>
+            <?php echo $this->getQuickCreateButtonHtml() ?>
+            <!-- End of Displaying of your custom import form -->
+            <?php echo $this->getSampleButtonHtml() ?>
+            <!-- End of Displaying of your custom install sample form -->
+        </td>
+    </tr>
+</table>
+</div>
+<div>
+    <?php echo $this->getGridHtml() ?>
+</div>
+<a id="click_open_popup" href="#batch_create_form" style="display:none" title="<?php echo $this->__("Click Here"); ?>"><?php echo $this->__("Click Here"); ?></a>
+<div style="display:none" id="batch_create_wrapper">
+    <?php
+        $list_types = Mage::helper("ves_blockbuilder")->getSelectorTypes();
+
+    ?>
+
+    <form id="batch_create_form" method="post" action="<?php echo $this->getUrl('*/*/batchSave'); ?>">
+        <p id="saved_message" class="" style="display:none"><?php echo $this->__("Please input value for required fields!");?></p>
+        <div id="selector_fields">
+            <h3><?php echo $this->__("Selector Item ")." #1"; ?></h3>
+            <table cellspacing="0" class="form-list">
+                <tbody>
+                    <tr>
+                        <td class="label"><label for="element_name_1"><?php echo $this->__("Element Name");?> 1</label></td>
+                        <td class="value">
+                            <input type="text" class="form-control input-text" value="" name="element_name[]" id="element_name_1"> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label for="element_type_1"><?php echo $this->__("Element Type");?> 1</label></td>
+                        <td class="value">
+                            <select class="form-control select" name="element_type[]" id="element_type_1"> 
+                                <?php foreach($list_types as $key=>$val): ?>
+                                    <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label for="element_selector_1"><?php echo $this->__("Css Selector");?> 1</label></td>
+                        <td class="value">
+                            <input type="text" class="form-control input-text" value="" name="element_selector[]" id="element_selector_1"> 
+                            <br/>
+                            <?php echo $this->__("Input css selector (html tag name, class or ID).<br/> For example: body .header"); ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label for="element_attrs_1"><?php echo $this->__("Css Attributes");?> 1</label></td>
+                        <td class="value">
+                            <input type="text" class="form-control input-text" value="" name="element_attrs[]" id="element_attrs_1"> 
+                             <br/>
+                            <?php echo $this->__("Input css attribute which will apply style value.<br/> For example: background-image, background-color, color, font-size or border-style, border-size"); ?>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="selector_append_fields">
+
+        </div>
+        <div class="actions">
+            <div class="pull-left">
+                <button class="scalable add" id="add_item_button" onclick="addSelectorItem()" type="button" title="<?php echo $this->__("Add Item");?>"><span><span><span><?php echo $this->__("Add Item");?></span></span></span></button>
+            </div>
+            <div class="pull-right">
+                <button class="scalable save" id="save_button" type="button" onclick="return postAjaxForm();" title="<?php echo $this->__("Save Batch");?>"><span><span><span><?php echo $this->__("Save Batch");?></span></span></span></button>
+            </div>
+        </div>
+        <?php echo $this->getBlockHtml('formkey') ?>
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    var number_row = 2;
+    var tmp_html = $j("#batch_create_wrapper").html();
+    
+    function postAjaxForm() {
+        var obj = $j("#batch_create_form");
+        $j.fancybox.showActivity();
+        $j.ajax({
+            type        : "POST",
+            cache   : false,
+            url     : "<?php echo $this->getUrl('*/*/batchSave'); ?>",
+            data     : $j(obj).serializeArray(),
+            success: function(data) {
+                data += '<br/><button class="scalable add" onclick="openQuickCreatePopup()"><span><span><?php echo $this->__("Continue Create");?></span></span></button>';
+                $j.fancybox(data);
+            }
+        });
+
+        return false;
+    }
+    function openQuickCreatePopup() {
+        if($j("#batch_create_form").length <= 0) {
+            $j("#batch_create_wrapper").html(tmp_html);
+
+            $j("#batch_create_form").bind("submit", function() {
+
+                    postAjaxForm( );
+
+                    return false;
+            });
+        }
+        $j("#click_open_popup").trigger('click');
+    }
+
+    function addSelectorItem() {
+        var html = '<h3><?php echo $this->__("Selector Item "); ?> #'+number_row+'</h3>';
+            html += '<table cellspacing="0" class="form-list">';
+            html += '  <tbody> ';
+            html += '        <tr>';
+            html += '            <td class="label"><label for="element_name_'+number_row+'"><?php echo $this->__("Element Name");?> '+number_row+'</label></td>';
+            html += '            <td class="value">';
+            html += '                <input type="text" class="form-control input-text" value="" name="element_name[]" id="element_name_'+number_row+'"> ';
+            html += '            </td>';
+            html += '        </tr>';
+            html += '        <tr>';
+            html += '            <td class="label"><label for="element_type_1"><?php echo $this->__("Element Type"); ?> '+number_row+'</label></td>';
+            html += '            <td class="value">';
+            html += '<select class="form-control select" name="element_type[]" id="element_type_'+number_row+'"> ';
+                                <?php foreach($list_types as $key=>$val): ?>
+            html += '                        <option value="<?php echo $key; ?>"><?php echo $val; ?></option>';
+                                <?php endforeach; ?>
+
+            html += '                </select>';
+            html += '            </td>';
+            html += '        </tr>';
+            html += '        <tr>';
+            html += '            <td class="label"><label for="element_selector_1"><?php echo $this->__("Css Selector");?> '+number_row+'</label></td>';
+            html += '            <td class="value">';
+            html += '                <input type="text" class="form-control input-text" value="" name="element_selector[]" id="element_selector_'+number_row+'"> ';
+            html += '<br/>';
+            html += '                <?php echo $this->__("Input css selector (html tag name, class or ID).<br/> For example: body .header"); ?>';
+            html += '            </td>';
+            html += '        </tr>';
+            html += '        <tr>';
+            html += '            <td class="label"><label for="element_attrs_'+number_row+'"><?php echo $this->__("Css Attributes");?> '+number_row+'</label></td>';
+            html += '            <td class="value">';
+            html += '                <input type="text" class="form-control input-text" value="" name="element_attrs[]" id="element_attrs_'+number_row+'"> ';
+            html += ' <br/>';
+            html += '                <?php echo $this->__("Input css attribute which will apply style value.<br/> For example: background-image, background-color, color, font-size or border-style, border-size"); ?>';
+            html += '            </td>';
+            html += '        </tr>';
+            html += '    </tbody>';
+            html += '</table>';
+
+            $j("#selector_append_fields").append(html);
+            number_row++;
+    }
+
+    $j(document).ready(function () {
+        $j("#click_open_popup").fancybox({
+            'scrolling'     : 'no',
+            'titleShow'     : false,
+            'width'         : 800,
+            'onClosed'     : function() {
+                $j("#saved_message").hide();
+            },
+            'onCleanup': function () {
+                var myContent = this.href;
+                $j(myContent).unwrap();
+            }
+            
+        });
+
+        $j("#batch_create_form").bind("submit", function() {
+            postAjaxForm();
+            return false;
+        });
+    });
+
+</script>

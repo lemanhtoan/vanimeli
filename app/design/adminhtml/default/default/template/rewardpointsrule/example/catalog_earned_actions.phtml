@@ -1,0 +1,48 @@
+<?php
+$currency = Mage::getModel('directory/currency')->load(Mage::app()->getStore()->getBaseCurrencyCode());
+?>
+<div id="messages">
+    <ul class="messages">
+        <li class="notice-msg">
+            <ul>
+                <li><span><?php echo $this->__('Example for "Earning Point Action":') ?></span>
+                </li>
+            </ul>
+
+            <?php echo $this->__('If you want to give Customers 5 points for purchasing products, then:') ?>
+            <div style="margin-left: 50px">              
+                <?php echo $this->__('- Choose "Action": "Give X points to Customer"') ?>
+                </br>
+                <?php echo $this->__('- Fill in field "Points (X)": 5') ?></br>
+                <?php echo $this->__('=> If Customers purchase a product of %s or %s, they will earn 5 points.', $currency->format(500), $currency->format(800)) ?>
+            </div>
+
+            <?php echo $this->__('If you want to give Customers 5 points for every %s of price they spend and limit the number of points that can be earned to 15, then:', $currency->format(200)) ?>
+            <div style="margin-left: 50px">              
+                <?php echo $this->__('- Choose "Action": "Give X points for every Y amount of price"') ?>
+                </br>
+                <?php echo $this->__('- Fill in field "Points (X)": 5') ?>
+                </br>
+                <?php echo $this->__('- Fill in field "Money Step (Y)": 200') ?>
+                </br>
+                <?php echo $this->__('- Fill in field "Max points earned by this rule": 15') ?>
+
+                </br>
+                <?php echo $this->__('=> If Customers purchase a product of %s, they will earn 15 points.', $currency->format(800)) ?>
+            </div>
+
+            <?php echo $this->__('If you want to give Customers 5 points for every %s of profit they make and limit the number of points that can be earned to 15, then:', $currency->format(200)) ?>
+            <div style="margin-left: 50px">              
+                <?php echo $this->__('- Choose "Action": "Give X points for every Y amount of Profit"') ?>
+                </br>
+                <?php echo $this->__('- Fill in field "Points (X)": 5') ?>
+                </br>
+                <?php echo $this->__('- Fill in field "Money Step (Y)": 200') ?>
+                </br>
+                <?php echo $this->__('- Fill in field "Max points earned by this rule": 15') ?>
+                </br>
+                <?php echo $this->__('=> If Customers purchase a product which contributes %s in profit, they will earn 15 points.', $currency->format(800)) ?>
+            </div>
+        </li>
+    </ul>
+</div>

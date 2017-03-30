@@ -1,0 +1,209 @@
+.box-products {
+	position:relative;
+}
+.productcarousel .carousel-control{
+	z-index:10
+}
+
+.productcarousel .nav{
+	padding:0;
+	margin:0
+}
+.productcarousel .carousel-controls{
+	position: absolute;
+	right: 0;
+	top: -35px;
+}
+
+.productcarousel .left{
+	left: -49px;	
+}
+	
+.productcarousel .tab-content, .producttabs .box-product{
+	overflow:inherit
+}
+
+.productcarousel {
+	background:#FFF;
+	margin-bottom:12px;
+	clear:both;
+}
+.productcarousel img {
+    height: auto;
+    max-width: 100%;
+} 
+
+.productcarousel .block-heading {
+    color: #6E6662;
+    font-size: 28px;
+    margin-bottom: 0;
+    padding: 8px 10px 10px;
+    text-align: center;
+}
+.productcarousel .block-heading  .pretext{
+	   clear: both;
+		color: #808181;
+		display: block;
+		font-size: 11px;
+ }
+
+ .carousel-control {
+  cursor: pointer;
+  border: 2px solid #e2e2e2;
+  height: 24px;
+  font-size: 19px;
+  text-align: center;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-transition: color 600ms linear;
+  transition: color 600ms linear;
+}
+.carousel-control:hover,
+.carousel-control:focus {
+  color: #000000;
+  border-color: #000000;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.carousel-control.left,
+.carousel-control.right {
+  text-decoration: none;
+  background-color: transparent;
+  background-image: none;
+  background-image: -webkit-gradient(linear,0% top,100% top,from(rgba(0,0,0,0)),to(rgba(0,0,0,0)));
+  background-image: -webkit-linear-gradient(left,color-stop(rgba(0,0,0,0) 0%),color-stop(rgba(0,0,0,0) 100%));
+  background-image: -moz-linear-gradient(left,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 100%);
+  background-image: linear-gradient(to right,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#00000000', GradientType=1);
+}
+.carousel-control {
+  background-image: none;
+  background-color: transparent;
+}
+
+.product-block .image {
+    display: block;
+    margin-bottom: 0;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
+
+.product-block .img-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  border-width: 0;
+  border-style: solid;
+  border-color: #505050;
+  border-color: rgba(79,79,79,0.5);
+  zoom: 1;
+  border-color: transparent \9;
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f4f4f4f, endColorstr=#7f4f4f4f)";
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f4f4f4f, endColorstr=#7f4f4f4f);
+  -webkit-transition: all 0.6s ease-in-out 0s;
+  transition: all 0.6s ease-in-out 0s;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  filter: alpha(opacity=0);
+
+}
+.product-block .colorbox {
+  background: #FFFFFF;
+  padding: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  line-height: 33px;
+  overflow: auto;
+  display: block !important;
+  z-index: 10;
+  color: #000000;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+  width: 100px;
+  height: 33px;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: transform 0.4s ease-in 0.2s, opacity 0.4s ease-in-out 0s;
+  transition: transform 0.4s ease-in 0.2s, opacity 0.4s ease-in-out 0s;
+  position: absolute;
+  display: none;
+  text-align: center;
+}
+.product-block .colorbox span {
+  margin-right: 5px;
+}
+.product-block .colorbox .icon-eye {
+  margin: 0 5px 0 0;
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+}
+
+.product-block:hover .colorbox {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition-delay: 0.4s;
+  transition-delay: 0.4s;
+}
+
+/* vertical start*/
+
+.vertical .carousel-inner {
+  height: 100%;
+}
+
+.carousel.vertical .item {
+  -webkit-transition: 0.6s ease-in-out top;
+     -moz-transition: 0.6s ease-in-out top;
+      -ms-transition: 0.6s ease-in-out top;
+       -o-transition: 0.6s ease-in-out top;
+          transition: 0.6s ease-in-out top;
+}
+
+.carousel.vertical .active {
+  top: 0;
+}
+
+.carousel.vertical .next {
+  top: 100%;
+}
+
+.carousel.vertical .prev {
+  top: -100%;
+}
+
+.carousel.vertical .next.left,
+.carousel.vertical .prev.right {
+  top: 0;
+}
+
+.carousel.vertical .active.left {
+  top: -100%;
+}
+
+.carousel.vertical .active.right {
+  top: 100%;
+}
+
+.carousel.vertical .item {
+    left: 0;
+}​

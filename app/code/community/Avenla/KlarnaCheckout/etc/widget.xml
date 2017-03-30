@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!--
+
+ This file is released under a custom license by Avenla Oy.
+ All rights reserved
+
+ License and more information can be found at http://productdownloads.avenla.com/magento-modules/klarna-checkout/
+ For questions and support - klarna-support@avenla.com
+
+ @category   Avenla
+ @package    Avenla_KlarnaCheckout
+ @copyright  Copyright (c) Avenla Oy
+ @link       http://www.avenla.fi
+
+ Avenla KlarnaCheckout
+
+ @category   Avenla
+ @package    Avenla_KlarnaCheckout
+
+-->
+<widgets>
+	<klarnaCheckout_methods type="klarnaCheckout/widgets_methods">
+		<name>Klarna Checkout payment methods</name>
+		<description type="desc">View your Klarna Checkout payment methods with Klarna tooltip</description>
+		<parameters>
+			<methodslayout>
+				<required>1</required>
+				<visible>1</visible>
+				<label>Layout</label>
+				<type>select</type>
+				<values>
+					<sinle_row translate="label">
+						<value>long</value>
+						<label>One row</label>
+					</sinle_row>
+					<two_rows translate="label">
+						<value>short</value>
+						<label>Two rows</label>
+					</two_rows>
+				</values>
+			</methodslayout>
+			<color>
+				<required>1</required>
+				<visible>1</visible>
+				<label>Color</label>
+				<type>select</type>
+				<values>
+					<blue translate="label">
+						<value>blue</value>
+						<label>Blue</label>
+					</blue>
+					<white translate="label">
+						<value>white</value>
+						<label>White</label>
+					</white>
+				</values>
+			</color>
+			<tooltiplayout>
+				<required>1</required>
+				<visible>1</visible>
+				<label>Tooltip layout</label>
+				<type>select</type>
+				<values>
+					<blue translate="label">
+						<value>blue</value>
+						<label>Blue</label>
+					</blue>
+					<white translate="label">
+						<value>white</value>
+						<label>White</label>
+					</white>
+				</values>
+			</tooltiplayout>
+			<width>
+				<required>1</required>
+				<visible>1</visible>
+				<label>Width</label>
+				<type>text</type>
+			</width>
+		</parameters>
+	</klarnaCheckout_methods>
+	<klarnaCheckout_logo type="klarnaCheckout/widgets_logo">
+		<name>Klarna logo</name>
+		<description type="desc">View Klarna logo</description>
+		<parameters>
+			<background>
+				<required>1</required>
+				<visible>1</visible>
+				<label>Background</label>
+				<type>select</type>
+				<values>
+					<light translate="label">
+						<value>blue-black</value>
+						<label>Light</label>
+					</light>
+					<dark translate="label">
+						<value>white</value>
+						<label>Dark</label>
+					</dark>
+				</values>
+			</background>
+			<width>
+				<required>1</required>
+				<visible>1</visible>
+				<label>Width</label>
+				<type>text</type>
+			</width>
+		</parameters>
+	</klarnaCheckout_logo>
+</widgets>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Ves_Landingpage>
+			<active>true</active>
+			<codePool>community</codePool>
+			<depends>
+				<Mage_Adminhtml/>
+			</depends>
+		</Ves_Landingpage>
+	</modules>
+</config>

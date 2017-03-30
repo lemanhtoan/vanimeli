@@ -1,0 +1,414 @@
+<?php 
+ /*------------------------------------------------------------------------
+  # VenusTheme Block Builder Module 
+  # ------------------------------------------------------------------------
+  # author:    VenusTheme.Com
+  # copyright: Copyright (C) 2012 http://www.venustheme.com. All Rights Reserved.
+  # @license: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+  # Websites: http://www.venustheme.com
+  # Technical Support:  http://www.venustheme.com/
+-------------------------------------------------------------------------*/
+$themeName =  $this->getThemePackage();
+ 
+$patterns =  $this->getPattern( );
+
+$border_styles = array("hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset", "initial", "inherit");
+
+$backgroundImageURL = $this->getThemeURL().'/images/patterns/';
+$backgroundImageURL_default = $this->getThemeDefaultURL().'/images/patterns/';
+
+$allow_save_editor = Mage::getStoreConfig("ves_livecss/general/allow_save_profile");
+
+?>
+
+<script type="text/javascript">
+jQuery(document).ready( function (){
+	jQuery(".ves-paneltool .panelbutton").click( function(){	
+		jQuery(this).parent().toggleClass("active");
+	} );
+} );
+
+</script>
+
+<div id="ves-livecss" class="hidden-md hidden-sm hidden-xs">
+	<div class="ves-paneltool editortool">
+		<div class="panelbutton">
+			<i class="glyphicon glyphicon-adjust"></i>
+		</div>
+
+		<div class="panelcontent editortool">
+			<div class="panelinner">
+				<form action="<?php echo $this->getLiveEditLink(); ?>" enctype="multipart/form-data" method="post" class="clearfix" id="ves_pagebuilder_livecss_form">
+					<h4><?php echo Mage::helper('ves_blockbuilder')->__( 'Live Css Editor' ); ?></h4>					
+					<?php $xmlselectors = $this->renderEdtiorThemeForm( );?>
+					<?php if($allow_save_editor): ?>
+						<?php
+					 		$themeCustomizePath = $this->getCustomizePath();
+
+					 		$files = Mage::helper('ves_blockbuilder')->getFileList( $themeCustomizePath , '.css' );
+						?>
+						<p>
+							<span class="badge"><?php echo Mage::helper("ves_blockbuilder")->__("Theme: ");?>: <?php echo $themeName; ?></span>
+						</p>	 	
+
+						<div class="buttons-group">
+							<input type="hidden" name="action-mode" id="ves-action-mode" >
+							<input type="hidden" name="liveeditor" value="1">
+							<a href="#" class="btn btn-primary btn-xs" onclick="jQuery('#ves-action-mode').val('save-edit');jQuery('#ves_pagebuilder_livecss_form').submit();"><?php echo Mage::helper("ves_blockbuilder")->__('Save Profile');?></a>
+							<a href="#" class="btn btn-danger btn-xs" onclick="jQuery('#ves-action-mode').val('save-delete');jQuery('#ves_pagebuilder_livecss_form').submit();"><?php echo Mage::helper("ves_blockbuilder")->__('Delete');?></a>
+						</div>
+
+						<div class="groups form-fluid" style="width: 100%">
+							<div class="form-group pull-left" style="width:45%">
+								<label><?php echo Mage::helper("ves_blockbuilder")->__('Css Profiles: '); ?></label>	
+								<select name="saved_file" id="ves-saved-files">
+									<option value=""> ------------- </option>
+									<?php foreach( $files as $file ){ $file = str_replace( ".css","", $file); ?>
+										<option value="<?php echo $file;?>"><?php echo $file; ?></option>
+									<?php } ?>
+								</select> 
+							</div>
+
+							<div class="form-group pull-left" style="width:45%">
+								<label class="show-for-notexisted"><?php echo Mage::helper("ves_blockbuilder")->__('And Named This:'); ?></label>
+								<label class="show-for-existed"><?php echo Mage::helper("ves_blockbuilder")->__('Rename This'); ?></label>
+								<input type="text" name="newfile" />
+								
+							</div>	
+					    </div>
+					<?php endif; ?>
+
+				    <div class="clearfix panel-group" id="ves-customize-body">
+						<ul class="nav nav-tabs" id="ves-pagesbuilder-livecss-tab">
+							<?php foreach( $xmlselectors as $for => $output ) { ?>
+							<li><a href="#ves-livecss-tab-<?php echo $for ?>"><?php echo Mage::helper('ves_blockbuilder')->__(ucfirst($for) );?></a></li>		
+							<?php } ?>
+						</ul>
+
+						<div class="tab-content"> 
+						<?php foreach( $xmlselectors as $for => $output ) { ?>
+							<div class="tab-pane" id="ves-livecss-tab-<?php echo $for; ?>">
+								<?php if( !empty( $output) ){?>
+								<div class="accordion">
+								<?php $i=0; foreach ( $output as $group ) { ?>
+								    <div class="accordion-group  panel panel-default clearfix">
+										<div class="accordion-heading panel-heading">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#custom-accordion" href="#collapse<?php echo $group['match'];?>">
+												<?php echo $group['header']; ?>	 
+											</a>
+										</div>
+
+										<div id="collapse<?php echo $group['match'];?>" class="accordion-body panel-collapse collapse <?php if( $i++ ==0) { ?> in <?php } ?>">
+											<div class="accordion-inner panel-body clearfix">
+												<?php foreach ($group['selector'] as $k => $item ) {  ?>
+												<?php  if (isset($item['type'])&&$item['type']=="image") { ?>
+												<div class="form-group background-images"> 
+													<label data-tooltip="true" data-placement="top" title="<?php echo $this->__("Css Selector: ")." ".$item['selector']; ?>"><?php echo $item['label']?></label>
+													<a class="clear-bg label label-success" href="#">Clear</a>
+													<input value="" name="customize[<?php echo $group['match'];?>][]" data-match="<?php echo $group['match'];?>" type="text" class="input-setting input-background-setting" data-selector="<?php echo $item['selector']?>" data-attrs="background-image" data-image="">
+													<div class="clearfix"></div>
+													<p><em style="font-size:10px">Those Images in folder YOURTHEME/images/patterns/</em></p>
+													<div class="bi-wrapper clearfix">
+														<?php foreach ( $patterns as $pattern ){ ?>
+														<div style="background:url('<?php echo $pattern["path"];?>') no-repeat center center;" class="pull-left" data-image="<?php echo $pattern["path"];?>" data-val="../../images/patterns/<?php echo $pattern['file']; ?>"></div>
+														<?php } ?>
+													</div>
+												</div>
+											
+												<?php } elseif( $item['type'] == "fontsize" ) { ?>
+												<div class="form-group">
+													<label data-tooltip="true" data-placement="top" title="<?php echo $this->__("Css Selector: ")." ".$item['selector']; ?>"><?php echo $item['label']?></label>
+													<select name="customize[<?php echo $group['match'];?>][]" data-match="<?php echo $group['match']?>" class="input-setting" data-selector="<?php echo $item['selector']?>" data-attrs="<?php echo $item['attrs']?>">
+														<option value="">Inherit</option>
+
+
+														<?php for( $fs=1; $fs<=32; $fs++ ) { ?>
+														<option value="<?php echo $fs; ?>"><?php echo $fs; ?></option>
+														<?php } ?>
+													</select>	
+													<a href="#" class="clear-bg label label-success">Clear</a>
+												</div>
+
+										  		<?php } elseif( $item['type'] == "borderstyle" ) { ?>
+				                                   <div class="form-group">
+					                                   <label data-tooltip="true" data-placement="top" title="<?php echo $this->__("Css Selector: ")." ".$item['selector']; ?>"><?php echo $item['label']?></label>
+					                                  	<select name="customize[<?php echo $group['match'];?>][]" data-match="<?php echo $group['match']?>" class="input-setting" data-selector="<?php echo $item['selector']?>" data-attrs="<?php echo $item['attrs']?>">
+															<option value="">None</option>
+															<?php foreach ( $border_styles as $item ){ ?>
+															<option value="<?php echo $item; ?>"><?php echo $item; ?></option>
+															<?php } ?>
+														</select>	
+														<a href="#" class="clear-bg label label-success">Clear</a>
+				                                    </div>
+
+				                                    <?php } elseif( $item['type'] == "text" ) { ?>
+				                                    <div class="form-group">
+														<label data-tooltip="true" data-placement="top" title="<?php echo $this->__("Css Selector: ")." ".$item['selector']; ?>"><?php echo $item['label']?></label>
+														<input value="" size="10" name="customize[<?php echo $group['match']?>][]" data-match="<?php echo $group['match']?>" type="text" class="input-setting color-selector" data-selector="<?php echo $item['selector']?>" data-attrs="<?php echo $item['attrs']?>">
+														<a href="#" class="clear-bg label label-success">Clear</a>
+												    </div>
+
+				                                    <?php } elseif( $item['type'] == "raw-text" ) { ?>
+					                                <div class="form-group">
+														<label data-tooltip="true" data-placement="top" title="<?php echo $this->__("Css Selector: ")." ".$item['selector']; ?>"><?php echo $item['label']?></label>
+														<input value="" size="10" name="customize[<?php echo $group['match']?>][]" data-match="<?php echo $group['match']?>" type="text" style="color:#000" class="input-setting input-text" data-selector="<?php echo $item['selector']?>" data-attrs="<?php echo $item['attrs']?>">
+														<a href="#" class="clear-bg label label-success">Clear</a>
+													</div>
+
+													<?php } elseif( $item['type'] == "textarea" ) { ?>
+					                                <div class="form-group">
+														<label data-tooltip="true" data-placement="top" title="<?php echo $this->__("Css Selector: ")." ".$item['selector']; ?>"><?php echo $item['label']?></label>
+														<textarea rows="5" name="customize[<?php echo $group['match']?>][]" data-match="<?php echo $group['match']?>" style="color:#000" class="textarea-setting custom-css" data-selector="<?php echo $item['selector']?>" data-attrs="<?php echo $item['attrs']?>" placeholder="<?php echo $this->__("Write your custom rules..."); ?>" data-index="<?php echo $k; ?>"></textarea>
+														<a href="#" class="clear-bg label label-success">Clear</a>
+														<script type="text/javascript"><!--
+															jQuery(document).ready(function($) {
+																var a = "vescustomcss-<?php echo $k; ?>";
+																var csslink = $("#"+a);
+
+																if(csslink.length <= 0) {
+																	csslink = $('<style type="text/css" rel="stylesheet" id="' + a + '" />').appendTo("head");
+																}
+															})
+														//--></script>
+													</div>
+
+													<?php } else { ?>
+													<div class="form-group">
+														<label data-tooltip="true" data-placement="top" title="<?php echo $this->__("Css Selector: ")." ".$item['selector']; ?>"><?php echo $item['label']?></label>
+														<input value="" size="10" name="customize[<?php echo $group['match']?>][]" data-match="<?php echo $group['match']?>" type="text" class="input-setting color-selector" data-selector="<?php echo $item['selector']?>" data-attrs="<?php echo $item['attrs']?>">
+														<a href="#" class="clear-bg label label-success">Clear</a>
+													</div>
+													<?php } ?>
+											 	<?php } ?>
+										    </div>
+										</div>
+									</div>          	
+								<?php } ?>
+								</div>
+							<?php } ?>
+						</div>
+					    <?php } /* endforeach  */?>
+						</div>   
+					</div>
+				</form>		    
+			</div>		
+		</div>
+		<div class="panelbutton label-customize"></div>
+	</div>
+</div> 
+
+<script type="text/javascript">
+
+jQuery('#ves-pagesbuilder-livecss-tab a').click(function (e) {
+	e.preventDefault();
+	jQuery(this).tab('show');
+})
+jQuery('#ves-pagesbuilder-livecss-tab a:first').tab('show'); 
+
+
+var $VESMAINCONTAINER = jQuery("html");
+
+
+/**
+ * BACKGROUND-IMAGE SELECTION
+ */
+jQuery(".background-images").each( function(){
+
+	var $parent = this;
+	var $input  = jQuery(".input-background-setting", $parent ); 
+	jQuery(".bi-wrapper > div",this).click( function(){
+		 $input.val( jQuery(this).data('val') ); 
+		 jQuery('.bi-wrapper > div', $parent).removeClass('active');
+		 jQuery(this).addClass('active');
+
+		 if( $input.data('selector') ){  
+			jQuery($input.data('selector'), jQuery($VESMAINCONTAINER) ).css( $input.data('attrs'),'url('+ jQuery(this).data('image') +')', 'important' );
+		 }
+	} );
+} ); 
+
+jQuery(".clear-bg").click( function(){
+	var $parent = jQuery(this).parent();
+	var $input  = jQuery(".input-setting", $parent );
+	if($input.length > 0) {
+		if( $input.val('') ) {
+			if( $parent.hasClass("background-images") ) {
+				jQuery('.bi-wrapper > div',$parent).removeClass('active');	
+				jQuery($input.data('selector'),jQuery("#main-preview iframe").contents()).css( $input.data('attrs'),'none' );
+			}else {
+				$input.attr( 'style','' )	
+			}
+			jQuery($input.data('selector'), jQuery($VESMAINCONTAINER) ).css( $input.data('attrs'),'inherit' );
+
+		}	
+		$input.val('');
+	} else {
+		$input  = jQuery(".textarea-setting", $parent );
+		var index = $input.data("index");
+
+		if($input.val('') && jQuery("#vescustomcss-"+index).length > 0) {
+			jQuery("#vescustomcss-"+index).text('');
+		}
+		$input.val('');
+	}
+	
+
+	return false;
+} );
+
+jQuery('.accordion-group textarea.textarea-setting').keyup( function() {
+		var input = this;
+		var index = jQuery(input).data("index");
+
+		if( jQuery(input).data('selector') && jQuery("#vescustomcss-"+index).length > 0){
+
+			jQuery("#vescustomcss-"+index).text(jQuery(input).data('selector') + "{" + jQuery(input).val() + "}");
+
+		}
+})
+
+// Color selector
+ jQuery('.accordion-group input.color-selector').each( function(){
+	 	 var input = this;
+	 	 jQuery(input).attr('readonly','readonly');
+	 	 jQuery(input).ColorPicker({
+	 	 	onChange:function (hsb, hex, rgb) {
+	 	 		jQuery(input).css('backgroundColor', '#' + hex);
+	 	 		jQuery(input).val( hex );
+
+	 	 		if( jQuery(input).data('selector') ){
+	 	 			if("body" == jQuery(input).data('selector') ) {
+	 	 				jQuery($VESMAINCONTAINER).find(jQuery(input).data('selector')).css( jQuery(input).data('attrs'),"#"+jQuery(input).val())
+	 	 			} else {
+	 	 				jQuery($VESMAINCONTAINER).find(jQuery(input).data('selector')).css( jQuery(input).data('attrs'),"#"+jQuery(input).val())
+	 	 			}
+					
+				}
+	 	 	}
+	 	 });
+ 	} );
+
+//Input text 
+jQuery('.accordion-group input.input-text').keyup( function() {
+		var input = this;
+		if( jQuery(input).data('selector') ){   
+			jQuery($VESMAINCONTAINER).find(jQuery(input).data('selector')).css( jQuery(input).data('attrs'), jQuery(input).val() )
+		}
+	})
+
+//Select value 
+jQuery('.accordion-group select.input-setting').change( function(){
+	var input = this; 
+		if( jQuery(input).data('selector') ){  
+		var ex = jQuery(input).data('attrs')=='font-size'?'px':"";
+		jQuery( $VESMAINCONTAINER ).find(jQuery(input).data('selector')).css( jQuery(input).data('attrs'), jQuery(input).val() + ex);
+	}
+ } );
+
+<?php if($allow_save_editor): ?>
+/**
+ *  FORM SUBMIT
+ */
+ jQuery( "#ves_pagebuilder_livecss_form" ).submit( function(){ 
+	jQuery('.input-setting').each( function(){
+		if( jQuery(this).data("match") ) {
+			var val = jQuery(this).data('selector')+"|"+jQuery(this).data('attrs');
+			jQuery(this).parent().append('<input type="hidden" name="customize_match['+jQuery(this).data("match")+'][]" value="'+val+'"/>');
+		}	 
+	} );
+
+	jQuery('.textarea-setting').each( function(){
+		if( jQuery(this).data("match") ) {
+			var val = jQuery(this).data('selector')+"|customcss";
+			jQuery(this).parent().append('<input type="hidden" name="customize_match['+jQuery(this).data("match")+'][]" value="'+val+'"/>');
+		}	 
+	} );
+
+	return true; 
+} );
+
+jQuery(".show-for-existed").hide();
+
+if(jQuery('#loaded_custom_css_profile').length > 0) {
+	jQuery('#loaded_custom_css_profile').data("backhref", jQuery('#loaded_custom_css_profile').attr("href"));
+}
+jQuery("#ves-saved-files").change( function() {
+
+	if( jQuery(this).val() ){  
+		jQuery(".show-for-notexisted").hide();
+		jQuery(".show-for-existed").show();
+	}else {
+		jQuery(".show-for-notexisted").show();
+		jQuery(".show-for-existed").hide();
+	}
+	if("" != jQuery(this).val()) {
+
+		var url  = '<?php echo $this->getCustomizeFolderURL(); ?>'+jQuery(this).val()+".json?rand"+Math.random();
+
+		jQuery.getJSON( url, function(data) {
+			var items = data;
+				if( items ){
+					if(jQuery('#loaded_custom_css_profile').length > 0) {
+						jQuery('#loaded_custom_css_profile').attr("href", "");
+					}
+					jQuery('#ves-customize-body .accordion-group').each( function(){
+						var i = 0;
+						jQuery("input, select, textarea", this).each( function(){
+							if( jQuery(this).data('match') ){
+								if( items[jQuery(this).data('match')] && items[jQuery(this).data('match')][i] ){ 
+									var el = items[jQuery(this).data('match')][i];
+								 	jQuery(this).val( el.val );
+								 	if( el.val== '') {
+								 		jQuery(this).css('background',"inherit");
+								 	}
+								 	else { 
+								 		jQuery(this).css('background',"#"+el.val);
+								 	}
+								 	jQuery(this).ColorPickerSetColor(el.val );
+								 	/*Set css property for elements*/
+								 	if( jQuery(this).data('selector') ){
+								 		if(jQuery(this).hasClass("color-selector")) {
+								 			jQuery($VESMAINCONTAINER).find(jQuery(this).data('selector')).css( jQuery(this).data('attrs'),"#"+jQuery(this).val());
+
+								 		} else if(jQuery(this).hasClass("input-background-setting")) {
+
+								 			jQuery($VESMAINCONTAINER).find(jQuery(this).data('selector')).css( jQuery(this).data('attrs'), 'url('+ jQuery(this).val() +')', 'important' );
+
+									 	} else if(jQuery(this).hasClass("input-text")) {
+
+								 			jQuery($VESMAINCONTAINER).find(jQuery(this).data('selector')).css( jQuery(this).data('attrs'),"#"+jQuery(this).val() );
+
+								 		} else if(jQuery(this).hasClass("input-setting")) {
+
+								 			var ex = jQuery(this).data('attrs')=='font-size'?'px':"";
+
+											jQuery( $VESMAINCONTAINER ).find(jQuery(this).data('selector')).css( jQuery(this).data('attrs'), jQuery(this).val() + ex);
+
+								 		} else if(jQuery(this).hasClass("textarea-setting")) {
+
+								 			var index = jQuery(this).data('index');
+
+								 			if(jQuery("#vescustomcss-"+index).length > 0 ) {
+								 				jQuery("#vescustomcss-"+index).text( jQuery(this).data('selector') + "{" + jQuery(this).val() + "}" );
+								 			}
+											
+
+								 		}
+									}
+								}
+
+								i++;
+							}
+						} );
+						 
+					});
+				}
+			})
+	} else {
+		if(jQuery('#loaded_custom_css_profile').length > 0) {
+			jQuery('#loaded_custom_css_profile').attr("href", jQuery('#loaded_custom_css_profile').data("backhref"));
+		}
+	}
+});
+<?php endif; ?>
+</script>

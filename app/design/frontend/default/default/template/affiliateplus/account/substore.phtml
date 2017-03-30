@@ -1,0 +1,44 @@
+<?php
+/**
+ * Edit Affiliate template
+ */
+?>
+<?php
+$store_id = Mage::app()->getStore()->getStoreId();
+$check_responsvie = Mage::getStoreConfig('affiliateplus/style_config/responsive_enable', $store_id);
+$account = $this->getAccount();
+if($check_responsvie){
+    $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+    $class_name_col = 'col-lg-6 col-md-6 col-sm-12 col-xs-12';
+}
+else{
+    $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+    $class_name_col = 'col-lg-6 col-md-6 col-sm-6 col-xs-6';
+}
+?>
+
+<div class="aff-main-content  <?php echo $class_name; ?>">
+    <div class="aff-title">
+        <h1><?php echo $this->__('Sub store link') ?></h1>
+    </div>
+    <?php if($account->getKeyShop()):?>
+        <div class="affiliate-get-link fieldset">
+            <ul class="form-list">
+                <li class="wide">
+                    <p><?php echo $this->__('Sub store link') ?>:</p>
+                    <a id="affiliate-link" href="<?php echo $this->getAffiliateUrl() ?>" rel="nofollow" title="<?php echo $this->__('Sub store link') ?>"><?php echo $this->getAffiliateUrl() ?></a>
+                </li>
+            </ul>
+        </div>
+
+        <br />
+    <?php else: ?>
+
+
+        <div>
+            <p class="note-msg">
+                <?php echo $this->__('There are no substore available.') ?>
+            </p>
+        </div>
+    <?php endif;?>
+</div>

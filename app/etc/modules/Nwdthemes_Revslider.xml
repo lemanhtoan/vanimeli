@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Nwdthemes_Revslider>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+				<Nwdthemes_All/>
+                <Mage_Widget />
+            </depends>
+		</Nwdthemes_Revslider>
+    </modules>
+</config>

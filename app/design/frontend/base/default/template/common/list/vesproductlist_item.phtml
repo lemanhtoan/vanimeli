@@ -1,0 +1,206 @@
+<!-- Product Item -->
+<div class="product-block">
+    <?php if($show_image): ?>
+        <?php
+            if($alt_image && $hover_image = $this->getProductImage($_product->getId(), $swap_image_number, $imgWidth, $imgHeight)) {
+                    $swap_class = "swap";
+             }
+        ?>
+    <div class="image <?php echo $swap_class; ?>">
+        <div class="icon">
+            <?php
+                if($enable_sale_icon):
+                    $specialprice = $_product->getSpecialPrice();
+
+        // Get the Special Price FROM date
+                $specialPriceFromDate = $_product->getSpecialFromDate();
+        // Get the Special Price TO date
+                $specialPriceToDate = $_product->getSpecialToDate();
+        // Get Current date
+                $todayStartOfDayDate  = Mage::app()->getLocale()->date()
+                ->toString(Varien_Date::DATETIME_INTERNAL_FORMAT);
+                $today = strtotime($todayStartOfDayDate);
+
+                if ($specialprice):
+                    if($today >= strtotime( $specialPriceFromDate) && $today <= strtotime($specialPriceToDate) || $today >= strtotime( $specialPriceFromDate) && is_null($specialPriceToDate)):
+
+                        ?>
+                    <span class="onsale"><span><?php echo $this->__("Sale");?></span></span>
+                    <?php
+                    endif;
+                    endif;
+                    endif;
+                    ?>
+                    <?php // New icon ?>
+                    <?php
+                    if($enable_new_icon) {
+                        $is_new = $this->checkProductIsNew( $_product );
+
+                        if($is_new) { ?>
+                        <span class="new-icon"><span><?php echo $this->__("New");?></span></span>
+                        <?php
+
+                    }
+                }
+                ?>
+        </div>
+        <div class="product-image">
+            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>">
+                <?php if($lazyload) { ?>
+                <img class="img-responsive lazyOwl" data-src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($imgWidth, $imgHeight); ?>" width="<?php echo $imgWidth; ?>" height="<?php echo $imgHeight; ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                <?php } else { ?>
+                <img class="img-responsive" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($imgWidth, $imgHeight); ?>" width="<?php echo $imgWidth; ?>" height="<?php echo $imgHeight; ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                <?php } ?>
+            </a>
+
+            <?php if($alt_image && $hover_image) { ?>
+                
+                <a class="hover-image" href="<?php echo $_product->getProductUrl(); ?>">
+                    <img src="<?php echo $hover_image; ?>" width="<?php echo $imgWidth; ?>" height="<?php echo $imgHeight; ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>">
+                </a>
+                
+            <?php } ?>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <!-- Product Meta Information -->
+    <div class="product-info">
+        <!-- Product Title -->
+        <?php if( $show_name ): ?>
+            <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+            <h3 class="product-name name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></h3>
+        <?php endif; ?>
+
+        <?php
+        // Provides extra blocks on which to hang some features for products in the list
+        // Features providing UI elements targeting this block will display directly below the product name
+        if ($this->getChild('name.after')) {
+            $_nameAfterChildren = $this->getChild('name.after')->getSortedChildren();
+            foreach ($_nameAfterChildren as $_nameAfterChildName) {
+                $_nameAfterChild = $this->getChild('name.after')->getChild($_nameAfterChildName);
+                $_nameAfterChild->setProduct($_product);
+                echo $_nameAfterChild->toHtml();
+            }
+        }
+        ?>
+
+        <!-- Product Price -->
+        <?php if($show_price): ?>
+            <div class="price" >
+                <?php echo $this->getPriceHtml($_product, true, $price_prefix) ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Product Review -->
+        <?php if($show_rating) { ?>
+            <?php echo $this->getReviewsSummaryHtml($_product, true, true)?>
+        <?php } ?>
+
+        <!-- Product Description -->
+        <?php if($show_short_description): ?>
+            <div class="desc std">
+                <?php
+                $product_short_desc = $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description');
+                ?>
+                <?php
+                if(strlen($product_short_desc)>$short_max_char){
+                 echo $this->subString($product_short_desc, $short_max_char, "");
+
+                 ?>
+                <?php if($show_learnmore): ?>
+                 <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
+                <?php endif; ?>
+                 <?php }else{ ?>
+                 <?php echo $product_short_desc ?>
+                 <?php } ?>
+             </div>
+        <?php endif; ?>
+
+        <?php if($enable_deals){
+
+            // Get the Discount
+            $save_price = (float)$_product->getPrice() - (float)$_product->getSpecialPrice();
+            $save_price_currency = Mage::helper('core')->currency($save_price, true, false);
+            $discount = round(($save_price/$_product->getPrice())*100);
+            $discount_string = " ".$discount."%";
+            if((float)$discount > 0 && (float)$discount < 100): 
+        ?>
+            <div class="deal_detail">
+                    <ul>
+                        <?php if($show_discount): ?>
+                        <li>
+                            <span><?php echo $this->__("Discount");?></span>
+                            <span class="deal_detail_num"><?php echo $discount;?>%</span>
+                        </li>
+                        <?php endif; ?>
+                        <?php if($show_save_price): ?>
+                        <li>
+                            <span><?php echo $this->__("You save");?></span>
+                            <span class="deal_detail_num"><span class="price"><?php echo $save_price_currency; ?></span></span>
+                        </li>
+                        <?php endif; ?>
+                        <?php if($show_number_bought): ?>
+                        <li>
+                            <span><?php echo $this->__("Bought");?></span>
+                            <span class="deal_detail_num"><?php echo $this->getBought($_product->getSku());?></span>
+                        </li>
+                        <?php endif; ?>
+                    </ul>
+            </div>
+            <?php if(isset($_product) && $_product->getFinalPrice() < $_product->getPrice() && $show_countdowntimer): ?>
+            <?php 
+                $date1 = date('G:i:s', strtotime($_product->getSpecialToDate()));
+                if ($date1 == "0:00:00") {
+                    $targetDate = date('m/d/Y \2\3\:\5\9\:\0\0', strtotime($_product->getSpecialToDate()));
+                }else{
+                    $targetDate = date('m/d/Y G:i:s', strtotime($_product->getSpecialToDate()));
+                } 
+            ?>
+            <div class="productdeals">
+                <div id="item<?php echo $moduleId; ?>countdown_<?php echo $_product->getId(); ?>" class="item-countdown"></div>
+                <script type="text/javascript">
+                jQuery(document).ready(function($){
+                        $("#item<?php echo $moduleId; ?>countdown_<?php echo $_product->getId(); ?>").lofCountDown({
+                            formatStyle:2,
+                            TargetDate:"<?php echo $targetDate; ?>",
+                            DisplayFormat:"<ul><li>%%D%% <div><?php echo $this->__('Day');?></div></li><li> %%H%% <div><?php echo $this->__('Hours');?></div></li><li> %%M%% <div><?php echo $this->__('Mins');?></div></li><li> %%S%% <div><?php echo $this->__('Secs');?></div></li></ul>",
+                            FinishMessage:"<?php echo $this->__('Expired');?>",
+                        });
+                    });
+                </script>
+            </div>
+            <?php endif; ?>
+         <?php endif; ?>
+        <?php }?>
+
+        <!-- Action Buttons: addtocart, compare wishlist -->
+        <div class="actions">
+            <?php if($show_addtocart): ?>
+                <?php if($_product->isSaleable()): ?>
+                    <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Add to Cart')) ?>" class="button btn-cart" onclick="<?php if($enable_ajax_cart) { ?>addToCart('<?php echo $this->getAddToCartUrl($_product) ?>')<?php } else { ?>setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')<?php } ?>">
+                        <span>
+                            <span><?php echo $this->__('Add to Cart') ?></span>
+                        </span> 
+                    </button>
+                <?php else: ?>
+                    <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                <?php endif; ?>
+            <?php endif; ?>
+
+            <?php if($show_addtolinks): ?>
+                <ul class="add-to-links">
+                    <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                        <li><a href="<?php echo $this->getAddToWishlistUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+                    <?php endif; ?>
+
+                    <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+                        <li><span class="separator">|</span> <a href="<?php echo $_compareUrl ?>" class="link-compare"><?php echo $this->__('Add to Compare') ?></a></li>
+                    <?php endif; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
+
+    </div>
+    <!-- End Product Meta Information -->
+</div>

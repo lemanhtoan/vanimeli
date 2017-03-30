@@ -1,0 +1,707 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <pagesbuilder translate="label" module="ves_blockbuilder">
+            <label>Ves Pages Builder</label>
+            <sort_order>151</sort_order>
+            <class>pagesbuilder</class>
+        </pagesbuilder>
+    </tabs>
+
+    <sections>
+        <ves_blockbuilder>
+            <label>Pages Builder</label>
+            <tab>pagesbuilder</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <ves_blockbuilder>
+                    <label>General Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields> 
+                        <show translate="label" module="core">
+                            <label>Enabled</label>
+                            <sort_order>0</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show>
+
+                        <heading_jquery translate="label">
+                            <label>Jquery, Jquery UI, And OWL Carousel</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_jquery>
+
+                        <enable_jquery translate="label" module="core">
+                            <label>Enabled JQUERY</label>
+                            <sort_order>5</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_jquery>
+
+                        <enable_jquery_ui translate="label" module="core">
+                            <label>Enabled JQUERY UI</label>
+                            <sort_order>10</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_jquery_ui>
+
+                        <enable_transition translate="label" module="core">
+                            <label>Enabled Jquery Transition</label>
+                            <sort_order>11</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_transition>
+
+                        <enable_owl translate="label" module="core">
+                            <label>Enabled OWL Carousel</label>
+                            <sort_order>12</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_owl>
+
+                        <enable_parallax translate="label" module="core">
+                            <label>Enabled Parallax Js</label>
+                            <sort_order>13</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_parallax>
+
+                        <heading_bootstrap translate="label">
+                            <label>Bootstrap</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_bootstrap>
+
+                        <enable_bootstrap_js translate="label" module="core">
+                            <label>Enabled Bootstrap JS</label>
+                            <comment><![CDATA[Enable/disable load file /js/ves_base/bootstrap/js/bootstrap.min.js]]></comment>
+                            <sort_order>15</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_bootstrap_js>
+                        
+                        <enable_bootstrap translate="label" module="core">
+                            <label>Enabled Bootstrap 12 Columns</label>
+                            <sort_order>15</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_bootstrap>
+
+                        <enable_tinybootstrap translate="label" module="core">
+                            <label>Enabled Tiny Bootstrap 12 Columns</label>
+                            <sort_order>20</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <comment>Tiny bootstrap is minimalist of bootstrap. It just have css code for layout grid 12 columns and responsive </comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_tinybootstrap>
+
+                        <enable_bootstrap_24cols translate="label" module="core">
+                            <label>Enabled Bootstrap 24 Columns</label>
+                            <sort_order>21</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_bootstrap_24cols>
+
+                        <enable_bootstrap24 translate="label" module="core">
+                            <label>Enabled CSS Bootstrap 24 Columns</label>
+                            <sort_order>22</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enable_bootstrap_24cols>1</enable_bootstrap_24cols>
+                            </depends>
+                        </enable_bootstrap24>
+
+                        <enable_tinybootstrap24 translate="label" module="core">
+                            <label>Enabled Tiny CSS Bootstrap 24 Columns</label>
+                            <sort_order>23</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <comment>Tiny bootstrap is minimalist of bootstrap. It just have css code for layout grid 24 columns and responsive </comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enable_bootstrap_24cols>1</enable_bootstrap_24cols>
+                            </depends>
+                        </enable_tinybootstrap24>
+
+                        <enable_fontawesome translate="label" module="core">
+                            <label>Enabled Font Awesome</label>
+                            <sort_order>24</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <comment><![CDATA[Load font awesome for bootstrap and icon font. Get more information at here: <a href="http://fortawesome.github.io/Font-Awesome/" target="_BLANK">http://fortawesome.github.io/Font-Awesome/</a>]]></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_fontawesome>
+                        
+
+                        <heading_popup translate="label">
+                            <label>Popup Plugins</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>26</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_popup>
+
+                        <enable_colorbox translate="label" module="core">
+                            <label>Enabled Colorbox Popup JS</label>
+                            <sort_order>30</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_colorbox>
+
+                        <enable_fancybox translate="label" module="core">
+                            <label>Enabled Fancybox Popup JS</label>
+                            <sort_order>31</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_fancybox>
+
+                        <enable_fancybox_buttons translate="label" module="core">
+                            <label>Enabled Helper Fancybox Buttons</label>
+                            <sort_order>32</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enable_fancybox>1</enable_fancybox>
+                            </depends>
+                        </enable_fancybox_buttons>
+
+                        <enable_fancybox_media translate="label" module="core">
+                            <label>Enabled Helper Fancybox Media</label>
+                            <sort_order>33</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enable_fancybox>1</enable_fancybox>
+                            </depends>
+                        </enable_fancybox_media>
+
+                        <enable_fancybox_thumbs translate="label" module="core">
+                            <label>Enabled Helper Fancybox Thumbs</label>
+                            <sort_order>34</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enable_fancybox>1</enable_fancybox>
+                            </depends>
+                        </enable_fancybox_thumbs>
+
+                        <heading_sample translate="label">
+                            <label>Animation and Sample Assets</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_sample>
+
+                        <enable_animation translate="label" module="core">
+                            <label>Enabled CSS3 Animation</label>
+                            <sort_order>38</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_animation>
+
+                        <enable_holder_js translate="label" module="core">
+                            <label>Enabled Image Holder Js</label>
+                            <sort_order>40</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_holder_js>
+
+                        <use_sample_elements translate="label" module="core">
+                            <label>Allow Use Sample Elements CSS</label>
+                            <comment>Allow/Not Allow load elements css file. skin/frontend/base/default/ves_base/elements.css</comment>
+                            <sort_order>50</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </use_sample_elements>
+                        
+                        <enable_visual_composer translate="label" module="core">
+                            <label>Enabled Visual Composer</label>
+                            <sort_order>61</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <comment><![CDATA[Enable/Disable Visual Composer on frontend (frontend layout builder) - <strong>Commin soon</strong>]]></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_visual_composer>
+
+                        <auto_backup_profile translate="label" module="core">
+                            <label>Auto Backup Page Builder Profile</label>
+                            <comment><![CDATA[Allow auto backup page builder profile to json file store in the folder <strong>"var/cache/vespagebuilder/"</strong> or <strong>"var/cache/vesproductbuilder/"</strong>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>100</sort_order>
+                        </auto_backup_profile>
+
+                        <heading_masonary translate="label">
+                            <label>Masonary JS Plugins</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_masonary>
+
+                        <enable_masonary translate="label" module="core">
+                            <label>Enabled Masonry JS</label>
+                            <sort_order>130</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <comment><![CDATA[Load Masonry Js/css Files: <br/> ves_base/js/libs/masonry/modernizr.custom.js <br/>ves_base/js/libs/masonry/masonry.pkgd.min.js<br/>ves_base/js/libs/masonry/imagesloaded.js<br/>ves_base/js/libs/masonry/classie.js<br/>ves_base/js/libs/masonry/AnimOnScroll.js<br/>ves_base/js/libs/masonry/component.css]]></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_masonary>
+
+                        <heading_cache translate="label">
+                            <label>Cache Setting</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>500</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_cache>
+
+                        <minify_html translate="label" module="core">
+                            <label>Enable Minify Html Output</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>510</sort_order>
+                        </minify_html>
+
+                        <cache_lifetime translate="label">
+                            <label>Cache Life Time</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <sort_order>555</sort_order>
+                            <comment>Default: 86400 ms</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cache_lifetime>
+                    </fields> 
+                </ves_blockbuilder>
+            </groups>
+        </ves_blockbuilder>
+        <ves_productbuilder>
+            <label>Product Builder</label>
+            <tab>pagesbuilder</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>15</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general>
+                    <label>General Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <show translate="label" module="core">
+                            <label>Enabled Product Layout Builder</label>
+                            <comment>Enable/Disable Product Layout Builder Profile On Frontend</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>0</sort_order>
+                        </show>
+
+                        <enable_media_gallery translate="label" module="core">
+                            <label>Enabled Media Gallery Js</label>
+                            <comment><![CDATA[Enable/Disable Gallery Js For Media In Product Detail Page.<br/>The gallery js will use when active media layout = "Gallery" in product layout builder profile]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>30</sort_order>
+                        </enable_media_gallery>
+
+                        <enable_jcarousel translate="label" module="core">
+                            <label>Enabled jCarousel Lite Js</label>
+                            <comment><![CDATA[Enable/Disable <a href="http://www.gmarwaha.com/jquery/jcarousellite/demo.php" target="_BLANK">jCarousel Lite Js</a> for product thumbnails carousel]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>40</sort_order>
+                        </enable_jcarousel>
+
+                        <enable_tags translate="label" module="core">
+                            <label>Enabled Product Tags Block</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>50</sort_order>
+                        </enable_tags>
+
+                        <enable_tags_tab translate="label" module="core">
+                            <label>Enabled Tab Product Tags</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>60</sort_order>
+                        </enable_tags_tab>
+
+                    </fields>
+                </general>
+
+                <layout>
+                    <label>Layout Builder Profile Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <heading_simple_product translate="label">
+                            <label>Simple Products</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>10</sort_order>
+                        </heading_simple_product>
+
+                        <auto_layout_simple translate="label" module="core">
+                            <label>Auto Apply Layout Builder</label>
+                            <comment>Allow auto apply product layout builder for all simple products. If not, you should manually choose layout builder profile for each product (Go to Catalog > Manage Products > Edit product and choose layout builder profile</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ves_blockbuilder/system_config_source_listLayoutMode</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>20</sort_order>
+                        </auto_layout_simple>
+
+                        <layout_simple_product translate="label" module="core">
+                            <label>Layout Builder Profile</label>
+                            <comment>Choose product layout builder profile for simple products</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ves_blockbuilder/system_config_source_listProductBuilders</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>30</sort_order>
+                            <depends><auto_layout_simple><value>auto</value></auto_layout_simple></depends>
+                        </layout_simple_product>
+
+                        <heading_configurable_product translate="label">
+                            <label>Configurable Products</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>40</sort_order>
+                        </heading_configurable_product>
+
+                        <auto_layout_configurable translate="label" module="core">
+                            <label>Auto Apply Layout Builder</label>
+                            <comment>Allow auto apply product layout builder for all configurable products. If not, you should manually choose layout builder profile for each product (Go to Catalog > Manage Products > Edit product and choose layout builder profile</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ves_blockbuilder/system_config_source_listLayoutMode</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>50</sort_order>
+                        </auto_layout_configurable>
+
+                        <layout_configurable_product translate="label" module="core">
+                            <label>Layout Builder Profile</label>
+                            <comment>Choose product layout builder profile for configurable products</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ves_blockbuilder/system_config_source_listProductBuilders</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>60</sort_order>
+                            <depends><auto_layout_configurable><value>auto</value></auto_layout_configurable></depends>
+                        </layout_configurable_product>
+
+                        <heading_grouped_product translate="label">
+                            <label>Grouped Products</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>70</sort_order>
+                        </heading_grouped_product>
+
+                        <auto_layout_grouped translate="label" module="core">
+                            <label>Auto Apply Layout Builder</label>
+                            <comment>Allow auto apply product layout builder for all grouped products. If not, you should manually choose layout builder profile for each product (Go to Catalog > Manage Products > Edit product and choose layout builder profile</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ves_blockbuilder/system_config_source_listLayoutMode</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>80</sort_order>
+                        </auto_layout_grouped>
+
+                        <layout_grouped_product translate="label" module="core">
+                            <label>Layout Builder Profile</label>
+                            <comment>Choose product layout builder profile for grouped products</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ves_blockbuilder/system_config_source_listProductBuilders</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>90</sort_order>
+                            <depends><auto_layout_grouped><value>auto</value></auto_layout_grouped></depends>
+                        </layout_grouped_product>
+
+                        <heading_virtual_product translate="label">
+                            <label>Virtual Products</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>100</sort_order>
+                        </heading_virtual_product>
+
+                        <auto_layout_virtual translate="label" module="core">
+                            <label>Auto Apply Layout Builder</label>
+                            <comment>Allow auto apply product layout builder for all virtual products. If not, you should manually choose layout builder profile for each product (Go to Catalog > Manage Products > Edit product and choose layout builder profile</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ves_blockbuilder/system_config_source_listLayoutMode</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>110</sort_order>
+                        </auto_layout_virtual>
+
+                        <layout_virtual_product translate="label" module="core">
+                            <label>Layout Builder Profile</label>
+                            <comment>Choose product layout builder profile for virtual products</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ves_blockbuilder/system_config_source_listProductBuilders</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>120</sort_order>
+                            <depends><auto_layout_virtual><value>auto</value></auto_layout_virtual></depends>
+                        </layout_virtual_product>
+                    </fields>
+                </layout>       
+            </groups>
+        </ves_productbuilder>
+        <ves_livecss>
+            <label>Live CSS Editor</label>
+            <tab>pagesbuilder</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>18</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general>
+                    <label>General Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields> 
+                        <show translate="label" module="core">
+                            <label>Enabled Live Css Tool</label>
+                            <comment>Enable/Disable Live CSS Tool On Frontend (only admin user can save the css profile)</comment>
+                            <sort_order>0</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show>
+
+                        <allow_save_profile translate="label" module="core">
+                            <label>Allow Save Css Profile</label>
+                            <comment>Enable/Disable Save Css Customize Profile On Frontend</comment>
+                            <sort_order>10</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>ves_blockbuilder/system_config_backend_builder</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allow_save_profile>
+
+                        <css_profile translate="label">
+                            <label>Select Custom Css Profile</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ves_blockbuilder/system_config_source_ListCssProfiles</source_model>
+                            <comment>Select a css profile. The profile was created by live css editor tool and was stored in the folder skin/frontend/THEME_PACKAGE/THEME_DEFAULT_LAYOUT/css/customize/</comment>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </css_profile>
+
+                    </fields>
+                </general>
+            </groups>
+        </ves_livecss>
+        <ves_feed>
+            <label>Market</label>
+            <tab>pagesbuilder</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>50</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general>
+                    <label>Page Builder Plugins</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields> 
+                        <app_feed translate="label">
+                            <label>Download and setup extend pages builder plugins</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>ves_blockbuilder/system_config_form_field_feed</frontend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </app_feed>
+                    </fields>
+                </general>
+            </groups>
+        </ves_feed>
+    </sections>
+</config>

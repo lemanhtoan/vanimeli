@@ -1,0 +1,37 @@
+<?php if($number): ?>
+<?php $blockId = rand().time(); ?>
+<div class="widget-counters counters">
+   <div class="counter-wrap <?php if (isset($stylecls)&&$stylecls) echo 'text-'.$stylecls;?>" style="<?php echo (isset($font_size) && $font_size)?'font-size:'.$font_size:''; ?>">
+
+    <?php if($icon): ?>
+    <i class="fa <?php echo $icon; ?>" style="<?php echo (isset($font_size) && $font_size)?'font-size:'.$font_size:''; ?>"></i><br>
+    <?php endif; ?>
+
+    <span id="counter<?php echo $blockId ?>" class="counter"><?php echo (int)$number; ?></span></div>
+
+    <?php if (isset($title)&&!empty($title)): ?>
+    <h5><?php echo $title; ?></h5>
+  <?php endif; ?>
+
+  <?php if (isset($description)&&!empty($description)): ?>
+    <div class="description"><?php echo $description; ?></div>
+  <?php endif; ?>
+</div>
+
+<script type="text/javascript">
+
+    jQuery('#counter<?php echo $blockId ?>').each(function() {
+
+        jQuery(this).animate({countNum: jQuery(this).text()}, {
+          duration: 8000,
+          easing:'linear',
+          step: function() {
+            jQuery(this).text(Math.floor(this.countNum));
+          },
+          complete: function() {
+            jQuery(this).text(this.countNum);
+          }
+        });
+    });
+  </script>
+<?php endif; ?>

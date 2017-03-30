@@ -1,0 +1,233 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+//Load Theme Settings
+$class = '';
+$enable_ajax_cart = false;
+if(Mage::helper("productlist")->checkModuleInstalled("Ves_Themesettings"))
+{
+    $ves = $this->helper('themesettings');
+    $ajax = $this->helper('ajax');
+    $helpImg = $this->helper('themesettings/image');
+    
+    $alt_image_column = $ves->getConfig('category_product/alt_image_column');
+    $alt_image_column_value = $ves->getConfig('category_product/alt_image_column_value');
+
+    // Product Settings
+    $display_name_single_line = $ves->getConfig('category_product/display_name_single_line');
+    if($display_name_single_line){
+        $class .= ' single-line-name';
+    }
+    // Product Grid
+    $equal_height = $ves->getConfig('category_grid/equal_height');
+    if($equal_height){
+        $class .= ' equal-height';
+    }
+    $hover_effect = $ves->getConfig('category_grid/hover_effect');
+    if($equal_height){
+        $class .= ' hover-effect';
+    }
+    $disable_hover_effect = $ves->getConfig('category_grid/disable_hover_effect');
+
+    // Ajax Cart, Quick View
+    $ajaxcart = $ajax->getConfig('general_setting/enable_ajaxcart');
+    $enable_ajax_cart = $ajaxcart;
+    $show_addtocart = $ajax->getConfig('general_setting/show_addtocart');
+    $show_quickview = $ajax->getConfig('general_setting/show_quickview');
+    $popup_quickview_width = $ajax->getConfig('general_setting/popup_quickview_width');
+    $popup_quickview_height = $ajax->getConfig('general_setting/popup_quickview_height');
+
+    // Product Label
+    $enable_new_icon = $ves->getConfig('product_labels/new');
+    $enable_sale_icon = $ves->getConfig('product_labels/sale');
+
+    // Product Settings
+    $_helper = $this->helper('catalog/output');
+    $show_name = $ves->getConfig('product_slider/show_name');
+
+    $show_short_description = $ves->getConfig('product_slider/show_short_description');
+    $short_max_char = $ves->getConfig('product_slider/short_max_char');
+    $show_price = $ves->getConfig('product_slider/show_price');
+    $show_rating = $ves->getConfig('product_slider/show_rating');
+    $show_learnmore = $ves->getConfig('product_slider/show_learnmore');
+    $show_countdowntimer = $ves->getConfig('product_slider/show_countdowntimer');
+    $show_addtolinks = $ves->getConfig('product_slider/show_addtolinks');
+
+    $alt_image = $ves->getConfig('product_slider/alt_image');
+    $alt_image_column = $ves->getConfig('product_slider/alt_image_column');
+    $alt_image_column_value = $ves->getConfig('product_slider/alt_image_column_value');
+
+    $aspect_ratio = $ves->getConfig('product_slider/aspect_ratio');
+    $imgWidth = (int)$ves->getConfig('product_slider/image_width');
+    $imgHeight = $imgWidth;
+    //If image width is not specified, use default values
+    if ($imgWidth <= 0)
+    {
+        $imgWidth = 295;
+        $imgHeight = 295;
+    }
+
+    if($aspect_ratio){
+        $imgHeight = 0;
+        $catViewKeepFrame = FALSE;
+    }else{
+        $catViewKeepFrame = TRUE;
+    }
+
+    if (Mage::registry('catViewKeepFrame') === NULL){
+        Mage::register('catViewKeepFrame', $catViewKeepFrame);
+    }
+
+    // Quickview Design
+    $quickview_format = $ves->getCfgDesign('icons/quickview_format');
+    $quickview_text = $ves->getCfgDesign('icons/quickview_text');
+    $quickview_class = $ves->getCfgDesign('icons/quickview_class');
+
+    // Addtocart Design
+    $addtocart_format = $ves->getCfgDesign('icons/addtocart_format');
+    $addtocart_text = $ves->getCfgDesign('icons/addtocart_text');
+    $addtocart_class = $ves->getCfgDesign('icons/addtocart_class');
+
+    // Compare Design
+    $compare_format = $ves->getCfgDesign('icons/compare_format');
+    $compare_text = $ves->getCfgDesign('icons/compare_text');
+    $compare_class = $ves->getCfgDesign('icons/compare_class');
+
+    // Wishlist Design
+    $wishlist_format = $ves->getCfgDesign('icons/wishlist_format');
+    $wishlist_text = $ves->getCfgDesign('icons/wishlist_text');
+    $wishlist_class = $ves->getCfgDesign('icons/wishlist_class');
+
+}
+if($show_countdowntimer){
+    $widget_show_countdowntimer = $this->getData('show_countdowntimer');
+    if($widget_show_countdowntimer == "false"){
+        $show_countdowntimer = false;
+    }
+}
+//End Load Theme Settings
+// Override Theme Settings
+$show_quickview = $this->getConfig('show_quickview');
+$popup_quickview_width = $this->getConfig('popup_quickview_width');
+$popup_quickview_height = $this->getConfig('popup_quickview_height');
+
+$display_name_single_line = $this->getConfig('display_name_single_line');
+if($display_name_single_line){
+    $class .= ' single-line-name';
+}
+
+// End Override Theme Settings
+$moduleId = "ves_productlist_carousel_".rand().time();
+$show_all_button = (int)$this->getConfig("show_link", 0);
+$title = $this->getConfig("title", "");
+$stylecls = $this->getConfig("stylecls");
+
+$lazyload = $this->getConfig("lazyload", 0);
+$show_image = (int)$this->getConfig("show_image", 1);
+$imgWidth = (int)$this->getConfig("image_width", 300);
+$imgHeight = (int)$this->getConfig("image_height", 300);
+$show_name = $this->getConfig('show_name');
+$show_short_description = $this->getConfig('show_short_description');
+$show_price = $this->getConfig('show_price');
+$show_rating = $this->getConfig('show_rating');
+$show_addtocart = $this->getConfig('show_addtocart');
+$show_addtolinks = $this->getConfig('show_addtolinks');
+$alt_image = $this->getConfig('enable_swap');
+$swap_image_number = $this->getConfig('swap_image_number', 1);
+$enable_sale_icon = $this->getConfig('show_sale_icon');
+$enable_new_icon = $this->getConfig('show_new_icon');
+$show_pager = $this->getConfig('show_pager', 0);
+$short_max_char = (int)$this->getConfig("desc_maxchar", 100);
+$show_learnmore = (int)$this->getConfig("show_learnmore", 0);
+
+/*Deals Setting*/
+$enable_deals = $this->getConfig("enable_deals", 0);
+$enable_deals_block = Mage::getStoreConfig("productlist/general_setting/enable_countdown_js");
+if(!$enable_deals_block && $enable_deals) {
+    $enable_deals = 0;
+}
+$show_discount = $this->getConfig("show_discount", 1, "deals_setting");
+$show_save_price = $this->getConfig("show_save_price", 1, "deals_setting");
+$show_number_bought = $this->getConfig("show_number_bought", 1, "deals_setting");
+$show_countdown_timer = $this->getConfig("show_countdown_timer", 1, "deals_setting");
+
+$rule_info = $this->getRuleModel();
+$_helper = $this->helper('catalog/output');
+$price_prefix = "_productlist_new_list_".rand(1,9)+rand().time();
+
+
+//Load product item layout
+$common_template = $default_path = "item.phtml";
+if(!Mage::helper("productlist")->checkModuleInstalled("Ves_Themesettings")) {
+    $common_template = $default_path = "vesproductlist_item.phtml";
+}
+if($custom_common = $this->getConfig("common_template", "")) {
+    $common_template = $custom_common;
+}
+$current_catalog_product_path = Mage::getSingleton('core/design_package')->getBaseDir(array('_area' => 'frontend', '_type'=>'template'));
+$current_catalog_product_path .= "/common/list/";
+$base_catalog_product_path = Mage::getBaseDir('design')."/frontend/base/default/template/common/list/";
+
+$load_file_path = false;
+
+if(file_exists($current_catalog_product_path.$common_template)) { //Load in default template
+    $load_file_path = $current_catalog_product_path.$common_template;
+} elseif(file_exists($current_catalog_product_path.$default_path)) {
+    $load_file_path = $current_catalog_product_path.$default_path;
+} elseif(file_exists($base_catalog_product_path.$common_template)) { //Load in base template
+    $load_file_path = $base_catalog_product_path.$common_template;
+} elseif(file_exists($base_catalog_product_path.$default_path)) {
+    $load_file_path = $base_catalog_product_path.$default_path;
+}
+
+?>
+<?php if (($_products = $this->getProductCollection()) && $_products->getSize()): ?>
+<div class="widget widget-new-ruleproducts <?php echo $this->getConfig("addition_cls"); ?> <?php if (isset($stylecls)&&$stylecls) echo 'block-'.$stylecls;?>">
+   <?php if( $title != '' && $title){ ?>
+        <div class="widget-title block-title">
+            <strong> <span><?php echo $title; ?> </span> </strong>
+        </div>
+        <?php } ?>
+    <?php if($show_all_button && $rule_info){ ?>
+        <div class="viewmore"><a href="<?php echo $rule_info->getUrl(); ?>" title="<?php echo $this->stripTags($rule_info->getTitle()); ?>" ><?php echo $this->__('Show All'); ?></a></div>
+    <?php } ?>
+    <div class="widget-products">
+        <?php echo $this->getPagerHtml() ?>
+        <ol class="mini-products-list">
+        <?php $i=0; foreach ($_products->getItems() as $_product): ?>
+            <li class="item<?php echo (++$i == count($_products))?' last':''; ?>  <?php echo $class; ?>">
+                <!-- Product Item -->
+                <?php 
+                    if($load_file_path) {
+                        require ($load_file_path); //Require file app/design/frontend/template package/template layout/template/common/list/item.phtml
+                    }
+                ?>
+                <!-- End Product Item -->
+            </li>
+        <?php endforeach; ?>
+        </ol>
+    </div>
+</div>
+<?php endif; ?>

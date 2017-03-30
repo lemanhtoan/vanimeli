@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<widgets>
+    <vesmegamenu type="ves_megamenu/widget_menu"  translate="label description" module="ves_megamenu" >
+        <name>Ves Megamenu : Custom Menu </name>
+        <description type="desc">Generate A Custom Menu</description>
+        <parameters>
+			<show translate="label" module="core">
+				<label>Enabled</label>
+				<sort_order>10</sort_order>
+				<type>select</type>
+				<values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+				<visible>1</visible>
+				<required>0</required>
+				<value>true</value>
+			</show>
+			<root_menu_id translate="label" module="core">
+				<label>Root Menu Id</label>
+				<sort_order>20</sort_order>
+				<type>select</type>
+                <source_model>ves_megamenu/system_config_source_listRootMenu</source_model>
+				<description>Choose Root Menu Item To Generate Menu</description>
+                <visible>1</visible>
+			</root_menu_id>
+            <template translate="label">
+                <visible>1</visible>
+                <label>Menu Template</label>
+                <description>Input custom module template file path. For example: ves/megamenu/default.phtml Empty for default</description>
+                <type>text</type>
+                <sort_order>250</sort_order>
+            </template> 
+        </parameters>
+    </vesmegamenu>   
+</widgets>

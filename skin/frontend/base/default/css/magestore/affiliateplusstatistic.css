@@ -1,0 +1,106 @@
+div#tabs{
+    margin:40px auto;
+    font-size:11px;
+/*    border:solid 1px #BBB;*/
+    float: left;
+    width: 100%;
+
+}	
+/* DIV that holds each tab*/
+div.my_tab{
+    margin:0px auto;
+
+}
+
+/* Title of each tab, used when user don't have Javascript'*/	
+div.my_tab h5{
+    color:#414141;
+    border-bottom:solid 1px #cacaca;
+
+}
+
+/* Tab Bar, created via JS*/
+div#tab-bar{
+    padding:20px 0px 0px 10px;
+    margin:0px;
+    height:50px;
+/*    border-bottom:solid 1px #BBB;
+    margin-bottom:20px;*/
+    font:normal 12px "Trebuchet MS";
+}
+
+/* Single Tab */
+div#tab-bar div.mt-tab{
+    float:left;
+
+    display:inline;
+    position:relative;
+    text-align:center;
+    margin:-9px 5px 20px 0px;
+    cursor:pointer;
+    border-top:solid 1px #BBB;
+    border-left:solid 1px #BBB;
+    border-right:solid 1px #BBB;
+    border-bottom:solid 1px #BBB;
+    font:normal 13px "Trebuchet MS";
+    background: #fff !important;
+    height:36px;
+    color:#414141;
+    padding:10px 10px 5px 10px;	
+    font-weight: bold;
+}
+
+/* Single Tab, when active */
+div#tab-bar div.mt-tab-active{
+    float:left;
+    display:inline;
+    text-align:center;
+    margin:-9px 5px 20px 0px;
+    cursor:pointer;
+    border-top:solid 1px #BBB;
+    border-left:solid 1px #BBB;
+    border-right:solid 1px #BBB;
+    border-bottom:solid 1px #BBB;
+    height:36px;
+    color:Black;
+    font-weight:bold;
+    padding:10px 10px 5px 10px;	
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: #ccc !important;
+}
+div#tab-bar div.mt-tab-active:hover{
+    background:#ccc;
+}
+#loading-mask .loader {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+/*    width: 120px;*/
+    margin-left: -60px;
+    padding: 15px 60px;
+    background: #FFF4E9;
+    border: 2px solid #F1AF73;
+    color: #D85909;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1000;
+}
+#csv-download{width: 100%;height: 90px;}
+#sales_report_order_statuses {
+    height: 130px;
+}
+.grid-export {
+    width: 100%;
+    float: left;
+}
+.grid-export-csv {
+    float: right;
+}
+.grid-export-csv img {
+    float: left;
+    margin: 9px 5px 0px 0;
+}
+/*#affiliateplusstatistic-filter .filter-label{float:left;height:100%;width:30%;}
+#affiliateplusstatistic-filter .form-list .field{width:100%}
+#affiliateplusstatistic-filter .input-box{padding-left:50px;clear:none;float:left}*/

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <nwdall translate="label" module="nwdall">
+            <label>NWDthemes Extensions</label>
+            <sort_order>222</sort_order>
+        </nwdall>
+    </tabs>
+	<sections>
+		<nwdall translate="label" module="nwdall">
+			<label>Extensions Information</label>
+			<tab>nwdall</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>10</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+                <about translate="label">
+                    <label>NWDthemes.com</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <info translate="label">
+                            <frontend_model>nwdall/adminhtml_system_config_nwdthemes</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </info>
+                    </fields>
+                </about>
+                <extensions translate="label">
+                    <label>Installed Extensions</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>nwdall/system_config_form_fieldset_nwdall_extensions</frontend_model>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                </extensions>
+			</groups>
+		</nwdall>
+	</sections>
+</config>

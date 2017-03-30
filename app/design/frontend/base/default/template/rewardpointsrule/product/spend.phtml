@@ -1,0 +1,166 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * spend points for product
+ * 
+ * @see Magestore_RewardPointsRule_Block_Product_Spend
+ */
+?>
+
+<?php if ($this->isShowRedeemRules()): ?>
+    <?php $_catalogRules = $this->getSpendingRules() ?>
+    <?php if (count($_catalogRules)): ?>
+    <?php $_formData = $this->getRewardFormData() ?>
+    <?php $_pointHelper   = $this->getPointHelper() ?>
+    <div class="divider"></div>
+    <div class="rewardpoints-product-rule">
+        <div class="list-rule">
+            <span><?php echo $this->__('Use Your Points') ?>:</span>
+            <select id="reward_product_rule" name="reward_product_rule" class="input-select" onchange="changeRewardProductRule(this);">
+                <option value=""><?php echo $this->__('-- Please Select Rule --') ?></option>
+                <?php foreach ($_catalogRules as $_rule): ?>
+                <option value="<?php echo $_rule->getId() ?>"<?php if ($_formData->getRewardProductRule() == $_rule->getId()): ?> selected="selected"<?php endif ?>>
+                    <?php echo $this->escapeHtml($_rule->getName()) ?>
+                    (<?php echo $this->__('With %s', $_pointHelper->format($this->getMinRulePoint($_rule))) ?>)
+                </option>
+                <?php endforeach; ?>
+            </select>
+            <input type="hidden" id="reward_product_point" name="reward_product_point" value="" />
+        </div>
+        <div id="rewardpoints-login-msg" style="display: none;">
+            <?php echo $this->__('You need') ?>
+            <a href="<?php echo $this->getUrl('customer/account/login') ?>"><?php echo $this->__('login') ?></a>
+            <?php echo $this->__('to redeem your points on this product') ?>
+        </div>
+        <div id="rewardpoints-needmore-msg" style="display: none;">
+            <?php echo $this->__('You need to earn ') ?>
+            <span id="rewardpoints-needmore-points">100</span>
+            <?php echo $this->__('more point(s) to use this rule.') ?>
+            <?php echo $this->__('Please click') ?>
+            <a href="<?php echo Mage::helper('rewardpoints/policy')->getPolicyUrl() ?>"><?php echo $this->__('here') ?></a>
+            <?php echo $this->__('to learn about it.') ?>
+        </div>
+        <div id="rewardpoints-slider-container" style="display: none;">
+            <div id="rewardpoints-slider">
+                <div id="rewardpoints-slider-zoom-out"><img src="<?php echo $this->getSkinUrl('css/magestore/images/slider_btn_zoom_out.gif') ?>" alt="<?php echo $this->__('Zoom Out') ?>" title="<?php echo $this->__('Zoom Out') ?>" /></div>
+                <div id="rewardpoints-track">
+                    <div id="rewardpoints-handle"></div>
+                </div>
+                <div id="rewardpoints-slider-zoom-in"><img src="<?php echo $this->getSkinUrl('css/magestore/images/slider_btn_zoom_in.gif') ?>" alt="<?php echo $this->__('Zoom In') ?>" title="<?php echo $this->__('Zoom In') ?>" /></div>
+            </div>
+            <div class="rewardpoints-slider-label">
+                <span><span id="rewardpoints-slider-label">100</span> <?php echo $this->__('Points') ?></span>
+            </div>
+        </div>
+        <div id="rewardpoints-price-template" style="display: none;">
+            <span class="price" style = "font-size:16px;  float:right;">
+                <span class="price"></span>
+                <?php echo $this->__('with') ?>
+                <span class="points"></span>
+                <?php echo $this->__('Point(s)') ?>
+            </span>
+        </div>
+        <?php 
+        if (!Mage::getStoreConfigFlag('rewardpoints/earning/earn_when_spend',Mage::app()->getStore()->getId())){ ?>
+        <div class="cant-earn-points-spend" style="padding: 10px 0; clear: both"><?php echo $this->__('P/s: You will not earn any points when using points to spend!'); ?></div>
+        <?php } ?>
+    </div>
+    <script type="text/javascript">
+        var rewardProductRules = <?php echo $this->getProductRulesJson($_catalogRules) ?>;
+        var currentRuleOptions = {};
+        var needChangeRewardManual = true;
+        function changeRewardProductRule(el) {
+            var ruleId = el.value;
+            rewardPrice.clearPrices();
+            if (ruleId) {
+                currentRuleOptions = rewardProductRules[ruleId];
+                switch (currentRuleOptions.optionType) {
+                    case 'login':
+                        showRewardInfo('rewardpoints-login-msg');
+                        break;
+                    case 'needPoint':
+                        showRewardInfo('rewardpoints-needmore-msg');
+                        $('rewardpoints-needmore-points').innerHTML = currentRuleOptions.needPoint;
+                        break;
+                    case 'slider':
+                        showRewardInfo('rewardpoints-slider-container');
+                        rewardSlider.applyOptions(currentRuleOptions.sliderOption);
+                        break;
+                    case 'static':
+                        $('reward_product_point').value = currentRuleOptions.sliderOption.minPoints;
+                        rewardPrice.showPointPrices(currentRuleOptions.sliderOption.pointStep, currentRuleOptions);
+                        needChangeRewardManual = false;
+                        showRewardInfo('');
+                        break;
+                }
+            } else {
+                showRewardInfo('');
+            }
+        }
+        function changePointCallback(points) {
+            rewardPrice.showPointPrices(points, currentRuleOptions);
+        }
+        function showRewardInfo(elId) {
+            var elIds = ['rewardpoints-login-msg', 'rewardpoints-needmore-msg', 'rewardpoints-slider-container'];
+            for (var i = 0; i < 3; i++){
+                if (elIds[i] == elId) {
+                    $(elId).show();
+                } else {
+                    $(elIds[i]).hide();
+                }
+            }
+        }
+        var rewardSlider;
+        var rewardPrice;
+        //Event.observe(window, 'load', function(){
+            $('rewardpoints-slider-container').show();
+            rewardSlider = new RewardPointsSlider(
+                'reward_product_point',
+                'rewardpoints-track',
+                'rewardpoints-handle',
+                'rewardpoints-slider-zoom-out',
+                'rewardpoints-slider-zoom-in',
+                'rewardpoints-slider-label'
+            );
+            rewardSlider.changePointCallback = changePointCallback;
+            $('rewardpoints-slider-container').hide();
+            
+            var pricesElements = $$('.product-shop .price-box .regular-price, .product-shop .price-excluding-tax .price, .product-shop .price-including-tax .price, .product-shop .price-as-configured .full-product-price');
+            var specials = $$('.product-shop .special-price .price');
+            if (typeof specials[0] != 'undefined') {
+                pricesElements.push(specials[0]);
+            }
+            rewardPrice = new RewardPointsPrice(
+                'rewardpoints-price-template',
+                pricesElements,
+                <?php echo Mage::app()->getStore()->convertPrice(Mage::helper('tax')->getPrice($this->getProduct(), $this->getProduct()->getFinalPrice(),null,null,null, null,Mage::app()->getStore()->getId())) ?>,
+                <?php echo $this->getPriceFormatJs() ?>
+            );
+            //Mage::helper('tax')->getPrice($this->getProduct(), $this->getProduct()->getFinalPrice(),null,null,null, null,Mage::app()->getDefaultStoreView())
+            changeRewardProductRule($('reward_product_rule'));
+            if (needChangeRewardManual) {
+                rewardSlider.manualChange(<?php echo $_formData->getRewardProductPoint() ?>);
+            }
+        //});
+    </script>
+    <?php endif; ?>
+<?php endif; ?>

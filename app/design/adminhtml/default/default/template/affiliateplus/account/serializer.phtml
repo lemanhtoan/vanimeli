@@ -1,0 +1,29 @@
+<?php $_id = 'id_' . md5(microtime())  ?>
+
+<input type="hidden" name="<?php echo $this->getInputElementName() ?>" id="<?php echo $_id ?>" value="" />
+<div id="map-customer-info" style="display:none;" >
+	<input type="hidden" id="map_customer_name" value="">
+	<input type="hidden" id="map_customer_email" value="">
+</div>
+<?php $_gridJsObject = $this->getGridBlock()->getJsObjectName() ?>
+<script type="text/javascript">
+
+//Changed By Adam 29/10/2015: Fix issue of SUPEE 6788 - in Magento 1.9.2.2
+var mapAccount = new MapAccount('<?php echo $this->getUrl('adminhtml/affiliateplus_account/changeCustomer',array('_secure'=>true)) ?>')
+
+function accountObjectRowClick(grid, event){
+	var trElement = Event.findElement(event, 'tr');
+	var isInput   = Event.element(event).tagName == 'INPUT';
+	if(trElement){
+		var checkbox = Element.getElementsBySelector(trElement, 'input');
+		if(checkbox[0]){
+			$('<?php echo $_id ?>').value = checkbox[0].value;
+			checkbox[0].checked = true;
+			mapAccount.changeCustomer(checkbox[0].value);
+		}
+	}
+}
+
+<?php echo $_gridJsObject ?>.rowClickCallback =	accountObjectRowClick;
+
+</script>

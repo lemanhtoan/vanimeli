@@ -1,0 +1,24 @@
+{* This is a comment block
+
+Available vars in this template:
+  - name            Recipient name
+  - email           Recipient Email address
+  - product_name    Product name
+  - product_url     Url for product
+  - product_image   Url for product small image (75 px)
+  - message         Sender custom message
+  - sender_name     Sender name
+  - sender_email    Sender email
+
+Use vars: {{var var_name}}
+*}<!--@subject Välökommen, {{var name}} @-->
+<!--@vars
+{"htmlescape var=$name":"Recipient Name",
+"var product_url":"Url for Product",
+"var product_name":"Product Name",
+"var message":"Sender Message"}
+@-->
+
+Välkommen, {{htmlescape var=$name}}<br /><br />
+Var vänlig se <a href="{{var product_url}}">{{var product_name}}</a><br /><br />
+Här är meddelandet: <br />{{var message}}<br /><br />

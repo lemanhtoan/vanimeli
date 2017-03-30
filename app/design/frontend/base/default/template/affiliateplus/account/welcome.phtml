@@ -1,0 +1,18 @@
+<?php
+$store_id = Mage::app()->getStore()->getStoreId();
+$check_responsvie = Mage::getStoreConfig('affiliateplus/style_config/responsive_enable', $store_id);
+ if($check_responsvie)
+     $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+ else
+     $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+?>
+
+<div class="aff-main-content <?php echo $class_name; ?>">
+<?php 
+  
+    echo $this->getChildHtml('account_welcome');
+    echo $this->getChildHtml('account_program');
+    echo $this->getChildHtml('sales_home');
+    echo $this->getChildHtml('account_bottom');
+?>
+</div>

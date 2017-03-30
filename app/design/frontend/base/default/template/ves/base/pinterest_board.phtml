@@ -1,0 +1,22 @@
+<?php
+	$select_type = $this->getConfig("select_type", "profile");
+	$select_type = ($select_type == "board")?"embedBoard":"embedUser";
+	$url = $this->getConfig("url", "");
+	$modid = rand().time();
+	$enable_collapse = $this->getConfig("enable_collapse", 0);
+	if($url): 
+?>
+<div class="widget-pinterest-board block">
+	<?php if (isset($widget_heading)&&!empty($widget_heading)): ?>
+	<div class="block-title">
+		<?php if($enable_collapse): ?><span class="opener hidden-lg hidden-md" data-toggle="collapse" data-target="#widget-pinterest<?php echo $modid; ?>"><i class="fa fa-angle-down"></i></span><?php endif; ?>
+		<?php echo $widget_heading; ?>
+	</div>
+	<?php endif; ?>
+	<div id="widget-pinterest<?php echo $modid; ?>" class="widget-inner block-content <?php if($enable_collapse): ?> widget-enanle-collapse collapse in <?php endif; ?>">
+		<a data-pin-do="<?php echo $select_type; ?>" href="<?php echo $url; ?>" data-pin-scale-width="<?php echo $this->getConfig("image_width", 80); ?>" data-pin-scale-height="<?php echo $this->getConfig("board_height", 320); ?>" data-pin-board-width="<?php echo $this->getConfig("board_width", 371); ?>"></a>
+			<!-- Please call pinit.js only once per page -->
+		<script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
+	</div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,77 @@
+<?php 
+$mId = rand().time();
+$widget = $this->getWidget(); 
+$show_name = isset($widget['show_name'])?$widget['show_name']: 1;
+$itemsperpage = isset($widget['max_items'])?$widget['max_items']: 1;
+$cols = isset($widget['limit_cols'])?$widget['limit_cols']: 1;
+$auto_play = isset($widget['auto_play'])?$widget['auto_play']: 0;
+$speed = isset($widget['speed'])?$widget['speed']: 6000;
+$auto_play = $auto_play?'true':'false';
+$speed = ($auto_play == 'true')?$speed:'false';
+$image_height = isset($widget['image_height'])?$widget['image_height']: 320;
+$image_width = isset($widget['image_width'])?$widget['image_width']: 300;
+$collection = isset($widget['products'])?$widget['products']: array();
+$moduleId = rand().time();
+
+if($collection) {
+  $products = $collection->getItems();
+?>
+<?php if( isset($widget['widget_name']) & $show_name){
+?>
+<div class="menu-title"><?php echo $widget['widget_name'];?></div>
+<?php
+}?>
+<div class="widget-product-carousel">
+  <div class="widget-inner">
+    <div class="box-products carousel slide" id="widgetproductcarousel<?php echo $moduleId;?>">
+      <?php if( count($products) > $itemsperpage ) { ?>
+      <div class="carousel-controls">
+        <a class="carousel-control left fa fa-angle-left" href="#widgetproductcarousel<?php echo $moduleId;?>"   data-slide="prev">&lt;</a>
+        <a class="carousel-control right fa fa-angle-right" href="#widgetproductcarousel<?php echo $moduleId;?>"  data-slide="next">&gt;</a>
+      </div>
+      <?php } ?>
+      <div class="carousel-inner">
+        <?php
+          $pages = array_chunk( $products, $itemsperpage);
+        ?>
+        <?php foreach ($pages as $k => $_productCollection) { ?>
+          <div class="item <?php if($k==0) {?>first<?php } elseif($k == (count($pages) -1 )) {?>last<?php } ?> <?php if($k==0) {?>active<?php } ?> no-margin">
+            <?php foreach( $_productCollection as $i => $product ) {  $i=$i+1;?>
+              <?php if( $cols == 1 || $i%$cols == 1 ) { ?>
+              <div class="row products-row">
+              <?php } ?>
+                  <?php
+                    try{
+                      $image = Mage::helper('catalog/image')->init($product, 'small_image')->resize((int)$image_width, (int)$image_height);
+                    }
+                    catch(Exception $e) {
+                      $image = Mage::getDesign()->getSkinUrl('images/catalog/product/placeholder/image.jpg',array('_area'=>'frontend'));  
+                    }
+                  ?>
+                  <div class="product-block w-product clearfix">
+                    <div class="image"><a href="<?php echo $product->getProductUrl(); ?>"><img src="<?php echo $image; ?>" alt="<?php echo $product->getName(); ?>" /></a></div>
+                    <div class="name"><a href="<?php echo $product->getProductUrl(); ?>"><?php echo $product->getName(); ?></a></div>
+                    <div class="price">
+                      <?php echo Mage::getSingleton('core/layout')->createBlock('catalog/product_list')->getPriceHtml($product, true, $mId); ?>
+                    </div>
+                    <?php if($product->getRatingSummary()) { ?>
+                        <div class="rating"><?php echo Mage::getSingleton('core/layout')->createBlock('catalog/product_list')->getReviewsSummaryHtml($product, true, true) ?></div>
+                    <?php }; ?>
+                    <?php if($product->isSaleable()) { ?>
+                    <div class="cart"><button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->helper('checkout/cart')->getAddUrl($product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></div>
+                    <?php } ?>
+                  </div>
+                  <?php if( $cols==1 || $i%$cols == 0 || $i==count($_productCollection) ) { ?>
+                    </div>
+                  <?php } ?>
+            <?php } //End For Each ?>
+          </div>
+        <?php } //End For Each ?>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+jQuery('#widgetproductcarousel<?php echo $moduleId;?>').carousel({interval:<?php echo ( $auto_play_mode?$interval:'false') ;?>,auto:<?php echo $auto_play;?>,pause:'hover', cycle: true});
+</script>
+<?php } ?>

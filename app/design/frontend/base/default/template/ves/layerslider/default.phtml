@@ -1,0 +1,461 @@
+<?php
+ /*------------------------------------------------------------------------
+  # VenusTheme Layer Slider Module 
+  # ------------------------------------------------------------------------
+  # author:    VenusTheme.Com
+  # copyright: Copyright (C) 2012 http://www.venustheme.com. All Rights Reserved.
+  # @license: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+  # Websites: http://www.venustheme.com
+  # Technical Support:  http://www.venustheme.com/
+-------------------------------------------------------------------------*/
+if( isset($banners) && count($banners) ) {
+$randID = rand( 20,   rand() );
+$sliderParams['hide_navigator_after'] = 1;
+$sliderParams['hide_navigator_after'] = isset($sliderParams['show_navigator'])&&$sliderParams['show_navigator']?0:$sliderParams['hide_navigator_after'];
+$background_color = (isset($sliderParams['general']['bgcolor']) && $sliderParams['general']['bgcolor'])?' background-color:'.$sliderParams['general']['bgcolor'].';':"";
+
+if(!$background_color) {
+  $background_color = (isset($sliderParams['background_color']) && $sliderParams['background_color'])?' background-color:'.$sliderParams['background_color'].';':"";
+}
+
+
+$hideTimerBar     = isset( $sliderParams['show_time_line'] ) && $sliderParams['show_time_line'] ? "on": 'off';
+$class     = isset( $sliderParams['fullwidth'] ) && !empty($sliderParams['fullwidth']) ? $sliderParams['fullwidth']: 'boxed';
+$fullwidth = $class =="fullwidth"?"on":"off";
+$fullscreen = $class =="fullscreen"?"on":"off";
+
+$thumbnail_width = isset($sliderParams["thumbnail_width"])?$sliderParams["thumbnail_width"]:"100";
+$thumbnail_height = isset($sliderParams["thumbnail_height"])?$sliderParams["thumbnail_height"]:"50";
+
+$start_slide = isset($sliderParams["start_slide"])?$sliderParams["start_slide"]:"0";
+$show_play_pause = isset($sliderParams["show_play_pause"])?$sliderParams["show_play_pause"]:0;
+$hidden_screen_class = isset($sliderParams["hide_screen_width"])?$sliderParams["hide_screen_width"]:"";
+
+/*Navigator*/
+$show_thumb_in_control = isset($sliderParams["show_control_thumb"])?$sliderParams["show_control_thumb"]:"0";
+$show_thumb_in_control = ($show_thumb_in_control == 1)?"true": "false";
+$navigator_type = isset($sliderParams["navigator_type"])?$sliderParams["navigator_type"]:"bullet";
+$navigator_hidden = isset($sliderParams["navigator_hidden"])?$sliderParams["navigator_hidden"]:1;
+$navigator_class = $navigator_hidden?"hidebullets":"";
+$offset_horizontal = isset($sliderParams["offset_horizontal"])?$sliderParams["offset_horizontal"]:"50%";
+$offset_vertical = isset($sliderParams["offset_vertical"])?$sliderParams["offset_vertical"]:"20px";
+$show_direction_nav = isset($sliderParams["show_direction_nav"])?$sliderParams["show_direction_nav"]:1;
+$navigator_arrows = isset($sliderParams["navigator_arrows"])?$sliderParams["navigator_arrows"]:"verticalcentered";
+$prev_left = isset($sliderParams["prev_left"])?$sliderParams["prev_left"]:"20px";
+$next_right = isset($sliderParams["next_right"])?$sliderParams["next_right"]:"20px";
+$prev_top = isset($sliderParams["prev_top"])?$sliderParams["prev_top"]:"-20px";
+$next_top = isset($sliderParams["next_top"])?$sliderParams["next_top"]:"-20px";
+
+/*Transaction*/
+$touch_mobile = isset($sliderParams["touch_mobile"])?$sliderParams["touch_mobile"]:1;
+$touch_mobile = $touch_mobile?'true':'false';
+
+$stop_on_hover = isset($sliderParams["stop_on_hover"])?$sliderParams["stop_on_hover"]:1;
+$stop_on_hover = $stop_on_hover?'true':'false';
+
+$auto_play = isset($sliderParams["auto_play"])?$sliderParams["auto_play"]:1;
+$auto_play = $auto_play?'true':'false';
+
+$transition = (isset($sliderParams["transition"]) && $sliderParams["transition"])?$sliderParams["transition"]:"random";
+$transition = is_array($transition)?implode(",", $transition): $transition;
+
+$strips = (isset($sliderParams["strips"]) && $sliderParams["strips"])?$sliderParams["strips"]:20;
+$block_cols = (isset($sliderParams["block_cols"]) && $sliderParams["block_cols"])?$sliderParams["block_cols"]:10;
+$block_rows = (isset($sliderParams["block_rows"]) && $sliderParams["block_rows"])?$sliderParams["block_rows"]:20;
+
+/*Timer Bar*/
+$show_time_line = isset($sliderParams["show_time_line"])?$sliderParams["show_time_line"]:0;
+$timer_background = isset($sliderParams["timer_background"]) && $sliderParams["timer_background"]?$sliderParams["timer_background"]:"#000";
+$timer_color = isset($sliderParams["timer_color"]) && $sliderParams["timer_color"]?$sliderParams["timer_color"]:"#FFF";
+$timer_diameter = isset($sliderParams["timer_diameter"]) && $sliderParams["timer_diameter"]?$sliderParams["timer_diameter"]:"30";
+$timer_padding = isset($sliderParams["timer_padding"]) && $sliderParams["timer_padding"]?$sliderParams["timer_padding"]:0;
+$timer_stroke = isset($sliderParams["timer_stroke"]) && $sliderParams["timer_stroke"]?$sliderParams["timer_stroke"]:7;
+$timer_bar_stroke = isset($sliderParams["timer_bar_stroke"]) && $sliderParams["timer_bar_stroke"]?$sliderParams["timer_bar_stroke"]:0;
+$timer_bar_stroke_color = isset($sliderParams["timer_bar_stroke_color"]) && $sliderParams["timer_bar_stroke_color"]?$sliderParams["timer_bar_stroke_color"]:"#EEE";
+$timer_bar_stroke_style = isset($sliderParams["timer_bar_stroke_style"]) && $sliderParams["timer_bar_stroke_style"]?$sliderParams["timer_bar_stroke_style"]:"solid";
+$timer_position = isset($sliderParams["timer_position"]) && $sliderParams["timer_position"]?$sliderParams["timer_position"]:"bottom-right";
+$timer_x = isset($sliderParams["timer_x"]) && $sliderParams["timer_x"]?$sliderParams["timer_x"]:10;
+$timer_y = isset($sliderParams["timer_y"]) && $sliderParams["timer_y"]?$sliderParams["timer_y"]:10;
+
+$timer_style = isset($sliderParams["timer_style"])?$sliderParams["timer_style"]:"Bar";
+$timer_opacity = (isset($sliderParams["timer_opacity"]) && $sliderParams["timer_opacity"] !="")?$sliderParams["timer_opacity"]:0.5;
+if($auto_play == "false" || !$show_time_line) {
+  $timer_opacity = 0;
+}
+
+/*Trigger functions*/
+$trigger_before_change = isset($sliderParams["trigger_before_change"])?$sliderParams["trigger_before_change"]:"";
+$trigger_after_change = isset($sliderParams["trigger_after_change"])?$sliderParams["trigger_after_change"]:"";
+$trigger_slideshow_end = isset($sliderParams["trigger_slideshow_end"])?$sliderParams["trigger_slideshow_end"]:"";
+$trigger_last_slide = isset($sliderParams["trigger_last_slide"])?$sliderParams["trigger_last_slide"]:"";
+$trigger_after_load = isset($sliderParams["trigger_after_load"])?$sliderParams["trigger_after_load"]:"";
+$trigger_on_pause = isset($sliderParams["trigger_on_pause"])?$sliderParams["trigger_on_pause"]:"";
+$trigger_on_play = isset($sliderParams["trigger_on_play"])?$sliderParams["trigger_on_play"]:"";
+
+$slider_background = "";
+if(isset($setting['general']) && isset($setting['general']['src']) && $setting['general']['src']) {
+  $slider_background = "background-image: url('".$setting['general']['src']."'); background-size: ".$setting['general']['size'].";background-position:".$setting['general']['position'].";background-repeat: ". $setting['general']['repeat'].";";
+}
+
+/*Navigation Button IDs*/
+$previousControl = "sliderlayer_prev_".$randID;
+$nextControl = "sliderlayer_next_".$randID;
+$bulletControl = "vesbullets".$randID;
+?>
+
+<?php if( $class =="boxed") { ?>
+<div class="layerslider-wrapper" style="max-width:<?php echo ((float)$sliderParams['width'] + 60);?>px;">
+<?php } ?>
+
+  <div class="bannercontainer banner-<?php echo trim($class);?> <?php echo $hidden_screen_class;?>" style="padding: <?php echo $sliderParams['padding'];?>;margin: <?php echo $sliderParams['margin'];?>;<?php echo $background_color.$slider_background; ?>;max-width:<?php echo ((float)$sliderParams['width'] );?>px;<?php echo ((int)$sliderParams['shadow_type'] > 0)?'overflow:visible':''; ?>">
+          <div id="sliderlayer<?php echo $randID; ?>" class="vesslider rev_slider <?php echo trim($class);?>banner" style="width:100%;height:<?php echo $sliderParams['height'];?>px; " >
+              <?php
+                foreach($banners as $k => $banner) {
+                  echo $this->renderBannerElements($banner, $sliderParams);
+                }
+              ?>
+          </div>
+          <!-- Config to show slider shadow -->
+          <?php if((int)$sliderParams['shadow_type'] > 0): ?>
+          <div class="tp-bannershadow tp-shadow<?php echo (int)$sliderParams['shadow_type']; ?>"></div>
+          <?php endif; ?>
+          <!-- Config to show navigator (bullets or thumbnails) -->
+          <?php if($navigator_type == "bullet" || $navigator_type == "bullet-name"){ ?>
+            <div id="<?php echo $bulletControl; ?>" class="tp-bullets simplebullets round <?php echo $navigator_class; ?>" style="bottom: <?php echo $offset_vertical;?>; left: <?php echo $offset_horizontal;?>; margin-left: -36px;">
+              <?php
+                  $i = 0;
+                  foreach($banners as $k => $banner) {
+                   if($banner){
+                      $slider_data = array();
+                      if(isset($banner['slide'])) {
+                        /*If slider was disable, it don't show up on slideshow*/
+                        if(isset($banner['slide']['slider_status']) && !$banner['slide']['slider_status'])
+                          continue;
+
+                        $custom_class = "";
+                        if($i ==0){
+                          $custom_class = "first";
+                        } elseif($i == (count($banners) - 1) ) {
+                          $custom_class = "last";
+                        }
+                        ?>
+                        <div class="bullet slider-pagging <?php echo $custom_class; ?>" onclick="jQuery('#sliderlayer<?php echo $randID; ?>').trigger('iView:goSlide', [<?php echo $i; ?>]); return false;">
+                           <?php
+                            $product_sku = isset($banner['slide']['slider_productsku'])?$banner['slide']['slider_productsku']:"";
+                            if($product_sku) {
+
+                                $product_info_block = Mage::app()->getLayout()->createBlock("ves_layerslider/html", 'product-info-navigation')
+                                                  ->setTemplate("ves/layerslider/product_info.phtml")
+                                                  ->assign("product_sku", $product_sku);
+
+                                echo $product_info_block->toHtml();
+                            }
+                          ?>
+                        </div>
+                        <?php
+                        $i++;
+                      }
+                    }
+                  }
+                ?>
+              <div class="tpclear"></div>
+            </div>
+          <?php } elseif($navigator_type == "thumb") { ?>
+            <div id="<?php echo $bulletControl; ?>" class="tp-bullets tp-thumbs round <?php echo $navigator_class; ?>" style="bottom: <?php echo $offset_vertical;?>; left: <?php echo $offset_horizontal;?>; margin-left: -36px;">
+                <div class="tp-mask">
+                  <div class="tp-thumbcontainer">
+                    <?php
+                      $i = 0;
+                      foreach($banners as $k => $banner) {
+                       if($banner){
+                          $slider_data = array();
+                          if(isset($banner['slide'])) {
+                            /*If slider was disable, it don't show up on slideshow*/
+                            if(isset($banner['slide']['slider_status']) && !$banner['slide']['slider_status'])
+                              continue;
+
+                            $custom_class = "";
+                            if($i ==0){
+                              $custom_class = "first";
+                            } elseif($i == (count($banners) - 1) ) {
+                              $custom_class = "last";
+                            }
+                            $thumbnail = $this->getSliderThumbnail($banner, $sliderParams);
+                             ?>
+                              <div class="bullet slider-pagging thumb <?php echo $custom_class; ?>" style="position:relative;width: <?php echo (int)$thumbnail_width;?>px;height: <?php echo $thumbnail_height; ?>px;background-image:url(<?php echo $thumbnail; ?>) !important;background-size:cover;background-position:center center;" onclick="jQuery('#sliderlayer<?php echo $randID; ?>').trigger('iView:goSlide', [<?php echo $i; ?>]); return false;">
+                                <?php
+                                  $product_sku = isset($banner['slide']['slider_productsku'])?$banner['slide']['slider_productsku']:"";
+                                  if($product_sku) {
+
+                                      $product_info_block = Mage::app()->getLayout()->createBlock("ves_layerslider/html", 'product-info-navigation')
+                                                        ->setTemplate("ves/layerslider/product_info.phtml")
+                                                        ->assign("product_sku", $product_sku);
+
+                                      echo $product_info_block->toHtml();
+                                  }
+                                ?>
+                              </div>
+                            <?php
+
+                            $i++;
+                          }
+                        }
+                      }
+                    ?>
+                    <div class="tpclear"></div>   
+                  </div>
+                </div>
+            </div>
+          <?php } elseif ($navigator_type == "name") { ?>
+            <div id="<?php echo $bulletControl; ?>" class="tp-bullets tp-names round <?php echo $navigator_class; ?>" style="bottom: <?php echo $offset_vertical;?>; left: <?php echo $offset_horizontal;?>;">
+              <?php
+                  $i = 0;
+                  foreach($banners as $k => $banner) {
+                   if($banner){
+                      $slider_data = array();
+                      if(isset($banner['slide'])) {
+                        /*If slider was disable, it don't show up on slideshow*/
+                        if(isset($banner['slide']['slider_status']) && !$banner['slide']['slider_status'])
+                          continue;
+
+                        $custom_class = "";
+                        if($i == 0){
+                          $custom_class = "first";
+                        } elseif($i == (count($banners) - 1) ) {
+                          $custom_class = "last";
+                        }
+                        $k = $i + 1;
+                        $slider_name = isset($banner['slide']['slider_title'])?$banner['slide']['slider_title']:"";
+                        ?>
+                        <div class="bullet slider-name <?php echo $custom_class; ?>">
+                          <div class="slider-pagging" onclick="jQuery('#sliderlayer<?php echo $randID; ?>').trigger('iView:goSlide', [<?php echo $i; ?>]); return false;">
+                            <div class="slider-number"><?php echo ($k < 10)?'0'.$k:$k; ?></div><div class="slider-name"><?php echo $slider_name; ?></div>
+                          </div>
+                          <?php
+                            $product_sku = isset($banner['slide']['slider_productsku'])?$banner['slide']['slider_productsku']:"";
+                            if($product_sku) {
+
+                                $product_info_block = Mage::app()->getLayout()->createBlock("ves_layerslider/html", 'product-info-navigation')
+                                                  ->setTemplate("ves/layerslider/product_info.phtml")
+                                                  ->assign("product_sku", $product_sku);
+
+                                echo $product_info_block->toHtml();
+                            }
+                          ?>
+                        </div>
+                        <?php
+                        $i++;
+                      }
+                    }
+                  }
+                ?>
+              <div class="tpclear"></div>
+            </div>
+          <?php } elseif ($navigator_type == "name-thumb") { ?>
+            <div id="<?php echo $bulletControl; ?>" class="tp-bullets tp-thumbs round <?php echo $navigator_class; ?>" style="bottom: <?php echo $offset_vertical;?>; left: <?php echo $offset_horizontal;?>; margin-left: -36px;">
+                <div class="tp-mask">
+                  <div class="tp-thumbcontainer">
+                    <?php
+                      $i = 0;
+                      foreach($banners as $k => $banner) {
+                       if($banner){
+                          $slider_data = array();
+                          if(isset($banner['slide'])) {
+                            /*If slider was disable, it don't show up on slideshow*/
+                            if(isset($banner['slide']['slider_status']) && !$banner['slide']['slider_status'])
+                              continue;
+
+                            $custom_class = "";
+                            if($i == 0){
+                              $custom_class = "first";
+                            } elseif($i == (count($banners) - 1) ) {
+                              $custom_class = "last";
+                            }
+                            $slider_name = isset($banner['slide']['slider_title'])?$banner['slide']['slider_title']:"";
+                            $k = $i + 1;
+                            $thumbnail = $this->getSliderThumbnail($banner, $sliderParams);
+                            ?>
+                              <div class="bullet slider-name-thumb <?php echo $custom_class; ?>">
+                                <div class="slider-pagging" onclick="jQuery('#sliderlayer<?php echo $randID; ?>').trigger('iView:goSlide', [<?php echo $i; ?>]); return false;">
+                                    <div class="slider-thumb">
+                                      <img src="<?php echo $thumbnail; ?>" style="width: <?php echo (int)$thumbnail_width;?>px;height: <?php echo $thumbnail_height; ?>px;" alt="slider <?php echo $k; ?>"/>
+                                    </div>
+                                    <div class="slider-name"><?php echo $slider_name; ?></div>
+                                    <?php
+                                      $product_sku = isset($banner['slide']['slider_productsku'])?$banner['slide']['slider_productsku']:"";
+                                      if($product_sku) {
+
+                                          $product_info_block = Mage::app()->getLayout()->createBlock("ves_layerslider/html", 'product-info-navigation')
+                                                            ->setTemplate("ves/layerslider/product_info.phtml")
+                                                            ->assign("product_sku", $product_sku);
+
+                                          echo $product_info_block->toHtml();
+                                      }
+                                    ?>
+                                </div>
+                              </div>
+                            <?php
+                            $i++;
+                          }
+                        }
+                      }
+                    ?>
+                    <div class="tpclear"></div>   
+                  </div>
+                </div>
+            </div>
+          <?php } else { 
+              //Pass
+              $custom_navigation = $this->getChild('custom-slider-navigation');
+
+              if($custom_navigation) {
+
+                  $custom_navigation->assign("bulletControl", $bulletControl)
+                                    ->assign("sliderParams", $sliderParams)
+                                    ->assign("randID", $randID)
+                                    ->assign("offset_vertical", $offset_vertical)
+                                    ->assign("offset_horizontal", $offset_horizontal)
+                                    ->assign("banners", $banners);
+
+                  echo $this->getChildHtml('custom-slider-navigation');
+              }
+             
+           }
+          ?>
+          <!-- Config to show direction navigation (next & prev button) -->
+          <?php if($show_direction_nav): ?>
+          <div class="iview-prevNav tp-leftarrow  tparrows default round" id="<?php echo $previousControl; ?>">&nbsp;</div>
+          <div class="iview-nextNav tp-rightarrow  tparrows default round" id="<?php echo $nextControl; ?>">&nbsp;</div>
+          <?php endif; ?>
+          <!-- Config to show play and pause buttons -->
+          <?php if($show_play_pause): ?>
+          <div class="vesslider-controls" style="display:none">
+                <div class="button-pause"><a href="javascript:void(0);" onClick="jQuery('#sliderlayer<?php echo $randID; ?>').trigger('iView:pause'); return false;"><?php echo $this->__("Pause");?></a></div>
+                <div class="button-play"><a href="javascript:void(0);" onClick="jQuery('#sliderlayer<?php echo $randID; ?>').trigger('iView:play'); return false;"><?php echo $this->__("Play");?></a></div>
+          </div>
+          <?php endif; ?>
+    </div>
+
+<?php if( $class =="boxed") { ?>
+ </div>
+<?php } ?>
+      <!--
+      ##############################
+       - ACTIVATE THE BANNER HERE -
+      ##############################
+      -->
+      <script type="text/javascript">
+
+        var tpj=jQuery;
+        tpj('#sliderlayer<?php echo $randID; ?>').iView({
+            fx: '<?php echo $transition; ?>', // Specify sets like: 'left-curtain,fade,zigzag-top,strip-left-fade'
+            easing: '<?php echo (isset($sliderParams["easing"]) && $sliderParams["easing"])?$sliderParams["easing"]:"easeOutQuad"; ?>', // for the complete list http://jqueryui.com/demos/effect/easing.html
+            strips: <?php echo (int)$strips; ?>, // Number of strips for strip animations
+            blockCols: <?php echo (int)$block_cols; ?>, // Number of block columns for block animations
+            blockRows: <?php echo (int)$block_rows; ?>, // Number of block rows for block animations
+            sliderWidth: '<?php echo $sliderParams['width'];?>px',
+            sliderHeight: '<?php echo $sliderParams['height'];?>px',
+            thumbWidth: '<?php echo (int)$sliderParams['thumbnail_width'];?>',
+            thumbHeight: '<?php echo (int)$sliderParams['thumbnail_height'];?>',
+            captionSpeed: <?php echo (isset($sliderParams["caption_speed"]) && $sliderParams["caption_speed"])?$sliderParams["caption_speed"]:500 ?>, // Caption transition speed
+            captionEasing: '<?php echo (isset($sliderParams["caption_easing"]) && $sliderParams["caption_easing"])?$sliderParams["caption_easing"]:"easeInOutSine"; ?>', // Caption transition easing effect
+            captionOpacity: 1, // Caption opacity
+            animationSpeed: <?php echo (isset($sliderParams["speed"]) && $sliderParams["speed"])?$sliderParams["speed"]:500; ?>, // Slide transition speed
+            pauseTime: <?php echo (isset($sliderParams["delay"]) && $sliderParams["delay"])?$sliderParams["delay"]:15000; ?>, // How long each slide will show
+            startSlide: <?php echo (int)$start_slide; ?>, // Set starting Slide (0 index)
+            directionNav: false, // Next & Previous navigation
+            directionNavHoverOpacity: 0.6, // Fade on hover
+            directionPosition: "<?php echo $navigator_arrows; ?>",
+            controlNav: false, // 1,2,3,4... navigation
+            controlNavNextPrev: false, // previous,next navigation
+            controlNavHoverOpacity: 0.6, // Navigation fade on hover
+            controlNavThumbs: false, // Show thumbs navigation
+            controlNavTooltip: false, // Show tooltip image previewer
+            autoAdvance: <?php echo $auto_play; ?>, // Force auto transitions
+            keyboardNav: true, // Use left & right arrows
+            touchNav: <?php echo $touch_mobile; ?>, // Use Touch swipe to change slides
+            pauseOnHover: <?php echo $stop_on_hover; ?>, // Stop slider while hovering
+            showThumbInControl: <?php echo $show_thumb_in_control; ?>,
+            prevNavTemplate: false, // Forexample: '<div><img src="%src%" alt="%alt%" width="%width%" height="%height%"/></div>',
+            nextNavTemplate: false, // Forexample: '<div><img src="%src%" alt="%alt%" width="%width%" height="%height%"/></div>',
+            prevId: "#<?php echo $previousControl; ?>",
+            prevMarginTop: "<?php echo $prev_top; ?>",
+            prevLeft: "<?php echo $prev_left; ?>",
+            nextId: "#<?php echo $nextControl; ?>",
+            nextMarginTop: "<?php echo $next_top; ?>",
+            nextRight: "<?php echo $next_right; ?>",
+            nextLabel: "<?php echo $this->__('Next'); ?>", // To set the string of the next button (Multilanguage use)
+            previousLabel: "<?php echo $this->__('Previous'); ?>", // To set the string of the previous button (Multilanguage use)
+            playLabel: "<?php echo $this->__('Play'); ?>", // To set the string of the play button (Multilanguage use)
+            pauseLabel: "<?php echo $this->__('Pause'); ?>", // To set the string of the pause button (Multilanguage use)
+            closeLabel: "<?php echo $this->__('Close'); ?>", // To set the string of the close button (Multilanguage use)
+            randomStart: false, // Start on a random slide
+            forceFullWidth: "<?php echo $fullwidth; ?>",
+            forceFullScreen: "<?php echo $fullscreen; ?>",
+            timer: '<?php echo $timer_style; ?>', // Timer style: "Pie", "360Bar" or "Bar"
+            timerBg: '<?php echo $timer_background; ?>', // Timer background
+            timerColor: '<?php echo $timer_color; ?>', // Timer color
+            timerOpacity: <?php echo (float)$timer_opacity; ?>, // Timer opacity
+            timerDiameter: <?php echo (int)$timer_diameter; ?>, // Timer diameter
+            timerPadding: <?php echo (float)$timer_padding; ?>, // Timer padding
+            timerStroke: <?php echo (float)$timer_stroke; ?>, // Timer stroke width
+            timerBarStroke: <?php echo (float)$timer_bar_stroke; ?>, // Timer Bar stroke width
+            timerBarStrokeColor: '<?php echo $timer_bar_stroke_color; ?>', // Timer Bar stroke color
+            timerBarStrokeStyle: '<?php echo $timer_bar_stroke_style; ?>', // Timer Bar stroke style
+            timerPosition: "<?php echo $timer_position; ?>",
+            timerX: <?php echo (float)$timer_x; ?>, // Timer X position threshold
+            timerY: <?php echo (float)$timer_y; ?>, // Timer Y position threshold
+            tooltipX: 5, // Tooltip X position threshold
+            tooltipY: -5, // Tooltip Y position threshold
+            onBeforeChange: function(){<?php echo $trigger_before_change; ?>}, // Triggers before a slide transition
+            onAfterChange: function(){
+              <?php
+                if($navigator_type !="none"){
+                  ?>
+                  if(tpj("#<?php echo $bulletControl; ?>").length > 0 && tpj("#<?php echo $bulletControl; ?>").find(".bullet").length > 0) {
+                    tpj("#<?php echo $bulletControl; ?>").find(".bullet").removeClass("selected");
+                    tpj("#<?php echo $bulletControl; ?>").find(".bullet:eq("+this.defs.slide+")").addClass("selected");
+                  }
+                  <?php
+                }
+              ?>
+              <?php echo $trigger_after_change; ?>
+            }, // Triggers after a slide transition
+            onSlideshowEnd: function(){ <?php echo $trigger_slideshow_end; ?> }, // Triggers after all slides have been shown
+            onLastSlide: function(){ <?php echo $trigger_last_slide; ?> }, // Triggers when last slide is shown
+            onAfterLoad: function(){
+              if(tpj("#<?php echo $previousControl; ?>").length > 0 ) {
+                tpj("#<?php echo $previousControl; ?>").fadeIn();
+              }
+              if(tpj("#<?php echo $nextControl; ?>").length > 0 ) {
+                tpj("#<?php echo $nextControl; ?>").fadeIn();
+              }
+              <?php
+                if($navigator_type !="none"){
+                  ?>
+                  if(tpj("#<?php echo $bulletControl; ?>").length > 0 && tpj("#<?php echo $bulletControl; ?>").find(".bullet").length > 0) {
+                    tpj("#<?php echo $bulletControl; ?>").find(".bullet").removeClass("selected"); 
+                    tpj("#<?php echo $bulletControl; ?>").find(".bullet:eq(<?php echo $start_slide; ?>)").addClass("selected")
+                  }
+                  <?php
+                }
+              ?>
+              <?php echo $trigger_after_load; ?>
+            }, // Triggers when slider has loaded
+            onPause: function(){ <?php echo $trigger_on_pause; ?> }, // Triggers when slider has paused
+            onPlay: function(){ <?php echo $trigger_on_play; ?> } // Triggers when slider has played
+        });
+        if(tpj("#<?php echo $previousControl; ?>").length > 0 ) {
+          tpj("#<?php echo $previousControl; ?>").click( function(){
+              tpj('#sliderlayer<?php echo $randID; ?>').trigger('iView:previous'); 
+              return false;
+          })
+        }
+        if(tpj("#<?php echo $nextControl; ?>").length > 0 ) {
+          tpj("#<?php echo $nextControl; ?>").click( function(){
+              tpj('#sliderlayer<?php echo $randID; ?>').trigger('iView:next'); 
+              return false;
+          })
+        }
+      </script>
+<?php } ?>

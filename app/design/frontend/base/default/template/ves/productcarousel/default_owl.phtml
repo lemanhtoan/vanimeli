@@ -1,0 +1,149 @@
+<?php
+/*framework: get current theme setting*/
+$list_image_width = (int)$this->getEffectConfig("image_width", 300);
+$list_image_height = (int)$this->getEffectConfig("image_height", 300);
+$swap_image_number = (int)$this->getEffectConfig("swap_image_number", 0);
+
+$popup_quickview_width = $this->getEffectConfig("popup_quickview_width", "60%");
+$popup_quickview_height = $this->getEffectConfig("popup_quickview_height", "80%");
+
+$enable_pzoom = $this->getEffectConfig("show_pzoom");
+$enable_new_icon = $this->getEffectConfig("enable_new_icon");
+$enable_sale_icon = $this->getEffectConfig("enable_sale_icon");
+$show_title = $this->getEffectConfig('show_title');
+$enable_short_desc = $this->getEffectConfig('show_desc');
+$show_review = $this->getEffectConfig('show_review');
+$show_price = $this->getEffectConfig('show_price');
+$show_addcart = $this->getEffectConfig("show_addcart");
+$show_compare_wishlist = $this->getEffectConfig("show_wc") ;
+/*end get setting*/
+
+/*quickview was enabled?*/
+$quickview = $this->getEffectConfig('enable_quickview');
+$quickview = $quickview ? $quickview : 0;
+/*Swap images was enabled?*/
+$swap_image = $this->getEffectConfig('enable_swap');
+$swap_image = $swap_image ? $swap_image : 0;
+
+$moduleId = rand().time();
+$itemsperpage = (int)$this->getEffectConfig("max_items");
+
+
+$title_maxchar = (int)$this->getEffectConfig("title_maxchar");
+$title_maxchar = $title_maxchar > 0 ?$title_maxchar: 100;
+$desc_maxchar = (int)$this->getEffectConfig("desc_maxchar");
+$desc_maxchar = $desc_maxchar > 0 ?$desc_maxchar: 100;
+
+
+/*Owl Carousel Setting*/
+
+$auto_play_mode = (int)$this->getCarouselConfig("auto_play");
+$interval = (int)$this->getCarouselConfig("interval");
+$lazy_load_image = $this->getCarouselConfig("lazy_load_image", 0);
+$loop = (int)$this->getCarouselConfig("loop", 1);
+$slide_by = (int)$this->getCarouselConfig("slide_by", 1);
+$margin_item = $this->getCarouselConfig("margin_item", 0);
+$show_nav = (int)$this->getCarouselConfig("show_navigator", 1);
+$rtl = (int)$this->getCarouselConfig("rtl", 0);
+$mouse_drag = (int)$this->getCarouselConfig("mouse_drag", 1);
+$touch_drag = (int)$this->getCarouselConfig("touch_drag", 1);
+$mobile_items = (int)$this->getCarouselConfig("mobile_items", 1);
+$tablet_items = (int)$this->getCarouselConfig("tablet_items", 2);
+$tablet_small_items = (int)$this->getCarouselConfig("tablet_small_items", 2);
+$portrait_items = (int)$this->getCarouselConfig("portrait_items", 3);
+$large_items = (int)$this->getCarouselConfig("large_items", 5);
+$custom_items = $this->getCarouselConfig("custom_items", "");
+$enable_pagination = (int)$this->getCarouselConfig("show_pagination", 1);
+
+$carousel_responsive = (int)$this->getCarouselConfig("carousel_responsive", 1);
+$cols = (int)$this->getCarouselConfig("default_items", 4);
+$cols = !empty($cols)?(int)$cols:4;
+$itemsperpage = (int)$this->getCarouselConfig("max_items", (int)$cols);
+
+$auto_play = $auto_play_mode?"true":"false";
+
+$default_items = $cols;
+$cols = 1;
+$span = 12/$cols;
+$active = 'latest';
+
+if($items){
+	$items = $items->getItems();
+}
+$price_prefix = '_productcarousel_owl_'.rand(1,9)+rand().time();
+$common_layout = $this->getConfig('common_layout');
+
+if(isset($common_layout) && !empty($common_layout)){
+	$default_layout = $common_layout;
+}
+
+$custom_navigation = false;
+$title_class = $this->getConfig('title_class');
+$title_icon = $this->getConfig('title_icon');
+$show_viewalllink = $this->getConfig('show_viewalllink');
+$viewall_text = $this->getConfig('viewall_text');
+$viewall_link = $this->getConfig('viewall_link');
+if($viewall_link){
+	if(!preg_match("/^http\:\/\/|https\:\/\//", $viewall_link)) {
+		$viewall_link = Mage::getBaseUrl().$viewall_link;
+	}
+}
+$processor = Mage::helper('cms')->getPageTemplateProcessor();
+$pretext = $processor->filter($this->getConfig("pretext"));
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<div class="<?php echo $this->getConfig('prefix');?> block productcarousel owlproductcarousel" id="module<?php echo $moduleId; ?>" style="width:100%">
+	<?php if($this->getConfig('title')){?>
+	<div class="block-title <?php echo $title_class ?>">
+		<span>
+			<?php if($title_icon!=''){ ?>
+			<img src="<?php echo Mage::getBaseUrl('media') . $title_icon ?>" alt="<?php echo $this->getConfig('title') ?>" />
+			<?php } ?>
+			<strong><span><?php echo $this->getConfig('title')?></span></strong>
+		</span>
+		<?php if( $pretext!='' && !$cms ) { ?>
+		   <div class="pretext"><?php echo $pretext;?></div>
+		<?php } elseif($cms!='') {  ?>
+		   <div class="pretext"><?php echo $cms;?></div>
+		   <?php
+		}?>
+	</div>
+	<?php }?>
+	<div class="block-content">
+		<div class="box-products carousel slide owl-carousel-play" data-ride="owlcarousel">
+			<div id="owlproductcarousel<?php echo $moduleId;?>"
+				class="owl-carousel"
+				data-slide-default="<?php echo $default_items?(int)$default_items:4; ?>"
+				data-slide-desktop="1199,<?php echo $default_items?(int)$default_items:4; ?>"
+				data-slide-desktop-small="979,<?php echo $portrait_items?(int)$portrait_items:3; ?>"
+				data-slide-tablet="768, <?php echo $tablet_items?(int)$tablet_items:2; ?>"
+				data-slide-tablet-small="640, <?php echo $tablet_small_items?(int)$tablet_small_items:2; ?>"
+				data-slide-mobile="479, <?php echo $mobile_items?(int)$mobile_items:1; ?>"
+				data-slide-custom="<?php echo (isset($custom_items) && $custom_items)?$custom_items:'false';?>"
+				data-slide-speed="<?php echo $interval?(int)$interval:'300';?>"
+				data-auto="<?php echo $auto_play_mode?'true':'false';?>"
+				data-navigation="<?php echo ($show_nav == 1 && !$custom_navigation)?'true':'false'; ?>"
+				data-pagination="<?php echo $enable_pagination == 1?'true':'false'; ?>">
+				<?php $pages = array_chunk( $items, $itemsperpage); ?>
+				<?php foreach ($pages as  $k => $_productCollection ):  ?>
+					<div class="item <?php if($k==0) {?>first<?php } elseif($k == (count($pages) -1 )) {?>last<?php } ?> products-grid no-margin">
+						<?php if($product_module_path = Mage::helper("ves_tempcp/framework")->getLayoutPath("product_module.phtml")) { ?>
+							<?php require ($product_module_path); ?>
+							<?php } ?>
+						</div>
+					<?php endforeach; ?>
+				</div>
+				<?php if($show_nav == 1 && count($pages) > $default_items && $custom_navigation): ?>
+					<a class="owl-left left carousel-control carousel-xs radius-x" href="#owlproductcarousel<?php echo $moduleId;?>" data-slide="prev">
+						<span class="fa fa-angle-left"></span>
+					</a>
+					<a class="owl-right right carousel-control carousel-xs radius-x" href="#owlproductcarousel<?php echo $moduleId;?>" data-slide="next">
+						<span class="fa fa-angle-right"></span>
+					</a>
+				<?php endif; ?>
+			</div>
+			<?php if($show_viewalllink){ ?>
+			<a href="<?php echo $viewall_link ?>" title="<?php echo $viewall_text ?>"><?php echo $viewall_text ?></a>
+			<?php } ?>
+		</div>
+	</div>

@@ -1,0 +1,31 @@
+<?php
+/**
+ * Sales transaction history template
+ */
+?>
+<?php
+$store_id = Mage::app()->getStore()->getStoreId();
+$check_responsvie = Mage::getStoreConfig('affiliateplus/style_config/responsive_enable', $store_id);
+ if($check_responsvie)
+     $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+ else
+     $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+?>
+
+<div class="aff-main-content <?php echo $class_name; ?>">
+    <div class="aff-title">
+        <h2><?php echo $this->__('Tier Affiliates') ?></h2>
+    </div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php if ($this->getCollection()->getSize()): ?>
+        <?php echo $this->getPagerHtml() ?>
+        <?php echo $this->getGridHtml() ?>
+        <?php echo $this->getPagerHtml() ?>
+    <?php else: ?>
+        <div  style="float: left; width: 100%;">
+            <p class="note-msg">
+                <?php echo $this->__('There are no tier affiliates matching this selection.') ?>
+            </p>
+        </div>
+    <?php endif ?>
+</div>

@@ -1,0 +1,88 @@
+/* 
+    Document   : rewardpointsreport.css
+    Created on : Aug 27, 2013, 9:08:56 PM
+    Author     : magestore
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*********** Report Dashboard *********/
+#wrap-content-right {
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: #FFF;
+}
+#diagram_tab {
+    margin: 0px 0px;
+    padding: 10px 6px 0px 6px;
+    border: 0px;
+}
+#diagram_tab li{
+    text-align: center;
+    font-size: small;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    display: list-item;
+}
+/*TAB*/
+#diagram_tab li:nth-of-type(1) {
+    width: 18%;
+    float: left;
+}
+#diagram_tab li:nth-of-type(2) {
+    width: 25%;
+    float: left;
+}
+#diagram_tab li:nth-of-type(3) {
+    width: 57%;
+    float: left;
+}
+#diagram_tab li:nth-of-type(4) {
+    width: 34%;
+    float: left;
+    clear: left;
+}
+#diagram_tab li:nth-of-type(5) {
+    width: 33%;
+    float: left;
+}
+#diagram_tab li:nth-of-type(6) {
+    width: 33%;
+    float: left;
+}
+#diagram_tab li a {
+    line-height: 27px;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+}
+
+/*----graph content----*/
+#diagram_tab_content {
+    width: auto;
+    background-color: #FFF;
+    padding: 0px;
+    margin: 10px 16px 16px 16px;
+    position: relative;
+}
+.tab-graph-content {
+    width: auto;
+}
+.rewardpoints-image-chart {
+    width: 72%;
+    margin: 0 auto;
+}
+.rewardpoints-image-chart img{
+    width: 100%;
+}
+.rewardpoints-no-data-found {
+    min-height: 300px;
+}
+
+.rewards-report-number {font-size: 24px;}
+
+.rewardpointsreport-statistic-container {
+    width: 100%;
+    background-color: #FFF;
+}

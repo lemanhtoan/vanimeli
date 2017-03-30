@@ -1,0 +1,118 @@
+﻿#klarnaWrapper {position: relative;} 
+#klarnaOverlay{background-color:#FFF;position:absolute;height:100%;width:100%;opacity:0.5;}
+#klarnaMsg h2{color:#1e7ec8;font-weight:bold;margin:0px;}
+#klarnaMsg h2.kco-validation-message{color:#fd7070;}
+#kcoNewsLetterForm {display:block;margin: 10px 0px;}
+.klarnaLink{margin-bottom:10px;}
+.klarnaLink img{margin:0 auto;}
+.klarnaLinkText{margin:10px 0px 0px 0px;font-weight:bold;}
+.klarnaLink:hover{border:1px solid #8CCBFC;}
+.klarnaLink, #klarnaMsg{background-color:#FFF;text-align:center;border:1px solid #1e7ec8;display:block;padding:20px 5px;margin-bottom:0px;border-radius:3px;}
+.cart .totalsRow{margin: 0 0 18px;}
+.cart .crosssell{margin: 0 0 18px;overflow:hidden;float:none !important;clear:none !important;width:auto}
+.cart .crosssell li.item{float:left;margin-right:10px;margin-bottom:10px;width:48%;}
+.cart .crosssell li.item .product-image{display:inline-block;float:left;margin-right: 10px;}
+.cart .crosssell li.item .product-details{float:left;margin-left:0px;}
+.cart .crosssell li.item .product-details .add-to-links, .cart .crosssell li.item .product-details .button{display:inline-block !important;}
+.crosssell .products-grid{width:100%;border:1px solid red;}
+.crosssell .products-grid > li:nth-child(3n+1) {clear: none !important;}
+.crosssell .products-grid .product-image{max-width: 100px;margin: 5px auto;}
+.cart .cart-collaterals .col2-set, .cart .totals{width:auto;float:none;}
+.cart .cart-collaterals .col2-set .col-2{width: 48.5%;}
+.cart-forms, .cart-totals-wrapper {float:none !important;clear:none !important;width:100% !important;}
+.cart .loading{ background: url('loader.gif') no-repeat 50% 50% !important; opacity:0.7;}
+.cart .sp-methods{background:none !important;margin:0px !important;padding:0px !important;}
+.cart .sp-methods dd label{min-width: 0px !important; width:100%!important;}
+.cart .cart-table{width:100% !important;}
+.cart-table .product-cart-total, .cart-table .product-cart-price, .a-center, .cart-table tfoot td, td.product-cart-actions{text-align: center;}
+.cart-table .product-cart-image{text-align:center;}
+.cart-table .product-cart-image .product-image img {max-width: 100%;width:auto !important;}
+.cart-table .product-cart-image .product-image{text-align: center;display: inline-block;}
+.cart-table .btn-empty {float: none !important;}
+.cart-forms, .cart-totals-wrapper{padding-left:0px !important;}
+.cart .form-list .input-box{width:90% !important;}
+.cart .payments ul li.active, .cart .responsive-payments ul li.active{background: #0186D3 !important;position:relative;z-index:2;}
+.cart .payments ul li.active img, .cart .responsive-payments ul li.active img{max-height:30px;margin:0 auto;}
+.cart .payments ul li button, .cart .responsive-payments ul li button{background:none;padding:0px;color:#000;}
+.cart .paymentMenuContainer{position:relative;overflow: hidden;}
+.cart .full-column {margin-bottom:20px;} 
+.cart .payments ul li, .cart .responsive-payments ul li{
+	background: rgb(252,255,244);
+	background: -moz-linear-gradient(top,  rgba(252,255,244,1) 0%, rgba(233,233,206,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,255,244,1)), color-stop(100%,rgba(233,233,206,1)));
+	background: -webkit-linear-gradient(top,  rgba(252,255,244,1) 0%,rgba(233,233,206,1) 100%);
+	background: -o-linear-gradient(top,  rgba(252,255,244,1) 0%,rgba(233,233,206,1) 100%);
+	background: -ms-linear-gradient(top,  rgba(252,255,244,1) 0%,rgba(233,233,206,1) 100%);
+	background: linear-gradient(to bottom,  rgba(252,255,244,1) 0%,rgba(233,233,206,1) 100%);
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	height:50px;
+}
+.cart .payments ul li{
+	display:block;
+	float:left;
+	border: 1px solid #d0cbc1;
+	padding:10px 20px;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom:0px;
+}
+.cart .responsive-payments ul li{
+	padding:8px 0px !important;
+	float:none !important;
+	text-align:center;
+	border-bottom:1px solid #ddd;
+	display:none;
+	transition:0.4s;
+}
+.cart .payments ul li a, .cart .responsive-payments ul li a{
+	text-decoration:none;
+	font: bold 13px/16px Arial, Helvetica, sans-serif;
+	color: #000;
+	text-transform: uppercase;
+}
+.responsive-payments .paymentnavi-toggle:hover{cursor:pointer;}
+.responsive-payments ul li:hover, .payments ul li:hover {box-shadow:inset 0px 0px 5px 5px rgba(0,0,0,0.025);}
+.responsive-payments ul li.active{display:block !important;}
+.cart .paymentContainer{
+	padding:5px;
+	overflow: hidden;
+	clear:left;
+	position: relative;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border: 1px solid #d0cbc1;
+}
+.responsive-payments ul{overflow:hidden;border:1px solid #ddd;border-radius:3px 0px 0px 3px;margin-bottom:10px !important;}
+.responsive-payments .paymentnavi-toggle{
+	display:block;
+	position:absolute;
+	right:0;
+	top:1px;
+	height:49px;
+	width:49px;
+	background:url('dropdown.png') no-repeat;
+	background-size: cover;
+	z-index:20;
+}
+.twocolumncart .col2-set .col-narrow { width:49%; }
+.twocolumncart .col2-set .col-wide { width:49%; }
+.twocolumncart .crosssell{overflow: hidden;margin-top:10px;}
+.twocolumncart .shipping .shipping-form .form-list > li input, .twocolumncart .shipping .shipping-form .form-list > li select {width: 100%;}
+.twocolumncart .col2-set .full-column{float:none;width: auto;border: 0;padding-right: 0;padding-left: 0;}
+.twocolumncart .col2-set .col-2{padding:20px 0px;}
+@media only screen and (max-width: 800px){
+	.twocolumncart .col2-set .col-1, .twocolumncart .col2-set .col-2{float: none;width: auto;border: 0;padding-right: 0;padding-left: 0;}
+	.twocolumncart .cart-collaterals .col2-set .col-1, .twocolumncart .cart-collaterals .col2-set .col-2, .cart .cart-collaterals .col2-set .col-2 {width: 100%;}
+	.cart-table button.button{margin-bottom:5px;}
+}
+
+.KCOgiftFormContainer{margin-bottom:20px;}
+.catalog-product-view .kco-ppayment p{margin:0px;}
+.catalog-category-view .kco-ppayment p{font-size:11px;margin:0px;}
+.kco-ppayment img{display:inline;}

@@ -1,0 +1,125 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 8, 2014, 2:49:32 PM
+    Author     : Thu Thao
+*/
+
+@import url(//fonts.googleapis.com/css?family=Raleway:400,700,300);
+/************edit shopping cart*************/
+.cart-forms .discount h2{ font-size:12px;font-weight:bold;}
+.discount-form .rewards-sales-rules dt label{font-size: 14px;font-weight: normal;font-family:"Raleway","Helvetica Neue",Verdana,Arial,sans-serif;}
+.discount-form label{font-size: 14px;font-weight: normal;}
+
+
+/********************Checkout Success**********************/
+.col-main .referfriends-body{height:450px !important;}
+.col-main .referfriends-body-left-description{float:left;}
+.col-main  .referfriends-body-left{width: 49% !important;text-align: left;}
+.col-main  .referfriends-body-right{float:right; width:250px;}
+.col-main  .referfriends-body-right-ul li.referfriends-sharelink{text-align:left; float:left; width:100%;height:70px;}
+.col-main  .referfriends-body-right-ul li.referfriends-sharefacebook{float:left; width:100%; text-align:left;}
+.col-main  .referfriends-body-right-ul li.referfriends-sharegoogleplus{float:left;width:100%; text-align:left;}
+.col-main  .referfriends-body-right-ul li.referfriends-sharetwitter{float:left; width:100%; text-align:left;}
+.col-main  .referfriends-body-right-ul li.referfriends-shareemail {float:left; width:100%; text-align:left;}
+.col-main #rewardpoints-referfriends-popup{margin-left: auto;display: block;margin-right: auto;}
+@media (max-width:900px){
+.col-main  #rewardpoints-referfriends-popup{position:relative; height:auto; float:none !important; width:auto!important; left:auto !important;margin-left: auto;display: block;margin-right: auto;}
+.col-main  .referfriends-body-left-earn{float:left !important;}
+}
+@media (max-width:720px){
+.col-main  #rewardpoints-referfriends-popup{position:relative; height:auto; width:auto; margin-left: auto;display: block;margin-right: auto;}
+.col-main .referfriends-body-right{display:block !important; }
+}
+@media (max-width:690px){
+.col-main  #rewardpoints-referfriends-popup{position:relative; height:auto; width:auto; margin-left: auto;display: block;margin-right: auto;}
+.col-main .referfriends-body-right{display:block !important; width:100% !important; text-align: left;float:left !important;}
+.col-main .referfriends-body-left{width: 100% !important;text-align: left;}
+.col-main .referfriends-body-left-description{width: 100% !important;text-align: left;}
+.col-main  .referfriends-body-left-earn{padding-bottom:20px;}
+}
+/***********Edit Page Details*************/
+.referfriends-body-right-1{display:none;}
+.referfriends-title{background:none !important;}
+.referfriends-body{background:none !important;}
+.referfriends-bottom{background:none !important;}
+.dialog_e{background:none !important;}
+.dialog_content{background:none; width:auto !important;}
+.referfriends-title h2{padding-top:20px !important; font-weight:500; border-bottom: 1px solid #CCC; padding-bottom:10px !important;}
+.referfriends-title a{top:5px !important; right:10px !important;}
+.referfriends-body-left-earn{height:55px !important;}
+#rewardpoints-referfriends-popup{border:1px solid #CCC; border-radius:5px;}
+
+
+@media(max-width:900px){
+.dialog_e{display:none;}
+.dialog{position: absolute; left: 50% !important; top:32px !important; margin-left:-320px;width: 640px !important;float:left !important; height: auto !important;}
+#rewardpoints-referfriends-popup{position: absolute;left: 50%; margin-left:-320px;width: 640px !important;float:left !important; height: auto !important;} 
+.referfriends-body-right-ul  li.referfriends-sharelink{background-size: 35px !important;}
+.referfriends-body-right-ul li.referfriends-sharefacebook a{background-size: 35px !important;}
+.referfriends-body-right-ul li.referfriends-sharegoogleplus a{background-size: 35px !important;}
+.referfriends-body-right-ul li.referfriends-sharetwitter a{background-size: 35px !important;}
+.referfriends-body-right-ul li.referfriends-shareemail a{background-size: 35px !important;}
+.referfriends-body-right .referfriends-body-right-ul  li.referfriends-sharelink{font-size:16px;}
+.referfriends-body-right  .referfriends-body-right-ul li a{font-size:16px;}
+.referfriends-body-left-earn{height:58px !important;}
+.referfriends-body-left{width:300px !important;}
+.dialog{top:31px !important;}
+}
+@media(max-width:720px){
+.dialog{position: absolute !important; left: 50% !important; margin-left: -270px !important; width: 540px !important; float:left !important; height: auto !important;}
+ #rewardpoints-referfriends-popup{position: absolute;margin-left: -270px;left: 50%; width: 540px !important;float:left !important; height: auto !important;} 
+.referfriends-body-right .referfriends-body-right-ul  li.referfriends-sharelink{font-size:16px;}
+/* .referfriends-body-right-ul  li.referfriends-sharelink{background-size: 30px !important;}*/
+.referfriends-body-right-ul li.referfriends-sharefacebook {height: 50px !important;}
+.referfriends-body-right-ul li.referfriends-sharegoogleplus{height: 50px !important;}
+.referfriends-body-right-ul li.referfriends-sharetwitter {height: 50px !important;}
+.referfriends-body-right-ul li.referfriends-shareemail {height: 50px !important;}
+.referfriends-body-right  .referfriends-body-right-ul li a{font-size:16px;}
+.referfriends-body-right .referfriends-body-right-ul  li.referfriends-sharelink{font-size:14px;}
+.referfriends-body-left {width:500px !important; float:left;}
+.referfriends-body-left-earn{height:65px !important;}
+.referfriends-body-right {display:none;}
+.referfriends-body-right-1{display:block;position: absolute;top: 145px;left: 300px;}
+.referfriends-body-right-1  .referfriends-body-right-ul  li.referfriends-sharelink{font-size:16px;}
+.referfriends-body-right-1  .referfriends-body-right-ul li a{font-size:16px;}
+.share-link-url {width:149px !important;}
+.referfriends-title{background:none !important;}
+.referfriends-body{background:none !important;}
+.referfriends-bottom {background:none !important;}
+.referfriends-body-left-product-title h3{width:240px;}
+
+}
+@media(max-width:620px){
+.dialog{position: absolute !important; left: 50% !important; margin-left: -180px !important; width: 360px !important;float:left !important; height: auto !important;}
+#rewardpoints-referfriends-popup{position: absolute; margin-left: -180px;left: 50%; width: 360px !important;float:left !important; height: auto !important;} 
+.referfriends-body-right-ul  li.referfriends-sharelink{background-size: 27px !important;}
+.referfriends-body-right-ul li.referfriends-sharefacebook a{background-size: 27px !important;}
+.referfriends-body-right-ul li.referfriends-sharegoogleplus a{background-size: 27px !important;}
+.referfriends-body-right-ul li.referfriends-sharetwitter a{background-size: 27px !important;}
+.referfriends-body-right-ul li.referfriends-shareemail a{background-size: 27px !important;}
+.referfriends-body-right  .referfriends-body-right-ul li a{font-size:16px;}
+.referfriends-body-left {width:300px !important; float:left;}
+.referfriends-body-right-1{display:block; position:static; }
+.referfriends-title{background:none !important;}
+.referfriends-body{background:none !important;}
+.referfriends-bottom {background:none !important;}
+}
+@media(max-width:460px){
+#rewardpoints-referfriends-popup{position: absolute;margin-left: -150px;left: 50%; width: 300px !important;float:left !important; height: auto !important;} 
+.referfriends-body-right-ul  li.referfriends-sharelink{background-size: 27px !important;}
+.referfriends-body-right-ul li.referfriends-sharefacebook a{background-size: 27px !important;}
+.referfriends-body-right-ul li.referfriends-sharegoogleplus a{background-size: 27px !important;}
+.referfriends-body-right-ul li.referfriends-sharetwitter a{background-size: 27px !important;}
+.referfriends-body-right-ul li.referfriends-shareemail a{background-size: 27px !important;}
+.referfriends-body-right  .referfriends-body-right-ul li a{font-size:16px;}
+.referfriends-body-left {width:260px !important; float:left;}
+.referfriends-body-right-1{display:block; position:static; }
+.referfriends-title{background:none !important;}
+.referfriends-body{background:none !important;}
+.referfriends-bottom {background:none !important;}
+
+}

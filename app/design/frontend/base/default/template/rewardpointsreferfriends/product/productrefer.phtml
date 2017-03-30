@@ -1,0 +1,177 @@
+<?php
+	/**
+	 * Send email to friend Template
+	 */
+?>
+<?php if ($this->showLink()){ ?>
+
+<div class="rewardpoints-referfriends-linkrefer" id="rewardpoints-referfriends-linkrefer">
+	<a href="javascript:void()" onclick="getBox();" title="<?php echo $this->__('Share with Friend'); ?>"><?php echo $this->__('Share with Friend'); ?></a>
+	<?php echo Mage::helper('rewardpoints/point')->getImageHtml() ?>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	$$('p.email-friend').each(function (el){
+		el.innerHTML = $('rewardpoints-referfriends-linkrefer').innerHTML;
+	});
+	$('rewardpoints-referfriends-linkrefer').hide();
+//]]>
+</script>
+<script>
+    var winPopupRefer = new Window({windowClassName: 'rewardpoints-referfriend-dialog-refer', title:'Refer Friends',zIndex:100, width:695, height: 510,minimizable:false,maximizable:false,showEffectOptions:{duration:0.4},hideEffectOptions:{duration:0.4}, resizable:false, destroyOnClose: false});
+    function getBox(){ 
+        winPopupRefer.setContent('rewardpoints-referfriends-popup');
+//        winPopupRefer.setSize(winPopupRefer.width, document.getElementById("rewardpoints-referfriends-popup").style.height, true);
+        winPopupRefer.showCenter(true);
+        $('overlay_modal').observe('click', function(event){
+            winPopupRefer.hide(); 
+        });
+    }
+</script>
+<?php 
+    $_product = $this->getProduct();
+    $share_url = $this->getShareUrl($_product->getId());
+    $share_coupon = $this->getShareCoupon(); 
+?>
+<div id="rewardpoints-referfriends-popup" style="display:none; width:685px; height: 500px">
+    <div class="referfriends-title">
+        <h2><?php echo $this->__("Share Product") ?></h2>
+        <!--edit by Sally-->
+        <a class="bt_close" href="javascript:void()" id="windowclose" onclick="winPopupRefer.hide()"><img src="<?php echo $this->getSkinUrl('images/rewardpoints/btn_window_close.gif');?>"></a>
+        <!--end by Sally-->
+    </div>
+    <div class="referfriends-body" id="rewardpoints-referfriends-popup-body">
+        <div class="referfriends-body-left">
+            <div class="referfriends-body-left-description">
+                <?php echo $this->__('Refer this product to your friends and get reward points.') ?>
+            </div>
+            <div class="referfriends-body-left-earn" style="clear:both">
+                <?php if($this->hasSpecialOffer()): ?><br>
+                    <?php echo $this->__('Get more points per purchase that meets ');?>
+                    <a href="<?php echo Mage::getUrl('rewardpointsreferfriends');; ?>" target="blank"><?php echo $this->__('Special Offer.'); ?></a>
+                <?php endif; ?>
+            </div>
+            <div class="referfriends-body-left-product">
+                <div class="referfriends-body-left-product-title">
+                <h3><?php echo $_product->getName(); ?></h3>
+                <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(200) ?>" alt="<?php echo $this->htmlEscape($this->getImageLabel()) ?>" title="<?php echo $this->htmlEscape($this->getImageLabel()) ?>" style="margin-left: 20px"/>
+            </div>
+                <!-----------Add by Sally------------->
+                <div class="referfriends-body-right-1">
+                <ul class="referfriends-body-right-ul" style="list-style-type:none;">
+                <?php if($share_url): ?>
+                        <li class="referfriends-sharelink">
+                                <div class="share-link-title"><?php echo $this->__('Link') ?></div>
+                                <input type="text" value="<?php echo $share_url ?>" class="share-link-url input-text" readonly="true" onclick="this.select();" />
+                        </li>
+                <?php endif ?>
+                <?php if ($share_coupon): ?>
+                        <li class="referfriends-sharelink">
+                                <div class="share-link-title"><?php echo $this->__('Coupon code') ?></div>
+                                <input type="text" value="<?php echo $share_coupon ?>" class="share-link-url input-text" readonly="true" onclick="this.select();" />
+                        </li>
+                <?php endif ?>
+                        <?php if($this->callHelper()->getReferConfig('use_facebook')): ?>
+                        <li class="referfriends-sharefacebook">
+                                <a href="javascript:void()" onclick="postOnFacebookPopup()"><?php echo $this->__('Share it on Facebook'); ?></a>
+                        </li>
+                        <?php endif; ?>
+                        <?php if($this->callHelper()->getReferConfig('use_google') && $this->callHelper()->getReferConfig('refer_method')!='coupon'): ?>
+                        <li class="referfriends-sharegoogleplus">
+                                <a href="javascript:void()" onclick="popWin('https://plusone.google.com/_/+1/confirm?hl=en&url=<?php echo $share_url ?>', 'google','top:100,left:100,width=640,height=480,resizable=yes,scrollbars=yes')"><?php echo $this->__('Share it on Google +'); ?></a>
+                        </li>
+                        <?php endif; ?>
+                        <?php if($this->callHelper()->getReferConfig('use_twitter')){ ?>
+                        <li class="referfriends-sharetwitter">
+                                <a href="javascript:void()" onclick="popWin('https://twitter.com/share?url=<?php echo urlencode($share_url); ?>&original_referer=<?php echo urlencode($share_url) ?>&source=tweetbutton&text=<?php echo urlencode($_product->getName()) ?><?php if ($share_coupon) echo urlencode(chr(10).$this->__('Coupon code: ').$share_coupon.chr(10).$this->__('at')) ?>','tweeter','top:100,left:100,width=640,height=480,resizable=yes,scrollbars=yes')"><?php echo $this->__('Tweet it'); ?></a>
+                        </li>
+                        <?php } ?>
+                        <?php if($this->callHelper()->getReferConfig('use_email')): ?>
+                        <li class="referfriends-shareemail">
+                                <a href="<?php echo $this->getSendFriendUrl(); ?>"><?php echo $this->__('Mail it'); ?></a>
+                        </li>
+                        <?php endif; ?>
+                </ul>
+        </div>
+                <!-----------End by Sally------------->
+            </div>
+        </div>
+        <div class="referfriends-body-right">
+            <ul class="referfriends-body-right-ul">
+            <?php if($share_url): ?>
+                <li class="referfriends-sharelink">
+                    <div class="share-link-title"><?php echo $this->__('Link') ?></div>
+                    <input type="text" value="<?php echo $share_url ?>" class="share-link-url input-text" readonly="true" onclick="this.select();" />
+                </li>
+            <?php endif ?>
+            <?php if ($share_coupon): ?>
+                <li class="referfriends-sharelink">
+                    <div class="share-link-title"><?php echo $this->__('Coupon code') ?></div>
+                    <input type="text" value="<?php echo $share_coupon ?>" class="share-link-url input-text" readonly="true" onclick="this.select();" />
+                </li>
+            <?php endif ?>
+                <?php if($this->callHelper()->getReferConfig('use_facebook')): ?>
+                <li class="referfriends-sharefacebook">
+                    <a href="javascript:void()" onclick="postOnFacebookPopup()"><?php echo $this->__('Share it on Facebook'); ?></a>
+                </li>
+                <?php endif; ?>
+                <?php if($this->callHelper()->getReferConfig('use_google') && $this->callHelper()->getReferConfig('refer_method')!='coupon'): ?>
+                <li class="referfriends-sharegoogleplus">
+                    <a href="javascript:void()" onclick="popWin('https://plusone.google.com/_/+1/confirm?hl=en&url=<?php echo $share_url ?>', 'google','top:100,left:100,width=640,height=480,resizable=yes,scrollbars=yes')"><?php echo $this->__('Share it on Google +'); ?></a>
+                </li>
+                <?php endif; ?>
+                <?php if($this->callHelper()->getReferConfig('use_twitter')){ ?>
+                <li class="referfriends-sharetwitter">
+                    <a href="javascript:void()" onclick="popWin('https://twitter.com/share?url=<?php echo urlencode($share_url); ?>&original_referer=<?php echo urlencode($share_url) ?>&source=tweetbutton&text=<?php echo urlencode($_product->getName()) ?><?php if ($share_coupon) echo urlencode(chr(10).$this->__('Coupon code: ').$share_coupon.chr(10).$this->__('at')) ?>','tweeter','top:100,left:100,width=640,height=480,resizable=yes,scrollbars=yes')"><?php echo $this->__('Tweet it'); ?></a>
+                </li>
+                <?php } ?>
+                <?php if($this->callHelper()->getReferConfig('use_email')): ?>
+                <li class="referfriends-shareemail">
+                    <a href="<?php echo $this->getSendFriendUrl(); ?>"><?php echo $this->__('Mail it'); ?></a>
+                </li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
+    <div class="referfriends-bottom">
+    </div>
+</div>
+<?php //endif; ?>
+<script>
+window.fbAsyncInit = function() {
+    FB.init({
+        appId      : '<?php echo $this->callHelper()->getReferConfig('fbapp_id') ?>',
+        status     : true,
+        xfbml      : true
+      });
+    FB.Event.subscribe('edge.create',
+            function(response) {
+                ajaxfacebook('like', false, response);
+            }
+    );
+    FB.Event.subscribe('edge.remove',
+            function(response) {
+                ajaxfacebook('unlike', false, response);
+            }
+    );
+    FB.Event.subscribe('message.send',
+            function(response) {
+                ajaxfacebook('send', false, response);
+            }
+    );
+    };
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/all.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+</script>
+<script type="text/javascript">
+    function postOnFacebookPopup(){
+        popWin('http://www.facebook.com/sharer.php?s=100&p[title]=<?php echo urlencode($_product->getName()) ?>&p[summary]=<?php echo urlencode($_product->getMetaDescription()) ?>&p[url]=<?php echo urlencode($share_url) ?>&p[images][0]=<?php echo $_product->getImageUrl() ?>','sharer','toolbar=0,status=0,width=548,height=325');
+    }
+</script>
+<?php } ?>

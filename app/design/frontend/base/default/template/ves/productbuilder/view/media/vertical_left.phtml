@@ -1,0 +1,159 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+
+/* @var $this Mage_Catalog_Block_Product_View_Media */
+?>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+    $config_data = $this->getConfigData();
+    $enable_popup = isset($config_data['enable_image_popup'])?$config_data['enable_image_popup']:'true';
+    $enable_popup = $enable_popup=='true'?true:false;
+    $enable_thumbs_carousel = isset($config_data['enable_thumbs_carousel'])?$config_data['enable_thumbs_carousel']:'true';
+    $enable_thumbs_carousel = $enable_thumbs_carousel=='true'?true:false;
+    $columns = isset($config_data['thumbs_perpage'])?(int)$config_data['thumbs_perpage']:4;
+    $thumb_width = isset($config_data['thumb_width'])?(int)$config_data['thumb_width']:75;
+    $thumb_height = isset($config_data['thumb_height'])?(int)$config_data['thumb_height']:75;
+    $popup_image_width = isset($config_data['popup_width'])?$config_data['popup_width']:"";
+    $popup_image_height = isset($config_data['popup_height'])?$config_data['popup_height']:"";
+
+    $id = rand().time();
+    /*Check venustheme control panel is installed*/
+    $themeConfig = null;
+    $theme = null;
+    if(Mage::helper("ves_blockbuilder")->checkModuleInstalled("Ves_Tempcp")) {
+        $theme = Mage::helper("ves_tempcp/framework")->getFramework( );
+        $themeConfig = $theme->getConfig();
+    }
+?>
+
+<?php if (count($this->getGalleryImages()) > 0): ?>
+<div class="more-views vertical col-lg-3 col-md-3 col-sm-3 col-xs-3 pull-left">
+    <a href="javascript:;" class="jcarousel-control prev"><i class="fa fa-angle-up"></i></a>
+    <div id="image-additional" class="<?php echo $enable_thumbs_carousel?'carousel':''; ?>">
+        <ul class="product-image-thumbs" id="product_image_gallery_carousel_<?php echo $id; ?>">
+        <?php $i=0; foreach ($this->getGalleryImages() as $_image): ?>
+            <?php if ($this->isGalleryImageVisible($_image)): ?>
+            <li class="item">
+                <a class="thumb-link" href="#" title="<?php echo $this->escapeHtml($_image->getLabel()) ?>" data-image-index="<?php echo $i; ?>">
+                    <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($thumb_width, $thumb_height); ?>"
+                         width="<?php echo $thumb_width; ?>" height="<?php echo $thumb_height;?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" />
+                </a>
+            </li>
+            <?php endif; ?>
+        <?php $i++; endforeach; ?>
+        </ul>
+    </div>
+    <a href="javascript:;" class="jcarousel-control next"><i class="fa fa-angle-down"></i></a>
+    <div class="clear"></div>
+</div>
+<?php endif; ?>
+
+<div class="product-image product-image-zoom  zoom-available col-lg-9 col-md-9 col-sm-9 col-xs-9 pull-right">
+    <div class="product-image-gallery">
+        <a href="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" id="image-main"  class="gallery-image visible" rel="gallery_colobox" src="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" data-zoom-image="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>">
+        <img 
+             src="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>"
+             alt="<?php echo $this->escapeHtml($this->getImageLabel()) ?>"
+             title="<?php echo $this->escapeHtml($this->getImageLabel()); ?>"/>
+        </a>     
+            <?php $i=0; foreach ($this->getGalleryImages() as $_image): ?>
+                <?php if ($this->isGalleryImageVisible($_image)): ?>
+                    <a href="<?php echo $this->getGalleryImageUrl($_image); ?>" id="image-<?php echo $i; ?>" class="gallery-image"  rel="gallery_colobox" data-zoom-image="<?php echo  $this->getGalleryImageUrl($_image); ?>" src="<?php echo $this->getGalleryImageUrl($_image); ?>">
+                    <img
+                     src="<?php echo $this->getGalleryImageUrl($_image); ?>"
+                     data-zoom-image="<?php echo  $this->getGalleryImageUrl($_image); ?>"/>
+                    </a>
+                <?php endif; ?>
+            <?php $i++; endforeach; ?>
+    </div>
+</div>
+<?php if( $themeConfig && $themeConfig->get("product_enablezoom", 1) ) { ?>
+<script type="text/javascript" src="<?php echo $theme->getJs("elevatezoom/elevatezoom-min.js"); ?>"></script>
+<script type="text/javascript">
+<?php if( $themeConfig->get('product_zoomgallery') == 'slider' ) {  ?>
+  jQuery("#image-main").elevateZoom({
+      <?php if( $themeConfig->get('product_zoommode') != 'basic' ) { ?>
+      zoomType        : "<?php echo $themeConfig->get('product_zoommode');?>",
+      <?php } ?>
+      gallery:'image-additional', 
+      cursor: 'pointer',
+      easing : <?php echo (1 == $themeConfig->get('enable_zoom_easing', 0))?'true':'false'; ?>,
+      easingType : "<?php echo $themeConfig->get('zoom_easing_type', 'easeOutExpo'); ?>",
+      easingDuration : <?php echo $themeConfig->get('zoom_easing_duration', '2000'); ?>,
+      lensShape : "<?php echo $themeConfig->get('product_zoomlensshape');?>",
+      lensSize    : <?php echo (int)$themeConfig->get('product_zoomlenssize');?>,
+      galleryActiveClass: 'active'});
+  <?php } else { ?>
+  var zoomCollection = '<?php echo $themeConfig->get("product_zoomgallery")=="basic"?".product-image-zoom":"#image-main";?>';
+   jQuery( zoomCollection ).elevateZoom({
+      <?php if( $themeConfig->get('product_zoommode') != 'basic' ) { ?>
+      zoomType        : "<?php echo $themeConfig->get('product_zoommode');?>",
+      <?php } ?>
+      easing : <?php echo (1 == $themeConfig->get('enable_zoom_easing', 0))?'true':'false'; ?>,
+      easingType : "<?php echo $themeConfig->get('zoom_easing_type', 'easeOutExpo'); ?>",
+      easingDuration : <?php echo $themeConfig->get('zoom_easing_duration', '2000'); ?>,
+      lensShape : "<?php echo $themeConfig->get('product_zoomlensshape');?>",
+      lensSize    : <?php echo (int)$themeConfig->get('product_zoomlenssize');?>,
+  
+   });
+  <?php } ?> 
+  
+  ProductMediaManager.initZoom('<?php echo $themeConfig->get('product_zoomgallery');?>', '<?php echo $themeConfig->get('product_zoommode');?>', '<?php echo $themeConfig->get('product_zoomlensshape');?>', <?php echo (int)$themeConfig->get('product_zoomlenssize');?>);
+</script>
+<?php } ?>
+<script type="text/javascript">
+    $j(window).load(function() {
+        <?php if($enable_thumbs_carousel): ?>
+            $j(".vertical .carousel").jCarouselLite({
+                btnNext: ".vertical .next",
+                btnPrev: ".vertical .prev",
+                visible: <?php echo $columns?(int)$columns:3; ?>,
+                vertical: true
+            });
+        <?php endif; ?>
+        <?php if($enable_popup): ?>   
+            $j(".gallery-image").fancybox({
+                <?php if($popup_width): ?>
+                width       : <?php echo (float)$popup_width; ?>,
+                <?php endif; ?>
+                <?php if($popup_height): ?>
+                height      : <?php echo (float)$popup_height; ?>,
+                <?php endif; ?>
+                openEffect  : 'none',
+                closeEffect : 'none'
+            });
+        <?php endif; ?>
+
+    });
+</script>
+<?php echo $this->getChildHtml('after'); ?>

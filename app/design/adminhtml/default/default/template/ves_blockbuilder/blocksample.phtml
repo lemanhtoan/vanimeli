@@ -1,0 +1,53 @@
+<?php 
+	$profiles = Mage::helper("ves_blockbuilder")->getBlockProfiles();
+
+?>
+<div class="content-header">
+<table cellspacing="0">
+    <tr>
+        <td style="width:50%;"><h3 class="icon-head head-blog"><?php echo Mage::helper('ves_blockbuilder')->__('Ves Block Builder - Install Data Sample') ?></h3></td>
+        <td class="a-right">
+            <?php echo $this->getBackButtonHtml() ?>
+        </td>
+    </tr>
+</table>
+</div>
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+    	<h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('ves_blockbuilder')->__("Install block builder profiles"); ?></h4>
+    </div>
+    <div id="block_data" class="fieldset ">
+    	<div class="hor-scroll">
+    		<table class="form-list" cellspacing="0">
+    			<thead>
+    				<tr>
+    				<th><?php echo $this->__("Profile Name");?></th>
+    				<th><?php echo $this->__("Action");?></th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    			<?php if($profiles): ?>
+    			<?php foreach($profiles as $key=>$profile): ?>
+                <?php if(is_array($profile)): ?>
+                <tr><td colspan="2"><strong class="group-profile" style="color:#eb5e00"><?php echo "Profiles - ".str_replace("_", " ", $key); ?></strong></td></tr>
+                    <?php foreach($profile as $tmp_profile): ?>
+                        <tr>
+                            <td class="label"><?php echo $tmp_profile; ?></td>
+                            <td class="value"><button class="button scalable save" onclick="setLocation('<?php echo $this->getDataSampleLink($tmp_profile, $key); ?>');" type="button" title="<?php echo Mage::helper('ves_blockbuilder')->__("Install Sample"); ?>"><span><span><span><?php echo Mage::helper('ves_blockbuilder')->__("Install Sample"); ?></span></span></span></button></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                <tr>
+                    <td class="label"><?php echo $profile; ?></td>
+                    <td class="value"><button class="button scalable save" onclick="setLocation('<?php echo $this->getDataSampleLink($profile); ?>');" type="button" title="<?php echo Mage::helper('ves_blockbuilder')->__("Install Sample"); ?>"><span><span><span><?php echo Mage::helper('ves_blockbuilder')->__("Install Sample"); ?></span></span></span></button></td>
+                </tr>
+                <?php endif; ?>
+    			
+    			<?php endforeach; ?>
+    			<?php endif; ?>
+    			</tbody>
+    		</table>
+    	</div>
+    </div>
+</div>

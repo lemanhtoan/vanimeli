@@ -1,0 +1,82 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Rewardpoints Account Dashboard Recent Transactions
+ * 
+ * @see Magestore_RewardPoints_Block_Account_Dashboard_Transactions
+ */
+?>
+
+<?php $_collection = $this->getCollection() ?>
+    <div class="box-account box-info box-rewardpoints-history">
+        <div class="box-head">
+            <h2><?php echo $this->__('Recent Transactions') ?></h2>
+            <?php if (count($_collection)): ?>
+                <a href="<?php echo $this->getUrl('*/*/transactions') ?>"><?php echo $this->__('View All') ?></a>
+            <?php endif; ?>
+        </div>
+        <table class="data-table" id="recent-transactions-history">
+            <colgroup>
+                <col class="id" />
+                <col class="title" />
+                <col class="point_amount" />
+                <col class="created_time" />
+                <col class="expiration_date" />
+                <col class="status" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th><?php echo $this->__('Title') ?></th>
+                    <th><?php echo $this->__('Points') ?></th>
+                    <th><?php echo $this->__('Creating Date') ?></th>
+                    <th><?php echo $this->__('Expiration Date') ?></th>
+                    <th><?php echo $this->__('Status') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (count($_collection)): ?>
+                    <?php foreach ($_collection as $_transaction): ?>
+                        <tr>
+                            <td class="a-right first"><?php echo $_transaction->getId() ?></td>
+                            <td><span class="label-cell"><?php echo $this->__('Title') ?></span><h2><?php echo $this->__($_transaction->getTitleHtml()) ?></h2></td>
+                            <td class="a-right"><span class="label-cell"><?php echo $this->__('Points') ?></span><h2><?php echo $_transaction->getPointAmount() ?></h2></td>
+                            <td><span class="label-cell"><?php echo $this->__('Creating Date') ?></span><h2><?php echo $this->formatTime($_transaction->getCreatedTime(), 'medium', true) ?></h2></td>
+                            <td><span class="label-cell"><?php echo $this->__('Expiration Date') ?></span><h2>
+                                    <?php if ($_transaction->getExpirationDate()): ?>
+                                        <?php echo $this->formatTime($_transaction->getExpirationDate(), 'medium', true) ?>
+                                    <?php else: ?>
+                                        <?php echo $this->__('N/A') ?>
+                                    <?php endif ?>
+                                </h2></td>
+                            <td><span class="label-cell"><?php echo $this->__('Status') ?></span><h2><?php echo $_transaction->getStatusLabel() ?></h2></td>
+                        </tr>
+                    <?php endforeach ?>
+                <?php else: ?>
+                        <tr>
+                            <td colspan="6">
+                                <span><?php echo $this->__('Your point balance hasn\'t had any transaction yet.') ?></span>
+                            </td>
+                        </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>

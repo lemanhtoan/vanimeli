@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<ves translate="label" module="ves_testimonial">
+			<label>Venus Theme</label>
+			<sort_order>211</sort_order>
+		</ves>
+	</tabs>
+	<sections>
+		<ves_testimonial>
+			<label>Ves Testimonial</label>
+			<tab>ves</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>10</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<general_setting translate="label">
+					<label>General Setting</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<last_update translate="label">
+							<label>Current Update Time</label>
+							<frontend_type>label</frontend_type>
+							<frontend_model>ves_testimonial/system_config_form_field_notification</frontend_model>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</last_update> 
+						<show translate="label" module="core">
+							<label>Enabled</label>
+							<sort_order>10</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show>
+						
+						<title translate="label">
+							<label>Module Title</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<comment>Empty for hide</comment>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</title>
+
+						<cmsblock translate="label">
+                            <label>Select Static Block</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ves_testimonial/system_config_source_listCms</source_model>
+                            <sort_order>21</sort_order>
+							<comment>Choose Template for your module</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cmsblock>
+                        <pretext translate="label">
+                            <label>Pretext</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>22</sort_order>
+                            <comment>Empty for hide. You put html code such A, H2,H3,H4...</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><cmsblock>0</cmsblock></depends>
+                        </pretext>
+
+						<autoplay translate="label" module="core">
+							<label>Auto Play</label>
+							<sort_order>30</sort_order>
+							<comment>Enable/Disable Autoplay mode</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</autoplay>
+
+						<interval translate="label" module="core">
+							<label>Interval</label>
+							<sort_order>40</sort_order>
+							<comment></comment>
+							<frontend_type>text</frontend_type>				
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</interval>
+
+						<width translate="label" module="core">
+							<label>Testimonial Width</label>
+							<sort_order>50</sort_order>
+							<comment></comment>
+							<frontend_type>text</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</width>
+						<height translate="label" module="core">
+							<label>Testimonial Height</label>
+							<sort_order>60</sort_order>
+							<comment></comment>
+							<frontend_type>text</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</height>
+
+						<show_navigator>
+							<label>Enable Button Navigation</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>65</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_navigator>
+
+						<show_more_link>
+							<label>Show More Link</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>68</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_more_link>
+
+						<columns translate="label" module="core">
+							<label>Columns</label>
+							<sort_order>70</sort_order>
+							<comment>Number columns on carousel mode</comment>
+							<frontend_type>text</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</columns>
+
+						<max_items_page translate="label" module="core">
+							<label>Max Items In Each Page</label>
+							<sort_order>80</sort_order>
+							<comment></comment>
+							<frontend_type>text</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</max_items_page>
+
+						<filter_group translate="label" module="core">
+							<label>Testimonial Group</label>
+							<sort_order>110</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>ves_testimonial/system_config_source_listTestimonial</source_model>
+							<comment>Choose Testimonial Group to get testimonials to show on frontend.</comment>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</filter_group>
+
+					</fields>
+				</general_setting>
+				<list_setting translate="label">
+					<label>Listing Page Setting</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<layout_mode translate="label">
+                            <label>Listing Layout Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ves_testimonial/system_config_source_listLayouts</source_model>
+                            <sort_order>0</sort_order>
+							<comment>Choose Template for your listing page of testimonials</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </layout_mode>
+						<list_columns translate="label" module="core">
+							<label>Columns</label>
+							<sort_order>10</sort_order>
+							<comment>Number columns</comment>
+							<frontend_type>text</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</list_columns>
+						<list_limit translate="label" module="core">
+							<label>Limit </label>
+							<sort_order>20</sort_order>
+							<comment>Number items on a Page</comment>
+							<frontend_type>text</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depend><layout_mode><value>list</value></layout_mode></depend>
+						</list_limit>
+					</fields>
+				</list_setting>
+				<!-- Information -->
+				<advanded_parameter>
+					<label>Information - Support</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>6003</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields> 
+						<module_information translate="label">
+							<label>Set Module Visable On Pages, Position</label>
+							<frontend_type>label</frontend_type>
+							<frontend_model>ves_testimonial/system_config_form_field_information</frontend_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</module_information>                        
+					</fields>
+				</advanded_parameter>	
+			</groups>
+		</ves_testimonial>
+	</sections>    
+</config>

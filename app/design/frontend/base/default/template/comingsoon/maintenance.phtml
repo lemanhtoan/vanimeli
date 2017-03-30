@@ -1,0 +1,208 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please 
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_Coming_Soon
+ * @copyright   Copyright (c) 2015 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php
+$helper = Mage::helper('comingsoon');
+$config = Mage::helper('comingsoon/config');
+$head 	= Mage::getBlockSingleton('page/html_head');
+$isMobile = Mage::getSingleton('comingsoon/mobile_detect')->isMobile();
+$templateProcessor = Mage::helper('cms')->getPageTemplateProcessor();
+?>
+	<title><?php echo $this->getLayout()->getBlock('head')->getTitle(); ?></title>
+	<meta name="description" content="<?php echo $this->escapeHtml($this->getLayout()->getBlock('head')->getDescription()); ?>" />
+	<meta name="keywords" content="<?php echo $this->escapeHtml($this->getLayout()->getBlock('head')->getKeywords()); ?>" />
+	<meta name="viewport" content="user-scalable=no, width=device-width, minimum-scale=1, maximum-scale=1">
+	<link rel="icon" href="<?php echo $head->getFaviconFile(); ?>" type="image/x-icon" />
+	<link rel="shortcut icon" href="<?php echo $head->getFaviconFile(); ?>" type="image/x-icon" />
+
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/plumrocket/comingsoon/comingsoon.css'); ?>" media="all" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/plumrocket/comingsoon/comingsoon_custom.css'); ?>" media="all" />
+
+	<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/plumrocket/comingsoon/comingsoon.js'); ?>"></script>
+	<?php echo $this->getChildHtml('google_analytics'); ?>
+
+	<?php echo $this->getChildHtml('cs.head') ?>
+</head>
+<body>
+<?php echo $this->getChildHtml('cs.after_body_start') ?>
+
+<script type="text/javascript">
+	var maintenanceRefreshMinutes	= <?php echo (int)$config->getMaintenanceRefresh(); ?>;
+	<?php if($config->showMaintenanceLaunchTimer()): ?>
+		var countdownTimestamp		= <?php echo $config->getMaintenanceLaunchTime(); ?>;
+		var countdownFormat			= '<?php echo $this->jsQuoteEscape($config->getMaintenanceLaunchTimerFormat()); ?>';
+		var countdownLabelsFew		= "<?php echo $this->jsQuoteEscape($this->__('years,months,weeks,days,hours,minutes,seconds')); ?>";
+		var countdownLabelsOne		= "<?php echo $this->jsQuoteEscape($this->__('year,month,week,day,hour,minute,second')); ?>";
+	<?php endif; ?>
+</script>
+
+<?php switch($config->getMaintenanceBackgroundStyle()): ?>
+<?php case 'video': ?>
+	<?php if($_image = $helper->getRandomField($config->getMaintenanceBackgroundImage(true))): ?>
+		<img class="plcs-poster" src="<?php echo Mage::getBaseUrl('media') .'comingsoon/'. $this->escapeUrl($_image['name']); ?>" alt="<?php echo $this->escapeHtml($_image['label']); ?>" />
+	<?php endif; ?>
+	<?php if($_videoUrl = $helper->getRandomField($config->getMaintenanceBackgroundVideo(true), 'url', 'video')): ?>
+		<?php if($isMobile): ?>
+			<?php if(!$_image && $helper->isYoutubeOrVimeo($_videoUrl)): ?>
+				<?php if( ($_src = $helper->getYoutubeImageUrl($_videoUrl, 'big')) || ($_src = $helper->getVimeoImageUrl($_videoUrl, 'big'))): ?>
+					<div class="plcs-poster" style="background-image: url('<?php echo $this->escapeUrl($_src); ?>');"></div>
+				<?php endif; ?>
+			<?php endif; ?>
+		<?php else: ?>
+			<script type="text/javascript">
+				pjQuery_1_10_2(function () {
+					<?php if($okvideo = $helper->isYoutubeOrVimeo($_videoUrl)): ?>
+						pjQuery_1_10_2.okvideo({
+							source: '<?php echo $this->jsQuoteEscape($_videoUrl); ?>',
+		                    volume: 0,
+		                    loop: true,
+		                    hd: true, 
+		                    adproof: true,
+		                    annotations: false,
+		                 });
+					<?php endif; ?>
+					
+					var volumeInterval = setInterval(function() {
+						<?php if($okvideo): ?>
+							if(player.api) { player.api('setVolume', 0); }else{ player.setVolume(0); }
+						<?php else: ?>
+							pjQuery_1_10_2('#plcs-video')[0].volume = 0;
+						<?php endif; ?>
+					}, 1000);
+					
+					pjQuery_1_10_2('#plcs-play').on('click', function(){
+						pjQuery_1_10_2('.plcs-video-buttons').removeClass('plcs-no-play').addClass('plcs-play');
+						<?php if($okvideo): ?>
+							if(player.api) { player.api('play'); }else{ player.playVideo(); }
+						<?php else: ?>
+							pjQuery_1_10_2('#plcs-video')[0].play();
+						<?php endif; ?>
+					});
+					pjQuery_1_10_2('#plcs-stop').on('click', function(){
+						pjQuery_1_10_2('.plcs-video-buttons').removeClass('plcs-play').addClass('plcs-no-play');
+						<?php if($okvideo): ?>
+							if(player.api) { player.api('pause'); }else{ player.pauseVideo(); }
+						<?php else: ?>
+							pjQuery_1_10_2('#plcs-video')[0].pause();
+						<?php endif; ?>
+					});
+					
+					pjQuery_1_10_2('#plcs-no-sound').on('click', function(){
+						if(volumeInterval) {
+							clearInterval(volumeInterval);
+						}
+						pjQuery_1_10_2('.plcs-video-buttons').removeClass('plcs-sound').addClass('plcs-no-sound');
+						<?php if($okvideo): ?>
+							if(player.api) { player.api('setVolume', 0); }else{ player.setVolume(0); }
+						<?php else: ?>
+							pjQuery_1_10_2('#plcs-video')[0].volume = 0;
+						<?php endif; ?>
+					});
+					
+					pjQuery_1_10_2('#plcs-sound').on('click', function(){
+						if(volumeInterval) {
+							clearInterval(volumeInterval);
+						}
+						pjQuery_1_10_2('.plcs-video-buttons').removeClass('plcs-no-sound').addClass('plcs-sound');
+						<?php if($okvideo): ?>
+							if(player.api) { player.api('setVolume', 1); }else{ player.setVolume(100); }
+						<?php else: ?>
+							pjQuery_1_10_2('#plcs-video')[0].volume = 1;
+						<?php endif; ?>
+					});
+				});
+			</script>
+			<div class="plcs-video-bg">
+				<video autoplay loop id="plcs-video" <?php echo $okvideo? 'style="display: none;"' : ''; ?>>
+					<source src="<?php echo $this->escapeUrl($_videoUrl); ?>" />
+					<p>The format is not supported</p>
+				</video>
+			</div>
+
+			<div class="plcs-video-buttons plcs-no-sound plcs-play">
+				<span type="button" id="plcs-play">Play</span>
+				<span type="button" id="plcs-stop">Stop</span>
+				<span type="button" id="plcs-no-sound">no-sound</span>
+				<span type="button" id="plcs-sound">sound</span>
+			</div>
+		<?php endif; ?>
+	<?php endif; ?>
+<?php break; ?>
+
+<?php case 'image': ?>
+	<?php if($_image = $helper->getRandomField($config->getMaintenanceBackgroundImage(true))): ?>
+		<img class="plcs-poster" src="<?php echo Mage::getBaseUrl('media') .'comingsoon/'. $this->escapeUrl($_image['name']); ?>" alt="<?php echo $this->escapeHtml($_image['label']); ?>" />
+	<?php endif; ?>
+<?php break; ?>
+
+<?php case 'slideshow': ?>
+	<?php
+		$_images = $config->getMaintenanceBackgroundImage(true);
+		$_imgsCount = count($_images);
+		if ($_imgsCount > 1) {
+			shuffle($_images);
+	?>
+		<div class="plcs-images-bg">
+		<?php foreach (array_values($_images) as $n => $_image) : ?>
+			<img class="plcs-background-image" src="<?php echo Mage::getBaseUrl('media') .'comingsoon/'. $this->escapeUrl($_image['name']); ?>" alt="<?php echo $this->escapeHtml($_image['label']); ?>" style="<?php echo $n? 'display: none;' : 
+			''; ?>" />
+		<?php endforeach ?>
+		</div>
+	<?php } else if ($_imgsCount == 1) { ?>
+		<?php $_image = array_shift($_images); ?>
+		<img class="plcs-poster" src="<?php echo Mage::getBaseUrl('media') .'comingsoon/'. $this->escapeUrl($_image['name']); ?>" alt="<?php echo $this->escapeHtml($_image['label']); ?>" />
+	<?php } ?>
+<?php break; ?>
+
+<?php endswitch; ?>
+
+<div class="plcs-background-shadow"></div>
+
+<div class="plcs-wrapper">
+	<div class="plcs-page">
+
+		<?php if($_logoSrc = $config->getDesignHeaderLogoSrc()): ?>
+			<div class="plcs-logo">
+				<img src="<?php echo $this->escapeUrl($this->getSkinUrl($_logoSrc)); ?>" alt="<?php echo $this->escapeHtml($config->getDesignHeaderLogoAlt()); ?>" />
+			</div>
+		<?php endif; ?>
+
+		<div>
+			<?php echo $this->getChildHtml('store_language'); ?>
+		</div>
+		
+		<div class="plcs-heading-text">
+			<?php echo $templateProcessor->filter($config->getMaintenanceHeadingText()); ?>
+		</div>
+
+		<div class="plcs-description">
+			<?php echo $templateProcessor->filter($config->getMaintenanceDescription()); ?>
+		</div>
+
+		<?php if($config->showMaintenanceLaunchTimer()): ?>
+			<div class="plcs-launch-timer plcs-clear">
+				<div id="countdown"></div>
+			</div>
+		<?php endif; ?>
+
+	</div>
+</div>
+<?php echo $this->getChildHtml('cs.before_body_end') ?>
+</body>
+</html>

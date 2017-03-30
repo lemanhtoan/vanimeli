@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webtex
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Webtex EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.webtex.com/LICENSE-1.0.html
+ *
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@webtex.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.webtex.com/ for more information
+ * or send an email to sales@webtex.com
+ *
+ * @category   Webtex
+ * @package    Webtex_CustomerLifetimeSales
+ * @copyright  Copyright (c) 2012 Webtex (http://www.webtex.com/)
+ * @license    http://www.webtex.com/LICENSE-1.0.html
+ */
+
+/**
+ * Customer Lifetime Sales and Orders Statistics extension
+ *
+ * @category   Webtex
+ * @package    Webtex_CustomerLifetimeSales
+ * @author     Webtex Dev Team <dev@webtex.com>
+ */-->
+<layout version="0.1.0">
+
+    <adminhtml_catalog_product_edit>
+        <reference name="head">
+            <action method="addItem"><type>js</type><name>webtex/giftcards/giftcards.js</name></action>
+	</reference>
+    </adminhtml_catalog_product_edit>
+
+    <adminhtml_sales_order_create_load_block_items>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/webtex/giftcards/giftcards.js</name></action>
+        </reference>
+        <reference name="items_grid">
+            <block type="Webtex_Giftcards_Block_Adminhtml_Balance" template="webtex/giftcards/balance.phtml" name="giftcards_balance"/>
+        </reference>
+    </adminhtml_sales_order_create_load_block_items>
+
+
+    <adminhtml_sales_order_create_load_block_data>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/webtex/giftcards/giftcards.js</name></action>
+        </reference>
+        <reference name="items_grid">
+            <block type="Webtex_Giftcards_Block_Adminhtml_Balance" template="webtex/giftcards/balance.phtml" name="giftcards_balance"/>
+        </reference>
+    </adminhtml_sales_order_create_load_block_data>
+
+    <adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/webtex/giftcards/giftcards.js</name></action>
+        </reference>
+        <reference name="items_grid">
+            <block type="Webtex_Giftcards_Block_Adminhtml_Balance" template="webtex/giftcards/balance.phtml" name="giftcards_balance"/>
+        </reference>
+    </adminhtml_sales_order_create_index>
+
+    <giftcards_adminhtml_product_pregenerated>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="giftcards/adminhtml_catalog_product_tab_pregenerated" name="admin.product.pregenerated"/>
+        </block>
+    </giftcards_adminhtml_product_pregenerated>
+
+    <adminhtml_giftcards_cardproducts_index>
+        <referense name="head">
+            <action method="setTitle" translate="title"><title>Catalog</title></action>
+        </referense>
+        <reference name="menu">
+            <action method="setActive"><menupath>catalog/products</menupath></action>
+        </reference>
+        <reference name="content">
+            <block type="giftcards/adminhtml_cardproducts" name="products_list">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm"><params>0</params></action>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_giftcards_cardproducts_index>
+
+</layout>

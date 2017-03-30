@@ -1,0 +1,56 @@
+<?php
+    $store_id = Mage::app()->getStore()->getStoreId();
+?>
+<style>
+    .affiliate-page .main{
+        background-color: #<?php echo Mage::getStoreConfig('affiliateplus/style_config/background_color', $store_id) ?>;
+    }
+    .navbar-collapse-aff .block-title-aff,
+    .navbar-collapse-aff .block-title-aff h2,
+    .affiliate-page .aff-main-content .aff-title h2,
+    .affiliate-page .aff-main-content .aff-title h1{
+        background-color: #<?php echo Mage::getStoreConfig('affiliateplus/style_config/background_title', $store_id) ?>;
+        color:#<?php echo Mage::getStoreConfig('affiliateplus/style_config/title_color', $store_id) ?>;
+    }
+    .affiliate-page .fieldset .legend,
+    .affiliate-page h2.legend,    
+    .affiliate-page .aff-main-content .block .block-title strong{
+        background-color: #<?php echo Mage::getStoreConfig('affiliateplus/style_config/background_subtitle', $store_id) ?>;
+        color:#<?php echo Mage::getStoreConfig('affiliateplus/style_config/sub_title_color', $store_id) ?>;
+    }
+    #affiliateplus-sidebar .allow .step-title{
+        background-color: #<?php echo Mage::getStoreConfig('affiliateplus/style_config/button_social_background_color', $store_id) ?>;
+    }
+    #affiliateplus-sidebar .step-title span.aff-logo{
+        color:#<?php echo Mage::getStoreConfig('affiliateplus/style_config/button_social_color', $store_id) ?>;
+    }
+    .affiliate-page .affiliate-navigation{
+        background-color: #<?php echo Mage::getStoreConfig('affiliateplus/style_config/background_navigation_color', $store_id) ?>;
+    }
+    .affiliate-page .affiliate-navigation   li  a{
+        font-size:<?php echo Mage::getStoreConfig('affiliateplus/style_config/text_font_size', $store_id) ?>px;
+    }
+    .affiliate-page .affiliate-navigation li a:hover,
+    .affiliate-page .affiliate-navigation li a:focus,
+    .affiliate-page .affiliate-navigation .active a{
+        background-color: #<?php echo Mage::getStoreConfig('affiliateplus/style_config/active_background_navigation_color', $store_id) ?> !important;
+        color:#<?php echo Mage::getStoreConfig('affiliateplus/style_config/active_color_navigation_color', $store_id) ?> !important;
+    }
+    .aff-popup{
+        background-color: #<?php echo Mage::getStoreConfig('affiliateplus/style_config/background_popup_color', $store_id) ?>;
+    }
+    .affiliate-page .aff-popup h2.legend, 
+    .affiliate-page .aff-popup .aff-main-content .block .block-title strong{
+        background-color: #<?php echo Mage::getStoreConfig('affiliateplus/style_config/background_popup_title', $store_id) ?>;
+        color:#<?php echo Mage::getStoreConfig('affiliateplus/style_config/popup_title_color', $store_id) ?>;
+    }
+    .affiliateplus-account-bottom button.form-button.btn-login span{
+        background-color: #<?php echo Mage::getStoreConfig('affiliateplus/style_config/background_color_login_button', $store_id) ?>;
+    }
+    .affiliateplus-account-bottom button.form-button.btn-signup span{
+        background-color: #<?php echo Mage::getStoreConfig('affiliateplus/style_config/background_color_signup_button', $store_id) ?>;
+    }
+    .affiliateplus-account-bottom button.form-button.btn-contact span{
+        background-color: #<?php echo Mage::getStoreConfig('affiliateplus/style_config/background_color_contact_button', $store_id) ?>;
+    }
+</style>

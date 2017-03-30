@@ -1,0 +1,314 @@
+<?php
+/**
+ * @see Mage_Adminhtml_Block_Widget_Form_Container
+ */
+ ?>
+ <?php
+    $megamenu = $this->getMenuData();
+    $widgets = $this->getWidgets();
+    $stores = array();
+    $stores = Mage::helper("ves_megamenu")->getElementStores("store_id", "stores[]", $stores);
+    $update_link = $this->getUpdateLink();
+    $yesno_options= array(1 => Mage::helper('ves_megamenu')->__('Yes'),
+                  0 => Mage::helper('ves_megamenu')->__('No'));
+    $module_row = 0;
+ ?>
+
+<?php echo $this->getFormInitScripts() ?>
+<?php echo Mage::helper('ves_megamenu')->initTextEditor(); ?>
+<div class="entry-edit">
+    
+        <div class="box">
+             <div class="heading">
+                  <h1><?php echo $this->getHeaderText(); ?></h1>
+                  <div class="buttons">
+                  <a href="<?php echo $this->getUploadSampleLink(); ?>" class="button" style="background:#5CB85C"><?php echo Mage::helper('ves_megamenu')->__('Import'); ?></a>
+                  <a href="<?php echo $this->getExportLink(); ?>" class="button" style="background:#5CB85C"><?php echo Mage::helper('ves_megamenu')->__('Export'); ?></a>
+                  <a onclick="jQuery('#form').submit();" class="button"><?php echo Mage::helper('ves_megamenu')->__('Save'); ?></a>
+                  <a onclick="__submit('save-edit')" class="button"><?php echo Mage::helper('ves_megamenu')->__('Save And Edit'); ?></a>
+                  <a onclick="__submit('save-new')" class="button"><?php echo Mage::helper('ves_megamenu')->__('Save And New'); ?></a> | 
+                  <a href="<?php echo $this->getLiveEditLink(); ?>" class="button" style="background:#5CB85C"><?php echo Mage::helper('ves_megamenu')->__('Live Megamenu Editor'); ?></a> | 
+                   
+                   
+                  <a class="button" style="background:#49AFCD" id="btn-guide" href="http://www.venustheme.com/guides/framework2/megamenu/"><?php echo Mage::helper('ves_megamenu')->__('Guide'); ?></a>
+                </div>
+                 
+            </div>
+            <div class="content">
+                 <div id="grouptabs" class="htabs">
+                    <a href="#tab-manage-menus"><?php echo Mage::helper('ves_megamenu')->__('Manage Mega Menu Items'); ?></a>
+                    <a href="#tab-manage-widgets"><?php echo Mage::helper('ves_megamenu')->__('Manage Widgets'); ?></a>
+                </div>
+                <div id="tab-contents">
+                    <div id="tab-manage-widgets">
+                        <p>
+                            <i><?php echo Mage::helper('ves_megamenu')->__('Widgets has feature, function same as Opencart Modules which supported by megamenu. You create instances of Widgets to use for content of submenu item or column of mega menu'); ?></i>
+                        </p>
+                        <div>
+                            <a class="button btn-action-widget" href="<?php echo $this->getCreateWidgetLink();?>" ><?php echo Mage::helper('ves_megamenu')->__('Create Widget'); ?></a>
+                        </div>
+                         <table class="form">
+                            <tr>    
+                                <td><strong><?php echo Mage::helper('ves_megamenu')->__('Widget Name'); ?></strong></td>
+                                <td><strong><?php echo Mage::helper('ves_megamenu')->__('Widget Types'); ?></strong></td>
+                                <td><strong><?php echo Mage::helper('ves_megamenu')->__('Action'); ?></strong></td>
+                            </tr>
+                            <?php if( $widgets->count() > 0 ) { ?>
+                            
+                                <?php foreach( $widgets  as $widget ) { ?>
+                                <tr>
+                                    <td><?php echo $widget->getName(); ?></td>
+                                    <td><?php echo $widget->getType(); ?></td>
+                                    <td><a class="btn-action-widget" rel="edit" href="<?php echo $this->getCreateWidgetLink($widget->getId(),$widget->getType());?>"><?php echo Mage::helper('ves_megamenu')->__('Edit'); ?></a>
+                                        | 
+                                        <a onclick="return confirm('<?php echo Mage::helper('ves_megamenu')->__('Do you want to continue delete the widget?');?>');"  rel="edit" href="<?php echo $this->getDelWidgetLink($widget->getId(),$widget->getType());?>"><?php echo Mage::helper('ves_megamenu')->__('Delete'); ?></a>
+                                    </td>
+                                <?php } ?>
+                                </tr>
+                            <?php } ?>
+                            
+                         </table>
+                    </div>
+                    <div id="tab-manage-menus">
+                        <form id="form" action="<?php echo $this->getFormActionUrl() ?>" method="post" id="product_edit_form" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?php echo $megamenu->getId(); ?>"/>
+                        <input type="hidden" name="save_mode" value="" id="save_mode"/>
+                        <input type="hidden" name="sortable" value="" id="sortable"/>
+                        <div class="megamenu">
+                            <div class="tree-megamenu">
+                                
+                                <?php echo $this->getChildHtml('megamenu_tree'); ?>
+                                <input type="button" name="serialize" id="serialize" value="Update" />
+                                
+                                <p class="note"><i><?php echo Mage::helper("ves_megamenu")->__("To sort orders or update parent-child, you drap and drop expected menu, then click to Update button to Save");?></i></p>
+                            </div>
+                            <div class="megamenu-form">
+                                <h3><?php echo Mage::helper("ves_megamenu")->__("Menu Item Edit");?></h3>
+                                <div id="megamenu-form">
+                                     <?php echo $this->getChildHtml('megamenu_form'); ?>
+                                </div>
+
+
+                                </div>
+                        </div>
+                        <?php echo $this->getBlockHtml('formkey')?>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+       
+        <div style="display:none"></div>
+  
+</div>
+<script type="text/javascript"><!--
+jQuery("a.btn-action-widget").click( function(){
+    jQuery('#dialog').remove();
+    var _link = jQuery(this).attr('href');
+    jQuery('#anchor-content').prepend('<div id="dialog" style="padding: 3px 0px 0px 0px;"><iframe src="'+_link+'" style="padding:0; margin: 0; display: block; width: 100%; height: 100%;" frameborder="no" scrolling="auto"></iframe></div>');
+    
+    jQuery('#dialog').dialog({
+        title: '<?php echo Mage::helper("ves_megamenu")->__("Add & Edit Widget"); ?>',
+        close: function (event, ui) {
+            
+        },  
+        bgiframe: false,
+        width: 980,
+        height: 600,
+        resizable: false,
+        modal: true
+    });
+
+    jQuery('.ui-widget-overlay').bind( 'click', function() {
+        jQuery("#dialog").dialog('close');
+        jQuery('.ui-widget-overlay').unbind();
+    });
+    
+    return false;   
+} );
+function importMenus(url) {
+        var store_id = $('store_switcher') == undefined ? 0 : $('store_switcher').value;
+        jQuery('#dialog_menu').dialog({
+            title: '<?php echo Mage::helper("ves_megamenu")->__("Import Menus From Store View"); ?>',
+            close: function (event, ui) {
+                
+            },  
+            bgiframe: false,
+            width: 400,
+            height: 200,
+            resizable: false,
+            modal: true
+        });
+
+        jQuery('.ui-widget-overlay').bind( 'click', function() {
+            jQuery("#dialog_menu").dialog('close');
+            jQuery('.ui-widget-overlay').unbind();
+        });
+
+        jQuery("#import_menu_button").click(function(){
+            runImportMenu(url);
+            return false;
+        })
+        
+        return false; 
+    }
+    function runImportMenu(url) {
+        var store_id = $('store_switcher_noaction') == undefined ? 0 : $('store_switcher_noaction').value;
+        var current_store_id = $('store_switcher') == undefined ? 0 : $('store_switcher').value;
+        var request = new Ajax.Request(url,{
+            parameters: { store_id : store_id, current_store_id: current_store_id },
+            //method: 'post',
+            onSuccess: function(){
+                if(current_store_id) {
+                    window.location = '<?php echo $this->getUrl("*/*/index") ?>store_id/'+current_store_id;
+                } else {
+                    window.location = '<?php echo $this->getUrl("*/*/index") ?>'
+                }     
+            }
+        });
+    }
+//--></script>
+<script type="text/javascript"><!--
+    function importCategories(url) {
+        var store_id = $('store_switcher') == undefined ? 0 : $('store_switcher').value;
+        var request = new Ajax.Request(url,{
+            parameters: { store_id : store_id },
+            //method: 'post',
+            onSuccess: function(){
+                if(store_id) {
+                    window.location = '<?php echo $this->getUrl("*/*/index") ?>store_id/'+store_id;
+                } else {
+                    window.location = '<?php echo $this->getUrl("*/*/index") ?>'
+                }
+                //window.location = '<?php echo $this->getUrl("*/*/index") ?>'
+             }
+        });
+    }
+//--></script>
+<script type="text/javascript"><!--
+    function deleteCategories(url, flag) {
+        var r = confirm("<?php echo Mage::helper("ves_megamenu")->__("Do you want continue delete all menu categories?");?>");
+        if(r == true){
+            var store_id = $('store_switcher') == undefined ? 0 : $('store_switcher').value;
+            var request = new Ajax.Request(url,{
+                parameters: { store_id : store_id },
+                //method: 'post',
+                onSuccess: function(){
+                    if(store_id) {
+                        window.location = '<?php echo $this->getUrl("*/*/index") ?>store_id/'+store_id;
+                    } else {
+                        window.location = '<?php echo $this->getUrl("*/*/index") ?>'
+                    }
+                    //window.location = '<?php echo $this->getUrl("*/*/index") ?>'
+                 }
+            });
+        }
+        
+    }
+
+    function deleteAllMenuItems(url, flag) {
+        var r = confirm("<?php echo Mage::helper("ves_megamenu")->__("Do you want continue delete all menu items?");?>");
+        if(r == true){
+            var store_id = $('store_switcher') == undefined ? 0 : $('store_switcher').value;
+            var request = new Ajax.Request(url,{
+                parameters: { store_id : store_id },
+                //method: 'post',
+                onSuccess: function(){
+                    if(store_id) {
+                        window.location = '<?php echo $this->getUrl("*/*/index") ?>store_id/'+store_id;
+                    } else {
+                        window.location = '<?php echo $this->getUrl("*/*/index") ?>'
+                    }
+                    //window.location = '<?php echo $this->getUrl("*/*/index") ?>'
+                 }
+            });
+        }
+        
+    }
+//--></script>
+<script type="text/javascript"><!--
+ jQuery('ol.sortable').nestedSortable({
+            forcePlaceholderSize: true,
+            handle: 'div',
+            helper: 'clone',
+            items: 'li',
+            opacity: .6,
+            placeholder: 'placeholder',
+            revert: 250,
+            tabSize: 25,
+            tolerance: 'pointer',
+            toleranceElement: '> div',
+            maxLevels: 8,
+
+            isTree: true,
+            expandOnHover: 700,
+            startCollapsed: true
+        });
+    
+    jQuery('#serialize').click(function(){
+        var serialized = jQuery('ol.sortable').nestedSortable('serialize');
+        jQuery("#sortable").val(serialized);
+        jQuery("#form").attr("action", "<?php echo $update_link;?>");
+        jQuery("#form").submit();
+         
+    })
+
+    jQuery(".quickdel").click( function(){
+        if( confirm("<?php echo Mage::helper("ves_megamenu")->__("Are you sure to delete this?");?>") ){
+            var id = jQuery(this).attr("rel").replace("id_","");
+            var store_id = $('store_switcher') == undefined ? 0 : $('store_switcher').value;
+            if(store_id) {
+               window.location.href="<?php echo $this->getUrl('*/*/delete');?>id/"+id+"/store_id/"+store_id;
+            } else {
+               window.location.href="<?php echo $this->getUrl('*/*/delete');?>id/"+id; 
+            }
+            
+        }
+    } );
+    jQuery(document).ajaxSend(function() {
+        jQuery("#ajaxloading").show();
+    });
+    jQuery(document).ajaxComplete(function() {
+        jQuery("#ajaxloading").hide();
+    });
+//--></script>
+<script type="text/javascript"><!--
+
+jQuery( "#grouptabs a" ).tabs();
+
+jQuery(document).ready(function(){
+    jQuery('#grouptabs a').click( function(){
+        jQuery.cookie("megaactived_tab", jQuery(this).attr("href") );
+    } );
+
+    if( jQuery.cookie("megaactived_tab") !="undefined" ){
+        jQuery('#grouptabs a').each( function(){
+            if( jQuery(this).attr("href") ==  jQuery.cookie("megaactived_tab") ){
+                jQuery(this).click();
+                return ;
+            }
+        } );
+        
+    }
+})
+
+
+ function __submit( m ){
+    jQuery("#save_mode").val( m );
+    jQuery('#form').submit();
+ }
+
+//--></script>
+
+<?php echo $this->getChildHtml('form_after');?>
+
+<?php if ($this->hasFooterButtons()): ?>
+    <div class="content-footer">
+        <p class="form-buttons"><?php echo $this->getButtonsHtml('footer') ?></p>
+    </div>
+<?php endif; ?>
+<script type="text/javascript">
+    editForm = new varienForm('edit_form', '<?php echo $this->getValidationUrl() ?>');
+</script>
+<?php echo $this->getFormScripts() ?>

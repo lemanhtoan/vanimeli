@@ -1,0 +1,64 @@
+<?php if ($this->showButton('twitter')): ?>
+    <div id="behavior-twitter" class="behavior-twitter behavior-social" <?php if (!$this->showCount('twitter')) echo "style='width: 56px !important; display: inline-block !important;'" ?>>
+        <a class="twitter-share-button" data-url="<?php echo $this->getShareUrl() ?>" data-text="" <?php if (!$this->showCount('twitter')) echo "data-count='none'"; ?>><?php $this->_helper()->__('Tweet'); ?></a>
+
+        <script>
+            var messageTwitter = '<?php echo $this->getSocialInfo('twitter') ?>';
+            var canRequestTwitter = (messageTwitter === '') ? false : true;
+
+            window.twttr = (function (d, s, id) {
+                var t, js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "https://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js, fjs);
+                return window.twttr || (t = {_e: [], ready: function (f) {
+                        t._e.push(f)
+                    }});
+            }(document, "script", "twitter-wjs"));
+            twttr.ready(function (twttr) {
+                twttr.events.bind('tweet', function (event) {
+                    if (login && canRequestTwitter) {
+                        showAjaxLoader();
+                        new Ajax.Request('<?php echo $this->getUrl('rewardpointsbehavior/index/tweet') ?>', {
+                            method: 'post',
+                            parameters: {
+                                link: '<?php echo $this->getShareUrl() ?>'
+                            },
+                            onException: function () {
+                                $('social-info-behavior').innerHTML = messageError;
+                                hideAjaxLoader();
+                            },
+                            onSuccess: function (message) {
+                                if (message.responseText != '') {
+                                    $('social-info-behavior').innerHTML = message.responseText;
+                                } else {
+                                    $('social-info-behavior').innerHTML = messageDefault;
+                                }
+                                hideAjaxLoader();
+                                canRequestTwitter = false;
+                            }
+                        });
+                    }
+                });
+            });
+            if (messageTwitter !== '' && login) {
+                Event.observe('behavior-twitter', 'mouseover', function () {
+                    if (canRequestTwitter) {
+                        $('behavior-ajax-loader').show();
+                        $('social-info-behavior').innerHTML = messageTwitter;
+                    } else {
+                        $('behavior-ajax-loader').hide();
+                    }
+                });
+                Event.observe('behavior-twitter', 'mouseout', function () {
+                    $('behavior-ajax-loader').show();
+                    $('social-info-behavior').innerHTML = messageDefault;
+                });
+            }
+
+        </script>
+    </div>
+<?php endif; ?>

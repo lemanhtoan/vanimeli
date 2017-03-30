@@ -1,0 +1,60 @@
+<?php
+$currency = Mage::getModel('directory/currency')->load(Mage::app()->getStore()->getBaseCurrencyCode());
+?>
+<div id="messages">
+    <ul class="messages">
+        <li class="notice-msg">
+
+            <?php if (Mage::app()->getRequest()->getControllerName() == 'adminhtml_earning_sales') { ?>
+                <ul>
+                    <li><span><?php echo $this->__('Example for "Earning Point Action":') ?></span>
+                    </li>
+                </ul>
+
+                <?php echo $this->__('1. If you want to give Customers 5 points for purchasing, then:') ?>
+                <div style="margin-left: 50px">              
+                    <?php echo $this->__('- Choose "Action": "Give fixed X points to Customers"') ?>
+                    </br>
+                    <?php echo $this->__('- Fill in field "Points (X)": 5') ?>
+                    </br>
+                    <?php echo $this->__('=> If Customers place an order of $100 or $1000, they will earn 5 points.') ?>
+                </div>
+
+                <?php echo $this->__('2. If you want to give Customers 5 points for every $200.00 spent and limit the number of points that can be earned to 15, then:', $currency->format(200)) ?>
+                <div style="margin-left: 50px">              
+                    <?php echo $this->__('- Choose "Action": "Give X points for every Y amount spent" ') ?>
+                    </br>
+                    <?php echo $this->__('- Fill in field "Points (X)": 5') ?>
+                    </br>
+                    <?php echo $this->__('- Fill in field "Money Step (Y)": 200') ?>
+                    </br>
+                    <?php echo $this->__('- Fill in field "Max points earned by this rule": 15') ?>
+                    </br>
+                    <?php echo $this->__('=> If Customers purchase an order of $800.00, they will earn 15 points.', $currency->format(800)) ?>
+                </div>
+
+                <?php echo $this->__('3. If you want to give Customers 5 points for every 10 items they order and limit the number of points that can be earned to 15, then:') ?>
+                <div style="margin-left: 50px">              
+                    <?php echo $this->__('- Choose "Action": "Give X points for every Y qty purchased"') ?>
+                    </br>
+                    <?php echo $this->__('- Fill in field "Points (X)": 5') ?>
+                    </br>
+                    <?php echo $this->__('- Fill in field "Quantity (Y)": 10') ?>
+                    </br>
+                    <?php echo $this->__('- Fill in field "Max points earned by this rule": 15') ?>
+                    </br>
+                    <?php echo $this->__('=> If Customers purchase an order of 40 items, they will earn 15 points.') ?>
+                </div>
+            <?php } ?>
+            </br>
+            <ul>
+                <li><span><?php echo $this->__('Example for "Conditions":') ?></span>
+                </li>
+            </ul>
+            <?php echo $this->__('If you want to apply the rule to items that cost more than %s and have brand Apple, the condition is:', $currency->format(200)) ?>
+            <div style="margin-left: 50px"> 
+                <img title="conditons" alt="conditons" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'rewardpointsrule/example/catalog_conditions.png'; ?>">
+            </div>
+        </li>
+    </ul>
+</div>

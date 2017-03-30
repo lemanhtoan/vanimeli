@@ -1,0 +1,585 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_RewardPointsReferFriends
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Rewardpointsreferfriends template
+ *
+ * @see Magestore_RewardPointsReferFriends_Block_Rewardpointsreferfriends
+ */
+?>
+<div class="rewardpointsreferfriends-dashboard-left">
+    <div class="page-title">
+        <h1><?php echo $this->__('Refer Friends') ?></h1>
+    </div>
+    <div class="rewardpointsreferfriends-content">
+        <strong><?php echo $this->__('Share the referring link or coupon code with your friends and earn commissions.'); ?></strong><br>
+        <ul class="rewardpoints-dashboard-ul">
+            <?php if ($registerPoint = Mage::getStoreConfig('rewardpoints/referfriendplugin/refer_register_point', Mage::app()->getStore()->getId())): ?>
+                <li><?php echo $this->__('You will receive %s when your friends create accounts via your link/coupon.', Mage::helper('rewardpoints/point')->format($registerPoint)); ?></li>
+                <li><?php echo $this->__('You can receive some Points per purchase made by your friends as our policy below.'); ?></li>
+            <?php endif; ?>
+        </ul>
+        <br>
+        <?php
+        $specialoffer = $this->getSpecialOffer(Mage::app()->getStore()->getId());
+        if ($specialoffer->getSize()):
+            ?>
+            <div class="box-account box-info box-rewardpoints-summary box-referfriends-content">
+                <div class="box-head">
+                    <h2><?php echo $this->__('Special Offer'); ?></h2>
+                </div>
+                <div class="info-summary">
+                    <?php foreach ($specialoffer as $value): ?>
+                        <div class="info-summary-special-offer">
+                            <strong class="special-title-offer"><?php echo $value->getTitle(); ?></strong>
+                            <?php echo $this->callHelper()->getDateExpire($value->getFromDate(), $value->getToDate()); ?>
+
+                            <?php
+                            $helper = Mage::helper('cms');
+                            $processor = $helper->getBlockTemplateProcessor();
+                            $html = $processor->filter($value->getDescriptionReferal());
+                            echo $html;
+                            ?>
+                            <?php
+                            $type = $value->getDiscountType();
+                            if ($type == 1)
+                                $discount = Mage::helper('core')->formatPrice($value->getDiscountValue());
+                            else
+                                $discount = (float) $value->getDiscountValue() . '%';
+                            ?>
+                            <?php if ($value->getDiscountValue() > 0) echo $this->__("Your invited friends will receive a <strong style='color:#3182be'>" . $discount . "</strong> discount when purchasing at our store."); ?>
+                            <br>
+                            <?php
+                            $action = $value->getCommissionAction();
+                            $val = Mage::helper('rewardpoints/point')->format($value->getCommissionPoint());
+                            $pointcom = '';
+                            switch ($action) {
+                                case 2:
+                                    $moneystep = $value->getMoneyStep();
+                                    if ($moneystep > 0)
+                                        $pointcom = $this->__(" for every <strong style='color:#3182be'>" . Mage::helper('core')->formatPrice($moneystep) . "</strong> spent by your friends.");
+                                    break;
+                                case 3:
+                                    $qtystep = $value->getQtyStep();
+                                    if ($qtystep > 0)
+                                        $pointcom = $this->__(" for every <strong style='color:#3182be'>" . $qtystep . ' product(s)</strong> purchasing made by your friends.');
+                                    break;
+                            }
+                            if ($pointcom == '')
+                                $pointcom = $this->__(' per purchasing made by your friends.');
+                            ?>
+                            <?php if ($value->getCommissionPoint()) echo $this->__("You will receive <strong style='color:#3182be'>" . $val . "</strong>" . $pointcom); ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+<div class="rewardpointsreferfriends-dashboard-right">
+    <div class="block block-list">
+        <div class="block-title">
+            <strong>Sharing is so easy</strong>
+        </div>
+        <p class="box-content refer-sharing-box-content">
+            <?php echo $this->__('You can share your link or coupon with your friends quickly by using our strong online marketing tool, such as: email, Facebook, Twitter, G+. Find them in below.'); ?>
+        </p>
+    </div>
+    <div class="block block-list">
+        <div class="block-title">
+            <strong><?php echo $this->__('Link/Coupon to share'); ?></strong>
+        </div>
+        <div class="block-content refer-sharing-box-content">
+            <div class="rewardpointsreferfriend-box-url">
+                <?php if ($this->getShareLink()): ?>
+                    <div class="refer-content">
+                        <div style="font-size:15px"><?php echo $this->__('Link'); ?></div>
+                        <input id="refer-link" type="text" value="<?php echo $this->getShareLink(); ?>" readonly="true"
+                               onclick="this.select();" size="30" class="input-text">
+                    </div>
+                    <?php if ($this->canEditKey()): ?>
+                <form action="<?php echo $this->getUrl('rewardpointsreferfriends/index/editKey') ?>" method="post" onsubmit="return validateKey()">
+                            <input type="checkbox" id="edit-key" class="required-entry"
+                                   onclick="javascript:($('edit-link-box').toggle())" value="1"/>
+                            <label for="edit-key"><?php echo $this->__("Custom Key") ?></label>
+                            <div id="edit-link-box" class="refer-edit-box" style="display: none">
+                                <input type="text" placeholder="<?php echo $this->__('Your Key') ?>" name="refer-key" id="refer-key" required
+                                       onchange="changeKey();" onkeyup="changeKey();"/>
+
+                                <div id="review-link" class="validation-advice"></div>
+                                <div class="buttons-set">
+                                    <input type="submit" value="<?php echo $this->__("Save"); ?>" class="button"/>
+                                </div>
+                            </div>
+                        </form>
+                    <?php endif ?>
+                <?php endif ?>
+                <script type="text/javascript">
+                    var baseLink = $('refer-link').value.substring(0, $('refer-link').value.indexOf('?k='));
+                    var changeKey = function () {
+                        $('review-link').innerHTML = "";
+                        if (!validateKey()) {
+                            $('review-link').innerHTML = '<?php echo $this->__("Please use only letters (a-z), numbers (0-9) or dash(-) in this field"); ?>';
+                            return;
+                        }
+                        $('review-link').innerHTML = baseLink + "?k=" + $("refer-key").value;
+                    };
+                    var validateKey = function () {
+                        var key = $("refer-key").value;
+                        var regex = /^[a-zA-Z0-9-]+$/;
+                        return key.match(regex) != null;
+                    };
+                </script>
+
+                <?php if ($this->getShareCoupon()): ?>
+                    <div class="refer-content">
+                        <div style="font-size:15px"><?php echo $this->__('Coupon code'); ?></div>
+                        <input type="text" value="<?php echo $this->getShareCoupon(); ?>" readonly="true"
+                               onclick="this.select();" size="30" class="input-text">
+                    </div>
+                    <?php if ($this->canEditCoupon()): ?>
+                <form action="<?php echo $this->getUrl('rewardpointsreferfriends/index/editCoupon') ?>" method="post" onsubmit="return validateCoupon()">
+                            <input type="checkbox" id="edit-coupon" class="required-entry"
+                                   onclick="javascript:($('edit-coupon-box').toggle())" value="1"/>
+                            <label for="edit-coupon"><?php echo $this->__("Custom Coupon") ?></label>
+                            <div id="edit-coupon-box" class="refer-edit-box" style="display: none">
+                                <input type="text" placeholder="<?php echo $this->__('Your Coupon') ?>" name="refer-coupon" id="refer-coupon" required
+                                       onchange="changeCoupon()" onkeyup="changeCoupon()"/>
+                                <div id="review-coupon" class="validation-advice"></div>
+                                <div class="buttons-set">
+                                    <input type="submit" value="<?php echo $this->__("Save"); ?>" class="button"/>
+                                </div>
+                            </div>
+                        </form>
+                        <script type="text/javascript">
+                            var changeCoupon = function () {
+                                $('review-coupon').innerHTML = '';
+                                var coupon = $("refer-coupon").value;
+                                if (!validateCoupon()) {
+                                    $('review-coupon').innerHTML = '<?php echo $this->__("Please use only letters (a-z), numbers (0-9) or dash(-) in this field"); ?>';
+                                    return;
+                                }
+                            };
+                            var validateCoupon = function () {
+                                var coupon = $("refer-coupon").value;
+                                var regex = /^[a-zA-Z0-9-]+$/;
+                                return coupon.match(regex) != null;
+                            };
+                        </script>
+                    <?php endif; ?>
+                <?php endif ?>
+            </div>
+        </div>
+    </div>
+
+    <ol class="opc referfriends-opc">
+        <?php if ($this->callHelper()->getReferConfig('use_email')): ?>
+            <li id="referfriends-opc-email" class="section allow">
+                <div class="step-title" onclick="toggleReferFriendsRighbox('referfriends-opc-email-content')">
+                    <!--By Crystal -->
+                    <h2 class="logo email-logo"> <?php echo $this->__('Email'); ?></h2>
+                    <!-- End -->
+
+                </div>
+                <div id="referfriends-opc-email-content" class="step a-item" style="display:none;">
+                    <ul class="message">
+                        <li class="success-msg" id="referfriends-email-msg" style="display:none;">
+                            <ul>
+                                <li><?php echo $this->__('Email has been sent successfully!') ?></li>
+                            </ul>
+                        </li>
+                        <li class="error-msg" id="referfriends-email-msg-fail" style="display:none;">
+                            <ul>
+                                <li><?php echo $this->__('Email does not been sent!') ?></li>
+                            </ul>
+                        </li>
+                        <li class="error-msg" id="referfriends-email-msg-notice" style="display:none">
+                            <ul>
+                                <li><?php echo $this->__('Please enter correct emails address!.') ?></li>
+                            </ul>
+                        </li>
+                        <li class="error-msg" id="referfriends-email-msg-captcha" style="display:none">
+                            <ul>
+                                <li><?php echo $this->__('Please enter a correct verification code!') ?></li>
+                            </ul>
+                        </li>
+                        <li class="error-msg" id="referfriends-email-msg-maxemail" style="display:none">
+                            <?php
+                            //$maxemail = Mage::helper('rewardpointsreferfriends')->getReferConfig('max_email');
+                            ?>
+                            <!--ul><li><?php //echo $this->__('You can send a maximum of '.$maxemail.' emails per day.')       ?></li></ul-->
+                            <ul>
+                                <li id="max-email-more"></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form id="referfriends-email-form" method="post" onsubmit="ajaxmail();
+                                return false;">
+                        <ul class="form-list">
+                            <li>
+                                <label><?php echo $this->__('From:'); ?></label>&nbsp;
+                                <a href="mailto:<?php echo $this->getCustomerEmail(); ?>"><?php echo $this->getCustomerEmail(); ?></a>
+                            </li>
+                            <li>
+                                <label
+                                    for="referfriends-email-address"><?php echo $this->__("Enter your friends' emails separated by comma:"); ?></label>
+
+                                <div class="input-box">
+                                    <input type="text" class="input-text required-entry" id="referfriends-email-address"
+                                           name="emails" style="width: 250px;"
+                                           value="<?php echo $this->getEmailFormData()->getEmails() ?>"/>
+                                </div>
+                            </li>
+                            <li>
+                                <span>
+                                    <?php echo $this->__('Or retrieve contacts from'); ?> <a href="#"
+                                       onclick="retrieveContacts('gmail');
+                                                   return false;"
+                                       title="<?php echo $this->__('get contacts from gmail') ?>"><?php echo $this->__('Gmail') ?></a>,
+                                    <a href="#" onclick="retrieveContacts('yahoo');
+                                                return false;"
+                                       title="<?php echo $this->__('get contacts from yahoo') ?>"><?php echo $this->__('Yahoo') ?></a>
+                                </span>
+                            </li>
+                            <li>
+                                <label for="referfriends-email-subject"><?php echo $this->__('Subject:'); ?></label>
+
+                                <div class="input-box">
+                                    <input type="text" class="input-text required-entry" id="referfriends-email-subject"
+                                           name="email_subject" style="width: 250px;"
+                                           value="<?php echo $this->getEmailSubject(); ?>">
+                                </div>
+                            </li>
+                            <li>
+                                <label
+                                    for="referfriends-email-content"><?php echo $this->__('Your message (use the suggested message or write your own):'); ?></label>
+
+                                <div class="input-box">
+                                    <textarea id="referfriends-email-content" name="email_content" class="required-entry"
+                                              style="height: 165px;"><?php echo $this->getEmailContent(); ?></textarea>
+                                    <!--div class="editable required-entry"-->
+                                </div>
+                            </li>
+                            <?php if ($this->callHelper()->getReferConfig('use_captcha')): ?>
+                                <li class="fields">
+                                    <div class="field">
+                                        <label class="required"
+                                               for="account_captcha"><em>*</em><?php echo $this->__('Verification'); ?>
+                                        </label>
+
+                                        <div class="input-box">
+                                            <img
+                                                src="<?php echo $this->getUrl('rewardpointsreferfriends/refer/imagecaptcha'); ?>"
+                                                id="account_captcha_image"/>
+                                            <span id="affiliate-please-wait-captcha" style="display:none;"
+                                                  class="opc-please-wait">
+                                                <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>"
+                                                     class="v-middle"
+                                                     alt=""/> &nbsp; <?php echo $this->__('Getting new captcha') ?>...
+                                            </span>
+                                            <a href="javascript:void(0);" onclick="refreshCaptchaImage();
+                                                            return false;"
+                                               id="affiliate-captcha-link"><?php echo $this->__("Refresh"); ?></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="fields">
+                                    <div class="field">
+                                        <div class="input-box">
+                                            <input id="account_captcha" class="input-text required-entry" type="text"
+                                                   title="<?php echo $this->__('Captcha code') ?>" name="account_captcha"/>
+                                        </div>
+                                    </div>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                        <div class="buttons-set">
+                            <span><span id="referfriends-ajax-loader" style="display:none"><img
+                                        src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif'); ?>"/></span></span>
+                            <button id="haitv235" class="button" title="<?php echo $this->__('Send Email') ?>"
+                                    onclick="//ajaxmail();">
+                                <span><span><?php echo $this->__('Send Email'); ?></span></span>
+                            </button>
+                        </div>
+                    </form>
+                    <p></p>
+                    <script type="text/javascript">
+                        new VarienForm('referfriends-email-form', true);
+                        function retrieveContacts(mailSv) {
+                            var mailCfg = <?php echo $this->getJsonEmail() ?>;
+                            var popUrl = mailCfg[mailSv];
+                            if (popUrl)
+                                popWin(popUrl, mailSv, 'top:100,left:100,width=640,height=480,resizable=yes,scrollbars=yes');
+                        }
+                        function ajaxmail() {
+                            $('referfriends-email-msg').hide();
+                            $('referfriends-email-msg-fail').hide();
+                            $('referfriends-email-msg-notice').hide();
+                            $('referfriends-email-msg-captcha').hide();
+                            $('referfriends-email-msg-maxemail').hide();
+
+                            var form = new VarienForm('referfriends-email-form', true);
+                            var emaillist = document.getElementById('referfriends-email-address').value;
+                            var subject = document.getElementById('referfriends-email-subject').value;
+                            var content = document.getElementById('referfriends-email-content').value;
+                            if (document.getElementById('account_captcha'))
+                                var captcha = document.getElementById('account_captcha').value;
+                            else
+                                captcha = null;
+                            if (!form.validator.validate())
+                                return false;
+                            $('referfriends-ajax-loader').show();
+                            url = '<?php echo $this->getUrl("rewardpointsreferfriends/refer/ajaxmail") ?>';
+                            sendmail = new Ajax.Request(url, {
+                                method: 'post',
+                                parameters: {
+                                    emaillist: emaillist,
+                                    subject: subject,
+                                    content: content,
+                                    captcha: captcha
+                                },
+                                onSuccess: function (message) {
+                                    if ($('account_captcha'))
+                                        refreshCaptchaImage();
+                                    if (!isNaN(message.responseText)) {
+                                        if (message.responseText > 0) {
+                                            document.getElementById('max-email-more').innerHTML = 'You have only ' + message.responseText + ' times left to send emails today.';
+                                        } else
+                                            document.getElementById('max-email-more').innerHTML = 'You can not send more email today.';
+                                    }
+                                    switch (message.responseText) {
+                                        case 'email_wrong':
+                                            $('referfriends-email-msg-notice').show();
+                                            break;
+                                        case 'wrong_captcha':
+                                            $('referfriends-email-msg-captcha').show();
+                                            break;
+                                        case 'success':
+                                            $('referfriends-email-msg').show();
+                                            break;
+                                        case 'fail':
+                                            $('referfriends-email-msg-fail').show();
+                                            break;
+                                        default:
+                                            $('referfriends-email-msg-maxemail').show();
+                                            break;
+                                    }
+                                    $('referfriends-ajax-loader').hide();
+                                    document.getElementById('account_captcha').value = '';
+                                }
+                            });
+                        }
+                        function refreshCaptchaImage() {
+                            url = '<?php echo $this->getUrl("rewardpointsreferfriends/refer/refreshcaptcha") ?>';
+                            $('account_captcha_image').hide();
+                            $('affiliate-captcha-link').hide();
+                            $('affiliate-please-wait-captcha').show();
+                            refreshCaptcha = new Ajax.Request(url, {
+                                method: 'get',
+                                onSuccess: function (transport) {
+                                    imageCapcha = new Image();
+                                    imageCapcha.src = transport.responseText;
+                                    $('account_captcha_image').src = imageCapcha.src;
+                                    $('affiliate-please-wait-captcha').hide();
+                                    $('account_captcha_image').show();
+                                    $('affiliate-captcha-link').show();
+                                },
+                                onException: function (xhr, e) {
+                                    $('affiliate-please-wait-captcha').hide();
+                                    $('account_captcha_image').show();
+                                    $('affiliate-captcha-link').show();
+                                    alert('Exception: ' + e);
+                                }
+                            });
+                        }
+                    </script>
+                </div>
+            </li>
+        <?php endif ?>
+        <?php if ($this->callHelper()->getReferConfig('use_facebook')): ?>
+            <li id="referfriends-opc-facebook" class="section allow">
+                <div class="step-title" onclick="toggleReferFriendsRighbox('referfriends-opc-facebook-content')">
+                    <!--By Crystal -->
+                    <h2 class="logo facebook-logo"><?php echo $this->__('Facebook'); ?></h2>
+                    <!-- End -->
+                </div>
+                <div id="referfriends-opc-facebook-content" class="step a-item" style="display:none;">
+                    <ul class="message">
+                        <li class="success-msg" id="referfriends-facebook-msg" style="display:none">
+                            <ul>
+                                <li><?php echo $this->__('This message has been posted successfully!') ?></li>
+                            </ul>
+                        </li>
+                        <li class="error-msg" id="referfriends-facebook-msg-fail" style="display:none;">
+                            <ul>
+                                <li><?php echo $this->__('This message has not been posted!') ?></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form id="referfriends-facebook-form" method="post">
+                        <ul class="form-list">
+                            <li>
+                                <label
+                                    for="referfriends-facebook-content"><?php echo $this->__('Post on Facebook:'); ?></label>
+
+                                <div class="input-box">
+                                    <textarea id="referfriends-facebook-content"
+                                              class="required-entry"><?php echo $this->getFacebookContent(); ?></textarea>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="buttons-set">
+                            <button type="button" class="button" title="Post on Facebook" onclick="postOnFacebook();">
+                                <span><span><?php echo $this->__('Post on Facebook'); ?></span></span>
+                            </button>
+                        </div>
+                    </form>
+                    <p></p>
+                    <script src='http://connect.facebook.net/en_US/all.js'></script>
+                    <script type="text/javascript">
+                                var facebookForm = new VarienForm('referfriends-facebook-form', true);
+                                FB.init({
+                                    appId: '<?php echo $this->callHelper()->getReferConfig('fbapp_id') ?>',
+                                    status: true,
+                                    cookie: true
+                                });
+                                function postOnFacebook() {
+                                    if (facebookForm.validator.validate()) {
+                                        $('referfriends-facebook-msg').hide();
+                                        $('referfriends-facebook-msg-fail').hide();
+                                        var message = $('referfriends-facebook-content').value;
+                                        if (message) {
+                                            //$('affiliate-facebook-content').value
+                                            // calling the API ...
+                                            var obj = {
+                                                method: 'feed',
+                                                link: '<?php echo $this->getShareLink(); ?>',
+                                                picture: '<?php echo $this->getSkinUrl(Mage::getStoreConfig('design/header/logo_src')); ?>',
+                                                description: message
+                                            };
+
+                                            function callback(response) {
+                                                if (response && response.post_id) {
+                                                    $('referfriends-facebook-msg').show();
+                                                } else {
+                                                    $('referfriends-facebook-msg-fail').show();
+                                                }
+                                            }
+
+                                            FB.ui(obj, callback);
+                                        }
+                                    }
+                                }
+                    </script>
+                </div>
+            </li>
+        <?php endif ?>
+        <?php if ($this->callHelper()->getReferConfig('use_twitter')): ?>
+            <li id="referfriends-opc-twitter" class="section allow">
+                <div class="step-title" onclick="toggleReferFriendsRighbox('referfriends-opc-twitter-content')">
+                    <!--By Crystal -->
+                    <h2 class="logo twitter-logo"> <?php echo $this->__('Twitter'); ?></h2>
+                    <!-- End -->
+                </div>
+                <div id="referfriends-opc-twitter-content" class="step a-item" style="display:none;">
+                    <ul class="form-list">
+                        <li>
+                            <label
+                                for="referfriends-twitter-content"><?php echo $this->__('Your message (use the suggested message or write your own):'); ?></label>
+
+                            <div class="input-box">
+                                <textarea id="referfriends-twitter-content"
+                                          class="required-entry"><?php echo $this->getTwitterContent(); ?></textarea>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="buttons-set">
+                        <button class="button tweeter" title="Tweet" onclick="referfriendsTweet();">
+                            <span class="span">
+                                <span><?php echo $this->__('Tweet'); ?></span>
+                            </span>
+                        </button>
+                    </div>
+                    <p></p>
+                    <script type="text/javascript">
+                        function referfriendsTweet() {
+                            var tweetUrl = 'https://twitter.com/intent/tweet?original_referer=<?php echo urlencode($this->getDefaultShareLink()) ?>source=tweetbutton&text=';
+                            tweetUrl += encodeURIComponent($('referfriends-twitter-content').value);
+                            popWin(tweetUrl, 'tweet', 'top:100,left:100,width=640,height=480,resizable=yes,scrollbars=yes');
+                        }
+                    </script>
+                </div>
+            </li>
+        <?php endif ?>
+        <?php if ($this->callHelper()->getReferConfig('use_google') && $this->callHelper()->getReferConfig('refer_method') != 'coupon'): ?>
+            <li id="referfriends-opc-google" class="section allow">
+                <div class="step-title" onclick="toggleGooglePlus()">
+                    <!--By Crystal -->
+                    <h2 class="logo google-logo"><?php echo $this->__('Google+'); ?></h2>
+                    <!-- End -->
+                </div>
+                <div id="referfriends-opc-google-content" class="step a-item" style="display:none;">
+                    <div class="google-plus-share">
+                        <a href="https://plus.google.com/share?url='<?php echo $this->getGoogleplusShareLink(); ?>'"
+                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+                                       return false;"><img
+                                src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Share on Google+"/></a> &nbsp;Share
+                        it on Google +
+                        <!--g:plus action="share" height="24" href="<?php //echo $this->getGoogleplusShareLink();       ?>"><?php //echo $this->__('Please wait...');       ?></g:plus-->
+                    </div>
+                    <p></p>
+                    <script type="text/javascript">
+                        var loadGooglePlus = true;
+                    </script>
+                </div>
+            </li>
+        <?php endif ?>
+    </ol>
+</div>
+<script type='text/javascript'>
+    function toggleGooglePlus() {
+        toggleReferFriendsRighbox('referfriends-opc-google-content');
+        if (loadGooglePlus) {
+            (function () {
+                var po = document.createElement('script');
+                po.type = 'text/javascript';
+                po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(po, s);
+            })();
+            loadGooglePlus = false;
+        }
+    }
+    var referfriendsCurrentEId = '';
+    function toggleReferFriendsRighbox(eId) {
+        if (eId != referfriendsCurrentEId) {
+            if (referfriendsCurrentEId != '') {
+                $(referfriendsCurrentEId).hide();
+                $($(referfriendsCurrentEId).parentNode.id).removeClassName('active');
+            }
+            referfriendsCurrentEId = eId;
+        }
+        $(eId).toggle();
+        $($(eId).parentNode.id).toggleClassName('active');
+    }
+</script>
+
+<?php echo $this->getChildHtml('rewardpointsreferfriends.transactions'); ?>

@@ -1,0 +1,156 @@
+/* mixins */
+
+@mixin breakpointmedia( $value, $operator: 'min-width', $query: 'screen') {
+    @media #{$query} and (#{$operator}: #{$value/16}em) {
+        @content;
+    }
+}
+
+/* sprite */
+@mixin my-sprite($images){
+    @include my-sprite-sprite($images);
+    width: my-sprite-sprite-width($images);
+    height: my-sprite-sprite-height($images);
+}
+/* clearfix */
+@mixin clearfix {
+    &:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+}
+
+/* list_ib */
+@mixin list_ib {
+    font-size: 0;
+    display: table;
+    li {display: inline-block; vertical-align: top;}
+}
+
+/* list_jst */
+@mixin list_jst {
+    text-align: justify;
+    line-height: 0;
+    *text-justify: newspaper;
+    *text-align-last: justify;
+    *zoom:1;
+    :after {content: ''; display: inline-block; width: 100%; height: 0; visibility: hidden;}
+    li {display: inline-block; *display : inline; *zoom : 1; vertical-align: top; line-height: normal; text-align: left;}
+}
+
+/* reset */
+@mixin reset {
+    padding: 0;
+    margin: 0;
+    border: none;
+
+    li {
+        list-style:none;
+    }
+}
+
+/* hold-center */
+@mixin hold-center($blockWidth: auto, $blockMinWidth: 0, $blockMaxWidth: auto, $blockType: fixed) {
+    $blockMargin: auto;
+    @if ($blockType == fixed) {
+        @if ($blockWidth == auto) {
+            $blockMargin: 0;
+        }
+        width: $blockWidth;
+    } @else if ($blockType == flex) {
+        max-width: $blockMaxWidth;
+        min-width: $blockMinWidth;
+    } @else {
+        width: $blockWidth;
+    }
+    margin: $blockMargin;
+}
+
+/* core-justify */
+@mixin core-justify() {
+    font-size: 0;
+    text: {
+        align: justify;
+        justify: newspaper;
+    }
+
+    &:after {
+        display: inline-block;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+        width: 100%;
+        content: '';
+    }
+
+    .lt-ie8 & {
+        text-align-last: justify;
+        zoom: 1;
+    }
+}
+
+/* placeholder */
+@mixin placeholder {
+    &.placeholder { @content; }
+    &:-moz-placeholder { @content; }
+    &::-moz-placeholder { @content; }
+    &::-webkit-input-placeholder { @content; }
+}
+
+/* triangle */
+@mixin triangle($direction: up, $size: 5px, $color: #000000) {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    display: block;
+
+    @if $direction == up {
+        border-right: $size solid transparent;
+        border-left: $size solid transparent;
+        border-bottom: $size solid $color;
+        border-top: none;
+    }
+
+    @if $direction == down {
+        border-right: $size solid transparent;
+        border-left: $size solid transparent;
+        border-top: $size solid $color;
+        border-bottom: none;
+    }
+
+    @if $direction == right {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+        border-left: $size solid $color;
+        border-right: none;
+    }
+
+    @if $direction == left {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+        border-right: $size solid $color;
+        border-left: none;
+    }
+
+    @if $direction == upleft {
+        border: $size solid transparent;
+        border-top: $size solid $color;
+        border-left: $size solid $color;
+    }
+
+    @if $direction == upright {
+        border: $size solid transparent;
+        border-top: $size solid $color;
+        border-right: $size solid $color;
+    }
+
+    @if $direction == bottom-right {
+        border: $size solid transparent;
+        border-bottom: $size solid $color;
+        border-right: $size solid $color;
+    }
+
+    @if $direction == bottom-left {
+        border: $size solid transparent;
+        border-bottom: $size solid $color;
+        border-left: $size solid $color;
+    }
+}

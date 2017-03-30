@@ -1,0 +1,17 @@
+<?php if( !defined( 'Nwdthemes_Revslider_Helper_Framework::ABSPATH') ) exit(); ?>
+<input type="hidden" id="sliderid" value="<?php echo $sliderID; ?>"></input>
+
+<?php
+$is_edit = true;
+echo $this->getChild('slider-main-options')->assign(get_defined_vars())->toHtml();
+?>
+
+<script type="text/javascript">
+	var g_jsonTaxWithCats = <?php echo $jsonTaxWithCats?>;
+
+	(function(jQuery) {
+	jQuery(document).ready(function(){			
+		RevSliderAdmin.initEditSliderView();
+	});
+	})($nwd_jQuery);
+</script>

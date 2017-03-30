@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+<!--        Changed By Adam 29/10/2015: Fix issue of SUPEE 6788 - in Magento 1.9.2.2-->
+        <affiliateplus>
+            <children>
+                <program module="affiliateplusprogram" translate="title">
+                    <title>Manage Programs</title>
+                    <sort_order>0</sort_order>
+                    <action>adminhtml/affiliateplusprogram_program/index</action>
+                </program>
+            </children>
+        </affiliateplus>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <affiliateplus>
+                        <children>
+                            <program module="affiliateplusprogram" translate="title">
+                                <title>Manage Programs</title>
+                                <sort_order>0</sort_order>
+                                <action>adminhtml/affiliateplusprogram_program/index</action>
+                            </program>
+                        </children>
+                    </affiliateplus>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

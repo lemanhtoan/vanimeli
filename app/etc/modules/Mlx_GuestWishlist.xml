@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Mlx_GuestWishlist>
+            <active>true</active>
+            <codePool>local</codePool>
+            <name>Wishlist For Guest</name>
+            <depends>             
+                <Mage_Wishlist />                
+            </depends>
+        </Mlx_GuestWishlist>
+    </modules>
+</config>

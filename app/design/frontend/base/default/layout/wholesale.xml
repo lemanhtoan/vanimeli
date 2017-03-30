@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <wholesale_link> 	
+        <reference name="top.links">         
+			<action method="addLink" translate="label title before_text">
+				<label>Register as Wholesaler</label>
+				<url helper="wholesale/getRegisterUrl" />
+				<title>Register as Wholesaler</title>
+				<prepare/>
+				<urlParams/>
+				<position>100</position>
+				<li/><a/>
+			</action>
+        </reference>       
+    </wholesale_link>
+	<wholesale_account_create translate="label">
+		<label>Customer Account Registration Form</label>
+		<!-- Mage_Customer -->
+		<remove name="right"/>
+		<remove name="left"/>
+		<reference name="root">
+			<action method="setTemplate"><template>page/1column.phtml</template></action>
+		</reference>
+		<reference name="content">
+			<block type="customer/form_register" name="customer_form_register" template="wholesale/customer/form/register.phtml">
+				 <action method="setShowAddressFields"  ifconfig="wholesale/general/show_address"><value>true</value></action>
+				<block type="page/html_wrapper" name="customer.form.register.fields.before" as="form_fields_before" translate="label">
+					<label>Form Fields Before</label>
+				</block>
+			</block>
+		</reference>
+	</wholesale_account_create>	
+</layout> 

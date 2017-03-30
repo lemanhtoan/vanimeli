@@ -1,0 +1,54 @@
+<?php if ($this->showButton('facebook', true)): ?>
+    <div class="behavior-facebook-share behavior-social" id="behavior-facebook-share">
+        <a href="javascript:void()" class="share-button" onclick="shareFacebook();">
+            <i></i>
+            <span class="label"><?php echo $this->__("Share"); ?></span>
+        </a>
+        <script type="text/javascript">
+            var messageFacebookShare = '<?php echo $this->getSocialInfo('facebook_share') ?>';
+            var canRequestShare = (messageFacebookShare === '') ? false : true;
+            function shareFacebook() {
+                var sharedUrl = '<?php echo $this->getShareUrl() ?>';
+                FB.ui({method: 'stream.share', u: sharedUrl}, function (response) {
+                    if (login && response && response.object_id && canRequestShare) {
+                        showAjaxLoader();
+                        new Ajax.Request('<?php echo $this->getUrl('rewardpointsbehavior/index/faceshare') ?>', {
+                            method: 'post',
+                            parameters: {
+                                link: sharedUrl
+                            },
+                            onException: function () {
+                                $('social-info-behavior').innerHTML = messageError;
+                                hideAjaxLoader();
+                            },
+                            onSuccess: function (message) {
+                                if (message.responseText && message.responseText != '') {
+                                    $('social-info-behavior').innerHTML = message.responseText;
+                                } else {
+                                    $('social-info-behavior').innerHTML = messageDefault;
+                                }
+                                hideAjaxLoader();
+                                canRequestShare = false;
+                            }
+                        });
+                    }
+                });
+            }
+
+            if (messageFacebookShare !== '' && login) {
+                Event.observe('behavior-facebook-share', 'mouseover', function () {
+                    if (canRequestShare) {
+                        $('behavior-ajax-loader').show();
+                        $('social-info-behavior').innerHTML = messageFacebookShare;
+                    } else {
+                        $('behavior-ajax-loader').hide();
+                    }
+                });
+                Event.observe('behavior-facebook-share', 'mouseout', function () {
+                    $('behavior-ajax-loader').show();
+                    $('social-info-behavior').innerHTML = messageDefault;
+                });
+            }
+        </script>
+    </div>
+<?php endif; ?>

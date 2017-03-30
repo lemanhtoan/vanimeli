@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <ves translate="label" module="ves_landingpage">
+            <label>Venus Theme</label>
+            <sort_order>211</sort_order>
+        </ves>
+    </tabs>
+    <sections>
+        <ves_landingpage>
+            <label>Ves Landing Page</label>
+            <tab>ves</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <ves_landingpage>
+                    <label>General Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields> 
+                        <last_update translate="label">
+                            <label>Current Update Time</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>ves_landingpage/system_config_form_field_notification</frontend_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </last_update> 
+                        <show translate="label" module="core">
+                            <label>Enabled</label>
+                            <sort_order>0</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show> 
+                        <title translate="label">
+                            <label>Module Title </label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <comment>Empty for hide</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title> 
+
+                        <image translate="label comment">
+                            <label>Background Image</label>
+                            <comment>Allowed file types: jpeg, gif, png.</comment>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">ves_landingpage</upload_dir>
+                            <base_url type="media" scope_info="1">ves_landingpage</base_url>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </image>
+                        <logo translate="label comment">
+                            <label>Logo Slider</label>
+                            <comment>Allowed file types: jpeg, gif, png.</comment>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">ves_landingpage</upload_dir>
+                            <base_url type="media" scope_info="1">ves_landingpage</base_url>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </logo>
+
+                        <link_logo translate="label">
+                            <label>Url link Logo</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </link_logo>
+
+                        <width translate="label">
+                            <label>Width Module</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <comment>Empty for get full width</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </width> 
+
+                        <height translate="label">
+                            <label>Heigth Module</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <comment>Empty for full height</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </height> 
+
+                        <interval translate="label">
+                            <label>Interval</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </interval>
+
+                       <video_id translate="label">
+                            <label>Video ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <comment>For Example ID: https://www.youtube.com/watch?v=BBvsB5PcitQ  => VideoID = BBvsB5PcitQ</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </video_id>
+
+                        <loop translate="label" module="core">
+                            <label>Loop Video</label>
+                            <sort_order>6</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </loop> 
+
+                        <auto_play translate="label" module="core">
+                            <label>Auto Play</label>
+                            <sort_order>7</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </auto_play>
+
+                        <show_controls translate="label" module="core">
+                            <label>Show Controls</label>
+                            <sort_order>8</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_controls>
+
+                        <mute translate="label" module="core">
+                            <label>Mute</label>
+                            <sort_order>9</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </mute> 
+                        
+                    </fields> 
+                </ves_landingpage>
+
+                <advanded_parameter>
+                    <label>Information - Support</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>6001</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields> 
+                        <module_information translate="label">
+                            <label>Set Module Visable On Pages, Position</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>Ves_Landingpage_Block_System_Config_Form_Field_Information</frontend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </module_information>                        
+                    </fields>
+                </advanded_parameter>
+            </groups>
+        </ves_landingpage>
+    </sections>    
+</config>

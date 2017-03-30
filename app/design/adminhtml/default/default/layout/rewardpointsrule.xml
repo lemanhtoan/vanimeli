@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsRule
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <adminhtml_reward_earning_individual_index>
+        <reference name="head">
+            <action method="addJs">
+                <file>magestore/rewardpointsrule/grid.js</file>
+            </action>
+        </reference>
+    </adminhtml_reward_earning_individual_index>
+    <adminhtml_reward_spending_individual_index>
+        <reference name="head">
+            <action method="addJs">
+                <file>magestore/rewardpointsrule/grid.js</file>
+            </action>
+        </reference>
+    </adminhtml_reward_spending_individual_index>
+    <adminhtml_reward_rewardpointsrule_index>    
+        <reference name="content">
+            <block type="rewardpointsrule/adminhtml_rewardpointsrule" name="rewardpointsrule" />
+        </reference>
+    </adminhtml_reward_rewardpointsrule_index>
+    
+    <adminhtml_reward_earning_catalog_showapplyrule>		
+        <reference name="content">
+            <block type="rewardpointsrule/adminhtml_earning_catalog" template="rewardpointsrule/applyrule.phtml" name="applyrule" />
+        </reference>
+    </adminhtml_reward_earning_catalog_showapplyrule>
+    
+    <adminhtml_reward_earning_catalog_index>
+        <reference name="head">
+                <action method="addJs"><script>magestore/rewardpointsrule.js</script></action>
+        </reference>        
+    </adminhtml_reward_earning_catalog_index>
+	
+	<adminhtml_reward_earning_catalog_edit>
+         <reference name="head">
+            <action method="setCanLoadTinyMce">
+                <flag>1</flag>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/variables.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/wysiwyg/widget.js</script>
+            </action>
+            <action method="addJs">
+                <script>lib/flex.js</script>
+            </action>
+            <action method="addJs">
+                <script>lib/FABridge.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/flexuploader.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/browser.js</script>
+            </action>
+            <action method="addJs">
+                <script>prototype/window.js</script>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>lib/prototype/windows/themes/magento.css</name>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>mage/adminhtml/wysiwyg/tiny_mce/setup.js</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>tiny_mce/tiny_mce.js</name>
+                <params/>
+            </action>
+        </reference>
+    </adminhtml_reward_earning_catalog_edit>
+	
+    <adminhtml_reward_earning_sales_edit>
+         <update handle="editor"/>
+         <reference name="head">
+            <action method="setCanLoadTinyMce">
+                <flag>1</flag>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/variables.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/wysiwyg/widget.js</script>
+            </action>
+            <action method="addJs">
+                <script>lib/flex.js</script>
+            </action>
+            <action method="addJs">
+                <script>lib/FABridge.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/flexuploader.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/adminhtml/browser.js</script>
+            </action>
+            <action method="addJs">
+                <script>prototype/window.js</script>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>lib/prototype/windows/themes/magento.css</name>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>mage/adminhtml/wysiwyg/tiny_mce/setup.js</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>tiny_mce/tiny_mce.js</name>
+                <params/>
+            </action>
+        </reference>
+    </adminhtml_reward_earning_sales_edit>
+</layout>

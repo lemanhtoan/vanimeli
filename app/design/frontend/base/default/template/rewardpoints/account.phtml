@@ -1,0 +1,59 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Rewardpoints show on customer account dashboard template
+ * 
+ * @see Magestore_RewardPoints_Block_Account
+ */
+?>
+
+<div class="box-account box-info box-rewardpoints-summary">
+	<div class="box-head">
+		<h2><?php echo $this->__('Reward information') ?></h2>
+	</div>
+    <div class="info-summary">
+        <p><strong>
+            <?php echo $this->__('Your balance is') ?>
+            <strong class="rewardpoints-money">
+                <?php echo $this->getBalanceText() ?>
+                <?php if ($_pointMoney = $this->getPointMoney()): ?>
+                    (<?php echo $_pointMoney ?>)
+                <?php endif ?>
+            </strong>
+            <?php echo Mage::helper('rewardpoints/point')->getImageHtml(true) ?>
+        </strong>
+        <br/>
+    <?php if ($_holdingBalance = $this->getHoldingBalance()): ?>
+        <span>
+            <?php echo $this->__('You have %s that are pending for approval.',
+                '<span class="rewardpoints-money">' . $_holdingBalance . '</span>'
+            ) ?>
+        </span>
+    <?php endif ?>
+        </p>
+        <p><strong class="rewardpoints-money">
+            <a href="<?php echo $this->getUrl('rewardpoints/index/index') ?>" title="<?php echo $this->__('View My Rewards') ?>">
+                <?php echo $this->__('View My Rewards') ?>
+            </a>
+        </strong></p>
+    </div>
+</div>

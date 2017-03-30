@@ -1,0 +1,111 @@
+<?php
+$_helper = Mage::helper('catalog/output');
+$_rule = $this->getListRule();
+$title_name = $this->getConfig('title_name');
+$show_code = $this->getConfig('show_code');
+$show_short_description = $this->getConfig('show_short_description');
+$addition_cls = $this->getConfig('addition_cls');
+$title = $this->getConfig('title');
+$background_color = $this->getConfig('background_color');
+$style = '';
+if ($background_color != '' || $thumbnailurl != '') {
+    $style = 'style="';
+    if($background_color != ''){
+        $style .= 'background-color:'.$background_color.';';
+    }
+
+    /** THUMBNAIL **/
+    $imagesize = $this->getConfig('image_size');
+    $image_file = $this->getConfig('file');
+    $array_size = explode("x", $imagesize);
+    $image_width = isset($array_size[0])?(int)$array_size[0]:0;
+    $image_width = $image_width?$image_width: 0;
+    $image_height = isset($array_size[1])?(int)$array_size[1]:0;
+    $image_height = $image_height?$image_height: 0;
+    $thumbnailurl = "";
+    if($image_file ) {
+        if (!preg_match("/^http\:\/\/|https\:\/\//", $image_file) && $image_width >0 && $image_height > 0) {
+            $thumbnailurl = Mage::helper("ves_base")->resizeImage($image_file, (int)$image_width, (int)$image_height);
+        } else {
+            $thumbnailurl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$image_file;
+        }
+    }
+    if( $thumbnailurl != '' ){
+
+        $position_x = 'center';
+        if($this->getConfig('background_position_x') != ''){
+            $position_x = $this->getData('background_position_x');
+        }
+
+        $position_y = 'center';
+        if($this->getConfig('background_position_y') != ''){
+            $position_y = $this->getData('background_position_y');
+        }
+
+        $style .= "background-image:url('".$thumbnailurl."');background-repeat: no-repeat;";
+        $style .= 'background-position: '.$position_x.' '.$position_y.';';
+    }
+
+    $style .= 'float: right;width: 100%;';
+
+    $style .= '"';
+}
+$id = rand().time();
+
+?>
+<?php if($this->checkGroupCustomer($_rule->getData('customer_group_ids'))){ ?>
+<div class="widget-banner-countdown block <?php echo $addition_cls; ?> " <?php echo $style; ?>>
+    <?php if( $title != '' ){ ?>
+    <div class="block-title">
+        <?php echo $title; ?>
+    </div>
+    <?php } ?>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-8">
+        <?php echo $this->__($title_name).'  :';?>  <?php echo $_rule->getName(); ?> . 
+        <?php if($show_code){ 
+                if($_rule->getCouponCode()){
+                    echo $this->__('Use Code'); ?> :  <?php echo $_rule->getCouponCode();
+                }else{
+                    echo $this->__('Use Code'); ?> :  <?php echo $this->getConfig('custom_couponcode');
+                }
+            }?>
+        <br>
+        <?php if ($show_short_description) { ?>
+            <span class="description">
+            <?php echo $this->__($_rule->getDescription()); ?>
+            </span>
+        <?php } ?>
+        
+      </div>
+      <div class="col-xs-6 col-md-4">
+       <!-- TIME -->
+       <?php
+       if($this->getConfig('show_timer_countdown')){
+        $date1 = date('G:i:s', strtotime($_rule->getToDate()));
+        if ($date1 == "0:00:00") {
+            $targetDate = date('m/d/Y \2\3\:\5\9\:\0\0', strtotime($_rule->getToDate()));
+        }else{
+            $targetDate = date('m/d/Y G:i:s', strtotime($_rule->getToDate()));
+        }
+        ?>
+        <div class="banner-countdowns" >
+            <div id="item<?php echo $id; ?>countdown_<?php echo $_rule->getId(); ?>" class="item-countdown"></div>
+            <script type="text/javascript">
+                jQuery(document).ready(function($){
+                    $("#item<?php echo $id; ?>countdown_<?php echo $_rule->getId(); ?>").lofCountDown({
+                        formatStyle:2,
+                        TargetDate:"<?php echo $targetDate; ?>",
+                        DisplayFormat:"<ul><li>%%D%% <div><?php echo $this->__('Day');?></div></li><li> %%H%% <div><?php echo $this->__('Hours');?></div></li><li> %%M%% <div><?php echo $this->__('Mins');?></div></li><li> %%S%% <div><?php echo $this->__('Secs');?></div></li></ul>",
+                        FinishMessage:"<?php echo $this->__('Expired');?>",
+                    });
+                });
+            </script>
+        </div>
+        <?php } ?>
+    </div>
+</div>  
+</div>
+<?php 
+} // end if check groupcustomer
+?>

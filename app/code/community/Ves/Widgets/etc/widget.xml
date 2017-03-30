@@ -1,0 +1,1411 @@
+<?xml version="1.0"?>
+<widgets>
+	<widget_singledeals type="ves_widgets/widget_singledeals">
+		<name>Single Deal Block</name>
+		<description>Single Deal Block</description>
+		<parameters>
+			<title translate="label">
+				<visible>1</visible>
+				<label>Widget Title </label>
+				<type>text</type>
+				<sort_order>0</sort_order>
+				<description>Empty for hide</description>
+				<value></value>
+			</title>
+			<addition_cls translate="label" module="core">
+				<visible>1</visible>
+				<label>Addition Class</label>
+				<description>This class is used to make owner style for the widget. </description>
+				<type>text</type>
+				<sort_order>5</sort_order>
+			</addition_cls>
+			<background_color translate="label">
+				<visible>1</visible>
+				<label>Background Color</label>
+				<type>text</type>
+				<sort_order>10</sort_order>
+				<description><![CDATA[Example: #CC0000, white,...]]></description>
+			</background_color>
+			<file translate="label" module="core">
+				<visible>1</visible>
+				<label>Background Image</label>
+				<type>ves_widgets/adminhtml_widget_mediachooser</type>
+				<description><![CDATA[Enter image path or use holder image (ex: holder.js/300x200 ). Example: <strong>subfolder/image_name.jpg</strong>.The "subfolder" is child folder in <strong>your_webroot_folder/media/</strong>]]></description>
+				<sort_order>15</sort_order>
+			</file>
+			<background_position_x translate="label">
+				<visible>1</visible>
+				<label>Background Positon x</label>
+				<type>text</type>
+				<sort_order>20</sort_order>
+				<description><![CDATA[Default is center]]></description>
+			</background_position_x>
+			<background_position_y translate="label">
+				<visible>1</visible>
+				<label>Background Positon y</label>
+				<type>text</type>
+				<sort_order>25</sort_order>
+				<description><![CDATA[Default is center]]></description>
+			</background_position_y>
+			<image_size translate="label" module="core">
+				<visible>1</visible>
+				<label>Image size</label>
+				<type>text</type>
+				<description><![CDATA[Enter image size. Example: thumbnail, medium, large, full or other sizes defined by current theme. Alternatively enter image size in pixels: 200x100 (Width x Height). Leave empty to use 'thumbnail' size. Empty to disable resize image]]></description>
+				<type>text</type>
+				<sort_order>30</sort_order>
+			</image_size>
+			<id_path translate="label">
+				<visible>1</visible>
+				<required>1</required>
+				<label>Product</label>
+				<type>label</type>
+				<helper_block>
+					<type>adminhtml/catalog_product_widget_chooser</type>
+					<data>
+						<button translate="open">
+							<open>Select Product...</open>
+						</button>
+					</data>
+				</helper_block>
+				<sort_order>35</sort_order>
+			</id_path>
+			<show_short_description translate="label">
+				<visible>1</visible>
+				<label>Display Short Description</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>40</sort_order>
+				<value>1</value>
+			</show_short_description>
+			<show_price translate="label">
+				<visible>1</visible>
+				<label>Display Price</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>45</sort_order>
+				<value>1</value>
+			</show_price>
+			<show_addtocart translate="label">
+				<visible>1</visible>
+				<label>Display Button Add To Cart</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>50</sort_order>
+				<value>1</value>
+			</show_addtocart>
+			<show_timer_countdown translate="label">
+				<visible>1</visible>
+				<label>Display Time Countdown</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>55</sort_order>
+				<value>1</value>
+			</show_timer_countdown>
+			<show_review translate="label">
+				<visible>1</visible>
+				<label>Display Review</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>60</sort_order>
+				<value>1</value>
+			</show_review>
+			<show_wishlist translate="label">
+				<visible>1</visible>
+				<label>Display Button Wishlist</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>65</sort_order>
+				<value>1</value>
+			</show_wishlist>
+			<show_compare translate="label">
+				<visible>1</visible>
+				<label>Display Button Compare</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>70</sort_order>
+				<value>1</value>
+			</show_compare>
+			<template translate="label">
+				<visible>1</visible>
+				<label>Widget Template</label>
+				<description>Input custom module template file path. For example: ves/widgets/singledeal.phtml Empty for default</description>
+				<type>text</type>
+				<sort_order>75</sort_order>
+			</template>
+		</parameters>
+	</widget_singledeals>
+
+
+	<widget_singleproduct type="ves_widgets/widget_singleproduct">
+		<name>Ves Widgets: Single Product Block</name>
+		<description>Show Single Product Information Block</description>
+		<parameters>
+			<title translate="label">
+				<visible>1</visible>
+				<label>Widget Title </label>
+				<type>text</type>
+				<sort_order>0</sort_order>
+				<description>Empty for hide</description>
+				<value></value>
+			</title>
+			<addition_cls translate="label" module="core">
+				<visible>1</visible>
+				<label>Addition Class</label>
+				<description>This class is used to make owner style for the widget. </description>
+				<type>text</type>
+				<sort_order>5</sort_order>
+			</addition_cls>
+			
+			<id_path translate="label">
+				<visible>1</visible>
+				<required>1</required>
+				<label>Product</label>
+				<type>label</type>
+				<helper_block>
+					<type>adminhtml/catalog_product_widget_chooser</type>
+					<data>
+						<button translate="open">
+							<open>Select Product...</open>
+						</button>
+					</data>
+				</helper_block>
+				<sort_order>20</sort_order>
+			</id_path>
+			<enable_wrapper translate="label">
+				<visible>1</visible>
+				<label>Show block wrapper</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>25</sort_order>
+				<value>1</value>
+			</enable_wrapper>
+			<show_product_title translate="label">
+				<visible>1</visible>
+				<label>Display Product Title</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>36</sort_order>
+				<value>1</value>
+			</show_product_title>
+			<show_image translate="label">
+				<visible>1</visible>
+				<label>Display Product Image</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>37</sort_order>
+				<value>1</value>
+			</show_image>
+			<image_size translate="label" module="core">
+				<visible>1</visible>
+				<label>Image size</label>
+				<type>text</type>
+				<description><![CDATA[Enter image size in pixels: 300x300 (Width x Height).]]></description>
+				<type>text</type>
+				<sort_order>38</sort_order>
+			</image_size>
+
+			<show_swap translate="label">
+				<visible>1</visible>
+				<label>Display Swap Image</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>40</sort_order>
+				<value>1</value>
+			</show_swap>
+			<swap_index translate="label">
+				<visible>1</visible>
+				<label>Swap image index</label>
+				<type>text</type>
+				<sort_order>40</sort_order>
+				<value>0</value>
+			</swap_index>
+			<show_sale_label translate="label">
+				<visible>1</visible>
+				<label>Display Sale Label</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>42</sort_order>
+				<value>0</value>
+			</show_sale_label>
+			<show_new_label translate="label">
+				<visible>1</visible>
+				<label>Display New Label</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>43</sort_order>
+				<value>0</value>
+			</show_new_label>
+			<show_short_description translate="label">
+				<visible>1</visible>
+				<label>Display Short Description</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>44</sort_order>
+				<value>1</value>
+			</show_short_description>
+			<desc_maxchar translate="label">
+				<visible>1</visible>
+				<label>Short Description Max Chars</label>
+				<type>text</type>
+				<sort_order>45</sort_order>
+				<value>100</value>
+			</desc_maxchar>
+			<show_price translate="label">
+				<visible>1</visible>
+				<label>Display Price</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>48</sort_order>
+				<value>1</value>
+			</show_price>
+			<show_addtocart translate="label">
+				<visible>1</visible>
+				<label>Display Button Add To Cart</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>50</sort_order>
+				<value>1</value>
+			</show_addtocart>
+			<show_timer_countdown translate="label">
+				<visible>1</visible>
+				<label>Display Time Countdown</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>55</sort_order>
+				<value>1</value>
+			</show_timer_countdown>
+			<show_review translate="label">
+				<visible>1</visible>
+				<label>Display Review</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>60</sort_order>
+				<value>1</value>
+			</show_review>
+			<show_wishlist translate="label">
+				<visible>1</visible>
+				<label>Display Button Wishlist</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>65</sort_order>
+				<value>1</value>
+			</show_wishlist>
+			<show_compare translate="label">
+				<visible>1</visible>
+				<label>Display Button Compare</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>70</sort_order>
+				<value>1</value>
+			</show_compare>
+			<show_quickview translate="label">
+				<visible>1</visible>
+				<label>Display Quick View</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>80</sort_order>
+				<value>1</value>
+			</show_quickview>
+			<show_image_popup translate="label">
+				<visible>1</visible>
+				<label>Display Image Popup</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>90</sort_order>
+				<value>1</value>
+			</show_image_popup>
+			<popup_size translate="label" module="core">
+				<visible>1</visible>
+				<label>Popup Image Size</label>
+				<type>text</type>
+				<description><![CDATA[Enter popup image size in pixels: 600x800 (Width x Height).]]></description>
+				<type>text</type>
+				<sort_order>100</sort_order>
+				<value>600x800</value>
+			</popup_size>
+			<template translate="label">
+				<visible>1</visible>
+				<label>Widget Template</label>
+				<description>Input custom module template file path. For example: ves/widgets/single_product.phtml Empty for default</description>
+				<type>text</type>
+				<sort_order>1000</sort_order>
+			</template>
+		</parameters>
+	</widget_singleproduct>
+
+	<!-- =================================================== -->
+
+
+	<widget_banner_countdown type="ves_widgets/widget_bannercountdown">
+		<name>Banner Countdown</name>
+		<description>Banner Countdown Block</description>
+		<parameters>
+
+			<title translate="label">
+				<visible>0</visible>
+				<label>Widget Title </label>
+				<type>text</type>
+				<sort_order>0</sort_order>
+				<description>Empty for hide</description>
+				<value></value>
+			</title>
+			<title_name translate="label">
+				<visible>1</visible>
+				<label>Title of Name</label>
+				<type>text</type>
+				<sort_order>0</sort_order>
+				<description>Empty for hide</description>
+				<value></value>
+			</title_name>
+
+			<filter_group translate="label" module="core">
+				<label>Banner Countdown</label>
+				<sort_order>1</sort_order>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_source_listGroup</source_model>
+				<description>Choose Rule to show on frontend.</description>
+				<visible>1</visible>
+			</filter_group>
+
+			<addition_cls translate="label" module="core">
+				<visible>1</visible>
+				<label>Addition Class</label>
+				<description>This class is used to make owner style for the widget. </description>
+				<type>text</type>
+				<sort_order>5</sort_order>
+			</addition_cls>
+			<background_color translate="label">
+				<visible>1</visible>
+				<label>Background Color</label>
+				<type>text</type>
+				<sort_order>10</sort_order>
+				<description><![CDATA[Example: #CC0000, white,...]]></description>
+			</background_color>
+			<file translate="label" module="core">
+				<visible>1</visible>
+				<label>Background Image</label>
+				<type>ves_widgets/adminhtml_widget_mediachooser</type>
+				<description><![CDATA[Enter image path or use holder image (ex: holder.js/300x200 ). Example: <strong>subfolder/image_name.jpg</strong>.The "subfolder" is child folder in <strong>your_webroot_folder/media/</strong>]]></description>
+				<sort_order>15</sort_order>
+			</file>
+
+			<background_position_x translate="label">
+				<visible>1</visible>
+				<label>Background Positon x</label>
+				<type>text</type>
+				<sort_order>20</sort_order>
+				<description><![CDATA[Default is center]]></description>
+			</background_position_x>
+			<background_position_y translate="label">
+				<visible>1</visible>
+				<label>Background Positon y</label>
+				<type>text</type>
+				<sort_order>25</sort_order>
+				<description><![CDATA[Default is center]]></description>
+			</background_position_y>
+			<image_size translate="label" module="core">
+				<visible>1</visible>
+				<label>Image size</label>
+				<type>text</type>
+				<description><![CDATA[Enter image size. Example: thumbnail, medium, large, full or other sizes defined by current theme. Alternatively enter image size in pixels: 200x100 (Width x Height). Leave empty to use 'thumbnail' size. Empty to disable resize image]]></description>
+				<type>text</type>
+				<sort_order>30</sort_order>
+			</image_size>
+
+			<custom_couponcode translate="label" module="core">
+				<visible>1</visible>
+				<label>Custom Coupon code</label>
+				<type>text</type>
+				<description><![CDATA[If you use "Use Auto Generation" you must go to Manage coupon code get a coupon code and enter it here.]]></description>
+				<type>text</type>
+				<sort_order>31</sort_order>
+			</custom_couponcode>
+
+			<show_code translate="label">
+				<visible>1</visible>
+				<label>Display Code</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>35</sort_order>
+				<value>1</value>
+			</show_code>
+			<show_short_description translate="label">
+				<visible>1</visible>
+				<label>Display Short Description</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>40</sort_order>
+				<value>1</value>
+			</show_short_description>
+
+			<show_timer_countdown translate="label">
+				<visible>1</visible>
+				<label>Display Time Countdown</label>
+				<type>select</type>
+				<source_model>adminhtml/system_config_source_yesno</source_model>
+				<sort_order>45</sort_order>
+				<value>1</value>
+			</show_timer_countdown>
+
+		</parameters>
+	</widget_banner_countdown>
+	<!-- =================================================== -->
+
+	<!-- =================================================== -->
+
+
+	<widget_countdown_timer type="ves_widgets/widget_countdowntimer">
+		<name>Banner Countdown Timer</name>
+		<description>Show a banner with countdown timer</description>
+		<parameters>
+
+			<title translate="label">
+				<visible>1</visible>
+				<label>Widget Title</label>
+				<type>text</type>
+				<description>Empty for hide</description>
+				<value></value>
+			</title>
+
+			<enable_collapse translate="label" module="core">
+				<visible>1</visible>
+				<label>Enable Collapse</label>
+				<type>select</type>
+				<values>
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+				</values>
+				<value>false</value>
+			</enable_collapse>
+			<addition_cls translate="label" module="core">
+				<visible>1</visible>
+				<label>Addition Class</label>
+				<description>This class is used to make owner style for the widget. </description>
+				<type>text</type>
+			</addition_cls>
+			<title_name translate="label">
+				<visible>1</visible>
+				<label>Title of Name</label>
+				<type>text</type>
+				<description>Empty for hide</description>
+				<value></value>
+			</title_name>
+
+			<end_date translate="label">
+				<label>Expired Date:</label>
+                <type>text</type>
+                <description>Input date with format: M/d/yyyy for example: 09/30/2015</description>
+                <visible>1</visible>
+			</end_date>
+			<use_image_background translate="label" module="core">
+				<visible>1</visible>
+				<label>Use Backgroupd Image</label>
+				<type>select</type>
+				<values>
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+				</values>
+				<value>false</value>
+			</use_image_background>
+			<file translate="label" module="core">
+				<visible>1</visible>
+				<label>Image</label>
+				<type>ves_widgets/adminhtml_widget_mediachooser</type>
+				<description><![CDATA[Enter image path or use holder image (ex: holder.js/300x200 ). Example: <strong>subfolder/image_name.jpg</strong>.The "subfolder" is child folder in <strong>your_webroot_folder/media/</strong>]]></description>
+				<depends><use_image_background><value>true</value></use_image_background></depends>
+			</file>
+
+			<image_size translate="label" module="core">
+				<visible>1</visible>
+				<label>Image size</label>
+				<type>text</type>
+				<description><![CDATA[Enter image size. Example: thumbnail, medium, large, full or other sizes defined by current theme. Alternatively enter image size in pixels: 200x100 (Width x Height). Leave empty to use 'thumbnail' size. Empty to disable resize image]]></description>
+				<depends><use_image_background><value>true</value></use_image_background></depends>
+			</image_size>
+
+			<background_position_x translate="label">
+				<visible>1</visible>
+				<label>Background Positon x</label>
+				<type>text</type>
+				<description><![CDATA[Default is center]]></description>
+				<depends><use_image_background><value>true</value></use_image_background></depends>
+			</background_position_x>
+			<background_position_y translate="label">
+				<visible>1</visible>
+				<label>Background Positon y</label>
+				<type>text</type>
+				<description><![CDATA[Default is center]]></description>
+				<depends><use_image_background><value>true</value></use_image_background></depends>
+			</background_position_y>
+
+			<background_color translate="label">
+				<visible>1</visible>
+				<label>Background Color</label>
+				<type>text</type>
+				<description><![CDATA[Example: #CC0000, white,...]]></description>
+			</background_color>
+
+			<show_link translate="label">
+				<visible>1</visible>
+				<label>Display Link</label>
+				<type>select</type>
+				<values>
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+				</values>
+				<value>false</value>
+			</show_link>
+
+			<link_title translate="label">
+				<visible>1</visible>
+				<label>Link Title</label>
+				<type>text</type>
+				<description>Input link title. Empty for hide</description>
+				<depends><show_link><value>true</value></show_link></depends>
+			</link_title>
+			<class_link translate="label" module="core">
+				<visible>1</visible>
+				<label>Addition Class For Link</label>
+				<type>text</type>
+				<depends><show_link><value>true</value></show_link></depends>
+			</class_link>
+			<url translate="label">
+				<visible>1</visible>
+				<label>Url Link</label>
+				<type>text</type>
+				<description>Input link url. Empty for hide</description>
+				<depends><show_link><value>true</value></show_link></depends>
+			</url>
+
+
+			<show_description translate="label">
+				<visible>1</visible>
+				<label>Display Description</label>
+				<type>select</type>
+				<values>
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+				</values>
+				<value>false</value>
+			</show_description>
+
+			<html translate="label" module="core">
+				<visible>1</visible>
+				<label>Content</label>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<value></value>
+				<depends><show_description><value>true</value></show_description></depends>
+			</html>
+
+			<show_date translate="label">
+				<visible>1</visible>
+				<label>Show Expired Date</label>
+				<type>select</type>
+				<values>
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+				</values>
+				<value>false</value>
+			</show_date>
+
+			<show_timer_countdown translate="label">
+				<visible>1</visible>
+				<label>Display Timer Countdown</label>
+				<type>select</type>
+				<values>
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+				</values>
+				<value>true</value>
+			</show_timer_countdown>
+
+		</parameters>
+	</widget_countdown_timer>
+	<!-- =================================================== -->
+
+	<widget_content_swiper type="ves_widgets/widget_swiper">
+		<name>Content Swiper Slider</name>
+		<description>Create Content Swiper Slider</description>
+		<parameters>
+			<title translate="label" module="core">
+				<visible>1</visible>
+				<label>Widget Title</label>
+				<description>This tile will be showed as header of widget block. Empty to disable </description>
+				<type>text</type>
+				<sort_order>0</sort_order>
+				<value></value>
+			</title>
+			<addition_cls translate="label" module="core">
+				<visible>1</visible>
+				<label>Addition Class</label>
+				<description>This class is used to make owner style for the widget. </description>
+				<type>text</type>
+				<sort_order>1</sort_order>
+			</addition_cls>
+			<stylecls translate="label" module="core">
+				<visible>1</visible>
+				<label>Widget Box Style</label>
+				<description>These classes are bootstrap typo contextual color classes </description>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listStyles</source_model>
+				<sort_order>2</sort_order>
+			</stylecls>
+
+			<template translate="label">
+				<visible>1</visible>
+				<label>Module Template</label>
+				<description>Input custom module template file path. For example: ves/widget/swiper.phtml Empty for default</description>
+				<type>text</type>
+				<sort_order>10</sort_order>
+			</template>
+
+			<spacer_7 translate="label">
+				<label>Carousel Setting</label>
+				<type>ves_widgets/system_config_form_field_heading</type>
+				<sort_order>20</sort_order>
+				<visible>1</visible>
+				<description></description>
+			</spacer_7>
+			<effect>
+				<label>Effect</label>
+				<type>select</type>
+				<values>
+					<slide translate="label">
+						<label>Slide</label>
+						<value>slide</value>
+					</slide>
+					<fade translate="label">
+						<label>Fade</label>
+						<value>fade</value>
+					</fade>
+					<cube translate="label">
+						<label>Cube</label>
+						<value>cube</value>
+					</cube>
+					<coverflow translate="label">
+						<label>Coverflow</label>
+						<value>coverflow</value>
+					</coverflow>
+				</values>
+				<visible>1</visible>
+				<sort_order>25</sort_order>
+				<value>slide</value>
+			</effect>
+			<direction>
+				<label>Direction</label>
+				<type>select</type>
+				<values>
+					<horizontal translate="label">
+						<label>Horizontal</label>
+						<value>horizontal</value>
+					</horizontal>
+					<vertical translate="label">
+						<label>Vertical</label>
+						<value>vertical</value>
+					</vertical>
+				</values>
+				<visible>1</visible>
+				<sort_order>50</sort_order>
+				<value>horizontal</value>
+			</direction>
+			<rtl>
+				<label>Enable Right To Left</label>
+				<type>select</type>
+				<values>
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+					
+				</values>
+				<visible>1</visible>
+				<sort_order>260</sort_order>
+				<value>false</value>
+			</rtl>
+			<freemode>
+				<label>Freemode</label>
+				<comment>If true then slides will not have fixed positions</comment>
+				<type>select</type>
+				<values>
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+					
+				</values>
+				<visible>1</visible>
+				<sort_order>270</sort_order>
+				<value>false</value>
+			</freemode>
+			<loop>
+				<label>Enable Loop Carousel</label>
+				<type>select</type>
+				<values>
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+					
+				</values>
+				<visible>1</visible>
+				<sort_order>280</sort_order>
+				<value>false</value>
+			</loop>
+			<show_navigator>
+				<visible>1</visible>
+				<label>Enable Button Navigation</label>
+				<type>select</type>
+				<values>
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+					
+				</values>
+				<sort_order>283</sort_order>
+				<value>false</value>
+			</show_navigator>
+			<show_pagination>
+				<visible>1</visible>
+				<label>Enable Pagination</label>
+				<type>select</type>
+				<values>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+					
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					
+				</values>
+				<sort_order>284</sort_order>
+				<value>true</value>
+			</show_pagination>
+			<show_scrollbar>
+				<visible>1</visible>
+				<label>Enable Scroll Bar</label>
+				<type>select</type>
+				<values>
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+					
+				</values>
+				<sort_order>285</sort_order>
+				<value>false</value>
+			</show_scrollbar>
+
+			<slider_height>
+				<label>Slide Height</label>
+				<type>text</type>
+				<description>Input number to make height of swiper slide in px. For example: 500</description>
+				<sort_order>290</sort_order>
+				<visible>1</visible>
+				<value></value>
+			</slider_height>
+
+			<slide_by>
+				<label>Slide By</label>
+				<type>text</type>
+				<description>Number Items will slide on a time. For example: 2,3,4,5,6,.. Default: auto</description>
+				<sort_order>300</sort_order>
+				<visible>1</visible>
+				<value>auto</value>
+			</slide_by>
+
+			<space>
+				<label>Distance Between Slides</label>
+				<type>text</type>
+				<description>Distance between slides in px. Default: 0</description>
+				<sort_order>310</sort_order>
+				<visible>1</visible>
+				<value>0</value>
+			</space>
+
+			<speed>
+				<visible>1</visible>
+				<label>Speed</label>
+				<comment>Duration of transition between slides (in ms)</comment>
+				<type>text</type>
+				<sort_order>500</sort_order>
+				<value>300</value>
+			</speed>
+
+			<auto_play>
+				<visible>1</visible>
+				<label>Auto Play</label>
+				<type>select</type>
+				<values>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+				</values>
+				<sort_order>400</sort_order>
+				<value>false</value>
+			</auto_play>
+
+			<interval>
+				<visible>1</visible>
+				<label>Interval</label>
+				<comment>Determines the duration of the transition in milliseconds.If less than 10, the number is interpreted as a speed (pixels/millisecond).This is probably desirable when scrolling items with variable sizes</comment>
+				<type>text</type>
+				<sort_order>500</sort_order>
+				<value>3000</value>
+			</interval>
+
+			<spacer_8 translate="label">
+				<label>Carousel Items</label>
+				<type>ves_widgets/system_config_form_field_heading</type>
+				<sort_order>510</sort_order>
+				<visible>1</visible>
+				<description></description>
+			</spacer_8>
+			<size_1 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 1</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>520</sort_order>
+			</size_1>
+
+			<content_1 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 1</label>
+				<description>Enter Content 1 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>521</sort_order>
+			</content_1>
+
+			<size_2 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 2</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>530</sort_order>
+			</size_2>
+
+			<content_2 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 2</label>
+				<description>Enter Content 2 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>531</sort_order>
+			</content_2>
+
+			<size_3 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 3</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>540</sort_order>
+			</size_3>
+			
+			<content_3 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 3</label>
+				<description>Enter Content 3 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>541</sort_order>
+			</content_3>
+
+			<size_4 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 4</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>550</sort_order>
+			</size_4>
+
+			<content_4 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 4</label>
+				<description>Enter Content 4 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>551</sort_order>
+			</content_4>
+
+			<size_5 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 5</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>560</sort_order>
+			</size_5>
+
+			<content_5 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 5</label>
+				<description>Enter Content 5 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>561</sort_order>
+			</content_5>
+
+			<size_6 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 6</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>570</sort_order>
+			</size_6>
+
+			<content_6 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 6</label>
+				<description>Enter Content 6 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>571</sort_order>
+			</content_6>
+
+			<size_7 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 7</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>580</sort_order>
+			</size_7>
+
+			<content_7 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 7</label>
+				<description>Enter Content 7 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>581</sort_order>
+			</content_7>
+
+			<size_8 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 8</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>590</sort_order>
+			</size_8>
+
+			<content_8 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 6</label>
+				<description>Enter Content 8 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>591</sort_order>
+			</content_8>
+
+			<size_9 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 9</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>600</sort_order>
+			</size_9>
+
+			<content_9 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 9</label>
+				<description>Enter Content 9 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>601</sort_order>
+			</content_9>
+
+			<size_10 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 10</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>610</sort_order>
+			</size_10>
+
+			<content_10 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 10</label>
+				<description>Enter Content 10 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>611</sort_order>
+			</content_10>
+
+			<size_11 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 11</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>615</sort_order>
+			</size_11>
+
+			<content_11 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 11</label>
+				<description>Enter Content 11 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>616</sort_order>
+			</content_11>
+
+			<size_12 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 12</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>620</sort_order>
+			</size_12>
+
+			<content_12 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 12</label>
+				<description>Enter Content 12 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>621</sort_order>
+			</content_12>
+
+			<size_13 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 13</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>630</sort_order>
+			</size_13>
+
+			<content_13 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 13</label>
+				<description>Enter Content 13 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>631</sort_order>
+			</content_13>
+
+			<size_14 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 14</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>640</sort_order>
+			</size_14>
+
+			<content_14 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 14</label>
+				<description>Enter Content 14 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>641</sort_order>
+			</content_14>
+
+			<size_15 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 15</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>740</sort_order>
+			</size_15>
+
+			<content_15 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 15</label>
+				<description>Enter Content 15 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>741</sort_order>
+			</content_15>
+
+			<size_16 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 16</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>840</sort_order>
+			</size_16>
+
+			<content_16 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 16</label>
+				<description>Enter Content 16 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>841</sort_order>
+			</content_16>
+
+			<size_17 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 17</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>940</sort_order>
+			</size_17>
+
+			<content_17 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 17</label>
+				<description>Enter Content 17 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>941</sort_order>
+			</content_17>
+
+			<size_18 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 18</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>950</sort_order>
+			</size_18>
+
+			<content_18 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 18</label>
+				<description>Enter Content 18 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>951</sort_order>
+			</content_18>
+
+			<size_19 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 19</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>960</sort_order>
+			</size_19>
+
+			<content_19 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 14</label>
+				<description>Enter Content 19 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>961</sort_order>
+			</content_19>
+
+			<size_20 translate="label" module="core">
+				<visible>1</visible>
+				<label>Box Size Of Item 20</label>
+				<type>select</type>
+				<source_model>ves_widgets/system_config_listSize</source_model>
+				<sort_order>970</sort_order>
+			</size_20>
+
+			<content_20 translate="label" module="core">
+				<visible>1</visible>
+				<label>Content 20</label>
+				<description>Enter Content 20 </description>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>971</sort_order>
+			</content_20>
+		</parameters>
+	</widget_content_swiper>
+
+	<widget_popup type="ves_widgets/widget_popup">
+		<name>Ves Widgets: Popup</name>
+		<description>Show Promotion, Newsletter, Signup Popup</description>
+		<parameters>
+			<title translate="label" module="core">
+				<visible>1</visible>
+				<label>Form Title</label>
+				<description>Show on the top of form</description>
+				<type>text</type>
+				<sort_order>0</sort_order>
+			</title>
+			<addition_class translate="label" module="core">
+				<visible>1</visible>
+				<label>Addition Class</label>
+				<description>This class is used to make owner style for the widget. </description>
+				<type>text</type>
+				<sort_order>5</sort_order>
+			</addition_class>
+			
+			<open_button_text translate="label" module="core">
+				<visible>1</visible>
+				<label>Open Popup Button Text</label>
+				<description>Input text for open popup button. Empty for hide</description>
+				<type>text</type>
+				<sort_order>6</sort_order>
+			</open_button_text>
+
+			<button_class translate="label" module="core">
+				<visible>1</visible>
+				<label>Button Class</label>
+				<description>Input css class for open popup button</description>
+				<type>text</type>
+				<sort_order>7</sort_order>
+			</button_class>
+
+			<open_popup_first>
+				<visible>1</visible>
+				<label>Allow Open Popup On First Load</label>
+				<type>select</type>
+				<values>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					
+				</values>
+				<sort_order>8</sort_order>
+				<value>true</value>
+			</open_popup_first>
+
+			<show_disable_option>
+				<visible>1</visible>
+				<label>Show Dont Show Popup Again</label>
+				<description>Disable checkbox allow Not receive this message again</description>
+				<type>select</type>
+				<values>
+					<yes translate="label">
+						<label>Yes</label>
+						<value>true</value>
+					</yes>
+
+					<no translate="label">
+						<label>No</label>
+						<value>false</value>
+					</no>
+					
+				</values>
+				<sort_order>9</sort_order>
+				<value>true</value>
+			</show_disable_option>
+
+			<form_type>
+				<visible>1</visible>
+				<label>Select Popup Content Type</label>
+				<type>select</type>
+				<value>light</value>
+				<values>
+					<newsletter translate="label" module="core">
+						<label>Newsletter Form</label>
+						<value>newsletter</value>
+					</newsletter>
+					<login translate="label" module="core">
+						<label>Login and Register Form</label>
+						<value>login</value>
+					</login>
+					<register translate="label" module="core">
+						<label>Register</label>
+						<value>register</value>
+					</register>
+					<forgotpassword translate="label" module="core">
+						<label>Forgot Password Form</label>
+						<value>forgotpassword</value>
+					</forgotpassword>
+					<customhtml translate="label" module="core">
+						<label>Custom Html</label>
+						<value>customhtml</value>
+					</customhtml>
+				</values>
+				<sort_order>10</sort_order>
+			</form_type>
+			<html translate="label" module="core">
+				<label>Custom </label>
+				<visible>1</visible>
+				<type>ves_base/adminhtml_widget_wysiwygEditor</type>
+				<sort_order>12</sort_order>
+				<depends><form_type><value>customhtml</value></form_type></depends>
+			</html>
+			<popup_height translate="label" module="core">
+				<label>Popup Height</label>
+				<visible>1</visible>
+				<type>text</type>
+				<sort_order>15</sort_order>
+				<value>80%</value>
+				<description>Default value is 80%</description>
+			</popup_height>
+			<popup_width translate="label" module="core">
+				<label>Popup Width</label>
+				<visible>1</visible>
+				<type>text</type>
+				<value>60%</value>
+				<sort_order>20</sort_order>
+				<description>Default value is 60%</description>
+			</popup_width>
+			<delay translate="label">
+				<visible>1</visible>
+				<label>Popup will show after</label>
+				<description>A specified number of seconds. Empty to when load widget.</description>
+				<type>text</type>
+				<sort_order>25</sort_order>
+			</delay>
+			<opacity translate="label">
+				<visible>1</visible>
+				<label>Opacity</label>
+				<description>The overlay opacity level. Range: 0 to 1.</description>
+				<type>text</type>
+				<value>0.6</value>
+				<sort_order>30</sort_order>
+			</opacity>
+			<expire translate="label">
+				<visible>1</visible>
+				<label>Cookie Expire</label>
+				<description>Cookie expire time(second). When popup is shown, there will be one cookie created at a set time. Once, the page is loaded in the time, the system will check whether the cookie of created popup is outdated or not. If the cookie is outdated, popup will show up; in contrast, if the cookie have been not outdated yet, the popup wont show and wait until the cookie is outdated</description>
+				<type>text</type>
+				<sort_order>32</sort_order>
+			</expire>
+
+			<form_template translate="label">
+				<visible>1</visible>
+				<label>Form Template</label>
+				<description>Input custom module template file path. For example: ves/base/newsletter.phtml. Empty for default</description>
+				<type>text</type>
+				<sort_order>105</sort_order>
+			</form_template>
+		</parameters>
+	</widget_popup>
+</widgets>

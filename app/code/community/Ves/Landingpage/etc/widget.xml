@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<widgets>
+    <veslandingpage type="ves_landingpage/widget_video"  translate="label description" module="ves_landingpage" >
+        <name>Ves Video Landing Page </name>
+        <description type="desc">Generate Content Landing Page With Video Background</description>
+        <parameters>
+			<show translate="label" module="core">
+                <label>Enabled</label>
+                <sort_order>0</sort_order>
+                <type>select</type>
+                <visible>1</visible>
+                <required>0</required>
+                <values>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                </values>
+                <value>false</value>
+            </show> 
+            <title translate="label">
+                <label>Module Title </label>
+                <type>text</type>
+                <sort_order>1</sort_order>
+                <description>Empty for hide</description>
+                <visible>1</visible>
+                <required>0</required>
+                <value></value>
+            </title> 
+
+            <image translate="label description">
+                <label>Background Image</label>
+                <description><![CDATA[ Input background <b>image url</b> or <b>image path</b>. <br/>For example: <b>image url</b> http://websiteurl.com/image.jpg<br/> <b>Image path</b> is path of image file in the folder: media/ves_landingpage/]]></description>
+                <type>text</type>
+                <sort_order>20</sort_order>
+                <visible>1</visible>
+                <required>0</required>
+                <value></value>
+            </image>
+
+            <logo translate="label description">
+                <label>Logo Slider</label>
+                <description><![CDATA[ Input background <b>image url</b> or <b>image path</b>. <br/>For example: <b>image url</b> http://websiteurl.com/image.jpg<br/> <b>Image path</b> is path of image file in the folder: media/ves_landingpage/]]></description>
+                <type>text</type>
+                <sort_order>30</sort_order>
+                <visible>1</visible>
+                <required>0</required>
+                <value></value>
+            </logo>
+
+            <link_logo translate="label">
+                <label>Url link Logo</label>
+                <type>text</type>
+                <sort_order>40</sort_order>
+                <visible>1</visible>
+                <required>0</required>
+                <value></value>
+            </link_logo>
+
+            <width translate="label">
+                <label>Width Module</label>
+                <description>Empty for get full width</description>
+                <type>text</type>
+                <sort_order>41</sort_order>
+                <visible>1</visible>
+                <required>0</required>
+                <value></value>
+            </width>
+
+            <height translate="label">
+                <label>Heigth Module</label>
+                <description>Empty for get full height</description>
+                <type>text</type>
+                <sort_order>42</sort_order>
+                <visible>1</visible>
+                <required>0</required>
+                <value></value>
+            </height>
+
+            <interval translate="label">
+                <label>Interval</label>
+                <type>text</type>
+                <sort_order>50</sort_order>
+                <visible>1</visible>
+                <required>0</required>
+                <value>6000</value>
+            </interval>
+
+           <video_id translate="label">
+                <label>Video ID</label>
+                <type>text</type>
+                <sort_order>60</sort_order>
+                <description>For Example ID: https://www.youtube.com/watch?v=BBvsB5PcitQ  => VideoID = BBvsB5PcitQ</description>
+                <visible>1</visible>
+                <required>0</required>
+                <value></value>
+            </video_id>
+
+            <loop translate="label" module="core">
+                <label>Loop Video</label>
+                <sort_order>70</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <required>0</required>
+                <value>true</value>
+            </loop> 
+
+            <auto_play translate="label" module="core">
+                <label>Auto Play</label>
+                <sort_order>80</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <required>0</required>
+                <value>false</value>
+            </auto_play>
+
+            <show_controls translate="label" module="core">
+                <label>Show Controls</label>
+                <sort_order>90</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <required>0</required>
+                <value>yes</value>
+            </show_controls>
+
+            <mute translate="label" module="core">
+                <label>Mute</label>
+                <sort_order>100</sort_order>
+                <type>select</type>
+                <values>
+                    <yes translate="label">
+                        <label>Yes</label>
+                        <value>true</value>
+                    </yes>
+                    <no translate="label">
+                        <label>No</label>
+                        <value>false</value>
+                    </no>
+                </values>
+                <visible>1</visible>
+                <required>0</required>
+                <value>true</value>
+            </mute>
+        </parameters>
+    </veslandingpage>   
+</widgets>

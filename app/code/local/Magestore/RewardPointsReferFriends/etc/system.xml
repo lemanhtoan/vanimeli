@@ -1,0 +1,701 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsReferFriends
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <tabs>
+        <magestore translate="label">
+            <label>Magestore Extension</label>
+            <sort_order>400</sort_order>
+        </magestore>
+    </tabs>
+    <sections>
+        <rewardpoints translate="label" module="rewardpoints">
+            <groups>
+                <referfriendplugin translate="label">
+                    <label>Refer Friends Plugin Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label comment">
+                            <label>Enable Refer Friends plugin</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </enable>
+                        <link_to_offer translate="label comment">
+                            <label>To Manage Offers please go to</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>rewardpoints/adminhtml_system_config_form_field_tooffers</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </link_to_offer>
+                        <!--                        <default_config_separator translate="label comment">
+                            <label>Default Configuration</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>rewardpoints/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </default_config_separator>
+                       <use_default_config translate="label comment">
+                            <label>Use default configuration</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>30</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If you select 'Yes', Refer Friends Plugin will be applied to all products.</comment>
+                        </use_default_config>
+                        <earn_points translate="label comment">
+                            <label>Number of earning points</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Number of earning points per purchase made by an invited friend.</comment>
+                            <depends>
+                                <use_default_config>1</use_default_config>
+                            </depends>
+                        </earn_points>
+                        <discount_type translate="label comment">
+                            <label>Discount type for invited friends</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>50</sort_order>
+                            <source_model>rewardpointsreferfriends/system_config_source_discounttype</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                            <depends>
+                                <use_default_config>1</use_default_config>
+                            </depends>
+                        </discount_type>
+                        <discount_value translate="label comment">
+                            <label>Discount value for invited friends</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty or zero, no discount is offered.</comment>
+                            <depends>
+                                <use_default_config>1</use_default_config>
+                            </depends>
+                        </discount_value>-->
+                        <default_shopping_link translate="label comment">
+                            <label>Landing page</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The page that Customers are redirected to when clicking on the referral link via
+                                Email, Facebook, Twitter, Google+.
+                                If empty, they will be navigated to Referring Policy page.
+                            </comment>
+                        </default_shopping_link>
+                        <!-- Start Louis changed v2.4 -->
+                        <refer_register_point translate="label comment">
+                            <label>Number of points earned for an invited friend's registration</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </refer_register_point>
+                        <!-- end Louis -->
+                        <refer_method_separator translate="label comment">
+                            <label>Referring Method(s)</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>rewardpoints/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </refer_method_separator>
+                        <refer_method translate="label comment">
+                            <label>Select method(s)</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>90</sort_order>
+                            <source_model>rewardpointsreferfriends/system_config_source_refermethod</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Method(s) will be used to refer friends and shown in frontend</comment>
+                        </refer_method>
+                        <customer_can_change_key>
+                            <label>Allow customer to change referral link</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>94</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </customer_can_change_key>
+                        <customer_can_change_coupon>
+                            <label>Allow customer to change referral coupon</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>95</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </customer_can_change_coupon>
+                        <pattern>
+                            <label>Coupon code pattern</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                                <![CDATA[Example:<br/><strong>[A.8] : 8 alpha characters<br/>[N.4] : 4 numeric characters<br/>[AN.6] : 6 alphanumeric characters<br/>REWARD-[A.4]-[AN.6] : REWARD-ADFA-12NF0O</strong>]]></comment>
+                            <depends>
+                                <refer_method>coupon</refer_method>
+                            </depends>
+
+                        </pattern>
+                        <pattern_for_both>
+                            <label>Coupon code pattern</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[Example:<br/><strong>[A.8] : 8 alpha characters<br/>[N.4] : 4 numeric characters<br/>[AN.6] : 6 alphanumeric characters<br/>REWARD-[A.4]-[AN.6] : REWARD-ADFA-12NF0O</strong>]]></comment>
+                            <depends>
+                                <refer_method>coupon</refer_method>
+                            </depends>
+                            <depends>
+                                <refer_method>both</refer_method>
+                            </depends>
+
+                        </pattern_for_both>
+
+                        <apply_old_customer translate="label comment">
+                            <label>Apply for current Customer</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>101</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                If yes, the referring method(s) will be applied for people who have already purchased on the site without using any coupon before. Each customer can get discount only ONE time.
+                            </comment>
+                        </apply_old_customer>
+                        <uses_per_customer>
+                            <label>Maximum number of orders to earn points after referring friends</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>105</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The number of orders each invited friend can earn points. If empty or zero, there
+                                is no limitation.
+                            </comment>
+                        </uses_per_customer>
+                        <refering_email_separator translate="label comment">
+                            <label>Sharing via Email</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>rewardpoints/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </refering_email_separator>
+                        <use_email translate="label comment">
+                            <label>Enable Sharing via Email</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>115</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </use_email>
+                        <sharing_subject translate="label">
+                            <label>Default subject</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </sharing_subject>
+                        <link_to_share_email>
+                            <label>Link shared in email</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>130</sort_order>
+                            <source_model>rewardpointsreferfriends/system_config_source_linkshare</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </link_to_share_email>
+                        <sharing_message_for_link translate="label">
+                            <label>Default shared message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                            <depends>
+                                <refer_method>link</refer_method>
+                            </depends>
+                        </sharing_message_for_link>
+                        <sharing_message_for_coupon translate="label">
+                            <label>Default shared message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                            <depends>
+                                <refer_method>coupon</refer_method>
+                            </depends>
+                        </sharing_message_for_coupon>
+                        <sharing_message_for_both translate="label">
+                            <label>Default shared message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                            <depends>
+                                <refer_method>both</refer_method>
+                            </depends>
+                        </sharing_message_for_both>
+                        <insert_policy translate="label">
+                            <!--<label>Insert Policy...</label>-->
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>rewardpointsreferfriends/adminhtml_system_config_form_field_button
+                            </frontend_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>After choosing a position, click on the Insert Policy Variable button to add the
+                                Referral Policy description to emails shared. Please read the extension's user guide for
+                                more details.
+                            </comment>
+                        </insert_policy>
+                        <use_captcha translate="label comment">
+                            <label>Enable captcha on email</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>155</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </use_captcha>
+                        <max_email translate="label">
+                            <label>Number of emails sent per day</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>158</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The maximum number of emails which can be sent by a referring Customer per day. If
+                                empty or zero, there is no limitation.
+                            </comment>
+                        </max_email>
+                        <yahoo_app_id translate="label">
+                            <label>Yahoo Application ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </yahoo_app_id>
+                        <yahoo_consumer_key translate="label">
+                            <label>Yahoo Consumer Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </yahoo_consumer_key>
+                        <yahoo_consumer_secret translate="label">
+                            <label>Yahoo Consumer Secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>180</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[<a href="https://developer.apps.yahoo.com/dashboard/createKey.html" target="_bank">Register to Yahoo</a>]]>
+                            </comment>
+                        </yahoo_consumer_secret>
+                        <google_consumer_key translate="label">
+                            <label>Google Client ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>190</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </google_consumer_key>
+                        <google_consumer_secret translate="label">
+                            <label>Google Client Secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[<a href="https://console.developers.google.com" target="_bank">Register to Google</a>]]>
+                            </comment>
+                        </google_consumer_secret>
+                        <share_by_facebook_separator translate="label comment">
+                            <label>Sharing via Facebook</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>rewardpoints/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>210</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </share_by_facebook_separator>
+                        <use_facebook translate="label comment">
+                            <label>Enable sharing via Facebook</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>220</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </use_facebook>
+                        <link_to_share_facebook>
+                            <label>Link shared on Facebook</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>230</sort_order>
+                            <source_model>rewardpointsreferfriends/system_config_source_linkshare</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </link_to_share_facebook>
+                        <facebook_message_for_link translate="label">
+                            <label>Facebook Message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>240</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                            <depends>
+                                <refer_method>link</refer_method>
+                            </depends>
+                        </facebook_message_for_link>
+                        <facebook_message_for_coupon translate="label">
+                            <label>Facebook Message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>250</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                            <depends>
+                                <refer_method>coupon</refer_method>
+                            </depends>
+                        </facebook_message_for_coupon>
+                        <facebook_message_for_both translate="label">
+                            <label>Facebook Message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>260</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                            <depends>
+                                <refer_method>both</refer_method>
+                            </depends>
+                        </facebook_message_for_both>
+                        <fbapp_id translate="label">
+                            <label>Facebook Application ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>261</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </fbapp_id>
+                        <fbapp_secret translate="label">
+                            <label>Facebook Application Secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>262</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[<a href="http://developers.facebook.com/setup/" target="_bank">Register to Facebook</a>]]>
+                            </comment>
+                        </fbapp_secret>
+                        <share_by_twitter_separator translate="label comment">
+                            <label>Sharing via Twitter</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>rewardpoints/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>270</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </share_by_twitter_separator>
+                        <use_twitter translate="label comment">
+                            <label>Enable sharing via Twitter</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>280</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </use_twitter>
+                        <link_to_share_twitter>
+                            <label>Link shared on Twitter</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>290</sort_order>
+                            <source_model>rewardpointsreferfriends/system_config_source_linkshare</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </link_to_share_twitter>
+                        <twitter_message_for_link translate="label">
+                            <label>Twitter Message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                            <depends>
+                                <refer_method>link</refer_method>
+                            </depends>
+                        </twitter_message_for_link>
+                        <twitter_message_for_coupon translate="label">
+                            <label>Twitter Message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>310</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                            <depends>
+                                <refer_method>coupon</refer_method>
+                            </depends>
+                        </twitter_message_for_coupon>
+                        <twitter_message_for_both translate="label">
+                            <label>Twitter Message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>320</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                            <depends>
+                                <refer_method>both</refer_method>
+                            </depends>
+                        </twitter_message_for_both>
+                        <!-- <twapp_id translate="label">
+                            <label>Twitter application ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>321</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </twapp_id>
+                        <twapp_secret translate="label">
+                            <label>Twitter application secret</label>
+                            <frontend_type>text</frontend_type>			  
+                            <sort_order>322</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[<a href="https://dev.twitter.com/apps/new" target="_bank">Register to Twitter</a>]]>
+                            </comment>
+                        </twapp_secret> -->
+                        <share_by_google_separator translate="label comment">
+                            <label>Sharing via Google+</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>rewardpoints/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>330</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </share_by_google_separator>
+                        <use_google translate="label comment">
+                            <label>Enable sharing via Google+</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>340</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </use_google>
+                        <link_to_share_google>
+                            <label>Link shared on Google+</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>350</sort_order>
+                            <source_model>rewardpointsreferfriends/system_config_source_linkshare</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </link_to_share_google>
+                        <coupon_config_separator translate="label comment">
+                            <label>Coupon Printing Configuration</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>rewardpoints/adminhtml_system_config_form_field_separator</frontend_model>
+                            <margin_top>10px</margin_top>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </coupon_config_separator>
+                        <caption translate="label comment">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>401</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[Please note that coupons can be applied with the maximum discount to some specific products only.]]></comment>
+                        </caption>
+                        <max_discount translate="label comment">
+                            <label>Show maximum discount by</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>402</sort_order>
+                            <source_model>rewardpointsreferfriends/system_config_source_maxdiscount</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Type of discount on printed coupons</comment>
+                        </max_discount>
+                        <logo translate="label comment">
+                            <label>Logo</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image_pdf</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">
+                                rewardpointsreferfriends/pdf/logo
+                            </upload_dir>
+                            <base_url type="media" scope_info="1">rewardpointsreferfriends/pdf/logo</base_url>
+                            <sort_order>410</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Recommended logo size: 167x47px. The logo will be used on PDF and HTML documents.
+                                JPEG, TIFF, PNG file formats are supported.
+                            </comment>
+                        </logo>
+                        <note translate="label comment">
+                            <label>Notes on Coupon Codes</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>420</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[{store_name}: your store's name<br/>{store_url}: your store's url<br/>{store_address}: your store's address]]></comment>
+                        </note>
+                        <style_color translate="label comment">
+                            <label>Title color</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>430</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>color</validate>
+                        </style_color>
+                        <coupon_color translate="label comment">
+                            <label>Text color</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>440</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>color</validate>
+                        </coupon_color>
+                        <background_coupon>
+                            <label>Coupon Code background color</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>450</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>color</validate>
+                        </background_coupon>
+                        <background translate="label comment">
+                            <label>Background image</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image_pdf</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">
+                                rewardpointsreferfriends/pdf/background
+                            </upload_dir>
+                            <base_url type="media" scope_info="1">rewardpointsreferfriends/pdf/background</base_url>
+                            <sort_order>460</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select background image of coupon</comment>
+                        </background>
+                    </fields>
+                </referfriendplugin>
+            </groups>
+        </rewardpoints>
+    </sections>
+</config>

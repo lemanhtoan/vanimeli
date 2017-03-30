@@ -1,0 +1,157 @@
+<?php 
+/*Owl Carousel Setting*/
+	$auto_play_mode = $this->getCarouselConfig("auto_play");
+	$interval = (int)$this->getCarouselConfig("interval");
+	$lazy_load_image = $this->getCarouselConfig("lazy_load_image", 0);
+	$loop = (int)$this->getCarouselConfig("loop", 1);
+	$slide_by = (int)$this->getCarouselConfig("slide_by", 1);
+	$margin_item = $this->getCarouselConfig("margin_item", 0);
+	$show_nav = (int)$this->getCarouselConfig("show_navigator", 1);
+	$show_nav = false;
+	$rtl = (int)$this->getCarouselConfig("rtl", 0);
+	$mouse_drag = (int)$this->getCarouselConfig("mouse_drag", 1);
+	$touch_drag = (int)$this->getCarouselConfig("touch_drag", 1);
+	$mobile_items = (int)$this->getCarouselConfig("mobile_items", 1);
+	$tablet_items = (int)$this->getCarouselConfig("tablet_items", 2);
+	$tablet_small_items = (int)$this->getCarouselConfig("tablet_small_items", 2);
+	$portrait_items = (int)$this->getCarouselConfig("portrait_items", 3);
+	$large_items = (int)$this->getCarouselConfig("large_items", 5);
+	$custom_items = $this->getCarouselConfig("custom_items", "");
+
+	$carousel_responsive = (int)$this->getCarouselConfig("carousel_responsive", 1);
+	$cols = (int)$this->getCarouselConfig("default_items", 4);
+	$cols = !empty($cols)?(int)$cols:4;
+	$itemsperpage = (int)$this->getConfig("max_items", 1);
+	$itemsperpage = $itemsperpage?$itemsperpage:1;
+	$auto_play = $auto_play_mode?"true":"false";
+
+	$thumb_width = $this->getConfig("thumbWidth", 200);
+	$thumb_height = $this->getConfig("thumbHeight", 200);
+	
+	$default_items = $cols;
+
+	$moduleId = "vesgallery".rand().time();
+
+	$show_title = (int)$this->getConfig("show_title", 1);
+	$show_link = (int)$this->getConfig("show_link", 1);
+	$show_description = (int)$this->getConfig("show_description", 1);
+	$show_description = (int)$this->getConfig("show_description", 1);
+	$enable_popup = (int)$this->getConfig("enable_popup", 1);
+?>
+<?php 
+	$style = "";
+	if( $this->getConfig("moduleHeight") !="auto" ){
+		$style .=";height:".(int) $this->getConfig("moduleHeight")."px";
+	}
+	if( $this->getConfig("moduleWidth") !="auto" ){
+		$style .=";width:".(int) $this->getConfig("moduleWidth")."px";
+	}
+?>
+<?php if( count($this->getImages()) ) { ?>
+<div class="ves-gallery" style="position:relative;<?php echo $style;?>">
+	<?php if($this->getConfig('title')){?>
+	<div class="block-title">
+		<h2><?php echo $this->getConfig('title')?></h2>
+	</div>
+	<?php }?>
+	
+
+		<div class="block-content">
+		<div class="box-gallery carousel slide">
+			<div id="owlgallery<?php echo $moduleId;?>" class="owl-carousel">
+				<?php
+					$pages = array_chunk( $this->getImages(), $itemsperpage);
+				?>
+				<?php $number = 1; ?>
+				<?php foreach ($pages as  $k => $tmpgallery ):  ?>
+						<div class="item <?php if($k==0) {?>first<?php } elseif($k == (count($pages) -1 )) {?>last<?php } ?> products-grid no-margin">
+						<?php foreach( $tmpgallery as $i => $image ) {  $i=$i+1;?>
+						<?php if( $cols == 1 || $i%$cols == 1 ) { ?>
+						<div class="item-row <?php echo isset($image['classes'])?$image['classes']:'';?>">
+						<?php } ?>
+							<a class="group-file<?php echo $moduleId ?> group-gallery-<?php echo $moduleId?>" rel="group-gallery-<?php echo $moduleId?>" href="<?php echo $image['imageURL'];?>" title="<?php echo $image['title'];?> - <?php echo $image['description']; ?>">
+								<img src="<?php echo $image['thumbnailURL'];?>" alt="<?php echo $image['title'];?>"/>
+							</a>
+				
+							<?php if($show_title || $show_description): ?>
+							<div class="desc-gallery">
+								<?php if($show_title): ?>
+						        <div class="gellary-title">
+						        	<?php if($image['links']): ?>
+						        	<a href="<?php echo $image['links']; ?>"><?php echo $image['title'];?></a>
+						        	<?php else: ?>
+						        	<?php echo $image['title'];?>
+						        	<?php endif; ?>
+						        </div>
+						    	<?php endif; ?>
+						    	<?php if($show_description): ?>
+						        <div class="gellary-description"><?php echo !$crop_desc?$image['description']:$this->subString($image['description'], 100, "");?></div>
+						    	<?php endif; ?>
+					        </div>
+					    	<?php endif; ?>
+			        <?php if($image['links'] && $show_link): ?>
+							<div class="links"> 
+								<a href="<?php echo $image['links']; ?>"><?php echo $this->__("Link");?></a>
+							</div>
+					<?php endif; ?>
+						<?php if( $cols==1 || $i%$cols == 0 || $i==count($tmpgallery) ) { ?>
+						</div>
+					<?php } ?>
+					<?php $number ++; } //endforeach 2?>
+						</div>
+				<?php endforeach; ?>
+			</div>
+			<a href="javascript;" class="owl-left"><i class='fa fa-angle-left'></i></a>
+			<a href="javascript;" class="owl-right"><i class='fa fa-angle-right'></i></a>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+jQuery(window).load(function() {
+	var owl = jQuery('#owlgallery<?php echo $moduleId;?>');
+        owl.owlCarousel({
+            autoPlay: <?php echo $auto_play_mode?'true':'false';?>,
+            slideSpeed: <?php echo $interval?(int)$interval:'500';?>,
+            autoplayHoverPause: true,
+            <?php if($lazy_load_image) { ?>
+            lazyLoad:true,
+            <?php } ?>
+            navigationText: ["<span class='fa fa-angle-left'></span>","<span class='fa fa-angle-right'></span>"],
+            slideBy: <?php echo (isset($slide_by) && $slide_by)?(int)$slide_by:1; ?>,
+            loop: <?php echo $loop == 1?'true':'false'; ?>,
+            margin: <?php echo $margin_item?(int)$margin_item:'0'; ?>,
+            navigation: <?php echo $show_nav == 1?'true':'false'; ?>,
+            rtl: <?php echo $rtl == 1?'true':'false'; ?>,
+            mouseDrag: <?php echo $mouse_drag == 1?'true':'false'; ?>,
+            touchDrag: <?php echo $touch_drag == 1?'true':'false'; ?>,
+            autoWidth: false,
+            responsive: <?php echo $carousel_responsive == 1?'true':'false'; ?>,
+            items: <?php echo $default_items?(int)$default_items:4; ?>,
+            itemsDesktop : [1199,<?php echo $default_items?(int)$default_items:4; ?>], //4 items between 1199px and 980px
+            itemsDesktopSmall : [979,<?php echo $portrait_items?(int)$portrait_items:3; ?>], //3 items betweem 979px and 769px
+            itemsTablet: [768, <?php echo $tablet_items?(int)$tablet_items:2; ?>], //2 items between 768px and 641px
+            itemsTabletSmall : [640, <?php echo $tablet_small_items?(int)$tablet_small_items:2; ?>], //2 items between 641px and 480px
+            itemsMobile : [479, <?php echo $mobile_items?(int)$mobile_items:1; ?>], // itemsMobile disabled - inherit from itemsTablet option
+            itemsCustom: <?php echo (isset($custom_items)&&$custom_items)?'['.$custom_items.']':'false';?> // custom numbers item view on screen
+        });
+
+	jQuery('.owl-left',jQuery('#owlgallery<?php echo $moduleId;?>').parent()).click(function(){
+        owl.trigger('owl.prev');
+        return false; 
+    });
+    jQuery('.owl-right',jQuery('#owlgallery<?php echo $moduleId;?>').parent()).click(function(){
+        owl.trigger('owl.next');
+        return false; 
+    });
+});
+</script>
+<?php if($enable_popup): ?>
+<script type="text/javascript">
+jQuery(document).ready(function( $ ){
+	$(".group-file<?php echo $moduleId; ?>").colorbox({rel:'group-gallery-<?php echo $moduleId; ?>', overlayClose: true, opacity: 0.5, scalePhotos: true, maxWidth: '100%', maxHeight: '100%'});
+});
+</script>
+<?php endif; ?>
+<?php } //end if ?>

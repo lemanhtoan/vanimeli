@@ -1,0 +1,58 @@
+<?php 
+ /*------------------------------------------------------------------------
+  # Ves Blog Module 
+  # ------------------------------------------------------------------------
+  # author:    Ves.Com
+  # copyright: Copyright (C) 2012 http://www.ves.com. All Rights Reserved.
+  # @license: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+  # Websites: http://www.ves.com
+  # Technical Support:  http://www.ves.com/
+-------------------------------------------------------------------------*/
+?>
+<?php $page = $this->getRequest()->getParam('page') ? $this->getRequest()->getParam('page') : 1; ?>
+<?php $blogsPerPage = $this->getLimitPerPage(); $count = ($this->getTotal()); ?>
+
+<?php if( $count > $blogsPerPage ) : ?>
+<div class="pager">
+    <p class="amount">
+        <?php if($this->getPages() == 1): ?>
+        <strong><?php echo $count.' '. $this->__("Item(s)"); ?></strong>
+        <?php else: 
+             $nextT = ($blogsPerPage*$page) <= $count ? ($blogsPerPage*$page):$count;
+        ?>
+        <?php echo sprintf( $this->__("%s to %s of %s Item(s) "), (($blogsPerPage*($page-1))+1), $nextT, $count ); ?>
+        <?php endif; ?>
+    </p>
+    <?php if($this->getPages() > 1): ?>
+    <?php $current_link = $this->getCurrentLink(); ?>
+    <div class="pages">
+        <div><strong><?php echo $this->__('Page:') ?></strong></div>
+        <ol>
+            <?php if($page > 1): ?>
+            <li>
+                <a class="previous" title="<?php echo $this->__('Previous') ?>" href="<?php echo (strpos($current_link, "?") === FALSE)?$current_link.'?page='.($page-1):$current_link.'&page='.($page-1); ?>">
+                    <img class="v-middle" alt="<?php $this->__('Previous') ?>" src="<?php echo $this->getSkinUrl('images/i_pager-prev.gif') ?>" />
+                </a>
+            </li>
+            <?php endif; ?>
+            <?php for($i = 1; $i <= $this->getPages(); $i++): ?>
+            <?php if($i == $page): ?>
+            <li class="current"><?php echo $i; ?></li>
+            <?php else: ?>
+            <li>
+                <a href="<?php echo (strpos($current_link, "?") === FALSE)?$current_link.'?page='.$i:$current_link.'&page='.$i; ?>"><?php echo $i; ?></a>
+            </li>
+            <?php endif; ?>
+            <?php endfor; ?>
+            <?php if($page < $this->getPages()): ?>
+            <li>
+                <a class="next" title="<?php echo $this->__('Next') ?>" href="<?php echo (strpos($current_link, "?") === FALSE)?$current_link.'?page='.($page+1):$current_link.'&page='.($page+1); ?>;">
+                    <img class="v-middle" alt="<?php $this->__('Next') ?>" src="<?php echo $this->getSkinUrl('images/i_pager-next.gif') ?>" />
+                </a>
+            </li>
+            <?php endif; ?>
+        </ol>
+    </div>
+    <?php endif; ?>
+</div>
+<?php endif; ?>

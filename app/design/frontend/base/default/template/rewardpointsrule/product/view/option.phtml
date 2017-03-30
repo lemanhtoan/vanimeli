@@ -1,0 +1,199 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Rewardpoints earning on product view page template
+ * 
+ * @see Magestore_RewardPoints_Block_Product_View_Earning
+ */
+?>
+<!--Hai.Tran fix option rewardpointsrule-->
+<script type="text/javascript">
+    var idProduct = '<?php echo Mage::getBlockSingleton('catalog/product_view')->getProduct()->getId() ?>';
+    if ($('product-price-' + idProduct)) {
+        var priceElement;
+        var optionRewardpointsRule = $$('.product-options-bottom');
+        var url = '<?php echo Mage::getUrl('rewardpointsrule/checkout/priceOption') ?>';
+        if ($('product-price-' + idProduct).down('.price'))
+            priceElement = $('product-price-' + idProduct).down('.price');
+        else
+            priceElement = $('product-price-' + idProduct);
+        var priceRewardpointsRule = priceElement.innerHTML;
+        var priceRewardpointsRuleOld = parseFloat(priceRewardpointsRule.replace( /^\D+/g, ''));//parseFloat(priceRewardpointsRule.substr(1).replace(',', ''));
+    }
+</script>
+<?php if ($this->enableDisplay() && $this->getEarningPoints() > 0): ?>
+    <script type="text/javascript">
+        if ($('product-price-' + idProduct)) {
+            function ajaxLoadPoint(event, price) {
+                priceRewardpointsRuleNew = priceElement.innerHTML;
+                if (priceRewardpointsRuleNew != priceRewardpointsRule || price != null) {
+                    priceRewardpointsRule = priceRewardpointsRuleNew;
+                    if (price != null)
+                        priceAjax = parseFloat(price) + priceRewardpointsRuleOld;
+                    else
+                        priceAjax = parseFloat(priceRewardpointsRule.replace( /^\D+/g, ''));//parseFloat(priceRewardpointsRule.substr(1).replace(',', ''));
+                    if ('undefined' != typeof (rewardPrice)) {
+                        pricePoints = $('rewardpoints-price-template').down('.price').down('.points').innerHTML;
+                        rewardPrice.finalPrice = priceAjax
+                        if (rewardPrice.isShowed)
+                            changePointCallback(pricePoints);
+                    }
+
+                    var beforeAjax = $$('.rewardpoints-product-view-earning')[0].innerHTML;
+                    $$('.rewardpoints-product-view-earning')[0].innerHTML = '<img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif'); ?>" />';
+                    new Ajax.Request(url, {
+                        method: 'post',
+                        parameters: {
+                            price: priceAjax,
+                            id: idProduct,
+                        },
+                        onSuccess: function(message) {
+                            if (message.responseText != 'false') {
+                                $$('.rewardpoints-product-view-earning')[0].innerHTML = message.responseText;
+                            } else {
+                                $$('.rewardpoints-product-view-earning')[0].innerHTML = beforeAjax;
+                            }
+                        },
+                        onException: function(hr, e) {
+                            $$('.rewardpoints-product-view-earning')[0].innerHTML = beforeAjax;
+                        }
+                    });
+                }
+            }
+
+            if (optionRewardpointsRule[0] && optionRewardpointsRule[0].down('.price')) {
+                $$('select.super-attribute-select').each(function(el) {
+                    Event.observe(el, 'change', ajaxLoadPoint);
+                });
+            }
+
+            $$('body .product-custom-option').each(function(element) {
+                Event.observe(element, 'click', ajaxLoadPoint);
+                Event.observe(element, 'change', ajaxLoadPoint);
+            });
+            a = 1;
+            document.observe("bundle:reload-price", function(event) {
+                if (a == 1)
+                    a = 0;
+                else if (a == 0) {
+                    a = 2;
+                    priceRewardpointsRule = priceElement.innerHTML;
+                    priceRewardpointsRuleOld = parseFloat(priceRewardpointsRule.substr(1).replace(',', '')) - event.memo.price;
+                } else {
+                    ajaxLoadPoint(event, event.memo.price);
+                }
+            });
+        }
+    </script>
+<?php else: ?>
+    <script type="text/javascript">
+        if ($('product-price-' + idProduct)) {
+            if (optionRewardpointsRule[0] && optionRewardpointsRule[0].down('.price')) {
+                $$('select.super-attribute-select').each(function(el) {
+                    Event.observe(el, 'change', changePriceSpend);
+                });
+            }
+
+            $$('body .product-custom-option').each(function(element) {
+                Event.observe(element, 'click', changePriceSpend);
+                Event.observe(element, 'change', changePriceSpend);
+            });
+            a = 1;
+            document.observe("bundle:reload-price", function(event) {
+                if (a == 1)
+                    a = 0;
+                else if (a == 0) {
+                    a = 2;
+                    priceRewardpointsRule = priceElement.innerHTML;
+                    priceRewardpointsRuleOld = parseFloat(priceRewardpointsRule.substr(1).replace(',', '')) - event.memo.price;
+                } else {
+                    changePriceSpend(event, event.memo.price);
+                }
+            });
+            function changePriceSpend(event, price) {
+                if ('undefined' != typeof (rewardPrice)) {
+                    pricePoints = $('rewardpoints-price-template').down('.price').down('.points').innerHTML;
+                    priceChange = priceElement.innerHTML;
+
+                    if (price != null)
+                        rewardPrice.finalPrice = parseFloat(price) + priceRewardpointsRuleOld;
+                    else
+                        rewardPrice.finalPrice = parseFloat(priceChange.substr(1).replace(',', ''));
+                    if (rewardPrice.isShowed)
+                        changePointCallback(pricePoints);
+                }
+            }
+        }
+    </script>
+<?php endif; ?>
+
+<script type="text/javascript">
+    if ($('product-price-' + idProduct)) {
+<?php if ($this->getRequest()->getControllerName() == 'cart' && Mage::getBlockSingleton('catalog/product_view')->hasOptions()): ?>
+            document.observe("dom:loaded", function() {
+                if ('undefined' != typeof (rewardPrice)) {
+                    pricePoints = $('rewardpoints-price-template').down('.price').down('.points').innerHTML;
+                    priceChange = priceElement.innerHTML;
+                    rewardPrice.finalPrice = parseFloat(priceChange.substr(1).replace(',', ''));
+                    if (rewardPrice.isShowed)
+                        changePointCallback(pricePoints);
+                }
+            });
+<?php endif; ?>
+    }
+</script>
+<?php if ($this->enableDisplay() && $this->getEarningPoints() > 0 && Mage::getBlockSingleton('catalog/product_view')->getProduct()->isGrouped()): ?>
+    <?php
+    $pointSum = $this->getGroupedEarningPoints();
+    $message = Mage::helper('rewardpoints/point')->getImageHtml(true) . ' ' . $this->__('You will earn %s for purchasing this product.');
+    $originMessage = Mage::helper('rewardpoints/point')->getImageHtml(true) . ' ' . $this->__('You could receive some %s for purchasing this product', Mage::helper('rewardpoints/point')->getPluralName());
+    ?>
+    <script type="text/javascript">
+        var pointName = '<?php echo Mage::helper('rewardpoints/point')->getName() ?>';
+        var pointPluralName = '<?php echo Mage::helper('rewardpoints/point')->getPluralName() ?>';
+        var message = '<?php echo $message ?>';
+        var originMessage = '<?php echo $originMessage ?>';//$$('.rewardpoints-product-view-earning')[0].innerHTML;
+        $$('#super-product-table input').each(function(element) {
+            Event.observe(element, 'change', changeEarnPointGrouped);
+        });
+
+        function changeEarnPointGrouped() {
+            var form = $('product_addtocart_form').serialize(true);
+            var pointSum = 0;
+    <?php foreach ($pointSum as $id => $point): ?>
+                pointSum += form['super_group[<?php echo $id ?>]'] * <?php echo $point ?>;
+    <?php endforeach; ?>
+            if (pointSum > 0)
+                $$('.rewardpoints-product-view-earning')[0].innerHTML = message.replace("%s", formatPoint(pointSum));
+            else
+                $$('.rewardpoints-product-view-earning')[0].innerHTML = originMessage;
+        }
+        function formatPoint(point) {
+            var points = parseInt(point);
+            if (Math.abs(points) <= 1)
+                return points + ' ' + pointName;
+            else
+                return points + ' ' + pointPluralName;
+        }
+        changeEarnPointGrouped();
+    </script>
+<?php endif; ?>
+

@@ -1,0 +1,65 @@
+<?php $product_info_block = Mage::registry("product_info_block"); ?>
+<?php $_helper = $product_info_block->helper('catalog/output'); ?>
+<?php $_product = $product_info_block->getProduct(); ?>
+<?php 
+	$container_class = $this->getConfig("container_class","");
+	$block_type = $this->getConfig("block_type","");
+
+	if($block_type) {
+		switch ($block_type) {
+			case 'alert_urls':
+				echo $container_class?'<div class="'.$container_class.'">'.$product_info_block->getChildHtml('alert_urls').'</div>':$product_info_block->getChildHtml('alert_urls');
+				break;
+			case 'product_type_availability':
+				echo $container_class?'<div class="'.$container_class.'">'.$product_info_block->getChildHtml('product_type_availability').'</div>':$product_info_block->getChildHtml('product_type_availability');
+				break;
+			case 'extrahint':
+				echo $container_class?'<div class="'.$container_class.'">'.$product_info_block->getChildHtml('extrahint').'</div>':$product_info_block->getChildHtml('extrahint');
+				break;
+			case 'container1':
+				echo $container_class?'<div class="'.$container_class.'">'.$product_info_block->getChildChildHtml('container1', '', true, true).'</div>':$product_info_block->getChildChildHtml('container1', '', true, true);
+				break;
+			case 'product_type_data':
+				echo $container_class?'<div class="'.$container_class.'">'.$product_info_block->getChildHtml('product_type_data').'</div>':$product_info_block->getChildHtml('product_type_data');
+				break;
+			case 'addtocart':
+				if (!$product_info_block->hasOptions()) {
+				?>
+                    <div class="add-to-box <?php echo $container_class; ?>">
+                        <?php if($_product->isSaleable()): ?>
+                            <?php echo $product_info_block->getChildHtml('addtocart') ?>
+                            <?php if( $product_info_block->helper('wishlist')->isAllow() || $_compareUrl=$product_info_block->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+                                <span class="or hidden"><?php echo $product_info_block->__('OR') ?></span>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    </div>
+				<?php
+				}
+				break;
+			case 'addto':
+				echo $container_class?'<div class="'.$container_class.'">'.$product_info_block->getChildHtml('addto').'</div>':$product_info_block->getChildHtml('addto');
+				break;
+			case 'sharing':
+				echo $container_class?'<div class="'.$container_class.'">'.$product_info_block->getChildHtml('sharing').'</div>':$product_info_block->getChildHtml('sharing');
+				break;
+			case 'extra_buttons':
+				echo $container_class?'<div class="'.$container_class.'">'.$product_info_block->getChildHtml('extra_buttons').'</div>':$product_info_block->getChildHtml('extra_buttons');
+				break;
+			case 'container2':
+				?>
+				<?php if ($_product->isSaleable() && $product_info_block->hasOptions()):?>
+	                <div <?php if($enable_snipet): ?>itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer"<?php endif; ?> class="<?php echo $container_class; ?>">
+	                <?php echo $product_info_block->getChildChildHtml('container2', '', true, true) ?>
+	                </div>
+	            <?php endif;?>
+				<?php
+				break;
+			case 'other':
+				echo $container_class?'<div class="'.$container_class.'">'.$product_info_block->getChildHtml('other').'</div>':$product_info_block->getChildHtml('other');
+				break;
+			default:
+				
+				break;
+		}
+	}
+ ?>

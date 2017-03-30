@@ -1,0 +1,17 @@
+<?php 
+	 // echo $this->getUrl( 'gallery/adminhtml_banner/quickadd' ); die;
+	 
+?>
+<div id="demo666"></div>
+	<ul id="separate-list"></ul>
+    <script>        
+        function createUploader(){            
+            var uploader = new qq.FileUploader({
+                element: document.getElementById('demo666'),
+                listElement: document.getElementById('separate-list'),
+                action: '<?php echo $this->getUrl( 'gallery/adminhtml_banner/upload' );?>',
+				debug:true
+            });           
+        }        
+        window.onload = createUploader;     
+    </script>    

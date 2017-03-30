@@ -1,0 +1,47 @@
+<?php $product_info_block = Mage::registry("product_info_block"); ?>
+<?php $_helper = $product_info_block->helper('catalog/output'); ?>
+<?php $_product = $product_info_block->getProduct(); ?>
+
+<?php if($this->getConfig("bootstrap_tab", 1)): ?>
+<div class="product-tabs">
+    <?php if ($detailedInfoGroup = $product_info_block->getChildGroup('detailed_info', 'getChildHtml')):?>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <?php $i = 0; ?>
+        <?php foreach ($detailedInfoGroup as $alias => $html): $i++;?>
+                <?php
+                    $title = $product_info_block->getChildData($alias, 'title');
+                    $title = !$title?$this->__($alias):$title;
+                    $alias = str_replace(".", "", $alias);
+                ?>
+                <li <?php echo $i==1?'class="active"':'';?>><a href="#ves-product-tab-<?php echo $alias; ?>" aria-controls="ves-product-tab-<?php echo $alias; ?>" role="tab" data-toggle="tab"><span><?php echo $product_info_block->escapeHtml(ucfirst($title)) ?></span></a></li>
+        <?php endforeach;?>
+    </ul>
+    <!-- Tab panes -->
+  <div class="tab-content">
+    <?php $i = 0; ?>
+    <?php foreach ($detailedInfoGroup as $alias => $html): $i++; $alias = str_replace(".", "", $alias);?>
+        <div role="tabpanel" class="tab-pane <?php echo $i==1?'active':'';?>" id="ves-product-tab-<?php echo $alias?>"><?php echo $html ?></div>
+    <?php endforeach;?>
+  </div>
+  <?php endif; ?>
+</div>
+<?php else: ?>
+<div class="product-collateral toggle-content tabs">
+        <?php if ($detailedInfoGroup = $product_info_block->getChildGroup('detailed_info', 'getChildHtml')):?>
+            <dl id="collateral-tabs" class="collateral-tabs">
+                
+                <?php foreach ($detailedInfoGroup as $alias => $html): $i++;?>
+                    <?php
+                        $title = $product_info_block->getChildData($alias, 'title');
+                        $title = !$title?$this->__($alias):$title;
+                    ?>
+                    <dt class="tab"><span><?php echo $product_info_block->escapeHtml(ucfirst($title)) ?></span></dt>
+                    <dd class="tab-container">
+                        <div class="tab-content"><?php echo $html ?></div>
+                    </dd>
+                <?php endforeach;?>
+            </dl>
+        <?php endif; ?>
+</div>
+<?php endif; ?>

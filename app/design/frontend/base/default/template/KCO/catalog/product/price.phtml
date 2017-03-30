@@ -1,0 +1,37 @@
+<?php
+/**
+ * This file is released under a custom license by Avenla Oy.
+ * All rights reserved
+ * 
+ * License and more information can be found at http://productdownloads.avenla.com/magento-modules/klarna-checkout/ 
+ * For questions and support - klarna-support@avenla.com
+ * 
+ * @category   Avenla
+ * @package    Avenla_KlarnaCheckout
+ * @copyright  Copyright (c) Avenla Oy
+ * @link       http://www.avenla.fi 
+ */
+
+/**
+ * Avenla KlarnaCheckout
+ *
+ * @category   Avenla
+ * @package    Avenla_KlarnaCheckout
+ */
+?>
+<?php if($data = $this->getWidgetData()): ?>
+	<?php if($monthly = $data->getMonthlyPrice()): ?>
+		<div class="kco-ppayment">
+			<p><?php echo Mage::helper('klarnaCheckout')->__("From %s/mo.", $monthly); ?></p>
+			<img src="<?php echo Mage::helper('klarnaCheckout')->getLogoSrc(50); ?>" />
+		</div>
+	<?php elseif($data->getPrice()): ?>
+		<div style="width:<?php echo $data->getWidth(); ?>px; height:<?php echo $data->getHeight(); ?>px" 
+		     class="klarna-widget klarna-part-payment"
+		     data-eid="<?php echo $data->getEid(); ?>"
+		     data-locale="<?php echo $data->getLocale(); ?>"
+		     data-price="<?php echo $data->getPrice(); ?>"
+		     data-layout="<?php echo $data->getLayout(); ?>">
+		</div>
+	<?php endif; ?>
+<?php endif; ?>

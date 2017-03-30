@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<widgets>
+	<widget_sample1 type="sample_widgets/widget_sample">
+      <title>Ves Sample: Sample 1 widget</title>
+      <description>Sample 1 widget description</description>
+      <code>sample</code>
+      <icon>sample</icon>
+      <group>other</group>
+   </widget_sample1>
+</widgets>

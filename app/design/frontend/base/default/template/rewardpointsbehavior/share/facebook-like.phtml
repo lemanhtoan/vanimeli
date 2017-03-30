@@ -1,0 +1,77 @@
+<?php if ($this->showButton('facebook')): ?>
+    <div id="fb-root"></div>
+    <div id="behavior-facebook-like" class="behavior-facebook-like behavior-social" <?php if (!$this->showCount('facebook')) echo "style='width: 52px !important;'" ?>>
+        <fb:like layout="<?php echo $this->showCount('facebook') ? 'button_count' : 'button'; ?>" href="<?php echo $this->getShareUrl() ?>" show_faces="false" style="z-index: 100; line-height: 9px; margin-right: 12px" share="false"></fb:like>
+
+        <script>
+            var messageFacebookLike = '<?php echo $this->getSocialInfo('facebook') ?>';
+            var canRequestLike = (messageFacebookLike === '') ? false : true;
+            var countRequest = 0;
+
+            var html = document.getElementsByTagName("HTML")[0];
+            var att = document.createAttribute("xmlns:fb");
+            att.value = "http://ogp.me/ns/fb#";
+            html.setAttributeNode(att);
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            window.fbAsyncInit = function () {
+                FB.init({status: true, cookie: true, xfbml: true});
+                FB.Event.subscribe('edge.create', function (response) {
+                    ajaxfacebook(0, response);
+                });
+                FB.Event.subscribe('edge.remove', function (response) {
+                    ajaxfacebook(1, response);
+                });
+            };
+            function ajaxfacebook(remove, link) {
+                countRequest++;
+                if (login && countRequest <= 2) {
+                    showAjaxLoader();
+                    new Ajax.Request('<?php echo $this->getUrl('rewardpointsbehavior/index/facebook') ?>', {
+                        method: 'post',
+                        parameters: {
+                            remove: remove,
+                            link: link
+                        },
+                        onException: function () {
+                            $('social-info-behavior').innerHTML = messageError;
+                            hideAjaxLoader();
+                        },
+                        onSuccess: function (message) {
+                            if (message.responseText != '') {
+                                $('social-info-behavior').innerHTML = message.responseText;
+                            } else {
+                                $('social-info-behavior').innerHTML = messageDefault;
+                            }
+                            hideAjaxLoader();
+                            canRequestLike = false;
+                        }
+                    });
+                }
+            }
+            if (messageFacebookLike !== '' && login) {
+                Event.observe('behavior-facebook-like', 'mouseover', function () {
+                    if (canRequestLike) {
+                        $('behavior-ajax-loader').show();
+                        $('social-info-behavior').innerHTML = messageFacebookLike;
+                    }
+                    else {
+                        $('behavior-ajax-loader').hide();
+                    }
+
+                });
+                Event.observe('behavior-facebook-like', 'mouseout', function () {
+                    $('behavior-ajax-loader').show();
+                    $('social-info-behavior').innerHTML = messageDefault;
+                });
+            }
+        </script>
+    </div>
+<?php endif; ?>

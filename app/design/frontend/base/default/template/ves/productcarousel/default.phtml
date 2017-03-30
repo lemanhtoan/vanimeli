@@ -1,0 +1,120 @@
+<?php
+/*framework: get current theme setting*/
+$list_image_width = (int)$this->getEffectConfig("image_width", 300);
+$list_image_height = (int)$this->getEffectConfig("image_height", 300);
+$swap_image_number = (int)$this->getEffectConfig("swap_image_number", 0);
+
+$popup_quickview_width = $this->getEffectConfig("popup_quickview_width", "60%");
+$popup_quickview_height = $this->getEffectConfig("popup_quickview_height", "80%");
+
+$enable_pzoom = $this->getEffectConfig("show_pzoom");
+$enable_new_icon = $this->getEffectConfig("enable_new_icon");
+$enable_sale_icon = $this->getEffectConfig("enable_sale_icon");
+$show_title = $this->getEffectConfig('show_title');
+$enable_short_desc = $this->getEffectConfig('show_desc');
+$show_review = $this->getEffectConfig('show_review');
+$show_price = $this->getEffectConfig('show_price');
+$show_addcart = $this->getEffectConfig("show_addcart");
+$show_compare_wishlist = $this->getEffectConfig("show_wc") ;
+/*end get setting*/
+
+/*quickview was enabled?*/
+$quickview = $this->getEffectConfig('enable_quickview');
+$quickview = $quickview ? $quickview : 0;
+/*Swap images was enabled?*/
+$swap_image = $this->getEffectConfig('enable_swap');
+$swap_image = $swap_image ? $swap_image : 0;
+
+$moduleId = rand().time();
+$itemsperpage = (int)$this->getConfig("max_items","catalog_source_setting");
+$auto_play_mode = (int)$this->getEffectConfig("auto_play");
+
+$title_maxchar = (int)$this->getEffectConfig("titleMaxchar");
+$title_maxchar = $title_maxchar > 0 ?$title_maxchar: 100;
+$desc_maxchar = (int)$this->getEffectConfig("descMaxchar");
+$desc_maxchar = $desc_maxchar > 0 ?$desc_maxchar: 100;
+$interval = (int)$this->getEffectConfig("interval");
+
+$auto_play = $auto_play_mode?"true":"false";
+$cols = (int)$this->getConfig("limit_cols","catalog_source_setting");
+
+
+$cols = !empty($cols)?$cols:1;
+$span = 12/$cols;
+$active = 'latest';
+
+if($items){
+	$items = $items->getItems();
+}
+$price_prefix = '_productcarousel_'.rand(1,9)+rand().time();
+$itemsperpage = (int)$this->getConfig("max_items","catalog_source_setting");
+
+$common_layout = $this->getConfig('common_layout');
+
+if(isset($common_layout) && !empty($common_layout)){
+	$default_layout = $common_layout;
+}
+$title_class = $this->getConfig('title_class');
+$title_icon = $this->getConfig('title_icon');
+$show_viewalllink = $this->getConfig('show_viewalllink');
+$viewall_text = $this->getConfig('viewall_text');
+$viewall_link = $this->getConfig('viewall_link');
+if($viewall_link){
+	if(!preg_match("/^http\:\/\/|https\:\/\//", $viewall_link)) {
+		$viewall_link = Mage::getBaseUrl().$viewall_link;
+	}
+}
+$processor = Mage::helper('cms')->getPageTemplateProcessor();
+$pretext = $processor->filter($this->getConfig("pretext"));
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<div class="<?php echo $this->getConfig('prefix');?> block productcarousel" id="module<?php echo $moduleId; ?>">
+	<?php if($this->getConfig('title')){?>
+	<div class="block-title <?php echo $title_class ?>">
+		<span>
+			<?php if($title_icon!=''){ ?>
+			<img src="<?php echo Mage::getBaseUrl('media') . $title_icon ?>" alt="<?php echo $this->getConfig('title') ?>" />
+			<?php } ?>
+			<strong><span><?php echo $this->getConfig('title')?></span></strong>
+		</span>
+		<?php if( ($pretext) && !$cms ) { ?>
+		<div class="pretext"><?php echo $pretext;?></div>
+		<?php } else {
+			?>
+			<div class="pretext"><?php echo $cms;?></div>
+			<?php
+		} ?>
+	</div>
+	<?php }?>
+	<div class="block-content">
+		<div class="box-products carousel slide" id="productcarousel<?php echo $moduleId;?>">
+			<?php if( count($items) > $itemsperpage && $this->getConfig("show_navigator")) { ?>
+			<div class="carousel-controls">
+				<a class="carousel-control left fa fa-angle-left" href="#productcarousel<?php echo $moduleId;?>"   data-slide="prev"></a>
+				<a class="carousel-control right fa fa-angle-right" href="#productcarousel<?php echo $moduleId;?>"  data-slide="next"></a>
+			</div>
+			<?php } ?>
+			<div class="carousel-inner">
+				<?php
+				$pages = array_chunk( $items, $itemsperpage);
+				?>
+				<?php foreach ($pages as  $k => $_productCollection ) {  ?>
+
+				<div class="item <?php if($k==0) {?>first<?php } elseif($k == (count($pages) -1 )) {?>last<?php } ?> <?php if($k==0) {?>active<?php } ?> products-grid no-margin">
+
+					<?php if($product_module_path = Mage::helper("ves_tempcp/framework")->getLayoutPath("product_module.phtml")) { ?>
+						<?php require ($product_module_path); ?>
+
+						<?php } ?>
+					</div>
+					<?php } ?>
+				</div>
+			</div>
+		<?php if($show_viewalllink){ ?>
+		<a href="<?php echo $viewall_link ?>" title="<?php echo $viewall_text ?>"><?php echo $viewall_text ?></a>
+		<?php } ?>
+		</div>
+	</div>
+	<script type="text/javascript">
+		jQuery('#productcarousel<?php echo $moduleId;?>').carousel({interval:<?php echo ( $auto_play_mode?$interval:'false') ;?>,auto:<?php echo $auto_play;?>,pause:'hover', cycle: true});
+	</script>

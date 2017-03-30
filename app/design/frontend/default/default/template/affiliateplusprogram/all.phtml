@@ -1,0 +1,66 @@
+<?php
+/**
+ * Sales transaction history template
+ */
+?>
+<?php
+$store_id = Mage::app()->getStore()->getStoreId();
+$check_responsvie = Mage::getStoreConfig('affiliateplus/style_config/responsive_enable', $store_id);
+ if($check_responsvie)
+     $class_name = 'col-lg-9 col-md-9 col-sm-12 col-xs-12';
+ else
+     $class_name = 'col-lg-9 col-md-9 col-sm-9 col-xs-9';
+?>
+
+<div class="aff-main-content <?php echo $class_name; ?>">
+    <div class="aff-title">
+        <h2><?php echo $this->__('Other Programs') ?></h2>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <form action="<?php echo $this->getUrl('affiliateplusprogram/index/joinall') ?>" method="post" id="affiliateplus_program_form">
+        <?php echo $this->getGridHtml() ?>
+
+        <div class="buttons-set">
+            <p class="back-link">
+                <a href="<?php echo $this->getUrl('*/*/index') ?>">
+                    <button type="button" class="button button-config" onclick="history.go('-1')">
+                        <span><span><?php echo $this->__('Back') ?></span></span>
+                    </button>
+                </a>
+            </p>
+            <?php if (count($this->getCollection())): ?>
+                <button class="button button-config" type="button" onclick='submitProgramForm();'>
+                    <span>
+                        <span><?php echo $this->__('Join All Selected Programs') ?></span>
+                    </span>
+                </button>
+            <?php endif ?>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    var affiliateplusProgramForm = new VarienForm('affiliateplus_program_form', true);
+    function selectProgram(el) {
+        if (el.checked)
+            $$('input[name="program_ids[]"]').each(function(e) {
+                e.checked = true
+            });
+        else
+            $$('input[name="program_ids[]"]').each(function(e) {
+                e.checked = false
+            });
+    }
+    function submitProgramForm() {
+        var canSubmit = false;
+        $$('input[name="program_ids[]"]').each(function(e) {
+            if (e.checked)
+                canSubmit = true;
+        });
+        if (canSubmit)
+            affiliateplusProgramForm.submit();
+        else
+            alert('<?php echo $this->__('Please select a program to join.') ?>');
+    }
+    
+</script>
+

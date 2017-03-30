@@ -1,0 +1,60 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+
+ */
+?>
+
+<?php $_collection = $this->getCollection() ?>
+<?php if (count($_collection)): ?>
+    <div class="box-account box-info box-rewardpointsreferfriends-history">
+        <div class="box-head">
+            <h2><?php echo $this->__('Invited Friends') ?></h2>
+        </div>
+        <table class="data-table" id="recent-transactions-history">
+            <colgroup>
+                <col class="id" />
+                <col class="name" />
+                <col class="created_time" />
+                <col class="earn_points" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th><?php echo $this->__('No.') ?></th>
+                    <th><?php echo $this->__('Friend Name') ?></th>
+                    <th><?php echo $this->__('Invited Date') ?></th>
+                    <th><?php echo $this->__('Earning Points') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $count = 1; ?>
+                <?php foreach ($_collection as $_transaction): ?>
+                    <tr>
+                        <td class="a-right first"><?php echo $count++;//$_transaction->getCustomerId() ? $_transaction->getCustomerId() : $this->__('N/A') ?></td>
+                        <td><span class="label-cell"><?php echo $this->__('Friend Name') ?></span><h2><?php echo $_transaction->getFirstname() . ' ' . $_transaction->getLastname() . ' (' . $_transaction->getEmail() . ')' ?></h2></td>
+                        <td><span class="label-cell"><?php echo $this->__('Invited Date') ?></span><h2><?php echo $this->formatTime($_transaction->getCreatedTime(), 'medium', true) ?></h2></td>
+                        <td class="a-right"><span class="label-cell"><?php echo $this->__('Earned Points') ?></span><h2><?php echo $_transaction->getEarningPoints() ?></h2></td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+        <?php echo $this->getPagerHtml() ?>
+    </div>
+    <?php
+ endif ?>

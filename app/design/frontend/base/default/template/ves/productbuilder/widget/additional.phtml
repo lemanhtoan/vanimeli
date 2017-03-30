@@ -1,0 +1,11 @@
+<?php $product_info_block = Mage::registry("product_info_block"); ?>
+<?php if($additional = $product_info_block->getChildHtml("additional")): ?>
+<div class="panel panel-default product-additional-block">
+	<div class="panel-heading">
+        <h3 class="panel-title"><?php echo $this->__("Additional Information") ?></h3>
+    </div>
+    <div class="panel-body">
+        <div class="tab-content"><?php echo $additional; ?></div>
+    </div>
+</div>
+<?php endif; ?>

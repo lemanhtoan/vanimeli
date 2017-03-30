@@ -1,0 +1,18 @@
+<div class="block block-list block-google-plus">
+	<?php if(isset($title) && trim($title)!=''): ?>
+		<div class="block-title">
+			<strong><span><?php echo $title; ?></span></strong>
+		</div>
+	<?php endif; ?>
+	<div class="block-content">
+		<div class="<?php echo $badge; ?>" data-width="<?php echo $width; ?>" data-annotation="bubble" data-href="<?php echo $url ?>" data-theme="<?php echo $theme; ?>" data-showtagline="<?php echo $tagline ?>" data-showcoverphoto="<?php echo $coverphoto ?>" data-rel="author" data-layout="<?php echo $layout ?>"></div>
+
+		<script type="text/javascript">
+			(function() {
+				var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+				po.src = 'https://apis.google.com/js/platform.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			})();
+		</script>
+	</div>
+</div>

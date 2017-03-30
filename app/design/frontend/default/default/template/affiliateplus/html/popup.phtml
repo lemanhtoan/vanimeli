@@ -1,0 +1,53 @@
+
+<div style="display:none" class="bg-fade" onclick="closeAffPopup();" id="bg-fade">&nbsp;</div>
+<div style="display:none" class="aff-popup" id="aff-popup">
+    <a class="close-affpopup hidden-xs" href="javascript:void(0);" onclick="closeAffPopup();"><img src="<?php echo $this->getSkinUrl('css/magestore/images/close.png') ?>"/></a>
+    <div class="popup-content" id="popup-content"><span class="no-content">&nbsp;</span></div>
+</div>
+<script type="text/javascript">
+    //var $pop = jQuery.noConflict();
+    function affPopup(element){
+        $('bg-fade').show();
+        $('aff-popup').show();
+        $('aff-popup').addClassName('active');
+        if(element == null){
+            
+        }else{
+            var off = element.cumulativeOffset();
+            $('aff-popup').setStyle({
+                'top':off[1]-$('aff-popup').getHeight()+'px',
+            });
+        }
+    }
+    function insertHtml(response_text){
+        $('aff-popup').removeClassName('active');
+        document.getElementById("popup-content").innerHTML = response_text;
+       // $('popup-content').update(response_text);
+    }
+    function closeAffPopup(){
+        var null_string='<span class="no-content"  style="float:left;width:100%;min-height: 200px;">&nbsp;</span>';
+        $('bg-fade').hide();
+        $('aff-popup').hide();
+        document.getElementById("popup-content").innerHTML =null_string;
+    }
+    function ajaxPopup(url,temp,element){
+        if(element == null){
+            affPopup(null);
+        }else{
+            affPopup(element);
+        }
+        if(temp==null){
+            new Ajax.Request(url, {
+             method: 'get',
+             onComplete: function(response) {
+               insertHtml(response.responseText);
+             }
+            });
+         }else{
+            setTimeout(function(){
+                insertHtml(temp);
+            }, 1000); 
+            
+         }
+    }
+</script>

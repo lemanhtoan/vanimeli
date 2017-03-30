@@ -1,0 +1,51 @@
+<?xml version="1.0"?> 
+<config>
+    <menu>
+            <vesextensions module="ves_widgets">
+                <title>VenusTheme</title>
+                <sort_order>53</sort_order>
+                <children>
+                    <veswidgets translate="title" module="ves_widgets">
+                        <title>Ves Widgets</title>
+                        <children>
+                            <configuration translate="title" module="ves_widgets">
+                                <title>Configuration</title>
+                                <sort_order>15</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_widgets</action>
+                            </configuration>
+                        </children>
+                    </veswidgets>
+                </children>
+            </vesextensions>
+    </menu>
+    <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <veswidgets translate="title" module="ves_widgets">
+                            <title>Ves Widgets</title>
+                            <children>
+                                <configuration translate="title" module="ves_widgets">
+                                    <title>Configuration</title>
+                                    <sort_order>15</sort_order>
+                                    <action>adminhtml/system_config/edit/section/ves_widgets</action>
+                                </configuration>
+                            </children>
+                        </veswidgets>
+                         <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ves_widgets>
+                                            <title>Ves Widgets</title>
+                                        </ves_widgets>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+</config>

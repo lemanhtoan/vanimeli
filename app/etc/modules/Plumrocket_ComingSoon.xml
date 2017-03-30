@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Plumrocket_ComingSoon>
+			<active>true</active>
+			<codePool>community</codePool>
+			<version>1.0.2</version>
+			<name>Coming Soon &amp; Maintenance Page</name>
+			<wiki>http://wiki.plumrocket.com/wiki/Magento_Coming_Soon_and_Maintenance_Page_v1.x_Extension</wiki>
+			<depends>
+				<Plumrocket_Base />
+			</depends>
+		</Plumrocket_ComingSoon>
+	</modules>
+</config>

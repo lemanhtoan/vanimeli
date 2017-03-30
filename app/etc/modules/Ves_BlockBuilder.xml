@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Ves_BlockBuilder>
+			<active>true</active>
+			<codePool>community</codePool>
+			<version>1.0.0</version>
+			<depends>
+				<Mage_Adminhtml />
+				<Mage_Widget />
+			</depends>
+		</Ves_BlockBuilder>
+	</modules>
+</config>

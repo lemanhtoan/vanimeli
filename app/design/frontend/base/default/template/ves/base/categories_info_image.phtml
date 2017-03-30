@@ -1,0 +1,105 @@
+<?php 
+$cols =  (int)$this->getConfig( "columns" );
+$cols = !empty($cols)?$cols:1;
+$span = 12/$cols;
+?>
+<div class="widget-categories-info block <?php echo $addition_cls; ?> <?php if (isset($stylecls)&&$stylecls) echo 'block-'.$stylecls;?>">
+	<?php if (isset($widget_heading)&&!empty($widget_heading)): ?>
+		<div class="block-title">
+			<?php echo $widget_heading; ?>
+			<!-- Show pretext -->
+			<?php if( ($pretext = $this->getConfig("pretext")) && !$cms ) { ?>
+			<div class="pretext"><?php echo $pretext;?></div>
+			<?php } elseif($cms) { ?>
+			<div class="pretext"><?php echo $cms;?></div>
+			<?php } ?>
+			<!-- End Show pretext -->
+		</div>
+	<?php endif; ?>
+	<div class="widget-inner block-content">
+		<?php 
+
+		if($catsid!= ''){
+
+			$_catalogCatgoryHelper = Mage::helper('catalog/category');
+			$catIds = explode(',',$catsid);
+			$number_check_limit = 1;
+			?>
+			<?php foreach($catIds as $catId): 
+			$category = Mage::getModel('catalog/category')->load($catId);
+			if( $number_check_limit <= $limit ):?>
+			<div class="col-lg-<?php echo $span;?> col-md-<?php echo $span;?> col-sm-<?php echo $span;?> col-xs-12">
+				<div class="item">
+					<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<?php if( $show_image && $category->getThumbnail()){ ?>
+							<div class="image pull-right" style="width:100%">
+								<a href="<?php echo $_catalogCatgoryHelper->getCategoryUrl($category)?>" title="<?php echo $category->getName()?>">
+									<?php 
+										$category_image = Mage::getBaseUrl('media').'catalog/category/'.$category->getThumbnail();
+										if($resize_image) {
+											$category_image = $this->getCategoryImage( $category, $image_width, $image_height, "thumbnail" );
+										}
+									?>
+									<img src="<?php echo $category_image; ?>" width="<?php echo (int)$image_width; ?>" height="<?php echo (int)$image_height; ?>" alt="<?php echo $category->getName()?>">
+								</a>
+							</div>
+						<?php } ?>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<?php if( $show_title ){ ?>
+						<h3><a href="<?php echo $_catalogCatgoryHelper->getCategoryUrl($category)?>" title="<?php echo $category->getName(); ?>">
+							<?php echo $category->getName()?>
+							<?php if($show_number_product): ?>
+								(<?php echo $category->getProductCount() ?>)
+							<?php endif; ?>
+						</a></h3>
+						<?php } ?>
+						<?php if( $show_description &&  $category->getDescription() != '' ){ ?>
+						<div>
+							<?php echo $this->subString($category->getDescription(), $limit_description); ?>
+						</div>
+						<?php } ?>
+						<?php
+						/*Returns comma separated ids*/
+						$subCatIds = $category->getChildren();
+						if($subCatIds != '' && $show_sub_category ){
+							?>
+							<ul>
+								<?php 
+								$c = 0;
+								foreach(explode(',',$subCatIds) as $subCat) :?>
+								<?php if( $c == $limit_subcategory ) break; ?>
+								<li>
+									<?php
+									$subCategory = Mage::getModel('catalog/category')->load($subCat);
+									?>
+									<a href="<?php echo $_catalogCatgoryHelper->getCategoryUrl($subCategory)?>">
+										<?php echo $subCategory->getName()?>
+
+										<?php if( $show_number_product ){
+											echo '('.$subCategory->getProductCount().')';		
+										} ?>
+									</a>
+								</li>
+								<?php $c++; ?>
+							<?php endforeach; ?>
+						</ul>
+						<?php } ?>
+
+						<?php if( $show_viewall ){ ?>
+						<div class="view">
+							<a href="<?php echo $_catalogCatgoryHelper->getCategoryUrl($category)?>"><br><?php echo $this->__('View all'); ?></a>
+						</div>
+						<?php } ?>
+					</div>
+				</div>
+				</div>
+			</div>
+		<?php endif; ?>
+		<?php $number_check_limit ++ ?>
+	<?php endforeach; ?>
+	<?php } ?>
+</div>
+<div class="clearfix clr"> </div>
+</div>

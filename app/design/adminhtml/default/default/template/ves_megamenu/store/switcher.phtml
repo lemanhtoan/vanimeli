@@ -1,0 +1,117 @@
+<?php $_websiteCollection = $this->getWebsiteCollection() ?>
+<?php 
+    $store_id = Mage::getSingleton('admin/session')->getLastViewedStore() ? Mage::getSingleton('admin/session')->getLastViewedStore() : Mage::helper("ves_megamenu")->getStoreId(); 
+    $clone_link = $this->getCloneLink();
+?>
+<?php if ($_websiteCollection->getSize()): ?>
+<div id="store_switcher_container">
+<p class="switcher"><label for="store_switcher"><?php echo $this->__('Choose Store View') ?>:</label>
+<select name="store_switcher" id="store_switcher" class="left-col-block" onChange="reloadStore()">
+    <option value=""><?php echo $this->getDefaultStoreName() ?></option>
+    <?php foreach ($_websiteCollection as $_website): ?>
+        <?php $showWebsite=false; ?>
+        <?php foreach ($this->getGroupCollection($_website) as $_group): ?>
+            <?php $showGroup=false; ?>
+            <?php foreach ($this->getStoreCollection($_group) as $_store): ?>
+                <?php if ($showWebsite == false): ?>
+                    <?php $showWebsite = true; ?>
+                    <optgroup label="<?php echo $_website->getName() ?>"></optgroup>
+                <?php endif; ?>
+                <?php if ($showGroup == false): ?>
+                    <?php $showGroup = true; ?>
+                    <optgroup label="&nbsp;&nbsp;&nbsp;<?php echo $_group->getName() ?>">
+                <?php endif; ?>
+                <option group="<?php echo $_group->getId() ?>" value="<?php echo $_store->getId() ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $_store->getName() ?></option>
+            <?php endforeach; ?>
+            <?php if ($showGroup): ?>
+                </optgroup>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+</select>
+</p>
+</div>
+<div id="store_select_container" style="display:none">
+<p class="switcher"><label for="store_switcher"><?php echo $this->__('Clone menu items to store') ?>:</label>
+<input type="hidden" id="clone_from_menu_item" value=""/>
+<select name="store_select" id="store_select" class="left-col-block">
+    <option value=""><?php echo $this->getDefaultStoreName() ?></option>
+    <?php foreach ($_websiteCollection as $_website): ?>
+        <?php $showWebsite=false; ?>
+        <?php foreach ($this->getGroupCollection($_website) as $_group): ?>
+            <?php $showGroup=false; ?>
+            <?php foreach ($this->getStoreCollection($_group) as $_store): ?>
+                <?php if ($showWebsite == false): ?>
+                    <?php $showWebsite = true; ?>
+                    <optgroup label="<?php echo $_website->getName() ?>"></optgroup>
+                <?php endif; ?>
+                <?php if ($showGroup == false): ?>
+                    <?php $showGroup = true; ?>
+                    <optgroup label="&nbsp;&nbsp;&nbsp;<?php echo $_group->getName() ?>">
+                <?php endif; ?>
+                <option group="<?php echo $_group->getId() ?>" value="<?php echo $_store->getId() ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $_store->getName() ?></option>
+            <?php endforeach; ?>
+            <?php if ($showGroup): ?>
+                </optgroup>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+</select>
+<a href="javascript:;" onclick="actionClone()"><?php echo $this->__('Save') ?></a>
+</p>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    function cloneMenu(menu_id) {
+        
+    }
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+
+var megamenuStore = new Class.create();
+megamenuStore.prototype = {
+    initialize : function(containerId, storeSwitcher, url, lastViewedStore){
+        this.containerId    = containerId;
+        this.storeSwitcher  = storeSwitcher
+        this.url            = url;
+        this.lastViewedStore = lastViewedStore ? lastViewedStore : 0;
+        this.selectorOnChange = this.optionOnChange.bindAsEventListener(this);
+        this.storesGroup = {};
+        this.initSwitcher();
+    },
+
+    optionOnChange : function (event)
+    {
+        
+    },
+
+    initSwitcher : function()
+    {
+        if ($(this.storeSwitcher)) {
+            this.options = $$('#'+this.containerId+' option');
+            for (var option=0; option<=this.options.length; option++) {
+                if(typeof(this.options[option]) != "undefined") {
+                    var id = this.options[option].value*1;
+                    this.storesGroup[id] = this.options[option].getAttribute('group');
+                    if($(this.options[option]).value == this.lastViewedStore)
+                        $(this.options[option]).setAttribute('selected', 'selected');
+                }
+                
+            }
+            Event.observe(this.storeSwitcher, 'change', this.selectorOnChange);
+        }
+    }
+}
+
+var megamenuStoreSwitcher = new megamenuStore('store_switcher_container', 'store_switcher', '<?php echo $this->getSwitchUrl() ?>', <?php echo $store_id; ?>);
+
+function reloadStore() {
+    var url = "<?php echo $this->getSwitchUrl() ?>";
+    var store_id = $(store_switcher).value;
+    window.location = url+"store_id/"+store_id;
+}
+//]]>
+</script>
+<?php endif; ?>

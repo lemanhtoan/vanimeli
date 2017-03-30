@@ -1,0 +1,39 @@
+<?php
+/*
+* Ves Magento Theme Framework for Prestashop 1.6.x
+*
+* @package   vesblockbuilder
+* @version   5.0
+* @author    http://www.venustheme.com
+* @copyright Copyright (C) October 2013 venustheme.com <@emai:venustheme@gmail.com>
+*               <info@venustheme.com>.All rights reserved.
+* @license   GNU General Public License version 2
+*/
+
+if (isset($links) && $links): 
+$id = rand().time();
+$enable_collapse = $this->getConfig("enable_collapse", 0);
+?>
+<div class="widget-links block <?php echo $addition_cls; ?> <?php if(isset($stylecls)&&$stylecls){ echo 'block-'.$stylecls; } ?>">
+	<?php if (isset($widget_heading)&&!empty($widget_heading)): ?>
+	<div class="block-title">
+		<?php if($enable_collapse): ?><span class="opener hidden-lg hidden-md" data-toggle="collapse" data-target="#widget-links<?php echo $id; ?>"><i class="fa fa-angle-down"></i></span><?php endif; ?>
+		<?php echo $widget_heading; ?>
+	</div>
+	<?php endif; ?>
+	<div id="widget-links<?php echo $id; ?>" class="widget-inner block-content <?php if($enable_collapse): ?> widget-enable-collapse collapse in <?php endif; ?>">	
+		<div class="panel-group">
+			<ul class="nav-links <?php echo isset($ul_cls)?$ul_cls:''; ?>">
+				<?php foreach($links as $key=>$ac): ?>
+			  		<li>
+			  			<?php if(isset($ac['link_icon']) && $ac['link_icon']): ?>
+                        <i class="<?php echo $ac['link_icon']; ?>">&nbsp;</i>
+                        <?php endif; ?>
+			  			<a href="<?php echo $ac['link']; ?>"><?php echo $ac['text']; ?></a></li>
+			  	<?php endforeach; ?>
+			</ul>
+	</div></div>
+</div>
+<?php endif; ?>
+
+

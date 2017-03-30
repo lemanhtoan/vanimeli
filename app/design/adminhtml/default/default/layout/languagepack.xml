@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+
+	<default>
+        <reference name="head">
+        	<action method="addItem"><type>skin_css</type><file>languagepack/admin.css</file></action>
+            <action method="addItem"><type>skin_js</type><file>languagepack/script.js</file></action>
+        </reference>
+    </default>
+
+    <languagepack_adminhtml_languagepack_index>
+
+        <reference name="content">
+
+            <block type="languagepack/adminhtml_languagepack" name="languagepack" />
+
+        </reference>
+
+    </languagepack_adminhtml_languagepack_index>
+
+</layout> 

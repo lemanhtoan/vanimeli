@@ -1,0 +1,10 @@
+.instagram_status {
+    width: 280px;
+    text-align: center;
+}
+.instagram_status.success {
+    color:#008000;
+}
+.instagram_status.error {
+    color:#FF0000;
+}

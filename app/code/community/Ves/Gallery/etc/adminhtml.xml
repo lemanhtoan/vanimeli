@@ -1,0 +1,91 @@
+<?xml version="1.0"?> 
+<config>
+    <menu>
+            <vesextensions module="ves_gallery">
+                <title>Ves</title>
+                <sort_order>50</sort_order>
+                <children>
+                    <gallery translate="title" module="ves_gallery">
+                        <title>Ves Gallery</title>
+                        <children>
+                            <add module="ves_gallery">
+                                <title>Add File</title>
+                                <sort_order>0</sort_order>
+                                <action>adminhtml/gallerybanner/add</action>
+                            </add>
+                            <index module="ves_gallery">
+                                <title>Manage Files</title>
+                                <sort_order>3</sort_order>
+                                <action>adminhtml/gallerybanner/index</action>
+                            </index>
+                            <configuration translate="title" module="ves_gallery">
+                                <title>Configuration</title>
+                                <sort_order>4</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_gallery</action>
+                            </configuration>
+                        </children>
+                    </gallery>
+                </children>
+            </vesextensions>
+        </menu>
+		<acl>
+            <resources>
+                <admin>
+                    <children>
+                        <vesextensions module="ves_gallery">
+                            <title>Ves</title>
+                            <sort_order>50</sort_order>
+                            <children>
+                                <gallery translate="title" module="ves_gallery">
+                                    <title>Ves Gallery</title>
+                                    <children>
+                                        <add module="ves_gallery">
+                                            <title>Add File</title>
+                                            <sort_order>0</sort_order>
+                                        </add>
+
+                                        <index module="ves_gallery">
+                                            <title>Manage Files</title>
+                                            <sort_order>3</sort_order>
+                                        </index>
+                                        <save module="ves_gallery">
+                                            <title>Save Gallery</title>
+                                            <sort_order>3</sort_order>
+                                        </save>
+                                        <delete module="ves_gallery">
+                                            <title>Delete Gallery</title>
+                                            <sort_order>3</sort_order>
+                                        </delete>
+                                        <configuration translate="title" module="ves_gallery">
+                                            <title>Configuration</title>
+                                            <sort_order>4</sort_order>
+                                        </configuration>
+                                    </children>
+                                </gallery>
+                            </children>
+                        </vesextensions>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ves_gallery>
+                                            <title>Ves Gallery</title>
+                                        </ves_gallery>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+       <translate>
+            <modules>
+                <Ves_Gallery>
+                    <files>
+                        <default>Ves_Gallery.csv</default>
+                    </files>
+                </Ves_Gallery>
+            </modules>
+        </translate>
+</config>

@@ -1,0 +1,149 @@
+<?php
+
+$title = $this->getConfig('title');
+$title_name = $this->getConfig('title_name');
+
+$show_date = $this->getConfig('show_date',0);
+$end_date = $this->getConfig('end_date');
+
+$use_image_background = $this->getConfig('use_image_background', 0);
+$show_link = $this->getConfig('show_link', 0);
+$link_title = $this->getConfig('link_title');
+$class_link = $this->getConfig('class_link');
+$url = $this->getConfig('url');
+$html = $this->getConfig('html');
+if (base64_decode($html, true) == true){
+    $customHtml = html_entity_decode(base64_decode($html));
+}else{
+    $customHtml = $html;
+}
+$processor = Mage::helper('cms')->getPageTemplateProcessor();
+$customHtml = $processor->filter($customHtml);
+
+
+$show_timer_countdown = $this->getConfig('show_timer_countdown', 1);
+$enable_collapse = $this->getConfig('enable_collapse');
+$show_description = $this->getConfig('show_description');
+$addition_cls = $this->getConfig('addition_cls');
+$background_color = $this->getConfig('background_color');
+$style = '';
+if ($background_color != '' || $thumbnailurl != '') {
+    $style = 'style="';
+    if($background_color != ''){
+        $style .= 'background-color:'.$background_color.';';
+    }
+    if($use_image_background) {
+        /** THUMBNAIL **/
+        $imagesize = $this->getConfig('image_size');
+        $image_file = $this->getConfig('file');
+        $array_size = explode("x", $imagesize);
+        $image_width = isset($array_size[0])?(int)$array_size[0]:0;
+        $image_width = $image_width?$image_width: 0;
+        $image_height = isset($array_size[1])?(int)$array_size[1]:0;
+        $image_height = $image_height?$image_height: 0;
+        $thumbnailurl = "";
+
+        if($image_file ) {
+            if (!preg_match("/^http\:\/\/|https\:\/\//", $image_file) && $image_width >0 && $image_height > 0) {
+                $thumbnailurl = Mage::helper("ves_base")->resizeImage($image_file, (int)$image_width, (int)$image_height);
+            } else {
+                $thumbnailurl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$image_file;
+            }
+        }
+
+        if( $thumbnailurl != '' ){
+
+            $position_x = 'center';
+            if($this->getConfig('background_position_x') != ''){
+                $position_x = $this->getData('background_position_x');
+            }
+
+            $position_y = 'center';
+            if($this->getConfig('background_position_y') != ''){
+                $position_y = $this->getData('background_position_y');
+            }
+
+            $style .= "background-image:url('".$thumbnailurl."');background-repeat: no-repeat;";
+            $style .= 'background-position: '.$position_x.' '.$position_y.';';
+        }
+    }
+
+    $style .= '"';
+}
+$id = rand().time();
+
+?>
+<?php if($end_date){ ?>
+<div class="widget-banner-flash block bg-carousel flashsale <?php echo $addition_cls; ?> ">
+    <?php if( $title != '' ){ ?>
+    <div class="block-title">
+        <?php if($enable_collapse): ?><span class="opener hidden-lg hidden-md" data-toggle="collapse" data-target="#widget-banner-flash<?php echo $id; ?>"><i class="fa fa-angle-down"></i></span><?php endif; ?>
+        <?php echo $title; ?>
+    </div>
+    <?php } ?>
+    <div id="widget-banner-flash<?php echo $id; ?>" class="widget-inner block-content <?php if($enable_collapse): ?> widget-enanle-collapse collapse in <?php endif; ?>">
+        <div class="slide flashsale">
+            <div class="panel" <?php echo $style; ?>>
+                <?php if($title_name): ?>
+                <div class="panel-heading">
+                    <h4 class="panel-title"><?php echo $title_name; ?></h4>
+                </div>
+                <?php endif; ?>
+                <div class="panel-body">
+                    <?php if($show_description && $customHtml): ?>
+                        <div class="flashsale-description">
+                        <?php echo $customHtml; ?>
+                        </div>
+                    <?php endif ;?>
+                    <?php if($show_date && $end_date): ?>
+                        <div class="flashsale-enddate">
+                        <?php echo Mage::helper('core')->formatDate($end_date, 'long', false); ?>
+                        </div>
+                    <?php endif ;?>
+
+                    <!-- TIME -->
+                       <?php
+                       if($this->getConfig('show_timer_countdown')){
+                        $date1 = date('G:i:s', strtotime($end_date));
+                        if ($date1 == "0:00:00") {
+                            $targetDate = date('m/d/Y \2\3\:\5\9\:\0\0', strtotime($end_date));
+                        }else{
+                            $targetDate = date('m/d/Y G:i:s', strtotime($end_date));
+                        }
+                        ?>
+                        <div class="banner-countdowns">
+                            <div id="itemflashsale<?php echo $id; ?>countdown" class="item-countdown">
+                                <ul>
+                                    <li>%%D%% <div><?php echo $this->__('Day');?></div></li>
+                                    <li> %%H%% <div><?php echo $this->__('Hours');?></div></li>
+                                    <li> %%M%% <div><?php echo $this->__('Mins');?></div></li>
+                                    <li> %%S%% <div><?php echo $this->__('Secs');?></div></li>
+                                </ul>
+                            </div>
+                            <script type="text/javascript">
+                                jQuery(document).ready(function($){
+                                    $("#itemflashsale<?php echo $id; ?>countdown").lofCountDown({
+                                        formatStyle:2,
+                                        TargetDate:"<?php echo $targetDate; ?>",
+                                        DisplayFormat: $("#itemflashsale<?php echo $id; ?>countdown").html(),
+                                        FinishMessage:"<?php echo $this->__('Expired');?>",
+                                    });
+                                });
+                            </script>
+                        </div>
+                        <?php } ?>
+                    <?php if($show_link && $url): ?>
+                    <div class="flashsale-link">
+                        <a class="btn-link <?php echo $class_link; ?>" href="<?php echo $url; ?>" title="<?php Mage::helper('core')->quoteEscape($link_title);?>"><?php echo $link_title; ?></a>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>  
+        </div>
+       
+    </div>
+</div>  
+</div>
+<?php 
+} // end if check groupcustomer
+?>

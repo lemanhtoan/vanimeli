@@ -1,0 +1,25 @@
+<?php
+/*
+* Ves Base Widget - Custom Magento Block
+*
+* @package   vesbase
+* @version   5.0
+* @author    http://www.venustheme.com
+* @copyright Copyright (C) October 2013 venustheme.com <@emai:venustheme@gmail.com>
+*               <info@venustheme.com>.All rights reserved.
+* @license   GNU General Public License version 2
+*/
+$modid = rand().time();
+$enable_collapse = $this->getConfig("enable_collapse", 0);
+?>
+<div class="widget-customblock block <?php echo $addition_cls; ?> <?php echo isset($stylecls)&&$stylecls?'block-'.$stylecls:'';?>">
+	<?php if (isset($widget_heading)&&!empty($widget_heading)): ?>
+	<div class="block-title">
+		<?php if($enable_collapse): ?><span class="opener hidden-lg hidden-md" data-toggle="collapse" data-target="#widget-customblock<?php echo $modid; ?>"><i class="fa fa-angle-down"></i></span><?php endif; ?>
+		<?php echo $widget_heading; ?>
+	</div>
+	<?php endif; ?>
+	<div id="widget-customblock<?php echo $modid; ?>" class="widget-inner block-content clearfix <?php if($enable_collapse): ?> widget-enanle-collapse collapse in <?php endif; ?>">
+		<?php echo $block_html; ?>
+	</div>
+</div>

@@ -1,0 +1,35 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please 
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_Coming_Soon
+ * @copyright   Copyright (c) 2015 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+
+$helper = Mage::helper('comingsoon');
+$url = $this->getRow()->getUrl();
+?>
+
+<script type="text/javascript">
+	var youtubeImageUrl = '<?php echo $this->jsQuoteEscape(Plumrocket_ComingSoon_Helper_Data::YOUTUBE_IMAGE_MEDIUM); ?>';
+</script>
+<video class="plcs-admin-video" style="<?php echo $helper->isYoutubeOrVimeo($url)? 'display: none;' : ''; ?>">
+	<source src="<?php echo $url && $url != '_TMPNAME_'? $this->escapeUrl($url) : ''; ?>" />
+	<p>The format is not supported</p>
+</video>
+
+<?php if(($_imageUrl = $helper->getYoutubeImageUrl($url)) || ($_imageUrl = $helper->getVimeoImageUrl($url))): ?>
+	<img class="plcs-admin-video-image plcs-gallery-image-preview" src="<?php echo $this->escapeUrl($_imageUrl); ?>" />
+<?php else: ?>
+	<img class="plcs-admin-video-image plcs-gallery-image-preview" src="" style="display: none;" />
+<?php endif; ?>

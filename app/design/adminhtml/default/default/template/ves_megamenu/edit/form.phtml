@@ -1,0 +1,305 @@
+<?php
+/******************************************************
+ * @package Pav Megamenu module for Opencart 1.5.x
+ * @version 1.0
+ * @author http://www.pavothemes.com
+ * @copyright   Copyright (C) Feb 2013 PavoThemes.com <@emai:pavothemes@gmail.com>.All rights reserved.
+ * @license     GNU General Public License version 2
+*******************************************************/
+$menu = $this->getMegaMenu();
+if( $menu ): 
+$menu_image = $menu->getImage();
+if($menu_image != ""){
+    $menu_image = Mage::helper('ves_megamenu')->resizeImage($menu_image, 135, 135);
+}
+$module_row= 'ss';
+$text_edit_menu = Mage::helper("ves_megamenu")->__("Edit: %s (ID:%s)");
+
+$yesno = array(1 => Mage::helper('ves_megamenu')->__('Yes'),
+                  0 => Mage::helper('ves_megamenu')->__('No'));
+
+$submenutypes = array('menu'=>'Menu', 'html'=>'HTML','widget'=>'Widget');
+
+$targets = array('' => Mage::helper("ves_megamenu")->__("-- Choose a Target Type --"),
+                '_blank' => Mage::helper("ves_megamenu")->__("Load in a new window"),
+                '_self' => Mage::helper("ves_megamenu")->__("Load in the same frame as it was clicked"),
+                '_parent' => Mage::helper("ves_megamenu")->__("Load in the parent frameset"),
+                '_top' => Mage::helper("ves_megamenu")->__("Load in the full body of the window"),
+                );
+
+$megamenutypes = $this->getMenuTypes();
+
+$product_id = ($menu->getId() && $menu->getType() == 'product')?$menu->getItem():"";
+
+$widgets = $this->getWidgets();
+
+?>
+<?php if( $menu->getMegamenuId() > 0 ) { ?>
+<h3><?php echo sprintf($text_edit_menu, $menu->getTitle(), $menu->getMegamenuId());?></h3>
+<?php } else { ?>
+<h3><?php echo Mage::helper("ves_megamenu")->__("Create New Megamenu");?></h3>
+<?php } ?>
+<div>
+<?php 
+// echo '<pre>'.print_r( $menu_description,1 ); die;
+?>
+    <h4><?php Mage::helper("ves_megamenu")->__("Menu Information");?></h4>
+    <table class="form">
+      <tr>
+        <td><?php echo Mage::helper("ves_megamenu")->__("Title");?></td>
+        <td><input name="megamenu[title]" value="<?php echo $menu->getTitle();?>" size="50"/></td>
+      </tr>
+       <tr>
+        <td><?php echo Mage::helper("ves_megamenu")->__("Description");?></td>
+        <td>
+            <textarea name="megamenu[description]" cols="5" style="width:400px" rows="10"><?php echo $menu->getDescription(); ?></textarea>
+        </td>
+      </tr>
+    </table>
+    <h4><?php Mage::helper("ves_megamenu")->__("Menu Type");?></h4>
+    <input type="hidden" name="megamenu[item]" value="" />
+    <table class="form">
+        <tr>
+            <td><?php echo Mage::helper("ves_megamenu")->__("is Published");?></td>
+                
+            <td>
+                <select type="list" name="megamenu[published]" >
+                    <?php foreach( $yesno as $key => $val ){ ?>
+                    <option value="<?php echo $key;?>" <?php if( $key==$menu->getPublished()){ ?> selected="selected"<?php } ?>><?php echo $val; ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><?php echo Mage::helper("ves_megamenu")->__('Type:');?></td>
+                
+            <td>
+                <select name="megamenu[type]" id="megamenutype">
+                    <?php foreach(  $megamenutypes as $mt => $val ){ ?>
+                    <option value="<?php echo $mt; ?>" <?php if($mt == $menu->getType()) {?> selected="selected" <?php } ?>><?php echo $val; ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+        <tr id="megamenutype-url" class="megamenutype">
+            <td><?php echo Mage::helper("ves_megamenu")->__('URL:');?></td>
+            <td>
+                <input type="text" name="megamenu[url]" value="<?php echo $menu->getUrl();?>" size="70"/>
+                <i><?php echo Mage::helper("ves_megamenu")->__("Input url url or use shortcode of magento. <br/>For example: <strong>http://domain.com/yoururl</strong><br/>Or Shortcodes: <br/><strong>{{store url=''}}</strong> <br/><strong>{{store direct_url='category/subcategory.html'}}</strong><br/><strong>{{store url='about'}}</strong><br/><strong>{{store direct_url='category/subcategory.html' _query='a=param_a&amp;amp;b=param_b'}}</strong><br/>{{store url='about' _use_rewrite='true'}}");?></i>
+            </td>
+        </tr>
+        <tr id="megamenutype-category" class="megamenutype">
+            <td><?php echo Mage::helper("ves_megamenu")->__('Category');?></td>
+            <td> 
+               <?php echo $this->getTreecategoriesHtml('category', (!$menu->getId() || $menu->getType() != 'category')); ?>
+                <i><?php Mage::helper("ves_megamenu")->__('Select a category');?></i>
+            </td>
+        </tr>
+        <tr id="megamenutype-product" class="megamenutype">
+            <td><?php echo Mage::helper("ves_megamenu")->__('Product');?></td>
+            <td>
+                <input type="text" name="megamenu[product]" value="<?php echo $product_id;?>" size="50"/>
+                <i><?php echo Mage::helper("ves_megamenu")->__('Type Product Id');?></i>
+            </td>
+        </tr>
+        <tr id="megamenutype-cms_page" class="megamenutype">
+            <td><?php echo Mage::helper("ves_megamenu")->__('Cms Page');?></td>
+            <td>
+                <?php echo $this->getItemHtml('cms_page', (!$menu->getId() || $menu->getType() != 'cms_page')); ?>
+            </td>
+        </tr>
+        <tr id="megamenutype-html" class="megamenutype">
+            <td><?php echo Mage::helper("ves_megamenu")->__('HTML');?></td>
+            <td>
+                <?php echo Mage::helper('ves_megamenu')->getElementEditor('megamenu-content_text-1','megamenu[content_text]', $menu->getContentText()); ?>
+                <i><?php echo Mage::helper("ves_megamenu")->__('If menu content is HTML so all submenu of this menu will not be showed');?></i>
+            </td>
+        </tr>
+    </table>    
+    <h4>Menu Params</h4>      
+     <table class="form">
+        <tr>
+            <td><?php echo Mage::helper("ves_megamenu")->__('Parent ID: ');?></td>
+                
+            <td>
+                <?php echo Mage::helper('ves_megamenu')->getElementMenus('megamenu-parentid','megamenu[parent_id]', $menu->getParentId()); ?>
+            </td>
+        </tr>
+
+        <tr>
+            <td><?php echo Mage::helper("ves_megamenu")->__('Menu Icon Class:');?></td>
+                
+            <td>
+                <input type="text" name="megamenu[menu_icon_class]" value="<?php echo $menu->getMenuIconClass();?>"/>
+                <i><?php echo Mage::helper("ves_megamenu")->__('Input css icon class which will show a html tag before menu title. <br/>For example: <strong>fa fa-home</strong> On frontend will add <i class="fa fa-home"></i> before menu title ');?></i>
+            </td>
+        </tr> 
+
+         <tr>
+              <td><?php echo Mage::helper("ves_megamenu")->__('Image: ');?></td>
+              <td valign="top">
+                <div class="image">
+                    <img src="<?php echo $menu_image; ?>" style="width:135px;height:135px" alt="" id="thumb">
+                    <input name="megamenu[image]" value="<?php echo $menu->getImage(); ?>" id="image" type="hidden">
+                    <br>
+                    <input type="file" name="image" value=""/>
+                    <br/><br/>
+                    <input type="checkbox" name="image[delete]" id="image_delete" value="1"/> <label for="image_delete"><?php echo Mage::helper("ves_megamenu")->__('Delete Image ');?></label>
+                </div></td>
+            </tr>
+
+
+        <tr>
+            <td><?php echo Mage::helper("ves_megamenu")->__('Menu Class:');?></td>
+                
+            <td>
+                <input type="text" name="megamenu[menu_class]" value="<?php echo $menu['menu_class']?>"/>
+                
+            </td>
+        </tr> 
+        <tr>
+            <td><?php echo Mage::helper("ves_megamenu")->__('Position:');?></td>
+                
+            <td>
+                <input type="text" name="megamenu[position]" value="<?php echo isset($menu['position'])?$menu['position']:0; ?>"/>
+                
+            </td>
+        </tr>  
+        <tr>
+            <td><?php echo Mage::helper("ves_megamenu")->__('Show Title:');?></td>
+                
+            <td>
+                <select type="list" name="megamenu[show_title]" >
+                    <?php foreach( $yesno as $key => $val ){ ?>
+                    <option value="<?php echo $key;?>" <?php if(isset($menu['show_title']) && $key==$menu['show_title']){ ?> selected="selected"<?php } ?>><?php echo $val; ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><?php echo Mage::helper("ves_megamenu")->__('Link Target:');?></td>
+                
+            <td>
+                <select type="list" name="megamenu[target]" value="">
+                    <?php foreach( $targets as $key => $val ){ ?>
+                    <option value="<?php echo $key;?>" <?php if( $key==$menu['target']){ ?> selected="selected"<?php } ?>><?php echo $val; ?></option>
+                    <?php } ?>
+                </select>
+                <i><?php echo Mage::helper("ves_megamenu")->__('The target attribute specifies a window or a frame where the linked document is loaded.');?></i>
+            </td>
+        </tr>
+        <tr>
+            <td><?php echo Mage::helper("ves_megamenu")->__('Is Group:');?></td>
+                
+            <td>
+                <select type="list" name="megamenu[is_group]" value="">
+                    <?php foreach( $yesno as $key => $val ){ ?>
+                    <option value="<?php echo $key;?>" <?php if( $key==$menu['is_group']){ ?> selected="selected"<?php } ?>><?php echo $val; ?></option>
+                    <?php } ?>
+                </select>
+                <i><?php echo Mage::helper("ves_megamenu")->__('Set Group to allow All Submenu Items showing in same level of parent menu without hovering on parent to show them');?></i>
+            </td>
+        </tr>
+        <tr style="display:none">
+            <td><?php echo Mage::helper("ves_megamenu")->__('entry_iscontent');?></td>
+            <td>
+                <select type="list" name="megamenu[is_content]">
+                    <?php foreach( $yesno as $key => $val ){ ?>
+                    <option value="<?php echo $key;?>" <?php if( $key==$menu['is_content']){ ?> selected="selected"<?php } ?>><?php echo $val; ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?php echo Mage::helper("ves_megamenu")->__("Width Of Submenu Wrapper:");?>
+            </td>
+                
+            <td>
+                <input type="text" name="megamenu[width]" value="<?php echo $menu['width']?>"/>
+                <i><?php echo Mage::helper("ves_megamenu")->__('Input numeric value width of submenu wrapper to show more columns. For example: 780 on the frontend it will be 780px.');?></i>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?php echo Mage::helper("ves_megamenu")->__("Columns:");?>
+            </td>
+                
+            <td>
+                <input type="text" name="megamenu[colums]" value="<?php echo $menu['colums']?>"/>
+                <i><?php echo Mage::helper("ves_megamenu")->__('Submenu Items will be splited and showed in X column(s)');?></i>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+            <?php echo Mage::helper("ves_megamenu")->__("Detail Columns Width");?>  
+            </td>
+                
+            <td>
+                <textarea type="text" name="megamenu[submenu_colum_width]" rows="5" style="width:400px"><?php echo $menu['submenu_colum_width']?></textarea>
+                <i><?php echo Mage::helper("ves_megamenu")->__('Enter detail width of each subcols in values 1->12.
+Example: col1=3 col3=5');?></i>
+            </td>
+        </tr>
+        <tr>
+            <td><?php echo Mage::helper("ves_megamenu")->__("Sub Menu Type");?></td>
+            <td>
+                <?php //echo '<pre>'.print_r( $menu,1 ); die ;?>
+                <select name="megamenu[type_submenu]" id="megamenu-type_submenu">
+                    <?php foreach( $submenutypes as $stype => $text ) { ?>
+                    <option value="<?php echo $stype;?>" <?php if($stype==$menu['type_submenu']) { ?> selected="selected"<?php } ?>><?php echo $text;?></option>
+                    <?php } ?>
+                </select>
+                <i><?php echo Mage::helper("ves_megamenu")->__('If the type is Menu, so submenus of this will be showed');?></i>
+            </td>
+        </tr>
+        <tr class="type_submenu" id="type_submenu-html" style="display:none;">
+            <td><?php echo Mage::helper("ves_megamenu")->__('Submenu Content:');?></td>
+            <td>
+                <?php echo Mage::helper('ves_megamenu')->getElementEditor('megamenu-submenu_content-1','megamenu[submenu_content]', $menu->getSubmenuContent()); ?>
+            
+            </td>
+        <tr>
+
+        <tr class="type_submenu" id="type_submenu-widget" style="display:none;">
+            <td><?php echo Mage::helper("ves_megamenu")->__('Widget Id:');?></td>
+            <td>
+                 <?php if( $widgets->count() > 0 )  { ?>
+                 <select name="megamenu[widget_id]">
+                    <?php foreach( $widgets as $w => $t ) { ?>
+                    <option <?php if($t->getId() == $menu['widget_id']) { ?> selected="selected" <?php } ?>value="<?php echo $t->getId(); ?>"><?php echo $t->getName(); ?></option>
+                    <?php } ?>
+                 </select>
+                 <?php } ?>
+            </td>
+        <tr>
+
+    </table>
+    <input type="hidden" name="megamenu[megamenu_id]" value="<?php echo $menu['megamenu_id']?>"/>
+</div>
+<?php endif; ?>
+
+<script type="text/javascript"> 
+jQuery("#type_submenu-"+jQuery("#megamenu-type_submenu").val()).show();
+jQuery("#megamenu-type_submenu").change( function(){
+    jQuery(".type_submenu").hide();
+    jQuery("#type_submenu-"+jQuery(this).val()).show();
+} );
+
+   jQuery(".megamenutype").hide();
+   jQuery("#megamenutype-"+ jQuery("#megamenutype").val()).show();
+   jQuery("#megamenutype").change( function(){
+        jQuery(".megamenutype").hide();
+        jQuery("#megamenutype-"+jQuery(this).val()).show();
+   } );
+   
+   
+
+jQuery("#megamenu-information").change( function(){ 
+    jQuery('input[name=\'megamenu[item]\']').val(jQuery(this).val());
+} );
+
+
+  
+</script>

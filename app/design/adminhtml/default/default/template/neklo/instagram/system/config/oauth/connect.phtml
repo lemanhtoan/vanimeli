@@ -1,0 +1,20 @@
+<?php /* @var $this Neklo_Instagram_Block_Adminhtml_System_Config_Frontend_Oauth_Button */ ?>
+<?php echo $this->getButtonHtml(); ?>
+<script type="text/javascript">
+    var popupWidth = 640;
+    var popupHeight = 560;
+    var popupLeftOffset = screen.width / 2 - 640 / 2;
+    var popupTopOffset = screen.height / 2 - 480 / 2;
+
+    var button = $('<?php echo $this->getButton()->getId(); ?>');
+    if (button) {
+        Event.observe(button, 'click', function(e) {
+            Event.stop(e);
+            popWin(
+                '<?php echo $this->getLoginUrl(); ?>',
+                'instagram_oauth',
+                'width=' + popupWidth + ',height=' + popupHeight + ',left=' + popupLeftOffset + ',top=' + popupTopOffset + ',location=no,status=no,menubar=no,toolbar=no,resizable=no,scrollbars=no'
+            );
+        });
+    }
+</script>

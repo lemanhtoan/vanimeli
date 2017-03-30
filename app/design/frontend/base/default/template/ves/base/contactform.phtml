@@ -1,0 +1,18 @@
+<?php
+/*
+* Ves Base Widget - generate contacts form
+*
+* @package   vesbase
+* @version   5.0
+* @author    http://www.venustheme.com
+* @copyright Copyright (C) October 2013 venustheme.com <@emai:venustheme@gmail.com>
+*               <info@venustheme.com>.All rights reserved.
+* @license   GNU General Public License version 2
+*/
+$processor = Mage::helper('cms')->getPageTemplateProcessor();
+$html = $processor->filter($html);
+
+if($html) {
+	echo $html;
+}
+?>

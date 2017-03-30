@@ -1,0 +1,16 @@
+<div class="pricing pricing-table <?php echo $class; ?> <?php echo $isfeatured?'pricing-highlight':''; ?> text-center">
+	<div class="pricing-heading">
+		<?php if(isset($widget_heading) && $widget_heading): ?>
+		<h4 class="plan-title"><span><?php echo $widget_heading; ?></span></h4>
+		<?php endif; ?>
+		<div class="plan-price" ><sup class="plan-currency"><?php echo $currency; ?></sup> <span class="plan-figure"><?php echo $price; ?></span> <p class="plan-period"><?php echo $period; ?></p> </div>
+	</div>
+	<div class="pricing-body">
+		 <div class="plain-info">
+			<?php echo $content; ?>
+		</div>
+	</div>
+	<div class="pricing-footer"><a class="button btn btn-lg btn-block btn-outline <?php echo $stylecls?'btn-'.$stylecls:''; ?> plan-link" href="<?php echo $link; ?>"><?php echo $linktitle;?></a></div>
+</div>
+
+

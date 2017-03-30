@@ -1,0 +1,113 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Rewardpoints Report With DateRange Filter on Grid
+ * 
+ * @see Magestore_RewardPointsReport_Block_Adminhtml_Grid_Container
+ */
+?>
+
+<div class="content-header">
+    <table cellspacing="0">
+        <tbody>
+            <tr>
+                <td style="width:50%;">
+                    <h3 class="icon-head head-report-product-sold"><?php echo $this->getTitle() ?></h3>
+                </td>
+                <td class="form-buttons"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <?php echo $this->getChildHtml('store_switcher') ?>
+    
+    <?php // Filter By Date Range ?>
+    <div class="entry-edit">
+        <div class="fieldset" style="overflow: hidden;">
+            <div class="f-left" style="margin-right: 11px;">
+                <div id="magestore-rewardpoint-from-date">
+                    <label for="period_date_from"><?php echo $this->__('From') ?>:</label>
+                    <input class="input-text no-changes required-entry" type="text" id="period_date_from" name="report_from" value="<?php echo $this->getFilter('report_from') ?>" style="width: 110px;" />
+                    <img src="<?php echo $this->getSkinUrl('images/grid-cal.gif') ?>" title="<?php echo $this->__('Select Date') ?>" id="period_date_from_trig" alt="<?php echo $this->__('Select Date') ?>" class="v-middle"/>
+                </div>
+                <script type="text/javascript">
+                    Calendar.setup({
+                        inputField : 'period_date_from',
+                        ifFormat : '<?php echo $this->getDateFormat() ?>',
+                        button : 'period_date_from_trig',
+                        align : 'Bl',
+                        singleClick : true
+                    });
+                </script>
+            </div>
+            <div class="f-left" style="margin-right: 11px;">
+                <div id="magestore-rewardpoint-to-date">
+                    <label for="period_date_to"><?php echo $this->__('To') ?>:</label>
+                    <input class="input-text no-changes required-entry" type="text" id="period_date_to" name="report_to" value="<?php echo $this->getFilter('report_to') ?>" style="width: 110px;" />
+                    <img src="<?php echo $this->getSkinUrl('images/grid-cal.gif') ?>" title="<?php echo $this->__('Select Date') ?>" id="period_date_to_trig" alt="<?php echo $this->__('Select Date') ?>" class="v-middle"/>
+                </div>
+                <script type="text/javascript">
+                    Calendar.setup({
+                        inputField : 'period_date_to',
+                        ifFormat : '<?php echo $this->getDateFormat() ?>',
+                        button : 'period_date_to_trig',
+                        align : 'Bl',
+                        singleClick : true
+                    });
+                </script>
+            </div>
+            <button id="id_<?php echo microtime() ?>" type="button" class="scalable task" onclick="<?php echo $this->getJsObjectName() ?>.doFilter()">
+                <span><?php echo $this->__('Show Report') ?></span>
+            </button>
+        </div>
+    </div>
+    
+    <?php echo $this->getChildHtml('grid_content') ?>
+</div>
+
+<script type="text/javascript">
+    <?php echo $this->getJsObjectName() ?>.doFilter = function()
+    {
+        var filters = $$('#'+this.containerId+' .filter input', '#'+this.containerId+' .filter select', '#period_date_from', '#period_date_to');
+        var elements = [];
+        for(var i in filters){
+            if(filters[i].value && filters[i].value.length) elements.push(filters[i]);
+        }
+        if (!this.doFilterCallback || (this.doFilterCallback && this.doFilterCallback())) {
+            this.reload(this.addVarToUrl(this.filterVar, encode_base64(Form.serializeElements(elements))));
+        }
+    }
+    
+    <?php echo $this->getJsObjectName() ?>.resetFilter = function()
+    {
+        var filters = $$('#period_date_from', '#period_date_to');
+        var elements = [];
+        for(var i in filters){
+            if(filters[i].value && filters[i].value.length) elements.push(filters[i]);
+        }
+        if (!this.doFilterCallback || (this.doFilterCallback && this.doFilterCallback())) {
+            this.reload(this.addVarToUrl(this.filterVar, encode_base64(Form.serializeElements(elements))));
+        }
+    }
+</script>

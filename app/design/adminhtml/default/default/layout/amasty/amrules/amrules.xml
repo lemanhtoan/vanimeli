@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<layout>
+    <adminhtml_promo_quote_edit>
+        <reference name="head">
+            <action method="addJs">
+                <name>amasty/amrules/notifications.js</name>
+            </action>
+            <action method="addCss">
+                <name>css/amasty/amrules/style.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="amrules/adminhtml_notifications" name="amrules" as="amrules" template="amasty/amrules/notifications.phtml"/>
+        </reference>
+
+        <reference name="promo_quote_edit_tabs">
+            <block type="amrules/adminhtml_promo_quote_edit_tab_banner" name="amrules_product_page_banners"/>
+            <action method="addTab">
+                <name>amrules_product_page_banners</name>
+                <block>amrules_product_page_banners</block>
+            </action>
+        </reference>
+        <update handle="editor"/>
+    </adminhtml_promo_quote_edit>
+</layout>

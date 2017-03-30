@@ -1,0 +1,25 @@
+<?php $product_info_block = Mage::registry("product_info_block"); ?>
+<?php $_helper = $product_info_block->helper('catalog/output'); ?>
+<?php $_product = $product_info_block->getProduct(); ?>
+
+<div id="ves_product_view_accordion" class="product-collateral panel-group">
+    <?php if ($detailedInfoGroup = $product_info_block->getChildGroup('detailed_info', 'getChildHtml')):?>
+            <?php $key = 0; foreach ($detailedInfoGroup as $alias => $html):?>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a href="#ves_product_view_collapseAc<?php echo $key;?>" data-parent="#ves_product_view_accordion" data-toggle="collapse" class="accordion-toggle collapsed">
+                           <?php echo $product_info_block->escapeHtml($product_info_block->getChildData($alias, 'title')) ?>
+                          </a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse <?php if ($key==0) echo  'in'; else echo 'out';?>" id="ves_product_view_collapseAc<?php echo $key;?>"  >
+                        <div class="panel-body">
+                            <div class="tab-content"><?php echo $html ?></div>
+                        </div>
+                    </div>
+                </div>
+            <?php $key++; endforeach;?>
+        
+    <?php endif; ?>
+</div>

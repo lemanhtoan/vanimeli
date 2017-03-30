@@ -1,0 +1,171 @@
+<?php 
+  $widget = $this->getWidget();
+  $show_name = isset($widget['show_name'])?$widget['show_name']: 1;
+  $recursion_level = isset($widget['recursion_level'])?(int)$widget['recursion_level']: 1;
+
+  $category_link = isset($widget['category_link'])?$widget['category_link']: "#";
+  $show_image = isset($widget['show_image'])?$widget['show_image']: 0;
+  $image_width = isset($widget['image_width'])?$widget['image_width']: 100;
+  $image_height = isset($widget['image_height'])?$widget['image_height']: 100;
+
+  $categories = isset($widget['categories'])?$widget['categories']: array();
+  $categories = is_array($categories)?$categories:explode(",", $categories);
+  if($categories) {
+    $category_model = isset($widget['category_model'])?$widget['category_model']:null;
+    $collection = null;
+    if($category_model) {
+      $collection = $category_model->getCollection();
+      $collection->addAttributeToSelect('url_key')
+              ->addAttributeToSelect('name');
+
+      $magento_version = Mage::getVersion();
+      $magento_version = str_replace(".","", $magento_version);
+      if($magento_version < 1920) {
+          $collection->addAttributeToSelect('thumbnail');
+      }
+      $collection->addAttributeToSelect('image')
+              ->addAttributeToSelect('all_children')
+              ->addAttributeToSelect('is_anchor')
+              ->setOrder('position', Varien_Db_Select::SQL_ASC)
+              ->joinUrlRewrite()
+              ->addAttributeToFilter('is_active', 1)
+              ->addIdFilter($categories)
+              ->load();
+      $categories = $collection;
+    }
+    if(!function_exists("getMenuTreeCategories")) {
+        function getMenuTreeCategories($parentId, $tmp_subcategories = array(), $level = 1, $show_image = false, $recursion_level = 2){
+          if($level > $recursion_level || !$tmp_subcategories) {
+            return "";
+          }
+          $tmp_subcategories = is_array($tmp_subcategories)?$tmp_subcategories:explode(",", $tmp_subcategories);
+          $html = "";
+
+          $html .='
+          <div class="dropdown-menu level'.$level.'">
+            <div class="dropdown-menu-inner">
+              <div class="row">
+                <div class="mega-col col-sm-12" data-type="menu" data-colwidth="12">
+                  <div class="inner">
+                    <div class="ves-submenu">
+                      <ul>';
+                        foreach ($tmp_subcategories as $category_id) {
+                          $category = Mage::getModel('catalog/category')->load($category_id);
+                          $category_image = "";
+                          if($show_image) {
+                              $category_image = $category->getThumbnail();
+                              if(!$category_image) {
+                                $category_image = $category->getImage();
+                              }
+                          }
+                          $tmp_subsubcategories = array();
+                          if($level < $recursion_level) {
+                              $tmp_subsubcategories = $category->getChildren();
+                          }
+
+          $html .='                <li'.(($tmp_subsubcategories)?' class="parent dropdown-submenu"':'').'>';
+
+                          if($category_image){
+
+          $html .='                  <div class="category_image">
+                                        <a href="'.$category->getUrl().'" '. (($tmp_subsubcategories)?'class="dropdown-toggle" data-toggle="dropdown"':'').'><img src="'.(Mage::getBaseUrl('media').'catalog/category/'.$category_image).'" alt="'.$category->getName().'" width="'.$image_width.'" height="'.$image_height.'"/>';
+
+                               if($tmp_subsubcategories){
+          $html .='                     <b class="caret"></b>';
+                                }
+          $html .='                    </a>
+                                    </div>
+                                    <div class="category_name">
+                                        <a href="'.$category->getUrl().'" '. (($tmp_subsubcategories)?'class="dropdown-toggle" data-toggle="dropdown"':'').'><span class="menu-title">'.$category->getName().'</span>';
+                              if($tmp_subsubcategories){
+          $html .='                        <b class="caret"></b>';
+                              }
+          $html .='                     </a>
+                                    </div>';
+                            } else {
+          $html .='                 <a href="'.$category->getUrl().'" '. (($tmp_subsubcategories)?'class="dropdown-toggle" data-toggle="dropdown"':'').'><span class="menu-title">'.$category->getName().'</span>';
+                              if($tmp_subsubcategories){
+          $html .='                  <b class="caret"></b>';
+                              }
+          $html .='                  </a>';
+
+                            }
+                            //Load sub categories
+                            if($tmp_subsubcategories){
+                              $html.= getMenuTreeCategories($category_id, $tmp_subsubcategories, $level + 1, $show_image, $recursion_level);
+                            } 
+                            
+          $html .='                  </li>';
+                          }
+          $html .='
+                          </ul>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>';
+          return $html;
+        }
+  }
+
+?>
+<?php if( isset($widget['widget_name']) & $show_name){
+?>
+<div class="menu-title"><a href="<?php echo $category_link; ?>" title="<?php echo $widget['widget_name'];?>"><?php echo $widget['widget_name'];?></a></div>
+<?php
+}?>
+<div class="widget-category-list">
+  <div class="widget-inner">
+      <ul>
+      <?php foreach ($categories as $category_id) { ?>
+      <?php
+        
+        $category = is_object($category_id)?$category_id:Mage::getModel('catalog/category')->load($category_id);
+        $category_image = "";
+        if($show_image) {
+          $category_image = $category->getThumbnail();
+          if(!$category_image) {
+            $category_image = $category->getImage();
+          }
+        }
+        if($recursion_level > 1) {
+          $subcats = $category->getChildren();
+        }
+        
+      ?>
+      <li<?php echo ($subcats)?' class="parent dropdown-submenu"':'';?>>
+        <?php if($category_image): ?>
+        <div class="category_image">
+          <a href="<?php echo $category->getUrl(); ?>" <?php echo ($subcats)?'class="dropdown-toggle" data-toggle="dropdown"':'';?>><img src="<?php echo Mage::getBaseUrl('media').'catalog/category/'.$category_image;?>" alt="<?php echo $category->getName();?>" width="<?php echo $image_width; ?>" height="<?php echo $image_height; ?>"/>
+          <?php if($subcats): ?>
+          <b class="caret"></b>
+          <?php endif; ?>
+          </a>
+        </div>
+        <div class="category_name">
+          <a href="<?php echo $category->getUrl(); ?>" <?php echo ($subcats)?'class="dropdown-toggle" data-toggle="dropdown"':'';?>><span class="menu-title"><?php echo $category->getName();?></span>
+            <?php if($subcats): ?>
+              <b class="caret"></b>
+              <?php endif; ?>
+          </a>
+        </div>
+        <?php else: ?>
+        <a href="<?php echo $category->getUrl(); ?>" <?php echo ($subcats)?'class="dropdown-toggle" data-toggle="dropdown"':'';?>><span class="menu-title"><?php echo $category->getName();?></span>
+          <?php if($subcats): ?>
+          <b class="caret"></b>
+          <?php endif; ?>
+        </a>
+        <?php endif; ?>
+
+        <?php 
+        //Load sub categories
+        if($subcats){
+          echo getMenuTreeCategories($category_id, $subcats, 2, $show_image, $recursion_level);
+        } ?>
+      </li>
+      <?php } ?>
+      </ul>
+  </div>
+</div>
+<?php } ?>

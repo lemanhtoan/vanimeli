@@ -1,0 +1,48 @@
+<?php
+	$modid = rand().time();
+	$enable_collapse = $this->getConfig("enable_collapse", 0);
+?>
+<div class="widget-sociallinks block">
+	<?php if (isset($widget_heading)&&!empty($widget_heading)): ?>
+	<div class="block-title">
+		<?php if($enable_collapse): ?><span class="opener hidden-lg hidden-md" data-toggle="collapse" data-target="#widget-sociallinks<?php echo $modid; ?>"><i class="fa fa-angle-down"></i></span><?php endif; ?>
+		<?php echo $widget_heading; ?>
+	</div>
+	<?php endif; ?>
+	<div id="widget-sociallinks<?php echo $modid; ?>" class="widget-inner block-content <?php if($enable_collapse): ?> widget-enanle-collapse collapse in <?php endif; ?>">
+		<ul>
+			<?php 
+			if($facebook_link){ ?>
+			<li ><a class="fa fa-facebook" href="<?php echo 'http://facebook.com/'.$facebook_link ?>"></a></li>
+			<?php } ?>
+			<?php 
+			if($twitter_link){ ?>
+			<li><a class="fa fa-twitter" href="<?php echo 'https://twitter.com/'.$twitter_link ?>"></a></li>
+			<?php } ?>
+			<?php 
+			if($google_plus){ ?>
+			<li><a class="fa fa-google-plus" href="<?php echo 'https://plus.google.com/'.$google_plus ?>"></a></li>
+			<?php } ?>
+			<?php 
+			if($youtube){ ?>
+			<li><a class="fa fa-youtube" href="<?php echo 'https://youtube.com/'.$youtube ?>"></a></li>
+			<?php } ?>
+			<?php 
+			if($skype){ ?>
+			<li><a class="fa fa-skype" href="<?php echo 'https://skype.com/'.$skype ?>"></a></li>
+			<?php } ?>
+			<?php 
+			if($vimeo){ ?>
+			<li><a class="fa fa-vimeo-square" href="<?php echo 'https://vimeo.com/'.$vimeo ?>"></a></li>
+			<?php } ?>
+			<?php 
+			if($instagram){ ?>
+			<li><a class="fa fa-instagram" href="<?php echo 'https://instagram.com/'.$instagram ?>"></a></li>
+			<?php } ?>
+			<?php 
+			if($linkedin){ ?>
+			<li><a class="fa fa-linkedin" href="<?php echo 'https://linkedin.com/'.$linkedin ?>"></a></li>
+			<?php } ?>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+ 		<reference name="head">
+ 			<action method="addJs"><script>Mlx/Mlx/jquery.js</script></action> 			
+			<action method="addJs"><script>Mlx/Mlx/tinybox/tinybox.js</script></action>
+			<action method="addCss"><stylesheet>Mlx/Mlx/css/tinybox/style.css</stylesheet></action>
+			<action method="addCss"><stylesheet>Mlx/Mlx/css/style.css</stylesheet></action>
+		</reference>
+	</default>	
+	
+	<adminhtml_mlx_license_index>
+		<reference name="content">
+			<block type="mlx/adminhtml_license" template="Mlx/Mlx/license.phtml" name="mlx.license" />
+		</reference>
+	</adminhtml_mlx_license_index>
+
+</layout>

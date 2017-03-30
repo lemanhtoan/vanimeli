@@ -1,0 +1,1300 @@
+<?xml version="1.0"?>
+<!--
+/*
+ * Copyright (c) 2009-2014 Vaimo AB
+ *
+ * Vaimo reserves all rights in the Program as delivered. The Program
+ * or any portion thereof may not be reproduced in any form whatsoever without
+ * the written consent of Vaimo, except as provided by licence. A licence
+ * under Vaimo's rights in the Program may be available directly from
+ * Vaimo.
+ *
+ * Disclaimer:
+ * THIS NOTICE MAY NOT BE REMOVED FROM THE PROGRAM BY ANY USER THEREOF.
+ * THE PROGRAM IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE PROGRAM OR THE USE OR OTHER DEALINGS
+ * IN THE PROGRAM.
+ *
+ * @category    Vaimo
+ * @package     Vaimo_Klarna
+ * @copyright   Copyright (c) 2009-2014 Vaimo AB
+ */
+-->
+
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <vaimo_klarna_invoice translate="label" module="klarna">
+                    <label>Klarna Invoice</label>
+                    <sort_order>6</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                        </active>
+                        <merchant_id translate="label comment">
+                            <label>Merchant ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>The merchant id that you have received from Klarna</comment>
+                        </merchant_id>
+                        <shared_secret translate="label comment">
+                            <label>Shared secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>The shared secret that you have received from Klarna</comment>
+                        </shared_secret>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                        </title>
+                        <host translate="label comment">
+                            <label>Server</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>klarna/source_servermode</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Choose what server to make calls to</comment>
+                        </host>
+                        <order_status translate="label">
+                            <label>New order status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                        </order_status>
+                        <invoice_fee translate="label comment">
+                            <label>Invoice fee</label>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>In website currency</comment>
+                        </invoice_fee>
+                        <invoice_fee_label translate="label">
+                            <label>Invoice fee label</label>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </invoice_fee_label>
+                        <minimum_order_cost translate="label">
+                            <label>Minimum order amount</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                        </minimum_order_cost>
+                        <terms_url translate="label comment">
+                            <label>URL to terms and conditions</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>URL to this stores own terms and conditions (only used in Germany and Austria)</comment>
+                        </terms_url>
+                        <klarna_language translate="label">
+                            <label>Language</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>klarna/source_language</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                        </klarna_language>
+                        <sort_order translate="label">
+                            <label>Sort order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <show_advanced_options translate="label comment">
+                            <label>Show advanced options</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>500</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Display advanced or seldomly used settings</comment>
+                        </show_advanced_options>
+                        <pending_status_action translate="label comment">
+                            <label>Cancel pending reservations</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>510</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Automatically cancel orders when the reservation becomes pending</comment>
+                        </pending_status_action>
+                        <allow_part_capture_with_discount translate="label comment">
+                            <label>Allow part capture when orders have discount</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>515</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Due to how discounts are added on the Klarna reservation, part capturing an order with a discount can result in too low amounts being captured. Activate on your own risk.</comment>
+                        </allow_part_capture_with_discount>
+                        <send_klarna_email translate="label comment">
+                            <label>Send invoice via e-mail</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>520</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>If set to yes, Klarna will send out the invoices as soon as the reservation is activated</comment>
+                        </send_klarna_email>
+                        <allow_separate_address translate="label comment">
+                            <label>Allow separate addresses</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>530</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Allow shipping address to be different from billing address. You might need acceptance from Klarna if activated</comment>
+                        </allow_separate_address>
+                        <disable_company_purchase translate="label comment">
+                            <label>Disable method for company purchase</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>540</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Disable this method when company field is filled in during checkout</comment>
+                        </disable_company_purchase>
+                        <disable_backend_calls translate="label comment">
+                            <label>Disable Klarna Backend</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>550</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Disable all calls to Klarna from Admin, such as Capture, Credit and Cancel. This feature can be used if those functions are maintained by an external system</comment>
+                        </disable_backend_calls>
+                        <show_extended_error_message translate="label comment tooltip">
+                            <label>Show Extended Error Message</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <sort_order>560</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment><![CDATA["Yes" - show error messages provided by Klarna. "No" - show default error message]]></comment>
+                            <tooltip><![CDATA[Show extended error message in case if authorization was failed]]></tooltip>
+                        </show_extended_error_message>
+                        <allowspecific translate="label">
+                            <label>Allowed countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>570</sort_order>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>klarna/source_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Klarna supports one country per store</comment>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Specific countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>575</sort_order>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>klarna/source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Klarna supports one country per store</comment>
+                        </specificcountry>
+                    </fields>
+                </vaimo_klarna_invoice>
+                <vaimo_klarna_account translate="label" module="klarna">
+                    <label>Klarna Account</label>
+                    <sort_order>7</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Not available for Austria and the Netherlands</comment>
+                        </active>
+                        <merchant_id translate="label comment">
+                            <label>Merchant ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>The merchant id that you have received from Klarna</comment>
+                        </merchant_id>
+                        <shared_secret translate="label comment">
+                            <label>Shared secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>The shared secret that you have received from Klarna</comment>
+                        </shared_secret>
+                        <update_pclass translate="label comment">
+                            <label>Update Pclasses</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>klarna/adminhtml_pclass_update</frontend_model>
+                            <sort_order>19</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Installs the latest active payment classes (also known as pclasses). This will install both account type classes as well as special campaigns</comment>
+                        </update_pclass>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                        </title>
+                        <host translate="label comment">
+                            <label>Server</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>klarna/source_servermode</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Choose what server to make calls to</comment>
+                        </host>
+                        <order_status translate="label">
+                            <label>New order status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                        </order_status>
+                        <disable_product_widget translate="label comment">
+                            <label>Disable payment widget on product page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>If set to yes, the payment information from Klarna will not appear on the product page</comment>
+                        </disable_product_widget>
+                        <terms_url translate="label comment">
+                            <label>URL to terms and conditions</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>URL to this stores own terms and conditions (only used in Germany and Austria)</comment>
+                        </terms_url>
+                        <klarna_language translate="label">
+                            <label>Language</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>klarna/source_language</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                        </klarna_language>
+                        <sort_order translate="label">
+                            <label>Sort order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <show_advanced_options translate="label comment">
+                            <label>Show advanced options</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>500</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Display advanced or seldomly used settings</comment>
+                        </show_advanced_options>
+                        <pending_status_action translate="label comment">
+                            <label>Cancel pending reservations</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>510</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Automatically cancel orders when the reservation becomes pending</comment>
+                        </pending_status_action>
+                        <allow_part_capture_with_discount translate="label comment">
+                            <label>Allow part capture when orders have discount</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>515</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Due to how discounts are added on the Klarna reservation, part capturing an order with a discount can result in too low amounts being captured. Activate on your own risk.</comment>
+                        </allow_part_capture_with_discount>
+                        <send_klarna_email translate="label comment">
+                            <label>Send invoice via e-mail</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>520</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>If set to yes, Klarna will send out the invoices as soon as the reservation is activated</comment>
+                        </send_klarna_email>
+                        <allow_separate_address translate="label comment">
+                            <label>Allow separate addresses</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>530</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Allow shipping address to be different from billing address. You might need acceptance from Klarna if activated</comment>
+                        </allow_separate_address>
+                        <disable_company_purchase translate="label comment">
+                            <label>Disable method for company purchase</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>540</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Disable this method when company field is filled in during checkout</comment>
+                        </disable_company_purchase>
+                        <disable_backend_calls translate="label comment">
+                            <label>Disable Klarna Backend</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>550</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Disable all calls to Klarna from Admin, such as Capture, Credit and Cancel. This feature can be used if those functions are maintained by an external system</comment>
+                        </disable_backend_calls>
+                        <show_extended_error_message translate="label comment tooltip">
+                            <label>Show Extended Error Message</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>560</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment><![CDATA["Yes" - show error messages provided by Klarna. "No" - show default error message]]></comment>
+                            <tooltip><![CDATA[Show extended error message in case if authorization was failed]]></tooltip>
+                        </show_extended_error_message>
+                        <allowspecific translate="label">
+                            <label>Allowed countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <sort_order>570</sort_order>
+                            <source_model>klarna/source_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Klarna supports one country per store</comment>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Specific countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <sort_order>575</sort_order>
+                            <source_model>klarna/source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Klarna supports one country per store</comment>
+                        </specificcountry>
+                    </fields>
+                </vaimo_klarna_account>
+                <vaimo_klarna_special translate="label" module="klarna">
+                    <label>Klarna Campaign</label>
+                    <sort_order>8</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                        </active>
+                        <merchant_id translate="label comment">
+                            <label>Merchant ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>The merchant id that you have received from Klarna</comment>
+                        </merchant_id>
+                        <shared_secret translate="label comment">
+                            <label>Shared secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>The shared secret that you have received from Klarna</comment>
+                        </shared_secret>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                        </title>
+                        <host translate="label comment">
+                            <label>Server</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>klarna/source_servermode</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Choose what server to make calls to</comment>
+                        </host>
+                        <order_status translate="label">
+                            <label>New order status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                        </order_status>
+                        <terms_url translate="label comment">
+                            <label>URL to terms and conditions</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>URL to this stores own terms and conditions (only used in Germany and Austria)</comment>
+                        </terms_url>
+                        <cdn_logotype_override translate="label comment">
+                            <label>URL to special logotype</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Special campaign methods have various logotypes depending on campaign, this is a way to choose a logotype from Klarna</comment>
+                        </cdn_logotype_override>
+<!--
+                        <cdn_terms_override translate="label">
+                            <label>URL to terms</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                        </cdn_terms_override>
+-->
+                        <klarna_language translate="label">
+                            <label>Language</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>klarna/source_language</source_model>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                        </klarna_language>
+                        <sort_order translate="label">
+                            <label>Sort order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <show_advanced_options translate="label comment">
+                            <label>Show advanced options</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>500</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Display advanced or seldomly used settings</comment>
+                        </show_advanced_options>
+                        <pending_status_action translate="label comment">
+                            <label>Cancel pending reservations</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>510</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Automatically cancel orders when the reservation becomes pending</comment>
+                        </pending_status_action>
+                        <allow_part_capture_with_discount translate="label comment">
+                            <label>Allow part capture when orders have discount</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>515</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Due to how discounts are added on the Klarna reservation, part capturing an order with a discount can result in too low amounts being captured. Activate on your own risk.</comment>
+                        </allow_part_capture_with_discount>
+                        <send_klarna_email translate="label comment">
+                            <label>Send invoice via e-mail</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>520</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>If set to yes, Klarna will send out the invoices as soon as the reservation is activated</comment>
+                        </send_klarna_email>
+                        <allow_separate_address translate="label comment">
+                            <label>Allow separate addresses</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>530</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Allow shipping address to be different from billing address. You might need acceptance from Klarna if activated</comment>
+                        </allow_separate_address>
+                        <disable_company_purchase translate="label comment">
+                            <label>Disable method for company purchase</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>540</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Disable this method when company field is filled in during checkout</comment>
+                        </disable_company_purchase>
+                        <disable_backend_calls translate="label comment">
+                            <label>Disable Klarna Backend</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>550</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Disable all calls to Klarna from Admin, such as Capture, Credit and Cancel. This feature can be used if those functions are maintained by an external system</comment>
+                        </disable_backend_calls>
+                        <show_extended_error_message translate="label comment tooltip">
+                            <label>Show Extended Error Message</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>560</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment><![CDATA["Yes" - show error messages provided by Klarna. "No" - show default error message]]></comment>
+                            <tooltip><![CDATA[Show extended error message in case if authorization was failed]]></tooltip>
+                        </show_extended_error_message>
+                        <allowspecific translate="label">
+                            <label>Allowed countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <sort_order>570</sort_order>
+                            <source_model>klarna/source_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Klarna supports one country per store</comment>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Specific countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <sort_order>580</sort_order>
+                            <source_model>klarna/source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Klarna supports one country per store</comment>
+                        </specificcountry>
+                    </fields>
+                </vaimo_klarna_special>
+                <vaimo_klarna_checkout translate="label" module="klarna">
+                    <label>Klarna Checkout</label>
+                    <sort_order>9</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <api_version translate="label">
+                            <label>API Version</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>klarna/source_apiversion</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </api_version>
+                        <merchant_id translate="label comment">
+                            <label>Merchant ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The merchant id that you have received from Klarna</comment>
+                        </merchant_id>
+                        <shared_secret translate="label comment">
+                            <label>Shared secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The shared secret that you have received from Klarna</comment>
+                        </shared_secret>
+                        <host translate="label comment">
+                            <label>Server</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>klarna/source_servermode</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Choose what server to make calls to</comment>
+                        </host>
+                        <order_status translate="label">
+                            <label>New order status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <create_order_on_success translate="label comment">
+                            <label>Create order on Success</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Create pending order on Success and only update it when completed (will work together with creating it on Validate).</comment>
+                        </create_order_on_success>
+                        <terms_url translate="label comment">
+                            <label>URL to terms and conditions</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>URL to this stores own terms and conditions</comment>
+                        </terms_url>
+                        <klarna_language translate="label comment">
+                            <label>Language</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>klarna/source_language</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Can be used if site is in a different language than the official language of current country</comment>
+                        </klarna_language>
+                        <klarna_layout translate="label">
+                            <label>Layout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>klarna/source_klarnalayout</source_model>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </klarna_layout>
+                        <show_login_form translate="label comment">
+                            <label>Show login form</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Only for 2 column layout</comment>
+                        </show_login_form>
+                        <enable_cart_above_kco translate="label">
+                            <label>Enable cart in checkout page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_cart_above_kco>
+                        <enable_auto_focus translate="label">
+                            <label>Enable Autofocus for Klarna Checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_auto_focus>
+                        <disable_product_widget translate="label comment">
+                            <label>Disable payment widget on product page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If set to yes, the payment information from Klarna will not appear on the product page</comment>
+                        </disable_product_widget>
+                        <show_advanced_options translate="label comment">
+                            <label>Show advanced options</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>500</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Display advanced or seldomly used settings</comment>
+                        </show_advanced_options>
+                        <cart_redirect translate="label comment">
+                            <label>Cart redirect</label>
+                            <frontend_type>text</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <sort_order>505</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Default is cart, custom redirect must not go to any checkout page</comment>
+                        </cart_redirect>
+                        <auto_prefil translate="label comment">
+                            <label>Auto prefill known Klarna details</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>510</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>When activated, it will use the logged in customer details to prefill the Klarna Checkout form</comment>
+                        </auto_prefil>
+                        <disable_backend_calls translate="label comment">
+                            <label>Disable Klarna Backend</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>520</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Disable all calls to Klarna from Admin, such as Capture, Credit and Cancel. This feature can be used if those functions are maintained by an external system</comment>
+                        </disable_backend_calls>
+                        <show_extended_error_message translate="label comment tooltip">
+                            <label>Show Extended Error Message</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>530</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment><![CDATA["Yes" - show error messages provided by Klarna. "No" - show default error message]]></comment>
+                            <tooltip><![CDATA[Show extended error message in case if authorization was failed]]></tooltip>
+                        </show_extended_error_message>
+                        <extra_order_attribute translate="label comment">
+                            <label>Extra order ID attribute</label>
+                            <frontend_type>text</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <sort_order>540</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Will be used in the orderid2 field on the Klarna order</comment>
+                        </extra_order_attribute>
+                        <allow_separate_address translate="label comment">
+                            <label>Allow separate addresses</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>klarna/source_yesnodefault</source_model>
+                            <sort_order>550</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Allow shipping address to be different from billing address. You might need acceptance from Klarna if activated</comment>
+                        </allow_separate_address>
+                        <allow_part_capture_with_discount translate="label comment">
+                            <label>Allow part capture when orders have discount</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>515</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>Due to how discounts are added on the Klarna reservation, part capturing an order with a discount can result in too low amounts being captured. Activate on your own risk.</comment>
+                        </allow_part_capture_with_discount>
+                        <force_phonenumber translate="label">
+                            <label>Force entry of phonenumber</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>560</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </force_phonenumber>
+                        <packstation_enabled translate="label comment">
+                            <label>Enable DHL Packstation</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>570</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Only available in Germany</comment>
+                        </packstation_enabled>
+                        <enable_trigger_changed_js translate="label">
+                            <label>Enable javascript trigger for address update</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>580</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_trigger_changed_js>
+                        <auto_register_guest translate="label comment">
+                            <label>Automatically register guests on checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>590</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <comment>If disabled and Guest Checkout is allowed in Magento Checkout Options, orders will be placed as guests.</comment>
+                        </auto_register_guest>
+                        <user_defined_json translate="label comment">
+                            <label>User Defined Variables</label>
+                            <backend_model>klarna/adminhtml_system_config_backend_admin_json</backend_model>
+                            <frontend_type>textarea</frontend_type>
+                            <depends><show_advanced_options>1</show_advanced_options></depends>
+                            <sort_order>599</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>JSON encoded array. Please consult Klarna before using this, incorrect information may cause the integration to stop working</comment>
+                        </user_defined_json>
+                        <heading_https_only translate="label">
+                            <label>Only when https is activated in checkout</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>600</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_https_only>
+                        <enable_validation translate="label comment">
+                            <label>Enable Validation of Order before Klarna proceeds</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>610</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>An extra validation is made for the cart, stock levels for example, just before the order is created in Klarna.</comment>
+                        </enable_validation>
+                        <create_order_on_validation translate="label comment">
+                            <label>Create order on Validation</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><enable_validation>1</enable_validation></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>615</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Create pending order on Validation and only update it when completed.</comment>
+                        </create_order_on_validation>
+                        <recreate_cart_on_failed_validate translate="label comment">
+                            <label>Recreate Cart if validation Fails</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><enable_validation>1</enable_validation></depends>
+                            <depends><create_order_on_validation>1</create_order_on_validation></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>616</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If order creation during validation fails, for whatever reason, recreate cart so customer can try again or use another method</comment>
+                        </recreate_cart_on_failed_validate>
+                        <enable_postcode_update translate="label comment">
+                            <label>Enable tax and shipping updates</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><enable_trigger_changed_js>1</enable_trigger_changed_js></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>620</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Klarna contacts Magento to recalculate taxes and shippment amounts when address is updated.</comment>
+                        </enable_postcode_update>
+                        <heading_other_method_button translate="label">
+                            <label>Support of other payment methods</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>720</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_other_method_button>
+                        <enable_other_button translate="label comment">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>721</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If enabled, one button will be placed on klarna checkout page and one in the payment section of standard checkout</comment>
+                        </enable_other_button>
+                        <label_other_button translate="label comment">
+                            <label>Label for Other Payment Methods button</label>
+                            <frontend_type>text</frontend_type>
+                            <depends><enable_other_button>1</enable_other_button></depends>
+                            <sort_order>722</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This can be free text or a complete URL to a reasonably sized image</comment>
+                        </label_other_button>
+                        <label_back_button translate="label comment">
+                            <label>Label for Back to Klarna Checkout button</label>
+                            <frontend_type>text</frontend_type>
+                            <depends><enable_other_button>1</enable_other_button></depends>
+                            <sort_order>723</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This can be free text or a complete URL to a reasonably sized image</comment>
+                        </label_back_button>
+                        <auto_reset_other_method_button translate="label comment">
+                            <label>Automatically reactivate Klarna Checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <depends><enable_other_button>1</enable_other_button></depends>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>724</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If enabled, it will go to Klarna Checkout next time checkout is requested, if user exits standard checkout by going to another page. Attention! If there are many customizations in standard checkout, it might cause this reactivation as well!</comment>
+                        </auto_reset_other_method_button>
+                        <explicit_usage translate="label comment">
+                            <label>Only run Klarma Checkout if Explicitly called</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>725</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If set to Yes, and you go to checkout without any customisation, it will go to standard checkout rather than Klarna Checkout by default</comment>
+                        </explicit_usage>
+
+                        <heading_newsletter translate="label">
+                            <label>Newsletter</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>750</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_newsletter>
+                        <enable_newsletter translate="label comment">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>klarna/source_newsletter</source_model>
+                            <sort_order>760</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If checkbox for newsletter should be shown in checkout page.</comment>
+                        </enable_newsletter>
+                        <newsletter_checked translate="label">
+                            <label>Checked by default</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>770</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </newsletter_checked>
+                        <heading_ab_testing translate="label">
+                            <label>A/B Testing settings</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>850</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_ab_testing>
+                        <activate_ab_testing translate="label">
+                            <label>Enable A/B Testing</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>851</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </activate_ab_testing>
+                        <allowed_ip_range translate="label comment">
+                            <label>Enable for IP range (last digit)</label>
+                            <frontend_type>text</frontend_type>
+                            <depends><activate_ab_testing>1</activate_ab_testing></depends>
+                            <sort_order>860</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Specify 2 numbers between 0 and 255, separated by dash. Example: '0-50'. Empty value enables all IP addresses</comment>
+                        </allowed_ip_range>
+                        <allow_when_logged_in translate="label comment">
+                            <label>Enable for logged in Customers</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <depends><activate_ab_testing>1</activate_ab_testing></depends>
+                            <sort_order>870</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If not enabled, logged in customers will use standard Magento checkout</comment>
+                        </allow_when_logged_in>
+                        <allow_customer_group translate="label comment">
+                            <label>Enable for specific customer groups</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>klarna/source_customergroup</source_model>
+                            <depends><activate_ab_testing>1</activate_ab_testing></depends>
+                            <sort_order>880</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If you do not belong to a selected customer group, standard Magento checkout will be used. None selected, means enabled for all</comment>
+                        </allow_customer_group>
+                        <heading_api_v3x_only translate="label">
+                            <label>Specific for API V.3x (US and UK)</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>990</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading_api_v3x_only>
+                        <other_countries translate="label">
+                            <label>Show other allowed shipping countries</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>992</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </other_countries>
+                        <shipping_countries translate="label comment">
+                            <label>Shipping Countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <depends><other_countries>1</other_countries></depends>
+                            <sort_order>993</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>List of allowed shipping countries. If none selected, none will be supported. List will appear in Klarna Checkout</comment>
+                        </shipping_countries>
+                        <shipping_options translate="label comment">
+                            <label>Include Shipping Options</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>996</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>List of available shipping options that should appear in Klarna Checkout.</comment>
+                        </shipping_options>
+                    </fields>
+                </vaimo_klarna_checkout>
+            </groups>
+        </payment>
+        <sales>
+            <groups>
+                <totals_sort>
+                    <fields>
+                        <vaimo_klarna_fee translate="label">
+                            <label>Klarna invoice fee</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </vaimo_klarna_fee>
+                    </fields>
+                </totals_sort>
+            </groups>
+        </sales>
+        <tax>
+            <groups>
+                <cart_display>
+                    <fields>
+                        <vaimo_klarna_fee translate="label">
+                            <label>Display Klarna invoice fee</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>tax/system_config_source_tax_display_type</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </vaimo_klarna_fee>
+                    </fields>
+                </cart_display>
+                <sales_display>
+                    <fields>
+                        <vaimo_klarna_fee translate="label">
+                            <label>Display Klarna invoice fee</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>tax/system_config_source_tax_display_type</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </vaimo_klarna_fee>
+                    </fields>
+                </sales_display>
+                <classes>
+                    <fields>
+                        <vaimo_klarna_fee_tax_class translate="label">
+                            <label>Tax class for Klarna invoice fee</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>klarna/source_taxclass</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </vaimo_klarna_fee_tax_class>
+                    </fields>
+                </classes>
+                <calculation>
+                    <fields>
+                        <vaimo_klarna_fee_includes_tax translate="label comment">
+                            <label>Klarna invoice fee prices</label>
+                            <comment>Whether Klarna invoice fee set in admin includes tax</comment>
+                            <frontend_type>select</frontend_type>
+                            <backend_model>tax/config_price_include</backend_model>
+                            <source_model>tax/system_config_source_priceType</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </vaimo_klarna_fee_includes_tax>
+                    </fields>
+                </calculation>
+            </groups>
+        </tax>
+        <dev>
+            <groups>
+                <vaimo_klarna_debug translate="label">
+                    <label>Klarna Debug</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>999</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <vaimo_klarna_log_level translate="label">
+                            <label>Log Level</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>klarna/source_loglevel</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                                Log information is now logged to database, instead of file. Only klarnaerror.log still exists as a file. The database logs are automatically cleaned. Moderate means that selected exceptions are logged only to DB and no parameters or additional information is added to each log item. Minimal means that selected exceptions are not logged at all plus no debug type logs are made
+                            </comment>
+                        </vaimo_klarna_log_level>
+                    </fields>
+                </vaimo_klarna_debug>
+            </groups>
+        </dev>
+    </sections>
+</config>

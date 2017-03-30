@@ -1,0 +1,18 @@
+.message {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    right: 180px;
+}
+
+#note_preview {
+    width: 540px;
+}
+
+.message span {
+    font-size: 14px;
+}
+
+.form-list p.note {
+    background: none;
+}

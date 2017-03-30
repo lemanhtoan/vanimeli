@@ -1,0 +1,18 @@
+<div class="content-header">
+<table cellspacing="0">
+    <tr>
+        <td style="width:50%;"><h3 class="icon-head head-products"><?php echo Mage::helper('catalog')->__('Manage Block Builder Profile') ?></h3></td>
+        <td class="a-right">
+            <?php echo $this->getButtonsHtml() ?>
+            <!-- Start of Displaying of your custom import form -->
+			<?php echo $this->getImportButtonHtml() ?>
+			<!-- End of Displaying of your custom import form -->
+            <?php echo $this->getSampleButtonHtml() ?>
+            <!-- End of Displaying of your custom install sample form -->
+        </td>
+    </tr>
+</table>
+</div>
+<div>
+    <?php echo $this->getGridHtml() ?>
+</div>

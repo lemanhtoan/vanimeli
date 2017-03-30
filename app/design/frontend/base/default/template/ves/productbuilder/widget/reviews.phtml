@@ -1,0 +1,11 @@
+<?php $product_info_block = Mage::registry("product_info_block"); ?>
+<?php if($reviews_form = $product_info_block->getChildHtml("custom_review_form")): ?>
+<div class="panel panel-default product-reviews-block">
+	<div class="panel-heading">
+        <h3 class="panel-title"><?php echo $this->__("Reviews") ?></h3>
+    </div>
+    <div class="panel-body">
+        <div class="tab-content"><?php echo $reviews_form; ?></div>
+    </div>
+</div>
+<?php endif; ?>

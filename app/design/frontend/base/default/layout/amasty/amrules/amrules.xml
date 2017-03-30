@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Rules
+ */
+-->
+<layout version="0.1.0">
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addCss"><name>css/amasty/amrules/styles.css</name></action>
+        </reference>
+        <block  as="other" type="amrules/banner" name="amrules.banner.after_name" template="amrules/banner.phtml">
+            <action method="setPosition"><position>after_name</position></action>
+        </block>
+
+        <block before="main" type="amrules/banner" name="amrules.banner.top" template="amrules/banner.phtml">
+            <action method="setPosition"><position>top</position></action>
+        </block>
+
+        <reference name="content">
+            <block before="main" type="amrules/label" name="amrules.label" template="amrules/label.phtml"/>
+            <action method="insert" ifconfig="amrules/banners/enabled_top"><block>amrules.banner.top</block></action>
+            <reference name="product.info">
+                <block type="core/text_list" name="amrules.after.name" as="other" translate="label">
+                    <action method="insert" ifconfig="amrules/banners/enabled_above_cart"><block>amrules.banner.after_name</block></action>
+                </block>
+            </reference>
+        </reference>
+    </catalog_product_view>
+</layout>

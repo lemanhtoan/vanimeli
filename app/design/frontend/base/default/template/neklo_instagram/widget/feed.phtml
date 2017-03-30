@@ -1,0 +1,28 @@
+<?php /* @var $this Neklo_Instagram_Block_Widget_Feed */ ?>
+<?php if ($this->canShow()): ?>
+    <?php $imageList = $this->getImageList(); ?>
+    <?php if (count($imageList)) : ?>
+        <div class="neklo-instagram">
+            <?php if ($this->getTitle()) : ?>
+                <div class="neklo-instagram-title">
+                    <span><?php echo $this->escapeHtml($this->getTitle()) ?></span>
+                </div>
+            <?php endif; ?>
+            <?php if ($this->getDescription()) : ?>
+                <div class="neklo-instagram-description">
+                    <span><?php echo nl2br($this->escapeHtml($this->getDescription())) ?></span>
+                </div>
+            <?php endif; ?>
+            <ul class="neklo-instagram-list">
+                <?php foreach ($imageList as $image) : ?>
+                    <li>
+                        <a href="<?php echo $image->getLink(); ?>" target="_blank" >
+                            <i class="neklo-instagram-over"></i>
+                            <img src="<?php echo $image->getUrl(); ?>" width="<?php echo intval($this->getImageWidth()) ?>" height="<?php echo intval($this->getImageHeight()) ?>" alt="<?php echo $this->escapeHtml($image->getName()); ?>" title="<?php echo $this->escapeHtml($image->getName()); ?>" />
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

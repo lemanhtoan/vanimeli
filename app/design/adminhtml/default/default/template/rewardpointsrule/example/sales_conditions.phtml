@@ -1,0 +1,17 @@
+<?php
+$currency = Mage::getModel('directory/currency')->load(Mage::app()->getStore()->getBaseCurrencyCode());
+?>
+<div id="messages">
+    <ul class="messages">
+        <li class="notice-msg">
+            <ul>
+                <li><span><?php echo $this->__('Example for "Conditions":') ?></span>
+                </li>
+            </ul>
+            <?php echo $this->__('If you want to apply the rule to orders that have over %s in Subtotal and Shipping to France, the condition is:', $currency->format(1000)) ?>
+            <div style="margin-left: 50px"> 
+                <img title="conditons" alt="conditons" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'rewardpointsrule/example/shoppingcart.png'; ?>">
+            </div>
+        </li>
+    </ul>
+</div>

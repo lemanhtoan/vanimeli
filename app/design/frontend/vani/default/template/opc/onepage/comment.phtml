@@ -1,0 +1,22 @@
+<div class="comment-block">
+<h3><input type="checkbox" id="testtest"/><?php echo $this->__('Add message to Soft Goat')?><span class='fa expand_plus'></span></h3>
+    <div  class="collapse-block hidden">
+	<form autocomplete="off">
+	    <div class="comment">
+	        <div class="comment-form">            
+	            <div class="input-box">	                
+	                <textarea class="input-text" id="customer_comment" name="customer_comment" placeholder="add message..."></textarea>
+	            </div>	            
+	        </div>
+	    </div>
+	    	<button type="button" href="#" ><?php echo $this->__('Save message');?></button>
+	</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+var $j = jQuery.noConflict();
+	$j(window).bind("load", function() { 
+     $j("#testtest").click();
+});
+</script>

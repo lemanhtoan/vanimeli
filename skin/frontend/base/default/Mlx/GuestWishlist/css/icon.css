@@ -1,0 +1,27 @@
+
+
+.link-wishlist{text-align:left; text-decoration: none; text-indent: -999em; display: inline-block; position: relative; margin-bottom: 5px; width: 18px;}
+.link-wishlist:before{
+	content: "\f08a";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;	
+    color: #999;
+    font-size: 18px;
+    position: absolute;
+    top:0; left:0;
+    text-indent: 0;    
+}
+
+.link-wishlist:hover:before{
+	color: pink;
+}
+
+.link-wishlist.added:before{
+	color: pink;
+}
+
+.link-wishlist.added:hover:before{
+	color: #999;
+}

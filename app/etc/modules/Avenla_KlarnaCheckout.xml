@@ -1,0 +1,11 @@
+﻿<config>
+    <modules>
+        <Avenla_KlarnaCheckout>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Payment />
+            </depends>
+        </Avenla_KlarnaCheckout>
+    </modules>
+</config>

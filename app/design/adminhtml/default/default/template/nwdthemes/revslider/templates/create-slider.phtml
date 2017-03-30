@@ -1,0 +1,25 @@
+<?php
+/**
+ * @author    ThemePunch <info@themepunch.com>
+ * @link      http://www.themepunch.com/
+ * @copyright 2015 ThemePunch
+ */
+
+ 
+if( !defined( 'Nwdthemes_Revslider_Helper_Framework::ABSPATH') ) exit();
+
+$is_edit = false;
+
+echo $this->getChild('slider-main-options')->assign(get_defined_vars())->toHtml();
+?>
+
+<script type="text/javascript">
+	var g_jsonTaxWithCats = <?php echo $jsonTaxWithCats?>;
+
+	(function(jQuery) {
+	jQuery(document).ready(function(){
+		RevSliderAdmin.initAddSliderView();
+	});
+	})($nwd_jQuery);
+</script>
+

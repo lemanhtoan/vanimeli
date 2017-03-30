@@ -1,0 +1,141 @@
+Behavior Earning Rules,Behavior Earning Rules
+Earning Points Configuration,Earning Points Configuration
+Earn %s for logging in,Earn %s for logging in
+Earn %s for subscribing newsletter,Earn %s for subscribing newsletter
+Earn %s for registering a new account,Earn %s for registering a new account
+Earn %s for registering an account.,Earn %s for registering an account.
+Earn %s for taking poll. ,Earn %s for taking poll. 
+You will earn %s for writing a tag for this product.,You will earn %s for writing a tag for this product.
+You will earn %s for writing a review and %s for rating this product.,You will earn %s for writing a review and %s for rating this product.
+You will earn %s for rating this product.,You will earn %s for rating this product.
+You will earn %s for writing a review this product.,You will earn %s for writing a review this product.
+You will earn %s on your birthday.,You will earn %s on your birthday.
+Like or share to receive points.,Like or share to receive points.
+You will earn %s for a Facebook like.,You will earn %s for a Facebook like.
+You will earn %s for a Facebook share.,You will earn %s for a Facebook share.
+You will earn %s for a Twitter tweet.,You will earn %s for a Twitter tweet.
+You will earn %s for a Google plus +1.,You will earn %s for a Google plus +1.
+You will earn %s for a Pinterest pin.,You will earn %s for a Pinterest pin.
+You will earn %s for a LinkedIn share.,You will earn %s for a LinkedIn share.
+Cannot connect to server.,Cannot connect to server.
+Register Success,Register Success
+Signup newsletter,Signup newsletter
+Review product,Review product
+Rate a product,Rate a product
+Participate in poll,Participate in poll
+Tag product,Tag product
+Birthday,Birthday
+-- Please Select --,-- Please Select --
+Enabled,Enabled
+Disabled,Disabled
+Rules Manager,Rules Manager
+Rule Manager,Rule Manager
+RewardPoints Behavior,RewardPoints Behavior
+Manage customer behavior earning rule,Manage customer behavior earning rule
+The configuration has been saved.,The configuration has been saved.
+An error occurred while saving this configuration:,An error occurred while saving this configuration:
+You can not earn points for this action.,You can not earn points for this action.
+You have just earned %s for tweeting this via Twitter.,You have just earned %s for tweeting this via Twitter.
+You have just earned %s for sharing this via Facebook.,You have just earned %s for sharing this via Facebook.
+You have just earned %s for liking this via Facebook.,You have just earned %s for liking this via Facebook.
+You have just earned %s for +1 via Google+.,You have just earned %s for +1 via Google+.
+Earning Rates,Earning Rates
+Allow Everything,Allow Everything
+Earning,Earning
+Customer Behavior Earning Rules,Customer Behavior Earning Rules
+Login,Login
+Points earned for logging in,Points earned for logging in
+Show collectible points of logging in,Show collectible points of logging in
+Sign up and Subscribe Newsletters,Sign up and Subscribe Newsletters
+Points earned for signing up,Points earned for signing up
+Points earned for subscribing Newsletters,Points earned for subscribing Newsletters
+Show collectible points of subscribing to newsletters,Show collectible points of subscribing to newsletters
+Show collectible points of signing up,Show collectible points of signing up
+Rate Products,Rate Products
+Points earned for rating a product,Points earned for rating a product
+Maximum points earned for rating products,Maximum points earned for rating products
+Show collectible points of rating a product,Show collectible points of rating a product
+Review Products,Review Products
+Points earned for reviewing a productt,Points earned for reviewing a productt
+Max points earned for reviewing products,Max points earned for reviewing products
+Show collectible points of reviewing a product,Show collectible points of reviewing a product
+Tag Products,Tag Products
+Points earned for tagging a product,Points earned for tagging a product
+Max points earned for tagging products,Max points earned for tagging products
+Show collectible points of tagging a product,Show collectible points of tagging a product
+Take Polls,Take Polls
+Points earned for taking a poll,Points earned for taking a poll
+Max points earned for taking polls,Max points earned for taking polls
+Show collectible points of taking a poll,Show collectible points of taking a poll
+Customer’s Birthday,Customer’s Birthday
+Points earned for customer’s birthday,Points earned for customer’s birthday
+Show collectible points of customer’s birthday,Show collectible points of customer’s birthday
+Enable email sent to Customers for their birthdays,Enable email sent to Customers for their birthdays
+Email template sent to customers for their birthdays,Email template sent to customers for their birthdays
+Like/Share via Facebook,Like/Share via Facebook
+Show Facebook like button on frontend,Show Facebook like button on frontend
+Show Facebook like counter on frontend,Show Facebook like counter on frontend
+Points earned for Facebook like,Points earned for Facebook like
+Maximum points earned for Facebook like,Maximum points earned for Facebook like
+Show Facebook share button on frontend,Show Facebook share button on frontend
+Show Facebook like count on frontend,Show Facebook like count on frontend
+Points earned for sharing links via Facebook,Points earned for sharing links via Facebook
+Maximum points earned for sharing links via Facebook,Maximum points earned for sharing links via Facebook
+Minimum interval between Like/Share,Minimum interval between Like/Share
+Tweet via Twitter,Tweet via Twitter
+Show Twitter tweet button on frontend,Show Twitter tweet button on frontend
+Show Twitter tweet counter on frontend,Show Twitter tweet counter on frontend
+Points earned for tweeting on Twitter,Points earned for tweeting on Twitter
+Maximum points earned for tweeting on Twitter,Maximum points earned for tweeting on Twitter
+Minimum interval between tweets,Minimum interval between tweets
++1 via Google+,+1 via Google+
+Show Google+ button on frontend,Show Google+ button on frontend
+Show Google+ counter on frontend,Show Google+ counter on frontend
+Points earned for +1 via Google+,Points earned for +1 via Google+
+Maximum points earned for +1 via Google+,Maximum points earned for +1 via Google+
+Minimum interval between two +1s,Minimum interval between two +1s
+Sharing via LinkedIn,Sharing via LinkedIn
+Show LinkedIn button on frontend,Show LinkedIn button on frontend
+Show LinkedIn count on frontend,Show LinkedIn count on frontend
+Points earned for sharing via LinkedIn,Points earned for sharing via LinkedIn
+Max points earned for sharing via LinkedIn,Max points earned for sharing via LinkedIn
+Minimum interval between two sharing,Minimum interval between two sharing
+Pin via Pinterest,Pin via Pinterest
+Show Pinit button on frontend,Show Pinit button on frontend
+Show Pinit button count on frontend,Show Pinit button count on frontend
+Points earned for pin via Pinterest,Points earned for pin via Pinterest
+Max points earned for pin via Pinterest,Max points earned for pin via Pinterest
+Minimum interval between two pint,Minimum interval between two pint
+Show collectible points via social channels,Show collectible points via social channels
+Enable,Enable
+Pages to display,Pages to display
+point(s) per customer per day.,point(s) per customer per day.
+points per customer per day,points per customer per day
+(seconds). This is the minimum interval between 2 different Facebook Like or Share in order for Customers to be rewarded.,(seconds). This is the minimum interval between 2 different Facebook Like or Share in order for Customers to be rewarded.
+(seconds). This is the minimum interval between two different Twitter tweets in order for Customers to be rewarded.,(seconds). This is the minimum interval between two different Twitter tweets in order for Customers to be rewarded.
+"You have to check your link at <a href=http://www.google.com/webmasters/tools/richsnippets"" target=""_blank""> Webmasters Tool</a> before using this function""","You have to check your link at <a href=http://www.google.com/webmasters/tools/richsnippets"" target=""_blank""> Webmasters Tool</a> before using this function"""
+(seconds). This is the minimum interval between two different +1s in order for Customers to be rewarded.,(seconds). This is the minimum interval between two different +1s in order for Customers to be rewarded.
+(seconds). This is the minimum interval between two different sharing in order for Customers to be rewarded.,(seconds). This is the minimum interval between two different sharing in order for Customers to be rewarded.
+"Show collectible points of activities via Facebook, Twitter and G+","Show collectible points of activities via Facebook, Twitter and G+"
+Email template sent to customer when birthday,Email template sent to customer when birthday
+Magestore Extension,Magestore Extension
+Behavior Plugin Configuration,Behavior Plugin Configuration
+Enable Behavior Plugin,Enable Behavior Plugin
+Current Configuration Scope:,Current Configuration Scope:
+Manage Stores,Manage Stores
+RewardPointsBehavior Module Template,RewardPointsBehavior Module Template
+Share,Share
+Tweet,Tweet
+Login or create an account,Login or create an account
+Receive point(s) for registering successfully,Receive point(s) for registering successfully
+Receive point(s) for birthday,Receive point(s) for birthday
+Receive point(s) for Facebook like,Receive point(s) for Facebook like
+Receive point(s) for sharing link via Facebook,Receive point(s) for sharing link via Facebook
+Receive point(s) for +1 via Google+,Receive point(s) for +1 via Google+
+Receive point(s) for logging in successfully,Receive point(s) for logging in successfully
+Receive point(s) for subscribing to newsletter,Receive point(s) for subscribing to newsletter
+Receive point(s) for taking polls,Receive point(s) for taking polls
+Receive point(s) for rating a product,Receive point(s) for rating a product
+Receive point(s) for reviewing a product,Receive point(s) for reviewing a product
+Receive point(s) for tagging a product,Receive point(s) for tagging a product
+Receive point(s) for tweeting via Twitter,Receive point(s) for tweeting via Twitter

@@ -1,0 +1,51 @@
+<div class="page-title">
+    <h1><?php echo $this->__('Get your discounts now!'); ?></h1>
+</div>
+<?php
+$defaultLink = $this->getShoppingLink();
+$offer = $this->getSpecialOffer(Mage::app()->getStore()->getId());
+?>
+<div id="rewardpoints-referfriends-landing" style="width:685px; margin: auto">
+   
+    <div class="referfriends-body-refer parent-body-offer">
+        <div class="referfriends-body-offer-refer">            
+            <?php if($offer->getSize()): ?>
+                <?php foreach($offer as $value): ?>
+                    <div class="referfriends-body-offer-detail">
+                        <h3><?php echo $value->getTitle()." <font style='font-weight:normal'>".$this->callHelper()->getDateExpire($value->getFromDate(), $value->getToDate())."</font>"; ?></h3>
+                        <div class="referfriends-body-offer-detail-description">
+                        <?php //echo $value->getDescriptionInvited(); ?>
+                        <?php 
+                            $helper = Mage::helper('cms');
+                           $processor = $helper->getBlockTemplateProcessor();
+                            $html=$processor->filter($value->getDescriptionInvited());
+                            echo $html;
+                        ?>
+                        <?php $type=$value->getDiscountType(); 
+                            if($type==1) $discount=Mage::helper('core')->formatPrice($value->getDiscountValue());
+                            else $discount=(float)$value->getDiscountValue().'%';
+                        ?>
+                        <?php if($value->getDiscountValue()>0) echo $this->__("You can get a <strong style='color:#3182be'>".$discount."</strong> discount when purchasing products at our store on this occasion."); ?><br>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+        <div class="offer-howto">
+            <div class="offer-question">
+                <h3><?php echo $this->__('How does this work?'); ?></h3>
+                <p><?php echo $this->__('Click into <strong>Start Shopping</strong> button at below to view a list of products which you will receive discount.'); ?></p>
+            </div>
+            <div class="offer-contact">
+                <h3><?php echo $this->__('Question?'); ?></h3>
+                <p><?php echo $this->__('Please feel free to contact us at <a href="%s">%s</a> or call us at %s Monday - Friday, 8am - 5pm PST.', Mage::getStoreConfig('trans_email/ident_support/email'), Mage::getStoreConfig('trans_email/ident_support/email'),Mage::getStoreConfig('general/store_information/phone')); ?></p>
+            </div>
+        </div>
+		<div class="action-shopping">
+			<a class="btn-start-shopping" href="<?php echo $defaultLink; ?>">
+				<span class="offer-proceed"><span><?php echo $this->__("Start shopping"); ?></span></span>            
+			</a>
+		</div>
+    </div>
+   
+</div>

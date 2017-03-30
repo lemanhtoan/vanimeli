@@ -1,0 +1,74 @@
+/* ============================================ *
+ * http://themeforest.net/user/venustheme/portfolio/
+ * http://venustheme.com/
+ * Email: venustheme@gmail.com;
+ * Style product carousel default 
+ * ============================================ */ 
+.products-grid { display: block; width: 100%}
+
+.product-block {}
+.product-block .image .icon {
+    position: absolute;
+    top: 10px;
+}
+
+.onsale, .new-icon {
+    background: url("images/label_product.png") no-repeat scroll 0 0 transparent;
+    color: white;
+    float: right;
+    font-size: 14px;
+    font-weight: 400;
+    height: 37px;
+    line-height: 36px;
+    position: relative;
+    text-align: center;
+    text-transform: lowercase;
+    width: 37px;
+    z-index: 99;
+}
+.new-icon {background-position: 0 -43px;}
+
+.product-block .image {position: relative;}
+.product-block .image .hover-image {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 10;
+	visibility: hidden;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+.product-block .image:hover .hover-image,
+.product-block .image:focus .hover-image {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Countdown Timmer */
+.productdeals .timeleft {
+    background-color: #3b5871;
+    background-image: linear-gradient(to bottom, #3b5871, #0A263D);
+    background-image: -webkit-linear-gradient(to bottom, #3b5871, #0A263D);
+    background-image:    -moz-linear-gradient(to bottom, #3b5871, #0A263D);
+    background-image:     -ms-linear-gradient(to bottom, #3b5871, #0A263D);
+    background-image:      -o-linear-gradient(to bottom, #3b5871, #0A263D);
+    min-height: 40px;
+    border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    text-align: center;
+}
+.productdeals .timeleft h3{
+    color: #FFFFFF!important;
+    padding:0; 
+    margin:0; 
+    line-height:40px;
+    font-family: verdana,arial;
+    font-size: 19px;
+    font-weight: normal;
+}
+
+.productdeals .timeleft{
+    background-color: #6B9E1B; 
+}

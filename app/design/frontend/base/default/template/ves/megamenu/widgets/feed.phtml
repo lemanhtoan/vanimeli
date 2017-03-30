@@ -1,0 +1,26 @@
+<?php 
+	$widget = $this->getWidget(); 
+	$show_name = isset($widget['show_name'])?$widget['show_name']: 1;
+	$items = isset($widget['items'])?$widget['items']:array();
+	$limit = isset($widget['limit'])?(int)$widget['limit']:3;
+	if($items) {
+?>
+<?php if( isset($widget['widget_name']) & $show_name){
+?>
+<div class="menu-title"><?php echo $widget['widget_name'];?></div>
+<?php
+}?>
+<div class="widget-feed">
+	<div class="widget-inner">
+		 <?php $i=0; foreach( $items as $entry ) { ?>
+		 	<div class="rss-item">
+		 		<a href="<?php echo $entry->link; ?>"><?php echo $entry->title; ?></a>
+		 	</div>
+		 <?php 
+		 if($i++==$limit ){
+		 	break;
+		 } 
+		} ?>
+	</div>
+</div>
+<?php } ?>

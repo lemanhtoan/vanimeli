@@ -1,0 +1,11 @@
+<?php $product_info_block = Mage::registry("product_info_block"); ?>
+<?php if($product_tags = $product_info_block->getChildChildHtml('product.info.additional', 'product_tag_list', true, true)): ?>
+<div class="panel panel-default product-tags-block">
+	<div class="panel-heading">
+        <h3 class="panel-title"><?php echo $this->__("Product Tags") ?></h3>
+    </div>
+    <div class="panel-body">
+        <div class="tab-content"><?php echo $product_tags; ?></div>
+    </div>
+</div>
+<?php endif; ?>

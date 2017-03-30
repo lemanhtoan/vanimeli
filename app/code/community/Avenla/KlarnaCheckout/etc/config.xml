@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<!--
+
+ This file is released under a custom license by Avenla Oy.
+ All rights reserved
+
+ License and more information can be found at http://productdownloads.avenla.com/magento-modules/klarna-checkout/
+ For questions and support - klarna-support@avenla.com
+
+ @category   Avenla
+ @package    Avenla_KlarnaCheckout
+ @copyright  Copyright (c) Avenla Oy
+ @link       http://www.avenla.fi
+
+
+
+ Avenla KlarnaCheckout
+
+ @category   Avenla
+ @package    Avenla_KlarnaCheckout
+
+-->
+<config>
+    <modules>
+        <Avenla_KlarnaCheckout>
+            <version>1.3.0</version>
+        </Avenla_KlarnaCheckout>
+    </modules>
+    <global>
+		<blocks>
+			<klarnaCheckout>
+				<class>Avenla_KlarnaCheckout_Block</class>
+			</klarnaCheckout>
+			<catalog>
+                <rewrite>
+                    <product_price>Avenla_KlarnaCheckout_Block_Catalog_Product_Price</product_price>
+                </rewrite>
+            </catalog>
+            <bundle>
+                <rewrite>
+                    <catalog_product_price>Avenla_KlarnaCheckout_Block_Catalog_Product_Price</catalog_product_price>
+                </rewrite>
+            </bundle>
+		</blocks>
+		<models>
+			<klarnaCheckout>
+				<class>Avenla_KlarnaCheckout_Model</class>
+			</klarnaCheckout>
+		</models>
+		<helpers>
+			<klarnaCheckout>
+				<class>Avenla_KlarnaCheckout_Helper</class>
+			</klarnaCheckout>
+		</helpers>
+		<payment>
+			<groups>
+				<klarnaCheckout>KlarnaCheckout</klarnaCheckout>
+			</groups>
+		</payment>
+		<events>
+			<sales_order_save_commit_after>
+				<observers>
+					<avenla_klarnacheckout_sales_order_save_commit_after>
+						<type>singleton</type>
+						<class>klarnaCheckout/observer</class>
+						<method>orderStatusChanged</method>
+					</avenla_klarnacheckout_sales_order_save_commit_after>
+				</observers>
+			</sales_order_save_commit_after>
+			<sales_order_invoice_save_after>
+				<observers>
+					<avenla_klarnacheckout_sales_order_invoice_save_after>
+						<type>singleton</type>
+						<class>klarnaCheckout/observer</class>
+						<method>invoiceSaved</method>
+					</avenla_klarnacheckout_sales_order_invoice_save_after>
+				</observers>
+			</sales_order_invoice_save_after>
+			<kco_save_giftmessage>
+				<observers>
+					<avenla_klarnacheckout_save_giftmessage>
+						<type>model</type>
+                        <class>giftmessage/observer</class>
+                        <method>checkoutEventCreateGiftMessage</method>
+					</avenla_klarnacheckout_save_giftmessage>
+				</observers>
+			</kco_save_giftmessage>
+		</events>
+	</global>
+	<default>
+		<payment>
+			<klarnaCheckout_payment>
+				<model>klarnaCheckout/payment_KCO</model>
+				<group>klarnaCheckout</group>
+				<api>2</api>
+				<payment_action>authorize</payment_action>
+				<active>1</active>
+				<title>Klarna Checkout</title>
+				<debug_log>0</debug_log>
+				<custom_colors>0</custom_colors>
+				<color_button>0089CF</color_button>
+				<color_button_text>FFFFFF</color_button_text>
+				<color_checkbox>0089CF</color_checkbox>
+				<color_checkbox_checkmark>FFFFFF</color_checkbox_checkmark>
+				<color_header>434343</color_header>
+				<color_link>0089CF</color_link>
+				<allow_separate_shipping>0</allow_separate_shipping>
+			</klarnaCheckout_payment>
+			<klarnaCheckout_payment_v3>
+				<active>1</active>
+				<payment_action>authorize</payment_action>
+				<title>Klarna Checkout</title>
+				<model>klarnaCheckout/payment_KCOv3</model>
+			</klarnaCheckout_payment_v3>
+		</payment>
+	</default>
+	<frontend>
+		<translate>
+			<modules>
+				<translations>
+					<files>
+						<default>Avenla_KlarnaCheckout.csv</default>
+					</files>
+				</translations>
+			</modules>
+		</translate>
+		<layout>
+			<updates>
+				<klarnaCheckout>
+					<file>KCO.xml</file>
+				</klarnaCheckout>
+			</updates>
+		</layout>
+		<routers>
+			<checkout>
+				<args>
+					<modules>
+						<Avenla_KlarnaCheckout before="Mage_Checkout">Avenla_KlarnaCheckout</Avenla_KlarnaCheckout>
+					</modules>
+				</args>
+			</checkout>
+			<klarnaCheckout>
+				<use>standard</use>
+				<args>
+					<module>Avenla_KlarnaCheckout</module>
+					<frontName>klarnaCheckout</frontName>
+				</args>
+			</klarnaCheckout>
+		</routers>
+		<events>
+			<core_block_abstract_to_html_before>
+				<observers>
+					<avenla_klarnacheckout_observer>
+						<type>model</type>
+						<class>klarnaCheckout/observer</class>
+						<method>insertKlarnaLink</method>
+					</avenla_klarnacheckout_observer>
+				</observers>
+			</core_block_abstract_to_html_before>
+			<controller_action_layout_load_before>
+        		<observers>
+          			<avenla_klarnacheckout_layout_load_before>
+			            <class>klarnaCheckout/observer</class>
+            			<method>layoutLoadBefore</method>
+          			</avenla_klarnacheckout_layout_load_before>
+    			</observers>
+      		</controller_action_layout_load_before>
+		</events>
+	</frontend>
+
+	<adminhtml>
+		<events>
+			<core_block_abstract_to_html_before>
+				<observers>
+					<Avenla_KlarnaCheckout_core_block_abstract_to_html_before>
+						<class>klarnaCheckout/observer</class>
+						<method>addActivate</method>
+					</Avenla_KlarnaCheckout_core_block_abstract_to_html_before>
+				</observers>
+			</core_block_abstract_to_html_before>
+		</events>
+		<layout>
+			<updates>
+				<klarnaCheckout>
+					<file>KCO.xml</file>
+				</klarnaCheckout>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<translations>
+					<files>
+						<default>Avenla_KlarnaCheckout.csv</default>
+					</files>
+				</translations>
+			</modules>
+		</translate>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<Avenla>
+											<title>Avenla - All</title>
+										</Avenla>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</adminhtml>
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<klarnaCheckout before="Mage_Adminhtml">Avenla_KlarnaCheckout_Adminhtml</klarnaCheckout>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+</config>

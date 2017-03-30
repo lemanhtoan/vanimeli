@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <pagesbuilder translate="label" module="ves_blockbuilder">
+            <label>Ves Pages Builder</label>
+            <sort_order>151</sort_order>
+            <class>pagesbuilder</class>
+        </pagesbuilder>
+    </tabs>
+    <sections>
+        <ves_base>
+            <label>Base</label>
+            <tab>pagesbuilder</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>5</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general_setting>
+                    <label>General Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields> 
+                        <show translate="label" module="core">
+                            <label>Enabled</label>
+                            <sort_order>0</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show> 
+                       <root_media translate="label">
+                            <label>Root Media Path</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <comment>Input root media folder path of filemanager popup in pages builder ( media/FOLDER_PATH ). Input FOLDER_PATH . For example folder name: wysiwyg . The filemanager will get images from media/wysiwyg . Default empty value</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </root_media>
+                    </fields> 
+                </general_setting>
+            </groups>
+        </ves_base>
+    </sections>    
+</config>

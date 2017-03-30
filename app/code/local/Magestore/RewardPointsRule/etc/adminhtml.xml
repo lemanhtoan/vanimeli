@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsRule
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <menu>
+        <rewardpoints>
+            <children>
+                <earning>
+                    <title>Earning</title>
+                    <children>
+                        <rate module="rewardpoints" translate="title">
+                            <title>Earning Rates</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/reward_earning</action>
+                        </rate>
+                        <catalog module="rewardpointsrule" translate="title">
+                            <title>Catalog Earning Rules</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/reward_earning_catalog</action>
+                        </catalog>
+                        <sales module="rewardpointsrule" translate="title">
+                            <title>Shopping Cart Earning Rules</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/reward_earning_sales</action>
+                        </sales>
+                        <individual module="rewardpointsrule" translate="title">
+                            <title>Manage Earning Points By Product</title>
+                            <sort_order>40</sort_order>
+                            <action>adminhtml/reward_earning_individual</action>
+                        </individual>
+                    </children>
+                </earning>
+                <spending>
+                    <title>Spending</title>
+                    <children>
+                        <rate module="rewardpoints" translate="title">
+                            <title>Spending Rates</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/reward_spending</action>
+                        </rate>
+                        <catalog module="rewardpointsrule" translate="title">
+                            <title>Catalog Spending Rules</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/reward_spending_catalog</action>
+                        </catalog>
+                        <sales module="rewardpointsrule" translate="title">
+                            <title>Shopping Cart Spending Rules</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/reward_spending_sales</action>
+                        </sales>
+                        <individual module="rewardpointsrule" translate="title">
+                            <title>Manage Spending Points By Product</title>
+                            <sort_order>40</sort_order>
+                            <action>adminhtml/reward_spending_individual</action>
+                        </individual>
+                    </children>
+                </spending>
+            </children>
+        </rewardpoints>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <rewardpoints>
+                        <children>
+                            <earning>
+                                <title>Earning</title>
+                                <children>
+                                    <rate module="rewardpoints" translate="title">
+                                        <title>Earning Rates</title>
+                                        <sort_order>10</sort_order>
+                                    </rate>
+                                    <catalog module="rewardpointsrule" translate="title">
+                                        <title>Catalog Earning Rules</title>
+                                        <sort_order>20</sort_order>
+                                    </catalog>
+                                    <sales module="rewardpointsrule" translate="title">
+                                        <title>Shopping Cart Earning Rules</title>
+                                        <sort_order>30</sort_order>
+                                    </sales>
+                                    <individual module="rewardpointsrule" translate="title">
+                                        <title>Manage Earning Points By Product</title>
+                                        <sort_order>40</sort_order>
+                                    </individual>
+                                </children>
+                            </earning>
+                            <spending>
+                                <title>Spending</title>
+                                <children>
+                                    <rate module="rewardpoints" translate="title">
+                                        <title>Spending Rates</title>
+                                        <sort_order>10</sort_order>
+                                    </rate>
+                                    <catalog module="rewardpointsrule" translate="title">
+                                        <title>Catalog Spending Rules</title>
+                                        <sort_order>20</sort_order>
+                                    </catalog>
+                                    <sales module="rewardpointsrule" translate="title">
+                                        <title>Shopping Cart Spending Rules</title>
+                                        <sort_order>30</sort_order>
+                                    </sales>
+                                    <individual module="rewardpointsrule" translate="title">
+                                        <title>Manage Spending Points By Product</title>
+                                        <sort_order>40</sort_order>
+                                    </individual>
+                                </children>
+                            </spending>
+                        </children>
+                    </rewardpoints>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

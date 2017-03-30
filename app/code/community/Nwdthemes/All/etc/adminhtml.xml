@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config>
+
+	<menu>
+		<nwdthemes translate="title" module="nwdall">
+			<title>NWDThemes</title>
+			<sort_order>9999</sort_order>
+            <children>
+                <config translate="title" module="nwdall">
+                    <title>Save / Load Configuration</title>
+                    <sort_order>0</sort_order>
+                    <action>adminhtml/nwdconfig</action>
+                </config>
+            </children>
+		</nwdthemes>
+	</menu>
+
+	<acl>
+		<resources>
+			<all>
+				<title>Allow Everything</title>
+			</all>
+			<admin>
+				<children>
+					<nwdthemes>
+						<title>NWDThemes</title>
+                        <children>
+                            <config>
+                                <title>Save / Load Configuration</title>
+                            </config>
+                        </children>
+					</nwdthemes>
+					<system>
+						<children>
+							<config>
+								<children>
+									<nwdall>
+										<title>Nwdthemes - All</title>
+									</nwdall>
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+
+</config>

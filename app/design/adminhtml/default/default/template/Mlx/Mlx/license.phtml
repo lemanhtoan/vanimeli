@@ -1,0 +1,104 @@
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td><h3 class="icon-head head-cms-page"><?php echo $this->__('Manage License Keys'); ?></h3></td>            
+        </tr>
+    </table>
+</div>
+<div class="entry-edit">
+	<?php $extensions = Mage::helper('mlx')->getExtensions(); ?>
+	<?php foreach ($extensions as $extension ) : ?>
+    <form id="edit_form_<?php echo $extension->getCode(); ?>" action="<?php echo $this->getUrl('adminhtml/mlx_license/install'); ?>" method="post">
+    	<div>
+    		<input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>">
+    		<input name="name" type="hidden" value="<?php echo $extension->getSortCode(); ?>">
+    	</div>
+    	<div class="entry-edit-head">
+    		<h4 class="icon-head head-edit-form fieldset-legend"><?php echo $extension->getName(); ?> - <small>Version: <?php echo $extension->getVersion(); ?></small></h4>
+    		<div class="form-buttons"></div>
+		</div>
+    	<div class="fieldset " id="mlx_acontact_form">
+	    	<div class="hor-scroll">
+	    		<table cellspacing="0" class="form-list">
+	    			<tbody>	
+	    				<tr>
+	        				<td class="label"><label><?php echo $this->__('License info'); ?></label></td>
+	    					<td class="value"><?php echo $this->getLicenseInfo($extension->getKey(), $extension->getSortCode()); ?></td>
+	    				</tr>
+	    				
+	    				<tr>
+	        				<td class="label"><label for="key_<?php echo $extension->getCode(); ?>"><?php echo $this->__('License key'); ?></label></td>
+	    					<td class="value"><input style="width: 600px;" id="key_<?php echo $extension->getCode(); ?>" name="key" value="<?php echo $extension->getKey(); ?>" type="text" class="input-text required-entry"></td>
+	    				</tr>
+	    				
+	    				<tr>
+	        				<td class="label"><label><?php echo $this->__('License for'); ?></label></td>
+	    					<td class="value">
+	    						<?php foreach ($this->getDomains() as $domain) : ?>
+	    						<div><input type="checkbox" name="domain[]" value="<?php echo $domain; ?>" <?php echo $this->isChecked($domain, $extension->getKey(), $extension->getSortCode()) ? 'checked="checked"' : ""; ?> /> <?php echo $domain?></div>
+	    						<?php endforeach;?>
+	    					</td>
+	    				</tr>
+	    				<tr>
+	    					<td colspan="2">&nbsp;</td>
+	    				</tr>
+	    				<tr>
+	    					<td>&nbsp;</td>
+	    					<td>
+	    						&nbsp;&nbsp;<button class="scalable save" type="submit"><span><span><span><?php echo $this->__('Install License'); ?></span></span></span></button>
+	    						&nbsp;&nbsp;&nbsp;&nbsp;
+	    						<button onclick="setLocation('<?php echo $this->getHireUsUrl() ?>')"  class="scalable" type="button"><span><span><span><?php echo $this->__('Hire Us'); ?></span></span></span></button>
+	    					</td>
+	    				</tr>
+	    				<?php if($extension->getKey()) : ?>
+	    				<tr>
+	    					<td colspan="2">&nbsp;</td>
+	    				</tr>
+	    				<tr>
+	        				<td class="label"><label for="is_active"><?php echo $this->__('Upgrade License to'); ?></label></td>
+	    					<td class="value">
+	    						<select id="type_<?php echo $extension->getCode(); ?>" name="type" class=" required-entry select">
+	    							<?php foreach ($this->getLicenseTypeOption($extension->getLicense()) as $key=>$label) : ?>
+	    							<option value="<?php echo $key?>"><?php echo $label?></option>
+	    							<?php endforeach; ?>
+	    						</select>            
+	    					</td>
+	    				</tr>
+	    				<tr>
+							<td class="label">&nbsp;</td>
+							<td class="value">
+								<button onclick="updateLicenseViewPrice('<?php echo $this->getPriceUrl(array('lkey'=>$extension->getKey())) ?>', jQuery('#type_<?php echo $extension->getCode(); ?>').val())" class="scalable" type="button" >
+									<span><?php echo $this->__('View Price')?></span>
+								</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;									
+								<button onclick="updateLicensePurchase('<?php echo $this->getUpgradeUrl($extension->getKey()) ?>', jQuery('#type_<?php echo $extension->getCode(); ?>').val())" class="scalable add" type="button" >
+									<span><?php echo $this->__('Upgrade Now')?></span>
+								</button>				
+							</td>
+						</tr>
+	    				<?php endif; ?>
+	            	</tbody>
+	        	</table>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+	    var editForm_<?php echo $extension->getCode(); ?> = new varienForm('edit_form_<?php echo $extension->getCode(); ?>', '');
+	</script>
+	<?php endforeach; ?>
+	<?php if(!count($extensions)) : ?>
+	<p><?php echo $this->__('There are no extensions found.'); ?></p>
+	<?php endif; ?>
+</div>
+<script type="text/javascript">
+
+	function updateLicenseViewPrice(url, type){
+		url += 'ltype/'+type;	
+		TINY.box.show(url, 1, 300, 100, 1);
+	}
+	
+	function updateLicensePurchase(url, type){
+		url += 'licensetype/'+type;	
+		location.href=url;
+	}	
+</script>

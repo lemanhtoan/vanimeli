@@ -1,0 +1,139 @@
+<?php
+$_helper = Mage::helper('catalog/output');
+$_product = $this->getProduct();
+$addition_cls = $this->getData('addition_cls');
+$title = $this->getData('title');
+$background_color = $this->getData('background_color');
+$color = '';
+
+$style = 'style="';
+
+if($background_color != ''){
+	$style .= 'background-color:'.$background_color.';';
+}
+
+/** THUMBNAIL **/
+$imagesize = $this->getData('image_size');
+$image_file = $this->getData('file');
+$array_size = explode("x", $imagesize);
+$image_width = isset($array_size[0])?(int)$array_size[0]:0;
+$image_width = $image_width?$image_width: 0;
+$image_height = isset($array_size[1])?(int)$array_size[1]:0;
+$image_height = $image_height?$image_height: 0;
+$thumbnailurl = "";
+
+if ($image_file && !preg_match("/^http\:\/\/|https\:\/\//", $image_file) && $image_width >0 && $image_height > 0) {
+	$thumbnailurl = Mage::helper("ves_base")->resizeImage($image_file, (int)$image_width, (int)$image_height);
+} else {
+	$thumbnailurl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$image_file;
+}
+
+if( $image_file != '' ){
+
+    $position_x = 'center';
+    if($this->getData('background_position_x') != ''){
+        $position_x = $this->getData('background_position_x');
+    }
+
+    $position_y = 'center';
+    if($this->getData('background_position_y') != ''){
+        $position_y = $this->getData('background_position_y');
+    }
+
+    $style .= "background-image:url('".$thumbnailurl."');background-repeat: no-repeat;";
+    $style .= 'background-position: '.$position_x.' '.$position_y.';';
+    $style .= 'float: right;width: 100%;';
+}
+
+
+$style .= '"';
+$id = rand().time();
+?>
+
+<div class="widget-singedeals block <?php echo $addition_cls; ?> " <?php echo $style; ?>>
+	<?php if( $title != '' ){ ?>
+	<div class="block-title">
+		<?php echo $title; ?>
+	</div>
+	<?php } ?>
+	<div class="widget-inner block-content single-deals">
+
+		<?php if($_product != ''){?>
+        <?php if(!$image_file) { ?>
+        <div class="image col-lg-6 col-md-6 col-sm-4 col-xs-12">
+                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image img">
+                        <img class="img-responsive" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($image_width,$image_height); ?>" width="<?php echo $image_width; ?>" height="<?php echo $image_height; ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                    </a>
+        </div>
+        <?php } ?>
+		<div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 pull-right deal-product">
+            <div class="product-shop">
+                <div class="f-fix">
+                    <h3 class="deal-product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName() , 'name') ?></a></h3>
+
+                    <?php if ($this->getData('show_review')){ ?>
+                    <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                    <?php } ?>
+
+                    <?php
+                    if($this->getData('show_price')){
+                        echo $this->getPriceHtml($_product, true, '-widget-singedeals'.$id); } ?>
+
+
+                        <!-- TIMER -->
+                        <?php
+                        if($_product->getSpecialToDate() != '' && $this->getData('show_timer_countdown')){
+                            $date1 = date('G:i:s', strtotime($_product->getSpecialToDate()));
+                            if ($date1 == "0:00:00") {
+                                $targetDate = date('m/d/Y \2\3\:\5\9\:\0\0', strtotime($_product->getSpecialToDate()));
+                            }else{
+                                $targetDate = date('m/d/Y G:i:s', strtotime($_product->getSpecialToDate()));
+                            }
+                            ?>
+                            <div class="productdeals">
+                                <div class="item-detail">
+                                    <div class="timer-explain">(<?php echo date('m/d/Y', strtotime($_product->getSpecialToDate())); ?>)</div>
+                                </div>
+                                <div id="item<?php echo $id; ?>countdown_<?php echo $_product->getId(); ?>" class="item-countdown"></div>
+                                <script type="text/javascript">
+                                    jQuery(document).ready(function($){
+                                        $("#item<?php echo $id; ?>countdown_<?php echo $_product->getId(); ?>").lofCountDown({
+                                            formatStyle:2,
+                                            TargetDate:"<?php echo $targetDate; ?>",
+                                            DisplayFormat:"<ul><li>%%D%% <div><?php echo $this->__('Day');?></div></li><li> %%H%% <div><?php echo $this->__('Hours');?></div></li><li> %%M%% <div><?php echo $this->__('Mins');?></div></li><li> %%S%% <div><?php echo $this->__('Secs');?></div></li></ul>",
+                                            FinishMessage:"<?php echo $this->__('Expired');?>",
+                                        });
+                                    });
+                                </script>
+                            </div>
+                            <?php } ?>
+
+                            <?php if ($this->getData('show_short_description') && $_product->getShortDescription()):?>
+                                <div class="short-description">
+                                    <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+                                </div>
+                            <?php endif;?>
+
+                            <?php if ($this->getData('show_addtocart') && $_product->isSaleable()): ?>
+                                <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                            <?php else: ?>
+                                <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                            <?php endif; ?>
+
+                            <?php if($this->hasData('show_wishlist') || $this->hasData('show_compare')){ ?>
+                            <ul class="add-to-links">
+                                <?php if ($this->getData('show_wishlist') && $this->helper('wishlist')->isAllow()) : ?>
+                                    <li><a href="<?php echo $this->getAddToWishlistUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+                                <?php endif; ?>
+                                <?php if($this->getData('show_compare') && $_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+                                    <li><span class="separator">|</span> <a href="<?php echo $_compareUrl ?>" class="link-compare"><?php echo $this->__('Add to Compare') ?></a></li>
+                                <?php endif; ?>
+                            </ul>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+
+            </div>
+        </div>

@@ -1,0 +1,6 @@
+<li class="plcs-fields">
+	<label for="plcs-telephone" class="plcs-required"><em>*</em><?php echo $this->getLabel();?></label>
+	<div class="plcs-input-box">
+		<input type="text" name="telephone" value="" placeholder="<?php echo $this->getPlaceholder();?>" title="<?php echo $this->getLabel();?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="plcs-telephone" />
+	</div>
+</li>

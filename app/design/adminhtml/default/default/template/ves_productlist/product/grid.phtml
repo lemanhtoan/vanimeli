@@ -1,0 +1,92 @@
+<div class="content-header">
+<table cellspacing="0">
+    <tr>
+        <td style="width:50%;"><h3 class="icon-head head-products"><?php echo Mage::helper('catalog')->__("Manager Products Of Rule '%s'", $this->getChild("grid")->getProductlistRule()->getTitle()) ?></h3></td>
+        <td class="a-right">
+            <?php echo $this->getButtonsHtml() ?>
+            <!-- Start of Displaying of your custom import form -->
+            <?php echo $this->getImportButtonHtml() ?>
+            <?php echo $this->getQuickCreateButtonHtml() ?>
+            <!-- End of Displaying of your custom import form -->
+            <?php echo $this->getSampleButtonHtml() ?>
+            <!-- End of Displaying of your custom install sample form -->
+        </td>
+    </tr>
+</table>
+</div>
+<div>
+    <?php echo $this->getGridHtml() ?>
+</div>
+<style type="text/css">
+    .massaction .entry-edit, .massaction form{display:none;}
+</style>
+<script type="text/javascript">
+    
+    function savePosition_old( action_link ) {
+            
+        var products = <?php echo $this->getChild("grid")->getMassactionBlock()->getJsObjectName() ?>.getCheckboxesValues();
+        var positions = [];
+        var elements = Element.select($("<?php echo $this->getChild("grid")->getId(); ?>_table"), 'input[name="<?php echo $this->getChild("grid")->getPositionFieldName(); ?>"]');
+
+        for(var i=0; i<elements.length;i++){
+            positions.push(elements[i].value);
+        }
+
+        new Ajax.Request( action_link , {
+              method: 'post',
+              parameters: {productlist: products, positions: positions},
+              onSuccess: function(transport, json){
+                alert("no JSON object");
+              }
+        });
+        console.log(action_link);
+        console.log(<?php echo $this->getChild("grid")->getMassactionBlock()->getJsObjectName() ?>.getCheckedValues())
+        //<?php echo $this->getChild("grid")->getMassactionBlock()->getJsObjectName() ?>.apply();
+    }
+
+    function savePosition( action_link ) {
+            
+        var products = [];
+        var positions = [];
+        var grid = <?php echo $this->getChild("grid")->getJsObjectName();?>;
+
+        grid.rows.each(function(row){
+            var checkboxes = row.select('.massaction-checkbox');
+            var input_positions = row.select('input.input-text');
+            var checkbox_checked = true;
+            checkboxes.each(function(checkbox){
+                if(checkbox.checked) {
+                    products.push(checkbox.value);
+                } else {
+                    checkbox_checked = false;
+                }
+                
+            });
+            if(checkbox_checked) {
+                input_positions.each(function(input){
+                    positions.push(input.value);
+                });
+            }
+            
+        });
+
+        new Ajax.Request( action_link , {
+              method: 'post',
+              parameters: { 'productlist[]': products, 'positions[]': positions},
+              onSuccess: function(response){
+                var json = response.responseText.evalJSON();
+                if(typeof(json.success) != "undefined" ) {
+                    setLocation( window.location.href );
+                } else {
+                    alert(json.error);
+                }
+              }
+        });
+        //console.log(action_link);
+        //console.log(<?php echo $this->getChild("grid")->getMassactionBlock()->getJsObjectName() ?>.getCheckedValues())
+    }
+
+    Event.observe(window, "load", function(){
+        <?php echo $this->getChild("grid")->getMassactionBlock()->getJsObjectName() ?>.selectAll();
+    });
+</script>

@@ -1,0 +1,47 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Rewardpoints earning on sidebar template
+ * 
+ * @see Magestore_RewardPoints_Block_Checkout_Sidebar_Action
+ */
+?>
+<?php if ($this->enableDisplay()&&Mage::helper('rewardpoints/calculation_earning')->getTotalPointsEarning()): ?>
+
+    <div class="rewardpoints-cart-sidebar" style="margin-left: 20px;">
+        <?php echo $this->getImageHtml(true) ?>
+        <?php
+        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+            echo $this->__('Check out now to earn %s!',Mage::helper('rewardpoints/point')->format(Mage::helper('rewardpoints/calculation_earning')->getTotalPointsEarning()));
+
+        } else {
+			if(Mage::helper('core')->isModuleOutputEnabled('Magestore_Onestepcheckout') && $this->getRequest()->getModuleName() == 'onestepcheckout'){
+				echo "<a href='javascript:void(0);'  onclick='login_popup.show();'>".$this->__('Login')."</a><span style='margin-left: 4px;'>". $this->__('and check out to earn %s!',Mage::helper('rewardpoints/point')->format(Mage::helper('rewardpoints/calculation_earning')->getTotalPointsEarning())).'</span>';
+			}else{
+				$authUrl = $this->helper('core/url')->getCurrentUrl();
+				Mage::getSingleton('customer/session')->setBeforeAuthUrl($authUrl);
+				echo "<a href='".Mage::getUrl('rewardpoints/index/redirectLogin',array('redirect'=>base64_encode(Mage::helper('core/url')->getCurrentUrl())))."'>".$this->__('Login')."</a><span style='margin-left: 4px;'>". $this->__('and check out to earn %s!',Mage::helper('rewardpoints/point')->format(Mage::helper('rewardpoints/calculation_earning')->getTotalPointsEarning())).'</span>';
+			}
+        }
+        ?>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ves_Base>
+            <version>1.0.0</version>
+        </Ves_Base>
+    </modules>
+     <admin>
+        <routers>
+            <vesbase>
+                <use>admin</use>
+                <args>
+                    <module>Ves_Base</module>
+                    <frontName>vesbase</frontName>
+                </args>
+            </vesbase>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Ves_Base after="Mage_Adminhtml">Ves_Base</Ves_Base>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+
+    </admin>
+
+     <!-- frontend -->
+    <frontend>
+        <layout>
+            <updates>
+                <ves_base>
+                    <file>ves_base.xml</file>
+                </ves_base>
+            </updates>
+        </layout>
+    </frontend>
+    <!--Global-->
+    <global>  
+        <blocks>
+            <ves_base>
+                <class>Ves_Base_Block</class>
+            </ves_base>
+            <widget>
+                <rewrite>
+                    <adminhtml_widget>Ves_Base_Block_Adminhtml_Widget</adminhtml_widget>
+                    <adminhtml_widget_form>Ves_Base_Block_Adminhtml_Widget_Form</adminhtml_widget_form>
+                </rewrite>
+            </widget>
+        </blocks>
+        <models>
+            <ves_base>
+                <class>Ves_Base_Model</class>
+                <resourceModel>ves_base_mysql4</resourceModel>
+            </ves_base>
+            <widget>
+                <rewrite>
+                    <!-- Model -->
+                    <widget>Ves_Base_Model_Mage_Widget</widget>
+                </rewrite>
+            </widget>
+        </models>
+
+        <events>
+            <controller_front_init_before>
+                <observers>
+                    <ves_base_observer>
+                        <type>singleton</type>
+                        <class>Ves_Base_Model_Observer_Autoloader</class>
+                        <method>controllerFrontInitBefore</method>
+                    </ves_base_observer>
+                </observers>
+            </controller_front_init_before>
+        </events>
+
+        <helpers>
+            <ves_base>
+                <class>Ves_Base_Helper</class>
+            </ves_base>
+        </helpers>
+        <resources>
+            <ves_base_setup>
+                <setup>
+                    <module>Ves_Base</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </ves_base_setup>
+            <ves_base_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </ves_base_write>
+            <ves_base_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </ves_base_read>
+        </resources>
+    </global>
+
+     <adminhtml>
+        <layout>
+            <updates>
+                <vesbase>
+                    <file>ves_base.xml</file>
+                </vesbase>
+            </updates>
+        </layout>
+    </adminhtml>
+
+     <default>
+        <ves_base>
+            <general_setting>
+                <show>1</show>
+                <root_media></root_media>
+            </general_setting>
+        </ves_base>
+    </default>
+</config> 

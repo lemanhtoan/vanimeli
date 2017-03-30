@@ -1,0 +1,33 @@
+<?php
+$id = rand().time();
+if (isset($accordions)): ?>
+<!-- Accordion with background -->
+<div class="widget-accordion-bg block <?php echo $addition_cls; ?> <?php if (isset($stylecls)&&$stylecls) echo 'block-'.$stylecls;?>">
+	<?php if (isset($widget_heading)&&!empty($widget_heading)): ?>
+	<div class="block-title">
+		<?php echo $widget_heading; ?>
+	</div>
+	<?php endif; ?>
+	<div class="widget-inner block-content">
+		<div id="accordion<?php echo $id; ?>" class="panel-menu accordian-play">
+	 	<?php foreach ($accordions as $key => $ac): ?>
+	 		<?php
+	 			$item_class = (isset($ac['class']) && $ac['class']) ?$ac['class']: "accordion-item-".$key;
+	 			$item_background = (isset($ac['image']) && $ac['image']) ? ' background-image: url('. $ac['image'] .');' : "";
+	 		?>
+			<!-- accodion item -->
+			<div class="menu-title closed <?php echo $item_class; ?>" data-menu="<?php echo $item_class; ?>" <?php if(empty($item_background)): ?>  data-bg-effect="0" <?php endif; ?>>
+				<h<?php echo $heading_type; ?>><?php echo $ac['header']; ?></h<?php echo $heading_type; ?>><i class="icon-open-close"></i>
+				<div class="bg" style="<?php echo $item_background; ?>"></div>
+			</div>
+			<div class="panel-item-content" data-menu="<?php echo $item_class; ?>">
+				<?php echo $ac['content']; ?>
+			</div>
+	 	<?php endforeach; ?>
+		</div>	
+	</div>
+</div>
+<!-- End accordion with background -->
+<?php endif; ?>
+
+

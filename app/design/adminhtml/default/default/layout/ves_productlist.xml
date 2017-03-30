@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadTinyMce"><flag>1</flag></action>
+        </reference>
+        <update handle="editor"/>
+        <reference name="js">
+            <block type="core/template" template="ves_productlist/wysiwyg/js.phtml"/>
+        </reference>
+    </default>
+    <adminhtml_productlist_index>
+        <reference name="content">
+            <block type="productlist/adminhtml_rule" name="ves_productlist.rule" />
+        </reference>
+    </adminhtml_productlist_index>
+    <adminhtml_productlist_edit>
+        <reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadRulesJs"><flag>1</flag></action>
+            <action method="addJs"><script>mage/adminhtml/rules.js</script></action>
+            <action method="addJs"><script>mage/adminhtml/variables.js</script></action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>extjs/resources/css/ext-all.css</name>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>extjs/resources/css/ytheme-magento.css</name>
+            </action>
+        </reference>
+    </adminhtml_productlist_edit>
+    <adminhtml_ruleproducts_index>
+        <reference name="content">
+            <block type="productlist/adminhtml_product" name="ves_productlist.rule.products" template="ves_productlist/product/grid.phtml"/>
+        </reference>
+    </adminhtml_ruleproducts_index>
+</layout>

@@ -1,0 +1,58 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Render Cart Item
+ * 
+ * @see Magestore_RewardPointsRule_Block_Cart_Item_Renderer
+ */
+
+$_item = $this->getItem();
+$_pointSpending = $this->getPointSpending();
+$_pointEarning = $this->getPointEarning();
+?>
+<?php if ($_pointSpending): ?>
+<dl class="reward-points-spending">
+    <dt class="label">
+        <?php echo $this->__('Points Spent') ?>:
+    </dt>
+    <dd class="content">
+        <div class="messages-point"style="float:left;">
+        <?php echo $_pointSpending->getPointUsed() ? Mage::helper('rewardpoints/point')->format($_pointSpending->getPointUsed()*$_item->getQty()) : $this->__('No Point') ?>,
+        <?php echo Mage::app()->getStore()->formatPrice($_pointSpending->getPointDiscount()*$_item->getQty()) ?>
+        <?php echo $this->__('off') ?>
+        </div>
+        <a href="#" onclick="if(confirm('<?php echo $this->__('Are you sure?') ?>')) setLocation('<?php echo $this->getUrl('rewardpointsrule/checkout/removecatalog', array('id' => $_item->getId())) ?>'); return false;">
+            <img src="<?php echo $this->getSkinUrl('images/btn_remove.gif') ?>" title="<?php echo $this->__('Remove Rule') ?>" style="margin: 2px 0px 0px 4px;float:left;" />
+        </a>
+    </dd>
+</dl>
+<?php endif ?>
+
+<?php if ($_pointEarning): ?>
+<dl class="reward-points-earning" style="clear: both; <?php if (Mage::helper('rewardpoints/calculation_spending')->getTotalPointSpent() && !Mage::getStoreConfigFlag('rewardpoints/earning/earn_when_spend',Mage::app()->getStore()->getId())) {
+            echo 'display:none;';
+        } ?>">
+    <dt class="label">
+        <?php echo $this->__('Earning %s for this item', Mage::helper('rewardpoints/point')->format($_pointEarning)) ?>
+    </dt>
+</dt>
+<?php endif ?>

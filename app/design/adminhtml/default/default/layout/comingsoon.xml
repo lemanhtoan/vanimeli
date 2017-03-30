@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<comingsoon_admin_adminhtml_mode_edit>
+		<update handle="editor" />
+		<reference name="head">
+            <!-- <action method="setCanLoadTinyMce"><load>0</load></action> -->
+            <action method="addCss"><stylesheet>css/plumrocket/comingsoon/comingsoon.css</stylesheet></action>
+            <action method="addJs"><script>plumrocket/jquery-1.10.2.min.js</script></action>
+            <action method="addItem"><type>skin_js</type><name>js/plumrocket/comingsoon/comingsoon.js</name></action>
+        </reference>
+		<reference name="content">
+			<block type="comingsoon/adminhtml_mode_edit" name="comingsoon_mode_edit"/>
+		</reference>
+        <reference name="js">
+            <block type="core/template" template="catalog/wysiwyg/js.phtml" name="catalog.wysiwyg.js" />
+            <block type="adminhtml/template" template="comingsoon/js.phtml" name="comingsoon.js" />
+        </reference>
+		<reference name="left">
+            <!-- <block type="adminhtml/store_switcher" name="store_switcher" before="-"></block> -->
+            <block type="adminhtml/system_config_switcher" name="adminhtml.system.config.switcher" before="-"/>
+            <block type="comingsoon/adminhtml_mode_edit_tabs" name="comingsoon_mode_tabs">
+                <block type="comingsoon/adminhtml_mode_edit_tabs_general" name="comingsoon_mode_tabs_general" />
+                <action method="addTab"><name>general_section</name><block>comingsoon_mode_tabs_general</block></action>
+                <block type="comingsoon/adminhtml_mode_edit_tabs_comingsoon" name="comingsoon_mode_tabs_comingsoon" />
+                <action method="addTab"><name>comingsoon_section</name><block>comingsoon_mode_tabs_comingsoon</block></action>
+                <block type="comingsoon/adminhtml_mode_edit_tabs_maintenance" name="comingsoon_mode_tabs_maintenance" />
+                <action method="addTab"><name>maintenance_section</name><block>comingsoon_mode_tabs_maintenance</block></action>
+			</block>
+            <block type="comingsoon/adminhtml_mode_edit_currentTime" name="current_time" after="-"></block>
+        </reference>
+	</comingsoon_admin_adminhtml_mode_edit>
+</layout>

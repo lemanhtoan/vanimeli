@@ -1,0 +1,60 @@
+<?php
+/*
+* Ves Base Widget - Single image
+*
+* @package   vesbase
+* @version   5.0
+* @author    http://www.venustheme.com
+* @copyright Copyright (C) October 2013 venustheme.com <@emai:venustheme@gmail.com>
+*               <info@venustheme.com>.All rights reserved.
+* @license   GNU General Public License version 2
+*/
+
+$html = base64_decode($this->getConfig('html'));
+$content_class = $this->getConfig('contentclass', '');
+$heading_class = $this->getConfig('heading_class', '');
+$popup_type = $this->getConfig('popup_type', 'colorbox');
+$target = $this->getConfig('target', '');
+$target = ($target && $target!='none')?' target="'.$target.'"':'';
+
+if( isset($thumbnailurl) ):
+	$link_title = $image_alt = (isset($widget_heading)&&!empty($widget_heading))?$widget_heading: Mage::helper("ves_base")->__("Image");
+	if(isset($alt) && $alt) {
+		$image_alt = trim($alt);
+	}
+	$holder_image = isset($holder_image)?$holder_image:"";
+
+?>
+<div class="widget-images block <?php echo $addition_cls; ?> <?php echo isset($animation)&&$animation?$animation:''; ?> <?php echo isset($stylecls)&&$stylecls?'block-'.$stylecls:'';?>">
+	<?php if (isset($widget_heading)&&!empty($widget_heading)): ?>
+		<div class="block-title <?php echo $heading_class; ?>">
+			<?php echo $widget_heading; ?>
+		</div>
+	<?php endif; ?>
+	<div class="widget-inner block-content clearfix">
+		<div class="image-item">
+			<?php if($html != '' && $this->getConfig('show_description', 1)){ ?>
+			<div class="image-description <?php echo $content_class; ?>">
+				<?php 
+					$processor = Mage::helper('cms')->getPageTemplateProcessor();
+					$html = $processor->filter($html);
+					echo $html;
+				?>
+			</div>
+			<?php } ?>
+			<?php if ($link_url && !$ispopup): ?>
+				<a href="<?php echo $link_url;?>" <?php echo $target;?> class="ves-btnlink img-animation" title="<?php echo $link_title;?>">
+					<img <?php echo $holder_image?'data-src="'.$holder_image.'"':''; ?> src="<?php echo $thumbnailurl;?>" class="img-responsive  <?php echo $alignment?$alignment.'-block':''; ?>" alt="<?php echo $image_alt; ?>"/></a>
+				<?php else: ?>
+					<?php if ($ispopup): ?>
+					<a href="<?php echo $imageurl; ?>" class="ves-popup fancybox <?php echo $popup_type.'-play'; ?>" title="<?php echo Mage::helper("ves_base")->__('Show Large Image');?>">
+					<?php endif; ?>
+					<span class="img-animation"><img <?php echo $holder_image?'data-src="'.$holder_image.'"':''; ?> src="<?php echo $thumbnailurl; ?>" class="img-responsive  <?php echo $alignment?$alignment.'-block':''; ?>" alt="<?php echo $image_alt; ?>"/></span>
+					<?php if ($ispopup): ?>
+					</a>
+					<?php endif; ?>
+				<?php endif; ?>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>

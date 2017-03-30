@@ -1,0 +1,35 @@
+#anchor-content { background: #ddd; color: #444; font-family: "Open Sans",sans-serif; }
+.wrapper-popup #anchor-content { background: none; color: #333; font-family: Arial,sans-serif; }
+.disabled_control { cursor: default !important; }
+#form_slider_main td input.code { max-width: 400px; }
+.nav-bar li, .nav-bar dd {margin-bottom: 0;}
+.nav-bar { font-size: 12px; }
+p.super {margin-top: 0;}
+.header-right p, .header-right input, .footer, .footer p, .footer select {font-size: 0.95em;}
+.adminhtml-nwdrevslider-slide .ui-autocomplete {background-image: none;max-height: 350px;overflow-y: auto;overflow-x: hidden;}
+* html .adminhtml-nwdrevslider-slide .ui-autocomplete { height: 350px;}
+.preview_slider_store_select { float:  left; margin: 7px 0 0 14px; }
+form.form_layers[name="form_layers"] { display: block; }
+.tp-plugin-version {padding-bottom: 10px;}
+#button_general_settings { margin-right: 10px;}
+.wrapper .wrap {margin-left: 0; margin-right: 0;}
+.wrapper #viewWrapper .rs-mini-toolbar.sticky { right: 0; }
+#slide-general-settings-content select#store_id { min-height: 126px; }
+#slide_selector { z-index: 97 !important }
+#viewWrapper .rs-mini-toolbar { z-index: 98 !important }
+.rs_breadcrumbs { overflow: hidden; }
+#css-template-handling-dd, #animin-template-handling-dd, #animout-template-handling-dd { z-index: 2 !important; }
+form.form_layers[name="form_layers"] { z-index: 97 !important; }
+#top-toolbar-wrapper { z-index: 96 !important; }
+#hor-css-linear { z-index: 2 !important; }
+#verlinie { z-index: 97 !important; }
+#hor-css-linear-cover-right, #hor-css-linear-cover-left { z-index: 9 !important; }
+.wunderadmin .wp-core-ui select { display: inline; line-height: inherit; padding: inherit; height: inherit }
+.slide-main-settings-form label:not(.wa_checkbox_wrapper) { min-width: 200px !important; }
+input.slidetitleinput {vertical-align: inherit;}
+.notification-global .label {display: inline; min-width: inherit; width: inherit; }
+#tp-thelistoffonts .ui-menu-item a,
+#tp-thelistofclasses .ui-menu-item a { text-decoration: none; }
+.tls-title-wrapper { white-space: nowrap !important; }
+.ui-dialog.rs-open-premium-benefits-dialog-container .ui-button.ui-dialog-titlebar-close {height:22px; width:20px; background:url(../../admin/assets/images/oops/close_cross_x.png); top:30px; right:30px; }
+.ui-dialog.rs-open-premium-benefits-dialog-container .ui-button.ui-dialog-titlebar-close:hover { opacity: 0.75 }

@@ -1,0 +1,428 @@
+<?php
+$helperConfig	= Mage::helper('guestwishlist/config'); 
+?>
+<div class="wishlist-notify">&nbsp;</div>
+<script type="text/javascript">
+	
+	jQuery(document).ready(function(){
+
+		var options = {
+			'elements':        {
+				'add'		: '.link-wishlist',
+				'remove'	: '#wishlist-sidebar .btn-remove, .btn-wishlist-remove',
+				'cart'		: '.btn-wishlist-cart',
+				'update'	: '.btn-wishlist-update'
+			},
+			'translate'		: {
+				'add'		: '<?php echo $this->__('Add to Wishlist'); ?>',
+				'remove'	: '<?php echo $this->__('Remove from Wishlist'); ?>',
+				'error'		: '<?php echo $this->__("Sorry, We can\'t process your request. Please try again in next time.");  ?>',
+				'confirm'	: '<?php echo $this->__('Are you sure you would like to remove this item from the wishlist?'); ?>',
+				'login'		: '<?php echo $this->__('Please login before add to wishlist.'); ?>'
+			},
+			'area'			: {
+				'cart'			: jQuery('.checkout-cart-index .cart'),
+				'wishlist'		: jQuery('.wishlist-index-index .my-wishlist'),
+				'sidebar'		: jQuery('.block-wishlist'),
+			},
+			'count'			: {
+				'wishlist'		: jQuery('[href$="wishlist/"]', jQuery('.header .links')),
+				'cart'			: jQuery('.top-link-cart', jQuery('.header .links'))
+			},			
+			'url'			: {
+				'add'			: '<?php echo $this->getUrl('wishlist/index/add', array('product'=>'{product_id}', 'form_key' => Mage::getSingleton('core/session')->getFormKey())); ?>',
+				'remove'		: '<?php echo $this->getUrl('wishlist/index/remove', array('item'=>'{item_id}')); ?>',
+			},
+			'added'			: <?php echo Mage::helper('core')->jsonEncode(Mage::helper('guestwishlist')->parseWishlistAdded()); ?>,		
+			'selector_add'	: 'a[href*="wishlist/index/add/product/{product_id}/"]',
+			'class_has_item': 'added',
+			'number_col'	: 3,
+			'showMsg'		: <?php echo $helperConfig->canShowMsg(); ?>,
+			'enable'		: <?php echo $helperConfig->isEnable() ? 1 : (Mage::getSingleton('customer/session')->isLoggedIn() ? 1 : 0) ; ?>,
+			'useAjax'		: <?php echo $helperConfig->useAjax(); ?>,
+		};		
+		
+		jQuery(this).GuestWishlist(options);
+	});
+
+	<?php if(false) :  ?>
+	jQuery(document).ready(function(){
+				
+		jQuery('.link-wishlist,[href*="wishlist/index/updateItemOptions/"]').unbind("click", function(){}).removeAttr("onclick").click(function(e){
+			<?php if(!Mage::getSingleton('customer/session')->getCustomerId() && !Mage::getStoreConfig(Mlx_GuestWishlist_Helper_Data::XML_GUESTWISHLIST_ENABLE) ) : ?>
+			alert("Please login first.");
+			<?php else: ?>
+			var guest_wishlist_form	= jQuery('#product_addtocart_form');
+			var guest_wishlist_data	= "";	
+			var guest_wishlist_self = jQuery(this);
+			if(guest_wishlist_form.length){
+				guest_wishlist_data = guest_wishlist_form.serialize();
+			}
+			jQuery.ajax({
+				'url'			: jQuery(this).attr('href'),	
+				'type'			: 'POST',
+				'dataType'		: 'json',		
+
+				'data'			: guest_wishlist_data,	
+				'beforeSend'	: function(jqXHR, settings){	
+					NProgress.start();
+					NProgress.set(0.6);		
+				},				
+				'success'		: function(data, textStatus, jqXHR){
+					
+					if(data.error){
+						jQuery('.wishlist-notify').addClass("wishlist-notify-error");						
+					}else{
+						var parent	= jQuery(guest_wishlist_self).parent().parent();
+						var tagName	= parent.prop('tagName');
+						if(tagName == "tr" || tagName == "TR"){
+							parent.remove();
+						}
+					}
+					guestWishlistUpdateData(data);
+						
+					jQuery('.wishlist-notify').html(data.msg).slideDown(500);
+					setTimeout(function () {jQuery('.wishlist-notify').slideUp(500)}, 5000);
+					
+				},
+				'complete'		: function(jqXHR, textStatus){
+					NProgress.done();
+				},			
+				'error': function(jqXHR, textStatus, errorThrown){
+					NProgress.done();
+				}
+			});	
+			<?php endif; ?>	
+			return false;	
+		});
+
+		function guestWishlistUpdateData(data){
+			if(data.redirect){
+				document.location.href = data.redirect;
+				return false;
+			}
+			if(data.wcount){
+				jQuery('[href$="wishlist/"]', jQuery('.header .links')).html(data.wcount).attr('title', data.wcount);
+			}			
+			if(data.ccount){
+				jQuery('.top-link-cart', jQuery('.header .links')).html(data.ccount).attr('title', data.ccount);				
+			}
+			if(data.emptyCart && jQuery('.col-main .cart').length){							
+				jQuery('.col-main .cart').html(data.cart);
+			}
+
+			if((!jQuery('#wishlist-view-form table tbody tr').length && jQuery('#wishlist-view-form').length)){
+				jQuery('#wishlist-view-form').remove();
+				if(jQuery('#wishlist-allcart-form').length){
+					jQuery('#wishlist-allcart-form').remove();
+				}
+				
+				jQuery('.col-main .my-wishlist').append('<p class="wishlist-empty"><?php echo $this->__('You have no items in your wishlist.') ?></p>');
+			}
+
+			if(jQuery('.block-wishlist').length && data.emptyWL){				
+				jQuery('.block-wishlist').remove();
+			}
+
+			if(jQuery('.block-wishlist').length && !data.emptyWL){				
+				jQuery('.block-wishlist').html(jQuery(data.wishlist).html());
+			}
+
+			guestWishlistSlider();
+		}
+
+		function guestWishlistSlider(){
+
+			jQuery('#wishlist-sidebar .link-cart').click(function(){
+				var guest_wishlist_self = jQuery(this);
+				jQuery.ajax({
+					'url'			: jQuery(guest_wishlist_self).attr('href'),	
+					'type'			: 'POST',
+					'dataType'		: 'json',			
+					'beforeSend'	: function(jqXHR, settings){	
+						if(!jQuery('img', jQuery(guest_wishlist_self)).length){
+							jQuery(guest_wishlist_self).append('<img src="<?php echo $this->getSkinUrl('Mlx/GuestWishlist/images/ajax-loader.gif') ?>" />')
+						}			
+					},				
+					'success'		: function(data, textStatus, jqXHR){						
+						jQuery('img', jQuery(guest_wishlist_self)).remove();
+						//jQuery('.wishlist-notify').removeClass("wishlist-notify-error");;
+						jQuery('.wishlist-notify').removeClass("wishlist-notify-error");
+						if(data.error){
+							//jQuery('.wishlist-notify').css("color", "red");
+							jQuery('.wishlist-notify').addClass("wishlist-notify-error");	
+						}
+						guestWishlistUpdateData(data);
+						jQuery('.wishlist-notify').html(data.msg).slideDown(500);
+						setTimeout(function () {jQuery('.wishlist-notify').slideUp(500)}, 5000);
+						
+					},
+					'complete'		: function(jqXHR, textStatus){
+						
+					},			
+					'error': function(jqXHR, textStatus, errorThrown){
+						if(jQuery('img', jQuery(guest_wishlist_self)).length){
+							jQuery('img').remove();
+						}
+					}
+				});	
+				return false;
+			});
+			
+			jQuery('.btn-remove', jQuery('#wishlist-sidebar'))
+			.unbind("click", function(){})
+			.removeAttr("onclick")
+			.click(function(e){
+				var flag = confirm('<?php echo Mage::helper('wishlist')->__('Are you sure want to remove this product from your wishlist?') ?>');
+				
+				if(flag){
+					var guest_wishlist_self = jQuery(this);
+					jQuery.ajax({
+						'url'			: jQuery(guest_wishlist_self).attr('href'),	
+						'type'			: 'POST',
+						'dataType'		: 'json',			
+						'beforeSend'	: function(jqXHR, settings){	
+							if(!jQuery('img', jQuery(guest_wishlist_self)).length){
+								jQuery(guest_wishlist_self).append('<img src="<?php echo $this->getSkinUrl('Mlx/GuestWishlist/images/ajax-loader.gif') ?>" />')
+							}			
+						},				
+						'success'		: function(data, textStatus, jqXHR){						
+							jQuery('img', jQuery(guest_wishlist_self)).remove();
+							jQuery('.wishlist-notify').removeClass("wishlist-notify-error");;
+							if(data.error){
+								jQuery('.wishlist-notify').addClass("wishlist-notify-error");
+							}
+							guestWishlistUpdateData(data);
+							jQuery('.wishlist-notify').html(data.msg).slideDown(500);
+							setTimeout(function () {jQuery('.wishlist-notify').slideUp(500)}, 5000);
+							
+						},
+						'complete'		: function(jqXHR, textStatus){
+							
+						},			
+						'error': function(jqXHR, textStatus, errorThrown){
+							if(jQuery('img', jQuery(guest_wishlist_self)).length){
+								jQuery('img').remove();
+							}
+						}
+					});	
+				}
+				return false;			
+			});
+		}
+
+		guestWishlistSlider();
+		
+
+		jQuery('.btn-update', jQuery('#wishlist-view-form'))
+		.unbind("click")
+		.removeAttr("onclick")
+		.click(function(e){
+			var	guest_wishlist_self = jQuery(this);		
+			jQuery.ajax({
+				'url'			: jQuery('#wishlist-view-form').attr('action'),	
+				'type'			: 'POST',
+				'dataType'		: 'json',	
+				'data'			: jQuery('#wishlist-view-form').serialize(),		
+				'beforeSend'	: function(jqXHR, settings){	
+					if(!jQuery('img', jQuery(guest_wishlist_self)).length){
+						jQuery(guest_wishlist_self).append('<img src="<?php echo $this->getSkinUrl('Mlx/GuestWishlist/images/ajax-loader.gif') ?>" />')
+					}			
+				},				
+				'success'		: function(data, textStatus, jqXHR){					
+					jQuery('img', jQuery(guest_wishlist_self)).remove();
+					jQuery('.wishlist-notify').removeClass("wishlist-notify-error");;
+					if(data.error){
+						jQuery('.wishlist-notify').addClass("wishlist-notify-error");
+					}
+					guestWishlistUpdateData(data);
+					jQuery('.wishlist-notify').html(data.msg).slideDown(500);
+					setTimeout(function () {jQuery('.wishlist-notify').slideUp(500)}, 5000);
+					
+				},
+				'complete'		: function(jqXHR, textStatus){
+					
+				},			
+				'error': function(jqXHR, textStatus, errorThrown){
+					if(jQuery('img', jQuery(guest_wishlist_self)).length){
+						jQuery('img').remove();
+					}
+				}
+			});	
+			
+			return false;
+		});
+
+		jQuery('.btn-cart', jQuery('#product_addtocart_form'))
+		.unbind("click", function(){})
+		.removeAttr("onclick")
+		.click(function(e){
+					            
+			
+			var guest_wishlist_self	= jQuery(this);
+			jQuery.ajax({
+				'url'			: jQuery('#product_addtocart_form').attr("action"),	
+				'type'			: 'POST',
+				'dataType'		: 'json',	
+				'data'			: jQuery('#product_addtocart_form').serialize(),		
+				'beforeSend'	: function(jqXHR, settings){	
+					if(!jQuery('img', jQuery(guest_wishlist_self)).length){
+						jQuery(guest_wishlist_self).append('<img src="<?php echo $this->getSkinUrl('Mlx/GuestWishlist/images/ajax-loader.gif') ?>" />')
+					}			
+				},				
+				'success'		: function(data, textStatus, jqXHR){
+										
+					jQuery('img', jQuery(guest_wishlist_self)).remove();
+					jQuery('.wishlist-notify').removeClass("wishlist-notify-error");;
+					if(data.error){
+						jQuery('.wishlist-notify').addClass("wishlist-notify-error");
+					}else{						
+						jQuery('.wishlist-notify').html(data.msg).slideDown(500);
+						setTimeout(function () { setLocation('<?php echo $this->getUrl('checkout/cart') ?>') }, 1500);
+						
+					}
+					
+				},
+				'complete'		: function(jqXHR, textStatus){
+					
+				},			
+				'error': function(jqXHR, textStatus, errorThrown){
+					if(jQuery('img', jQuery(guest_wishlist_self)).length){
+						jQuery('img').remove();
+					}
+				}
+			});	
+			
+			return false;
+		});
+		 
+		jQuery('.btn-cart', jQuery('#wishlist-view-form'))
+		.unbind("click", function(){})
+		.removeAttr("onclick")
+		.click(function(e){
+			var PguestWLqty			= jQuery(this);
+			
+			while(jQuery(PguestWLqty).prop("tagName").toLowerCase() != "td"){
+				PguestWLqty	= jQuery(PguestWLqty).parent();
+			}
+			
+			var guestWLqty			= jQuery('.qty', jQuery(PguestWLqty));
+			
+			if(!guestWLqty.length){
+				var guestWLDescPrev	= jQuery(PguestWLqty).prev();
+				while(!jQuery('textarea', jQuery(guestWLDescPrev)).length){
+					guestWLDescPrev	= jQuery(guestWLDescPrev).prev();
+				}
+				var guestWLDesc		= jQuery('textarea', jQuery(guestWLDescPrev));				
+				var idxStr 			= guestWLDesc.attr('name').replace( /[^\d.]/g, '' );
+								
+			}else{
+				var idxStr 			= guestWLqty.attr('name').replace( /[^\d.]/g, '' );
+			}
+			
+			var value				= guestWLqty.val();
+			var url					= '<?php echo Mage::helper('wishlist')->getAddToCartUrl('%item%') ?>'.gsub('%item%', idxStr);			            
+			
+			
+			if (guestWLqty.length) {
+				var separator = (url.indexOf('?') >= 0) ? '&' : '?';
+				url += separator + guestWLqty.attr('name') + '=' + encodeURIComponent(value);
+			}		
+            
+			var guest_wishlist_self	= jQuery(this);
+			jQuery.ajax({
+				'url'			: url,	
+				'type'			: 'POST',
+				'dataType'		: 'json',			
+				'beforeSend'	: function(jqXHR, settings){	
+					if(!jQuery('img', jQuery(guest_wishlist_self)).length){
+						jQuery(guest_wishlist_self).append('<img src="<?php echo $this->getSkinUrl('Mlx/GuestWishlist/images/ajax-loader.gif') ?>" />')
+					}			
+				},				
+				'success'		: function(data, textStatus, jqXHR){
+					
+					jQuery('img', jQuery(guest_wishlist_self)).remove();
+					jQuery('.wishlist-notify').removeClass("wishlist-notify-error");;
+					if(data.error){
+						jQuery('.wishlist-notify').addClass("wishlist-notify-error");
+					}else{
+						var remove = jQuery(guest_wishlist_self);
+						while(jQuery(remove).prop("tagName").toLowerCase() != "tr"){
+							remove	= jQuery(remove).parent();
+						}
+						remove.remove();
+						
+						
+					}
+					guestWishlistUpdateData(data);
+					jQuery('.wishlist-notify').html(data.msg).slideDown(500);
+					setTimeout(function () {jQuery('.wishlist-notify').slideUp(500)}, 5000);
+					
+				},
+				'complete'		: function(jqXHR, textStatus){
+					
+				},			
+				'error': function(jqXHR, textStatus, errorThrown){
+					if(jQuery('img', jQuery(guest_wishlist_self)).length){
+						jQuery('img').remove();
+					}
+				}
+			});	
+			
+			return false;
+		});
+		
+		jQuery('.btn-remove', jQuery('#wishlist-view-form'))
+		.unbind("click", function(){})
+		.removeAttr("onclick")
+		.click(function(e){
+			var flag = confirm('<?php echo Mage::helper('wishlist')->__('Are you sure want to remove this product from your wishlist?') ?>');
+			
+			if(flag){
+				var guest_wishlist_self = jQuery(this);
+				jQuery.ajax({
+					'url'			: jQuery(guest_wishlist_self).attr('href'),	
+					'type'			: 'POST',
+					'dataType'		: 'json',			
+					'beforeSend'	: function(jqXHR, settings){	
+						if(!jQuery('img', jQuery(guest_wishlist_self)).length){
+							jQuery(guest_wishlist_self).append('<img src="<?php echo $this->getSkinUrl('Mlx/GuestWishlist/images/ajax-loader.gif') ?>" />')
+						}			
+					},				
+					'success'		: function(data, textStatus, jqXHR){
+						
+						jQuery('img', jQuery(guest_wishlist_self)).remove();
+						jQuery('.wishlist-notify').removeClass("wishlist-notify-error");;
+						if(data.error){
+							jQuery('.wishlist-notify').addClass("wishlist-notify-error");
+						}else{
+							
+							jQuery(guest_wishlist_self).closest('tr').remove();
+							
+							
+						}
+						guestWishlistUpdateData(data);
+						jQuery('.wishlist-notify').html(data.msg).slideDown(500);
+						setTimeout(function () {jQuery('.wishlist-notify').slideUp(500)}, 5000);
+						
+					},
+					'complete'		: function(jqXHR, textStatus){
+						
+					},			
+					'error': function(jqXHR, textStatus, errorThrown){
+						if(jQuery('img', jQuery(guest_wishlist_self)).length){
+							jQuery('img', jQuery(guest_wishlist_self)).remove();
+						}
+					}
+				});	
+			}
+			return false;			
+		});		
+
+
+		
+		
+	});
+	<?php endif; ?>
+</script>
+

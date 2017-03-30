@@ -1,0 +1,15 @@
+<?php if ($this->_helper()->isEnable()) : ?>
+    <?php if ($this->_helper()->getLoginConfig('logging_in') && $this->_helper()->getLoginConfig('show_login')) : ?>
+
+        <script type="text/javascript">
+            if ($('send2') && $('send2').up('.buttons-set')) {
+                var eladd = $('send2').up('.buttons-set');
+                eladd.insert(
+                '<div class="rewardpointsbehavior-checkout-action1" style="width:inherit"><a href="<?php echo Mage::getUrl('rewardpoints/index/index') ?>"><?php echo $this->_helper()->getIcon() ?></a>&nbsp;'+'<?php echo $this->getLoginInfo() ?></div>'
+                );
+            }
+        </script>
+
+    <?php endif ?>
+<?php endif; ?>
+

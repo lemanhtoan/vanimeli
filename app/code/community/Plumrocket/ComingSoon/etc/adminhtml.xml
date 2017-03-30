@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+		<plumrocket>
+			<title>Plumrocket</title>
+			<sort_order>80</sort_order>
+            <children>
+				<comingsoon module="comingsoon">
+					<title>Coming Soon &amp; Maintenance Page</title>
+					<sort_order>420</sort_order>
+					<children>
+						<mode module="comingsoon">
+							<title>Manage Website Mode</title>
+							<sort_order>0</sort_order>
+							<action>comingsoon_admin/adminhtml_mode/edit</action>
+						</mode>
+						<configuration module="comingsoon">
+							<title>Configuration</title>
+							<sort_order>2</sort_order>
+							<action>adminhtml/system_config/edit/section/comingsoon</action>
+						</configuration>
+					</children>
+				</comingsoon>
+			</children>
+		</plumrocket>
+	</menu>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<comingsoon translate="title" module="comingsoon">
+										<title>Coming Soon &amp; Maintenance Page Section</title>
+										<sort_order>1700</sort_order>
+									</comingsoon>
+								</children>
+							</config>
+						</children>
+					</system>
+					<plumrocket>
+						<title>Plumrocket</title>
+						<sort_order>80</sort_order>
+						<children>
+							<comingsoon translate="title" module="comingsoon">
+								<title>Coming Soon &amp; Maintenance Page</title>
+								<sort_order>1700</sort_order>
+								<children>
+									<mode translate="title">
+										<title>Manage Website Mode</title>
+										<sort_order>0</sort_order>
+									</mode>
+									<configuration translate="title">
+										<title>Configuration</title>
+										<sort_order>2</sort_order>
+									</configuration>
+								</children>
+						   </comingsoon>
+						</children>
+					</plumrocket>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

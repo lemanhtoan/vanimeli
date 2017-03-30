@@ -1,0 +1,202 @@
+<?php 
+$layouts = isset($layouts)?$layouts:array();
+$level = !isset($level)?1:$level;
+$rows = isset($rows)?$rows:$layouts;
+
+foreach ( $rows as $row) {
+ 			$row['level'] = ($level == 3)?2:$level;
+ 			$row['css'] = isset($row['css'])?str_replace("\n","", $row['css']):'';
+ 			$row['attrs'] = isset($row['attrs'])?$row['attrs']:'';
+ 			$row['inattrs'] = isset($row['inattrs'])?$row['inattrs']:'';
+ 			$row['nogutters'] = (isset($row['nogutters']) && $row['nogutters'])?' no-gutters ':'';
+
+ 			$tmp_custom_css = array();
+ 			$custom_css = $this->getRowStyle($row);
+ 			if($row['css']) {
+ 				$tmp_custom_css[] = $row['css'];
+ 			}
+ 			if($custom_css) {
+ 				$tmp_custom_css[] = $custom_css;
+ 			}
+ 			$custom_css = !empty($tmp_custom_css)?' style="'.implode(";", $tmp_custom_css).'"':'';
+ 			$custom_inner_css = $this->getRowInnerStyle($row);
+ 			$custom_inner_css = !empty($custom_inner_css)?' style="'.$custom_inner_css.'"':'';
+
+ 			$offcanvas_class = "";
+ 			if($row['level'] == 1 && isset($row['offcanvas']) && $row['offcanvas']) {
+ 				$offcanvas_class = "offcanvas-widget-siderbars";
+ 			}
+
+ 	?>
+	    <?php if ( $row['level'] == 1 || $row['level'] >= 2 ){	 ?>
+	    	<?php 
+	    	if ( isset($row['parallax'])&& $row['parallax'] ) {
+	    		$row['attrs'] .= ' data-parallax-percent="'.(isset($row['p_percent'])?$row['p_percent']:'50%').'" data-parallax-scroll="'.(isset($row['p_scroll'])?$row['p_scroll']:'0.4').'" ';
+	    		
+	    	} 
+	    	if ( isset($row['inparallax'])&& $row['inparallax'] ) {
+		    	$row['inattrs'] .= ' data-parallax-percent="'.(isset($row['inp_percent'])?$row['inp_percent']:'50%').'" data-parallax-scroll="'.(isset($row['inp_scroll'])?$row['inp_scroll']:'0.4').'" ';
+		    }
+	    	?>
+	        <div class="ves-container <?php echo $offcanvas_class; ?> <?php if ( isset($row['parallax'])&& $row['parallax'] ) { ?> ves-parallax <?php } ?> <?php if ($row['level']>=1 && isset($row['wcls'])) echo $row['wcls'];  ?>" <?php echo $row['attrs']; ?> <?php echo $custom_css; ?>>
+	        	<?php if( $row['level'] == 1 && (!isset($is_container) || (isset($is_container) && $is_container == 1))) : ?>
+	        	<div class="ves-inner <?php if ( isset($row['inparallax'])&& $row['inparallax'] ) { ?> ves-parallax <?php } ?> container<?php echo (isset($row['fullwidth']) && $row['fullwidth']==1)?'-fluid':'';?> <?php if (isset($row['cls'])) echo $row['cls'];  ?>" <?php echo $row['inattrs']; ?><?php echo $custom_inner_css; ?>>
+	        	<?php else: ?>
+	        	<div class="ves-inner <?php if ( isset($row['inparallax'])&& $row['inparallax'] ) { ?> ves-parallax <?php } ?> <?php if(isset($row['fullwidth']) && $row['fullwidth']==1): ?>container-fluid<?php endif; ?> <?php if (isset($row['cls'])) echo $row['cls'];  ?>" <?php echo $row['inattrs']; ?><?php echo $custom_inner_css; ?>>
+	        	<?php endif; ?>
+			    <?php $custom_css = $custom_inner_css = ""; ?>
+			    <?php } ?>
+			    <?php 
+			    	//Setting sidebar-offcanvas
+			    	$row_id = rand().time();
+				    if($row['level'] == 1 && isset($row['offcanvas']) && $row['offcanvas']) {
+
+						?>
+						<div class="row visible-xs visible-md">
+							<div class="container">
+				                <div class="offcanvas-widget-sidebars-buttons">
+				                	<?php if($row['offcanvas'] == "left" || $row['offcanvas'] == "both") { ?>
+				                    <button type="button" data-for="column-widget-left-<?php echo $row_id; ?>" data-reffor="column-left" data-rowid="<?php echo $row_id; ?>" class="pull-left btn btn-danger"><i class="glyphicon glyphicon-indent-left"></i> <?php echo Mage::helper('ves_productbuilder')->__('Sidebar Left'); ?></button>
+				                    <?php } ?>
+				                    <?php if($row['offcanvas'] == "right" || $row['offcanvas'] == "both") { ?>
+				                    <button type="button" data-for="column-widget-right-<?php echo $row_id; ?>" data-reffor="column-right" data-rowid="<?php echo $row_id; ?>" class="pull-right btn btn-danger"><?php echo Mage::helper('ves_productbuilder')->__('Sidebar Right'); ?> <i class="glyphicon glyphicon-indent-right"></i></button>
+				                    <?php } ?>
+				                </div>
+				            </div>
+				        </div>
+						<?php
+					}
+					//Setting sidebar-offcanvas
+				?>
+			    <div class="row row-level-<?php echo $row['level']; ?> <?php echo $row['nogutters']; ?> <?php if (isset($row['sfxcls'])&&$row['sfxcls']) echo 'row-'.$row['sfxcls']; ?>" <?php echo $custom_css; ?>>
+			    	<div class="row-inner clearfix <?php if ($row['level']>=1 && isset($row['incls'])) echo $row['incls'];  ?>" <?php echo $custom_inner_css; ?>>
+			        <?php foreach( $row['cols'] as $col ) { ?>
+			        	 <?php 
+			    			//Setting sidebar-offcanvas
+			        	 	$offcol_id = "";
+			        	 	$offcol_class = "";
+				    		if($row['level'] == 1 && isset($col['offcol']) && $col['offcol']) {
+				    			if($col['offcol'] != "main-column") {
+				    				$offcol_id = ' id="column-widget-'.$col['offcol'].'-'.$row_id.'" ';
+				    				$offcol_class = 'widget-sidebar';
+				    			} else {
+				    				$offcol_class = 'main-column';
+				    			}
+				    			
+							}
+							//Setting sidebar-offcanvas
+						?>
+						<?php 
+			            	$custom_col_css = "";
+			            	$col['css'] = isset($col['css'])?str_replace("\n","", $col['css']):'';
+			            	$custom_col_css = $this->getColStyle($col);
+			            	$custom_col_css = !empty($custom_col_css)?' style="'.$custom_col_css.'"':'';
+				            	
+				        ?>
+			            <div <?php echo $offcol_id; ?> class="<?php echo $offcol_class; ?> col-lg-<?php echo $col['lgcol']; ?> col-md-<?php echo $col['mdcol'];?> col-sm-<?php echo $col['smcol'];?> col-xs-<?php echo $col['xscol'];?> <?php echo isset($col['cls'])?$col['cls']:'';?> <?php if (isset($col['sfxcls'])&&$col['sfxcls']) echo 'col-'.$col['sfxcls'];  ?>" <?php echo $col['css']?'style="'.$col['css'].'"':'';?> <?php echo isset($col['attrs'])?$col['attrs']:''; ?>>
+
+			            	<?php if ($row['level']==2): ?>
+				               <?php if (isset($row['parallax'])&&$row['parallax']): ?>
+				                 <div class="ves-parallax" <?php echo isset($row['attrs'])?$row['attrs']:''; ?> <?php echo $custom_css; ?>> 
+				                 <?php $custom_css = $custom_inner_css = ""; ?>
+				               <?php endif; ?>
+				            <?php endif; ?>
+
+				            
+			            	<div class="col-inner <?php echo isset($col['incls'])?$col['incls']:'';?>" <?php echo $custom_col_css; ?>>
+			                <?php foreach ( $col['widgets'] as $widget ){ ?>
+			                	<?php if( isset($widget['shortcode']) ) { ?>
+
+			                		<?php
+			                		//Detect device to display widget
+			                		if(!$this->detectDeviceToShow($widget))
+			                			continue; 
+
+			                		$widget['shortcode'] = isset($widget['shortcode'])?$widget['shortcode']:'';
+			                		if(isset($block_widgets) && $block_widgets && !$widget['shortcode']) {
+			                			$widget['shortcode'] = isset($block_widgets[$widget['wkey']])?$block_widgets[$widget['wkey']]:'';
+			                		}
+			                		$custom_widget_css = "";
+			                		$tmp_widget_css = array();
+			                		$widget['css'] = isset($widget['css'])?str_replace("\n","", $widget['css']):'';
+			                		$custom_widget_css = $this->getWidgetStyle($widget);
+			                		if($widget['css']) {
+			                			$tmp_widget_css[] = $widget['css'];
+			                		}
+			                		if($custom_widget_css) {
+			                			$tmp_widget_css[] = $custom_widget_css;
+			                		}
+
+			                		$custom_widget_css = !empty($tmp_widget_css)?' style="'.implode(";", $tmp_widget_css).'"':'';
+
+			                		//Check generate widget via ajax
+			                		$custom_attribute = "";
+			                		$custom_widget_class = "";
+			                		$widget_id = "pwidget_".$widget['wkey']; 
+			                		$tmp_widgets = array();
+
+			                		if(isset($widget['isajax']) && $widget['isajax']) {
+			                			$widget['shortcode'] = str_replace("'", '"', $widget['shortcode']);
+			                			$custom_attribute = "id='".$widget_id."'";
+			                			$custom_widget_class = "ajax-generate-widget-play";
+
+			                			$widget['shortcode'] = str_replace("'", '"', $widget['shortcode']);
+
+			                			$tmp_widgets = array("wkey" => $widget['wkey'],
+			                							"widget" => base64_encode($widget['shortcode']));
+
+			                		}
+
+			                		if((isset($widget['cls']) && $widget['cls']) || (isset($widget['sfxcls']) && $widget['sfxcls']) || (isset($widget['sfxa']) && $widget['sfxa'])):
+			                		?>
+			                		<?php
+			                			$duration = (isset($widget['sfxaduration'])&&$widget['sfxaduration'])?' data-wow-duration="'.$widget['sfxaduration'].'"':'';
+			                			$delay = (isset($widget['sfxadelay']) && $widget['sfxadelay'])?' data-wow-delay="'.$widget['sfxadelay'].'"':'';
+			                			$offset = (isset($widget['sfxaoffset'])&&$widget['sfxaoffset'])?' data-wow-offset="'.$widget['sfxaoffset'].'"':'';
+			                			$iteration = (isset($widget['sfxaiteration'])&&$widget['sfxaiteration'])?' data-wow-iteration="'.$widget['sfxaiteration'].'"':'';
+			                		?>
+			                		<div <?php echo $duration.$delay.$offset.$iteration;?> class="<?php echo (isset($widget['cls'])?$widget['cls']:'').' '.((isset($widget['sfxcls'])&&$widget['sfxcls'])?'box box-'.$widget['sfxcls']:'').' '.(isset($widget['sfxa']) && $widget['sfxa']?' ves-animate '.$widget['sfxa']:''). ' '.$custom_widget_class; ?>" <?php echo $custom_widget_css; ?> <?php echo $custom_attribute;?>>
+
+			                		<?php else: ?>
+			                		<div <?php echo $custom_widget_class?'class="'.$custom_widget_class.'" ':''; ?><?php echo $custom_widget_css; ?> <?php echo $custom_attribute;?>>
+			                		<?php endif; ?>
+
+			                    	<?php echo (!isset($widget['isajax']) || !$widget['isajax'])?$this->renderWidgetShortcode($widget['shortcode']):""; ?>
+
+			                    	</div>
+			                    	<?php if(isset($widget['isajax']) && $widget['isajax'] && $tmp_widgets): ?>
+			                    		<script type="text/javascript">
+											jQuery(document).ready( function(){
+											    ajaxGenerateWidget(jQuery("#<?php echo $widget_id; ?>"),<?php echo Mage::helper('core')->jsonEncode($tmp_widgets);?>, '<?php echo $this->getAjaxGenerateUrl() ?>')
+											})
+			                    		</script>
+			                    	<?php endif; ?>
+		                   		<?php } ?>
+			                <?php } ?>
+			                <?php if (isset($col['rows'])&&$col['rows']) { ?>
+			                    <?php   
+			                        $rows = $col['rows'];
+			                 
+			                        $level = $level + 1;
+			                        //if( $template = $this->getLayoutPath("default.phtml") ){
+			                        require( "row.phtml" );
+			                        //}
+			                    ?>
+			                <?php } ?>
+			            	</div>
+
+			            	<?php if ($row['level']==2): ?>
+				               <?php if (isset($row['parallax'])&&$row['parallax']): ?>
+				                 </div>
+				                <?php endif; ?>
+		               		 <?php endif; ?>
+			        	</div>
+			        <?php } ?>
+			    	</div>
+			    </div>
+		<?php $level = ($level >=2)?1:$level; ?>
+	    <?php if ($row['level']==1 || $row['level'] >= 2 ) { ?>
+	            </div>
+	        </div>
+	    <?php } ?>
+	<?php } ?>

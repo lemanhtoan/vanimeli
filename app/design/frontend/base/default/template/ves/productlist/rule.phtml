@@ -1,0 +1,23 @@
+<?php
+$rule = $this->getRule();
+$img = '';
+if($rule->getImage()!=''){
+	$img = Mage::getBaseUrl('media').$rule->getImage();
+}
+$processor = Mage::helper('cms')->getPageTemplateProcessor();
+$rule_description = $processor->filter($rule->getDescription());
+
+?>
+<div class="page-title rule-title">
+	<h1><?php echo $this->getRule()->getTitle(); ?></h1>
+</div>
+<?php if($img!=''){ ?>
+<p class="category-image">
+	<img src="<?php echo $img ?>" alt="<?php echo $this->stripTags($this->getRule()->getTitle()); ?>">
+</p>
+<?php } ?>
+<?php if( $rule_description != '' ){ ?>
+<div class="category-description">
+	<?php echo $rule_description; ?>
+</div>
+<?php } ?>

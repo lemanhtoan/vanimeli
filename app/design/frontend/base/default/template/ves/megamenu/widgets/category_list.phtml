@@ -1,0 +1,70 @@
+<?php 
+  $widget = $this->getWidget();
+  $show_name = isset($widget['show_name'])?$widget['show_name']: 1;
+  $category_link = isset($widget['category_link'])?$widget['category_link']: "#";
+  $show_image = isset($widget['show_image'])?$widget['show_image']: 0;
+  $image_width = isset($widget['image_width'])?$widget['image_width']: 100;
+  $image_height = isset($widget['image_height'])?$widget['image_height']: 100;
+  $categories = isset($widget['categories'])?$widget['categories']: array();
+  $categories = is_array($categories)?$categories:explode(",", $categories);
+  if($categories) {
+    $category_model = isset($widget['category_model'])?$widget['category_model']:null;
+    $collection = null;
+    if($category_model) {
+      $collection = $category_model->getCollection();
+      $collection->addAttributeToSelect('url_key')
+              ->addAttributeToSelect('name');
+
+      $magento_version = Mage::getVersion();
+      $magento_version = str_replace(".","", $magento_version);
+      if($magento_version < 1920) {
+          $collection->addAttributeToSelect('thumbnail');
+      }
+      $collection->addAttributeToSelect('image')
+              ->addAttributeToSelect('all_children')
+              ->addAttributeToSelect('is_anchor')
+              ->setOrder('position', Varien_Db_Select::SQL_ASC)
+              ->joinUrlRewrite()
+              ->addAttributeToFilter('is_active', 1)
+              ->addIdFilter($categories)
+              ->load();
+      $categories = $collection;
+    }
+    
+?>
+<?php if( isset($widget['widget_name']) & $show_name){
+?>
+<div class="menu-title"><a href="<?php echo $category_link; ?>" title="<?php echo $widget['widget_name'];?>"><?php echo $widget['widget_name'];?></a></div>
+<?php
+}?>
+<div class="widget-category-list">
+  <div class="widget-inner">
+      <ul>
+      <?php foreach ($categories as $category_id) { ?>
+      <?php 
+        $category = is_object($category_id)?$category_id:Mage::getModel('catalog/category')->load($category_id);
+        $category_image = "";
+        if($show_image) {
+          $category_image = $category->getThumbnail();
+          if(!$category_image) {
+            $category_image = $category->getImage();
+          }
+        }
+      ?>
+      <li>
+        <?php if($category_image): ?>
+        <div class="category_image">
+          <a href="<?php echo $category->getUrl(); ?>"><img src="<?php echo Mage::getBaseUrl('media').'catalog/category/'.$category_image;?>" alt="<?php echo $category->getName();?>" width="<?php echo $image_width; ?>" height="<?php echo $image_height; ?>"/></a>
+        </div>
+        <div class="category_name">
+          <a href="<?php echo $category->getUrl(); ?>"><span><?php echo $category->getName();?></span></a>
+        </div>
+        <?php else: ?>
+        <a href="<?php echo $category->getUrl(); ?>"><span><?php echo $category->getName();?></span></a>
+        <?php endif; ?>
+      </li>
+      <?php } ?>
+      </ul>
+  </div>
+</div>
+<?php } ?>

@@ -1,0 +1,50 @@
+.nwt_top_menu {
+    width:130px;
+}
+.nwt_top_menu .top_img  {
+    background-image:url("logo.png") !important;
+    background-repeat:no-repeat !important;
+    padding-left:22px !important;
+    padding-right:0 !important;
+    width:8px;
+    height:27px;
+    float:left;
+}
+.content_aboutus {
+    background: none repeat scroll 0 0 #FAFAFA;
+    height: 200px;
+    margin: 10px auto;
+    position: relative;
+    width: 37%;
+    border: 1px solid #D6D6D6;
+}
+
+.content_aboutus span {
+    background: none repeat scroll 0 0 #6F8992;
+    color: #FFFFFF;
+    float: left;
+    font-weight: bold;
+    padding: 3px 0 3px 10px;
+    width: 98%;
+}
+
+.content_aboutus .content_data {
+    float: left;
+    line-height: 25px;
+    padding: 10px;
+}
+
+.content_aboutus .content_data em {
+    font-style: normal;
+    font-weight: bold;
+    margin-right: 7px;
+}
+.content_aboutus .content_data a{
+    color: #888888;
+}
+
+.content_aboutus .image_holder {
+    background: url("bignwtlogo.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 41px;
+    width: 200px;
+}

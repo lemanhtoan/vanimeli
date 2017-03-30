@@ -1,0 +1,57 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $account = Mage::getSingleton('affiliateplus/session')->getAccount();?>
+<?php if($account && $account->getStatus() == 1):  ?>
+<?php $product = $this->getProduct() ?>
+    <?php if(!Mage::helper('affiliateplus')->checkExistAccountProduct($account->getId(), $product->getId())): ?>
+    <button class="button btn-cart" id="affiliate_add_product_button_<?php echo $product->getId(); ?>" type="button" onclick="addProductToAffiliate('<?php echo $this->getUrl('affiliateplus/index/addproduct', array('accountid'=> $account->getId(), 'productid'=> $product->getId())); ?>', '<?php echo $account->getId(); ?>', '<?php echo $product->getId(); ?>');"><span><span>Add to substore</span></span></button>
+        <span id="affiliate-please-wait-product-<?php echo $product->getId(); ?>" style="display:none;" class="opc-please-wait">
+            <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" class="v-middle" alt="" /> &nbsp; <?php echo $this->__('Checking product before adding') ?>...
+        </span>
+        <div id="affiliate_add_product_message_<?php echo $product->getId(); ?>" class="affiliate_message"></div>
+    <?php endif; ?>
+<?php endif; ?>
+<script type="text/javascript">
+    function addProductToAffiliate(url, accountId, productId) {
+        $('affiliate_add_product_button_'+productId).hide();
+        $('affiliate-please-wait-product-'+productId).show();
+        $('affiliate_add_product_message_'+productId).hide();
+        new Ajax.Updater(
+            'affiliate_add_product_message',
+            url,
+            {
+                method: 'get',
+                onComplete: function() {
+                    $('affiliate-please-wait-product-'+productId).hide();
+                    $('affiliate_add_product_message_'+productId).show();
+                },
+                onSuccess: '',
+                onFailure: '',
+            }
+        );
+    }
+</script>

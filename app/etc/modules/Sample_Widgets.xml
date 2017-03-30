@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sample_Widgets>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+				<Ves_Base />
+			</depends>
+        </Sample_Widgets>
+    </modules>
+</config>

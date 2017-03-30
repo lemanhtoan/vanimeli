@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<layout version="1.0.0">
+
+	<default>
+		<reference name="after_body_start">
+			<block type="core/template" name="comingsoon_preview" before="content">
+				 <action ifconfig="comingsoon/general/enable" method="setTemplate">
+				 	<template>comingsoon/preview.phtml</template>
+				 </action>
+			</block>
+		</reference>
+	</default>
+
+	<comingsoon_index_maintenance>
+		<reference name="root">
+			<action method="setTemplate">
+				<template>comingsoon/maintenance.phtml</template>
+			</action>
+			<block type="googleanalytics/ga" name="google_analytics" as="google_analytics" template="googleanalytics/ga.phtml" />
+			<block type="page/switch" name="store_language" as="store_language" template="comingsoon/switch/languages.phtml"/>
+
+			<block type="core/text_list" name="cs.head" />
+			<block type="core/text_list" name="cs.after_body_start" />
+			<block type="core/text_list" name="cs.before_body_end" />
+		</reference>
+	</comingsoon_index_maintenance>
+
+	<comingsoon_index_comingsoon>
+		<reference name="root">
+			<action method="setTemplate">
+				<template>comingsoon/comingsoon.phtml</template>
+			</action>
+			<block type="googleanalytics/ga" name="google_analytics" as="google_analytics" template="googleanalytics/ga.phtml" />
+			<block type="page/switch" name="store_language" as="store_language" template="comingsoon/switch/languages.phtml"/>
+			<block type="comingsoon/forms_register" name="comingsoon_form_register" template="comingsoon/forms/register.phtml" />
+
+			<block type="core/text_list" name="cs.head" />
+			<block type="core/text_list" name="cs.after_body_start" />
+			<block type="core/text_list" name="cs.before_body_end" />
+		</reference>
+	</comingsoon_index_comingsoon>
+
+</layout>

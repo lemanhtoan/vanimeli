@@ -1,0 +1,288 @@
+/*Container size*/
+.container-small, .container-large {
+    max-width: 100%;
+}
+.ajax-loading-img{
+    background-image: url(images/preloader.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .container-small {
+        width: 300px;
+    }
+    .container-large {
+        width: 970px;
+    }
+}
+@media (min-width: 992px) {
+    .container-small {
+        width: 500px;
+    }
+    .container-large {
+        width: 1170px;
+    }
+}
+@media (min-width: 1200px) {
+    .container-small {
+        width: 700px;
+    }
+    .container-large {
+        width: 1500px;
+    }
+}
+
+/*Container size*/
+@media (max-width: 992px) {
+  .offcanvas-widget-siderbars .offcanvas-widget-sidebar {
+      display: none;
+      width: 100%;
+  }
+  .offcanvas-widget-siderbars.column-left-active .offcanvas-widget-sidebar.canvas-show {
+      display: block;
+  }
+  .offcanvas-widget-siderbars.column-left-active .main-column, .offcanvas-widget-siderbars.column-right-active .main-column {
+      display: none;
+  }
+}
+
+.col-nopadding, .row-nopadding, .widget-nopadding{ padding:0px!important;}
+/* no-gutters Class Rules */
+.row.no-gutters {
+   margin-right: 0;
+   margin-left: 0;
+}
+.row.no-gutters > [class^="col-"], 
+.row.no-gutters > [class*=" col-"], .row.no-gutters > .row-inner > [class^="col-"],.row.no-gutters > .row-inner > [class*=" col-"] {
+   padding-right: 0;
+   padding-left: 0;
+}
+/*Aligment*/
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.left-block {
+  display: block;
+  margin-left: 0px;
+  margin-right: auto;
+}
+
+.right-block {
+  display: block;
+  margin-left: auto;
+  margin-right: 0px;
+}
+
+/*Collapse opener*/
+.block .opener {
+  position: absolute;
+  right: 0;
+  top: 2px;
+  display: block;
+  cursor: pointer;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
+/* Accordion style*/
+.accordian-play .panel-item-content {
+  display: none;
+  margin: 0 auto;
+  max-width: 1080px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.accordian-play .menu-title {
+  transition: 0.5s ease;
+  -moz-transition: 0.5s ease;
+  -webkit-transition: 0.5s ease;
+  -o-transition: 0.5s ease;
+  color: #141414;
+  cursor: pointer;
+  text-align: center;
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden;
+  border-top: solid 1px #d8d8d7; }
+  
+.accordian-play .menu-title .bg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 100%;
+    padding-bottom: 80px;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    z-index: 0; }
+.accordian-play .menu-title h3 {
+    transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+
+    font-weight: 400;
+    font-style: normal;
+    text-transform: uppercase;
+    font-size: 4.5em;
+    letter-spacing: 0.09em;
+    line-height: 1em;
+    position: relative;
+    z-index: 5; }
+.accordian-play .menu-title h3 span {
+      display: block;
+
+      font-weight: 300;
+      font-style: normal;
+      font-style: italic;
+      font-weight: normal;
+      text-transform: none;
+      font-size: 24px;
+      line-height: 0;
+      letter-spacing: 0;
+      position: relative;
+      top: 15px; }
+.accordian-play .menu-title p {
+    transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+    font-size: 2em;
+    font-style: italic;
+    margin: 0.3em 0 0;
+    position: relative;
+    z-index: 5; }
+.accordian-play .menu-title i {
+    transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+    color: #ccc;
+    display: block;
+    height: 38px;
+    position: absolute;
+    font-size: 38px;
+    width: 38px;
+    margin-top: -19px;
+    top: 50%;
+    right: 90px;
+    z-index: 5; }
+.accordian-play .menu-title.adjust {
+    padding: 50px 0; }
+.accordian-play.press .menu-title a {
+  color: inherit;
+  text-decoration: none; }
+.accordian-play.press .menu-title p {
+  font-weight: 300;
+  font-style: normal;
+  text-transform: uppercase;
+  color: #484747;
+  font-size: 1.3em;
+  letter-spacing: 0.15em;
+  margin: 0 0 0.75em; }
+.accordian-play.press .menu-title .bg {
+  background-repeat: no-repeat;
+  background-size: cover; }
+.accordian-play.press .menu-title i {
+  border: solid 3px #ccc;
+  border-radius: 36px;
+  height: 32px;
+  width: 32px;
+  font-size: 20px; }
+.accordian-play.press .menu-title i:before {
+    left: 1px;
+    top: 6px;
+    position: relative; }
+.accordian-play.press .menu-title:hover {
+  background: #8f2626; }
+.accordian-play.press .menu-title:hover p {
+    color: #fff; }
+.accordian-play.press .menu-title:hover i {
+    border: solid 3px #fff; }
+.widget-images .image-description p{margin:0;}
+.widget-images .image-description br{display:none!important;}
+
+/*widget social share links*/
+.social-sharing-links li {
+    float: left;
+    padding: 0 7px 7px;
+}
+.social-sharing-links a{
+   font-size: 18px;
+}
+/*widget social share links*/
+.lookbook-products {
+    overflow: hidden;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    min-width: 100px;
+
+}
+
+.product-view .ves-container .product-img-box, .product-view .ves-container .product-shop, .product-view .ves-container .add-to-cart-wrapper, .product-view .ves-container .block-related { width: 100%;}
+
+.jcarousel-control {
+    display: block;
+    text-align: center;
+}
+
+/*Product Deals Counting number*/
+.productdeals .item-countdown{
+    padding: 10px 0;
+}
+.productdeals .item-countdown ul{
+    /*text-align: center;*/
+}
+.productdeals .item-countdown ul li{
+    display: inline-block; 
+    margin: 0px 8px 0 0;
+    line-height: normal;
+    border: 0;
+}
+.productdeals .item-countdown ul li.first{}
+.productdeals .item-countdown ul li.last{ 
+    margin: 0px;
+}
+.productdeals .item-countdown ul li div{
+    text-transform: lowercase; 
+    font-size:12px;
+    display: inline-block; 
+}
+.productdeals .item-countdown ul li div.countdown_num{}
+.productdeals .item-countdown ul li div.countdown_num span.mw_dld_detail_num{}
+.productdeals .timeleft{
+}
+.productdeals .item-countdown ul li div.countdown_num span{
+    display: inline-block; 
+    font-size: 14px; 
+    font-weight: bold; 
+    color: #000;
+    padding: 4px 0px;
+}
+.productdeals .item-countdown ul li div.countdown_num span + span{
+    border-left: 0;
+}
+/*Product Deals Counting number*/
+
+/*Product builder: Media styles*/
+.product-image-gallery .gallery-image {
+    display: none;
+}
+.product-img-box .product-image img {
+    max-width: 100%;
+    max-height: 750px;
+    margin: 0px auto;
+}
+.product-image-gallery .gallery-image.visible {
+    display: block;
+}

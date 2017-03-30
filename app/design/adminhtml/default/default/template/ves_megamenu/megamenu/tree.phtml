@@ -1,0 +1,40 @@
+<?php
+/******************************************************
+ * @package Ves Megamenu module for Magento 1.4.x.x and Magento 1.7.x.x
+ * @version 1.0.0.1
+ * @author http://landofcoder.com
+ * @copyright	Copyright (C) December 2010 LandOfCoder.com <@emai:landofcoder@gmail.com>.All rights reserved.
+ * @license		GNU General Public License version 2
+*******************************************************/
+?>
+<div class="categories-side-col">
+    <div class="content-header1">
+        <h3 class="icon-head head-categories"><?php echo Mage::helper('ves_megamenu')->__('Tree Megamenu Management');?></h3>
+    <ul style="clear:both">
+        <li><?php echo $this->getImportCategoriesButtonHtml() ?></li>
+        <li><?php echo $this->getImportMenusButtonHtml() ?></li>
+        <li><?php echo $this->getDeleteCategoriesButtonHtml() ?></li>
+        <li><?php echo $this->getDeleteAllButtonHtml() ?></li>
+    </ul>
+    </div>
+    <?php echo $this->getStoreSwitcherHtml();?>
+    <div class="navbar navbar-default" style="width:100%;min-height:50px;">
+        <nav id="mainmenutop" class="megamenu" role="navigation">
+            <div class="navbar-header">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+             <?php echo $this->getTreeHtml();?>
+             </div></div>
+        </nav>
+    </div>
+</div>
+<div id="dialog_menu" style="padding: 3px 0px 0px 0px;display:none">
+    <div class="import-form-wrapper">
+        <div class="storeviews">
+            <?php echo $this->getStoreSwitcherNoactionHtml();?>
+        </div>
+        <br/>
+        <div class="action">
+            <button class="scalable" id="import_menu_button" rel="" type="button"><span><span><span>Import Menus</span></span></span></button>
+        </div>
+    </div>
+</div>

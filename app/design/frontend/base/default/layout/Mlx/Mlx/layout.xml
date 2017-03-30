@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">			
+			<action method="addCss"><stylesheet>Mlx/Mlx/css/font-awesome.min.css</stylesheet></action>
+			<action method="addJs"><script>Mlx/Mlx/jquery.js</script></action>            	
+		</reference>
+		<reference name="global_notices">
+			<action method="setTemplate"><template>Mlx/Mlx/page/html/notices.phtml</template></action>
+		</reference>
+    </default>    
+</layout>

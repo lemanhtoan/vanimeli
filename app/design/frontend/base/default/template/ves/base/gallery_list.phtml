@@ -1,0 +1,144 @@
+<?php
+/*
+* Ves Base Widget - Single image
+*
+* @package   vesbase
+* @version   5.0
+* @author    http://www.venustheme.com
+* @copyright Copyright (C) October 2013 venustheme.com <@emai:venustheme@gmail.com>
+*               <info@venustheme.com>.All rights reserved.
+* @license   GNU General Public License version 2
+*/
+if($images):
+$rad = rand();
+//Popup Slideshow
+$slideshow = $this->getConfig("slideshow", 0);
+$slideshowSpeed = $this->getConfig("slideshow_speed", 2500);
+$moduleId = "veswidgetgallery".rand().time();
+$_helper = Mage::helper('catalog/output');
+$image_width = 60;
+$image_height = 60;
+$show_info = $this->getConfig("show_info", 0);
+?>
+<div class="widget-gallery-list block <?php echo $addition_cls; ?> <?php echo isset($stylecls)&&$stylecls?'block-'.$stylecls:'';?>">
+	<?php if (isset($widget_heading)&&!empty($widget_heading)): ?>
+		<div class="block-title">
+			<?php echo $widget_heading; ?>
+		</div>
+	<?php endif; ?>
+	<div class="widget-inner block-content clearfix">
+		<ul>
+		<?php foreach( $images as $i => $image) :   ?>
+			<li>				
+				<a class="group-file<?php echo $moduleId; ?> fancybox" href="<?php echo $image['imageURL'];?>" title="<?php echo $image['title'];?>" rel="group-gallery-<?php echo $moduleId; ?>">
+					<img src="<?php echo $image['thumbnailURL'];?>" alt="<?php echo $image['title'];?>"/>
+				</a>
+				<?php if($show_info && ($image['link'] || $image['title'] || $image['description'])): ?>
+                    <div class="desc-gallery">
+                        <div class="gallery-title">
+                            <?php if($image['link']): ?>
+                                <a href="<?php echo $image['link']; ?>"><?php echo $image['title'];?></a>
+                            <?php else: ?>
+                                <?php echo $image['title'];?>
+                            <?php endif; ?>
+                        </div>
+                        <?php if($image['description']): ?>
+                        <div class="gallery-description"><?php echo $image['description'];?></div>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+			</li>
+		<?php endforeach;?>
+		</ul>
+	</div>
+</div>
+<div id="lookbook-products<?php echo $moduleId; ?>" style="display: none;">
+<?php foreach ($images as $i => $image): ?>
+	<?php if(isset($image['products']) && $image['products'] && count($image['products']) > 0): ?>
+		<div class="owlcarousel">
+			<div class="owl-products-carousel owl-carousel">
+			<?php foreach($image['products'] as $_product): ?>
+				 <?php $price_prefix = "lookbook_".$moduleId."_".rand().time(); ?>
+				 <div class="item product-mini-item">
+				 	<div class="product-mini-info">
+				 		<div class="product-mini-image">
+				 			<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo Mage::helper('core')->quoteEscape($_product->getName()) ?>" class="product-image img">
+				 				<img class="img-responsive" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($image_width,$image_height); ?>" width="<?php echo $image_width; ?>" height="<?php echo $image_height; ?>" alt="<?php echo Mage::helper('core')->quoteEscape($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+				 			</a>
+				 		</div>
+				 		<div class="product-mini-info">
+				 			<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo Mage::helper('core')->quoteEscape($_product->getName()) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a>
+
+				 			<?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+
+				 			<div class="price" >
+			                    <?php echo $this->getPriceHtml($_product, true, $price_prefix) ?>
+			                </div>
+				 		</div>
+				 	</div>
+				</div>
+			<?php endforeach; ?>
+			</div>
+		</div>
+	<?php else: ?>
+	<div style="display:none"></div>
+	<?php endif; ?>
+<?php endforeach; ?>
+</div>
+<?php if ($ispopup): ?>
+<script type="text/javascript">
+	<?php if($popup_plugin == "colorbox"): ?>
+		
+		jQuery(document).ready(function( $ ){
+			$(".group-file<?php echo $moduleId; ?>").colorbox({rel:'group-gallery-<?php echo $moduleId?>', overlayClose: true, opacity: 0.5, slideshow:<?php echo $slideshow?'true':'false'; ?>, slideshowSpeed: <?php echo (int)$slideshowSpeed; ?>});
+		});
+		
+	 <?php else: ?>
+	 	jQuery(document).ready(function() {
+		 	jQuery(".group-file<?php echo $moduleId; ?>").fancybox({
+				prevEffect		: 'none',
+				nextEffect		: 'none',
+				autoPlay        : <?php echo $slideshow?'true':'false'; ?>,
+				playSpeed       : <?php echo (int)$slideshowSpeed; ?>,
+				<?php if($use_custom_button): ?>
+				closeBtn		: false,
+				<?php endif; ?>
+				helpers		: {
+					<?php if($use_custom_button): ?>
+					buttons	: {},
+					<?php endif; ?>
+					<?php if($enable_thumb): ?>
+					thumbs	: {
+						width	: <?php echo (float)$popup_thumb_width; ?>,
+						height	: <?php echo (float)$popup_thumb_height; ?>
+					},
+					<?php endif; ?>
+					title	: { type : 'inside' }
+				},
+				afterShow: function() {
+					var list_products = jQuery("#lookbook-products<?php echo $moduleId; ?> > div").eq(this.index).html();
+					var customContent = "<div class='lookbook-products' style='display:none'><div class=\"lookbook-title\"><?php echo Mage::helper('core')->quoteEscape('Lookbook'); ?></div>"+list_products+"</div>";
+
+					if(list_products) {
+						jQuery('.fancybox-overlay .fancybox-skin').first().append(customContent);
+						jQuery('.fancybox-overlay .lookbook-products').first().show();
+						
+						var productsowlcarousel = jQuery('.lookbook-products .owl-products-carousel').first();
+					        productsowlcarousel.owlCarousel({
+					            autoPlay: false,
+					            slideSpeed: 500,
+					            autoplayHoverPause: true,
+					            navigationText: ["<span class='fa fa-angle-left'></span>","<span class='fa fa-angle-right'></span>"],
+					            navigation: true,
+					            autoWidth: false,
+					            responsive: true,
+					            items: 4
+					        });
+					}
+				}
+			});
+		});
+	 <?php endif; ?>
+	</script>
+<?php endif; ?>
+<?php endif; ?>

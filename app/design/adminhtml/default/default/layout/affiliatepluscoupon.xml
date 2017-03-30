@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+<!--    Changed By Adam 29/10/2015: Fix issue of SUPEE 6788 - in Magento 1.9.2.2-->
+    <adminhtml_affiliatepluscoupon_account_coupons>
+        <block type="core/text_list" name="root">
+            <block type="affiliatepluscoupon/adminhtml_account_edit_tab_coupon" name="account.tabs.coupon" />
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                <action method="initSerializerBlock">
+                    <grid_block_name>account.tabs.coupon</grid_block_name>
+                    <data_callback>getSelectedRelatedCoupons</data_callback>
+                    <hidden_input_name>account_coupon</hidden_input_name>
+                    <reload_param_name>ocoupon</reload_param_name>
+                </action>
+                <action method="addColumnInputName">
+                    <input_name>coupon_code</input_name>
+                </action>
+            </block>
+        </block>
+    </adminhtml_affiliatepluscoupon_account_coupons>
+    <adminhtml_affiliatepluscoupon_account_couponsgrid>
+        <block type="core/text_list" name="root">
+            <block type="affiliatepluscoupon/adminhtml_account_edit_tab_coupon" name="account.tabs.coupon" />
+        </block>
+    </adminhtml_affiliatepluscoupon_account_couponsgrid>
+	
+    <adminhtml_affiliatepluscoupon_transaction_index>
+        <reference name="content">
+            <block type="affiliatepluscoupon/adminhtml_transaction" name="transaction" />
+        </reference>
+    </adminhtml_affiliatepluscoupon_transaction_index>
+	
+    <adminhtml_affiliatepluscoupon_link_index>
+        <reference name="content">
+            <block type="affiliatepluscoupon/adminhtml_link" name="transaction" />
+        </reference>
+    </adminhtml_affiliatepluscoupon_link_index>
+        
+    <!--hainh  23-07-2014 -->
+    <adminhtml_sales_order_create_index>
+        <reference name="coupons">
+            <action method="setTemplate">
+                <template>affliatepluscoupon/rewrite/form.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_sales_order_create_index>
+    <adminhtml_sales_order_create_load_block_data>
+        <reference name="coupons">
+            <action method="setTemplate">
+                <template>affliatepluscoupon/rewrite/form.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_sales_order_create_load_block_data>        
+    <adminhtml_sales_order_create_load_block_items>
+        <reference name="coupons">
+            <action method="setTemplate">
+                <template>affliatepluscoupon/rewrite/form.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_sales_order_create_load_block_items>
+    <!--hainh end edit -->
+        
+</layout>

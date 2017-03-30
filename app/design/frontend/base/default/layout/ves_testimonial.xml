@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+	    	<action method="addItem"><type>skin_css</type><name>ves_testimonial/style.css</name></action>
+	  	</reference>
+	</default>	
+	<cms_index_index translate="label">
+		<reference name="content">
+			<!-- example to add more testimonial 
+			<block type="ves_testimonial/scroll" before="-" name="testimonial.scroll2">
+				<action method="setConfig">
+					<key>title</key>
+					<value>New Ves Product Carousel </value>
+				</action>
+				<action method="setConfig">
+					<key>catsid</key>
+					<value>4,16</value>
+				</action>
+				<action method="setConfig">
+					<key>sourceProductsMode</key>
+					<value>most_viewed</value>
+				</action>
+				<action method="setConfig">
+					<key>show_desc</key>
+					<value>0</value>
+				</action>
+				<action method="setConfig">
+					<key>auto_play</key>
+					<value>0</value>
+				</action>
+			</block>
+			-->
+			<block type="ves_testimonial/scroll" before="-" name="testimonial.scroll"/>		
+		</reference>
+	</cms_index_index>
+
+	<testimonial_index_index>
+        <reference name="content">
+            <block type="ves_testimonial/testimonial_list" name="testimonial.frontpage">
+            	 <block type="ves_testimonial/testimonial_toolbar" name="list.toolbar" template="ves/testimonial/toolbar.phtml"/> 
+            </block>
+        </reference>
+		
+		<reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+		<!--<reference name="right">
+			<block type="ves_testimonial/search" name="ves.search" before="-" />
+			<block type="ves_testimonial/cmenu" name="ves.cmenu" after="ves.search" />
+			<block type="ves_testimonial/archives" name="ves.archives" after="ves.cmenu" />
+			<block type="ves_testimonial/latestcomment" name="ves.latestcomment" after="ves.cmenu" />
+			<block type="ves_testimonial/tags" name="ves.tags" after="-" /> 
+		</reference> -->
+		<!-- <reference name="content">
+            <block type="ves_blog/blog_list" name="blog.frontpage">
+            	<block type="ves_blog/blog_toolbar" name="list.toolbar" template="ves/blog/toolbar.phtml"/>
+            </block>
+        </reference>
+		
+		<reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference> -->
+		
+
+    </testimonial_index_index>
+</layout>

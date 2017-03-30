@@ -1,0 +1,4 @@
+<?php $product_info_block = Mage::registry("product_info_block"); ?>
+<?php $_helper = $product_info_block->helper('catalog/output'); ?>
+<?php $_product = $product_info_block->getProduct(); ?>
+<?php echo $product_info_block->getReviewsSummaryHtml($_product, 'default', false)?>

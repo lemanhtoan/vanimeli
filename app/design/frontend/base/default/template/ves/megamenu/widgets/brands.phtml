@@ -1,0 +1,38 @@
+<?php 
+  $widget = $this->getWidget(); 
+  $show_name = isset($widget['show_name'])?$widget['show_name']: 1;
+  $brands = isset($widget['brands'])?$widget['brands']: array();
+  $image_height = isset($widget['image_height'])?$widget['image_height']: 200;
+  $image_width = isset($widget['image_width'])?$widget['image_width']: 200;
+  if($brands) {
+?>
+<?php if( isset($widget['widget_name']) & $show_name){
+?>
+<div class="menu-title"><?php echo $widget['widget_name'];?></div>
+<?php
+}?>
+<div class="widget-brand-list">
+  <div class="widget-inner">
+    
+      <?php foreach ($brands as $brand) { ?>
+      <div class="post-item itemcol">
+        <h3><a href="<?php echo $brand->getLink();?>" title="<?php echo $brand->getTitle();?>"><?php echo $brand->getTitle(); ?></a></h3>
+        <div class="post-image">
+          <a href="<?php echo $brand->getLink();?>" title="<?php echo $brand->getTitle();?>">
+          <?php
+               $image = "";
+               if($image_height && $image_width) {
+                $image = Mage::helper('ves_megamenu')->resizeImage($brand->getFile(), $image_width, $image_height);
+               } else {
+                $image = $brand->getImageUrl("l");
+               }
+              ?>
+          <img src="<?php echo $image; ?>" class="post-image img-responsive" alt="<?php echo $brand->getTitle();?>"/>
+        </a>
+        </div>
+      </div>
+      <?php } ?>
+      
+  </div>
+</div>
+<?php } ?>

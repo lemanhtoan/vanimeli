@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<!--
+NOTICE OF LICENSE
+
+This source file is subject to the NekloEULA that is bundled with this package in the file ICENSE.txt.
+
+It is also available through the world-wide-web at this URL: http://store.neklo.com/LICENSE.txt
+
+Copyright (c)  Neklo (http://store.neklo.com/)
+-->
+<config>
+    <tabs>
+        <neklo translate="label" module="neklo_core">
+            <label>[NEKLO]</label>
+            <sort_order>310</sort_order>
+        </neklo>
+    </tabs>
+    <sections>
+        <neklo_core translate="label" module="neklo_core">
+            <label>Extensions &amp; Contact</label>
+            <tab>neklo</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>9999</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <extension translate="label">
+                    <label>Extensions Information</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>neklo_core/system_extension</frontend_model>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                </extension>
+                <contact translate="label">
+                    <label>Contact Form</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>neklo_core/system_contact</frontend_model>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <name translate="label">
+                            <label>Contact Name</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>neklo_core/system_config_backend_empty</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </name>
+                        <email translate="label">
+                            <label>Contact Email</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>neklo_core/system_config_backend_empty</backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </email>
+                        <subject translate="label">
+                            <label>Subject</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>neklo_core/system_config_backend_empty</backend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </subject>
+                        <reason translate="label">
+                            <label>Reason</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>neklo_core/source_reason</source_model>
+                            <backend_model>neklo_core/system_config_backend_empty</backend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </reason>
+                        <other_reason translate="label">
+                            <label>Other Reason</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>neklo_core/system_config_backend_empty</backend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <reason>other</reason>
+                            </depends>
+                        </other_reason>
+                        <message translate="label">
+                            <label>Message</label>
+                            <frontend_type>textarea</frontend_type>
+                            <backend_model>neklo_core/system_config_backend_empty</backend_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </message>
+                        <button>
+                            <frontend_model>neklo_core/system_contact_send</frontend_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </button>
+                    </fields>
+                </contact>
+                <newsletter translate="label">
+                    <label>Subscribe to Newsletter</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <name translate="label">
+                            <label>Name</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>neklo_core/system_config_backend_empty</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </name>
+                        <email translate="label">
+                            <label>Email</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>neklo_core/system_config_backend_empty</backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </email>
+                        <subscribe_button>
+                            <frontend_model>neklo_core/system_newsletter_subscribe</frontend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </subscribe_button>
+                    </fields>
+                </newsletter>
+                <notification>
+                    <label>Notifications</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <type translate="label">
+                            <label>Receive news about:</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <source_model>neklo_core/source_subscription_type</source_model>
+                        </type>
+                    </fields>
+                </notification>
+            </groups>
+        </neklo_core>
+    </sections>
+</config>

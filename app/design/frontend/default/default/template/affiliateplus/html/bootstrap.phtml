@@ -1,0 +1,23 @@
+
+<!--script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery-1.11.1.min.js');?>"></script-->
+<script>
+if(!window.jQuery)
+{
+   var script = document.createElement('script');
+   script.type = "text/javascript";
+   script.src = "<?php echo $this->getSkinUrl('js/jquery-1.11.1.min.js');?>";
+   document.getElementsByTagName('head')[0].appendChild(script);
+}
+</script>
+<!--<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/bootstrap/bootstrap.min.css');?>" media="all" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/bootstrap/custome-bootstrap.css');?>" media="all" />-->
+
+<script type="text/javascript">
+    var $aff = jQuery.noConflict();
+    $aff(document).ready(function(){
+         $aff( "body" ).addClass( "affiliate-page" );
+         $aff( ".affiliate-page .messages" ).addClass( "col-lg-12 col-md-12 col-sm-12 col-xs-12" );
+         $aff( ".affiliate-page .message" ).addClass( "col-lg-12 col-md-12 col-sm-12 col-xs-12" );
+    })
+   
+</script>

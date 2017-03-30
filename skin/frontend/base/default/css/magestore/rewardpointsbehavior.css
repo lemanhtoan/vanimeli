@@ -1,0 +1,104 @@
+.rewardpointsbehavior-checkout-action{
+    /*background-color: #FFE8DB;*/
+    float: left;
+    margin: 2px 2px 7px 0px;
+    padding: 1px;
+    width: 172px;
+    text-align: left;
+}
+.account-create .rewardpointsbehavior-checkout-action{
+    clear:both;
+}
+.account-create .rewardpointsbehavior-checkout-action1{
+    float: none;
+    width: 100% !important;
+    margin: 0px !important;
+}
+.account-login .rewardpointsbehavior-checkout-action1{
+    float: none;
+}
+.rewardpointsbehavior-checkout-action1{
+    /*background-color: #FFE8DB;*/
+    float: left;
+    margin: 0px 0px 0px 5px;
+    padding: 1px;
+    width: 172px;
+    text-align: left;
+}
+.rewardpointsbehavior-checkout-action .rewardpointsbehavior-icon{
+    float: right !important;
+}
+.rewardpointsbehavior-product-view{
+    width: 100%;
+    float: left;
+}
+.rewardpointsbehavior-product-view .rewardpointsbehavior-checkout-action{
+    width: auto;
+}
+
+.twitter-count-horizontal,
+.behavior-facebook-like.behavior-social{
+    width: 85px !important;
+    /*padding-right: 2px !important;*/
+    float:left;
+}
+#fb-send-id-behavior span{
+    vertical-align:baseline !important;
+}
+#___plusone_0, #___plusone_0 iframe{
+    width: 67px !important;
+    /*padding-right: 2px !important;*/
+}
+.behavior-google-plus {width: 67px; display: inline-block;}
+.behavior-linkedin {width: 100px; display: inline-block;}
+.share-social-button {display: inline;}
+/*.share-login {padding-left: 10px; }*/
+.behavior-social {display: inline-block; vertical-align: top;}
+
+.behavior-facebook-share .share-button .label {display: inline-block;vertical-align: top;zoom: 1;padding: 1px 4px 0 23px;white-space: nowrap;}
+.behavior-facebook-share .share-button {
+    font-size: 11px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 20px;
+    max-width: 100%;
+    position: relative;
+    display: inline-block;
+    zoom: 1;
+    background-color: #f8f8f8;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#dedede));
+    background-image: -moz-linear-gradient(top,#fff,#dedede);
+    background-image: -o-linear-gradient(top,#fff,#dedede);
+    background-image: -ms-linear-gradient(top,#fff,#dedede);
+    background-image: linear-gradient(top,#fff,#dedede);
+    border: #ccc solid 1px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color: #333;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    text-decoration: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+.behavior-facebook-share .share-button i {
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    margin-top: -7px;
+    width: 14px;
+    height: 14px;
+    background: transparent url('images/facebook-icon.png') 0 0 no-repeat;
+    background-image: url('images/facebook-icon.png');
+}
+.behavior-facebook-share a.share-button:hover{
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#e8e8e8));
+}

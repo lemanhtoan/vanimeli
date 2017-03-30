@@ -1,0 +1,194 @@
+"Manage Gift Cards","Manage Gift Cards"
+"Add New Gift Card","Add New Gift Card"
+"Save Gift Card","Save Gift Card"
+"Delete Gift Card","Delete Gift Card"
+"Resend Gift Card","Resend Gift Card"
+"Edit Gift Card \'%s\'","Edit Gift Card \'%s\'"
+"New Gift Card","New Gift Card"
+"Card ID","Card ID"
+"Card Code","Card Code"
+"Initial Value","Initial Value"
+"Current Balance","Current Balance"
+"Order","Order"
+"View","View"
+"Date Created","Date Created"
+"Card Type","Card Type"
+"Print","Print"
+"E-mail","E-mail"
+"Offline","Offline"
+"Status","Status"
+"Active","Active"
+"Inactive","Inactive"
+"Used","Used"
+"Delete","Delete"
+"Are you sure?","Are you sure?"
+"Resend","Resend"
+"Manage Gift Cards","Manage Gift Cards"
+"Gift Card Information","Gift Card Information"
+"Gift Card Information","Gift Card Information"
+"Gift Card Info","Gift Card Info"
+"Card Code","Card Code"
+"Initial Value","Initial Value"
+"Order","Order"
+"Initial Value","Initial Value"
+"Current Balance","Current Balance"
+"Status","Status"
+"Active","Active"
+"Inactive","Inactive"
+"Gift Card Type","Gift Card Type"
+"E-mail","E-mail"
+"Print","Print"
+"Recipient Info","Recipient Info"
+"Offline Address (for offline cards only)","Offline Address (for offline cards only)"
+"To Name","To Name"
+"To Email","To Email"
+"From Name","From Name"
+"Message","Message"
+"Card amount is not within the specified range.","Card amount is not within the specified range."
+"%s was added to your shopping cart.","%s was added to your shopping cart."
+"Cannot add the item to shopping cart.","Cannot add the item to shopping cart."
+"To redeem your gift card or to use your gift card balance you need to be logged in.","To redeem your gift card or to use your gift card balance you need to be logged in."
+"Gift Card ""%s"" was applied.","Gift Card ""%s"" was applied."
+"Gift Card ""%s"" is not valid.","Gift Card ""%s"" is not valid."
+"To redeem your gift card or to use your gift card balance you need to be logged in.","To redeem your gift card or to use your gift card balance you need to be logged in."
+"To redeem your gift card you need to be logged in.","To redeem your gift card you need to be logged in."
+"Gift Card ""%s"" was applied.","Gift Card ""%s"" was applied."
+"Gift Card ""%s"" is not valid.","Gift Card ""%s"" is not valid."
+'Gift Card "%s" was used.','Gift Card "%s" was used.'
+"Gift Cards","Gift Cards"
+"Gift Card","Gift Card"
+"Card does not exists","Card does not exists"
+"Gift card was successfully saved","Gift card was successfully saved"
+"Unable find gift card to save","Unable find gift card to save"
+"Gift card was successfully deleted","Gift card was successfully deleted"
+"Please select gift card(s)","Please select gift card(s)"
+"Total of %d geftcard(s) were successfully deleted","Total of %d geftcard(s) were successfully deleted"
+"Please select gift card(s)","Please select gift card(s)"
+"%d giftcard(s) were successfully resent","%d giftcard(s) were successfully resent"
+"There was an error processing your order. Please contact us or try again later.","There was an error processing your order. Please contact us or try again later."
+"Please specify the product\'s option(s).","Please specify the product\'s option(s)."
+"My Gift Cards","My Gift Cards"
+"My Gift Card balance","My Gift Card balance"
+"Enter the Gift Card code","Enter the Gift Card code"
+"Redeem","Redeem"
+"Card Type","Card Type"
+"Move to Wishlist","Move to Wishlist"
+"Gift Gards","Gift Gards"
+"Use my Gift Card balance.","Use my Gift Card balance."
+"Or redeem and use your Gift Card now:","Or redeem and use your Gift Card now:"
+"Redeem and Use","Redeem and Use"
+"To use your gift cards, please <a href=""%s"">register</a> or <a href=""%s"">log in</a>.","To use your gift cards, please <a href=""%s"">register</a> or <a href=""%s"">log in</a>."
+"Choose the type of Gift Card","Choose the type of Gift Card"
+"E-mail Gift Card (to someone or yourself)","E-mail Gift Card (to someone or yourself)"
+"Print-Out Gift Card","Print-Out Gift Card"
+"Amount","Amount"
+"Recipient E-mail","Recipient E-mail"
+"To","To"
+"From","From"
+"Message","Message"
+"Used Gift Cards","Used Gift Cards"
+"Total Gift Cards Amount","Total Gift Cards Amount"
+"Redeem and use your Gift Card now","Redeem and use your Gift Card now"
+"Check Gift Card Balance:","Check Gift Card Balance:"
+"Purchased Gift Cards","Purchased Gift Cards"
+"Used Gift Cards","Used Gift Cards"
+'Pre-Generated Codes','Pre-Generated Codes'
+'Gift Cards import','Gift Cards import'
+'On Sale','On Sale'
+'Sold','Sold'
+'Export Gift Cards','Export Gift Cards'
+'List ID','List ID'
+'Filename','Filename'
+'Date Created','Date Created'
+'Action','Action'
+'Download','Download'
+'Export Settings','Export Settings'
+'File type for export','File type for export'
+'Path to file','Path to file'
+'Value delimiter','Value delimiter'
+'Enclose Values In','Enclose Values In'
+'Export Parameters','Export Parameters'
+'Cards type for export','Cards type for export'
+'All','All'
+'Email','Email'
+'Cards status for export','Cards status for export'
+'Import Gift Cards','Import Gift Cards'
+'Download Gift Cards Created Lists','Download Gift Cards Created Lists'
+'Create Gift Cards','Create Gift Cards'
+'Import Gift Cards','Import Gift Cards'
+'Path to file for Gift Cards','Path to file for Gift Cards'
+'Path to export Cards Code','Path to export Cards Code'
+'Count of Gift Cards','Count of Gift Cards'
+'Gift Cards Amount','Gift Cards Amount'
+'Import Gift Cards','Import Gift Cards'
+'Import Gift Cards from CSV','Import Gift Cards from CSV'
+'Gift Card Statistic','Gift Card Statistic'
+'Generate Card Code','Generate Card Code'
+'Enter Card Code','Enter Card Code'
+'Gift Card Store','Gift Card Store'
+'Order N','Order N'
+'Used Amount','Used Amount'
+'Balance','Balance'
+'Created At','Created At'
+'Recipient','Recipient'
+'Used','Used'
+'Action','Action'
+'Import Gift Card','Import Gift Card'
+'Path to file for Gift Cards','Path to file for Gift Cards'
+'Gift Card "%s" was added.','Gift Card "%s" was added.'
+'Gift Card "%s" was succefuly removed.','Gift Card "%s" was succefuly removed.'
+'Gift Cards Export','Gift Cards Export'
+"Gift Cards succesfully exported","Gift Cards succesfully exported"
+'Import Gift Cards','Import Gift Cards'
+'Gift Cards where succesfully imported ','Gift Cards where succesfully imported '
+'An error occurred while importing Gift Cards.','An error occurred while importing Gift Cards.'
+'Gift Cards List', 'Gift Cards List' 
+'Download Gift Cards List','Download Gift Cards List'
+'Credit memo\'s total must be positive.','Credit memo\'s total must be positive.'
+'The credit memo has been created.','The credit memo has been created.'
+'Cannot save the credit memo.','Cannot save the credit memo.'
+'Gift cards was successfully created','Gift cards was successfully created'
+'Import Gift Cards from CSV','Import Gift Cards from CSV',
+'Card Currency:','Card Currency:'
+'Country:','Country:'
+'State:','State:'
+'City:','City:'
+'Street:','Street:'
+'ZIP:','ZIP:'
+'Phone:','Phone:'
+'Mail Delivery Date:','Mail Delivery Date:'
+'Enter your Gift Card','Enter your Gift Card'
+'applied from Gift Card','applied from Gift Card'
+'Remaining card balance','Remaining card balance'
+'Remove','Remove'
+'Used Gift Cards','Used Gift Cards'
+'Card Code','Card Code'
+'Card Balance','Card Balance'
+'Select amount','Select amount'
+'Preview my gift card','Preview my gift card'
+'Purchased Gift Cards','Purchased Gift Cards'
+"Card","Card"
+"Amount to use","Amount to use"
+'My Gift Cards','My Gift Cards'
+'Check Gift Card Balance','Check Gift Card Balance'
+'Enter the Gift Card code','Enter the Gift Card code'
+'Check','Check'
+'Redeem','Redeem'
+'Enter your Gift Card','Enter your Gift Card'
+'Please enter a valid Gift Card code.','Please enter a valid Gift Card code.'
+'Hello','Hello'
+'You have received a','You have received a'
+'from','from'
+'This card may be redeemed on','This card may be redeemed on'
+'website. Happy shopping','website. Happy shopping'
+'Gift Card value','Gift Card value'
+'Gift Card claim code','Gift Card claim code'
+'To redeem and use you gift card','To redeem and use you gift card'
+'Create an account and login into','Create an account and login into'
+'Redeem the card in My Gift Cards page of My Account section','Redeem the card in My Gift Cards page of My Account section'
+'Alternatively, you can redeem the card on My Cart page before proceeding to checkout','Alternatively, you can redeem the card on My Cart page before proceeding to checkout'
+'If you have any questions please contact us at','If you have any questions please contact us at'
+'Sorry but such card does not exists','Sorry but such card does not exists'
+'Maybe already activated','Maybe already activated'
+'Or maybe it was bought not by you','Or maybe it was bought not by you'
+"Gift cards cannot be used to purchase gift cards","Gift cards cannot be used to purchase gift cards"

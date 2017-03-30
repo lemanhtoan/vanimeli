@@ -1,0 +1,55 @@
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/* ============ Reward Points Stylesheets ============ */
+
+/* Restyle Adminhtml Loading Mask */
+#loading-mask {z-index: 5000;}
+
+
+/************** Slider **************/
+#rewardpoints-slider-container {}
+#rewardpoints-slider { position: relative; z-index: 9; height: 18px; margin: 12px auto 18px; padding: 0 24px; cursor: pointer; width: 209px; float: left;}
+#rewardpoints-slider-zoom-out { position: absolute; left: 1px; top: 0px;}
+#rewardpoints-track { position: relative; height: 18px; background: url('../../images/rewardpoints/reward_rule.gif') -1px 0px repeat-x;}
+#rewardpoints-handle { position: absolute; top: -1px; width: 9px; height: 22px; background: url('../../images/magnifier_handle.gif') 0 0 no-repeat;}
+#rewardpoints-slider-zoom-in { position: absolute; right: 1px; top: 0px;}
+.rewardpoints-slider-label { margin: 12px 0 0 5px; float: left;}
+
+#rewardpoints-login-msg, #rewardpoints-needmore-msg { clear:both; min-height:13px; margin:3px 0 0; padding-left:17px;line-height:13px; background:url('../../images/validation_advice_bg.gif') 2px 0 no-repeat; color:#eb340a;}
+
+#rewardpoints-needmore-points { font-size: 13px; font-weight: bold;}
+
+.rewards-sales-rules dt {margin-top: 7px;}
+.rewards-sales-rules dt label {font-weight: bold; color: #666;}
+.rewards-sales-rules dd {margin-left: 7px;}
+.rewards-sales-rules #rewardpoints-slider {margin-bottom: 10px;}
+.rewards-sales-rules #reward_sales_rule {width: 140px; margin-left: 3px;}
+.rewardpoints-slider-input .input-point {text-align: center;}
+.rewardpoints-slider-input .input-max {margin-top: 5px;}
+#reward_sales_point {width: 49px;}
+#reward_ajax_loading {margin: 10px; text-align: center; font-style: italic;}
+
+.rule_refreshing_label {color: #666; font-style: italic;}
+
+.content #cart-rewards-form {width: 280px;}
+.content #cart-rewards-form .rewards-sales-rules label {float: none;}
+.content .rewards-sales-rules dd label {font-weight: normal; color: #000;}
+

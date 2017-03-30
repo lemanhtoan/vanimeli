@@ -1,0 +1,33 @@
+<?php if ($this->isEnabled()) { ?>
+    <script type="text/javascript">
+        //<![CDATA[
+    <?php if ($this->_helper()->getSignConfig('newsletter') && $this->_helper()->getSignConfig('show_newsletter')) { ?>  
+            if($('newsletter-validate-detail') && $('newsletter-validate-detail').down('.block-content') && $('newsletter-validate-detail').down('.block-content').down('.actions')){
+                var eladd=$('newsletter-validate-detail').down('.block-content').down('.actions');
+                eladd.insert({
+                    after: '<div class="rewardpointsbehavior-checkout-action" style="width: inherit"><a href="<?php echo Mage::getUrl('rewardpoints/index/index') ?>" style="float:left; margin-right:3px"><?php echo $this->_helper()->getIcon() ?></a>'+'<?php echo $this->getRewardNewsletterInFo() ?></div>'
+                });
+            }
+    <?php } ?>   
+
+    <?php if ($this->_helper()->getPollConfig('poll') && $this->_helper()->getPollConfig('show_talkpoll')) { ?>
+            if($('pollForm') && $('pollForm').down('.actions') && $('pollForm').down('.actions').down('.button')){
+                var eladd=$('pollForm').down('.actions').down('.button');
+                eladd.insert({
+                    before: '<div class="rewardpointsbehavior-checkout-action"><a href="<?php echo Mage::getUrl('rewardpoints/index/index') ?>"><?php echo $this->_helper()->getIcon() ?></a>&nbsp;&nbsp;'+'<?php echo $this->getRewardPollInFo() ?></div>'
+                });
+            }
+    <?php } ?>
+ <?php $controllerName = Mage::app()->getRequest()->getControllerName(); ?>
+<?php if ($this->_helper()->getTagConfig('tag') && $this->_helper()->getTagConfig('show_tagging')&&($controllerName!='account')) { ?>
+            var temp=$$('.box-tags');
+            if(temp[0] && temp[0].down('h2')){
+                var eladd=temp[0].down('h2');
+                eladd.insert({
+                    after: '<div class="rewardpointsbehavior-product-view"><div class="rewardpointsbehavior-checkout-action"><a href="<?php echo Mage::getUrl('rewardpoints/index/index') ?>"><?php echo $this->_helper()->getIcon() ?></a>&nbsp;'+'<?php echo $this->getRewardTagProductInFo() ?></div></div>'
+                });
+            }
+    <?php } ?>
+        //]]>
+    </script>
+<?php } ?>

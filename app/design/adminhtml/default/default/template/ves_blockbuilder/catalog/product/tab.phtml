@@ -1,0 +1,32 @@
+<?php
+/**
+ * Custom tab template
+ */
+$profile_collection = $this->getProductLayoutProfiles();
+$profile_id = $this->getCurrentProfileId();
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__("Ves Product Layout Builder"); ?></h4>
+    </div>
+    <fieldset class="fieldset fieldset-wide" id="grop_layoutbuilder_fields">
+    	<div class="hor-scroll">
+    		<table class="form-list" cellspacing="0"> 
+    			<tr>
+    				<td class="label"><label for="block_id"><?php echo $this->__("Layout Builder Profile"); ?></label></td>
+    				<td class="value">
+    					<select name="block_id" id="block_id" class="select">
+				    		<option value=""><?php echo $this->__("-- Select A Profile --");?></option>
+				    		<?php if($profile_collection): ?>
+				    		<?php foreach($profile_collection as $item): ?>
+				    		<option value="<?php echo $item->getId(); ?>" <?php if($profile_id == $item->getId()): ?>selected="selected"<?php endif; ?>><?php echo $item->getTitle(); ?></option>
+				    		<?php endforeach; ?>
+				    		<?php endif; ?>
+				    	</select>
+				    </td>
+    			</tr>
+	    	
+	    	</table>
+	    </div>
+    </fieldset>
+</div>

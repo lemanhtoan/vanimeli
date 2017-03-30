@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <ves translate="label" module="ves_megamenu">
+            <label>Venus Extensions</label>
+            <sort_order>210</sort_order>
+        </ves>
+    </tabs>
+	<sections>
+        <ves_megamenu>
+            <label>Ves Megamenu</label>
+            <tab>ves</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+				
+            	<ves_megamenu translate="label">
+					
+                    <label>General Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>     
+							<last_update translate="label">
+							<label>Current Update Time</label>
+							<frontend_type>label</frontend_type>
+							<frontend_model>ves_megamenu/system_config_form_field_notification</frontend_model>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</last_update>
+						<show translate="label" module="core">
+							<label>Enabled</label>
+							<sort_order>10</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<backend_model>ves_megamenu/system_config_backend_megamenu</backend_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show>
+						<params translate="label" module="core">
+							<label>Params</label>
+                            <frontend_type>textarea</frontend_type>
+                            <backend_model>ves_megamenu/system_config_backend_megamenu</backend_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</params>
+						
+						<enable_sidebar_copyright translate="label" module="core">
+							<label>Enabled Sidebar Copyright</label>
+							<comment>Enable/disable Copyright on sidebar menu when view on mobile</comment>
+							<sort_order>70</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<backend_model>ves_megamenu/system_config_backend_megamenu</backend_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable_sidebar_copyright>
+						<enable_sidebar_sosial translate="label" module="core">
+							<label>Enabled Sidebar Social</label>
+							<comment>Enable/disable Social Links on sidebar menu when view on mobile</comment>
+							<sort_order>80</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<backend_model>ves_megamenu/system_config_backend_megamenu</backend_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable_sidebar_sosial>
+						<facebook_link translate="label" module="core">
+							<label>Facebook Link</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>ves_megamenu/system_config_backend_megamenu</backend_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</facebook_link>
+						<twitter_link translate="label" module="core">
+							<label>Twitter Link</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>ves_megamenu/system_config_backend_megamenu</backend_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</twitter_link>
+						<google_link translate="label" module="core">
+							<label>Google Plus Link</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>ves_megamenu/system_config_backend_megamenu</backend_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</google_link>
+						<instagram_link translate="label" module="core">
+							<label>Instagram Link</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>ves_megamenu/system_config_backend_megamenu</backend_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</instagram_link>
+						<youtube_link translate="label" module="core">
+							<label>Youtube Link</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>ves_megamenu/system_config_backend_megamenu</backend_model>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</youtube_link>
+						<pinterest_link translate="label" module="core">
+							<label>Pinterest Link</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>ves_megamenu/system_config_backend_megamenu</backend_model>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</pinterest_link>
+						<dribbble_link translate="label" module="core">
+							<label>Dribbble Link</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>ves_megamenu/system_config_backend_megamenu</backend_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</dribbble_link>
+
+						<enable_cache translate="label" module="core">
+							<label>Enabled Cache</label>
+							<sort_order>250</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<backend_model>ves_megamenu/system_config_backend_megamenu</backend_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable_cache>
+					</fields>
+				</ves_megamenu>
+
+         		  <advanded_parameter>
+					<label>Information - Support</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>6001</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields> 
+						<module_information translate="label">
+							<label>Set Module Visable On Pages, Position</label>
+							<frontend_type>label</frontend_type>
+							<frontend_model>ves_megamenu/system_config_form_field_information</frontend_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</module_information>                        
+					</fields>
+				</advanded_parameter>	
+            </groups>
+        </ves_megamenu>
+    </sections>    
+</config>

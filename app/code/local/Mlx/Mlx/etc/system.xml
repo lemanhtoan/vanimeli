@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	 <tabs>
+        <mlx translate="label">
+            <label>MLX</label>
+            <sort_order>0</sort_order>
+        </mlx>        
+    </tabs>
+</config>

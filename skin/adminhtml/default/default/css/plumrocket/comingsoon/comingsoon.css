@@ -1,0 +1,353 @@
+/*=== General Section ===*/
+.form-list td.value table input.input-text, .form-list td.value table textarea {
+ width: 95%;
+}
+
+#comingsoon_signup_fieldset td.value div.grid, #comingsoon_mailchimp_fieldset td.value div.grid {
+  width: 600px;
+}
+
+.form-list .not-active {
+  color: #A6A6A6!important;
+}
+
+.form-list td.value table tr.not-active input.input-text {
+  color: #A6A6A6!important;
+}
+
+.plcs-current-time {
+  margin-top: 15px;
+  text-align: center;
+  margin-left: -15px;
+}
+
+.plcs-current-time span {
+  display: block;
+  font-family: "Courier New", Courier, monospace;
+  margin: 0 auto;
+  width: 100px;
+}
+
+.plcs-current-time.fixed {
+  position: fixed;
+  top: 37px;
+  left: 87px;
+}
+
+
+/*=== Coming soon Page ===*/
+#comingsoon_general_fieldset table.form-list td.label {
+  display: none;
+}
+
+#maintenance_general_fieldset table.form-list #maintenance_general_note:before,
+#comingsoon_general_fieldset table.form-list #comingsoon_general_note:before {
+  background-image: url("../../../images/plumrocket/comingsoon/icon_coming_soon.jpg");
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-size: 100%;
+  border: 1px solid #ccc;
+  content: "";
+  float: left;
+  margin-right: 10px;
+}
+
+#maintenance_general_fieldset table.form-list #maintenance_general_note:before {
+  background-image: url("../../../images/plumrocket/comingsoon/icon_maintenance.jpg");
+}
+
+#maintenance_general_fieldset table.form-list #maintenance_general_note,
+#comingsoon_general_fieldset table.form-list #comingsoon_general_note {
+  display: inline-block;
+  line-height: 40px;
+}
+
+#maintenance_background_image > span,
+#maintenance_background_video > span,
+#comingsoon_background_image > span,
+#comingsoon_background_video > span {
+  font-size: 16px;
+  font-weight: 700;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+#maintenance_background_fieldset table.data colgroup,
+#comingsoon_background_image table.data colgroup { display: none; }
+
+.grid table tr td:first-child {
+  width: 180px;
+}
+
+#comingsoon_background_image .grid table tr td:first-child img,
+#comingsoon_background_video .grid table tr td:first-child video,
+#comingsoon_background_video .grid table tr td:first-child img,
+#maintenance_background_image .grid table tr td:first-child img,
+#maintenance_background_video .grid table tr td:first-child video,
+#maintenance_background_video .grid table tr td:first-child img {
+  width: 100%;
+}
+
+.grid table td.date_from,
+.grid table td.date_to {
+  width: 140px;
+}
+
+.grid table td.exclude,
+.grid table td.remove {
+  width: 60px;
+  text-align: center;
+}
+
+#comingsoon_background_video_add_button,
+#maintenance_background_video_add_button {
+  float: right;
+}
+
+/*=== Maintenance Page ===*/
+#edit_tabs_maintenance_section_content #maintenance_general_fieldset table td.label {
+  display: none;
+}
+
+
+/*=== Website Mode ===*/
+.comingsoon-admin-adminhtml-mode-edit .hor-scroll {
+  overflow: visible;
+}
+
+.comingsoon-admin-adminhtml-mode-edit #edit_tabs_general_section_content .scope-label {
+  display: none;
+}
+
+.comingsoon-admin-adminhtml-mode-edit #edit_tabs_general_section_content table td.label {
+  display: none;
+}
+
+.comingsoon-admin-adminhtml-mode-edit #edit_tabs_general_section_content table td #note_comingsoon_mode_checker,
+.comingsoon-admin-adminhtml-mode-edit #edit_tabs_general_section_content table td input[type=radio],
+.comingsoon-admin-adminhtml-mode-edit #edit_tabs_general_section_content table label {
+  display: none;
+}
+
+.comingsoon-admin-adminhtml-mode-edit #edit_tabs_general_section_content table label.inherit {
+  display: inline;
+}
+
+.comingsoon-admin-adminhtml-mode-edit #edit_tabs_general_section_content table p.note {
+  float: left;
+  width: 575px;
+}
+
+.plcs-block-mode {
+  width: 190px;
+  float: left;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.plcs-block-mode .plcs-mode-name {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.plcs-block-mode.plcs-enabled .plcs-mode-name {
+  font-weight: 700;
+}
+
+.plcs-block-mode .plcs-icon-block {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 15px 10px 25px 10px;
+  background: #fff;
+  height: 110px;
+  position: relative;
+  margin-top: 10px;
+}
+
+.plcs-block-mode .plcs-status-enabled,
+.plcs-block-mode .plcs-status-save {
+  color: #fff;
+  font-size: 12px;
+  margin: auto;
+  display: inline-block;
+  font-weight: 700;
+  visibility: hidden;
+  background: rgb(20, 154, 0);
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+  padding: 0 8px;
+}
+
+.plcs-block-mode.plcs-enabled .plcs-icon-block {
+  border: 2px solid #149A00;
+}
+
+.plcs-block-mode.plcs-enabled .plcs-status-enabled {
+  visibility: visible;
+}
+
+.plcs-block-mode .plcs-status-save {
+  background: #F56F09;
+}
+/*
+.plcs-block-mode .plcs-status.enabled {
+  background: #F56C06;
+}*/
+
+.plcs-block-mode.plcs-enabled .plcs-status-save {
+  visibility: visible;
+}
+
+.plcs-block-mode .plcs-icon-block.plcs-enabled {
+  border: 2px solid #149A00;
+}
+
+.plcs-block-mode .plcs-icon-block:hover:after {
+  display: none;
+}
+
+.plcs-block-mode .plcs-icon-block .plcs-icon {
+  width: 80px;
+  height: 80px;
+  background-size: 100%;
+  margin: 0 auto;
+}
+
+.plcs-block-mode.live-mode .plcs-icon-block .plcs-icon { background-image: url("../../../images/plumrocket/comingsoon/shop-open-icon.jpg"); }
+.plcs-block-mode.cs-mode .plcs-icon-block .plcs-icon { background-image: url("../../../images/plumrocket/comingsoon/icon_coming_soon.jpg"); }
+.plcs-block-mode.um-mode .plcs-icon-block .plcs-icon { background-image: url("../../../images/plumrocket/comingsoon/icon_maintenance.jpg"); }
+
+.plcs-block-mode .plcs-icon-block .plcs-descr {
+  font-size: 11px;
+  line-height: 14px;
+  display: none;
+}
+
+.plcs-block-mode .plcs-icon-block .plcs-descr .plcs-b-link {
+  display: inline-block;
+  margin-top: 5px;
+  color: #fff;
+  text-decoration: none;
+  padding: 2px 10px;
+  position: absolute;
+  bottom: 10px;
+  right: 50%;
+  margin-right: -45px;
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #FFAB5C),color-stop(1, #F57B00));
+  background-image: -o-linear-gradient(bottom, #FFAB5C 0%, #F57B00 100%);
+  background-image: -moz-linear-gradient(bottom, #FFAB5C 0%, #F57B00 100%);
+  background-image: -webkit-linear-gradient(bottom, #FFAB5C 0%, #F57B00 100%);
+  background-image: -ms-linear-gradient(bottom, #FFAB5C 0%, #F57B00 100%);
+  background-image: linear-gradient(to bottom, #FFAB5C 0%, #F57B00 100%);
+  border: 1px solid #F57B00;
+}
+
+.plcs-block-mode.plcs-enabled .plcs-icon-block .plcs-descr .plcs-b-link {
+  display: none;
+}
+
+.plcs-block-mode .plcs-icon-block .plcs-descr .plcs-b-link:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.plcs-block-mode .plcs-icon-block.plcs-hover .plcs-icon {
+  width: 35px;
+  height: 35px;
+}
+.plcs-block-mode .plcs-icon-block.plcs-hover .plcs-mode-name { display: none; }
+.plcs-block-mode .plcs-icon-block.plcs-hover .plcs-descr { 
+  display: block;
+  margin-top: 10px; 
+}
+
+.plcs-preview.plcs-preview-maintenance {
+  background: none;
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #FF7C7A),color-stop(1, #CE2926));
+  background-image: -o-linear-gradient(bottom, #FF7C7A 0%, #CE2926 100%);
+  background-image: -moz-linear-gradient(bottom, #FF7C7A 0%, #CE2926 100%);
+  background-image: -webkit-linear-gradient(bottom, #FF7C7A 0%, #CE2926 100%);
+  background-image: -ms-linear-gradient(bottom, #FF7C7A 0%, #CE2926 100%);
+  background-image: linear-gradient(to bottom, #FF7C7A 0%, #CE2926 100%);
+  border: 1px solid #CE2926;
+}
+
+.plcs-preview.plcs-preview-comingsoon {
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #FFD754),color-stop(1, #EBA307));
+  background-image: -o-linear-gradient(bottom, #FFD754 0%, #EBA307 100%);
+  background-image: -moz-linear-gradient(bottom, #FFD754 0%, #EBA307 100%);
+  background-image: -webkit-linear-gradient(bottom, #FFD754 0%, #EBA307 100%);
+  background-image: -ms-linear-gradient(bottom, #FFD754 0%, #EBA307 100%);
+  background-image: linear-gradient(to bottom, #FFD754 0%, #EBA307 100%);
+  border: 1px solid #E9A30A;
+}
+
+.plcs-preview.plcs-preview-live {
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #70ACFF),color-stop(1, #2B78E4));
+  background-image: -o-linear-gradient(bottom, #70ACFF 0%, #2B78E4 100%);
+  background-image: -moz-linear-gradient(bottom, #70ACFF 0%, #2B78E4 100%);
+  background-image: -webkit-linear-gradient(bottom, #70ACFF 0%, #2B78E4 100%);
+  background-image: -ms-linear-gradient(bottom, #70ACFF 0%, #2B78E4 100%);
+  background-image: linear-gradient(to bottom, #70ACFF 0%, #2B78E4 100%);
+  border: 1px solid #2B78E4;
+}
+
+.plcs-preview.plcs-preview-maintenance span,
+.plcs-preview.plcs-preview-comingsoon span,
+.plcs-preview.plcs-preview-live span {
+  background-image: url("../../../images/plumrocket/comingsoon/btn_go_pl.gif");
+}
+
+.plcs-preview.plcs-preview-maintenance:hover,
+.plcs-preview.plcs-preview-comingsoon:hover,
+.plcs-preview.plcs-preview-live:hover {
+  opacity: 0.8;
+}
+
+/* Additional */
+.comingsoon-admin-adminhtml-mode-edit .switcher a
+{
+  display: none;
+}
+
+.content-header .plcs-preview { display: none; }
+
+#note_comingsoon_signup_fields.note,
+#note_comingsoon_background_video.note,
+#note_maintenance_background_video.note {
+  width: 800px;
+}
+
+.comingsoon-admin-adminhtml-mode-edit .mceLayout {
+	max-width: 600px;
+}
+
+.comingsoon-admin-adminhtml-mode-edit table td.value > textarea.textarea {
+	max-width: 600px;
+}
+.comingsoon-admin-adminhtml-mode-edit table td.value > input.input-text {
+  max-width: 274px;
+}
+
+.filter-gray {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  /*filter: url(desaturate.svg#greyscale);*/
+  filter: gray;
+  -webkit-filter: grayscale(1);
+}
+
+
+body.comingsoon-admin-adminhtml-mode-edit .fieldset-wide .form-list td.value {
+    width: auto !important;
+    min-width: 600px!important;;
+ }
+
+body.comingsoon-admin-adminhtml-mode-edit .fieldset-wide .form-list {
+	width: auto!important;
+}

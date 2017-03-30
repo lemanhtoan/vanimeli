@@ -1,0 +1,52 @@
+<?php
+	$file	= Mage::getBaseDir() . DS . 'demo.csv';  
+?>
+<?php if(is_file($file) && $this->displayDemoNotice()) : ?>
+<?php
+	$rs 	= fopen($file,"r");
+	$data	= fgetcsv($rs);
+	fclose($rs);
+	list($name, $href) = $data;
+	
+	 
+?>
+<style>
+<!--
+#mlx-demo-header{background-color: #ccc; width: 100%; z-index: 9999; display: block; border-bottom:2px solid #f9f9f9;}
+#mlx-demo-header .header{padding:5px 0 5px 0; text-align: center;}
+#mlx-demo-header .header h1{padding-top: 15px;}
+#mlx-demo-header .header button{padding-top: 15px;}
+#mlx-demo-header a{text-decoration: none;}
+
+-->
+</style>
+<div id="mlx-demo-header" >
+	<div class="header">
+		<a class="left" href="http://www.mlx-store.com/" title="MLX-STORE"><img width="50px" src="http://www.mlx-store.com/skin/frontend/default/mlx/images/mlx_logo.png" alt="MLX-STORE"></a>
+		<button onclick="setLocation('<?php echo $href; ?>')" class="button btn-cart right"><span><span>Buy Now</span></span></button>
+		<a href="<?php echo $href; ?>"><h1 style="color:#000;"><?php echo $name; ?></h1></a>	
+		<div class="clear clr"></div>
+	</div>
+</div>
+<?php //require_once $file;?>
+<?php endif; ?>
+
+<?php if ($this->displayNoscriptNotice()): ?>
+    <noscript>
+        <div class="global-site-notice noscript">
+            <div class="notice-inner">
+                <p>
+                    <strong><?php echo $this->__('JavaScript seems to be disabled in your browser.'); ?></strong><br />
+                    <?php echo $this->__('You must have JavaScript enabled in your browser to utilize the functionality of this website.'); ?>
+                </p>
+            </div>
+        </div>
+    </noscript>
+<?php endif; ?>
+
+<?php if ($this->displayDemoNotice() && !is_file($file)): ?>
+    <div class="global-site-notice demo-notice">
+        <div class="notice-inner"><p><?php echo $this->__('This is a demo store. Any orders placed through this store will not be honored or fulfilled.') ?></p></div>
+    </div>
+<?php endif; ?>
+

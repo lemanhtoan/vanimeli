@@ -1,0 +1,93 @@
+<?php
+	$disabled  		 = false;
+	$id = 0;
+	$widget_params = array();
+	$show_name = 1;
+	$widget_data = $this->getSampleData();
+	if($widget_data && $widget_data->getId()){
+		$disabled = true;
+		$id = $widget_data->getId();
+		$widget_params =  $this->data->getParams();
+        $widget_params = unserialize(base64_decode($widget_params));
+        $show_name = isset($widget_params['show_name'])?$widget_params['show_name']:1;
+	}
+	$types = $this->getTypes();
+	$action = $this->getWidgetAction();
+	$form = $this->getDataForm();
+	$widget_selected = $this->getWidgetSelected();
+	$yesno = array(1 => Mage::helper('ves_megamenu')->__('Yes'),
+                  0 => Mage::helper('ves_megamenu')->__('No'));
+?>
+<div id="content">
+	<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+		<table class="form">
+			<input value="<?php echo $id;?>" name="widget[id]" type="hidden"/>
+			 <?php if( !$disabled ){ ?>
+			<tr>
+				<td><?php echo Mage::helper("ves_megamenu")->__("Widget Type");?></td>
+				<td>
+					<select name="widget[type]" id="widget_type">
+						<option  value=""><?php echo Mage::helper("ves_megamenu")->__("Select a widget type");?></option>	
+						<?php foreach( $types as $widget => $text ) { ?>
+						<option value="<?php echo $widget; ?>" <?php if( $widget_selected == $widget ) { ?> selected="selected" <?php } ?>><?php echo $text; ?></option>
+						<?php } ?>
+					</select>
+					<script type="text/javascript">
+						jQuery('#widget_type').change( function(){
+							location.href = '<?php echo html_entity_decode($action); ?>wtype/'+jQuery(this).val();
+						} );
+					</script>
+				</td>
+			</tr>
+			<?php }   ?>
+			<tr>
+				<td><?php echo Mage::helper("ves_megamenu")->__("Widget Name");?></td>
+				<td>
+					<input type="text" name="widget[name]" value="<?php echo $widget_data->getName();?>">
+					 <?php if( $disabled ){ ?> 
+					 <input type="hidden" name="widget[type]" value="<?php echo $widget_data->getType();?>">
+					 <?php } ?>
+				</td>
+			</tr>
+			<tr>
+				<td><?php echo Mage::helper("ves_megamenu")->__("Show Widget Name");?></td>
+				<td>
+					<select name="params[show_name]" id="widget_show_name">
+						<?php foreach($yesno as $key=>$val) { ?>
+						 <?php if($key == $show_name) { ?>
+						   	<option value="<?php echo $key; ?>" selected="selected"><?php echo $val; ?></option>
+						 <?php } else { ?>
+						 	<option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+						 <?php } ?>
+						<?php } ?>
+					</select>
+				</td>
+			</tr>
+		</table>
+		
+		<div>
+			<?php echo $form; ?>
+		</div>
+		<?php echo $this->getBlockHtml('formkey')?>
+		<div>
+			<a class="button button-action btn-save" id="submit_form"><?php echo Mage::helper("ves_megamenu")->__("Save");?></a>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	 jQuery("#submit_form").click( function(){
+	 	var er = false;
+	 	jQuery.each( jQuery("#form").serializeArray(), function(i, e){
+	 		if(e.name != "image[delete]" && e.name != "params[image_path]"){
+	 			if( e.value == '' ){
+	 		 		er = true;
+	 		 	}
+	 		}
+	 	} );
+	 	if( er ){
+	 		alert(  '<?php echo Mage::helper("ves_megamenu")->__("Please fill data"); ?>' );
+	 		return false;
+	 	}
+	 	jQuery('#form').submit();
+	 });
+</script>

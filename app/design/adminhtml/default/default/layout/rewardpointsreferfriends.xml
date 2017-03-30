@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsReferFriends
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <adminhtml_reward_rewardpointsreferfriends_index>
+        <reference name="content">
+            <block type="rewardpointsreferfriends/adminhtml_rewardpointsreferfriends" name="rewardpointsreferfriends" />
+        </reference>
+    </adminhtml_reward_rewardpointsreferfriends_index>
+    <adminhtml_reward_couponcode_index>
+        <reference name="content">
+            <block type="rewardpointsreferfriends/adminhtml_couponcode" name="referfriendscoupon" />
+        </reference>
+    </adminhtml_reward_couponcode_index>
+    <adminhtml_reward_rewardpointsreferfriends_edit>
+        <update handle="editor"/>
+        <block name="left">
+            <block type="adminhtml/store_switcher" name="store_switcher" before="-"></block>
+        </block>
+    </adminhtml_reward_rewardpointsreferfriends_edit>
+    <!-- adminhtml sales order -->
+    <adminhtml_sales_order_view>
+        <reference name="order_totals">
+            <block type="rewardpointsreferfriends/adminhtml_totals_order_orderviewpage"/>
+        </reference>
+    </adminhtml_sales_order_view>
+    <!-- -->
+    <adminhtml_sales_order_invoice_new>
+        <reference name="invoice_totals">
+            <block type="rewardpointsreferfriends/adminhtml_totals_invoice_orderviewpage" />
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+    <adminhtml_sales_order_invoice_view>
+        <reference name="invoice_totals">
+            <block type="rewardpointsreferfriends/adminhtml_totals_invoice_orderviewpage"/>
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="invoice_totals">
+            <block type="rewardpointsreferfriends/adminhtml_totals_invoice_orderviewpage"/>
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+    <!-- -->
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="creditmemo_totals">
+            <block type="rewardpointsreferfriends/adminhtml_totals_creditmemo_orderviewpage"/>
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="creditmemo_totals">
+            <block type="rewardpointsreferfriends/adminhtml_totals_creditmemo_orderviewpage"/>
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="creditmemo_totals">
+            <block type="rewardpointsreferfriends/adminhtml_totals_creditmemo_orderviewpage"/>
+        </reference>
+    </adminhtml_sales_order_creditmemo_updateqty>
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addJs">
+                <file>jscolor/jscolor.js</file>
+            </action>
+        </reference>
+    </adminhtml_system_config_edit>
+    <!-- end adminhtml sales order -->
+</layout>

@@ -1,0 +1,547 @@
+<?xml version="1.0"?>
+<widgets>
+   <widget_facebook type="ves_base/widget_facebook">
+      <title>Facebook</title>
+      <description>Facebook Like Box</description>
+      <code>facebook</code>
+      <icon>facebook</icon>
+      <group>social</group>
+   </widget_facebook>
+   <widget_fbcomment type="ves_base/widget_fbcomment">
+      <title>Facebook Comment</title>
+      <description>Facebook Comment Box</description>
+      <code>fbcomment</code>
+      <icon>facebook</icon>
+      <group>social</group>
+   </widget_fbcomment>
+   <widget_twitter type="ves_base/widget_twitter">
+      <title>Twitter</title>
+      <description>Get Latest Twitter TimeLife</description>
+      <code>twitter</code>
+      <icon>twitter</icon>
+      <group>social</group>
+   </widget_twitter>
+   <widget_video type="ves_base/widget_video">
+      <title>Video</title>
+      <description>Make Youtube Or Vimeo Video Widget</description>
+      <code>video</code>
+      <icon>video_code</icon>
+      <group>others</group>
+   </widget_video>
+   <widget_addthis type="ves_base/widget_addthis">
+      <title>Addthis</title>
+      <description>Make Addthis Social Sharing Widget</description>
+      <code>addthis</code>
+      <icon>addthis</icon>
+      <group>social</group>
+   </widget_addthis>
+   <widget_googleplus type="ves_base/widget_googleplus">
+      <title>Google Plus</title>
+      <description>Make Google Plus Widget</description>
+      <code>googleplus</code>
+      <icon>googleplus</icon>
+      <group>social</group>
+   </widget_googleplus>
+   <widget_flickr type="ves_base/widget_flickr">
+      <title>Flickr</title>
+      <description>Make Flick Gallery Widget</description>
+      <code>flickr</code>
+      <icon>flickr</icon>
+      <group>image</group>
+   </widget_flickr>
+   <widget_reviewrotator type="ves_base/widget_reviewrotator">
+      <title>Review Rotator</title>
+      <description>Make Product Review Rotator Widget</description>
+      <code>reviewrotator</code>
+      <icon>review</icon>
+      <group>magento</group>
+   </widget_reviewrotator>
+   <widget_text type="ves_base/widget_text">
+      <title>Separator Text</title>
+      <description>Separator Text Widget</description>
+      <code>separator_text</code>
+      <icon>text</icon>
+      <group>other</group>
+   </widget_text>
+   <widget_image type="ves_base/widget_image">
+      <title>Single Image</title>
+      <description>Create single image Widget</description>
+      <code>image</code>
+      <icon>image</icon>
+      <group>image</group>
+   </widget_image>
+   <widget_links type="ves_base/widget_links">
+      <title>Block Links</title>
+      <description>Create List Links Block</description>
+      <code>links</code>
+      <icon>links</icon>
+      <group>other</group>
+   </widget_links>
+   <widget_googlemap type="ves_base/widget_googlemap">
+      <title>Google Map</title>
+      <description>Create a google map</description>
+      <code>googlemap</code>
+      <icon>map</icon>
+      <group>other</group>
+   </widget_googlemap>
+   <widget_newsletter type="ves_base/widget_newsletter">
+      <title>Newsletter</title>
+      <description>Create Newsletter Block</description>
+      <code>newsletter</code>
+      <icon>mail</icon>
+      <group>magento</group>
+   </widget_newsletter>
+   <widget_customblock type="ves_base/widget_customblock">
+      <title>Custom Magento Module Block</title>
+      <description>Create magento module block as widget</description>
+      <code>customblock</code>
+      <icon>block</icon>
+      <group>magento</group>
+   </widget_customblock>
+   <widget_categories type="ves_base/widget_categories">
+      <title>Categories List</title>
+      <description>Show Categories on Frontend</description>
+      <code>categories</code>
+      <icon>sub_categories</icon>
+      <group>magento</group>
+   </widget_categories>
+   <widget_alert type="ves_base/widget_alert">
+      <title>Alert</title>
+      <description>Create a Alert Message Box Based on Bootstrap 3 typo</description>
+      <code>alert</code>
+      <icon>alert</icon>
+      <group>typo</group>
+   </widget_alert>
+   <widget_accordion type="ves_base/widget_accordion">
+      <title>Accordion</title>
+      <description>Create Accordion List</description>
+      <code>accordion</code>
+      <icon>accordion</icon>
+      <group>typo</group>
+   </widget_accordion>
+    <widget_accordion_bg type="ves_base/widget_accordionbg">
+      <title>Accordion With Background</title>
+      <description>Create Accordion List With Support Background Image</description>
+      <code>accordionbg</code>
+      <icon>accordion</icon>
+      <group>typo</group>
+   </widget_accordion_bg>
+   <widget_tab type="ves_base/widget_tab">
+      <title>Tab</title>
+      <description>Tabs List</description>
+      <code>tab</code>
+      <icon>tab</icon>
+      <group>typo</group>
+   </widget_tab>
+   <widget_button type="ves_base/widget_button">
+      <title>Button</title>
+      <description>Edit Button</description>
+      <code>button</code>
+      <icon>button</icon>
+      <group>typo</group>
+   </widget_button>
+   <widget_html type="ves_base/widget_html">
+      <title>HTML Block</title>
+      <description>A block of text with WYSIWYG editor</description>
+      <code>raw_html</code>
+      <icon>html</icon>
+      <group>other</group>
+   </widget_html>
+   <widget_rawhtml type="ves_base/widget_rawhtml">
+      <title>Raw HTML</title>
+      <description>Put Raw HTML Code</description>
+      <code>raw_html</code>
+      <icon>raw_html</icon>
+      <group>other</group>
+   </widget_rawhtml>
+   <widget_layerslider type="ves_layerslider/widget_slider" module="Ves_Layerslider">
+      <title>Ves Layer slider</title>
+      <description>Integrate with Ves Slider layer Module to get slider</description>
+      <code>layerslider</code>
+      <icon>gallery</icon>
+      <group>other</group>
+   </widget_layerslider>
+   <widget_product_carousel type="ves_productcarousel/widget_carousel" module="Ves_ProductCarousel">
+      <title>Ves Product Carousel</title>
+      <description>Integrate with Ves Product Carousel Module to get product carousel</description>
+      <code>productcarousel</code>
+      <icon>carousel</icon>
+      <group>other</group>
+   </widget_product_carousel>
+   <widget_tabshome_tab type="ves_tabshome/widget_tab"  module="Ves_TabsHome">
+      <title>Ves Tabs Home</title>
+      <description>Integrate with Ves Tabs Home Module to get products tab</description>
+      <code>tabshome</code>
+      <icon>tab</icon>
+      <group>other</group>
+   </widget_tabshome_tab>
+   <widget_brand_list type="ves_brand/widget_list"  module="Ves_Brand">
+      <title>Ves Brand List</title>
+      <description>Integrate with Ves Brand - Listing Module to get list brands.</description>
+      <code>brandlist</code>
+      <icon>manufacture</icon>
+      <group>other</group>
+   </widget_brand_list>
+   <widget_brand_scroll type="ves_brand/widget_scroll" module="Ves_Brand">
+      <title>Ves Brand Scroll</title>
+      <description>Integrate with Ves Brand - Scroll Module to get scroll brands.</description>
+      <code>brandscroll</code>
+      <icon>manufacture</icon>
+      <group>other</group>
+   </widget_brand_scroll>
+   <widget_blog_latest type="ves_blog/widget_latest" module="Ves_Blog">
+      <title>Ves Latest Blogs</title>
+      <description>Integrate with Ves Blog - Latest Module to get latest blog posts.</description>
+      <code>bloglatest</code>
+      <icon>blog</icon>
+      <group>other</group>
+   </widget_blog_latest>
+   <widget_tabs_tab type="ves_tabs/widget_tab">
+      <title>Ves Base : Categories Tabs</title>
+      <description>Create Categories Tabs To Display Products In Categories</description>
+      <code>categorytabs</code>
+      <icon>tab</icon>
+      <group>other</group>
+   </widget_tabs_tab>
+   <widget_deals_carousel type="ves_deals/widget_carousel">
+      <title>Ves Product Deals</title>
+      <description>Play Countdown in Sale Products</description>
+      <code>deals</code>
+      <icon>deal</icon>
+      <group>other</group>
+   </widget_deals_carousel>
+   <widget_treemenu_menu type="ves_treemenu/widget_menu">
+      <title>Ves Tree Menu</title>
+      <description>Display categories in tree menu</description>
+      <code>treemenu</code>
+      <icon>treemenu</icon>
+      <group>other</group>
+   </widget_treemenu_menu>
+   <widget_testimonial_list type="ves_testimonial/widget_list">
+      <title>Ves Testimonial</title>
+      <description>Display User Testimonial</description>
+      <code>testimonial</code>
+      <icon>testimonial</icon>
+      <group>other</group>
+   </widget_testimonial_list>
+   <widget_gallery_gallery type="ves_gallery/widget_gallery">
+      <title>Ves Images Gallery</title>
+      <description>Create Images Mini Gallery</description>
+      <code>gallery</code>
+      <icon>image</icon>
+      <group>image</group>
+   </widget_gallery_gallery>
+   <widget_contentslider_slider type="ves_contentslider/widget_slider">
+      <title>Ves Content Slider</title>
+      <description>Create Content Slider</description>
+      <code>contentslider</code>
+      <icon>gallery</icon>
+      <group>gallery</group>
+   </widget_contentslider_slider>
+   <widget_cms_block type="cms/widget_block">
+      <title>CMS Static Block</title>
+      <description>Contents of a Static Block</description>
+      <code>cmsblock</code>
+      <icon>cmsblock</icon>
+      <group>magento</group>
+   </widget_cms_block>
+   <widget_cms_page_link type="cms/widget_page_link">
+      <title>CMS Page Link</title>
+      <description>Link to a CMS Page</description>
+      <code>cmspage</code>
+      <icon>links2</icon>
+      <group>magento</group>
+   </widget_cms_page_link>
+   <category_widget_link type="catalog/category_widget_link">
+      <title>Catalog Category Link</title>
+      <description>Link to a Specified Category</description>
+      <code>categorylink</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </category_widget_link>
+   <product_widget_new type="catalog/product_widget_new">
+      <title>Catalog New Products List</title>
+      <description>List of Products that are set as New</description>
+      <code>new_products</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </product_widget_new>
+   <product_widget_link type="catalog/product_widget_link">
+      <title>Catalog Product Link</title>
+      <description>Link to a Specified Product</description>
+      <code>product_link</code>
+      <icon>links2</icon>
+      <group>magento</group>
+   </product_widget_link>
+   <widget_guest_form type="sales/widget_guest_form">
+      <title>Orders and Returns</title>
+      <description>Orders and Returns Search Form</description>
+      <code>guest_form</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </widget_guest_form>
+   <product_widget_compared type="reports/product_widget_compared">
+      <title>Recently Compared Products</title>
+      <description>List of Products Recently Compared and Removed from the Compare List by Visitor</description>
+      <code>product_compared</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </product_widget_compared>
+   <product_widget_viewed type="reports/product_widget_viewed">
+      <title>Recently Viewed Products</title>
+      <description>List of Products Recently Viewed by Visitor</description>
+      <code>recently_viewed</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </product_widget_viewed>
+   <widget_categoriesinfo type="ves_base/widget_categoriesinfo">
+      <title>Categories Info</title>
+      <description>Show Categories infor and subcategories</description>
+      <code>categories_info</code>
+      <icon>sub_categories</icon>
+      <group>others</group>
+   </widget_categoriesinfo>
+   <widget_categoryinfo type="ves_base/widget_categoryinfo">
+      <title>Category Info</title>
+      <description>Show Category Info To Frontend</description>
+      <code>category_info</code>
+      <icon>sub_categories</icon>
+      <group>others</group>
+   </widget_categoryinfo>
+   <widget_counting type="ves_base/widget_counting">
+      <title>Counting Number</title>
+      <description>Play Counting Number In Effect</description>
+      <code>counting_number</code>
+      <icon>counting_number</icon>
+      <group>others</group>
+   </widget_counting>
+   <widget_googlebutton type="ves_base/widget_googlebutton">
+      <title>Google Button</title>
+      <description>Google Button</description>
+      <code>button</code>
+      <icon>button</icon>
+      <group>typo</group>
+   </widget_googlebutton>
+   <widget_ourservice type="ves_base/widget_ourservice">
+      <title>Our Service</title>
+      <description>Create Service Information</description>
+      <code>ourservice</code>
+      <icon>service</icon>
+      <group>content</group>
+   </widget_ourservice>
+   <widget_pinterest type="ves_base/widget_pinterest">
+      <title>Pinterest</title>
+      <description>Edit Pinterest Share</description>
+      <code>pinterest</code>
+      <icon>pinterest</icon>
+      <group>social</group>
+   </widget_pinterest>
+   <widget_pinboard type="ves_base/widget_pinboard">
+      <title>Pinterest - Profile Widget</title>
+      <description>Pinterest Profile Or Board Widget</description>
+      <code>pinboard</code>
+      <icon>pinterest</icon>
+      <group>social</group>
+   </widget_pinboard>
+   <widget_pricing type="ves_base/widget_pricing">
+      <title>Pricing Plan</title>
+      <description>Plan Membership</description>
+      <code>pricing</code>
+      <icon>column</icon>
+      <group>content</group>
+   </widget_pricing>
+   <widget_product type="ves_base/widget_product">
+      <title>Product Item</title>
+      <description>Show Product Item Information</description>
+      <code>product_item</code>
+      <icon>product_item</icon>
+      <group>others</group>
+   </widget_product>
+   <widget_block_builder type="ves_blockbuilder/widget_builder">
+      <title>Ves Block Builder : Generate Block Builder Profile</title>
+      <description>Generate Block Builder Profile</description>
+      <code>blockbuilder</code>
+      <icon>blockbuilder</icon>
+      <group>others</group>
+      <show>blockbuilder/adminhtml_page</show>
+   </widget_block_builder>
+   <widget_page_builder type="ves_blockbuilder/widget_page">
+      <title>Ves Block Builder : Generate Page Builder Profile </title>
+      <description>Generate a page builder profile</description>
+      <code>pagebuilder</code>
+      <icon>pagebuilder</icon>
+      <group>others</group>
+      <show>cms/adminhtml_page</show>
+   </widget_page_builder>
+   <widget_gallery type="ves_base/widget_gallery">
+      <title>Ves Base: Gallery Images</title>
+      <description>Create Gallery Images/ Lookbook Images</description>
+      <code>gallery_image</code>
+      <icon>image</icon>
+      <group>others</group>
+   </widget_gallery>
+   <widget_progressbar type="ves_base/widget_progressbar">
+      <title>Progress Bar</title>
+      <description>Create Progress Bar</description>
+      <code>progressbar</code>
+      <icon>progress_bar</icon>
+      <group>others</group>
+   </widget_progressbar>
+   <widget_sociallinks type="ves_base/widget_sociallinks">
+      <title>Social Links</title>
+      <description>Show social links</description>
+      <code>sociallinks</code>
+      <icon>image</icon>
+      <group>social</group>
+   </widget_sociallinks>
+   <widget_megamenu_menu type="ves_megamenu/widget_menu">
+      <title>Ves Megamenu : Custom Menu</title>
+      <description>Generate A Custom Menu</description>
+      <code>megamenu</code>
+      <icon>treemenu</icon>
+      <group>others</group>
+   </widget_megamenu_menu>
+   <widget_verticalmenu_menu type="ves_verticalmenu/widget_menu">
+      <title>Ves Vertical Menu : Custom Menu</title>
+      <description>Generate A Custom Vertical Menu</description>
+      <code>verticalmenu</code>
+      <icon>treemenu</icon>
+      <group>others</group>
+   </widget_verticalmenu_menu>
+   <widget_owl_carousel type="ves_owlproductcarousel/widget_carousel">
+      <title>Owl Products Carousel</title>
+      <description>Create Products Carousel Widget Use Owl Carousel Js</description>
+      <code>owlcarousel</code>
+      <icon>carousel</icon>
+      <group>others</group>
+   </widget_owl_carousel>
+   <widget_faq_faq type="ves_faq/widget_faq">
+      <title>Ves FAQ : Latest Question</title>
+      <description type="desc">Show list latest question</description>
+      <code>vesfaqlatest</code>
+      <icon>faq</icon>
+      <group>others</group>
+   </widget_faq_faq>
+
+   <widget_contactform type="ves_base/widget_contactform">
+      <title>Contact Form</title>
+      <description type="desc">Create Magento Contact Form</description>
+      <code>vescontactform</code>
+      <icon>contact</icon>
+      <group>magento</group>
+   </widget_contactform>
+
+   <widget_content_carousel type="ves_base/widget_carousel">
+      <title>Content Carousel</title>
+      <description type="desc">Create Content Carousel</description>
+      <code>vescarousel</code>
+      <icon>carousel</icon>
+      <group>typo</group>
+   </widget_content_carousel>
+   <widget_basemagento type="ves_base/widget_basemagento">
+      <title>Ves Base : Magento Blocks</title>
+      <description>Generate Magento Blocks: header, breadcrumbs, left_first, left, right, footer_before, footer</description>
+      <code>baseblock</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </widget_basemagento>
+
+   <widget_wishlist_block type="ves_base/widget_wishlist">
+      <title>Sidebar Wishlist Block</title>
+      <description>Create Magento Wishlist Block</description>
+      <code>sidebar_wishlist</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </widget_wishlist_block>
+   <widget_mini_cart type="ves_base/widget_sidebarcart">
+      <title>Sidebar Cart Block</title>
+      <description>Create Magento Sidebar Sidebar Cart Block</description>
+      <code>sidebar_cart</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </widget_mini_cart>
+   <widget_tags_block type="ves_base/widget_tags">
+      <title>Sidebar Tags Block</title>
+      <description>Create Magento List Tags Block</description>
+      <code>sidebar_tags</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </widget_tags_block>
+   <widget_base_compare_block type="ves_base/widget_compare">
+      <title>Sidebar Compare Block</title>
+      <description>Create Magento Sidebar Compare Block</description>
+      <code>sidebar_compare</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </widget_base_compare_block>
+   <widget_toplinks type="ves_base/widget_toplinks">
+      <title>Top Links</title>
+      <description>Create Magento Top Links</description>
+      <code>top_links</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </widget_toplinks>
+   <widget_layered_filter_block type="ves_base/widget_layeredfilter">
+      <title>Sidebar Layered Filter Block</title>
+      <description>Create Magento Layered Filter Block</description>
+      <code>sidebar_filter</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </widget_layered_filter_block>
+   <widget_sitelogo type="ves_base/widget_sitelogo">
+      <title>Site Logo</title>
+      <description>Create Magento Site Logo On Header</description>
+      <code>side_logo</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </widget_sitelogo>
+   <widget_upsell_block type="ves_base/widget_upsell">
+      <title>Upsell Products Block</title>
+      <description>Create Magento Upsell Products Block. The block just show on product page.</description>
+      <code>upsell</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </widget_upsell_block>
+   <widget_related_products_block type="ves_base/widget_relatedproducts">
+      <title>Related Products Block</title>
+      <description>Create Related Products Block. Show only on product page</description>
+      <code>related</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </widget_related_products_block>
+   <widget_recent_viewed_block type="ves_base/widget_recentviewed">
+      <title>Sidebar Recent Viewed Block</title>
+      <description>Create Magento Recent Viewed Block</description>
+      <code>sidebar_recentviewed</code>
+      <icon>magento</icon>
+      <group>magento</group>
+   </widget_recent_viewed_block>
+    <productlist_carousel type="productlist/widget_carousel">
+        <title>Product List: Carousel By Rules</title>
+        <description type="desc">Create Carousel By Rules</description>
+        <code>product_list_carousel</code>
+        <icon>product_list</icon>
+        <group>others</group>
+   </productlist_carousel>
+  <productlist_tab type="productlist/widget_tab">
+         <title>Product List: Tabs By Rules</title>
+         <description type="desc">Create Tabs By Rules</description>
+        <code>product_list_tab</code>
+        <icon>product_list</icon>
+        <group>others</group>
+   </productlist_tab>
+   <productlist_category_tab type="productlist/widget_categorytab">
+         <title>Product List: Tabs By Categories</title>
+         <description type="desc">Create Tabs By Categories</description>
+        <code>product_list_catetab</code>
+        <icon>product_list</icon>
+        <group>others</group>
+   </productlist_category_tab>
+   <productlist_products type="productlist/widget_new">
+        <title>Product List: New Products List By Rule</title>
+        <description>List of Products In Custom Rule</description>
+        <code>product_list_new</code>
+        <icon>product_list</icon>
+        <group>others</group>
+   </productlist_products>
+</widgets>

@@ -1,0 +1,29 @@
+<?php
+$id = "widget-sample-sample1".rand().time();
+$enable_collapse = $this->getConfig("enable_collapse", 0);
+$title = $this->getConfig('title'); //Call function get config in block class with param name as in widget.xml
+$addition_cls = $this->getConfig('addition_cls'); //Call function get config in block class with param name as in widget.xml
+$stylecls = $this->getConfig('stylecls'); //Call function get config in block class with param name as in widget.xml
+
+$content_html = $this->getConfig('html');
+$content_html = base64_decode($content_html);
+
+if($content_html) {
+	$processor = Mage::helper('cms')->getPageTemplateProcessor();
+	$content_html = $processor->filter($content_html);
+}
+
+?>
+<div class="widget-sample1 block <?php echo $addition_cls; ?> <?php echo isset($stylecls)&&$stylecls?'block-'.$stylecls:'';?>">
+	<!-- Show widget block title -->
+	<?php if( $title != '' ){ ?>
+	<div class="block-title">
+		<?php if($enable_collapse): ?><span class="opener hidden-lg hidden-md" data-toggle="collapse" data-target="#<?php echo $id; ?>"><i class="fa fa-angle-down"></i></span><?php endif; ?>
+		<?php echo $title; ?>
+	</div>
+	<?php } ?>
+	<div id="<?php echo $id; ?>" class="widget-inner block-content <?php if($enable_collapse): ?>  widget-enanle-collapse collapse in <?php endif; ?>">
+      <!-- Load main content of widget at here -->
+      <?php echo $content_html; ?>
+	</div>
+</div>

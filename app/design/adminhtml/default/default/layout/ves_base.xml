@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <!-- Block Layout builder -->
+    <adminhtml_blockbuilder_edit>
+        <reference name="before_body_end">
+           <block before="-" type="ves_base/adminhtml_builder_edit_initform" name='base.builder.adminhtml.initform' template="ves_base/builder/initform.phtml"></block>
+        </reference>
+    </adminhtml_blockbuilder_edit>
+    <!-- Page Layout builder -->
+    <adminhtml_pagebuilder_edit>
+       <reference name="before_body_end">
+           <block before="-" type="ves_base/adminhtml_builder_edit_initform" name='base.builder.adminhtml.initform' template="ves_base/builder/initform.phtml"></block>
+        </reference>
+    </adminhtml_pagebuilder_edit>
+    <!-- Product Layout builder -->
+    <adminhtml_productbuilder_edit>
+        <reference name="before_body_end">
+           <block before="-" type="ves_base/adminhtml_builder_edit_initform" name='base.builder.adminhtml.initform' template="ves_base/builder/initform.phtml"></block>
+        </reference>
+    </adminhtml_productbuilder_edit>
+</layout>

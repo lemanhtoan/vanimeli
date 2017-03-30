@@ -1,0 +1,89 @@
+<?php
+/*
+* Ves Magento Theme Framework for Prestashop 1.6.x
+*
+* @package   vesblockbuilder
+* @version   5.0
+* @author    http://www.venustheme.com
+* @copyright Copyright (C) October 2013 venustheme.com <@emai:venustheme@gmail.com>
+*               <info@venustheme.com>.All rights reserved.
+* @license   GNU General Public License version 2
+*/
+$id=rand().time();
+$google_api = isset($google_api)?$google_api:"";
+$google_api = $google_api?$google_api:"AIzaSyDHInVsRQ9ffcVrKmJrr6QI1N3mHsKuYus";
+if(isset($description)) {
+	$description = str_replace(array("\r", "\n"), "", $description);
+
+} else {
+	$description = "";
+}
+
+?>
+<div id="map-canvas<?php echo $id; ?>" class="map-canvas-play" data-id="<?php echo $id; ?>" style="width:<?php echo $width; ?>; height:<?php echo $height; ?>;" data-latitude="<?php echo (float)$latitude; ?>" data-longitude="<?php echo (float)$longitude; ?>" data-zoom="<?php echo (int)$zoom; ?>"></div>
+<textarea id="map-canvas-description-<?php echo $id; ?>" class="hide"><?php echo $description; ?></textarea>
+
+<?php if(!defined("VES_GMAP_WIDGET_LOADED")): define("VES_GMAP_WIDGET_LOADED", 1); ?>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?php echo $google_api; ?>&amp;v=3&amp;sensor=false&amp;language=en"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/gmap/gmap3.min.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>ves_base/gmap/gmap3.infobox.js"></script>
+
+<script type="text/javascript">
+	var ves_map_widgets = new Array();
+    jQuery(document).ready(function($) {
+
+			if($(".map-canvas-play").length > 0) {
+					$(".map-canvas-play").each(function() {
+						var mapDiv, map, infobox;
+						var object_id = $(this).data("id");
+						var lat = $(this).data("latitude");
+						var lon = $(this).data("longitude");
+						var zoom = $(this).data("zoom");
+						mapDiv = $(this);
+						var description = "";
+						if($("#map-canvas-description-"+object_id).length > 0) {
+							description = $("#map-canvas-description-"+object_id).val();
+						}
+
+						mapDiv.gmap3({
+		                    map:{
+		                        options:{
+		                            center:[lat,lon],
+		                            zoom: zoom
+		                        }
+		                    },
+		                    marker:{
+		                        values:[
+		                            {latLng:[lat, lon], data: description},
+		                        ],
+		                        options:{
+		                            draggable: false
+		                        },
+		                        events:{
+		                              click: function(marker, event, context){
+		                                var map = $(this).gmap3("get"),
+		                                    infowindow = $(this).gmap3({get:{name:"infowindow"}});
+		                                if (infowindow){
+		                                    infowindow.open(map, marker);
+		                                    infowindow.setContent(context.data);
+		                                } else {
+		                                    $(this).gmap3({
+		                                    infowindow:{
+		                                        anchor:marker,
+		                                        options:{content: context.data}
+		                                    }
+		                                  });
+		                                }
+		                            }
+		                        }
+		                    }
+		                });
+		                ves_map_widgets.push(mapDiv);
+					})
+			}
+	});
+</script>
+
+<?php endif; ?>
+

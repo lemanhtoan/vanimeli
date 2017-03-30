@@ -1,0 +1,20 @@
+<?php if($attribute_code = $this->getConfig("attribute", "")): ?>
+
+<?php $product_info_block = Mage::registry("product_info_block"); ?>
+<?php $_product = $product_info_block->getProduct(); ?>
+
+<?php if($custom_content = Mage::getResourceModel('catalog/product')->getAttributeRawValue($_product->getId() , $attribute_code, Mage::app()->getStore()->getStoreId())): ?>
+	<?php if($this->getConfig("title", "")): ?>
+		<div class="panel panel-default product-attribute-block">
+			<div class="panel-heading">
+		        <h3 class="panel-title"><?php echo $this->getConfig("title", ""); ?></h3>
+		    </div>
+		    <div class="panel-body">
+		        <div class="tab-content"><?php echo $custom_content; ?></div>
+		    </div>
+		</div>
+	<?php else: ?>
+		<div class="product-attribute-block"><?php echo $custom_content; ?></div>
+	<?php endif; ?>
+<?php endif; ?>
+<?php endif; ?>

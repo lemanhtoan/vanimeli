@@ -1,0 +1,39 @@
+<?php
+  $mId = rand().time();
+	$widget = $this->getWidget(); 
+	$show_name = isset($widget['show_name'])?$widget['show_name']: 1;
+	$image_height = isset($widget['image_height'])?$widget['image_height']: 320;
+	$image_width = isset($widget['image_width'])?$widget['image_width']: 300;
+	$product = isset($widget['product'])?$widget['product']: null;
+
+    if($product) {
+?>
+<?php if( isset($widget['widget_name']) & $show_name){
+?>
+<div class="menu-title"><?php echo $widget['widget_name'];?></div>
+<?php
+}?>
+<?php
+    try{
+      $image = Mage::helper('catalog/image')->init($product, 'small_image')->resize((int)$image_width, (int)$image_height);
+    }
+    catch(Exception $e) {
+      $image = Mage::getDesign()->getSkinUrl('images/catalog/product/placeholder/image.jpg',array('_area'=>'frontend'));  
+    }
+?>
+<div class="widget-product">
+	 <div class="widget-inner">
+        <?php if ($image) { ?>
+        <div class="image"><a href="<?php echo $product->getProductUrl(); ?>"><img src="<?php echo $image; ?>" alt="<?php echo $product->getName(); ?>" /></a></div>
+        <?php } ?>
+        <div class="name"><a href="<?php echo $product->getProductUrl(); ?>"><?php echo $product->getName(); ?></a></div>
+        <div class="price">
+          <?php echo Mage::getSingleton('core/layout')->createBlock('catalog/product_list')->getPriceHtml($product, true, $mId); ?>
+        </div>
+        <div class="rating"><?php echo Mage::getSingleton('core/layout')->createBlock('catalog/product_list')->getReviewsSummaryHtml($product, true, true) ?></div>
+        <?php if($product->isSaleable()) { ?>
+        <div class="cart"><button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->helper('checkout/cart')->getAddUrl($product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></div>
+        <?php } ?>
+      </div>
+</div>
+<?php } ?>

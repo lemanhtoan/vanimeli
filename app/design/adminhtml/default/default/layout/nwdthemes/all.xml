@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<layout version="0.1.1">
+	<default>
+		<reference name="head">
+			<action method="addJs"><file>nwdthemes/widget_heading.js</file></action>
+		</reference>
+	</default>
+
+	<adminhtml_catalog_category_edit>
+		<reference name="head">
+			<action method="addJs"><file>nwdthemes/category_attribute_dependency.js</file></action>
+		</reference>
+	</adminhtml_catalog_category_edit>
+
+    <adminhtml_nwdconfig_index>
+        <reference name="head">
+            <action method="addJs"><file>nwdthemes/config_import.js</file></action>
+            <action method="addItem"><type>js</type><name>prototype/window.js</name></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+            <action method="addCss"><name>lib/prototype/windows/themes/magento.css</name></action>
+        </reference>
+        <reference name="content">
+            <block type="nwdall/adminhtml_nwdconfig" name="nwdconfig" as="nwdconfig" />
+        </reference>
+    </adminhtml_nwdconfig_index>
+
+</layout>

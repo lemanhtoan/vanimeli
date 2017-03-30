@@ -1,0 +1,92 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Rewardpoints show on Review Total
+ * 
+ * @see Magestore_RewardPoints_Block_Checkout_Cart_Label
+ */
+?>
+<?php if ($this->isEnable()): ?>
+
+    <?php
+    /** @var $_pointHelper Magestore_RewardPoints_Helper_Point */
+    $_pointHelper = $this->getPointHelper();
+    $_spendingPoint = $this->getSpendingPoint();
+    $_earningPoints = $this->getEarningPoint();
+    $_earningPointsByCoupon = Mage::helper('rewardpoints/calculation_earning')->getEarningPointByCoupon();
+    ?>
+    <?php if ($_spendingPoint || $_earningPoints  || $_earningPointsByCoupon): ?>
+        <?php if ($this->getColspan() == 1): ?><thead><?php endif ?>
+            <?php if ($_spendingPoint): ?>
+                <tr>
+                    <td class="a-right" id="check-spend-point" colspan="<?php echo $this->getColspan() ?>" style="<?php echo $this->getTotal()->getStyle() ?>">
+                        <strong style="font-size: 13px;">
+                            <?php
+                            if (Mage::app()->getRequest()->getModuleName() == 'webpos')
+                                echo $this->__('Customer will spend');
+                            else {
+                                echo $this->__('You will spend');
+                            }
+                            ?>:</strong>
+                    </td>
+                    <td class="a-right" style="min-width: 70px;<?php echo $this->getTotal()->getStyle() ?>">
+                        <?php echo $_pointHelper->format($_spendingPoint) ?>
+                    </td>
+                </tr>
+            <?php endif ?>
+            <?php if ($_earningPoints): ?>
+                <tr>
+                    <td class="a-right" colspan="<?php echo $this->getColspan() ?>" style="<?php echo $this->getTotal()->getStyle() ?>">
+                        <strong style="font-size: 13px;"><?php if (Mage::app()->getRequest()->getModuleName() == 'webpos')
+                                echo $this->__('Customer will earn');
+                            else {
+                                if(Mage::getSingleton('customer/session')->isLoggedIn() || $this->getQuote()->getCustomerGroupId() > 0){
+                                    echo $this->__('You will earn');
+                                }else{
+									if(Mage::helper('core')->isModuleOutputEnabled('Magestore_Onestepcheckout') && $this->getRequest()->getModuleName() == 'onestepcheckout'){
+										echo "<a href='javascript:void(0);' onclick='login_popup.show();'>".$this->__('Login')."</a> ". $this->__('to earn');
+									}else{
+										echo "<a href='".Mage::getUrl('rewardpoints/index/redirectLogin',array('redirect'=>base64_encode(Mage::helper('core/url')->getCurrentUrl())))."'>".$this->__('Login')."</a> ". $this->__('to earn');
+									}
+                                }
+                            } ?>:</strong>
+                    </td>
+                    <td class="a-right" style="min-width: 70px;<?php echo $this->getTotal()->getStyle() ?>">
+                        <?php echo $_pointHelper->format($_earningPoints) ?>
+                    </td>
+                </tr>
+            <?php endif ?>
+            <?php if ($_earningPointsByCoupon): ?>
+                <tr>
+                    <td class="a-right" colspan="<?php echo $this->getColspan() ?>" style="<?php echo $this->getTotal()->getStyle() ?>">
+                        <?php echo $this->__('Earn Points (%s)', Mage::helper('rewardpoints/calculation_earning')->getCouponEarnPoints()); ?>
+                    </td>
+                    <td class="a-right" style="min-width: 70px;<?php echo $this->getTotal()->getStyle() ?>">
+                        <?php echo $_pointHelper->format($_earningPointsByCoupon) ?>
+                    </td>
+                </tr>
+            <?php endif ?>
+            <?php if ($this->getColspan() == 1): ?></thead><?php endif ?>
+    <?php endif ?>
+
+    <?php
+
+ endif // End if ($this->isEnable()) ?>

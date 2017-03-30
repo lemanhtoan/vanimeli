@@ -1,0 +1,85 @@
+<?php 
+	$cols = (int)$this->getConfig("max_items", 1);
+	$cols = $cols?$cols:4;
+	$thumb_width = $this->getConfig("thumbWidth", 200);
+	$thumb_height = $this->getConfig("thumbHeight", 200);
+	
+	$span = 12/$cols;
+	$small_span = 6;
+
+	$moduleId = "vesgallery".rand().time();
+
+	$show_title = (int)$this->getConfig("show_title", 1);
+	$show_link = (int)$this->getConfig("show_link", 1);
+	$show_description = (int)$this->getConfig("show_description", 1);
+	$show_description = (int)$this->getConfig("show_description", 1);
+	$enable_popup = (int)$this->getConfig("enable_popup", 1);
+?>
+<?php 
+	$style = "";
+	if( $this->getConfig("moduleHeight") !="auto" ){
+		$style .=";height:".(int) $this->getConfig("moduleHeight")."px";
+	}
+	if( $this->getConfig("moduleWidth") !="auto" ){
+		$style .=";width:".(int) $this->getConfig("moduleWidth")."px";
+	}
+?>
+<?php if( count($this->getImages()) ) { ?>
+<div class="ves-gallery" style="position:relative;<?php echo $style;?>">
+	<?php if($this->getConfig('title')){?>
+	<div class="block-title">
+		<h2><?php echo $this->getConfig('title')?></h2>
+	</div>
+	<?php }?>
+	
+
+		<div class="block-content">
+			<div class="box-gallery gallery-grid-layout">
+				<?php $i = 0;?>
+				<?php foreach ($this->getImages() as  $k => $image ): $i++ ?>
+						<?php if($i == 1 || ($i-1) % $cols == 0) { ?>
+						<div class="item row clearfix <?php if(($i-1)==0) {?>active<?php } ?>">
+						<?php } ?>
+						<div class="col-lg-<?php echo $span;?> col-sm-<?php echo $small_span; ?> col-xs-12 <?php if(($i-1) % $cols == 0){echo "first";}  if($i%$cols == 0){echo "last";} ?> <?php echo isset($image['classes'])?$image['classes']:'';?>">
+
+							<a class="group-file<?php echo $moduleId?> group-gallery-<?php echo $moduleId?>" rel="group-gallery-<?php echo $moduleId?>" href="<?php echo $image['imageURL'];?>" title="<?php echo $image['title'];?> - <?php echo $image['description']; ?>">
+								<img src="<?php echo $image['thumbnailURL'];?>" alt="<?php echo $image['title'];?>"/>
+							</a>
+							<?php if($show_title || $show_description): ?>
+							<div class="desc-gallery">
+								<?php if($show_title): ?>
+						        <div class="gellary-title">
+						        	<?php if($image['links']): ?>
+						        		<a href="<?php echo $image['links']; ?>"><?php echo $image['title'];?></a>
+						        	<?php else: ?>
+						        		<?php echo $image['title'];?>
+						        	<?php endif; ?>
+						        </div>
+						    	<?php endif; ?>
+						    	<?php if($show_description): ?>
+						        <div class="gellary-description"><?php echo !$crop_desc?$image['description']:$this->subString($image['description'], 100, "");?></div>
+					        	<?php endif; ?>
+					        </div>
+					        <?php endif; ?>  
+					        <?php if($image['links'] && $show_link): ?>
+									<div class="links"> 
+										<a href="<?php echo $image['links']; ?>" ><?php echo $this->__("Link"); ?></a>
+									</div>
+							<?php endif; ?>
+						</div>
+					<?php if( $i%$cols == 0 || $i==count($images) ) { ?>
+						</div>
+					<?php } ?>
+				<?php endforeach; ?>
+			</div>
+		</div>
+</div>
+
+<?php if($enable_popup): ?>
+<script type="text/javascript">
+jQuery(document).ready(function( $ ){
+	$(".group-file<?php echo $moduleId?>").colorbox({rel:'group-gallery-<?php echo $moduleId; ?>', overlayClose: true, opacity: 0.5, scalePhotos: true, maxWidth: '100%', maxHeight: '100%'});
+});
+</script>
+<?php endif; ?>
+<?php } //end if ?>

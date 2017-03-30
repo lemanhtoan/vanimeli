@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sample_Widgets>
+            <version>1.0.0</version>
+        </Sample_Widgets>
+    </modules>
+
+    <!-- frontend -->
+    <frontend>
+        <layout>
+            <updates>
+                <sample_widgets>
+                    <file>sample_widgets.xml</file>
+                </sample_widgets>
+            </updates>
+        </layout>
+    </frontend>
+    <!--Global-->
+    <global>
+        <blocks>
+            <sample_widgets>
+                <class>Sample_Widgets_Block</class>
+            </sample_widgets>
+        </blocks>
+        <helpers>
+            <sample_widgets>
+                <class>Sample_Widgets_Helper</class>
+            </sample_widgets>
+        </helpers>
+        <resources>
+            <sample_widgets_setup>
+                <setup>
+                    <module>Sample_Widgets</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </sample_widgets_setup>
+            <sample_widgets_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </sample_widgets_write>
+            <sample_widgets_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </sample_widgets_read>
+        </resources>
+    </global>
+</config>

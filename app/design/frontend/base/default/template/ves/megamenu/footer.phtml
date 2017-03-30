@@ -1,0 +1,36 @@
+<?php
+    $enable_sidebar_sosial = Mage::getStoreConfig("ves_megamenu/ves_megamenu/enable_sidebar_sosial");
+    $enable_sidebar_copyright = Mage::getStoreConfig("ves_megamenu/ves_megamenu/enable_sidebar_copyright");
+
+    $enable_sidebar_sosial = $enable_sidebar_sosial == ""?1:$enable_sidebar_sosial;
+    $enable_sidebar_copyright = $enable_sidebar_copyright == ""?1:$enable_sidebar_copyright;
+?>
+<?php echo $this->getChildHtml() ?>
+<?php if($enable_sidebar_sosial): ?>
+<div class="social-icons">
+	<?php if($facebook_link = Mage::getStoreConfig("ves_megamenu/ves_megamenu/facebook_link")): ?>
+    <a href="<?php echo $facebook_link; ?>" class="social-icon facebook-icon" title="Facebook"><i class="fa fa-facebook"></i></a>
+	<?php endif; ?>
+	<?php if($twitter_link = Mage::getStoreConfig("ves_megamenu/ves_megamenu/twitter_link")): ?>
+    <a href="<?php echo $twitter_link; ?>" class="social-icon twitter-icon" title="Twitter"><i class="fa fa-twitter"></i></a>
+	<?php endif; ?>
+	<?php if($google_link = Mage::getStoreConfig("ves_megamenu/ves_megamenu/google_link")): ?>
+    <a href="<?php echo $google_link; ?>" class="social-icon google-plus-icon" title="Google Plus"><i class="fa fa-google-plus"></i></a>
+	<?php endif; ?>
+	<?php if($instagram_link = Mage::getStoreConfig("ves_megamenu/ves_megamenu/instagram_link")): ?>
+    <a href="<?php echo $instagram_link; ?>" class="social-icon instagram-icon" title="Instagram"><i class="fa fa-instagram"></i></a>
+	<?php endif; ?>
+	<?php if($youtube_link = Mage::getStoreConfig("ves_megamenu/ves_megamenu/youtube_link")): ?>
+    <a href="<?php echo $youtube_link; ?>" class="social-icon youtube-icon" title="Youtube"><i class="fa fa-youtube"></i></a>
+	<?php endif; ?>
+	<?php if($pinterest_link = Mage::getStoreConfig("ves_megamenu/ves_megamenu/pinterest_link")): ?>
+    <a href="<?php echo $pinterest_link; ?>" class="social-icon pinterest-icon" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+	<?php endif; ?>
+	<?php if($dribbble_link = Mage::getStoreConfig("ves_megamenu/ves_megamenu/dribbble_link")): ?>
+    <a href="<?php echo $dribbble_link; ?>" class="social-icon dribbble-icon" title="Dribbble"><i class="fa fa-dribbble"></i></a>
+	<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php if($enable_sidebar_copyright): ?>
+<div class="copyright"><?php echo Mage::getStoreConfig('design/footer/copyright'); ?></div>
+<?php endif; ?>

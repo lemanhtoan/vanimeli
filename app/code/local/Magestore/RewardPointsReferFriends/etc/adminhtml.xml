@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsReferFriends
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <menu>
+        
+        <rewardpoints module="rewardpoints" translate="title">
+            <children>
+                <specialrefer module="rewardpointsreferfriends" translate="title">
+                    <title>Special Referring Friends Offers</title>
+                    <sort_order>70</sort_order>
+                    <children>
+                        <offers>
+                            <title>Manage Offers</title>
+                            <action>adminhtml/reward_rewardpointsreferfriends</action>
+                        </offers>
+                        <couponcode>
+                            <title>Manage Coupon Codes</title>
+                            <action>adminhtml/reward_couponcode</action>
+                        </couponcode>
+                    </children>
+                    
+                </specialrefer>
+            </children>
+        </rewardpoints>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <rewardpoints module="rewardpoints" translate="title">
+                                        <title>Reward Points</title>
+                                        <sort_order>71</sort_order>
+                                    </rewardpoints>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <rewardpoints module="rewardpoints" translate="title">
+                        <children>
+                            <specialrefer module="rewardpointsreferfriends" translate="title">
+                                <title>Special Referring Friends Offers</title>
+                                <sort_order>70</sort_order>
+                                <children>
+                                    <offers>
+                                        <title>Manage offers</title>
+                                        <!--<action>rewardpointsreferfriendsadmin/adminhtml_rewardpointsreferfriends</action>-->
+                                    </offers>
+                                    <couponcode>
+                                        <title>Manage coupon code</title>
+                                        <!--<action>rewardpointsreferfriendsadmin/adminhtml_couponcode</action>-->
+                                    </couponcode>
+                                </children>   
+                            </specialrefer> 
+                        </children>
+                    </rewardpoints>
+                    
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,61 @@
+<?php
+	$link = $this->getConfig("link", "");
+	$show_width_height = $this->getConfig("show_wh", 0);
+?>
+<div class="ourservice-block block <?php echo $wrapper_class; ?>">
+	<div class="media <?php echo $inner_class; ?>">
+		<?php if($icon_position == 'left' || $icon_position == 'right' || $icon_position == 'top' ){ ?>
+		<?php if($icon_class || $thumbnailurl){  ?>
+		<div class="<?php if($icon_position == 'left'){ echo 'pull-left'; }elseif($icon_position == 'right'){echo
+			'pull-right'; } ?> <?php if (isset($stylecls)&&$stylecls) echo 'text-'.$stylecls;?> <?php echo $image_class; ?>">
+			<?php if($link): ?>
+			<a href="<?php echo $link; ?>">
+			<?php endif; ?>
+			<?php if($icon_class){ ?>
+			<i class="fa <?php echo $icon_class; ?>" style="<?php echo (isset($font_size) && $font_size)?'font-size:'.$font_size:''; ?>"></i>
+			<?php }elseif($thumbnailurl){ ?>
+			<img src="<?php echo $thumbnailurl; ?>" alt="icon" <?php if($show_width_height): ?>width="<?php echo $image_width; ?>" height="<?php echo $image_height; ?>"<?php endif; ?>/>
+			<?php } ?>
+			<?php if($link): ?>
+			</a>
+			<?php endif; ?>
+		</div>
+		<?php } ?>
+		<?php } ?>
+
+		<?php if( $widget_heading != '' || $content != '' ){ ?>
+		<?php if( $widget_heading != '' ){ ?>
+		<h4 class="ourservice-heading <?php echo $widget_heading_class; ?>">
+			<?php if($link): ?>
+			<a href="<?php echo $link; ?>">
+			<?php endif; ?>
+			<?php echo $widget_heading; ?>
+			<?php if($link): ?>
+			</a>
+			<?php endif; ?>
+		</h4>
+		<?php } ?>
+		<?php if( $content != '' ){ ?>
+		<div class="ourservice-content <?php echo $content_class; ?>">
+			<?php echo $content; ?>
+		</div>
+		<?php } ?>
+		<?php } ?>
+
+		<?php if( ($icon_position == 'bottom') && ( $icon_class || $thumbnailurl )){ ?>
+		<div <?php if( $image_class != '' ){ echo 'class="'.$image_class.'"'; } ?> >
+			<?php if($link): ?>
+			<a href="<?php echo $link; ?>">
+			<?php endif; ?>
+			<?php if($icon_class){ ?>
+			<i class="fa <?php echo $icon_class ?>"></i>
+			<?php }elseif($thumbnailurl){ ?>
+			<img src="<?php echo $thumbnailurl ?>" alt="icon" <?php if($show_width_height): ?>width="<?php echo $image_width; ?>" height="<?php echo $image_height; ?>"<?php endif; ?>/>
+			<?php } ?>
+			<?php if($link): ?>
+			</a>
+			<?php endif; ?>
+		</div>
+		<?php } ?>
+	</div>
+</div>

@@ -1,0 +1,68 @@
+<?php
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+/**
+ * Rewardpoints refund spent points/ earned points for customer template
+ * 
+ * @see Mage_Adminhtml_Block_Widget_Form_Renderer_Fieldset
+ */
+?>
+
+<?php if ($this->canRefundPoints()): ?>
+    <p>
+        <label for="creditmemo_refund_points"><?php echo $this->__('Return spent points to customer’ balance (%s)', Mage::helper('rewardpoints/point')->format($this->getMaxPointRefund(), $this->getCreditmemo()->getStoreId())) ?></label>
+        <input type="text" name="creditmemo[refund_points]" value="<?php echo $this->getCurrentPoint() ?>" id="creditmemo_refund_points" class="input-text not-nagetive-amount" style="width: 60px; text-align: right; margin-left: 10px;" onchange="checkCreditmemoRefundPoints(this)" />
+        <script type="text/javascript">
+            maxPointsRefund = <?php echo $this->getMaxPointRefund() ? $this->getMaxPointRefund() : '0' ?>;
+            function checkCreditmemoRefundPoints(el) {
+                if (el.value < 0) {
+                    el.value = 0;
+                }
+                if (el.value > maxPointsRefund) {
+                    el.value = maxPointsRefund;
+                }
+            }
+        </script>
+    </p>
+<?php elseif($this->getMaxPointRefund() == 0): ?>
+    <p>
+        <input type="hidden" name="creditmemo[refund_points]" value="0" id="creditmemo_refund_points" class="input-text not-nagetive-amount" />
+    </p>
+<?php endif ?>
+
+<?php if ($this->canRefundEarnedPoints()): ?>
+    <p>
+        <label for="creditmemo_refund_earned_points"><?php echo $this->__('Get back earned points from customer’s balance (%s)', Mage::helper('rewardpoints/point')->format($this->getMaxEarnedRefund(), $this->getCreditmemo()->getStoreId())) ?></label>
+        <input type="text" name="creditmemo[refund_earned_points]" value="<?php echo $this->getMaxEarnedRefund() ?>" id="creditmemo_refund_earned_points" class="input-text not-nagetive-amount" style="width: 60px; text-align: right; margin-left: 10px;" onchange="checkCreditmemoRefundEarnedPoints(this)" />
+        <script type="text/javascript">
+            maxEarnedRefund = <?php echo $this->getMaxEarnedRefund() ? $this->getMaxEarnedRefund() : '0' ?>;
+            function checkCreditmemoRefundEarnedPoints(el) {
+                if (el.value < 0) {
+                    el.value = 0;
+                }
+                if (el.value > maxEarnedRefund) {
+                    el.value = maxEarnedRefund;
+                }
+            }
+        </script>
+    </p>
+    <?php
+
+ endif ?>

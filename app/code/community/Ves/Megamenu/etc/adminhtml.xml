@@ -1,0 +1,100 @@
+<?xml version="1.0"?> 
+<config>
+    <menu>
+            <vesextensions module="ves_megamenu">
+                <title>VenusTheme</title>
+                <sort_order>50</sort_order>
+                <children>
+                    <ves_megamenu translate="title" module="ves_megamenu">
+                        <title>Ves Megamenu</title>
+                        <children>
+                            <index module="ves_megamenu">
+                                <title>Manage Menu Items</title>
+                                <sort_order>1</sort_order>
+                                <action>adminhtml/adminhtml_megamenu/index</action>
+                            </index>
+                            
+                            <configuration translate="title" module="ves_megamenu">
+                                <title>Configuration</title>
+                                <sort_order>3</sort_order>
+                                <action>adminhtml/system_config/edit/section/ves_megamenu</action>
+                            </configuration>
+                        </children>
+                    </ves_megamenu>
+                </children>
+            </vesextensions>
+        </menu>
+    <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <vesextensions module="ves_megamenu">
+                            <title>VenusTheme</title>
+                            <sort_order>50</sort_order>
+                            <children>
+                                <ves_megamenu translate="title" module="ves_megamenu">
+                                    <title>Ves Megamenu</title>
+                                    <children>
+                                        <index module="ves_megamenu">
+                                            <title>Manage Menu Items</title>
+                                            <sort_order>1</sort_order>
+                                            <action>adminhtml/adminhtml_megamenu/index</action>
+                                        </index>
+                                        <save module="ves_megamenu">
+                                            <title>Save Menu Item</title>
+                                            <sort_order>1</sort_order>
+                                        </save>
+                                        <delete module="ves_megamenu">
+                                            <title>Delete Menu Item</title>
+                                            <sort_order>1</sort_order>
+                                        </delete>
+                                        <liveedit module="ves_megamenu">
+                                            <title>Live Menu Item Editor</title>
+                                            <sort_order>1</sort_order>
+                                        </liveedit>
+                                        <savewidget module="ves_megamenu">
+                                            <title>Save Megamenu Widget</title>
+                                            <sort_order>1</sort_order>
+                                        </savewidget>
+                                        <importcategories module="ves_megamenu">
+                                            <title>Import Categories</title>
+                                            <sort_order>1</sort_order>
+                                        </importcategories>
+                                        <importmenus module="ves_megamenu">
+                                            <title>Import Menus</title>
+                                            <sort_order>1</sort_order>
+                                        </importmenus>
+                                        <configuration translate="title" module="ves_megamenu">
+                                            <title>Configuration</title>
+                                            <sort_order>3</sort_order>
+                                            <action>adminhtml/system_config/edit/section/ves_megamenu</action>
+                                        </configuration>
+                                    </children>
+                                </ves_megamenu>
+                            </children>
+                        </vesextensions>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ves_megamenu>
+                                            <title>Ves Megamenu</title>
+                                        </ves_megamenu>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+			<modules>
+				<Ves_Megamenu>
+					<files>
+						<default>Ves_Megamenu.csv</default>
+					</files>
+				</Ves_Megamenu>
+			</modules>
+		</translate>
+</config>

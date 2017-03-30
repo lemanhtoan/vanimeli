@@ -1,0 +1,438 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPointsReferFriends
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <Magestore_RewardPointsReferFriends>
+            <version>0.2.5</version>
+        </Magestore_RewardPointsReferFriends>
+    </modules>
+    <frontend>
+        <routers>
+            <rewardpointsreferfriends>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_RewardPointsReferFriends</module>
+                    <frontName>rewardpointsreferfriends</frontName>
+                </args>
+            </rewardpointsreferfriends>
+        </routers>
+        <layout>
+            <updates>
+                <rewardpointsreferfriends>
+                    <file>rewardpointsreferfriends.xml</file>
+                </rewardpointsreferfriends>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_RewardPointsReferFriends>
+                    <files>
+                        <default>Magestore_RewardPointsReferFriends.csv</default>
+                    </files>
+                </Magestore_RewardPointsReferFriends>
+            </modules>
+        </translate>
+        <events>
+            <paypal_prepare_line_items>
+                <observers>
+                    <rewardpointsreferfriends_frontend_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsreferfriends/frontend_observer</class>
+                        <method>paypalPrepareLineItems</method>
+                    </rewardpointsreferfriends_frontend_observers>
+                </observers>
+            </paypal_prepare_line_items>
+            <customer_login>
+                <observers>
+                    <referfriends_login>
+                        <type>singleton</type>
+                        <class>rewardpointsreferfriends/observer</class>
+                        <method>customerLogin</method>
+                    </referfriends_login>
+                </observers>
+            </customer_login>
+        </events>
+    </frontend>
+    <admin>
+        <routers>
+            <!-- <rewardpointsreferfriendsadmin>
+                <use>admin</use>
+                <args>
+                    <module>Magestore_RewardPointsReferFriends</module>
+                    <frontName>rewardpointsreferfriendsadmin</frontName>
+                </args>
+            </rewardpointsreferfriendsadmin> -->
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Magestore_RewardPointsReferFriends before="Mage_Adminhtml">Magestore_RewardPointsReferFriends_Adminhtml</Magestore_RewardPointsReferFriends>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <rewardpointsreferfriends>
+                    <file>rewardpointsreferfriends.xml</file>
+                </rewardpointsreferfriends>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magestore_RewardPointsReferFriends>
+                    <files>
+                        <default>Magestore_RewardPointsReferFriends.csv</default>
+                    </files>
+                </Magestore_RewardPointsReferFriends>
+            </modules>
+        </translate>
+    </adminhtml>
+    <global>
+        <models>
+            <rewardpointsreferfriends>
+                <class>Magestore_RewardPointsReferFriends_Model</class>
+                <resourceModel>rewardpointsreferfriends_mysql4</resourceModel>
+            </rewardpointsreferfriends>
+            <rewardpointsreferfriends_mysql4>
+                <class>Magestore_RewardPointsReferFriends_Model_Mysql4</class>
+                <entities>
+                    <rewardpointsspecialrefer>
+                        <table>rewardpoints_special_refer</table>
+                    </rewardpointsspecialrefer>
+                </entities>
+                <entities>
+                    <rewardpointsspecialrefervalue>
+                        <table>rewardpoints_special_refer_value</table>
+                    </rewardpointsspecialrefervalue>
+                </entities>
+                <entities>
+                    <rewardpointsrefercustomer>
+                        <table>rewardpoints_refer_customer</table>
+                    </rewardpointsrefercustomer>
+                </entities>
+            </rewardpointsreferfriends_mysql4>
+        </models>
+        <resources>
+            <rewardpointsreferfriends_setup>
+                <setup>
+                    <module>Magestore_RewardPointsReferFriends</module>
+                    <class>Magestore_RewardPointsReferFriends_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </rewardpointsreferfriends_setup>
+            <rewardpointsreferfriends_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </rewardpointsreferfriends_write>
+            <rewardpointsreferfriends_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </rewardpointsreferfriends_read>
+        </resources>
+        <blocks>
+            <rewardpointsreferfriends>
+                <class>Magestore_RewardPointsReferFriends_Block</class>
+            </rewardpointsreferfriends>
+        </blocks>
+        <helpers>
+            <rewardpointsreferfriends>
+                <class>Magestore_RewardPointsReferFriends_Helper</class>
+            </rewardpointsreferfriends>
+        </helpers>
+        <template>
+            <email>
+                <rewardpointsreferfriends_email_template translate="label" module="rewardpointsreferfriends">
+                    <label>Email refer friends</label>
+                    <file>rewardpointsreferfriends/email_template.html</file>
+                    <type>html</type>
+                </rewardpointsreferfriends_email_template>
+            </email>
+        </template>
+        <events>
+            <controller_action_predispatch_checkout_cart_couponPost>
+                <observers>
+                    <rewardpointsreferfriends_observers>
+                        <class>rewardpointsreferfriends/observer</class>
+                        <method>couponPost</method>
+                    </rewardpointsreferfriends_observers>
+                </observers>
+            </controller_action_predispatch_checkout_cart_couponPost>
+            <!--            <customer_register_success>
+                <observers>
+                    <rewardpointsreferfriends_observers>
+                        <class>rewardpointsreferfriends/observer</class>
+                        <method>customerRegisterSuccess</method>
+                    </rewardpointsreferfriends_observers>
+                </observers>
+            </customer_register_success>-->
+            <!--            <customer_save_commit_after>
+                <observers>
+                    <rewardpointsreferfriends_observers>
+                        <class>rewardpointsreferfriends/observer</class>
+                        <method>customerRegisterSuccessForLow</method>
+                    </rewardpointsreferfriends_observers>
+                </observers>
+            </customer_save_commit_after>-->
+            <adminhtml_customer_save_after>
+                <observers>
+                    <rewardpointsreferfriends_observers>
+                        <class>rewardpointsreferfriends/observer</class>
+                        <method>customerSaveAfter</method>
+                    </rewardpointsreferfriends_observers>
+                </observers>
+            </adminhtml_customer_save_after>
+
+            <controller_action_predispatch>
+                <observers>
+                    <rewardpointsreferfriends_action_predispatch>
+                        <type>singleton</type>
+                        <class>rewardpointsreferfriends/observer</class>
+                        <method>actionPredispatch</method>
+                    </rewardpointsreferfriends_action_predispatch>
+                </observers>
+            </controller_action_predispatch>
+            <rewardpoints_rewrite_coupon_block_get_coupon_code>
+                <observers>
+                    <rewardpointsreferfriends_block_rewrite_coupon>
+                        <type>singleton</type>
+                        <class>rewardpointsreferfriends/observer</class>
+                        <method>getCouponCode</method>
+                    </rewardpointsreferfriends_block_rewrite_coupon>
+                </observers>
+            </rewardpoints_rewrite_coupon_block_get_coupon_code>
+            <!--            <controller_action_predispatch_checkout_cart_couponPost>
+                <observers>
+                    <rewardpointsreferfriends_model_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsreferfriends/observer</class>
+                        <method>couponPost</method>
+                    </rewardpointsreferfriends_model_observers>
+                </observers>
+            </controller_action_predispatch_checkout_cart_couponPost>-->
+            <!-- Rewardpoints process order -->
+            <sales_order_save_after>
+                <observers>
+                    <rewardpointsreferfriends_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsreferfriends/observer</class>
+                        <method>salesOrderSaveAfter</method>
+                    </rewardpointsreferfriends_observers>
+                </observers>
+            </sales_order_save_after>
+            <!--            <rewardpoints_rewrite_coupon_block_get_coupon_code>
+                <observers>
+                    <rewardpointsreferfriends_get_coupon_code>
+                        <type>singleton</type>
+                        <class>rewardpointsreferfriends/observer</class>
+                        <method>getCouponCode</method>
+                    </rewardpointsreferfriends_get_coupon_code>
+                </observers>
+            </rewardpoints_rewrite_coupon_block_get_coupon_code>-->
+            <!-- Hiep update-->
+            <sales_order_invoice_save_after>
+                <observers>
+                    <rewardpointsreferfriends_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsreferfriends/observer</class>
+                        <method>salesOrderInvoiceSaveAfter</method>
+                    </rewardpointsreferfriends_observers>
+                </observers>
+            </sales_order_invoice_save_after>
+            <!-- earning point friend register -->
+            <customer_save_commit_after>
+                <observers>
+                    <rewardpointsreferfriends_observers>
+                        <type>singleton</type>
+                        <class>rewardpointsreferfriends/observer</class>
+                        <method>customerRegisterSuccessForLow</method>
+                    </rewardpointsreferfriends_observers>
+                </observers>
+            </customer_save_commit_after>
+        </events>
+        <!-- Reward Points Action Config -->
+        <rewardpoints>
+            <actions>
+                <!--Refer Friends Action-->
+                <referfriends>rewardpointsreferfriends/action_referfriends</referfriends>
+            </actions>
+            <actions>
+                <!--Refer Friends Action-->
+                <referfriends_cancel>rewardpointsreferfriends/action_cancel</referfriends_cancel>
+            </actions>
+            <actions>
+                <!--Friends Register Action-->
+                <referfriends_registed>rewardpointsreferfriends/action_registed</referfriends_registed>
+            </actions>
+        </rewardpoints>
+        <sales>
+            <quote>
+                <totals>
+                    <freeshipping>
+                        <class>salesrule/quote_freeshipping</class>
+                        <after>subtotal</after>
+                        <before>tax_subtotal,shipping</before>
+                    </freeshipping>
+                    <offer>
+                        <class>rewardpointsreferfriends/total_quote_earning</class>
+                        <after>wee,discount</after>
+                        <before>rewardpoints,tax</before>
+                    </offer>
+                    <offer_after_tax>
+                        <class>rewardpointsreferfriends/total_quote_earningaftertax</class>
+                        <after>tax</after>
+                        <before>rewardpointsaftertax,grand_total</before>
+                    </offer_after_tax>
+                </totals>
+            </quote>
+            <order_invoice>
+                <totals>
+                    <offer>
+                        <class>rewardpointsreferfriends/total_invoice_earning</class>
+                        <after>grand_total</after>
+                    </offer>
+                </totals>
+            </order_invoice>
+            <order_creditmemo>
+                <totals>
+                    <offer>
+                        <class>rewardpointsreferfriends/total_creditmemo_earning</class>
+                        <after>grand_total</after>
+                    </offer>
+                </totals>
+            </order_creditmemo>
+        </sales>
+        <pdf>
+            <totals>
+                <offer>
+                    <title>Offer Discount</title>
+                    <source_field>rewardpoints_invited_discount</source_field>
+                    <model>rewardpointsreferfriends/total_pdf_earning</model>
+                    <font_size>7</font_size>
+                    <display_zero>0</display_zero>
+                    <sort_order>256</sort_order>
+                </offer>
+            </totals>
+        </pdf>
+        <fieldsets>
+            <sales_convert_quote_address>
+                <rewardpoints_referal_earn>
+                    <to_order>*</to_order>
+                </rewardpoints_referal_earn>
+                <rewardpoints_refer_customer_id>
+                    <to_order>*</to_order>
+                </rewardpoints_refer_customer_id>
+                <rewardpoints_invited_discount>
+                    <to_order>*</to_order>
+                </rewardpoints_invited_discount>
+                <rewardpoints_invited_base_discount>
+                    <to_order>*</to_order>
+                </rewardpoints_invited_base_discount>
+            </sales_convert_quote_address>
+            <sales_convert_quote_item>
+                <rewardpoints_referal_earn>
+                    <to_order_item>*</to_order_item>
+                </rewardpoints_referal_earn>
+                <rewardpoints_invited_discount>
+                    <to_order_item>*</to_order_item>
+                </rewardpoints_invited_discount>
+                <rewardpoints_invited_base_discount>
+                    <to_order_item>*</to_order_item>
+                </rewardpoints_invited_base_discount>
+            </sales_convert_quote_item>
+            <!-- Admin reorder -->
+            <sales_convert_quote>
+                <rewardpoints_offer_key>
+                    <to_order>*</to_order>
+                </rewardpoints_offer_key>
+            </sales_convert_quote>
+            <sales_copy_order>
+                <rewardpoints_offer_key>
+                    <to_edit>*</to_edit>
+                </rewardpoints_offer_key>
+            </sales_copy_order>
+        </fieldsets>
+    </global>
+    <default>
+        <rewardpoints>
+            <referfriendplugin>
+                <enable>1</enable>
+                <!--                <use_default_config>0</use_default_config>-->
+                <!--<earn_points>1</earn_points>-->
+                <!--<discount_type>fix</discount_type>-->
+                <refer_method>link</refer_method>
+                <refer_method>both</refer_method>
+                <customer_can_change_key>0</customer_can_change_key>
+                <customer_can_change_coupon>0</customer_can_change_coupon>
+                <apply_old_customer>1</apply_old_customer>
+                <use_email>1</use_email>
+                <use_captcha>0</use_captcha>
+                <max_email>100</max_email>
+                <use_facebook>1</use_facebook>
+                <use_twitter>1</use_twitter>
+                <use_google>1</use_google>
+                <pattern><![CDATA[REWARD-[N.4]-[AN.5]-[A.4]]]></pattern>
+                <pattern_for_both><![CDATA[REWARD-[N.4]-[AN.5]-[A.4]]]></pattern_for_both>
+                <sharing_subject><![CDATA[Good service and product]]></sharing_subject>
+                <sharing_message_for_link><![CDATA[I've been shopping at {{store_name}} and feel really happy. They provide good customer service and reasonable prices:
+If you click on my link, you can even receive a special discount! 
+Check it out: {{link_to_share}}]]></sharing_message_for_link>
+                <sharing_message_for_coupon><![CDATA[I've been shopping at {{store_name}} and feel really happy. They provide good customer service and reasonable prices:
+If you use coupon code: {{coupon_share}}, you can even receive a special discount! 
+Check it out: {{link_to_site}}]]></sharing_message_for_coupon>
+                <sharing_message_for_both><![CDATA[I've been shopping at {{store_name}} and feel really happy. They provide good customer service and reasonable prices:
+If you use coupon code: {{coupon_share}}, you can even receive a special discount! 
+Check it out: {{link_to_share}}]]></sharing_message_for_both>
+                <facebook_message_for_link><![CDATA[I've been shopping at {{store_name}} and feel really happy. They provide good customer service and reasonable prices:
+If you click on my link, you can even receive a special discount! 
+Check it out: {{link_to_share}}]]></facebook_message_for_link>
+                <facebook_message_for_coupon><![CDATA[I've been shopping at {{store_name}} and feel really happy. They provide good customer service and reasonable prices:
+If you use coupon code: {{coupon_share}}, you can even receive a special discount! 
+Check it out: {{link_to_site}}]]></facebook_message_for_coupon>
+                <facebook_message_for_both><![CDATA[I've been shopping at {{store_name}} and feel really happy. They provide good customer service and reasonable prices:
+If you use coupon code: {{coupon_share}}, you can even receive a special discount! 
+Check it out: {{link_to_share}}]]></facebook_message_for_both>
+                <twitter_message_for_link>
+                    <![CDATA[If you click on my link, you can even receive a special discount from store! Check it out: {{link_to_share}}]]></twitter_message_for_link>
+                <twitter_message_for_coupon>
+                    <![CDATA[If you use coupon code: {{coupon_share}}, you can even receive a special discount! Check it out: {{link_to_site}}]]></twitter_message_for_coupon>
+                <twitter_message_for_both>
+                    <![CDATA[If you use coupon code: {{coupon_share}}, you can even receive a special discount! Check it out: {{link_to_share}}]]></twitter_message_for_both>
+                <logo>default/logo_print.png</logo>
+                <background>default/background.jpg</background>
+                <note>
+                    <![CDATA[The coupon cope is only valid at our online store. Converting to cash is not allowed. You can either redeem the coupon code to point balance to pay for your orders or send it to your friends to use for their purchasing at {store_url}]]></note>
+                <style_color>FF0000</style_color>
+                <coupon_color>FFFFFF</coupon_color>
+                <caption>SAVE UP TO</caption>
+                <background_coupon>FFD2FF</background_coupon>
+                <max_discount>1</max_discount>
+            </referfriendplugin>
+        </rewardpoints>
+    </default>
+</config>

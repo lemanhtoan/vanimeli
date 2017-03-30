@@ -1,0 +1,40 @@
+<?php 
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_RewardPoints
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * adminhtml default default template rewardpointsreport dashboard
+ * 
+ * @see Magestore_RewardPointsReport_Block_Adminhtml_Dashboard_Left_Graph
+ */
+?>
+<div style="margin:10px;">
+    <?php
+    $_containerStyle = "width:{$this->getWidth()}px;height:{$this->getHeight()}px; margin:0 auto;";
+    ?>
+    <?php if($this->isHasData()): ?>
+    <p style="<?php echo $_containerStyle?>"><img src="<?php echo $this->getChartUrl() ?>" alt="chart" title="chart" /></p>
+    <div class="chart-comment">
+        <?php echo $this->getCommentContent() ?>
+    </div>
+    <?php else: ?>
+    <p class="a-center" style="<?php echo $_containerStyle?>"><?php echo $this->__('No Data Found') ?></p>
+    <?php endif; ?>
+</div>

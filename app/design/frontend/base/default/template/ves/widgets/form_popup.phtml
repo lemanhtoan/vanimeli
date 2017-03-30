@@ -1,0 +1,90 @@
+<?php
+$title = $this->getData('title');
+$form_widget_type = $this->getData('form_type');
+$class = $this->getData('addition_class');
+$expire = (int)$this->getData('expire');
+$id = rand().time();
+$cookie_name = 'widget-popup-'.$form_widget_type;
+$delay = (int)$this->getData('delay');
+//Convert from seconds to milliseconds
+$delay = $delay*1000;
+$width = $this->getData('popup_width');
+$height = $this->getData('popup_height');
+$opacity = $this->getData('opacity');
+$open_button_text = $this->getConfig('open_button_text', '');
+$button_class = $this->getConfig('button_class', '');
+$open_popup_first = $this->getConfig('open_popup_first', 1);
+$show_disable_option = $this->getConfig('show_disable_option', 1);
+?>
+
+<?php if(isset($html) && $html!= ''){ ?>
+<?php if($open_button_text): ?>
+	<a href="javascript:void(0);" onclick="return showPopup<?php echo $id ?>();" class="<?php echo $button_class; ?>"><?php echo $open_button_text; ?></a>
+<?php endif; ?>
+<div class="widget-popup" id="widget-popup-<?php echo $form_widget_type; ?>" style="display:none">
+	<?php echo $html; ?>
+	<?php if($show_disable_option): ?>
+	<div class="clear">
+		<div class="action_button">
+	        <input type="checkbox" class="hide-popup-action" data-cookiename="<?php echo $cookie_name; ?>" name="action" id="action-position-<?php echo $form_widget_type; ?>" value="hide">
+	        <label class="checkbox-inline" for="action-position-<?php echo $form_widget_type; ?>"><?php echo $this->__("Not receive this message again"); ?></label>
+	    </div>
+	</div>
+	<?php endif ; ?>
+</div>
+<script type="text/javascript">
+	if(jQuery.cookie("<?php echo $cookie_name; ?>") == 'null' || jQuery.cookie("<?php echo $cookie_name; ?>") != "true"){
+		function showPopup<?php echo $id ?>(){
+			jQuery.colorbox({
+				inline:true,
+				href:'#widget-popup-<?php echo $form_widget_type; ?>',
+				width:"<?php echo $width ?>",
+				height: "<?php echo $height ?>",
+				opacity: <?php echo $opacity ?>,
+				<?php if($title != ''){ ?>
+					title:"<?php echo $title ?>",
+				<?php } ?>
+				onLoad:function(){
+
+						<?php if($expire && $expire>0){ ?>
+							// expires after number second
+							var date = new Date();
+							var second_number = <?php echo $expire  ?>;
+							date.setTime(date.getTime() + (second_number * 1000));
+							jQuery.cookie("<?php echo $cookie_name; ?>", "true", { expires: date });
+							<?php } ?>
+
+							jQuery('#widget-popup-<?php echo $form_widget_type; ?>').show();
+							<?php if($class != ''){ ?>
+								jQuery("#colorbox").addClass("<?php echo $class; ?>");
+								<?php } ?>
+							},
+				onClosed:function(){
+								jQuery('#widget-popup-<?php echo $form_widget_type; ?>').hide();
+								<?php if($class != ''){ ?>
+								jQuery("#colorbox").removeClass("<?php echo $class; ?>");
+								<?php } ?>
+								}
+							});
+		if(jQuery(".hide-popup-action").length > 0) {
+			jQuery(".hide-popup-action").on('change', function() {
+				var cookie_name = jQuery(this).data("cookiename");
+				if(cookie_name && ("hide" == jQuery(this).val())) {
+					jQuery.cookie(cookie_name, "true");
+				}
+			});
+		}
+		
+			
+       }
+<?php if($open_popup_first): //Open popup on first load?>
+	<?php if($delay && $delay>0): ?>
+		setTimeout(showPopup<?php echo $id ?>,<?php echo $delay ?>);
+	<?php else: ?>
+		showPopup<?php echo $id ?>();
+	<?php endif; ?>
+<?php endif; ?>
+
+}
+</script>
+<?php } ?>

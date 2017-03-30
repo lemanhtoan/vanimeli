@@ -1,0 +1,116 @@
+<?php
+/**
+ * Refer product for friend
+ * 
+ * @see Magestore_AffiliateplusReferFriend_Block_Product_Refer
+ */
+?>
+<?php $_product = $this->getProduct() ?>
+<?php $_affiliateUrl = $this->getAffiliateUrl($_product) ?>
+
+<?php if ($this->getGenerateJavascript()): ?>
+<script type="text/javascript">
+    function affEmailToFriend(url,el) {
+        var contentUrl = '<?php echo $this->getUrl('affiliateplus/refer/emailbox') ?>';
+        if (contentUrl.indexOf('?') == -1) {
+            contentUrl += '?url=';
+        } else {
+            contentUrl += '&url=';
+        }
+        contentUrl += encodeURIComponent(url);
+         ajaxPopup(contentUrl,null,el);
+    }
+    new VarienForm('affiliateplus-email-form',true);
+    function retrieveContacts(mailSv) {
+        var mailCfg = <?php echo $this->getJsonEmail() ?>;
+        var popUrl = mailCfg[mailSv];
+        if (popUrl) popWin(popUrl,mailSv,getPopupPosition(500,360)+',resizable=yes,scrollbars=yes');
+    }
+    function affSendEmail() {
+        var affEmailForm = new VarienForm('affiliateplus-email-form', true);
+        if (!affEmailForm.validator.validate()) {
+            return false;
+        }
+        $('affiliate-btn-send-email').hide();
+        $('affiliate-please-wait-send-email').show();
+        var sendUrl = '<?php echo $this->getUrl('affiliateplus/refer/sendemail') ?>';
+        var params  = affEmailForm.form.serialize();
+        new Ajax.Request(sendUrl, {
+            method: 'post',
+            postBody: params,
+            parameters: params,
+            onException: function (xhr, e){
+                window.location.reload();
+            },
+            onComplete: function(xhr){
+                var response = xhr.responseText.evalJSON();
+                if (response.redirect) {
+                    window.location.href = response.redirect;
+                } else if (response.success) {
+                    alert(response.message);
+                    closeAffPopup();
+                } else if (response.error) {
+                    alert(response.message);
+                    $('affiliate-btn-send-email').show();
+                    $('affiliate-please-wait-send-email').hide();
+                }
+            }
+        });
+    }
+    function affShareOnFacebook(url) {
+        var shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=';
+        shareUrl += encodeURIComponent(url);
+        popWin(shareUrl,'facebook',getPopupPosition(570,360)+',resizable=yes,scrollbars=yes');
+    }
+    function affShareOnTwitter(url) {
+        var shareUrl = 'https://twitter.com/intent/tweet?original_referer=';
+        shareUrl += encodeURIComponent(window.location.href) + '&text=&url=';
+        shareUrl += encodeURIComponent(url);
+        popWin(shareUrl,'twitter',getPopupPosition(480,320)+',resizable=yes,scrollbars=yes');
+    }
+    function affShareGooglePlus(url) {
+        var shareUrl = 'https://plus.google.com/share?url=';
+        shareUrl += encodeURIComponent(url);
+        popWin(shareUrl,'google',getPopupPosition(500,360)+',resizable=yes,scrollbars=yes');
+    }
+    function getPopupPosition(width,height){
+        var screenX     = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft;
+        var	screenY     = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop;
+        var	outerWidth  = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth;
+        var	outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22);
+        var left = parseInt(screenX + ((outerWidth - width) / 2), 10);
+        var top  = parseInt(screenY + ((outerHeight - height) / 2.5), 10);
+        return 'width='+width+',height='+height+',left='+left+',top='+top;
+    }
+</script>
+<?php endif ?>
+
+<!-- Changed By Adam 11/05/2015: Fix issue can't disable the social icons on product page -->
+<?php
+    $list = Mage::getStoreConfig('affiliateplus/refer/show_list_refer');
+    $values = explode(",", $list);
+?>
+<div class="affiliateplus-share-product-list">
+    <ul class="affiliateplus-refer">
+        <?php if(in_array('email', $values)):?>
+            <li>
+                <span class="logo-social email-logo" onclick="affEmailToFriend('<?php echo $_affiliateUrl . '&src=email' ?>',this)" title="<?php echo $this->__('Email to a Friend') ?>"></span>
+            </li>
+        <?php endif; ?>
+        <?php if(in_array('facebook', $values)):?>
+            <li>
+                <span class="logo-social facebook-logo" onclick="affShareOnFacebook('<?php echo $_affiliateUrl ?>')" title="<?php echo $this->__('Share on Facebook') ?>"></span>
+            </li>
+        <?php endif; ?>
+        <?php if(in_array('twitter', $values)):?>
+            <li>
+                <span class="logo-social twitter-logo" onclick="affShareOnTwitter('<?php echo $_affiliateUrl ?>')" title="<?php echo $this->__('Share on Twitter') ?>"></span>
+            </li>
+        <?php endif; ?>
+        <?php if(in_array('google', $values)):?>
+            <li>
+                <span class="logo-social google-logo" onclick="affShareGooglePlus('<?php echo $_affiliateUrl ?>')" title="<?php echo $this->__('Share on Google Plus') ?>"></span>
+            </li>
+         <?php endif; ?>
+    </ul>
+</div>

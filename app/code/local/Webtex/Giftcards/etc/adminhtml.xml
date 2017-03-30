@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<config>
+  <menu>
+    <customer>
+      <children>
+        <giftcards translate="title" module="giftcards">
+          <title>Gift Cards</title>
+          <children>
+            <grid translate="title" module="giftcards">
+              <title>Manage Gift Cards</title>
+              <action>adminhtml/giftcards_giftcards/</action>
+            </grid>
+            <products translate="title" module="giftcards">
+              <title>Gift Card Products</title>
+              <action>adminhtml/giftcards_cardproducts</action>
+            </products>
+            <import translate="title" module="giftcards">
+              <title>Import Gift Cards</title>
+              <action>adminhtml/giftcards_cardsload</action>
+            </import>
+            <getlist translate="title" module="giftcards">
+              <title>Download Generated Lists</title>
+              <action>adminhtml/giftcards_cardslist</action>
+            </getlist>
+	    <export_cards translate="title" module="giftcards">
+	      <title>Export Gift Cards</title>
+	      <action>adminhtml/giftcards_exportcards</action>
+	    </export_cards>
+	    <log_cards translate="title" module="giftcards">
+	      <title>Gift Cards Log</title>
+	      <action>adminhtml/giftcards_logcards</action>
+	    </log_cards>
+          </children>
+        </giftcards>
+      </children>
+    </customer>
+  </menu>
+  <acl>
+    <resources>
+      <all>
+        <title>Allow Everything</title>
+      </all>
+      <admin>
+        <children>
+          <customer>
+            <children>
+              <giftcards translate="title">
+                <title>Webtex Gift Cards</title>
+                <sort_order>30</sort_order>
+                <children>
+                  <grid>
+                    <title>Manage Gift Cards</title>
+                    <sort_order>31</sort_order>
+                  </grid>
+                  <import>
+                    <title>Import Gift Cards</title>
+                    <sort_order>32</sort_order>
+                  </import>
+                  <products>
+                    <title>Gift Card Products</title>
+                    <sort_order>35</sort_order>
+                  </products>
+                  <getlist>
+                    <title>Download Generated Lists</title>
+                    <sort_order>40</sort_order>
+                  </getlist>
+	          <export_cards translate="title" module="giftcards">
+	            <title>Export Gift Cards</title>
+                    <sort_order>50</sort_order>
+	          </export_cards>
+	          <log_cards translate="title" module="giftcards">
+	            <title>Gift Cards Log</title>
+                    <sort_order>60</sort_order>
+	          </log_cards>
+                </children>
+              </giftcards>
+            </children>
+          </customer>
+          <system>
+            <children>
+              <config>
+                <children>
+                  <giftcards>
+                    <title>Gift Cards</title>
+                  </giftcards>
+                </children>
+              </config>
+            </children>
+          </system>
+        </children>
+      </admin>
+    </resources>
+  </acl>
+</config>

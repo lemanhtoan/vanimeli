@@ -1,0 +1,43 @@
+<?php
+	$modid = rand().time();
+	$enable_collapse = $this->getConfig("enable_collapse", 0);
+	$custom_id = $this->getConfig("custom_id", "");
+?>
+<div <?php echo $custom_id?'id="'.$custom_id.'"':''; ?> class="block block-list block-flickr-widget">
+	<?php if(isset($title) && trim($title)!=''): ?>
+		<div class="block-title">
+			<?php if($enable_collapse): ?><span class="opener hidden-lg hidden-md" data-toggle="collapse" data-target="#widget-flickr<?php echo $modid; ?>"><i class="fa fa-angle-down"></i></span><?php endif; ?>
+			<strong><span><?php echo $title; ?></span></strong>
+		</div>
+	<?php endif; ?>
+
+<div id="widget-flickr<?php echo $modid; ?>" class="widget-inner block-content <?php if($enable_collapse): ?> widget-enanle-collapse collapse in <?php endif; ?>">
+<?php
+foreach ($photos as $k => $v) {
+	?>
+	<a class="group-file<?php echo $userId; ?> flick-photo" href="https://farm<?php echo $v['farm']; ?>.staticflickr.com/<?php echo $v['server']; ?>/<?php echo $v['id']; ?>_<?php echo $v['secret']; ?>_<?php echo $popup; ?>.jpg" >
+		<img width="<?php echo $thumbnailImageWidth; ?>" height="<?php echo $thumbnailImageHeight ?>"  src="https://farm<?php echo $v['farm']; ?>.staticflickr.com/<?php echo $v['server']; ?>/<?php echo $v['id']; ?>_<?php echo $v['secret']; ?>_<?php echo $thumbnail; ?>.jpg" />
+	</a>
+	<?php
+}
+?>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery('.flick-photo').colorbox({
+			overlayClose: true,
+			opacity: 0.5,
+			rel: false,
+			speed : <?php echo $speed; ?>,
+			width : <?php echo "'".$popupImageWidth."'"; ?>,
+			height : <?php echo "'".$popupImageHeight."'"; ?>,
+			onLoad:function(){
+				jQuery("#cboxNext").remove(0);
+				jQuery("#cboxPrevious").remove(0);
+				jQuery("#cboxCurrent").remove(0);
+			}
+		});
+
+	});
+</script>
+</div>
+</div>

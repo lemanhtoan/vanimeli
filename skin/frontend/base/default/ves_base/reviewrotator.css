@@ -1,0 +1,25 @@
+.collateral-box { margin-bottom:2em;  }
+.collateral-box h4{ color:#e26703; }
+#rr-customer-reviews { margin-bottom:15px; text-align:left}
+#rr-customer-reviews li { margin-bottom:25px; }
+#rr-customer-reviews li p { clear:both; }
+.rr-ratings-list {
+    width: auto;
+    margin:4px 0;
+    }
+.rr-ratings-list td {
+    padding:3px 0;
+    border: 0
+    }
+.rr-ratings-list td.label {
+    padding-right:8px;
+    font-size:.95em;
+    font-weight:bold;
+    line-height:1em;
+    color: #000;
+    text-align: left;
+    }
+
+    .rr-ratings-list{
+    	border: 0
+    }

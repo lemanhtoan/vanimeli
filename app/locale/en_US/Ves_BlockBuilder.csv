@@ -1,0 +1,185 @@
+Ves Block Builder,Ves Block Builder
+Ves Page Builder,Ves Page Builder
+Add Block Profile,Add Block Profile
+Manage Block Profiles,Manage Block Profiles
+Manage Page Profiles,Manage Page Profiles
+Install Sample Profile,Install Sample Profile
+Enable Container,Enable Container
+Block Title,Block Title
+Block Code,Block Code
+Block ShortCode,Block ShortCode
+Date From,Date From
+Date To,Date To
+Save And Continue Edit,Save And Continue Edit
+Duplicate,Duplicate
+Page Title,Page Title
+URL Key,URL Key
+Display Page From Date,Display Page From Date
+Display Page To Date,Display Page To Date
+Enable Page for certain customer groups,Enable Page for certain customer groups
+Item Information,Item Information
+Page Information,Page Information
+Design Page,Design Page
+Design Block,Design Block
+Prefix Class,Prefix Class
+Design In,Design In
+Enable Grid,Enable Grid
+CMS Page Information,CMS Page Information
+Settings,Settings
+Custom CSS,Custom CSS
+Wrapper For Page Builder,Wrapper For Page Builder
+Enable Wrapper Block,Enable Wrapper Block
+Page Builder Widget Settings,Page Builder Widget Settings
+Custom Template,Custom Template
+Input custom module template file path. For example: ves/blockbuilder/row.phtml Empty for default,Input custom module template file path. For example: ves/blockbuilder/row.phtml Empty for default
+Wrapper Class,Wrapper Class
+Enter custom CSS code here. Your custom CSS will be outputted only on this particular page.,Enter custom CSS code here. Your custom CSS will be outputted only on this particular page.
+Import CSV,Import CSV
+Remove Block,Remove Block
+Enabled,Enabled
+Disabled,Disabled
+Install Data Sample,Install Data Sample
+Sample Profiles For Page Builder,Sample Profiles For Page Builder
+Block Builder,Block Builder
+The module required Ves_Base module was installed. Please install and active the module Ves_Base.,The module required Ves_Base module was installed. Please install and active the module Ves_Base.
+Pages Manager,Pages Manager
+Pages Description,Pages Description
+Profile was successfully duplicated,Profile was successfully duplicated
+Css Selector Elements,Css Selector Elements
+Manager Css Selector Elements,Manager Css Selector Elements
+Css Selector,Css Selector
+Selector,Selector
+Manage Css Selector Elements,Manage Css Selector Elements
+Profile was successfully duplicated,Profile was successfully duplicated
+Saved custom css file successfully!,Saved custom css file successfully!
+Add Page Profile,Add Page Profile
+Ves Live CSS Editor,Ves Live CSS Editor
+Enable Live Css Tool,Enable Live Css Tool
+Manage Css Selectors,Manage Css Selectors
+VenusTheme,VenusTheme
+Ves Pages Builder,Ves Pages Builder
+Ves Live Css Editor,Ves Live Css Editor
+Ves Pages Builder Plugin Market,Ves Pages Builder Plugin Market
+Enabled JQUERY,Enabled JQUERY
+Enabled JQUERY UI,Enabled JQUERY UI
+Enabled Bootstrap,Enabled Bootstrap
+Enabled Tiny Bootstrap,Enabled Tiny Bootstrap
+Tiny bootstrap is minimalist of bootstrap. It just have css code for layout grid 12 columns and responsive,Tiny bootstrap is minimalist of bootstrap. It just have css code for layout grid 12 columns and responsive
+Enabled OWL Carousel,Enabled OWL Carousel
+Enabled Colorbox Popup JS,Enabled Colorbox Popup JS
+Enabled Image Holder Js,Enabled Image Holder Js
+Allow Use Sample Elements CSS,Allow Use Sample Elements CSS
+Allow/Not Allow load elements css file. skin/frontend/base/default/ves_base/elements.css,Allow/Not Allow load elements css file. skin/frontend/base/default/ves_base/elements.css
+Cache Life Time,Cache Life Time
+Default: 86400 ms,Default: 86400 ms
+Enable/Disable Live CSS Tool On Frontend (only admin user can save the css profile),Enable/Disable Live CSS Tool On Frontend (only admin user can save the css profile)
+Allow Save Css Profile,Allow Save Css Profile
+Enable/Disable Save Css Customize Profile On Frontend,Enable/Disable Save Css Customize Profile On Frontend
+Select Custom Css Profile,Select Custom Css Profile
+Select a css profile. The profile was created by live css editor tool and was stored in the folder skin/frontend/THEME_PACKAGE/THEME_DEFAULT_LAYOUT/css/customize/,Select a css profile. The profile was created by live css editor tool and was stored in the folder skin/frontend/THEME_PACKAGE/THEME_DEFAULT_LAYOUT/css/customize/
+Market,Market
+Page Builder Plugins,Page Builder Plugins
+Download and setup extend pages builder plugins,Download and setup extend pages builder plugins
+Ves Block Builder : Generate Block Builder Profile,Ves Block Builder : Generate Block Builder Profile
+Generate Block Builder Profile,Generate Block Builder Profile
+Choose Block Builder Item,Choose Block Builder Item
+Block Id,Block Id
+Block Builder Code,Block Builder Code
+The code of block builder,The code of block builder
+Show Title,Show Title
+Block Template,Block Template
+Input custom module template file path. For example: ves/blockbuilder/default.phtml Empty for default,Input custom module template file path. For example: ves/blockbuilder/default.phtml Empty for default
+Ves Block Builder : Generate Page Builder Profile,Ves Block Builder : Generate Page Builder Profile
+Generate a page builder profile,Generate a page builder profile
+Page Profile Id,Page Profile Id
+Choose A Profile Of Page Builder,Choose A Profile Of Page Builder
+Page Builder Code,Page Builder Code
+The code of page builder,The code of page builder
+Page Builder Template,Page Builder Template
+Input custom module template file path. For example: ves/blockbuilder/row.phtml Empty for default,Input custom module template file path. For example: ves/blockbuilder/row.phtml Empty for default
+Edit Item '%s',Edit Item '%s'
+Theme Default,Theme Default
+Repeat,Repeat
+Repeat X,Repeat X
+Repeat Y,Repeat Y
+No Repeat,No Repeat
+Inherits from parent element,Inherits from parent element
+The background scrolls along with the element,The background scrolls along with the element
+The background is fixed with regard to the viewport,The background is fixed with regard to the viewport
+The background scrolls along with the elements contents,The background scrolls along with the elements contents
+Primary,Primary
+Danger,Danger
+Info,Info
+Warning,Warning
+Highlighted,Highlighted
+Nopadding,Nopadding
+Shortcode,Shortcode
+Are you sure?,Are you sure?
+Edit Selector Item '%s',Edit Selector Item '%s'
+Input css selector which will been built in css file. For example: body #page,Input css selector which will been built in css file. For example: body #page
+Input selector element name. for example: Background Color,Input selector element name. for example: Background Color
+Css Attributes,Css Attributes
+"Input css attribute which will apply css code. For example: background-image, color, background-color, font-size, color, font, border-color,..","Input css attribute which will apply css code. For example: background-image, color, background-color, font-size, color, font, border-color,.."
+Element Group,Element Group
+Element Label,Element Label
+Upload CSV File,Upload CSV File
+Upload & Import,Upload & Import
+Import Profile From CSV,Import Profile From CSV
+Filter By Name,Filter By Name
+Filter By Group,Filter By Group
+Please input value for required fields!,Please input value for required fields!
+Continue Create,Continue Create
+Save Batch,Save Batch
+"Large Devices, Wide Screens","Large Devices, Wide Screens"
+"Medium Devices, Desktops","Medium Devices, Desktops"
+"Small Devices, Tablets","Small Devices, Tablets"
+"Extra Small Devices, Phones","Extra Small Devices, Phones"
+Add element,Add element
+Toggle List,Toggle List
+Typo,Typo
+Blog,Blog
+Social,Social
+Others,Others
+Content,Content
+Image Manager,Image Manager
+Row Settings,Row Settings
+Close,Close
+All,All
+Save,Save
+Column Settings,Column Settings
+Widget Settings,Widget Settings
+Layout,Layout
+Background,Background
+Inner Background,Inner Background
+Style,Style
+Enable offcanvas Sidebar,Enable offcanvas Sidebar
+Fullwidth,Fullwidth
+No Gutters,No Gutters
+Padding,Padding
+Margin,Margin
+Image,Image
+Background Color,Background Color
+Select Image,Select Image
+Background Position,Background Position
+Background Attachment,Background Attachment
+Parallax Style,Parallax Style
+Parallax Percent,Parallax Percent
+Parallax Scroll,Parallax Scroll
+Inner Background Color,Inner Background Color
+Inner Background Image,Inner Background Image
+Row Wrapper Class,Row Wrapper Class
+Wrapper Inner Class,Wrapper Inner Class
+Row Style,Row Style
+Row Inner Class,Row Inner Class
+Set Column As,Set Column As
+Addition Class,Addition Class
+Column Style,Column Style
+Animation,Animation
+CSS3 Animation,CSS3 Animation
+Animation Duration,Animation Duration
+Animation Delay,Animation Delay
+Animation Offset,Animation Offset
+Animation Iteration,Animation Iteration
+Widget Box Style,Widget Box Style
+"Input css selector (html tag name, class or ID).<br/> For example: body .header","Input css selector (html tag name, class or ID).<br/> For example: body .header"
+"Input css attribute which will apply style value.<br/> For example: background-image, background-color, color, font-size or border-style, border-size","Input css attribute which will apply style value.<br/> For example: background-image, background-color, color, font-size or border-style, border-size"

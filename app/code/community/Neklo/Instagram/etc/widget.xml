@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<!--
+NOTICE OF LICENSE
+
+This source file is subject to the NekloEULA that is bundled with this package in the file ICENSE.txt.
+
+It is also available through the world-wide-web at this URL: http://store.neklo.com/LICENSE.txt
+
+Copyright (c)  Neklo (http://store.neklo.com/)
+-->
+<widgets>
+    <neklo_instagram type="neklo_instagram/widget_feed" module="neklo_instagram">
+        <name>[NEKLO] Instagram Widget</name>
+        <parameters>
+            <is_enabled translate="label">
+                <label>Is Enabled</label>
+                <required>1</required>
+                <visible>1</visible>
+                <sort_order>10</sort_order>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <value>1</value>
+            </is_enabled>
+            <mode translate="label">
+                <label>Mode</label>
+                <required>1</required>
+                <visible>1</visible>
+                <sort_order>20</sort_order>
+                <type>select</type>
+                <source_model>neklo_instagram/source_mode</source_model>
+                <value>4</value>
+            </mode>
+            <user_id translate="label description">
+                <label>User ID</label>
+                <required>1</required>
+                <visible>1</visible>
+                <sort_order>30</sort_order>
+                <type>text</type>
+                <value></value>
+                <description>{how-to-get-user-id}</description>
+                <depends>
+                    <mode>
+                        <value>1</value>
+                    </mode>
+                </depends>
+            </user_id>
+            <hashtag translate="label">
+                <label>Hashtag</label>
+                <required>1</required>
+                <visible>1</visible>
+                <sort_order>40</sort_order>
+                <type>text</type>
+                <value></value>
+                <depends>
+                    <mode>
+                        <value>2</value>
+                    </mode>
+                </depends>
+            </hashtag>
+            <user_name translate="label description">
+                <label>User Name</label>
+                <required>1</required>
+                <visible>1</visible>
+                <sort_order>50</sort_order>
+                <type>text</type>
+                <value></value>
+                <description><![CDATA[Example: http://instagram.com/<b>neklo_llc</b>]]></description>
+                <depends>
+                    <mode>
+                        <value>4</value>
+                    </mode>
+                </depends>
+            </user_name>
+            <title translate="label description">
+                <label>Title</label>
+                <required>0</required>
+                <visible>1</visible>
+                <sort_order>60</sort_order>
+                <type>text</type>
+                <value></value>
+                <description><![CDATA[Example: Instagram Feed #%s<br/><b>%s</b> - replaces by hashtag]]></description>
+            </title>
+            <description translate="label description">
+                <label>Description</label>
+                <required>0</required>
+                <visible>1</visible>
+                <sort_order>70</sort_order>
+                <type>textarea</type>
+                <value></value>
+                <description><![CDATA[Example: Description Feed #%s<br/><b>%s</b> - replaces by hashtag]]></description>
+            </description>
+            <limit_items translate="label">
+                <label>Limit</label>
+                <required>1</required>
+                <visible>1</visible>
+                <sort_order>80</sort_order>
+                <type>text</type>
+                <value>5</value>
+            </limit_items>
+            <image_width translate="label">
+                <label>Thumbnail Width</label>
+                <required>1</required>
+                <visible>1</visible>
+                <sort_order>90</sort_order>
+                <type>text</type>
+                <value>200</value>
+            </image_width>
+            <image_height translate="label">
+                <label>Thumbnail Height</label>
+                <required>1</required>
+                <visible>1</visible>
+                <sort_order>100</sort_order>
+                <type>text</type>
+                <value>200</value>
+            </image_height>
+            <template translate="label">
+                <label>Template</label>
+                <visible>1</visible>
+                <type>select</type>
+                <value>neklo_instagram/widget/feed.phtml</value>
+                <values>
+                    <featured translate="label">
+                        <value>neklo_instagram/widget/feed.phtml</value>
+                        <label>Instagram Widget Default Template</label>
+                    </featured>
+                </values>
+                <sort_order>110</sort_order>
+            </template>
+        </parameters>
+    </neklo_instagram>
+</widgets>

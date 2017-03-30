@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Nwdthemes_All>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Nwdthemes_All>
+    </modules>
+</config>
