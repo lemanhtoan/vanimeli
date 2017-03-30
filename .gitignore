@@ -1,0 +1,8 @@
+/var/
+/media/
+/app/etc/local.xml
+*.htaccess
+/nbproject/private/
+/nbproject/private
+/nbproject/
+.idea/
