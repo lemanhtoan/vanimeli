@@ -33,16 +33,13 @@
 ?>
 
 <?php
-    $_cartQty = $this->getSummaryCount();
-    if(empty($_cartQty)) {
-        $_cartQty = 0;
-    }
+$total = $this->helper('checkout/cart')->getQuote()->getGrandTotal();
 ?>
 <div class="test">
 <a href="<?php echo Mage::getbaseurl()."onepage"?>">
     <div class="h-cart"></div>
     <span class="cart-label"><?php //echo $this->__('Cart'); ?></span>
-    <span class="cart-count"><?php echo $_cartQty; ?></span>
+    <span class="cart-count"><?php echo number_format($total, 2); ?></span>
 </a>
 
 <div id="header-cart" class="block block-cart skip-content">

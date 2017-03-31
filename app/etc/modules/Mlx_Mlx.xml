@@ -3,7 +3,7 @@
 <config>
     <modules>
         <Mlx_Mlx>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
         </Mlx_Mlx>
     </modules>

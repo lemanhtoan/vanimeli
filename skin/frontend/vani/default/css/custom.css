@@ -1,0 +1,61 @@
+/*CUSTOM*/
+.site-header a {
+    text-decoration: none;
+}
+.top-three {
+    display: table;
+    margin: 0 auto;
+}
+.customer-box {
+    float: left;
+    width: 50%;
+}
+
+.lang-box {
+    float: right;
+    width: 50%;
+}
+.lang-box img {
+    width: 70%;
+    border: none;
+    float: right;
+}
+
+.form-language {
+    float: right;
+}
+
+.header-minicart a, .header-minicart a:hover {
+    text-decoration: none;
+}
+
+@media only screen and (min-width: 1024px) {
+.ves-container .row.row-level-1 {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+}
+
+.newsl {
+    margin-top: 6px;
+    margin-bottom: 0;
+    font-size: 18px;
+}
+
+div#footer-email-subscription {
+    display: inline-flex;
+}
+
+div#footer-email-subscription button {
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #000;
+}
+
+.box-newsletter {
+    float: right;
+}
+
+.ves-container  .block {
+    margin-bottom: 0;
+}

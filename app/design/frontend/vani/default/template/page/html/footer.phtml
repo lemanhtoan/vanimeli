@@ -121,16 +121,19 @@ olika färger.</li>
             <div class="col-sm-3 col-md-2">
               <div class="footer-logo"><img src="<?php echo $this->getSkinUrl('img/footer-logo.png');?>" alt="" class="img-responsive"></div>
             </div>
-            <div class="col-sm-7 col-md-7">
+            <div class="col-sm-6 col-md-6">
             <div class="row">
               <div class="col-sm-4">
-                <h3>NYHETSBREV</h3>
-              Ta del av våra nyheter
+                  <div class="box-newsletter">
+                      <h3 class="newsl"><?php echo $this->__('Newsletter') ?></h3>
+                      <span ><?php echo $this->__('Receive our news') ?></span>
+                  </div>
+
               </div>
               <div class="col-sm-7"><?php echo $this->getChildHtml('newsletter'); ?></div>
             </div>
             </div>
-            <div class="col-sm-2 col-md-3">
+            <div class="col-sm-3 col-md-4">
               <img src="<?php echo $this->getSkinUrl('img/footer-cards.png');?>" alt="" class="img-responsive">
             </div>
           </div>
