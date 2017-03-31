@@ -49,29 +49,37 @@
     <div class="page">
         <?php echo $this->getChildHtml('header') ?>
         <div class="breadcramb-section">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
                     <div class="left-padding-90">
-                    <h2 class="page-title"><?php echo Mage::getSingleton('cms/page')->getTitle(); ?></h2>
+                    <h2 class="page-title"><?php echo $this->getLayout()->getBlock('head')->getTitle();//Mage::getSingleton('cms/page')->getTitle(); ?></h2>
                         <?php echo $this->getChildHtml('breadcrumbs') ?>
                     </div>
                     </div>
                 </div>
             </div>
         </div>
-       <div class="container">
-           <div class="row">
-               <div class="col-sm-12">
-                   <?php echo $this->getChildHtml('global_messages') ?>
-            <?php echo $this->getChildHtml('content') ?>
-       <?php echo $this->getChildHtml('footer_before') ?>
-        <?php echo $this->getChildHtml('footer') ?>
-        <?php echo $this->getChildHtml('global_cookie_notice') ?>
+        <div class="bg-wrapper">
+           <div class="container">
+               <div class="row">
+                   <div class="col-sm-12">
+                       <?php echo $this->getChildHtml('global_messages') ?>
+                       <?php echo $this->getChildHtml('content') ?>
+                   </div>
                </div>
            </div>
-       </div>
-            
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php echo $this->getChildHtml('footer_before') ?>
+                    <?php echo $this->getChildHtml('footer') ?>
+                    <?php echo $this->getChildHtml('global_cookie_notice') ?>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <?php echo $this->getAbsoluteFooter() ?>

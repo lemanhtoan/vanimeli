@@ -1,6 +1,6 @@
 body{font-family: 'Montserrat', sans-serif;}
 
-.site-header{padding: 0px 0 10px;}
+.site-header{padding: 0;}
 
 .site-logo{padding: 35px 0 30px 0;}
 
@@ -284,13 +284,13 @@ body{font-family: 'Montserrat', sans-serif;}
   margin: 0 auto;
   padding: 0;
 }
-.sf-menu > li {margin-left: 30px;}
+.sf-menu > li {margin-left: 28px;}
 .sf-menu > li:first-child {
 
   margin-left: 0px;
 
 }
-.sf-menu > li > a {font-size: 16px;display: block;font-weight: 700;text-transform: uppercase;color: #000;position: relative;padding: 2px 0;}
+.sf-menu > li > a {font-size: 14px;display: block;font-weight: 700;text-transform: uppercase;color: #000;position: relative;padding: 2px 0;}
 
 
 
@@ -995,7 +995,7 @@ body{font-family: 'Montserrat', sans-serif;}
 .header-top{background: #252119; padding: 5px 0;}
 #header-social-icons, .top-header-menu{list-style: none;margin-top: 0;margin-bottom: 0;}
 #header-social-icons li{list-style: none;float: left;margin-right: 5px;max-width: 32px;}
-#header-social-icons li img{max-width: 100%;}
+#header-social-icons li img{max-width: 90%; padding-top: 1px;}
 .top-header-menu li{display: inline; /*margin: 0px 10px;*/}
 .top-header-menu li a, .header-top a{color: #fff; line-height: 32px;}
 
