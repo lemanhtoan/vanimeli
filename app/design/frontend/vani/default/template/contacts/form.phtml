@@ -25,22 +25,23 @@
  */
 ?>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
-<!-- <div class="page-title">
-    <h1><?php echo Mage::helper('contacts')->__('Contact Us') ?></h1>
-</div> -->
-<div class="col-sm-12 col-md-12">
-    <div class="nav-contact-us">
-        <ul class="rootnav-contact-us">
-            <li class=""><a href="#">Contact us</a></li>
-            <li class=""><a href="#">shipping & dlivery</a></li>
-            <li class=""><a href="#">return & exchange</a></li>
-            <li class=""><a href="#">privacy policy</a></li>
-            <li class=""><a href="#">careintructions</a></li>
-            <li class=""><a href="#">press</a></li>
-        </ul>
+
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="nav-contact-us">
+            <ul class="rootnav-contact-us">
+                <li class=""><a href="#">Contact us</a></li>
+                <li class=""><a href="#">shipping & dlivery</a></li>
+                <li class=""><a href="#">return & exchange</a></li>
+                <li class=""><a href="#">privacy policy</a></li>
+                <li class=""><a href="#">careintructions</a></li>
+                <li class=""><a href="#">press</a></li>
+            </ul>
+        </div>
     </div>
 </div>
-<div class="col-sm-12 col-md-12">
+
+<div class="row">
     <div class="col-sm-12 col-md-6">
         <div class="chat-now">
             <h4>chat now</h4>
@@ -50,8 +51,6 @@
 
         <form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post" class="scaffold-form">
             <div class="fieldset">
-                <!--         <h2 class="legend"><?php echo Mage::helper('contacts')->__('Contact Information') ?></h2>
-        <p class="required"><?php echo Mage::helper('contacts')->__('* Required Fields') ?></p> -->
                 <h5><?php echo Mage::helper('contacts')->__('Contact Us') ?></h5>
 
                 <ul class="form-list">
@@ -114,8 +113,6 @@
             <h4>our address</h4>
             <span>sample text</span>
         </div>
-
-
     </div>
 </div>
 <script type="text/javascript">

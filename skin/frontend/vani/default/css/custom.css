@@ -82,7 +82,7 @@ ul.rootnav-contact-us li a:hover{
 ul.rootnav-contact-us li a{
     font-size: 15px;
     text-transform: uppercase;
-    padding-right: 15px;
+    padding-right: 30px;
     color: #333;
     font-weight: bold;
 }
@@ -137,22 +137,17 @@ ul.rootnav-contact-us{
 .breadcramb-section .left-padding-90 span{
     font-size: 14px ;
 }
-/*.bg-wrapper {*/
-    /*position: relative;*/
-/*}*/
-/*.bg-wrapper:after {*/
-    /*content : "";*/
-    /*display: block;*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*background-image: url("../images/bg-allpages-min.png");*/
-    /*width: 100%;*/
-    /*background-size: 100%;*/
-    /*height: 100%;*/
-    /*opacity : 0.2;*/
-    /*z-index: 0;*/
-/*}*/
+
+/*.bgwrapper {
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/bg-allpages-min.png);
+    background-size: 100%;
+    margin: 0 auto;
+    padding: 30px;
+    opacity: .2;
+    filter: alpha(opacity=20);
+}*/
 
 .mainheader-section {
     background: #fff;
@@ -218,3 +213,6 @@ div#footer-email-subscription button {
     margin-bottom: 50px;
 }
 
+#contactForm button {
+    margin-left: 0;
+}

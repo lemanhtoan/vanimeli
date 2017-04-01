@@ -140,3 +140,48 @@ olika färger.</li>
           </div>
         </div>
       </footer>
+<script type="text/javascript">
+  function thatsNotYoChild(parentID) {
+    var parent           = document.getElementById(parentID),
+        children         = parent.innerHTML,
+        wrappedChildren  = '<div id="children" class="children">' + children + '</div>',
+        x, y, w, newParent, clonedChild, clonedChildOld;
+
+    parent.innerHTML = wrappedChildren;
+    clonedChild = document.getElementById('children').cloneNode(true);
+    document.getElementById('children').id = 'children-old';
+    clonedChildOld = document.getElementById('children-old');
+    newParent = parent.parentNode;
+
+    newParent.appendChild(clonedChild);
+    clonedChildOld.style.opacity = '0';
+    clonedChildOld.style.filter = 'alpha(opacity=0)';
+
+    function doCoords () {
+      x = clonedChildOld.getBoundingClientRect().left;
+      y = clonedChildOld.getBoundingClientRect().top;
+      if (clonedChildOld.getBoundingClientRect().width) {
+        w = clonedChildOld.getBoundingClientRect().width; // for modern browsers
+      } else {
+        w = clonedChildOld.offsetWidth; // for oldIE
+      }
+
+      clonedChild.style.position = 'absolute';
+      clonedChild.style.left = x + 'px';
+      clonedChild.style.top = 420 + 'px';
+      clonedChild.style.width = w + 'px';
+    }
+
+    window.onresize = function () {
+
+      doCoords();
+
+    };
+  
+    doCoords();
+
+}
+
+//thatsNotYoChild('bgwrapper');
+
+</script>
