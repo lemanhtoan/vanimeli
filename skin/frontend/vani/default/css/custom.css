@@ -93,13 +93,45 @@
 }
 
 /*common*/
-.about-us-top{
-    background: url(../images/hero-img.jpg);
-    background-size: 100% 100%;
+.about-page .logo-about {
+    width: 100%;
 }
-.about-us-bottom{
+.about-page .logo-about li:last-child {
+    padding-right: 0;
+}
+.about-page .logo-about li {
+    width: 24%;
+    float: left;
+    padding-right: calc((100% - (24% * 4))/ 3);
+    text-align: center;
+}
+.about-page .page-title{
+    color: #000000;
+    padding-bottom: 15px;
+}
+.about-us-top .content-about{
+    width: 36%;
+    float: right;
+    padding: 30px;
+    background-color: rgba(255,255, 255, 0.6);
+}
+.about-us-bottom .content-about{
+    width: 36%;
+    float: left;
+    padding: 30px;
+    background-color: rgba(255,255, 255, 0.6);
+}
+.about-us-top{
     background: url(../images/home-secong-img.jpg);
     background-size: 100% 100%;
+    padding-top: 200px;
+    padding-bottom: 100px;
+}
+.about-us-bottom{
+    background: url(../images/hero-img.jpg);
+    background-size: 100% 100%;
+    padding-top: 200px;
+    padding-bottom: 100px;
 }
 .action.availability.in-stock {
     background: #000 none repeat scroll 0 0;
