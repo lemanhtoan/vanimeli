@@ -54,7 +54,7 @@
             </div>
             </div>
             <div class="col-sm-8">
-            <div class="view-product-shop">
+            <div class="view-product-shop status_stock_<?php echo $_product->isSaleable() ?>">
                 <div class="clearfix"></div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
@@ -108,13 +108,6 @@
                                 <?php echo $this->getChildHtml('addtocart') ?>
                             <?php endif; ?> 
                         </div>
-                        <?php if ($this->helper('wishlist')->isAllow()) : ?>
-<!--                         <div class="wishlistbg">
-                            <ul>
-                                <li><a href="<?php // echo $_wishlistSubmitUrl ?>" onclick="productAddToCartForm.submitLight(this, this.href); return false;" class="link-wishlist"><i class="fa fa-star"></i> <?php // echo $this->__('Add to Wishlist') ?></a></li>
-                            </ul>
-                        </div> -->
-                        <?php endif; ?>
                     </div>
             
                 <?php echo $this->getChildHtml('alert_urls') ?>

@@ -6083,14 +6083,14 @@ p.product-name a:hover {
     float: left;
     padding: 10px 30px;
     text-align: center;
-    width: 50%;
+    width: 100%;
     border-right: 1px solid #d0d0d0;
 }
 .text-img2 {
     float: right;
     padding: 10px 30px;
     text-align: center;
-    width: 50%;
+    width: 100%;
 
 }
 .main_bottom_part_text .text > p {

@@ -75,6 +75,13 @@
                     <template>page/3columns.phtml</template>
                     <layout_handle>page_three_columns</layout_handle>
                 </three_columns>
+
+                <custom_static_page_one_about>
+                 <label>About template view</label>
+                 <template>page/custom-about-us.phtml</template>
+                </custom_static_page_one_about>
+
+
             </layouts>
         </page>
     </global>

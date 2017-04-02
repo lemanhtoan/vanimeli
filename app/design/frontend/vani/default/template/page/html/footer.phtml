@@ -24,164 +24,144 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<?php if(Mage::registry('current_category') && !Mage::registry('current_product')){
-echo Mage::registry('current_category');
-?>
-<?php echo $this->getLayout()->createBlock('reports/product_viewed')->setTemplate('reports/product_viewed.phtml')->toHtml(); ?>
-<?php 
+<?php if (Mage::registry('current_category') && !Mage::registry('current_product')) {
+    echo Mage::registry('current_category');
+    ?>
+    <?php echo $this->getLayout()->createBlock('reports/product_viewed')->setTemplate('reports/product_viewed.phtml')->toHtml(); ?>
+    <?php
 }
 ?>
 
-      <section class="upper-footer">
-        <div class="container">
-          <div class="row">
+<section class="upper-footer">
+    <div class="container">
+        <div class="row">
             <div class="col-sm-4">
-              <div class="text-center">
-                <h3 class="footer-heading"><?php echo $this->__('WORLD WIDE SHIPPING'); ?></h3>
-                <p><?php echo $this->__('We Ship to all countries with DHL and PostNord'); ?></p>
-              </div>
+                <div class="text-center">
+                    <h3 class="footer-heading"><?php echo $this->__('WORLD WIDE SHIPPING'); ?></h3>
+                    <p><?php echo $this->__('We Ship to all countries with DHL and PostNord'); ?></p>
+                </div>
             </div>
             <div class="col-sm-4">
-              <div class="text-center">
-                <h3 class="footer-heading"><?php echo $this->__('30 DAYS'); ?></h3>
-                <p><?php echo $this->__('Open purchase and free return'); ?></p>
-              </div>
+                <div class="text-center">
+                    <h3 class="footer-heading"><?php echo $this->__('30 DAYS'); ?></h3>
+                    <p><?php echo $this->__('Open purchase and free return'); ?></p>
+                </div>
             </div>
             <div class="col-sm-4">
-              <div class="text-center">
-                <h3 class="footer-heading"><?php echo $this->__('30 DAYS'); ?></h3>
-                <p><?php echo $this->__('Always Free Return With In 30 Days'); ?></p>
-              </div>
+                <div class="text-center">
+                    <h3 class="footer-heading"><?php echo $this->__('30 DAYS'); ?></h3>
+                    <p><?php echo $this->__('Always Free Return With In 30 Days'); ?></p>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
-      <footer class="site-footer">
-        <div class="container">
-          <div class="row">
-                <div class="col-sm-3">
-                  <div class="footer-blockks">
+    </div>
+</section>
+<footer class="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="footer-blockks">
                     <h3 class="footer-heading">KUNDTJÄNST</h3>
                     <ul class="footer-links">
-                      <li><a href="#">Kontakt</a></li>
-                      <li><a href="#">Frakt & Leverans</a></li>
-                      <li><a href="#">Returer & Byten</a></li>
-                      <li><a href="#">Personuppgiftspolicy</a></li>
-                      <li><a href="#">Skötselråd</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                        <li><a href="#">Frakt & Leverans</a></li>
+                        <li><a href="#">Returer & Byten</a></li>
+                        <li><a href="#">Personuppgiftspolicy</a></li>
+                        <li><a href="#">Skötselråd</a></li>
                     </ul>
-                  </div>
                 </div>
-                <div class="col-sm-3">
-                  <div class="footer-blockks">
+            </div>
+            <div class="col-sm-3">
+                <div class="footer-blockks">
                     <h3 class="footer-heading">KONTAKT</h3>
                     <ul class="footer-links">
-                      <li><a href="mailto:info@softgoat.com">Mail: info@softgoat.com</a></li>
-                      <li>Telefon: 08 410 200 18</li>
-                      <li>Vardagar 10:00 - 17:00</li>
-                      <li>Butik på Tegnergatan 13</li>
-                      <li>Vardagar 10:00 - 18:00</li>
-                      <li>Lördag 11:00 - 16:00</li>
+                        <li><a href="mailto:info@softgoat.com">Mail: info@softgoat.com</a></li>
+                        <li>Telefon: 08 410 200 18</li>
+                        <li>Vardagar 10:00 - 17:00</li>
+                        <li>Butik på Tegnergatan 13</li>
+                        <li>Vardagar 10:00 - 18:00</li>
+                        <li>Lördag 11:00 - 16:00</li>
                     </ul>
-                  </div>
                 </div>
-                <div class="col-sm-3">
-                  <div class="footer-blockks">
+            </div>
+            <div class="col-sm-3">
+                <div class="footer-blockks">
                     <h3 class="footer-heading">TRUSTPILOT 8.8 / 10</h3>
                     <ul class="footer-links">
-                      <li>‘Wonderful garments, fantastic service
-and quick delivery! Can no be anything
-but great! Would highly recommend
-Soft Goat!’</li>
+                        <li>‘Wonderful garments, fantastic service
+                            and quick delivery! Can no be anything
+                            but great! Would highly recommend
+                            Soft Goat!’
+                        </li>
 
-                      <li style="margin-bottom: 15px; margin-top: 15px;"><img src="<?php echo $this->getSkinUrl('img/ratings-icon.png');?>" alt="ratings image" class="img-responsive"></li>
-                      <li><a href="#" class="underline">Se fler recensioner</a></li>
+                        <li style="margin-bottom: 15px; margin-top: 15px;"><img
+                                src="<?php echo $this->getSkinUrl('img/ratings-icon.png'); ?>" alt="ratings image"
+                                class="img-responsive"></li>
+                        <li><a href="#" class="underline">Se fler recensioner</a></li>
                     </ul>
-                  </div>
                 </div>
-                <div class="col-sm-3">
-                  <div class="footer-blockks">
+            </div>
+            <div class="col-sm-3">
+                <div class="footer-blockks">
                     <h3 class="footer-heading">OM SOFT GOAT</h3>
                     <ul class="footer-links">
-                      <li>Vår grundide är att sälja kvalitetsplagg
-och produkter i 100% cashmere på
-nätet. Genom att använda Internet som
-enda distributionskanal kan vi hålla
-priserna på låga nivåer och snabbt
-lansera nya produkter. Vi erbjuder
-klassiska och populära plagg i många
-olika färger.</li>
-                      <!-- <li><p><img src="<?php echo $this->getSkinUrl('img/blank-circle.png');?>" alt="" class="blank circle"></p></li> -->
-                      <li><a href="#" class="underline">Mer om oss</a></li>
+                        <li>Vår grundide är att sälja kvalitetsplagg
+                            och produkter i 100% cashmere på
+                            nätet. Genom att använda Internet som
+                            enda distributionskanal kan vi hålla
+                            priserna på låga nivåer och snabbt
+                            lansera nya produkter. Vi erbjuder
+                            klassiska och populära plagg i många
+                            olika färger.
+                        </li>
+                        <!-- <li><p><img src="<?php echo $this->getSkinUrl('img/blank-circle.png'); ?>" alt="" class="blank circle"></p></li> -->
+                        <li><a href="#" class="underline">Mer om oss</a></li>
                     </ul>
-                  </div>
                 </div>
-          </div>
-          <div class="margin-top-15">
-          <div class="row">
-            <div class="col-sm-3 col-md-2">
-              <div class="footer-logo"><img src="<?php echo $this->getSkinUrl('img/footer-logo.png');?>" alt="" class="img-responsive"></div>
             </div>
-            <div class="col-sm-6 col-md-6">
-            <div class="row">
-              <div class="col-sm-4">
-                  <div class="box-newsletter">
-                      <h3 class="newsl"><?php echo $this->__('Newsletter') ?></h3>
-                      <span ><?php echo $this->__('Receive our news') ?></span>
-                  </div>
-
-              </div>
-              <div class="col-sm-7"><?php echo $this->getChildHtml('newsletter'); ?></div>
-            </div>
-            </div>
-            <div class="col-sm-3 col-md-4">
-              <img src="<?php echo $this->getSkinUrl('img/footer-cards.png');?>" alt="" class="img-responsive">
-            </div>
-          </div>
-          </div>
         </div>
-      </footer>
+        <div class="margin-top-15">
+            <div class="row">
+                <div class="col-sm-3 col-md-2">
+                    <div class="footer-logo"><img src="<?php echo $this->getSkinUrl('img/footer-logo.png'); ?>" alt=""
+                                                  class="img-responsive"></div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="box-newsletter">
+                                <h3 class="newsl"><?php echo $this->__('Newsletter') ?></h3>
+                                <span><?php echo $this->__('Receive our news') ?></span>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-7"><?php echo $this->getChildHtml('newsletter'); ?></div>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-4">
+                    <img src="<?php echo $this->getSkinUrl('img/footer-cards.png'); ?>" alt="" class="img-responsive">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
 <script type="text/javascript">
-  function thatsNotYoChild(parentID) {
-    var parent           = document.getElementById(parentID),
-        children         = parent.innerHTML,
-        wrappedChildren  = '<div id="children" class="children">' + children + '</div>',
-        x, y, w, newParent, clonedChild, clonedChildOld;
+    jQuery(document).ready(function($){
+        $(".tab1title").click(function(){
+            $('.tab2title').removeClass('active');
+            $(this).toggleClass('active');
+            $(".tab2content").hide();
+            $(".tab1content").toggle('slow');
+        });
 
-    parent.innerHTML = wrappedChildren;
-    clonedChild = document.getElementById('children').cloneNode(true);
-    document.getElementById('children').id = 'children-old';
-    clonedChildOld = document.getElementById('children-old');
-    newParent = parent.parentNode;
+        $(".tab2title").click(function(){
+            $('.tab1title').removeClass('active');
+            $(this).toggleClass('active');
+            $(".tab1content").hide();
+            $(".tab2content").toggle('slow');
+        });
 
-    newParent.appendChild(clonedChild);
-    clonedChildOld.style.opacity = '0';
-    clonedChildOld.style.filter = 'alpha(opacity=0)';
-
-    function doCoords () {
-      x = clonedChildOld.getBoundingClientRect().left;
-      y = clonedChildOld.getBoundingClientRect().top;
-      if (clonedChildOld.getBoundingClientRect().width) {
-        w = clonedChildOld.getBoundingClientRect().width; // for modern browsers
-      } else {
-        w = clonedChildOld.offsetWidth; // for oldIE
-      }
-
-      clonedChild.style.position = 'absolute';
-      clonedChild.style.left = x + 'px';
-      clonedChild.style.top = 420 + 'px';
-      clonedChild.style.width = w + 'px';
-    }
-
-    window.onresize = function () {
-
-      doCoords();
-
-    };
-  
-    doCoords();
-
-}
-
-//thatsNotYoChild('bgwrapper');
+    });
 
 </script>
