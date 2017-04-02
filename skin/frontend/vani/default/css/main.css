@@ -1244,3 +1244,58 @@ a.underline{text-decoration: underline;}
   margin-right: auto;
   overflow: hidden;
 }
+
+
+
+/*CUSTOM CARD*/
+select#card-amount {
+    min-width: 80%;
+    border: 2px solid #242118;
+    color: black;
+    font-size: 16px;
+    max-width: 100%;
+    min-height: 40px;
+    padding: 15px;
+    width: auto;
+}
+
+.giftcard-info input {
+    min-width: 80%;
+    border: 2px solid #3a3a3a;
+    color: black;
+    font-size: 16px;
+    max-width: 100%;
+    min-height: 40px;
+    padding: 25px 15px;
+}
+
+.giftcard-fieldset .field {
+  margin-top: 20px;
+}
+
+.giftcard-fieldset textarea {
+    width: 80%;
+    height: 100px;
+    min-width: 80%;
+    border: 2px solid #3a3a3a;
+    color: black;
+    font-size: 16px;
+    max-width: 100%;
+    min-height: 40px;
+    padding: 15px;
+}
+
+.field.ttday {
+    width: 100%;
+    float: left;
+    margin-bottom: 30px;
+}
+
+img#mail_delivery_date_button {
+    float: left;
+    margin-left: 30px;
+}
+
+input#mail_delivery_date {
+    float: left;
+}
