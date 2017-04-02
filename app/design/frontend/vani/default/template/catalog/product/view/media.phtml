@@ -84,8 +84,8 @@ $_helper = $this->helper('catalog/output');
                     <?php if ($this->isGalleryImageVisible($_image)): ?>
                         <li class="item">
                             <a class="thumb-link" href="#"
-                               title="<?php //echo $this->escapeHtml($_image->getLabel()) ?>"
-                               data-image-index="<?php //echo $i; ?>">
+                               title="<?php echo $this->escapeHtml($_image->getLabel()) ?>"
+                               data-image-index="<?php echo $i; ?>">
                                 <img
                                     src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(100); ?>"
                                     width="100" height="100"
