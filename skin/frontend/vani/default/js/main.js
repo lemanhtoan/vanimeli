@@ -41,13 +41,13 @@ jQuery(document).ready(function($) {
 
         [700, 3],
 
-        [1000, 4],
+        [1000, 3],
 
-        [1200, 5],
+        [1200, 3],
 
-        [1400, 5],
+        [1400, 3],
 
-        [1600, 5]
+        [1600, 3]
       ],
       navigation : true,
       navigationText: 	["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],

@@ -7,7 +7,9 @@
      <label>Custom static page 1</label>
      <template>page/home-page.phtml</template>
     </custom_static_page_one>
+
    </layouts>
+
   </page>
  </global>
 </config>

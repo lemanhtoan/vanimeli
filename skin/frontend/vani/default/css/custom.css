@@ -13,7 +13,49 @@
 }
 }
 
+@media only screen and (min-width: 768px) {
+    .product-view {
+        margin-top: 60px;
+    }
+
+    .product-view .regular-price .price {
+        line-height: 30px;
+    }
+
+    .product-view .Klarna {
+        padding-top: 5px;
+    }
+
+    .product-view .product-options dd {
+        padding: 0 0 4px 0;
+        margin: 0;
+        border-bottom: none;
+    }
+    .product-view .view-product-shop .product-options dd select{
+        min-height: 36px;
+        padding-left: 22px;
+        min-width: 180px;
+        max-height: 60px;
+    }
+
+    .product-view .col-sm-12 .product-options {
+        width: 26%;
+        min-width: 180px;
+    }
+
+    .product-view .storle.tab1.collapsed,.product-view .skot.tab2.collapsed {
+        opacity: 1;
+    }
+    .product-view .storle.tab1,.product-view .skot.tab2 {
+        opacity: .5;
+    }
+
+}
 @media only screen and (min-width: 1200px){
+
+    .product-view .pro-details-description > h2 {
+        margin-top: 0;
+    }
     .catalog-category-view .row{
         position: relative;
     }
@@ -51,6 +93,120 @@
 }
 
 /*common*/
+.about-us-top{
+    background: url(../images/hero-img.jpg);
+    background-size: 100% 100%;
+}
+.about-us-bottom{
+    background: url(../images/home-secong-img.jpg);
+    background-size: 100% 100%;
+}
+.action.availability.in-stock {
+    background: #000 none repeat scroll 0 0;
+    color: #fff;
+    font-size: 18px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.status_stock_ .add-to-box {
+    margin: 0 !important;
+}
+.action.availability.out-of-stock {
+    text-transform:   initial !important;
+}
+.out-of-stock-prod {
+    padding: 0 0 30px;
+    float: left;
+    width: 200%;
+}
+
+.product-view #latest_offers .owl-item li.item {
+    border: none;
+    padding: 10px;
+    margin: 0;
+    -moz-box-shadow: inset 0 0 8px #000000;
+    -webkit-box-shadow: inset 0 0 8px #000000;
+    box-shadow: inset 0 0 8px #000000;
+}
+.product-view #latest_offers .owl-item {
+    background: none;
+    border: none;
+    list-style: none;
+    padding: 0 2%;
+    text-align: center !important;
+}
+
+.product-view .owl-controls.clickable {
+    margin-top: 0;
+}
+.product-view .product-image-gallery {
+    position: relative;
+    webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+.product-image-thumbs {
+    background: none;
+}
+.product-view .product-img-box .product-image, .product-view .more-views{
+    -moz-box-shadow: inset 0 0 8px #000000;
+    -webkit-box-shadow: inset 0 0 8px #000000;
+    box-shadow: inset 0 0 8px #000000;
+    padding: 8px;
+    border: none;
+}
+#owl-product-image-thumbs {
+    position: relative;
+}
+
+#owl-product-image-thumbs.owl-carousel .owl-item .item {
+    border: none;
+    margin-left: 0;
+    webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+.latest-offer .owl-theme .owl-controls{
+    top: calc(50% - 23px);
+}
+.product-view #owl-product-image-thumbs.owl-theme .owl-controls .owl-buttons {
+    position: absolute;
+    top: calc(50% - 15px);
+    width: 100%;
+}
+#owl-product-image-thumbs {
+    margin-bottom: 0;
+}
+
+.product-view .owl-theme .owl-controls .owl-buttons div{
+    background: none;
+}
+.product-view #latest_offers.owl-theme .owl-controls .owl-buttons div.owl-prev{
+    float: left;
+    padding-left: 60px;
+}
+.product-view #latest_offers.owl-theme .owl-controls .owl-buttons div.owl-next{
+    float: right;
+    padding-right: 60px;
+}
+.product-view #owl-product-image-thumbs.owl-theme .owl-controls .owl-buttons div.owl-prev{
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+.product-view #owl-product-image-thumbs.owl-theme .owl-controls .owl-buttons div.owl-next{
+    float: right;
+    margin: 0;
+    padding: 0;
+}
+.product-view .owl-theme .owl-controls .owl-buttons div img {
+    width: 30px;
+}
+.product-view .owl-theme .owl-controls .owl-buttons{
+
+}
+
 .contacts-index-index .online-sms {
     display: block;
     margin-bottom: 10px;
@@ -138,16 +294,13 @@ ul.rootnav-contact-us{
     font-size: 14px ;
 }
 
-/*.bgwrapper {
+.bgwrapper {
     width: 100%;
     height: 100%;
     background-image: url(../images/bg-allpages-min.png);
     background-size: 100%;
     margin: 0 auto;
-    padding: 30px;
-    opacity: .2;
-    filter: alpha(opacity=20);
-}*/
+}
 
 .mainheader-section {
     background: #fff;
@@ -215,4 +368,8 @@ div#footer-email-subscription button {
 
 #contactForm button {
     margin-left: 0;
+}
+
+.storle.active, .skot.active {
+    opacity: 0.4;
 }
