@@ -56,6 +56,9 @@
             <div class="col-sm-8">
             <div class="view-product-shop status_stock_<?php echo $_product->isSaleable() ?>">
                 <div class="clearfix"></div>
+
+                <?php echo $this->getChildHtml('product_type_data') ?>
+
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
                     <div class="product-name-title">

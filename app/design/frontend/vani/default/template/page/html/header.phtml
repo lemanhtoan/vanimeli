@@ -93,10 +93,10 @@
         <nav class="crazy-nav">
         <ul class="sf-menu">
           <li><a href="<?php echo Mage::getBaseUrl();?>"><?php echo $this->__('Home'); ?></a></li>
-          <li><a href="<?php echo $this->getUrl('products');?>"><?php echo $this->__('Products');?></a></li>
+          <li><a href="<?php echo $this->getUrl('products.html');?>"><?php echo $this->__('Products');?></a></li>
           <li><a href="<?php echo $this->getUrl('about-us');?>"><?php echo $this->__('About us');?></a></li>
           <li><a href="<?php echo $this->getUrl().'	';?>"><?php echo $this->__('Stockists');?></a></li>
-          <li><a href="<?php echo $this->getUrl().'	';?>"><?php echo $this->__('Gift card');?></a></li>
+          <li><a href="<?php echo $this->getUrl('gift-card.html');?>"><?php echo $this->__('Gift card');?></a></li>
           <li><a href="<?php echo $this->getUrl().'	';?>"><?php echo $this->__('Vanimeli world');?></a></li>
           <li><a href="<?php echo $this->getUrl('contacts');?>""><?php echo $this->__('Contact us');?></a></li>
         </ul>
@@ -165,12 +165,14 @@
     <div class="col-sm-12">
     <div class="mobile-menu-wrap">
     <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">PRODUKTER</a></li>
-          <li><a href="#">OM OSS</a></li>
-          <li><a href="#">BUTIKER</a></li>
-          <li><a href="#">KONTAKT</a></li>
-          </ul>
+          <li><a href="<?php echo Mage::getBaseUrl();?>"><?php echo $this->__('Home'); ?></a></li>
+          <li><a href="<?php echo $this->getUrl('products.html');?>"><?php echo $this->__('Products');?></a></li>
+          <li><a href="<?php echo $this->getUrl('about-us');?>"><?php echo $this->__('About us');?></a></li>
+          <li><a href="<?php echo $this->getUrl().' ';?>"><?php echo $this->__('Stockists');?></a></li>
+          <li><a href="<?php echo $this->getUrl('gift-card.html');?>"><?php echo $this->__('Gift card');?></a></li>
+          <li><a href="<?php echo $this->getUrl().' ';?>"><?php echo $this->__('Vanimeli world');?></a></li>
+          <li><a href="<?php echo $this->getUrl('contacts');?>""><?php echo $this->__('Contact us');?></a></li>
+      </ul>
     </div>
     <!-- End mobile-menu-wrap -->
     </div>

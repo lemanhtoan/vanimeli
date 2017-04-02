@@ -28,7 +28,6 @@ $_preValues = $_product->getPreconfiguredValues();
             <input style="width:100px;" type="text" id="card-amount" name="card_amount" value="<?php echo $_preValues->getCardAmount(); ?>" class="input-text required-entry validate-float-range float-range-<?php echo $_from;?>-<?php echo $_to;?>"/>&nbsp;(<?php echo $_currency->format($_from) ?> - <?php echo $_currency->format($_to) ?>)
         </div>
         <?php elseif($this->getPriceStatus() == 2) : ?>
-        <br/>
         <label for="card-amount" class="required"><?php echo $this->__('Select amount') ?><em>*</em>:</label><br/>
         <select id="card-amount" name="card_amount" class="validate-select" style="width:207px;">
             <?php foreach($this->aAdditionalPrices as $additionalPrice) : ?>
@@ -59,10 +58,10 @@ $_preValues = $_product->getPreconfiguredValues();
 
         <?php if($this->getCardType() == 'email' && Mage::getStoreConfig('giftcards/default/show_mail_delivery_date_field')): ?>
         <!--delivery date-->
-            <div class="field">
+            <div class="field ttday">
                 <label for="mail_delivery_date" class=""><?php echo $this->__('Mail Delivery Date'); ?></label><br />
                 <input type="text" id="mail_delivery_date" name="mail_delivery_date" value="<?php echo $_preValues->getMailDeliveryDate();?>" title="<?php echo $this->__('Mail Delivery Date'); ?>" class="validate-date input-text"/>
-                <img src="<?php echo Mage::getDesign()->getSkinUrl('images/grid-cal.gif'); ?>" alt="" class="v-middle" id="mail_delivery_date_button" title="<?php echo $this->__('Mail Delivery Date'); ?>"/>
+                <img src="<?php echo Mage::getDesign()->getSkinUrl('images/grid-cal.gif'); ?>" alt="" class="ttdate v-middle" id="mail_delivery_date_button" title="<?php echo $this->__('Mail Delivery Date'); ?>"/>
             </div>
             <!--<br/>
             <a href="#" onclick="preview();"> Preview my gift card. </a>-->
