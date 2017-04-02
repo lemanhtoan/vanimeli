@@ -93,6 +93,9 @@
 }
 
 /*common*/
+.mini-products-list li.last{
+    border-bottom: 0;
+}
 .about-page .about-us-center .logo-about h4{
     margin: 20px 0;
 }

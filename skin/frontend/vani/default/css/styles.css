@@ -6547,8 +6547,8 @@ p.product-name a:hover {
     width: 100%;
 }
 .minicart-actions .cart-link{display: none;}
-#cart-sidebar .increment_qty_main{line-height: 32px;}
-#cart-sidebar .decrement_qty_main{line-height: 26px;}
+#cart-sidebar .increment_qty_main{line-height: 28px;}
+#cart-sidebar .decrement_qty_main{line-height: 28px;}
 #cart-sidebar .increment_qty_main:hover{text-decoration: none;color: white !important;}
 #cart-sidebar .decrement_qty_main:hover{text-decoration: none;color: white !important;}
 .info-wrapper .price{color: black}
@@ -6578,7 +6578,7 @@ p.product-name a:hover {
 .header-minicart #header-cart {
     background-color: #f2f2f2;
     position: absolute;
-    right: -98px;
+    right: -8px;
     top: 55px;
     width: 300px;
     z-index: 99999;
