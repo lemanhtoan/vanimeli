@@ -37,7 +37,7 @@
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 </script>
 <!--<div id="messages_product_view"><?php // echo $this->getMessagesBlock()->toHtml() ?></div>-->
-<div class="product-view">
+<div class="product-view prod_<?php echo $_product->getTypeId() ?>">
     <div class="product-essential row">
         <form action="<?php echo $this->getSubmitUrl($_product, array('_secure' => $this->_isSecure())) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
             <?php echo $this->getBlockHtml('formkey') ?>
@@ -96,7 +96,7 @@
                                 {
                                     float: left;
                                     margin: 92px 0 0;
-                                    width: 40%;
+                                    width: 50%;
                                 }
                                 .col-sm-12 .wishlistbg
                                 {
