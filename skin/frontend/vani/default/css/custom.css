@@ -1,6 +1,6 @@
 /*CUSTOM*/
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .product-view .skot.tab2title h2,
     .product-view .skot.tab2title span,
     .product-view .storle.tab1title span,
@@ -13,7 +13,106 @@
         text-align: center;
     }
 }
+@media only screen and (min-width: 481px)and (max-width: 980px) {
+
+    .opc-wrapper-opc.design_package_vani h1.checkout-title {
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    .opc-wrapper-opc .opc-review-actions h5 span.price,
+    .opc-wrapper-opc .opc-review-actions h5 {
+        font-size: 20px;
+    }
+
+    .opc-wrapper-opc .collapse-block button{
+        min-width: 210px;
+    }
+    .opc-wrapper-opc .collapse-block button,
+    .opc-wrapper-opc .discount .buttons-set {
+        border: none;
+        margin-top: 20px;
+        margin-right: 51%;
+        float: left;
+        margin-bottom: 15px;
+        max-width: 210px;
+    }
+
+    .opc-wrapper-opc .button.btn-checkout{
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+        margin-top: 20px;
+    }
+}
+@media only screen and (max-width: 480px) {
+
+    .opc-wrapper-opc.design_package_vani h1.checkout-title {
+        font-size: 22px;
+        font-weight: 600;
+    }
+    .opc-wrapper-opc .opc-col-left .fields .field {
+        width: 100% !important;
+    }
+    .opc-wrapper-opc .collapse-block button {
+        background: #000 none repeat scroll 0 0 !important;
+        clear: none;
+        float: right;
+        margin-top: 10px;
+        padding: 0;
+        width: 48%;
+    }
+    .form-list .control input.checkbox {
+        display: inline;
+    }
+
+    .opc-wrapper-opc .opc-col-left .control label {
+        font-size: 14px;
+        padding-left: 12px;
+        display: inline;
+        line-height: 32px;
+    }
+
+    .background_image_part .image_part_logo {
+        float: right;
+        max-width: 60%;
+        width: 40%;
+    }
+
+    .background_image_part .image_part_logo  img {
+        display: inline-block;
+        max-width: 100%;
+        margin-top: 2px;
+    }
+
+    .opc-wrapper-opc.design_package_vani.design_theme_default{
+        margin-top: 0 !important;
+    }
+
+    .opc-wrapper-opc .opc-review-actions h5 span.price{
+        font-size: 15px;
+    }
+
+    .opc-wrapper-opc .opc-review-actions h5 > span.price,
+    .opc-wrapper-opc .opc-review-actions h5{
+        font-size: 14px;
+        margin-bottom: 10px;
+        margin-top: 19px;
+        float: none;
+        line-height: 1.1;
+    }
+
+}
 @media only screen and (max-width: 420px) {
+    .header-minicart .cart-count {
+        font-size: 15px;
+    }
+
+    .visible-xs.visible-sm.col-sm-4.col-xs-4 {
+        padding-left: 0;
+    }
+
     .product-view .col-sm-12 .product-options {
         float: left;
         margin: 0;
@@ -57,8 +156,63 @@
 
 
 }
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .background_image_part {
+        margin-top: 30px;
+    }
 
+    .site-footer .footer-letter {
+        width: 75%;
+        float: right;
+        padding-right: 0;
+        padding-left: 45px;
+    }
+    .site-footer .footer-payment .img-responsive {
+        margin: 0 auto;
+    }
+
+    .site-footer .footer-payment{
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 981px) and (max-width: 1199px) {
+
+    .form-list .control input.checkbox {
+        display: inline;
+    }
+
+    .opc-wrapper-opc .opc-col-left .control label {
+        font-size: 14px;
+        padding-left: 12px;
+        display: inline;
+        line-height: 32px;
+    }
+
+    .opc-wrapper-opc .opc-col-left .fields .field {
+        width: 100% !important;
+    }
+    .opc-wrapper-opc .opc-review-actions h5 span.price{
+        font-size: 15px;
+    }
+    .opc-wrapper-opc .opc-review-actions h5 > span.price,
+    .opc-wrapper-opc .opc-review-actions h5{
+        font-size: 14px;
+        margin-bottom: 10px;
+        margin-top: 19px;
+        float: none;
+        line-height: 1.1;
+    }
+
+    .opc-wrapper-opc .button.btn-checkout span span {
+        color: #FFFFFF;
+        font-size: 18px !important;
+    }s
+}
 @media only screen and (min-width: 993px) and (max-width: 1199px) {
+    .site-footer .footer-letter {
+        padding-left: 0;
+    }
     .navigation-menu .col-sm-offset-1 {
         margin-left: 0;
         width: 75%;
@@ -73,6 +227,11 @@
 }
 @media only screen and (min-width: 768px) and (max-width: 1199px) {
 
+    .col-sm-12 .add-to-box {
+        float: left;
+        margin: 72px 0 0 !important;
+        width: 40%;
+    }
 
     .col-sm-3.col-xs-12.pull-right {
         padding-left: 0;
@@ -110,6 +269,14 @@
 }
 @media only screen and (min-width: 421px) and (max-width: 767px) {
 
+    .header-minicart .cart-count {
+        font-size: 24px;
+    }
+
+    .visible-xs.visible-sm.col-sm-4.col-xs-4 {
+        padding-left: 0;
+    }
+
     .product-view #latest_offers {
         width: calc(100% + 10px);
         margin-left: -10px;
@@ -143,7 +310,7 @@
 
     .product-view .col-sm-12 .add-to-box {
         float: left;
-        margin: 75px 0 0 !important;
+        margin: 79px 0 0 !important;
         width: 50%;
     }
 
@@ -152,7 +319,14 @@
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
+
+    .background_image_part {
+        margin-top: 30px;
+    }
+    .giftcard-info select#card-amount {
+        width: 100% !important;
+    }
     .box-newsletter {
         float: none!important;
         padding: 10px 0;
@@ -234,8 +408,25 @@
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
+
+    .mainheader-section .sticky_menu_nav {
+        margin-bottom: 0;
+    }
+
+    .header-minicart.cart-icon {
+        padding-bottom: 40px;
+    }
 }
 
+@media only screen and (min-width: 981px) {
+    .opc-wrapper-opc .collapse-block button{
+        clear: none;
+        float: right;
+        margin-top:10px;
+        padding: 0;
+        width: 48%;
+    }
+}
 @media only screen and (min-width: 768px) {
 /*about*/
     .about-page .about-us-center .logo-about h4 {
@@ -324,6 +515,12 @@
 
 @media only screen and (min-width: 1200px) {
 
+    .col-sm-12 .add-to-box {
+        float: left;
+        margin: 72px 0 0 !important;
+        width: 40%;
+    }
+
     .about-us-bottom,.about-us-top{
         padding-top: 150px;
     }
@@ -392,6 +589,61 @@
 }
 
 /*common*/
+
+.opc-wrapper-opc .collapse-block button{
+    background: #000 none repeat scroll 0 0 !important;
+}
+
+.form-list .control input.checkbox{
+    display: inline;
+}
+#checkout-review-table-wrapper a {
+    color: #fff;
+}
+
+.ajaxlogin-window .close:hover,
+.ajaxlogin-window .close{
+    opacity: 1;
+}
+
+.ajaxlogin-window .buttons-set a {
+    width: 100%;
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 0;
+}
+
+.giftcard-info input:focus,
+.giftcard-fieldset textarea,
+.giftcard-info select#card-amount {
+    border: 1px solid #36322b;
+}
+
+.giftcard-info input{
+    height: 55px !important;
+    border: 1px solid #36322b;
+}
+
+.opc-wrapper-opc .opc-col-left input.input-text{
+    background: #ffffff;
+    border-color: #cccccc;
+    border-radius: 0 !important;
+}
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 1) url("../img/down_arrow.png") no-repeat scroll right 10px center;
+    border: 1px solid #d8d8d8;
+    color: black;
+    font-family: "Muli",sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+    max-width: 100%;
+    padding: 12px 20px;
+    width: 100%;
+}
+
 .product-view.prod_giftcards .col-sm-12 .add-to-box{
     margin: 10px 0 !important;
 }
