@@ -5996,14 +5996,14 @@ p.product-name a:hover {
 .opc-wrapper-opc h1.checkout-title{font-size:36px;margin-bottom:20px;text-transform:none;font-weight:300;color:#000000;font-style:normal;font-family:'Muli',sans-serif;}
 #messages_product_view{
    -moz-animation: cssAnimation 0s ease-in 2s forwards;
-   Firefox */
+   /*Firefox */
    -webkit-animation: cssAnimation 0s ease-in 2s forwards;
-   Safari and Chrome */
+  /* Safari and Chrome */
    -o-animation: cssAnimation 0s ease-in 2s forwards;
-   Opera */
+  /*Opera */
    animation: cssAnimation 0s ease-in 2s forwards;
     -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;*/
+    animation-fill-mode: forwards;
 }
 @keyframes cssAnimation {
     to {
@@ -6251,7 +6251,7 @@ p.product-name a:hover {
     font-size: 16px;
     max-width: 100%;
     min-height: 40px;
-    padding: 18px 30px;
+    padding: 18px 37px;
     width: auto;
 }
 .discount-block {
@@ -6350,7 +6350,7 @@ p.product-name a:hover {
 .opc-index-index .opc-wrapper-opc .form-list select {
     -moz-appearance: none;
     -webkit-appearance: none;
-    background: rgba(0, 0, 0, 0) url("../img/down_arrow.png") no-repeat scroll right 10px center;
+    background: rgba(255, 255, 255, 1) url("../img/down_arrow.png") no-repeat scroll right 5px center;
     border: 1px solid #d8d8d8;
     color: black;
     font-family: "Muli",sans-serif;
@@ -6578,11 +6578,12 @@ p.product-name a:hover {
 .header-minicart #header-cart {
     background-color: #f2f2f2;
     position: absolute;
-    right: -8px;
+    right: -15px;
     top: 55px;
     width: 300px;
     z-index: 99999;
     padding: 10px;
+  margin-top: 0;
 }
 .header-minicart.cart-icon {
     position: relative;

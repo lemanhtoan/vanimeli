@@ -35,7 +35,7 @@ jQuery(document).ready(function($) {
       itemsCustom : [
         [0, 1],
 
-        [450, 1],
+        [480, 2],
 
         [600, 2],
 
