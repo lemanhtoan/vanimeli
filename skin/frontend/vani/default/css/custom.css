@@ -629,7 +629,11 @@
     border-color: #cccccc;
     border-radius: 0 !important;
 }
-select {
+
+
+
+.catalog-product-view select
+ {
     -moz-appearance: none;
     -webkit-appearance: none;
     background: rgba(255, 255, 255, 1) url("../img/down_arrow.png") no-repeat scroll right 10px center;
@@ -644,6 +648,9 @@ select {
     width: 100%;
 }
 
+.opc-index-index .opc-wrapper-opc .form-list select {
+    padding: 15px 20px !important;
+}
 .product-view.prod_giftcards .col-sm-12 .add-to-box{
     margin: 10px 0 !important;
 }
