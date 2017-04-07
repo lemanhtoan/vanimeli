@@ -552,10 +552,15 @@
         position: relative;
     }
 
-    .catalog-category-view .row .category-products .toolbar {
+    .catalog-category-view .row .category-products .toolbar,
+    .catalogsearch-result-index .row .category-products .toolbar{
         position: absolute;
         top: -80px;
         right: 15px;
+    }
+
+    .catalogsearch-result-index .page-title h1 {
+        margin: 15px 0;
     }
 
     .category-products .products-grid > li {

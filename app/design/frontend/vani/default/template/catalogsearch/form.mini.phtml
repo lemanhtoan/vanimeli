@@ -30,16 +30,16 @@ $catalogSearchHelper =  $this->helper('catalogsearch');
 <div id="search-overlay">
 <form class="navbar-form" role="search" id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
     <div class="input-group add-on h-search border-radius-0">
-      <input class="form-control border-radius-0" id="search" type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" value="<?php echo $catalogSearchHelper->getEscapedQueryText() ?>" class="input-text" maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength();?>" placeholder="Search Products...">
+      <input class="form-control border-radius-0" id="search" type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" value="<?php echo $catalogSearchHelper->getEscapedQueryText() ?>" class="input-text" maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength();?>" placeholder="<?php echo $this->__('Search Products...');?>">
       <div class="input-group-btn">
         <button class="btn h-search-btn border-radius-0" type="submit"><!-- <i class="fa fa-search"></i> -->Search</button>
       </div>
     </div>
-    <div id="search_autocomplete" class="search-autocomplete"></div>
+    
     <script type="text/javascript">
         //<![CDATA[
             var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo Mage::helper('core')->jsQuoteEscape($this->__('Search entire store here...')) ?>');
-            searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
+            //searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
         //]]>
         </script>
 </form>

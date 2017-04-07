@@ -54,7 +54,7 @@
 <?php endif; ?>
 
 <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
-    <div class="category-description std">
+    <div class="category-description std" style="display: none;">
         <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
     </div>
     <?php endif; ?>

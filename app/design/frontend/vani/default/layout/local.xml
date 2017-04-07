@@ -119,11 +119,19 @@
         </reference>
 
         <reference name="footer">
+
             <block type="cms/block" name="footer-cmslinks" as="footer-cmslinks">
                 <action method="setBlockId">
                     <block_id>footer-cmslinks</block_id>
                 </action>
             </block>
+
+             <block type="cms/block" name="footer-cmslinks-group" as="footer-cmslinks-group">
+                <action method="setBlockId">
+                    <block_id>footer-cmslinks-group</block_id>
+                </action>
+            </block>
+
 
             <block type="cms/block" name="footer-cards" as="footer-cards">
                 <action method="setBlockId">

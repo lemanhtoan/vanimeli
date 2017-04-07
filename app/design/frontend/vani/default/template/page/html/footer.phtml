@@ -34,98 +34,23 @@
 
 <section class="upper-footer">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="text-center">
-                    <h3 class="footer-heading"><?php echo $this->__('WORLD WIDE SHIPPING'); ?></h3>
-                    <p><?php echo $this->__('We Ship to all countries with DHL and PostNord'); ?></p>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="text-center">
-                    <h3 class="footer-heading"><?php echo $this->__('30 DAYS'); ?></h3>
-                    <p><?php echo $this->__('Open purchase and free return'); ?></p>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="text-center">
-                    <h3 class="footer-heading"><?php echo $this->__('30 DAYS'); ?></h3>
-                    <p><?php echo $this->__('Always Free Return With In 30 Days'); ?></p>
-                </div>
-            </div>
-        </div>
+        <?php echo $this->getChildHtml('footer-cmslinks-group') ?>
+        
     </div>
 </section>
+
+
+
+
 <footer class="site-footer">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="footer-blockks">
-                    <h3 class="footer-heading">KUNDTJÄNST</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Kontakt</a></li>
-                        <li><a href="#">Frakt & Leverans</a></li>
-                        <li><a href="#">Returer & Byten</a></li>
-                        <li><a href="#">Personuppgiftspolicy</a></li>
-                        <li><a href="#">Skötselråd</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="footer-blockks">
-                    <h3 class="footer-heading">Contact us</h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:info@softgoat.com">Mail: info@vanimeli.com</a></li>
-                        <li>VaniMeli AB</li>
-                        <li>Org.nummer: 559061-2163</li>
-                        <li>MATSKEDSGATAN 8</li>
-                        <li>72476 Västerås</li>
-                        <li>Sweden</li>
+    <?php echo $this->getChildHtml('footer-cmslinks') ?>
 
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="footer-blockks">
-                    <h3 class="footer-heading">TRUSTPILOT 8.8 / 10</h3>
-                    <ul class="footer-links">
-                        <li>‘Wonderful garments, fantastic service
-                            and quick delivery! Can no be anything
-                            but great! Would highly recommend
-                            Soft Goat!’
-                        </li>
-
-                        <li style="margin-bottom: 15px; margin-top: 15px;"><img
-                                src="<?php echo $this->getSkinUrl('img/ratings-icon.png'); ?>" alt="ratings image"
-                                class="img-responsive"></li>
-                        <li><a href="#" class="underline">Se fler recensioner</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="footer-blockks">
-                    <h3 class="footer-heading">OM SOFT GOAT</h3>
-                    <ul class="footer-links">
-                        <li>Vår grundide är att sälja kvalitetsplagg
-                            och produkter i 100% cashmere på
-                            nätet. Genom att använda Internet som
-                            enda distributionskanal kan vi hålla
-                            priserna på låga nivåer och snabbt
-                            lansera nya produkter. Vi erbjuder
-                            klassiska och populära plagg i många
-                            olika färger.
-                        </li>
-                        <!-- <li><p><img src="<?php echo $this->getSkinUrl('img/blank-circle.png'); ?>" alt="" class="blank circle"></p></li> -->
-                        <li><a href="#" class="underline">Mer om oss</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        
         <div class="margin-top-15">
             <div class="row">
                 <div class="col-sm-3 col-md-2">
-                    <div class="footer-logo"><img src="<?php echo $this->getSkinUrl('img/footer-logo.png'); ?>" alt=""
-                                                  class="img-responsive"></div>
+                    <div class="footer-logo"><img src="<?php echo $this->getSkinUrl('img/footer-logo.png'); ?>" alt="" class="img-responsive"></div>
                 </div>
                 <div class="col-sm-6 col-md-6 footer-letter">
                     <div class="row">
