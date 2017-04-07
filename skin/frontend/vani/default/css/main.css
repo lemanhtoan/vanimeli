@@ -1299,3 +1299,10 @@ img#mail_delivery_date_button {
 input#mail_delivery_date {
     float: left;
 }
+.minicart-wrapper {
+    padding: 10px 3px;
+}
+  
+#header-cart:after, #header-cart:before {
+  right: 31%;
+}
