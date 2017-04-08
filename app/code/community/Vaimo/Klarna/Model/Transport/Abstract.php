@@ -1180,11 +1180,10 @@ abstract class Vaimo_Klarna_Model_Transport_Abstract extends Varien_Object
                     $res = 'https://cdn.klarna.com/public/images/' . $this->_getCountryCode() . '/badges/v1/' . $type . '/' . $this->_getCountryCode() . '_' . $type . '_badge_banner_blue.png?width=' . $width . '&eid=' . $this->getConfigData('merchant_id');
                 } elseif ($type==Vaimo_Klarna_Helper_Data::KLARNA_LOGOTYPE_TYPE_BASIC) {
                     $res = 'https://cdn.klarna.com/1.0/shared/image/generic/logo/' . $this->_getLanguageCode() . "_" . strtolower($this->_getCountryCode()) . '/' . $type . '/blue-black.png?width=' . $width . '&eid=' . $this->getConfigData('merchant_id');
-//                    $res = 'https://cdn.klarna.com/public/images/' . $this->_getCountryCode() . '/logos/v1/' . $type . '/' . $this->_getCountryCode() . '_' . $type . '_logo_std_blue-black.png?width=' . $width . '&eid=' . $this->getConfigData('merchant_id');
                 } elseif ($type==Vaimo_Klarna_Helper_Data::KLARNA_LOGOTYPE_TYPE_CHECKOUT) {
                     $res = 'https://cdn.klarna.com/1.0/shared/image/generic/badge/' . $this->_getLanguageCode() . "_" . strtolower($this->_getCountryCode()) . '/checkout/short-blue.png?width=' . $width . '&eid=' . $this->getConfigData('merchant_id'); // ' . $type . '/
                 } else {
-                    $res = 'https://cdn.klarna.com/public/images/' . $this->_getCountryCode() . '/badges/v1/' . $type . '/' . $this->_getCountryCode() . '_' . $type . '_badge_std_blue.png?width=' . $width . '&eid=' . $this->getConfigData('merchant_id');
+                    $res ='https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Solid_blue.svg/225px-Solid_blue.svg.png';// 'https://cdn.klarna.com/public/images/' . $this->_getCountryCode() . '/badges/v1/' . $type . '/' . $this->_getCountryCode() . '_' . $type . '_badge_std_blue.png?width=' . $width . '&eid=' . $this->getConfigData('merchant_id');
                 }
                 break;
             case Vaimo_Klarna_Helper_Data::KLARNA_LOGOTYPE_POSITION_PRODUCT:

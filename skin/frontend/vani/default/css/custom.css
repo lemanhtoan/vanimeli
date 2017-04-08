@@ -252,7 +252,7 @@
         width: 51%;
     }
     .top-header-menu li a, .header-top a {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .about-us-bottom,.about-us-top{
@@ -270,7 +270,7 @@
 @media only screen and (min-width: 421px) and (max-width: 767px) {
 
     .header-minicart .cart-count {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .visible-xs.visible-sm.col-sm-4.col-xs-4 {
@@ -555,7 +555,7 @@
     .catalog-category-view .row .category-products .toolbar,
     .catalogsearch-result-index .row .category-products .toolbar{
         position: absolute;
-        top: -80px;
+        top: -66px;
         right: 15px;
     }
 
@@ -942,12 +942,12 @@ ul.rootnav-contact-us {
 
 .customer-box {
     float: left;
-    width: 50%;
+    width: 55%;
 }
 
 .lang-box {
     float: right;
-    width: 50%;
+    width: 45%;
 }
 
 .lang-box img {
@@ -1148,3 +1148,187 @@ ul.box-topt li:hover {
     background: #000; 
     color: #fff;
 }
+
+/*no Limit*/
+
+
+    /* top message*/
+    #payment_form_vaimo_klarna_invoice img {
+      display: none;
+    }
+    .header-top a.my-account {
+        margin-left: 5px;
+        border-left: 1px solid;
+        line-height: 18px;
+        padding-left: 5px;
+        margin-top: 7px;
+    }
+
+    .notification-symbol {
+        width: 10%;
+        float: left;
+    }
+    .rowt2 {
+        width: 90%;
+        float: right;
+        padding-top: 10px;
+    }
+    .success-msg ul li {
+        width: 100%;
+        float: left;
+        margin-bottom: 0;
+    }
+    .message-header{
+        display: none;
+    }
+    .catalog-category-view .message-header,
+    .catalog-product-view .message-header {
+        display: block;
+    }
+    .catalog-product-view #bgwrapper .messages,
+    .catalog-category-view #bgwrapper .messages{
+        display: none;
+    }
+
+    .navigation-menu.sticky_menu_nav .message-header{
+        background-color: #d8f1f0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 11;
+    }
+    .navigation-menu.sticky_menu_nav.fixed_header_bg .header-minicart.cart-icon{
+        padding-bottom: 0;
+    }
+    .navigation-menu.sticky_menu_nav.fixed_header_bg{
+        position: fixed;
+    }
+    .navigation-menu.sticky_menu_nav{
+        position: relative;
+    }
+
+    .sticky_menu_nav.fixed_header_bg .message-header {
+        background-color: #d8f1f0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 11;
+        -webkit-transition: all .5s ease;
+        -moz-transition: all .5s ease;
+        -o-transition: all .5s ease;
+        transition: all .5s ease;
+    }
+
+    /* top message*/
+
+    @media only screen and (min-width: 992px) and (max-width: 1199px){
+        .catalog-category-view .row .category-products .toolbar,
+        .catalogsearch-result-index .row .category-products .toolbar {
+            position: absolute;
+            top: -66px;
+            right: 15px;
+        }
+
+        .breadcramb-section .left-padding-90 .page-title {
+            font-size: 25px;
+        }
+
+        .header-top .customer-box a.my-account {
+            line-height: 12px;
+            margin-top: 10px;
+        }
+
+        .mainheader-section .sticky_menu_nav .cart-count {
+            font-size: 22px;
+        }
+
+        .top-header-menu li a, .header-top a{
+            font-size: 12px;
+        }
+    }
+    @media only screen and (min-width: 641px) and (max-width: 991px){
+        .m-site-logo {
+            padding: 7% 0;
+        }
+
+        .breadcramb-section .left-padding-90 .page-title {
+            font-size: 24px;
+        }
+    }
+    @media only screen and (min-width: 768px) and (max-width: 991px){
+        .col-sm-3.col-xs-12.pull-right {
+            width: 20%;
+        }
+
+        .header-minicart .cart-count {
+            font-size: 25px;
+        }
+
+        .header-top .col-sm-6.col-xs-12.content-top-header {
+            width: 55%;
+        }
+
+        .mobile-menu-wrap .lang-box,
+        .header-top .customer-box {
+            display: none;
+        }
+
+        .header-top .lang-box {
+            float: right;
+            width: 100%;
+        }
+    }
+    @media only screen and (max-width: 420px){
+
+        .header-minicart .cart-count {
+            line-height: 36px;
+        }
+
+        .header-minicart .h-cart {
+            background-size: 25px 25px;
+            padding-right: 30px;
+        }
+    }
+
+    @media only screen and (max-width: 768px){
+      .stor-main.custom-tabs, .related-product-carousal {
+    float: left;
+    width: 100%;
+}
+
+      #owl-product-image-thumbs .owl-item .item img {
+        width: 100%;
+      }
+      .notice-cookie {
+        display: none;
+      }
+        .breadcramb-section .left-padding-90 .page-title {
+            font-size: 20px;
+        }
+        .mobile-menu-wrap ul li:last-child{
+            border-bottom: 1px solid #1c1c1c ;
+        }
+
+        .mobile-menu-wrap .lang-box {
+            float: none;
+            width: 100%;
+        }
+        .mobile-menu-wrap .form-language {
+            float: none;
+            margin-top: 0;
+        }
+        .mobile-menu-wrap .langs-wrapper {
+            display: inline-block;
+            text-align: center;
+        }
+        .mobile-menu-wrap .lang-box img {
+            width: 45px;
+        }
+
+    }
+
+    .block.block-list.block-viewed {
+        display: none;
+    }

@@ -116,6 +116,9 @@
         <reference name="header">
             <!-- add mega menu -->
             <block name="leftmenu" type="megamenu/megamenu" template="megamenu/megamenu-left.phtml" before="-"/>
+
+            <block type="core/messages" name="global_messages" as="global_messages"/>
+            <block type="core/messages" name="messages" as="messages"/>
         </reference>
 
         <reference name="footer">

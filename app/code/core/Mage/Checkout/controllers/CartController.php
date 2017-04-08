@@ -234,7 +234,7 @@ class Mage_Checkout_CartController extends Mage_Core_Controller_Front_Action
             if (!$this->_getSession()->getNoCartRedirect(true)) {
                 if (!$cart->getQuote()->getHasError()) {
 					$notifysymbol = "<img src='".Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."/noticeicons/1489953827_warning.png' >";
-                    $message = $this->__('<span class="notification-symbol">%s</span><span>Product added to cart</span><br/><span class="small-text"> Go to the checkout to complete your purchase or add more products</span>',$notifysymbol);
+                    $message = $this->__('<div class="notit"><span class="notification-symbol">%s</span><div class="rowt2"> <span class="added_cart">Product added to cart</span><br/><span class="small-text"> Go to the checkout to complete your purchase or add more products</span></div></div>',$notifysymbol);
                     $this->_getSession()->addSuccess($message);
                 }
                 $this->_goBack();
