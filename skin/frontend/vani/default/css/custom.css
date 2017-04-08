@@ -252,7 +252,7 @@
         width: 51%;
     }
     .top-header-menu li a, .header-top a {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .about-us-bottom,.about-us-top{
@@ -270,7 +270,7 @@
 @media only screen and (min-width: 421px) and (max-width: 767px) {
 
     .header-minicart .cart-count {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .visible-xs.visible-sm.col-sm-4.col-xs-4 {
@@ -555,7 +555,7 @@
     .catalog-category-view .row .category-products .toolbar,
     .catalogsearch-result-index .row .category-products .toolbar{
         position: absolute;
-        top: -80px;
+        top: -66px;
         right: 15px;
     }
 
@@ -947,12 +947,12 @@ ul.rootnav-contact-us {
 
 .customer-box {
     float: left;
-    width: 50%;
+    width: 55%;
 }
 
 .lang-box {
     float: right;
-    width: 50%;
+    width: 45%;
 }
 
 .lang-box img {
