@@ -52,9 +52,18 @@ $_renderers = $this->getChild('attr_renderers')->getSortedChildren();
         <dt><label class="required"><em>*</em><?php echo $_attribute->getLabel() ?></label></dt>
         <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
             <div class="input-box">
-                <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
-                    <option><?php echo $this->__('Choose an Option...') ?></option>
-                  </select>
+
+                 <span class="opt-lv1">
+                  <span class="opt-icon"></span>
+                  <span class="opt-text"><?php echo $this->__('Choose size:');?></span>
+              </span>
+
+                <ul class="box-topt">
+                    <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+                        <option><?php echo $this->__('Choose an Option...') ?></option>
+                      </select>
+                </ul>
+                
               </div>
         </dd>
         <?php endif; ?>
@@ -65,3 +74,65 @@ $_renderers = $this->getChild('attr_renderers')->getSortedChildren();
     </script>
     <?php echo $this->getChildHtml('after') ?>
 <?php endif;?>
+<script type="text/javascript">
+    function replaceDropDowns() {
+    jQuery('.product_attribute_option_link').remove();
+    jQuery('#selected_combination').text('');
+    jQuery(".super-attribute-select").each(function() {
+        var drop_down = jQuery(this); 
+        drop_down.hide();
+        
+        drop_down.find("option[value!='']").each(function() {
+            var option = jQuery(this);
+            jQuery("<li>", { 
+                    text: option.text(),
+                    href: '#',
+                    class: 'product_attribute_option_link',
+                    'data-id': drop_down.attr('id'),
+                    'data-name': drop_down.attr('name'),
+                    'data-value': option.val(),
+                    'data-label': option.text(),
+                    click: function() { 
+                        drop_down.val(option.val());
+                        var obj = drop_down.get();
+                        Event.observe(obj[0],'change',function(){});
+                        fireEvent(obj[0],'change');
+                        replaceDropDowns();
+                        var selected_combination = [];
+                        jQuery(".super-attribute-select").each(function() {
+                            if(jQuery(this).val()) {
+                                jQuery(".product_attribute_option_link[data-value="+jQuery(this).val()+"]").addClass('product_attribute_option_link_selected');
+                                selected_combination.push(jQuery(this).find("option:selected").text());
+                            }
+                        });
+                        jQuery.each(selected_combination, function(index, selection) {
+                            jQuery('#selected_combination').append(selection);
+                            if(index+1 < selected_combination.length)
+                                jQuery('#selected_combination').append(" - ");
+                        })
+
+                        jQuery('.product_attribute_option_link').hide();
+                        jQuery('.product_attribute_option_link').not("[data-id*='attribute92']").show();
+
+                        jQuery('.product_attribute_option_link').click(function(){
+                            jQuery('.opt-text').html(jQuery(this).attr('data-label'));
+                        });
+                        
+                        
+                        return false;
+                    }
+            }).appendTo(drop_down.parent());
+        })
+    });
+}
+
+jQuery(function() {
+    replaceDropDowns();
+    jQuery('.product_attribute_option_link').hide();
+    jQuery('.product_attribute_option_link').not("[data-id*='attribute92']").show();
+    jQuery('.product_attribute_option_link').click(function(){
+        jQuery('.opt-text').html(jQuery(this).attr('data-label'));
+    });
+})
+</script>
+

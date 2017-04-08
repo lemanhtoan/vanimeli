@@ -551,17 +551,15 @@ body{font-family: 'Montserrat', sans-serif;}
 }
 
 .sale {
-  background: #da1212;
-  color: #fff;
-  font-size: 14px;
-  height: 24px;
-  line-height: 21px;
-  margin-bottom: 5px !important;
-  margin-top: -35px !important;
-  padding-left: 10px;
-  position: absolute;
-  width: 55px;
-  text-align: center;
+    background: #da1212;
+    color: #fff;
+    font-size: 14px;
+    line-height: 21px;
+    position: absolute;
+    text-align: center;
+    padding: 5px;
+    top: 10px;
+    right: 55px;
 }
 
 .products-name{font-size: 18px; line-height: 30px; color: #3f4747;}
@@ -1231,14 +1229,14 @@ a.underline{text-decoration: underline;}
 .form-list{list-style: none !important;}
 .product-img-box .product-image, .more-views {
   border: 5px solid #e2e2e2;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .product-image-thumbs li {
-  display: inline-block;
-  border: 5px solid #e2e2e2;
+  /* display: inline-block; */
+  /* border: 5px solid #e2e2e2; */
 }
 .product-image-thumbs {
-  background: #e2e2e2;
+  /* background: #e2e2e2; */
   display: table;
   margin-left: auto;
   margin-right: auto;
@@ -1305,4 +1303,17 @@ input#mail_delivery_date {
   
 #header-cart:after, #header-cart:before {
   right: 31%;
+}
+#header-cart.haveItem:after, #header-cart.haveItem:before {
+  right: 42%;
+}
+
+.right_button_back a {
+    color: #000;
+}
+.ias-noneleft {
+  display: none;
+}
+.btn-show-hover {
+  display: none;
 }

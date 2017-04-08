@@ -1,42 +1,11 @@
-<?php
-/**
- * Magento
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Academic Free License (AFL 3.0)
- * that is bundled with this package in the file LICENSE_AFL.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/afl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magento.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magento.com for more information.
- *
- * @category    design
- * @package     vani_mali
- * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
- * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
- */
-
-/**
- * Product view template
- *
- * @see Mage_Catalog_Block_Product_View
- * @see Mage_Review_Block_Product_View
- */
-?>
 <?php $_helper = $this->helper('catalog/output'); ?>
 <?php $_product = $this->getProduct(); ?>
 <script type="text/javascript">
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 </script>
-<!--<div id="messages_product_view"><?php // echo $this->getMessagesBlock()->toHtml() ?></div>-->
+
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
+
 <div class="product-view prod_<?php echo $_product->getTypeId() ?>">
     <div class="product-essential row">
         <form action="<?php echo $this->getSubmitUrl($_product, array('_secure' => $this->_isSecure())) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
@@ -45,15 +14,13 @@
                 <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
                 <input type="hidden" name="related_product" id="related-products-field" value="" />
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-5 col-md-5">
             <div class="product-img-box">
                 <?php echo $this->getChildHtml('media') ?>
 
-                
-
             </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-7 col-md-7">
             <div class="view-product-shop status_stock_<?php echo $_product->isSaleable() ?>">
                 <div class="clearfix"></div>
 
@@ -61,27 +28,42 @@
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
-                    <div class="product-name-title">
-                    <h1><?php //echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
-                </div>
-                    
                     <?php  $pro=Mage::getModel('catalog/product')->load($_product->getId());?>
-                           <?php //print_r($pro);?>       
-
                         <div class="pro-price">
-                        <div class="pro-price-info">
-                            <?php //echo $pro->getSpecialPrice();?>
-                            <?php //echo $pro->getPrice();?>
-                            <?php echo $this->getPriceHtml($_product); ?>
-                            <?php echo $this->getChildHtml('bundle_prices') ?>
-                            <?php echo $this->getTierPriceHtml() ?>
+                            <div class="pro-price-info">
+                                <?php echo $this->getPriceHtml($_product); ?>
+                                <?php echo $this->getChildHtml('bundle_prices') ?>
+                                <?php echo $this->getTierPriceHtml() ?>
+                            </div>
                         </div>
+
+                        <div class="Klarna" id="helpKlarna" data-toggle="modal" data-target="helpKlarnaModal">
+                        <h3><?php echo $this->__('Klarna');?></h3><span>?</span><p><?php echo $this->__('Delbetala med klarna');?></p>
                         </div>
-                   <div class="Klarna">
-                    <h3>Klarna</h3><span>?</span><p>Delbetala med klarna</p>
-                   </div>
+
+                        <!-- Modal -->
+                        <div id="helpKlarnaModal" class="modal" role="dialog">
+                          <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title"><?php echo $this->__('Klarna');?></h4>
+                              </div>
+                              <div class="modal-body">
+                                <p>
+                                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('klarna_info')->toHtml(); ?>
+                                </p>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
 
                     </div>
+
+
                     <div class="col-xs-12 col-sm-12">
                         <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                             <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
@@ -95,7 +77,7 @@
                                 .col-sm-12 .add-to-box
                                 {
                                     float: left;
-                                    margin: 92px 0 0;
+                                    margin: 91px 0 0;
                                     width: 50%;
                                 }
                                 .col-sm-12 .wishlistbg
@@ -106,11 +88,13 @@
                                 }
                             </style>
                         <?php endif;?>
+
                         <div class="add-to-box">
                             <?php if($_product->isSaleable()): ?>
                                 <?php echo $this->getChildHtml('addtocart') ?>
                             <?php endif; ?> 
                         </div>
+
                     </div>
             
                 <?php echo $this->getChildHtml('alert_urls') ?>
@@ -118,14 +102,14 @@
 
                 <?php $stockItem = $_product->getStockItem(); ?>
                 <?php if (!$stockItem->getIsInStock()): ?>
-                <div class="col-sm-12"><span class="out-of-stock-prod"><span class="main_icon">!</span><span class="right_part_icon_text"><h2>Slut i lager</h2><a href="javascript:void(0)">Skapa en bevakning pa varan.</a></span></span></div>
+                <div class="col-sm-12">
+                    <span class="out-of-stock-prod"><span class="main_icon">!</span><span class="right_part_icon_text"><h2><?php echo $this->__('Slut i lager');?></h2><a href="javascript:void(0)"><?php echo $this->__('Skapa en bevakning pa varan.');?></a></span></span>
+                </div>
                 <?php endif; ?>
+
                 <div class="col-xs-12 col-sm-12">
-                    <div class="pro-details-description">
-                    <?php
-                    $my_product = Mage::getModel('catalog/product')->load($_product->getId());
-                    echo $my_product->getDescription();
-                    ?>
+                    <div class="pro-details-description pro-desct">
+                        <?php echo $_product->getDescription();?>
                     </div> 
                 </div>
                 <?php echo $this->getChildHtml('other');?>
@@ -191,9 +175,49 @@
         </script>
     </div>
     <?php echo $this->getChildHtml('upsell_products') ?>
-    <?php //echo $this->getChildHtml('product_additional_data') ?>
 
 </div>
 <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('store')->toHtml(); ?>
 
 <?php echo $this->getLayout()->createBlock('catalog/product_list_related')->setTemplate('catalog/product/list/related.phtml')->toHtml(); ?>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('.opt-lv1').click(function(){
+            jQuery('.box-topt').toggle();
+            if(jQuery('.box-topt').css('display') != 'none') {
+                jQuery('.opt-icon').css('margin-top', '-35px');
+            } else {
+                jQuery('.opt-icon').css('margin-top', '15px');
+            }
+        });
+
+        jQuery('#helpKlarna').click(function(event){
+            jQuery('#helpKlarnaModal').toggle();
+        });
+        
+        jQuery('#helpKlarnaModal .close').click(function(event){
+            jQuery('#helpKlarnaModal').hide();
+        });
+
+         
+        jQuery('#helpKlarnaModal').click(function(evt){    
+           if(evt.target.class == "modal-dialog")
+              return;
+           if(jQuery(evt.target).closest('.modal-dialog').length)
+              return;             
+           jQuery('#helpKlarnaModal').hide(); 
+
+        });  
+
+        jQuery('.view-product-shop .btn-cart').click(function() {
+            if (jQuery('.super-attribute-select').hasClass('validation-failed')) {
+                jQuery('.view-product-shop .add-to-box').addClass('fail-vali');
+            } else {
+                jQuery('.view-product-shop .add-to-box').removeClass('fail-vali');
+            }
+        });
+
+        
+    });
+</script>

@@ -87,13 +87,9 @@ $_helper = $this->helper('catalog/output');
                                title="<?php echo $this->escapeHtml($_image->getLabel()) ?>"
                                data-image-index="<?php echo $i; ?>">
                                 <img
-                                    src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(100); ?>"
-                                    width="100" height="100"
+                                    src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(140); ?>"
                                     alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>"/>
                             </a>
-                            <!--<a class="zoom-thumbnail"  class="cloud-zoom-gallery" href="<?php /*echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); */ ?>" title="<?php /*echo $_product->getName();*/ ?>" onclick="$('image-main').src = this.href; return false;" title="<?php /*echo $this->htmlEscape($_image->getLabel()) */ ?>">
-                     <img src="<?php /*echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(56); */ ?>" width="56" height="56" alt="<?php /*echo $this->htmlEscape($_image->getLabel()) */ ?>" />
-                   </a>-->
                         </li>
 
                     <?php endif; ?>

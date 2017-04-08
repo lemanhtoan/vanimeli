@@ -5109,14 +5109,14 @@ p.product-name a:hover {
 }
 
 .product-image-thumbs li {
-  display: inline-block;
+  /* display: inline-block; */
 }
 .product-image-thumbs li:first-child {
-  margin-left: -1px;
+  /* margin-left: -1px; */
 }
 .product-image-thumbs a {
-  display: inline-block;
-  border: 1px solid transparent;
+  /* display: inline-block; */
+  /* border: 1px solid transparent; */
 }
 
 .no-touch .product-image-thumbs a:hover {
@@ -6082,17 +6082,21 @@ p.product-name a:hover {
 .text-img1 {
     float: left;
     padding: 10px 30px;
-    text-align: center;
+    text-align: left;
     width: 100%;
     border-right: 1px solid #d0d0d0;
 }
 .text-img2 {
     float: right;
     padding: 10px 30px;
-    text-align: center;
+    text-align: left;
     width: 100%;
-
 }
+
+.text-img1 img, .text-img2 img {
+  width: 100%;
+}
+
 .main_bottom_part_text .text > p {
     color: black;
     font-size: 14px;
@@ -6252,7 +6256,7 @@ p.product-name a:hover {
     max-width: 100%;
     min-height: 40px;
     padding: 18px 37px;
-    width: auto;
+    width: 100%;
 }
 .discount-block {
     display: none;
@@ -6304,9 +6308,10 @@ p.product-name a:hover {
 }
 .opc-index-index .breadcramb-section{display: none;}
 .background_image_part {
-    background: #000 none repeat scroll 0 0;
+    /*background: #000 none repeat scroll 0 0;*/
     text-align: center;
     padding: 5px 0;
+    border: 1px solid #dadada;
 }
 .opc-wrapper-opc .opc-menu{display: none;}
 .background_image_part > img {
@@ -6321,9 +6326,9 @@ p.product-name a:hover {
 }
 .background_image_part img{display: inline-block;}
 .right_button_back > span {
-    background: #fefefe none repeat scroll 0 0;
+    background: #000 none repeat scroll 0 0;
     border-radius: 100%;
-    color: #000;
+    color: #fff;
     float: left;
     font-size: 14px;
     height: 20px;
@@ -6558,7 +6563,7 @@ p.product-name a:hover {
 #product-options-wrapper dt.swatch-attr .required{display: block;}
 .col-sm-12 .add-to-box {
     float: left;
-    margin: 67px 0 0 !important;
+    margin: 67px 0 0;
     width: 40%;
 }
 .wishlistbg .link-wishlist::before {

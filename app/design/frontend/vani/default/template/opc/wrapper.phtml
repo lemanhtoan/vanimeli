@@ -22,11 +22,9 @@ $is_persistent = Mage::helper('opc')->isPersistentMember();
 	<div class="row">
 		<div class="col-sm-12">
 
-		<?php  if(!Mage::getSingleton('customer/session')->isLoggedIn()){ ?>
 		<p class="loginout_link">
 			<?php echo '<a class="ajaxlogin-login" href="javascript:void(0);">'.$this->__('Login / Register').'</a>'; ?>
 		</p>
-		<?php } ?>
 <div class="clearfix opc-wrapper-opc design_package_<?php echo $package;?> design_theme_<?php echo $theme;?>">
     <!--<h2><?php //echo $this->__('Checkout')?></h2>-->
     <div class="opc-menu">
@@ -122,16 +120,8 @@ $is_persistent = Mage::helper('opc')->isPersistentMember();
 		      <?php echo $this->getChildHtml('agreements')?>
 		      <?php echo $this->getChildHtml('opc.newsletters');?>
 
-		      <?php  if(!Mage::getSingleton('customer/session')->isLoggedIn()){ ?>
-			      <span style="color: green; font-weight: bold; margin: 20px 0; float: left;"><?php echo $this->__('Please login before continue checkout.');?></span>
-
-			      <button type="button" disabled title="<?php echo $this->__('Continue to payment') ?>" class="button btn-checkout opc-btn-checkout"><span><span><?php echo $this->__('Continue to payment') ?></span></span></button>
-		      <!--<div class="checkout-term">
-		      <?php //echo $this->__('By Continue.I agree to the ');?><!--<a href="<?php //echo $this->getBaseUrl()."terms" ?>"><?php //echo $this->__('terms')?></a> 
-		      </div> --> 
-		      <?php } else { ?>
 				<button type="button"  title="<?php echo $this->__('Continue to payment') ?>" class="button btn-checkout opc-btn-checkout"><span><span><?php echo $this->__('Continue to payment') ?></span></span></button>
-		      <?php } ?>
+		     
 		</div>
     </div>
     

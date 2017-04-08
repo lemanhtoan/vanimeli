@@ -69,7 +69,7 @@
             <block type="configurableswatches/catalog_media_js_product" name="configurableswatches.media.js.product" />
         </reference>
         <reference name="product.info.options.configurable.renderers">
-            <block type="configurableswatches/catalog_product_view_type_configurable_swatches" template="configurableswatches/catalog/product/view/type/options/configurable/swatches.phtml" />
+            <block type="configurableswatches/catalog_product_view_type_configurable_swatches" template="configurableswatches/catalog/product/view/type/options/configurable/swatches.phtml"/>
         </reference>
         <reference name="product.info.options.configurable.after">
             <block type="core/template" template="configurableswatches/catalog/product/view/type/configurable/swatch-js.phtml" />

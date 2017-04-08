@@ -25,6 +25,18 @@
                     <show_in_store>1</show_in_store>
 
                     <fields>
+
+                        <enable_fb translate="label comment">
+                            <label>Enable Facebook Header</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>19</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </enable_fb>
+
                         <facebook_input translate="label">
                             <label>Facebook link: </label>
                             <comment>My Facebook link</comment>
@@ -34,35 +46,92 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </facebook_input>
+
+                        <enable_y translate="label comment">
+                            <label>Enable Youtube Header</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>21</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </enable_y>
+
                         <youtube_input translate="label">
                             <label>Youtube link: </label>
                             <comment>My Youtube link</comment>
                             <frontend_type>text</frontend_type>
-                            <sort_order>20</sort_order>
+                            <sort_order>22</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </youtube_input>
+
+                        <enable_t translate="label comment">
+                            <label>Enable Twitter Header</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>23</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </enable_t>
+
                         <twitter_input translate="label">
                             <label>Twitter link: </label>
                             <comment>My Twitter link</comment>
                             <frontend_type>text</frontend_type>
-                            <sort_order>20</sort_order>
+                            <sort_order>24</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </twitter_input>
+
+                         <enable_i translate="label comment">
+                            <label>Enable Instagram Header</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>25</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </enable_i>
+
                         <instagram_input translate="label">
                             <label>Instagram link: </label>
                             <comment>My Instagram link</comment>
                             <frontend_type>text</frontend_type>
-                            <sort_order>20</sort_order>
+                            <sort_order>26</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </instagram_input>
                     </fields>
                 </inchoo_group>
+
+                <inchoo_group_other translate="label">
+                    <label>Other Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1001</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+
+                    <fields> 
+                        <relatedlbl translate="label">
+                            <label>Related label: </label>
+                            <comment>Related label</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>27</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </relatedlbl>
+                    </fields>
+                </inchoo_group_other>
             </groups>
         </vanimeli>
     </sections>

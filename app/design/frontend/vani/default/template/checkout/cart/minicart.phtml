@@ -34,6 +34,12 @@
 
 <?php
 $total = $this->helper('checkout/cart')->getQuote()->getGrandTotal();
+$_cartQty = $this->getSummaryCount();
+if(empty($_cartQty)) {
+        $classN = '';
+    } else {
+    	$classN = 'haveItem';
+    }
 ?>
 <div class="test">
 <a href="<?php echo Mage::getbaseurl()."onepage"?>">
@@ -42,7 +48,7 @@ $total = $this->helper('checkout/cart')->getQuote()->getGrandTotal();
     <span class="cart-count"><?php echo number_format($total, 2); ?></span>
 </a>
 
-<div id="header-cart" class="block block-cart skip-content">
+<div id="header-cart" class="block block-cart skip-content <?php echo $classN; ?>">
 <p class="glyphicon glyphicon-triangle-top"></p>
     <?php echo $this->getChildHtml('minicart_content');?>
 </div>

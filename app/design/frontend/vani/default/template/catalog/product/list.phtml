@@ -129,15 +129,15 @@
         <?php $i=0; foreach ($_productCollection as $_product): ?>
             <?php /*if ($i++%$_columnCount==0): ?>
             <?php endif*/ ?>
-            <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+            <li class="itemprod item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>" data-id="<?php echo $_product->getId();?>">
 
                     <div class="prod-addcart_section">
                         <?php if(!$_product->canConfigure() && $_product->isSaleable()): ?>
-                            <button type="button" title="<?php echo $this->quoteEscape($this->__('Add to Cart')) ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('PÖP') ?></span></span></button>
+                            <button type="button" title="<?php echo $this->quoteEscape($this->__('Add to Cart')) ?>" class="button btn-cart btn-show-hover ip_<?php echo $_product->getId();?>" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('PÖP') ?></span></span></button>
                         <?php elseif($_product->getStockItem() && $_product->getStockItem()->getIsInStock()): ?>
-                            <a title="<?php echo $this->quoteEscape($this->__('View Details')) ?>" class="button" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('View') ?></a>
+                            <a title="<?php echo $this->quoteEscape($this->__('View Details')) ?>" class="button btn-show-hover ip_<?php echo $_product->getId();?>" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('View') ?></a>
                         <?php else: ?>
-                            <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                            <p class="availability out-of-stock btn-show-hover ip_<?php echo $_product->getId();?>"><span><?php echo $this->__('Out of stock') ?></span></p>
                         <?php endif; ?>
                         
                     </div>
@@ -201,3 +201,13 @@ if ($this->getChild('after')) {
 }
 ?>
 
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $(".itemprod").hover(function(){
+            $('.ip_' + $(this).attr('data-id')).show();
+        },function(){
+            $('.ip_' + $(this).attr('data-id')).hide();
+        });
+        
+    });
+</script>

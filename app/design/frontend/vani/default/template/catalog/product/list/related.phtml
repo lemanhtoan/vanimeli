@@ -4,7 +4,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
-					<h1 class="section-heading"><?php echo $this->__('YOU MAY ALSO LIKE:') ?></h1>
+					<h1 class="section-heading"><?php echo Mage::getStoreConfig('vanimeli/inchoo_group_other/relatedlbl'); ?></h1>
 				</div>
 			</div>
 			<div class="row">
@@ -17,7 +17,7 @@
 								
 								<?php if($_item->getSpecialPrice()){
 									?>
-									<p class="sale">Sale</p>
+									<p class="sale"><?php echo $this->__('Sale')?></p>
 									<?php
 								}else{
 									?>

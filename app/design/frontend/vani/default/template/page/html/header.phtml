@@ -40,10 +40,18 @@
 
         <div class="col-sm-3 col-xs-12 icon-network">
           <ul id="header-social-icons">
-            <li><a href="<?php echo Mage::getStoreConfig('vanimeli/inchoo_group/twitter_input');?>"><img src="<?php echo $this->getSkinUrl('img/twitter-icon.png');?>" alt=""></a></li>
+            <?php if (Mage::getStoreConfig('vanimeli/inchoo_group/enable_t') == '1') :?>
+              <li><a href="<?php echo Mage::getStoreConfig('vanimeli/inchoo_group/twitter_input');?>"><img src="<?php echo $this->getSkinUrl('img/twitter-icon.png');?>" alt=""></a></li>
+            <?php endif; ?>
+            <?php if (Mage::getStoreConfig('vanimeli/inchoo_group/enable_y') == '1') :?>
             <li><a href="<?php echo Mage::getStoreConfig('vanimeli/inchoo_group/youtube_input');?>"><img src="<?php echo $this->getSkinUrl('img/youtube-icon.png');?>" alt=""></a></li>
+          <?php endif ;?>
+          <?php if (Mage::getStoreConfig('vanimeli/inchoo_group/enable_i') == '1') :?>
             <li><a href="<?php echo Mage::getStoreConfig('vanimeli/inchoo_group/instagram_input');?>"><img src="<?php echo $this->getSkinUrl('img/instagram-icon.png');?>" alt=""></a></li>
+          <?php endif; ?>
+          <?php if (Mage::getStoreConfig('vanimeli/inchoo_group/enable_fb') == '1') :?>
             <li><a href="<?php echo Mage::getStoreConfig('vanimeli/inchoo_group/facebook_input');?>"><img src="<?php echo $this->getSkinUrl('img/facebook-icon.png');?>" alt=""></a></li>
+          <?php endif; ?>
           </ul>
         </div>
 
