@@ -16,10 +16,6 @@
         float: none;
     }
 
-    .add-to-box.fail-vali {
-        margin-top: 103px !important;
-    }
-
     .product-view .skot.tab2title,
     .product-view .storle.tab1title {
         padding: 0;
@@ -271,6 +267,10 @@
         width: 40%;
     }
 
+    .add-to-box.fail-vali {
+        margin-top: 115px !important;
+    }
+
     .col-sm-3.col-xs-12.pull-right {
         padding-left: 0;
     }
@@ -358,10 +358,13 @@
 
     .product-view .col-sm-12 .add-to-box {
         float: left;
-        margin: 79px 0 0;
+        margin: 89px 0 0;
         width: 50%;
     }
-
+    .view-product-shop .add-to-cart-buttons .button.btn-cart{
+        padding-top: 13px;
+        padding-bottom: 13px;
+    }
     .product-view .view-product-shop .product-options dd select {
         padding: 17px 30px 17px 17px;
     }

@@ -225,7 +225,7 @@
         });  
 
         jQuery('.view-product-shop .btn-cart').click(function() {
-            if (jQuery('.super-attribute-select').hasClass('validation-failed')) {
+            if (jQuery('.super-attribute-select.swatch-select').hasClass('validation-failed')) {
                 jQuery('.view-product-shop .add-to-box').addClass('fail-vali');
             } else {
                 jQuery('.view-product-shop .add-to-box').removeClass('fail-vali');

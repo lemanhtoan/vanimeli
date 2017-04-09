@@ -64,6 +64,8 @@ body {
     text-align: center;
     border-top: 1px solid #1c1c1c;
     padding: 10px 0;
+    width: 100%;
+    float: left;
 }
 
 .mobile-menu-wrap ul li a {
