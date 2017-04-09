@@ -1,6 +1,14 @@
 /*CUSTOM*/
 
 @media only screen and (max-width: 767px) {
+    .about-page .about-us-center .page-title {
+        text-align: center;
+        margin-bottom: 15px;
+        margin-top: 10px;
+    }
+    .about-page .page-title {
+        font-size: 19px;
+    }
     .product-view .skot.tab2title h2,
     .product-view .skot.tab2title span,
     .product-view .storle.tab1title span,
@@ -421,6 +429,11 @@
         padding-top: 15px;
     }
 
+    .about-page .about-us-bottom .page-title {
+        padding-top: 0;
+        margin-top: 0;
+    }
+
     .about-page p{
         margin: 0;
         text-align: justify;
@@ -430,9 +443,12 @@
     }
     .about-page .logo-about li {
         padding-bottom: 30px;
+        list-style: none;
+        margin-left: 0;
     }
     .about-page .about-us-center .logo-about h4 {
         margin: 25px 0;
+        font-size: 16px;
     }
 
 }
@@ -480,6 +496,8 @@
         float: left;
         margin-right: calc((100% - (23% * 4)) / 3);
         text-align: center;
+        list-style: none;
+        margin-left: 0;
     }
     .about-us-top .content-about {
         float: right;
@@ -716,6 +734,10 @@
     margin-left: auto;
     margin-right: auto;
     max-width: 120px;
+    width: 120px;
+    height: 120px;
+    background: #000;
+    border-radius: 50%;
 }
 
 .about-page p {
@@ -726,11 +748,6 @@
     text-align: justify;
 }
 
-.about-page .about-us-center .page-title {
-    text-align: center;
-    margin-bottom: 30px;
-    margin-top: 30px;
-}
 
 .about-page .logo-about {
     width: 100%;
@@ -739,7 +756,6 @@
 .about-page .page-title {
     color: #000000;
     padding-bottom: 15px;
-    font-size: 25px;
 }
 
 
@@ -1073,6 +1089,14 @@ div#footer-email-subscription button {
 }
 
 @media screen and (min-width: 768px) {
+    .about-page .about-us-center .page-title {
+        text-align: center;
+        margin-bottom: 30px;
+        margin-top: 30px;
+    }
+    .about-page .page-title {
+        font-size: 25px;
+    }
     .left-padding-90 .breadcrumbs strong,
     .breadcramb-section .left-padding-90 a,
     .breadcramb-section .left-padding-90 span {
@@ -1336,6 +1360,7 @@ ul.box-topt li:hover {
     }
 
     @media only screen and (max-width: 768px){
+
         .wrapper .breadcramb-section{
             padding: 8px 0;
         }
