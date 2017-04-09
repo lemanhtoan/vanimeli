@@ -35,33 +35,44 @@
 <?php
 $total = $this->helper('checkout/cart')->getQuote()->getGrandTotal();
 $_cartQty = $this->getSummaryCount();
-if(empty($_cartQty)) {
-        $classN = '';
-    } else {
-    	$classN = 'haveItem';
-        if ($_cartQty > 3) {
-            $classN.= ' pass3';
-        }
+if (empty($_cartQty)) {
+    $classN = '';
+} else {
+    $classN = 'haveItem';
+    if ($_cartQty > 3) {
+        $classN .= ' pass3';
     }
+}
 ?>
-<div class="test">
-<a href="<?php echo Mage::getbaseurl()."onepage"?>">
-    <div class="h-cart"></div>
-    <span class="cart-label"><?php //echo $this->__('Cart'); ?></span>
-    <span class="cart-count"><?php echo number_format($total, 2); ?></span>
-</a>
+<div class="test cart-toggle">
+    <!--<a href="#--><?php // echo Mage::getbaseurl()."onepage"?><!--">-->
+        <div class="h-cart"></div>
+        <span class="cart-label"><?php //echo $this->__('Cart'); ?></span>
+        <span class="cart-count"><?php echo number_format($total, 2); ?></span>
+   <!-- </a>-->
 
-<div id="header-cart" class="block block-cart skip-content <?php echo $classN; ?>">
-<p class="glyphicon glyphicon-triangle-top"></p>
-    <?php echo $this->getChildHtml('minicart_content');?>
-</div>
+    <div id="header-cart" class="block block-cart skip-content <?php echo $classN; ?>">
+        <p class="glyphicon glyphicon-triangle-top"></p>
+        <?php echo $this->getChildHtml('minicart_content'); ?>
+    </div>
 </div>
 <script type="text/javascript">
-jQuery(document).ready(function() {
-jQuery('.test').hover(function() {
-    jQuery(this).children('#header-cart,.skip-cart').addClass("skip-active");
-}, function() {
-    jQuery(this).children('#header-cart,.skip-cart').removeClass("skip-active");
-});        
-});
+
+    jQuery(document).ready(function () {
+        jQuery('div.cart-toggle').click(function () {
+            var widthscree = jQuery(window).width();
+            if(widthscree > 1024) {
+                jQuery('#header-cart').toggleClass("skip-active");
+            }else {
+                jQuery('#header-cart').toggle();
+            }
+        });
+    });
+    jQuery(document).ready(function () {
+        jQuery('.test').hover(function () {
+            jQuery(this).children('#header-cart,.skip-cart').addClass("skip-active");
+        }, function () {
+            jQuery(this).children('#header-cart,.skip-cart').removeClass("skip-active");
+        });
+    });
 </script>

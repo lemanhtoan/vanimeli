@@ -1481,3 +1481,6 @@ ul.box-topt li:hover {
     color: #000;
     font-size: 20px;
 }
+.product-view .view-product-shop .product-options dd select {
+    overflow-y: hidden;
+}

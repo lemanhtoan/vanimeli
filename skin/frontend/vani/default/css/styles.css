@@ -5641,6 +5641,7 @@ p.product-name a:hover {
 
 .product-options dd .input-box {
   padding-top: 0;
+  overflow: hidden;
 }
 
 .product-options dd input.datetime-picker {
@@ -6305,7 +6306,7 @@ p.product-name a:hover {
     /*background: #000 none repeat scroll 0 0;*/
     text-align: center;
     padding: 5px 0;
-    border: 1px solid #dadada;
+    /*border: 1px solid #dadada;*/
 }
 .opc-wrapper-opc .opc-menu{display: none;}
 .background_image_part > img {
