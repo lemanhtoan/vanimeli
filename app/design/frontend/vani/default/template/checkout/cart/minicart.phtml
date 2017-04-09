@@ -39,6 +39,9 @@ if(empty($_cartQty)) {
         $classN = '';
     } else {
     	$classN = 'haveItem';
+        if ($_cartQty > 3) {
+            $classN.= ' pass3';
+        }
     }
 ?>
 <div class="test">

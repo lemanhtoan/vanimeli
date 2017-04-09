@@ -1898,6 +1898,10 @@ input#mail_delivery_date {
     right: 42%;
 }
 
+#header-cart.haveItem.pass3:after, #header-cart.haveItem.pass3:before {
+    right: 50%;
+}
+
 .right_button_back a {
     color: #000;
 }

@@ -6537,7 +6537,10 @@ p.product-name a:hover {
 }
 
 #cart-sidebar.mini-products-list {
-    padding: 0 20px;
+        padding: 0 10px;
+    max-height: 292px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 .block-content .price {
     color: black;

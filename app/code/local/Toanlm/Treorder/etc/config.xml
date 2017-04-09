@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Toanlm_Treorder>
+      <version>0.1.0</version>
+    </Toanlm_Treorder>
+  </modules>
+  <frontend>
+    <routers>
+      <treorder>
+        <use>standard</use>
+          <args>
+            <module>Toanlm_Treorder</module>
+            <frontName>treorder</frontName>
+          </args>
+      </treorder>
+    </routers>
+  </frontend>
+  <global>
+    <helpers>
+      <treorder>
+        <class>Toanlm_Treorder_Helper</class>
+      </treorder>
+    </helpers>
+	<blocks>
+	  <treorder>
+		<class>Toanlm_Treorder_Block</class>
+	  </treorder>
+	</blocks>
+  </global>
+</config> 

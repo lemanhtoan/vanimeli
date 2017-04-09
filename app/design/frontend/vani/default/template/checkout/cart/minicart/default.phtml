@@ -124,51 +124,11 @@
                         <?php endif; //Can apply MSRP ?>
                     </td>
                 </tr>
-                <?php /*
-                <tr class="qty-wrapper">
-                    <th><?php echo $this->__('Qty'); ?></th>
-                    <td>
-                        <input
-                            id="qinput-<?php echo $_item->getId(); ?>"
-                            data-link="<?php echo $this->getAjaxUpdateUrl() ?>"
-                            data-item-id="<?php echo $_item->getId(); ?>"
-                            data-cart-item-id="<?php echo $_item->getSku(); ?>"
-                            class="qty cart-item-quantity input-text" name=""
-                            value="<?php echo $this->getQty()?>"
-                            <?php if ($this->isOnCheckoutPage()) echo 'disabled'; ?>
-                            />
-
-                        <button id="qbutton-<?php echo $_item->getId(); ?>"
-                                data-item-id="<?php echo $_item->getId(); ?>"
-                                disabled="disabled"
-                                data-update
-                                data-cart-item-update
-                                class="button quantity-button">
-                            <?php echo $this->__('ok'); ?>
-                        </button>
-                    </td>
-                </tr> */?>
+              
             </tbody>
         </table>
 
-        <?php /*if ($isVisibleProduct): ?>
-        <a href="<?php echo $this->getConfigureUrl() ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Edit item')) ?>" class="btn-edit">
-            <?php echo $this->__('Edit item')?>
-        </a>
-            |
-            <?php if (!$this->isOnCheckoutPage()): ?>
-                <a href="<?php echo $this->getAjaxDeleteUrl() ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Remove This Item')) ?>"
-                   data-confirm="<?php echo $this->__('Are you sure you would like to remove this item from the shopping cart?') ?>"
-                   class="remove">
-                    <?php echo $this->__('Remove Item') ?>
-                </a>
-            <?php else: ?>
-                <span><?php echo $this->__('Remove Item') ?></span>
-            <?php endif; ?>
-        <?php endif */?>
-
-
-
+       
         <?php if ($_options = $this->getOptionList()):?>
         <div class="truncated">
           <div class="truncated_full_value">
@@ -191,38 +151,80 @@
 
     </div>
 <div class="qtybg" style="float: right; margin: 20px 0px 0px;">
-        <form action="<?php echo $this->getUrl('checkout/cart/updatecheckoutPost'); ?>" method="post">
-            <a class="increment_qty_main increment_qty1_<?php echo $_item->getId(); ?>" href="javascript:void(0)">+</a>
+        <form class="barMini" action="<?php echo $this->getUrl('checkout/cart/updatePost'); ?>" method="post">
+
+            <input type="hidden" name="update_ajax" value="ajax_up">
+
+            <a class="increment_qty_main increment_qty_<?php echo $_item->getId(); ?>" href="javascript:void(0)">+</a>
             <input type="hidden" pattern="\d*" name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" size="4" data-cart-item-id="<?php echo $this->jsQuoteEscape($_item->getSku()) ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Qty')) ?>" class="input-text qty" maxlength="12" />
             
-            <a class="decrement_qty_main decrement_qty1_<?php echo $_item->getId(); ?>" href="javascript:void(0)">-</a> 
-            <script type="text/javascript">
-            //<![CDATA[
-            $ji(document).ready(function(){
-                var itemId = '<?php echo $_item->getId(); ?>';
-                $ji('.increment_qty1_'+itemId).click(function() {
-                    //$j('.btn-update').css('display','block');
-                    var oldVal = $ji(this).parent().find("input").val();
-                    if ( parseFloat(oldVal) >= 1 ) {
-                        var newVal = parseFloat(oldVal) + 1;
-                        $ji(this).parent().find("input").val(newVal);
-                        var form = jQuery(jQuery(this).closest('form'));
-                        form.submit();
-                    }
-                });
-                $ji('.decrement_qty1_'+itemId).click(function() {
-                    //$j('.btn-update').css('display','block');
-                    var oldVal = $ji(this).parent().find("input").val();
-                    if ( parseFloat(oldVal) >= 2 ) {
-                        var newVal = parseFloat(oldVal) - 1;
-                        $ji(this).parent().find("input").val(newVal);
-                        var form = jQuery(jQuery(this).closest('form'));
-                        form.submit();
-                    }
-                });
-            });
-            //]]>
-            </script>
+            <a class="decrement_qty_main decrement_qty_<?php echo $_item->getId(); ?>" href="javascript:void(0)">-</a> 
+            
         </form>
     </div>
-    </li>
+</li>
+
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function(){
+        var itemId = '<?php echo $_item->getId(); ?>';
+        jQuery('.increment_qty_'+itemId).click(function() {
+            var oldVal = jQuery(this).parent().find("input.qty").val();
+            console.log(oldVal, '+');
+            if ( parseFloat(oldVal) >= 1 ) {
+                var newVal = parseFloat(oldVal) + 1;
+                jQuery(this).parent().find("input").val(newVal);
+                ajaxLoad();
+            }
+        });
+
+        jQuery('.decrement_qty_'+itemId).click(function() {
+            var oldVal = jQuery(this).parent().find("input.qty").val();console.log(oldVal, '-');
+            if ( parseFloat(oldVal) >= 2 ) {
+                var newVal = parseFloat(oldVal) - 1;
+                jQuery(this).parent().find("input").val(newVal);
+                ajaxLoad();
+            }
+        });
+
+    });
+    function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+
+    function ajaxLoad() {
+        var form = jQuery('.barMini');
+        var formData = form.serializeArray();
+        jQuery.ajax({
+           url: form.attr('action'),
+           method: form.attr('method'),
+           data: formData,
+           dataType:"json",
+           beforeSend: function() {
+            jQuery('.wholescreen').show();
+           },
+           success:function(datart) {
+                 if(datart.status == 'ERROR'){
+                        alert(datart.message);
+                    }else{
+                        if(jQuery('.test')){
+                            jQuery('.test').replaceWith(datart.sidebar);
+                        }
+                    }
+                    jQuery('.wholescreen').hide();
+                    return false;
+           },
+            error:function(data) {
+               console.log(data, " updated error");
+               return false;
+           }
+        });
+        
+        return false;
+    }
+</script>

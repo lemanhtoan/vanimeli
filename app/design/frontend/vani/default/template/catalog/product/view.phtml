@@ -77,7 +77,7 @@
                                 .col-sm-12 .add-to-box
                                 {
                                     float: left;
-                                    margin: 82px 0 0;
+                                    margin: 91px 0 0;
                                     width: 50%;
                                 }
                                 .col-sm-12 .wishlistbg
@@ -124,55 +124,77 @@
         </form>
         <script type="text/javascript">
         //<![CDATA[
-            var productAddToCartForm = new VarienForm('product_addtocart_form');
-            productAddToCartForm.submit = function(button, url) {
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+ 
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                if(!url){
+                   url = jQuery('#product_addtocart_form').attr('action');
+                }
+                url = url.replace("checkout/cart","ajax/index"); 
+                var data = jQuery('#product_addtocart_form').serialize();
+                data += '&isAjax=1';   
+                jQuery('.wholescreen').show();
+                try {
+                    jQuery.ajax({
+                          url: url,
+                          dataType: 'json',
+                          type : 'post',
+                          data: data,
+                          success: function(data){
+                                jQuery('.wholescreen').hide();
+                                if (data.status == 'ERROR') {
+                                  alert(data.message);
+                                } else {
+
+                                    if(jQuery('.test')){
+                                        jQuery('.test').replaceWith(data.sidebar);
+                                    }
+                                }
+
+                                jQuery('.view-product-shop .add-to-box').removeClass('fail-vali');
+                                
+                          }
+                    });
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                // Remove custom datetime validators
+                for (var methodName in Validation.methods) {
+                    if (methodName.match(/^validate-datetime-.*/i)) {
+                        delete Validation.methods[methodName];
+                    }
+                }
+
                 if (this.validator.validate()) {
-                    var form = this.form;
-                    var oldUrl = form.action;
-
                     if (url) {
-                       form.action = url;
+                        this.form.action = url;
                     }
-                    var e = null;
-                    try {
-                        this.form.submit();
-                    } catch (e) {
-                    }
-                    this.form.action = oldUrl;
-                    if (e) {
-                        throw e;
-                    }
-
-                    if (button && button != 'undefined') {
-                        button.disabled = true;
-                    }
+                    this.form.submit();
                 }
-            }.bind(productAddToCartForm);
-
-            productAddToCartForm.submitLight = function(button, url){
-                if(this.validator) {
-                    var nv = Validation.methods;
-                    delete Validation.methods['required-entry'];
-                    delete Validation.methods['validate-one-required'];
-                    delete Validation.methods['validate-one-required-by-name'];
-                    // Remove custom datetime validators
-                    for (var methodName in Validation.methods) {
-                        if (methodName.match(/^validate-datetime-.*/i)) {
-                            delete Validation.methods[methodName];
-                        }
-                    }
-
-                    if (this.validator.validate()) {
-                        if (url) {
-                            this.form.action = url;
-                        }
-                        this.form.submit();
-                    }
-                    Object.extend(Validation.methods, nv);
-                }
-            }.bind(productAddToCartForm);
-        //]]>
-        </script>
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+    //]]>
+    </script>
     </div>
     <?php echo $this->getChildHtml('upsell_products') ?>
 
@@ -183,15 +205,7 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function(){
-       /* jQuery('.opt-lv1').click(function(){
-            jQuery('.box-topt').toggle();
-            if(jQuery('.box-topt').css('display') != 'none') {
-                jQuery('.opt-icon').css('margin-top', '-25px');
-            } else {
-                jQuery('.opt-icon').css('margin-top', '15px');
-            }
-        });
-*/
+      
         jQuery('#helpKlarna').click(function(event){
             jQuery('#helpKlarnaModal').toggle();
         });
@@ -221,3 +235,5 @@
         
     });
 </script>
+
+
