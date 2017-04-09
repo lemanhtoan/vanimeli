@@ -5629,12 +5629,6 @@ p.product-name a:hover {
   padding: 0 2px;
 }
 
-.product-options dd {
-  padding: 0 0 10px 0;
-  margin: 0 0 5px;
-  border-bottom: 1px solid #ededed;
-}
-
 .product-options dl.last dd.last {
   border-bottom: 0;
   padding-bottom: 5px;

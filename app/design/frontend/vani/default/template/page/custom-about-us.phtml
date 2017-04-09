@@ -66,7 +66,8 @@
             </div>
         </div>
         <div class="bgwrapper" id="bgwrapper">
-
+            <?php echo $this->getChildHtml('content') ?>
+            <!--conten cms page about us-->
             <div class="about-page">
                 <div class="about-us-top">
                     <div class="container">
@@ -74,25 +75,13 @@
                             <div class="col-sm-12">
                                 <div class="content-about">
                                     <h1 class="page-title">QUALITY GARMENTS IN 100% CASHMERE</h1>
-                                    <P>Our key aim is to sell quality garments in 100 % cashmere online. With the
-                                        Internet
-                                        as our sole distribution channel, we can keep prices low and rapidly launch new
-                                        products. We offer both classic and popular designs in a range of colors.</P>
-                                    <P> It is important to us that the product is available to all and that we also
-                                        create
-                                        opportunities for others. We therefore felt that we did not want to start a
-                                        brand
-                                        without an element of social responsibility. Soft Goat supports Project
-                                        Playground,
-                                        a non-profit organization working to empower vulnerable children and young
-                                        people in
-                                        South Africa's shanty towns</P>
+                                    <p>Our key aim is to sell quality garments in 100 % cashmere online. With the Internet as our sole distribution channel, we can keep prices low and rapidly launch new products. We offer both classic and popular designs in a range of colors.</p>
+                                    <p>It is important to us that the product is available to all and that we also create opportunities for others. We therefore felt that we did not want to start a brand without an element of social responsibility. Soft Goat supports Project Playground, a non-profit organization working to empower vulnerable children and young people in South Africa's shanty towns</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="about-us-center">
                     <div class="container">
                         <div class="row">
@@ -100,87 +89,44 @@
                                 <div class="content-about">
                                     <h1 class="page-title">OUR CASHMERE</h1>
                                     <ul class="logo-about">
-                                        <li>
-                                            <img src="<?php echo $this->getSkinUrl('images/logo-about.png'); ?>" alt="">
+                                        <li><img alt="" src="{{media url="wysiwyg/logo-about.png"}}" />
                                             <h4>origin</h4>
-                                            <p>
-                                                Cashmere wool comes from cashmere goats living in an extremely cold
-                                                climate on the high plateaus of the Gobi desert stretching between
-                                                China, Mongolia, Pakistan and Afghanistan. The name Cashmere comes from
-                                                the region of Kashmir, which is located in northern India, however very
-                                                few goats lives here today.
-                                            </p>
+                                            <p>Cashmere wool comes from cashmere goats living in an extremely cold climate on the high plateaus of the Gobi desert stretching between China, Mongolia, Pakistan and Afghanistan. The name Cashmere comes from the region of Kashmir, which is located in northern India, however very few goats lives here today.</p>
                                         </li>
-                                        <li>
-                                            <img src="<?php echo $this->getSkinUrl('images/logo-about.png'); ?>" alt="">
+                                        <li><img alt="" src="{{media url="wysiwyg/logo-about.png"}}" />
                                             <h4>pilling</h4>
-                                            <p>
-                                                The goats have an extremely warm and soft undercoat that protects them
-                                                during the winter. In the spring, when the goats start to shed their
-                                                winter coat, they are combed by hand to extract the downy undercoat. The
-                                                undercoat is washed and then sent to factories to be spun into yarn. It
-                                                takes about two to four years for a goat to produce enough wool to knit
-                                                a cashmere sweater.
-                                            </p>
+                                            <p>The goats have an extremely warm and soft undercoat that protects them during the winter. In the spring, when the goats start to shed their winter coat, they are combed by hand to extract the downy undercoat. The undercoat is washed and then sent to factories to be spun into yarn. It takes about two to four years for a goat to produce enough wool to knit a cashmere sweater.</p>
                                         </li>
-                                        <li>
-                                            <img src="<?php echo $this->getSkinUrl('images/logo-about.png'); ?>" alt="">
+                                        <li><img alt="" src="{{media url="wysiwyg/logo-about.png"}}" />
                                             <h4>CASHMERE GOATS</h4>
-                                            <p>
-                                                Many cashmere sweaters pill at first. This is normal, when the wool is
-                                                spun into yarn it has different lengths of the fibre. Shorter fibres
-                                                tend to crawl out on the surface after use and pilling is the result.
-                                                Pilling is most often seen in areas exposed to friction. You can easily
-                                                remove them with a thin comb or by hand. After washing the sweater a few
-                                                times the pilling tend to go away.
-                                            </p>
+                                            <p>Many cashmere sweaters pill at first. This is normal, when the wool is spun into yarn it has different lengths of the fibre. Shorter fibres tend to crawl out on the surface after use and pilling is the result. Pilling is most often seen in areas exposed to friction. You can easily remove them with a thin comb or by hand. After washing the sweater a few times the pilling tend to go away.</p>
                                         </li>
-                                        <li>
-                                            <img src="<?php echo $this->getSkinUrl('images/logo-about.png'); ?>" alt="">
-                                            <h4>GAUGE & PLY</h4>
-                                            <p>
-                                                In knitting, the term gauge (gg) is often used, and it refers to the
-                                                number of stitches per inch. Basically you can say that a higher guage
-                                                indicates a thinner sweater. Cashmere sweaters are mostly knitted in 7
-                                                gg, 12 gg and 16 gg. Ply indicates how many threads that is twisted in
-                                                the finished yarn. We use mostly 2 ply which is suitable for most types
-                                                of sweaters.
-                                            </p>
+                                        <li><img alt="" src="{{media url="wysiwyg/logo-about.png"}}" />
+                                            <h4>GAUGE &amp; PLY</h4>
+                                            <p>In knitting, the term gauge (gg) is often used, and it refers to the number of stitches per inch. Basically you can say that a higher guage indicates a thinner sweater. Cashmere sweaters are mostly knitted in 7 gg, 12 gg and 16 gg. Ply indicates how many threads that is twisted in the finished yarn. We use mostly 2 ply which is suitable for most types of sweaters.</p>
                                         </li>
-
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="about-us-bottom">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="content-about">
                                     <h1 class="page-title">OUR PRODUCTS</h1>
-                                    <P>All our products are 100 % cashmere and made in China. The use of cashmere in
-                                        China dates back a long time to when the people were dependent on its quality
-                                        for their survival. In the beginning, hand-knitted products were made in simpler
-                                        forms and this later evolved into making sweaters, scarves, etc. with the help
-                                        of knitting machines (although these are manual just like a sewing machine).</P>
-                                    <P>Thanks to these historical skills, the craftsmanship of the products is of a very
-                                        high standard. The yarn itself is oeko-certified (an international test and
-                                        certification system for textiles that limits the use of certain chemicals) and
-                                        is imported to provide a product of the highest quality. The combination of the
-                                        Chinese craftsmen's heritage and the high quality yarn ensures that our products
-                                        are of an exceptional standard.</P>
+                                    <p>All our products are 100 % cashmere and made in China. The use of cashmere in China dates back a long time to when the people were dependent on its quality for their survival. In the beginning, hand-knitted products were made in simpler forms and this later evolved into making sweaters, scarves, etc. with the help of knitting machines (although these are manual just like a sewing machine).</p>
+                                    <p>Thanks to these historical skills, the craftsmanship of the products is of a very high standard. The yarn itself is oeko-certified (an international test and certification system for textiles that limits the use of certain chemicals) and is imported to provide a product of the highest quality. The combination of the Chinese craftsmen's heritage and the high quality yarn ensures that our products are of an exceptional standard.</p>
                                     <h6>Visa alla produkter</h6>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <?php //echo $this->getChildHtml('content') ?>
+            <!--conten cms page about us-->
         </div>
 
         <div class="container">
