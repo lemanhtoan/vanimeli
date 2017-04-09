@@ -767,6 +767,7 @@
     margin: 0;
     box-shadow: 0 0 10px #DEDEDE inset, 0 -1px 1px #BFBDBD, 0 1px 1px rgba(255,253,253,.5);
     background-color: rgba(0,0,0,.02);
+    position: relative;
 }
 
 .product-view #latest_offers .owl-item {
@@ -1235,10 +1236,11 @@ ul.box-topt li:hover {
         z-index: 11;
     }
     .navigation-menu.sticky_menu_nav.fixed_header_bg .header-minicart.cart-icon{
-        padding-bottom: 0;
+        padding-bottom: 15px;
     }
     .navigation-menu.sticky_menu_nav.fixed_header_bg{
         position: fixed;
+        padding-bottom: 0;
     }
     .navigation-menu.sticky_menu_nav{
         position: relative;
@@ -1332,6 +1334,15 @@ ul.box-topt li:hover {
         .wrapper .breadcramb-section{
             padding: 8px 0;
         }
+
+        .product-options .swatch-attr label#color_label {
+            font-size: 16px;
+        }
+
+        .price-box .regular-price .price {
+            font-size: 20px;
+        }
+
         .left-padding-90 .breadcrumbs strong,
         .breadcramb-section .left-padding-90 a,
         .breadcramb-section .left-padding-90 span {
