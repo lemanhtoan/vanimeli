@@ -1369,6 +1369,9 @@ ul.box-topt li:hover {
     }
     @media only screen and (max-width: 420px){
 
+        .mb-show .cart_item {
+            margin-top: 12%;
+        }
         .header-minicart .cart-count {
             line-height: 36px;
         }
@@ -1416,7 +1419,7 @@ ul.box-topt li:hover {
       #owl-product-image-thumbs .owl-item .item img {
         width: 100%;
       }
-      .notice-cookie {
+      .notice-cookie#notice-cookie-block {
         display: none;
       }
         .breadcramb-section .left-padding-90 .page-title {
