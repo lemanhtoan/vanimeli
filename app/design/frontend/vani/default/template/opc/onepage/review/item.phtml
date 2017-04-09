@@ -146,37 +146,80 @@
 		</div>
 	</div>
 	<div class="qtybg" style="float: right; margin: 20px 0px 0px;">
-		<form action="<?php echo $this->getUrl('checkout/cart/updatecheckoutPost'); ?>" method="post">
+		<form class="barMini" action="<?php echo $this->getUrl('checkout/cart/updatePost'); ?>" method="post">
+
+			<input type="hidden" name="update_ajax" value="ajax_up">
+
 			<a class="increment_qty_main increment_qty_<?php echo $_item->getId(); ?>" href="javascript:void(0)">+</a>
 			<input type="hidden" pattern="\d*" name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" size="4" data-cart-item-id="<?php echo $this->jsQuoteEscape($_item->getSku()) ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Qty')) ?>" class="input-text qty" maxlength="12" />
 			
 			<a class="decrement_qty_main decrement_qty_<?php echo $_item->getId(); ?>" href="javascript:void(0)">-</a> 
+
 			<script type="text/javascript">
-			//<![CDATA[
-			$ji(document).ready(function(){
-				var itemId = '<?php echo $_item->getId(); ?>';
-				$ji('.increment_qty_'+itemId).click(function() {
-					//$j('.btn-update').css('display','block');
-					var oldVal = $ji(this).parent().find("input").val();
-					if ( parseFloat(oldVal) >= 1 ) {
-						var newVal = parseFloat(oldVal) + 1;
-						$ji(this).parent().find("input").val(newVal);
-						var form = jQuery(jQuery(this).closest('form'));
-						form.submit();
-					}
-				});
-				$ji('.decrement_qty_'+itemId).click(function() {
-					//$j('.btn-update').css('display','block');
-					var oldVal = $ji(this).parent().find("input").val();
-					if ( parseFloat(oldVal) >= 2 ) {
-						var newVal = parseFloat(oldVal) - 1;
-						$ji(this).parent().find("input").val(newVal);
-						var form = jQuery(jQuery(this).closest('form'));
-						form.submit();
-					}
-				});
-			});
-			//]]>
+
+			    jQuery(document).ready(function(){
+			        var itemId = '<?php echo $_item->getId(); ?>';
+			        jQuery('.increment_qty_'+itemId).click(function() {
+			            var oldVal = jQuery(this).parent().find("input.qty").val();
+			            if ( parseFloat(oldVal) >= 1 ) {
+			                var newVal = parseFloat(oldVal) + 1;
+			                jQuery(this).parent().find("input").val(newVal);
+			                ajaxLoad();
+			            }
+			        });
+
+			        jQuery('.decrement_qty_'+itemId).click(function() {
+			            var oldVal = jQuery(this).parent().find("input.qty").val();
+			            if ( parseFloat(oldVal) >= 2 ) {
+			                var newVal = parseFloat(oldVal) - 1;
+			                jQuery(this).parent().find("input").val(newVal);
+			                ajaxLoad();
+			            }
+			        });
+
+			    });
+			    function isNumberKey(evt){
+			        var charCode = (evt.which) ? evt.which : evt.keyCode;
+			        if (charCode > 31 && (charCode < 48 || charCode > 57))
+			            return false;
+			        return true;
+			    }
+
+
+			    function ajaxLoad() {
+			        var form = jQuery('.barMini');
+			        var formData = form.serializeArray();
+			        jQuery.ajax({
+			           url: form.attr('action'),
+			           method: form.attr('method'),
+			           data: formData,
+			           dataType:"json",
+			           beforeSend: function() {
+			            jQuery('.wholescreen').show();
+			           },
+			           success:function(datart) {
+			                 if(datart.status == 'ERROR'){
+			                        alert(datart.message);
+			                    }else{
+			                        if(jQuery('.test')){
+			                            jQuery('.test').replaceWith(datart.sidebar);
+			                        }
+			                        
+			                        // if(jQuery('#opc-review-block')){
+			                        //     jQuery('#opc-review-block').replaceWith(datart.reviewData);
+			                        // }
+			                    }
+			                    jQuery('.wholescreen').hide();
+			                    return false;
+			           },
+			            error:function(data) {
+			               console.log(data, " updated error");
+			               return false;
+			           }
+			        });
+			        
+			        return false;
+			    }
 			</script>
 		</form>
 	</div>
