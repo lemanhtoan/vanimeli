@@ -510,6 +510,22 @@ class Mage_Checkout_CartController extends Mage_Core_Controller_Front_Action
             $response['sidebar'] = $sidebar;
 
 
+          // $html = $this->getLayout()
+          //    ->createBlock('checkout_onepage_review')
+          //    ->setTemplate('opc/onepage/review/item.phtml')
+          //    ->addItemRender(
+          //        'configurable',
+          //        'checkout/cart_item_renderer_configurable'
+          //        );
+          //   $data = $html->toHtml();
+
+            // $block = $this->getLayout()->createBlock('checkout/cart_item_renderer_configurable')->setTemplate('opc/onepage/review/item.phtml');
+            // $html = $block->toHtml();
+
+            $response['reviewData'] = $data;
+
+
+
             $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($response));
             return;
         } catch (Mage_Core_Exception $e) {

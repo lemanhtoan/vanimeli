@@ -24,7 +24,7 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<?php $_item = $this->getItem()?>
+<?php $_item = $this->getItem(); ?>
 	<div class="selected-product-details" style="float:left;">
 		<span><?php  echo $this->escapeHtml($this->getProductName()) ?></span>
 			<?php if ($_options = $this->getOptionList()):?>
@@ -170,7 +170,7 @@
 
 			        jQuery('.decrement_qty_'+itemId).click(function() {
 			            var oldVal = jQuery(this).parent().find("input.qty").val();
-			            if ( parseFloat(oldVal) >= 2 ) {
+			            if ( parseFloat(oldVal) >= 1 ) {
 			                var newVal = parseFloat(oldVal) - 1;
 			                jQuery(this).parent().find("input").val(newVal);
 			                ajaxLoad();
