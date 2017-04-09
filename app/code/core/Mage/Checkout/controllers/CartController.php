@@ -509,6 +509,7 @@ class Mage_Checkout_CartController extends Mage_Core_Controller_Front_Action
             $sidebar = $sidebar_block->toHtml();
             $response['sidebar'] = $sidebar;
 
+
             $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($response));
             return;
         } catch (Mage_Core_Exception $e) {

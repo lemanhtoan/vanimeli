@@ -171,7 +171,7 @@
         var itemId = '<?php echo $_item->getId(); ?>';
         jQuery('.increment_qty_'+itemId).click(function() {
             var oldVal = jQuery(this).parent().find("input.qty").val();
-            console.log(oldVal, '+');
+            console.log(oldVal);
             if ( parseFloat(oldVal) >= 1 ) {
                 var newVal = parseFloat(oldVal) + 1;
                 jQuery(this).parent().find("input").val(newVal);
@@ -180,7 +180,7 @@
         });
 
         jQuery('.decrement_qty_'+itemId).click(function() {
-            var oldVal = jQuery(this).parent().find("input.qty").val();console.log(oldVal, '-');
+            var oldVal = jQuery(this).parent().find("input.qty").val();
             if ( parseFloat(oldVal) >= 2 ) {
                 var newVal = parseFloat(oldVal) - 1;
                 jQuery(this).parent().find("input").val(newVal);
