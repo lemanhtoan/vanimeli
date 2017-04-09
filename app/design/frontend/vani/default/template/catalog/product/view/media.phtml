@@ -40,16 +40,19 @@ $_helper = $this->helper('catalog/output');
     <div class="product-image-gallery">
         <img id="image-main"
              class="gallery-image visible"
-             src="<?php echo $this->helper('catalog/image')->init($_product, 'image') ?>"
+             src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(450, 470);?>"
              alt="<?php echo $this->escapeHtml($this->getImageLabel()) ?>"
              title="<?php echo $this->escapeHtml($this->getImageLabel()); ?>"/>
 
+        <?php $_images = Mage::getModel('catalog/product')->load($_product->getId())->getMediaGalleryImages(); ?>
+
         <?php $i = 0;
-        foreach ($this->getGalleryImages() as $_image): ?>
+
+        foreach ($_images as $_image): ?>
             <?php if ($this->isGalleryImageVisible($_image)): ?>
                 <img id="image-<?php echo $i; ?>"
                      class="gallery-image"
-                     src="<?php echo $this->getGalleryImageUrl($_image); ?>"
+                     src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize(450, 470); ?>"
                      data-zoom-image="<?php echo $this->getGalleryImageUrl($_image); ?>"/>
             <?php endif; ?>
             <?php $i++; endforeach; ?>

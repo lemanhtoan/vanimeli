@@ -1906,3 +1906,13 @@ input#mail_delivery_date {
 .ias-noneleft {
     display: none;
 }
+
+select.super-attribute-select {
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+}
+
+#product-options-wrapper .input-box {
+      width: 305px;
+    overflow: hidden;
+}

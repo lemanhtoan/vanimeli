@@ -5663,10 +5663,6 @@ p.product-name a:hover {
   height: 8em;
 }
 
-.product-options dd select {
-  width: 330px;
-  max-width: 100%;
-}
 
 .product-options ul.options-list {
   margin-right: 5px;
@@ -6247,10 +6243,7 @@ p.product-name a:hover {
     border: 2px solid #242118;
     color: black;
     font-size: 16px;
-    max-width: 100%;
-    min-height: 40px;
     padding: 18px 37px;
-    width: 100%;
 }
 .discount-block {
     display: none;
