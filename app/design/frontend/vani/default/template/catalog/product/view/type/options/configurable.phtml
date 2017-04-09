@@ -53,16 +53,16 @@ $_renderers = $this->getChild('attr_renderers')->getSortedChildren();
         <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
             <div class="input-box">
 
-                 <span class="opt-lv1">
-                  <span class="opt-icon"></span>
-                  <span class="opt-text"><?php echo $this->__('Choose size:');?></span>
-              </span>
-
-                <ul class="box-topt">
+<!--                 <span class="opt-lv1">-->
+<!--                  <span class="opt-icon"></span>-->
+<!--                  <span class="opt-text">--><?php //echo $this->__('Choose size:');?><!--</span>-->
+<!--              </span>-->
+<!---->
+<!--                <ul class="box-topt">-->
                     <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
                         <option><?php echo $this->__('Choose an Option...') ?></option>
                       </select>
-                </ul>
+<!--                </ul>-->
                 
               </div>
         </dd>
@@ -127,12 +127,12 @@ $_renderers = $this->getChild('attr_renderers')->getSortedChildren();
 }
 
 jQuery(function() {
-    replaceDropDowns();
-    jQuery('.product_attribute_option_link').hide();
-    jQuery('.product_attribute_option_link').not("[data-id*='attribute92']").show();
-    jQuery('.product_attribute_option_link').click(function(){
-        jQuery('.opt-text').html(jQuery(this).attr('data-label'));
-    });
+//    replaceDropDowns();
+//    jQuery('.product_attribute_option_link').hide();
+//    jQuery('.product_attribute_option_link').not("[data-id*='attribute92']").show();
+//    jQuery('.product_attribute_option_link').click(function(){
+//        jQuery('.opt-text').html(jQuery(this).attr('data-label'));
+//    });
 })
 </script>
 

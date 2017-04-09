@@ -48,6 +48,12 @@
 }
 @media only screen and (max-width: 480px) {
 
+    .category-products .products-grid > li {
+        margin-right: 0;
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
     .opc-wrapper-opc.design_package_vani h1.checkout-title {
         font-size: 22px;
         font-weight: 600;
@@ -157,6 +163,15 @@
 
 }
 @media only screen and (min-width: 768px) and (max-width: 992px) {
+    .category-products .products-grid > li {
+        width: 48%;
+        margin-right: 4%;
+    }
+
+    .category-products .products-grid > li:nth-child(2n) {
+        margin-right: 0;
+    }
+
     .background_image_part {
         margin-top: 30px;
     }
@@ -210,6 +225,16 @@
     }s
 }
 @media only screen and (min-width: 993px) and (max-width: 1199px) {
+
+    .category-products .products-grid > li {
+        width: 32%;
+        margin-right: 2%;
+    }
+
+    .category-products .products-grid > li:nth-child(3n) {
+        margin-right: 0;
+    }
+
     .site-footer .footer-letter {
         padding-left: 0;
     }
@@ -265,6 +290,16 @@
 
     .about-us-bottom .content-about {
         width: 60%;
+    }
+}
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+    .category-products .products-grid > li {
+        width: 48%;
+        margin-right: 4%;
+    }
+
+    .category-products .products-grid > li:nth-child(2n) {
+        margin-right: 0;
     }
 }
 @media only screen and (min-width: 421px) and (max-width: 767px) {
@@ -355,12 +390,6 @@
         min-width: 100%;
     }
 
-    .category-products .products-grid > li {
-        margin-right: 0;
-        width: 100%;
-        margin-bottom: 25px;
-    }
-
     .product-view {
         margin-top: 25px;
     }
@@ -404,6 +433,10 @@
 }
 
 @media only screen and (min-width: 1024px) {
+    .btn-show-hover {
+        display: none;
+    }
+
     .ves-container .row.row-level-1 {
         margin-left: 0 !important;
         margin-right: 0 !important;
@@ -566,11 +599,6 @@
     .category-products .products-grid > li {
         width: 30%;
         margin-right: 5%;
-        margin-bottom: 2.5%;
-        box-shadow: 0 0 10px #DEDEDE inset, 0 -1px 1px #BFBDBD, 0 1px 1px rgba(255,253,253,.5);
-        background-color: rgba(0,0,0,.02);
-        padding: 10px;
-        border: none;
     }
 
     .category-products .products-grid > li:nth-child(3n) {
@@ -593,6 +621,14 @@
 }
 
 /*common*/
+
+.category-products .products-grid > li {
+    margin-bottom: 2.5%;
+    box-shadow: 0 0 10px #DEDEDE inset, 0 -1px 1px #BFBDBD, 0 1px 1px rgba(255,253,253,.5);
+    background-color: rgba(0,0,0,.02);
+    padding: 10px;
+    border: none;
+}
 
 .opc-wrapper-opc .collapse-block button{
     background: #000 none repeat scroll 0 0 !important;
@@ -913,12 +949,6 @@ ul.rootnav-contact-us {
     margin-top: 0;
 }
 
-.left-padding-90 .breadcrumbs strong,
-.breadcramb-section .left-padding-90 a,
-.breadcramb-section .left-padding-90 span {
-    font-size: 14px;
-}
-
 .bgwrapper {
     width: 100%;
     height: 100%;
@@ -1036,8 +1066,14 @@ div#footer-email-subscription button {
     font-size: 30px;
 }
 
-@media screen and (min-width: 768px) { 
-  #helpKlarnaModal.modal:before {
+@media screen and (min-width: 768px) {
+    .left-padding-90 .breadcrumbs strong,
+    .breadcramb-section .left-padding-90 a,
+    .breadcramb-section .left-padding-90 span {
+        font-size: 14px;
+    }
+
+    #helpKlarnaModal.modal:before {
     display: inline-block;
     vertical-align: middle;
     content: " ";
@@ -1057,7 +1093,7 @@ div#footer-email-subscription button {
 }
 
 .fail-vali {
-    margin-top: 114px !important;
+    margin-top: 105px !important;
 }
 
 .owl-theme .owl-controls .owl-buttons div {
@@ -1293,6 +1329,19 @@ ul.box-topt li:hover {
     }
 
     @media only screen and (max-width: 768px){
+        .wrapper .breadcramb-section{
+            padding: 8px 0;
+        }
+        .left-padding-90 .breadcrumbs strong,
+        .breadcramb-section .left-padding-90 a,
+        .breadcramb-section .left-padding-90 span {
+            font-size: 11px;
+            line-height: 16px;
+        }
+        .col-xs-4.mobi-logo{
+            padding: 0;
+        }
+
       .stor-main.custom-tabs, .related-product-carousal {
     float: left;
     width: 100%;
@@ -1305,7 +1354,7 @@ ul.box-topt li:hover {
         display: none;
       }
         .breadcramb-section .left-padding-90 .page-title {
-            font-size: 20px;
+            font-size: 15px;
         }
         .mobile-menu-wrap ul li:last-child{
             border-bottom: 1px solid #1c1c1c ;
